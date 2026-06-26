@@ -12,7 +12,6 @@ import {
   ShieldCheck,
   Sprout,
 } from "lucide-react";
-import heroLandscape from "./assets/brand/hero-mountain-sunrise.webp";
 
 type Resource = {
   title: string;
@@ -213,12 +212,6 @@ export function App() {
             </a>
           </div>
         </div>
-        <img
-          className="hero-art"
-          src={heroLandscape}
-          alt=""
-          aria-hidden="true"
-        />
       </section>
 
       <section className="resource-section" id="resources" aria-labelledby="resources-title">
@@ -301,7 +294,9 @@ export function App() {
             </div>
           </article>
           <article className="featured-card">
-            <img src={heroLandscape} alt="" />
+            <div className="guide-art future-art" aria-hidden="true">
+              <Compass />
+            </div>
             <div>
               <h3>Building a New Future</h3>
               <p>Set goals, build confidence, and create the life you deserve.</p>
