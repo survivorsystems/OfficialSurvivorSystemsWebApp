@@ -6,7 +6,6 @@ import {
   Compass,
   FileText,
   Map,
-  MessageCircle,
   Scale,
   Search,
   ShieldAlert,
@@ -211,10 +210,6 @@ export function App() {
             <a className="primary-action" href="#resources">
               <BookOpenCheck aria-hidden="true" />
               Get Started
-            </a>
-            <a className="secondary-action" href="/local-help">
-              <MessageCircle aria-hidden="true" />
-              Talk to Someone
             </a>
           </div>
         </div>
