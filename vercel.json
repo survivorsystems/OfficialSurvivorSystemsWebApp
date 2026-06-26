@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/am-i-crazy",
+      "destination": "/index.html"
+    },
+    {
       "source": "/planning",
       "destination": "/index.html"
     },
