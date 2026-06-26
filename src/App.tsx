@@ -1,4 +1,4 @@
-import { type FormEvent, useCallback, useEffect, useMemo, useState } from "react";
+import { type CSSProperties, type FormEvent, useCallback, useEffect, useMemo, useState } from "react";
 import {
   BookOpenCheck,
   Compass,
@@ -33,6 +33,61 @@ type AssessmentAnswer = {
 type AssessmentQuestion = {
   prompt: string;
   answers: AssessmentAnswer[];
+};
+
+type GaugeValue = {
+  label: string;
+  value: number;
+  lowLabel: string;
+  highLabel: string;
+  state: string;
+  tone: "cyan" | "pink" | "purple";
+};
+
+type AssessmentGauges = {
+  autonomy: number;
+  danger: number;
+  reality: number;
+  dangerFloor: number;
+};
+
+type AssessmentGaugeEffect = {
+  autonomy: number;
+  danger: number;
+  reality: number;
+  emphasis: keyof Omit<AssessmentGauges, "dangerFloor">;
+  notice: string;
+  minDanger?: number;
+};
+
+type ExitGaugeState = {
+  readiness: number;
+  exposure: number;
+  backup: number;
+  exposureFloor: number;
+};
+
+type ExitGaugeEffect = {
+  readiness: number;
+  exposure: number;
+  backup: number;
+  emphasis: keyof Omit<ExitGaugeState, "exposureFloor">;
+  notice: string;
+  minExposure?: number;
+};
+
+type ExitAnswer = {
+  id: string;
+  label: string;
+  responseTitle: string;
+  response: string;
+  effect: ExitGaugeEffect;
+};
+
+type ExitQuestion = {
+  phase: string;
+  prompt: string;
+  answers: ExitAnswer[];
 };
 
 const modulePages: Record<
@@ -473,6 +528,267 @@ const assessmentQuestions: AssessmentQuestion[] = [
   },
 ];
 
+const assessmentGaugeEffects: Record<string, AssessmentGaugeEffect> = {
+  "1a": { autonomy: 4, danger: -2, reality: 6, emphasis: "reality", notice: "HEALTHY FUNCTION DETECTED." },
+  "1b": { autonomy: -3, danger: 2, reality: -14, emphasis: "reality", notice: "REALITY INTERFERENCE DETECTED." },
+  "1c": { autonomy: -4, danger: 3, reality: -12, emphasis: "reality", notice: "REALITY INTERFERENCE DETECTED." },
+  "1d": { autonomy: -5, danger: 4, reality: -10, emphasis: "reality", notice: "REALITY INTERFERENCE DETECTED." },
+  "1e": { autonomy: -10, danger: 18, reality: -8, emphasis: "danger", notice: "DANGER LEVEL ELEVATED.", minDanger: 21 },
+  "2a": { autonomy: 5, danger: -2, reality: 3, emphasis: "autonomy", notice: "HEALTHY FUNCTION DETECTED." },
+  "2b": { autonomy: -1, danger: 2, reality: 0, emphasis: "danger", notice: "CONFLICT LOAD REGISTERED." },
+  "2c": { autonomy: -10, danger: 9, reality: -3, emphasis: "autonomy", notice: "AUTONOMY SIGNAL DECREASED." },
+  "2d": { autonomy: -16, danger: 16, reality: -5, emphasis: "danger", notice: "DANGER LEVEL ELEVATED.", minDanger: 21 },
+  "3a": { autonomy: 3, danger: -2, reality: 6, emphasis: "reality", notice: "HEALTHY FUNCTION DETECTED." },
+  "3b": { autonomy: -7, danger: 3, reality: -10, emphasis: "reality", notice: "REALITY INTERFERENCE DETECTED." },
+  "3c": { autonomy: -5, danger: 5, reality: -5, emphasis: "danger", notice: "REPEATING CYCLE PRESSURE DETECTED." },
+  "3d": { autonomy: -4, danger: 3, reality: -13, emphasis: "reality", notice: "REALITY INTERFERENCE DETECTED." },
+  "4a": { autonomy: 8, danger: -4, reality: 3, emphasis: "autonomy", notice: "HEALTHY FUNCTION DETECTED." },
+  "4b": { autonomy: -2, danger: 3, reality: 0, emphasis: "danger", notice: "CONFLICT LOAD REGISTERED." },
+  "4c": { autonomy: -10, danger: 10, reality: -2, emphasis: "autonomy", notice: "AUTONOMY SIGNAL DECREASED." },
+  "4d": { autonomy: -15, danger: 15, reality: -4, emphasis: "autonomy", notice: "AUTONOMY SIGNAL DECREASED." },
+  "4e": { autonomy: -18, danger: 24, reality: -5, emphasis: "danger", notice: "DANGER LEVEL HIGH.", minDanger: 46 },
+  "5a": { autonomy: 6, danger: -2, reality: 2, emphasis: "autonomy", notice: "HEALTHY FUNCTION DETECTED." },
+  "5b": { autonomy: -5, danger: 2, reality: -3, emphasis: "autonomy", notice: "AUTONOMY SIGNAL DECREASED." },
+  "5c": { autonomy: -12, danger: 8, reality: -4, emphasis: "autonomy", notice: "AUTONOMY SIGNAL DECREASED." },
+  "5d": { autonomy: -18, danger: 12, reality: -7, emphasis: "autonomy", notice: "AUTONOMY SIGNAL DECREASED." },
+  "6a": { autonomy: 8, danger: -3, reality: 2, emphasis: "autonomy", notice: "HEALTHY FUNCTION DETECTED." },
+  "6b": { autonomy: 5, danger: -2, reality: 2, emphasis: "autonomy", notice: "HEALTHY FUNCTION DETECTED." },
+  "6c": { autonomy: -10, danger: 8, reality: -4, emphasis: "autonomy", notice: "RESOURCE CONTROL SIGNAL DETECTED." },
+  "6d": { autonomy: -20, danger: 18, reality: -5, emphasis: "danger", notice: "DANGER LEVEL HIGH.", minDanger: 46 },
+  "6e": { autonomy: -16, danger: 14, reality: -7, emphasis: "danger", notice: "DANGER LEVEL HIGH.", minDanger: 46 },
+  "7a": { autonomy: 7, danger: -3, reality: 2, emphasis: "autonomy", notice: "HEALTHY FUNCTION DETECTED." },
+  "7b": { autonomy: -8, danger: 7, reality: -3, emphasis: "autonomy", notice: "AUTONOMY SIGNAL DECREASED." },
+  "7c": { autonomy: -14, danger: 13, reality: -4, emphasis: "autonomy", notice: "MONITORING SIGNAL DETECTED.", minDanger: 21 },
+  "7d": { autonomy: -18, danger: 24, reality: -5, emphasis: "danger", notice: "POSSIBLE DEVICE EXPOSURE.", minDanger: 46 },
+  "8a": { autonomy: 4, danger: -2, reality: 5, emphasis: "reality", notice: "HEALTHY FUNCTION DETECTED." },
+  "8b": { autonomy: 0, danger: 0, reality: 1, emphasis: "reality", notice: "STANDARD MISMATCH LOGGED." },
+  "8c": { autonomy: -9, danger: 5, reality: -8, emphasis: "reality", notice: "REALITY INTERFERENCE DETECTED." },
+  "8d": { autonomy: -8, danger: 5, reality: -12, emphasis: "reality", notice: "REALITY INTERFERENCE DETECTED." },
+  "9a": { autonomy: 5, danger: -5, reality: 6, emphasis: "reality", notice: "HEALTHY FUNCTION DETECTED." },
+  "9b": { autonomy: -4, danger: 7, reality: -5, emphasis: "reality", notice: "REALITY INTERFERENCE DETECTED." },
+  "9c": { autonomy: -3, danger: 5, reality: -7, emphasis: "reality", notice: "REALITY INTERFERENCE DETECTED." },
+  "9d": { autonomy: -4, danger: 6, reality: -10, emphasis: "reality", notice: "REALITY INTERFERENCE DETECTED." },
+  "9e": { autonomy: -8, danger: 13, reality: -8, emphasis: "danger", notice: "DANGER LEVEL ELEVATED.", minDanger: 21 },
+  "10a": { autonomy: 3, danger: -3, reality: 3, emphasis: "autonomy", notice: "FUTURE STATUS WORKABLE." },
+  "10b": { autonomy: -10, danger: 8, reality: 2, emphasis: "autonomy", notice: "AUTONOMY SIGNAL DECREASED." },
+  "10c": { autonomy: -8, danger: 16, reality: 3, emphasis: "danger", notice: "ESCALATION FORECAST DETECTED.", minDanger: 21 },
+  "10d": { autonomy: -12, danger: 24, reality: 2, emphasis: "danger", notice: "DISTRESS LEVEL CRITICAL.", minDanger: 71 },
+  "10e": { autonomy: -2, danger: 2, reality: -2, emphasis: "reality", notice: "FUTURE DATA UNAVAILABLE." },
+};
+
+const exitPlanningQuestions: ExitQuestion[] = [
+  {
+    phase: "PHASE 1 - IMMEDIATE CONDITIONS",
+    prompt: "Are you currently in immediate danger, or do you believe something may happen very soon?",
+    answers: [
+      {
+        id: "ep1a",
+        label: "No. I have time to think and plan.",
+        responseTitle: "PLANNING WINDOW DETECTED",
+        response: "Time appears available. System will focus on preparation, reducing exposure, and creating backup options before conditions change.",
+        effect: { readiness: 8, exposure: -4, backup: 4, emphasis: "readiness", notice: "PLANNING WINDOW DETECTED." },
+      },
+      {
+        id: "ep1b",
+        label: "I am not sure.",
+        responseTitle: "CONDITIONS UNCLEAR",
+        response: "Uncertainty may mean the environment is unpredictable. System will continue cautiously and include an emergency backup plan.",
+        effect: { readiness: 2, exposure: 8, backup: 6, emphasis: "exposure", notice: "EXPOSURE LEVEL ELEVATED." },
+      },
+      {
+        id: "ep1c",
+        label: "Things are escalating, but I am not in immediate danger right now.",
+        responseTitle: "ESCALATION DETECTED",
+        response: "Humor suspended. System will prioritize speed, safer communication, transportation, and emergency alternatives.",
+        effect: { readiness: 4, exposure: 18, backup: 8, emphasis: "exposure", notice: "EXPOSURE LEVEL HIGH.", minExposure: 46 },
+      },
+      {
+        id: "ep1d",
+        label: "Yes. I may need to leave very soon.",
+        responseTitle: "EXIT WINDOW MAY BE LIMITED",
+        response: "Humor suspended. System will skip nonessential planning and identify the fastest available route to a safer location.",
+        effect: { readiness: 5, exposure: 24, backup: 12, emphasis: "exposure", notice: "URGENT EXIT CONDITIONS LOGGED.", minExposure: 46 },
+      },
+      {
+        id: "ep1e",
+        label: "Yes. I need emergency help now.",
+        responseTitle: "IMMEDIATE SAFETY MODE ACTIVATED",
+        response: "Humor suspended. If contacting emergency services is safe and appropriate, use local emergency services. If calling is not safe, consider moving toward a public or populated location, contacting a trusted person, or using a safer device.",
+        effect: { readiness: 0, exposure: 35, backup: 14, emphasis: "exposure", notice: "IMMEDIATE SAFETY MODE ACTIVE.", minExposure: 71 },
+      },
+    ],
+  },
+  {
+    phase: "PHASE 1 - RETALIATION FORECAST",
+    prompt: "What do you believe this person may do if they realize you are preparing to leave?",
+    answers: [
+      {
+        id: "ep2a",
+        label: "They may be upset, but I do not expect retaliation.",
+        responseTitle: "LOW RETALIATION EXPECTATION",
+        response: "Preparation may still be useful. System will continue without assuming cooperation.",
+        effect: { readiness: 5, exposure: -4, backup: 3, emphasis: "readiness", notice: "RETALIATION EXPECTATION LOW." },
+      },
+      {
+        id: "ep2b",
+        label: "They may pressure, guilt, manipulate, or promise to change.",
+        responseTitle: "EMOTIONAL OVERRIDE ATTEMPT ANTICIPATED",
+        response: "Possible incoming commands include promises to change, guilt, blame, or one more chance. Promises made after loss of control is detected are not automatically software updates.",
+        effect: { readiness: 2, exposure: 10, backup: 4, emphasis: "exposure", notice: "EXPOSURE LEVEL ELEVATED." },
+      },
+      {
+        id: "ep2c",
+        label: "They may interfere with money, transportation, housing, work, or communication.",
+        responseTitle: "RESOURCE INTERFERENCE POSSIBLE",
+        response: "Access may become restricted. System will prioritize independent access and backup routes.",
+        effect: { readiness: -4, exposure: 18, backup: 8, emphasis: "exposure", notice: "RESOURCE INTERFERENCE POSSIBLE.", minExposure: 46 },
+      },
+      {
+        id: "ep2d",
+        label: "They may monitor, follow, threaten, expose, or punish me.",
+        responseTitle: "HIGH-RISK RETALIATION PATTERN",
+        response: "Humor suspended. Planning may need to occur through a safer device, safer account, trusted person, or location outside the other person's access.",
+        effect: { readiness: -5, exposure: 26, backup: 10, emphasis: "exposure", notice: "HIGH-RISK RETALIATION PATTERN.", minExposure: 46 },
+      },
+      {
+        id: "ep2e",
+        label: "They may harm me, themselves, children, pets, family members, or property.",
+        responseTitle: "SEVERE RETALIATION RISK",
+        response: "Humor suspended. Threats involving harm, weapons, stalking, forced confinement, children, pets, or self-harm require a more cautious plan. System will build an emergency route before continuing.",
+        effect: { readiness: -6, exposure: 35, backup: 16, emphasis: "exposure", notice: "SEVERE RETALIATION RISK.", minExposure: 71 },
+      },
+      {
+        id: "ep2f",
+        label: "I genuinely do not know what they may do.",
+        responseTitle: "BEHAVIORAL FORECAST UNAVAILABLE",
+        response: "Unpredictability is itself relevant data. System will not assume a calm response.",
+        effect: { readiness: 0, exposure: 14, backup: 8, emphasis: "exposure", notice: "UNPREDICTABILITY LOGGED." },
+      },
+    ],
+  },
+  {
+    phase: "PHASE 1 - DEVICE AND ACCOUNT SAFETY",
+    prompt: "Are you confident that this device, browser, email, phone plan, and connected accounts are private?",
+    answers: [
+      {
+        id: "ep3a",
+        label: "Yes, as far as I know.",
+        responseTitle: "DEVICE APPEARS USABLE",
+        response: "No device is guaranteed safe. Continue with awareness of browser history, downloads, email alerts, shared accounts, backups, and billing notifications.",
+        effect: { readiness: 5, exposure: -3, backup: 2, emphasis: "readiness", notice: "DEVICE APPEARS USABLE." },
+      },
+      {
+        id: "ep3b",
+        label: "I am not sure.",
+        responseTitle: "DEVICE PRIVACY UNKNOWN",
+        response: "System recommends avoiding saved plans, obvious filenames, password changes, or sensitive downloads until a safer device is available.",
+        effect: { readiness: -3, exposure: 10, backup: 5, emphasis: "exposure", notice: "DEVICE PRIVACY UNKNOWN." },
+      },
+      {
+        id: "ep3c",
+        label: "They know my passwords or have access to my accounts.",
+        responseTitle: "ACCOUNT ACCESS COMPROMISED",
+        response: "Changing passwords from a monitored device may alert the person or expose the new password. Consider using a safer device and an account they do not know exists.",
+        effect: { readiness: -7, exposure: 18, backup: 6, emphasis: "exposure", notice: "ACCOUNT ACCESS COMPROMISED.", minExposure: 46 },
+      },
+      {
+        id: "ep3d",
+        label: "They check my phone, location, messages, or browser activity.",
+        responseTitle: "ACTIVE MONITORING POSSIBLE",
+        response: "System recommends minimizing visible searches and downloads. Use Quick Exit whenever needed.",
+        effect: { readiness: -8, exposure: 22, backup: 8, emphasis: "exposure", notice: "ACTIVE MONITORING POSSIBLE.", minExposure: 46 },
+      },
+      {
+        id: "ep3e",
+        label: "I believe the device may be tracked, monitored, or recorded.",
+        responseTitle: "POSSIBLE DEVICE EXPOSURE",
+        response: "Humor suspended. A safer device may be a library computer, trusted person's phone, workplace device where permitted, advocacy office, or device the other person has never accessed.",
+        effect: { readiness: -10, exposure: 28, backup: 10, emphasis: "exposure", notice: "POSSIBLE DEVICE EXPOSURE.", minExposure: 46 },
+      },
+    ],
+  },
+  {
+    phase: "PHASE 3 - PLAN A",
+    prompt: "Where is the safest realistic place you could go first? No address needed.",
+    answers: [
+      {
+        id: "ep4a",
+        label: "Trusted person, shelter, hotel, hospital, or public location.",
+        responseTitle: "PLAN A DESTINATION TYPE LOGGED",
+        response: "Destination category identified. System will keep backup options online.",
+        effect: { readiness: 16, exposure: -2, backup: 5, emphasis: "readiness", notice: "EXIT READINESS INCREASED." },
+      },
+      {
+        id: "ep4b",
+        label: "I have nowhere yet or cannot safely contact anyone.",
+        responseTitle: "DESTINATION NOT YET IDENTIFIED",
+        response: "This is a planning problem, not a moral failure. Relevant housing resources can be routed here later.",
+        effect: { readiness: 4, exposure: 6, backup: 8, emphasis: "backup", notice: "BACKUP STATUS UPDATED." },
+      },
+    ],
+  },
+  {
+    phase: "PHASE 3 - PLAN A",
+    prompt: "How would you get there?",
+    answers: [
+      {
+        id: "ep5a",
+        label: "My vehicle, someone can drive me, rideshare, taxi, or public transportation.",
+        responseTitle: "PRIMARY TRANSPORT IDENTIFIED",
+        response: "Primary route logged. Backup route remains useful if timing changes.",
+        effect: { readiness: 15, exposure: -2, backup: 5, emphasis: "readiness", notice: "EXIT READINESS INCREASED." },
+      },
+      {
+        id: "ep5b",
+        label: "I could walk to a safer location or I have no transportation option yet.",
+        responseTitle: "TRANSPORTATION GAP LOGGED",
+        response: "System will treat transportation as a primary blocker and keep emergency alternatives in view.",
+        effect: { readiness: -4, exposure: 8, backup: 8, emphasis: "backup", notice: "BACKUP STATUS UPDATED." },
+      },
+    ],
+  },
+  {
+    phase: "PHASE 3 - PLAN A",
+    prompt: "When would leaving be least likely to trigger interference?",
+    answers: [
+      {
+        id: "ep6a",
+        label: "When they are away, while I am already out, during work, or with another person present.",
+        responseTitle: "TIMING WINDOW IDENTIFIED",
+        response: "Timing is a safety variable. No date is required today.",
+        effect: { readiness: 14, exposure: -4, backup: 3, emphasis: "readiness", notice: "TIMING WINDOW IDENTIFIED." },
+      },
+      {
+        id: "ep6b",
+        label: "There is no predictable safe window or I am not ready to choose a time.",
+        responseTitle: "TIMING WINDOW NOT YET IDENTIFIED",
+        response: "No date required today. System will keep emergency and lower-visibility options available.",
+        effect: { readiness: -3, exposure: 8, backup: 8, emphasis: "backup", notice: "BACKUP STATUS UPDATED." },
+      },
+    ],
+  },
+  {
+    phase: "PLAN B - EMERGENCY EXIT",
+    prompt: "If you had to leave within ten minutes, what could you do?",
+    answers: [
+      {
+        id: "ep7a",
+        label: "Leave to a known location, contact pickup, move to public place, or contact emergency services.",
+        responseTitle: "EMERGENCY ROUTE IDENTIFIED",
+        response: "Emergency plan does not need to be elegant. It needs to create distance and time.",
+        effect: { readiness: 8, exposure: -2, backup: 24, emphasis: "backup", notice: "BACKUP STATUS AVAILABLE." },
+      },
+      {
+        id: "ep7b",
+        label: "I would have to leave without belongings or I do not have an emergency route yet.",
+        responseTitle: "EMERGENCY ROUTE INCOMPLETE",
+        response: "System will recommend one small next step instead of a giant checklist.",
+        effect: { readiness: 0, exposure: 8, backup: 6, emphasis: "backup", notice: "BACKUP STATUS INCOMPLETE." },
+      },
+    ],
+  },
+];
+
 const denialImages = [denialSupportOne, denialSupportTwo];
 
 const checkpointMessage =
@@ -526,6 +842,122 @@ function usePrefersReducedMotion() {
   }, []);
 
   return reduced;
+}
+
+function clampGauge(value: number) {
+  return Math.max(0, Math.min(100, value));
+}
+
+function assessmentGaugeValues(gauges: AssessmentGauges): GaugeValue[] {
+  const autonomyState =
+    gauges.autonomy >= 76
+      ? "AVAILABLE"
+      : gauges.autonomy >= 51
+        ? "PARTIAL"
+        : gauges.autonomy >= 26
+          ? "RESTRICTED"
+          : "SEVERELY RESTRICTED";
+  const dangerState =
+    gauges.danger >= 71 ? "CRITICAL" : gauges.danger >= 46 ? "HIGH" : gauges.danger >= 21 ? "ELEVATED" : "LOW";
+  const realityState =
+    gauges.reality >= 76 ? "STABLE" : gauges.reality >= 51 ? "CLEARING" : gauges.reality >= 26 ? "UNSTABLE" : "DISTORTED";
+
+  return [
+    {
+      label: "AUTONOMY METER",
+      value: gauges.autonomy,
+      lowLabel: "RESTRICTED",
+      highLabel: "AVAILABLE",
+      state: autonomyState,
+      tone: "cyan",
+    },
+    {
+      label: "DANGER LEVEL",
+      value: gauges.danger,
+      lowLabel: "LOW",
+      highLabel: "CRITICAL",
+      state: dangerState,
+      tone: "pink",
+    },
+    {
+      label: "REALITY SIGNAL",
+      value: gauges.reality,
+      lowLabel: "DISTORTED",
+      highLabel: "STABLE",
+      state: realityState,
+      tone: "purple",
+    },
+  ];
+}
+
+function exitGaugeValues(gauges: ExitGaugeState): GaugeValue[] {
+  const readinessState = gauges.readiness >= 76 ? "ROUTE IDENTIFIED" : gauges.readiness >= 41 ? "PARTIAL" : "BLOCKED";
+  const exposureState = gauges.exposure >= 66 ? "HIGH" : gauges.exposure >= 31 ? "ELEVATED" : "LOW";
+  const backupState = gauges.backup >= 76 ? "AVAILABLE" : gauges.backup >= 36 ? "INCOMPLETE" : "OFFLINE";
+
+  return [
+    {
+      label: "EXIT READINESS",
+      value: gauges.readiness,
+      lowLabel: "BLOCKED",
+      highLabel: "ROUTE IDENTIFIED",
+      state: readinessState,
+      tone: "cyan",
+    },
+    {
+      label: "EXPOSURE LEVEL",
+      value: gauges.exposure,
+      lowLabel: "LOW",
+      highLabel: "HIGH",
+      state: exposureState,
+      tone: "pink",
+    },
+    {
+      label: "BACKUP STATUS",
+      value: gauges.backup,
+      lowLabel: "OFFLINE",
+      highLabel: "AVAILABLE",
+      state: backupState,
+      tone: "purple",
+    },
+  ];
+}
+
+function GaugeDeck({
+  emphasis,
+  gauges,
+  notice,
+}: {
+  emphasis?: string | null;
+  gauges: GaugeValue[];
+  notice?: string;
+}) {
+  return (
+    <section className="gauge-deck" aria-label="Temporary system readings">
+      <div className="gauge-row">
+        {gauges.map((gauge) => (
+          <article
+            className={`analog-gauge ${gauge.tone} ${emphasis === gauge.label ? "pulse-gauge" : ""}`}
+            key={gauge.label}
+            style={{ "--gauge-value": gauge.value } as CSSProperties}
+          >
+            <div className="gauge-window">
+              <div className="gauge-arc" />
+              <div className="gauge-needle" />
+              <div className="gauge-hub" />
+              <div className="gauge-scale">
+                <span>{gauge.lowLabel}</span>
+                <span>{gauge.highLabel}</span>
+              </div>
+            </div>
+            <h3>{gauge.label}</h3>
+            <p>CURRENT STATE: {gauge.state}</p>
+          </article>
+        ))}
+      </div>
+      <p className="gauge-notice">{notice || "GAUGES INITIALIZED. CURRENT DATA: INSUFFICIENT. NO CONCLUSIONS LOADED."}</p>
+    </section>
+  );
 }
 
 function TypedText({
@@ -926,6 +1358,14 @@ function AmICrazyModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: 
   const [mode, setMode] = useState<"intro" | "question" | "response" | "denial" | "complete">("intro");
   const [denialImage, setDenialImage] = useState(denialImages[0]);
   const [responseDone, setResponseDone] = useState(false);
+  const [gauges, setGauges] = useState<AssessmentGauges>({
+    autonomy: 65,
+    danger: 10,
+    reality: 55,
+    dangerFloor: 10,
+  });
+  const [gaugeNotice, setGaugeNotice] = useState("GAUGES INITIALIZED. CURRENT DATA: INSUFFICIENT. NO CONCLUSIONS LOADED.");
+  const [gaugeEmphasis, setGaugeEmphasis] = useState<string | null>(null);
 
   const currentQuestion = assessmentQuestions[questionIndex];
   const patterns = Array.from(new Set(answers.map((answer) => answer.pattern).filter(Boolean)));
@@ -939,6 +1379,7 @@ function AmICrazyModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: 
     setAnswers((current) => [...current, answer]);
     setActiveResponse(answer);
     setResponseDone(false);
+    setGaugeEmphasis(null);
     setMode("response");
   }
 
@@ -963,6 +1404,9 @@ function AmICrazyModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: 
     setAnswers([]);
     setActiveResponse(null);
     setMode("intro");
+    setGauges({ autonomy: 65, danger: 10, reality: 55, dangerFloor: 10 });
+    setGaugeNotice("GAUGES INITIALIZED. CURRENT DATA: INSUFFICIENT. NO CONCLUSIONS LOADED.");
+    setGaugeEmphasis(null);
   }
 
   function clearAndExit() {
@@ -974,7 +1418,34 @@ function AmICrazyModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: 
     onNavigate("planning", "/planning");
   }
 
-  const completeSystemTyping = useCallback(() => setResponseDone(true), []);
+  const completeSystemTyping = useCallback(() => {
+    if (!activeResponse) {
+      setResponseDone(true);
+      return;
+    }
+
+    const effect = assessmentGaugeEffects[activeResponse.id];
+    if (effect) {
+      setGauges((current) => {
+        const dangerFloor = Math.max(current.dangerFloor, effect.minDanger ?? current.dangerFloor);
+        return {
+          autonomy: clampGauge(current.autonomy + effect.autonomy),
+          danger: Math.max(dangerFloor, clampGauge(current.danger + effect.danger)),
+          reality: clampGauge(current.reality + effect.reality),
+          dangerFloor,
+        };
+      });
+      setGaugeNotice(`UPDATING SYSTEM READINGS... ${effect.notice}`);
+      setGaugeEmphasis(
+        effect.emphasis === "autonomy"
+          ? "AUTONOMY METER"
+          : effect.emphasis === "danger"
+            ? "DANGER LEVEL"
+            : "REALITY SIGNAL",
+      );
+    }
+    setResponseDone(true);
+  }, [activeResponse]);
 
   return (
     <section className="assessment-shell" aria-labelledby="assessment-title">
@@ -1103,6 +1574,12 @@ function AmICrazyModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: 
           </div>
         </div>
       )}
+
+      <GaugeDeck
+        emphasis={gaugeEmphasis}
+        gauges={assessmentGaugeValues(gauges)}
+        notice={gaugeNotice}
+      />
     </section>
   );
 }
@@ -1136,6 +1613,222 @@ function ProceedControls({
         </button>
       </div>
     </div>
+  );
+}
+
+function ExitPlanningModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: string) => void }) {
+  const [mode, setMode] = useState<"intro" | "question" | "response" | "complete">("intro");
+  const [questionIndex, setQuestionIndex] = useState(0);
+  const [activeAnswer, setActiveAnswer] = useState<ExitAnswer | null>(null);
+  const [responseDone, setResponseDone] = useState(false);
+  const [answered, setAnswered] = useState<ExitAnswer[]>([]);
+  const [gauges, setGauges] = useState<ExitGaugeState>({
+    readiness: 25,
+    exposure: 12,
+    backup: 18,
+    exposureFloor: 12,
+  });
+  const [gaugeNotice, setGaugeNotice] = useState("GAUGES INITIALIZED. CURRENT DATA: INSUFFICIENT. NO PLAN LOADED.");
+  const [gaugeEmphasis, setGaugeEmphasis] = useState<string | null>(null);
+
+  const currentQuestion = exitPlanningQuestions[questionIndex];
+
+  function beginPlanning() {
+    setMode("question");
+  }
+
+  function showEmergencyOptions() {
+    setActiveAnswer(null);
+    setResponseDone(false);
+    setQuestionIndex(0);
+    setMode("question");
+  }
+
+  function selectExitAnswer(answer: ExitAnswer) {
+    setAnswered((current) => [...current, answer]);
+    setActiveAnswer(answer);
+    setResponseDone(false);
+    setGaugeEmphasis(null);
+    setMode("response");
+  }
+
+  function continuePlan() {
+    setActiveAnswer(null);
+    if (questionIndex >= exitPlanningQuestions.length - 1) {
+      setMode("complete");
+      return;
+    }
+    setQuestionIndex((current) => current + 1);
+    setMode("question");
+  }
+
+  function clearPlanning() {
+    setMode("intro");
+    setQuestionIndex(0);
+    setActiveAnswer(null);
+    setResponseDone(false);
+    setAnswered([]);
+    setGauges({ readiness: 25, exposure: 12, backup: 18, exposureFloor: 12 });
+    setGaugeNotice("GAUGES INITIALIZED. CURRENT DATA: INSUFFICIENT. NO PLAN LOADED.");
+    setGaugeEmphasis(null);
+  }
+
+  function quickExitPlanning() {
+    clearPlanning();
+    leaveSite();
+  }
+
+  const completeExitTyping = useCallback(() => {
+    if (!activeAnswer) {
+      setResponseDone(true);
+      return;
+    }
+
+    const effect = activeAnswer.effect;
+    setGauges((current) => {
+      const exposureFloor = Math.max(current.exposureFloor, effect.minExposure ?? current.exposureFloor);
+      return {
+        readiness: clampGauge(current.readiness + effect.readiness),
+        exposure: Math.max(exposureFloor, clampGauge(current.exposure + effect.exposure)),
+        backup: clampGauge(current.backup + effect.backup),
+        exposureFloor,
+      };
+    });
+    setGaugeNotice(`UPDATING EXIT READINGS... ${effect.notice}`);
+    setGaugeEmphasis(
+      effect.emphasis === "readiness"
+        ? "EXIT READINESS"
+        : effect.emphasis === "exposure"
+          ? "EXPOSURE LEVEL"
+          : "BACKUP STATUS",
+    );
+    setResponseDone(true);
+  }, [activeAnswer]);
+
+  const highExposure = gauges.exposure >= 66;
+  const backupAvailable = gauges.backup >= 76;
+  const recommendedStep = highExposure
+    ? "review device safety before making further plans"
+    : backupAvailable
+      ? "identify one possible first-night destination"
+      : "identify one public place reachable without transportation";
+
+  return (
+    <section className="assessment-shell" aria-labelledby="exit-title">
+      {mode === "intro" && (
+        <div className="assessment-panel">
+          <div className="terminal-label">MODULE: EXIT PLANNING</div>
+          <h1 id="exit-title">I KNOW I NEED TO LEAVE - NOW WHAT?</h1>
+          <TypedText
+            className="system-typed-text"
+            skipLabel="Print Module Brief"
+            text={
+              "SYSTEM:\nEXIT REQUEST RECEIVED.\n\nKnowing you need to leave and being able to leave are not the same thing.\n\nThis module will not tell you to just leave. It will help identify what must happen first, what could go wrong, what options are available, and what you can do next.\n\nYour answers will not be saved."
+            }
+          />
+          <div className="terminal-actions denial-actions">
+            <button type="button" onClick={beginPlanning}>
+              Begin Exit Planning
+            </button>
+            <button type="button" onClick={showEmergencyOptions}>
+              I Need Emergency Options
+            </button>
+            <button type="button" onClick={() => onNavigate("legal", "/legal")}>
+              Understand My Choices First
+            </button>
+            <button type="button" onClick={() => onNavigate("home", "/")}>
+              Back To Homepage
+            </button>
+            <button type="button" onClick={quickExitPlanning}>
+              Quick Exit
+            </button>
+          </div>
+        </div>
+      )}
+
+      {mode === "question" && currentQuestion && (
+        <div className="assessment-panel">
+          <div className="question-status">
+            <span>{currentQuestion.phase}</span>
+            <span>TEMP MEMORY ONLY</span>
+          </div>
+          <h2>{currentQuestion.prompt}</h2>
+          <div className="answer-grid">
+            {currentQuestion.answers.map((answer, index) => (
+              <button key={answer.id} type="button" onClick={() => selectExitAnswer(answer)}>
+                <span>{String.fromCharCode(65 + index)}</span>
+                {answer.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {mode === "response" && activeAnswer && (
+        <div className={activeAnswer.effect.minExposure && activeAnswer.effect.minExposure >= 46 ? "assessment-panel direct-panel" : "assessment-panel"}>
+          <div className="terminal-label">SYSTEM RESPONSE</div>
+          <h2>{activeAnswer.responseTitle}</h2>
+          <TypedText
+            className="system-typed-text"
+            onDone={completeExitTyping}
+            skipLabel="Print Response"
+            text={`SYSTEM:\n${activeAnswer.response}`}
+          />
+          {responseDone && (
+            <div className="proceed-terminal">
+              <div className="terminal-label">HOW WOULD YOU LIKE TO PROCEED?</div>
+              <div className="terminal-actions denial-actions">
+                <button type="button" onClick={continuePlan}>
+                  Continue Building My Plan
+                </button>
+                <button type="button" onClick={showEmergencyOptions}>
+                  Show Emergency Options
+                </button>
+                <button type="button" onClick={() => onNavigate("home", "/")}>
+                  I Need To Think
+                </button>
+                <button type="button" onClick={quickExitPlanning}>
+                  Quick Exit
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
+      {mode === "complete" && (
+        <div className="assessment-panel">
+          <div className="terminal-label">EXIT SYSTEM STATUS</div>
+          <h2>EXIT PLAN INITIALIZED.</h2>
+          <p>You do not have to complete every task today. You do not have to announce your plan.</p>
+          <div className="pattern-panel">
+            <h3>NEXT RECOMMENDED STEP</h3>
+            <p>{recommendedStep.toUpperCase()}.</p>
+            <p>ONE ACTION IS STILL ACTION. CONTROL RETURNS IN INCREMENTS.</p>
+          </div>
+          <div className="terminal-actions denial-actions">
+            <button type="button" onClick={() => onNavigate("local-help", "/local-help")}>
+              Show Relevant Free Resources
+            </button>
+            <button type="button" onClick={() => onNavigate("legal", "/legal")}>
+              Understand My Choices
+            </button>
+            <button type="button" onClick={clearPlanning}>
+              Restart With A Different Barrier
+            </button>
+            <button type="button" onClick={clearPlanning}>
+              Clear This Session
+            </button>
+            <button type="button" onClick={quickExitPlanning}>
+              Quick Exit
+            </button>
+          </div>
+        </div>
+      )}
+
+      <GaugeDeck emphasis={gaugeEmphasis} gauges={exitGaugeValues(gauges)} notice={gaugeNotice} />
+      {answered.length > 0 && <p className="session-note">Temporary planning signals are erased when this session clears, refreshes, or exits.</p>}
+    </section>
   );
 }
 
@@ -1212,6 +1905,8 @@ export function App() {
         <HomeModule onNavigate={navigate} />
       ) : activeModule === "am-i-crazy" ? (
         <AmICrazyModule onNavigate={navigate} />
+      ) : activeModule === "planning" ? (
+        <ExitPlanningModule onNavigate={navigate} />
       ) : (
         <ResourceModule moduleKey={activeModule} />
       )}
