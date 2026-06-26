@@ -12,7 +12,7 @@ import {
   ShieldCheck,
   Sprout,
 } from "lucide-react";
-import heroLandscape from "./assets/brand/hero-landscape.webp";
+import heroLandscape from "./assets/brand/hero-mountain-sunrise.webp";
 
 type Resource = {
   title: string;
@@ -216,7 +216,8 @@ export function App() {
         <img
           className="hero-art"
           src={heroLandscape}
-          alt="Watercolor hills with a winding path and sunrise"
+          alt=""
+          aria-hidden="true"
         />
       </section>
 
