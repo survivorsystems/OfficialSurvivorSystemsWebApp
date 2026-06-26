@@ -19,10 +19,13 @@
   --shadow-cyan: 0 0 18px rgba(0, 234, 255, 0.38);
   --shadow-pink: 0 0 18px rgba(255, 79, 216, 0.42);
   --shadow-purple: 0 0 26px rgba(126, 53, 255, 0.34);
+  --terminal-font:
+    "Share Tech Mono", "VT323", "Cascadia Mono", "IBM Plex Mono", "SFMono-Regular", Consolas,
+    monospace;
   color: var(--text);
   background: var(--bg);
   font-family:
-    "Cascadia Mono", "IBM Plex Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    var(--terminal-font);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
 }
@@ -200,10 +203,10 @@ button:disabled {
   background: var(--pink);
   box-shadow: var(--shadow-pink);
   display: inline-block;
-  height: 1.15em;
+  height: 1.08em;
   margin-left: 3px;
   transform: translateY(0.18em);
-  width: 0.65em;
+  width: 0.78em;
 }
 
 .text-button {
@@ -473,6 +476,17 @@ button:disabled {
 }
 
 .terminal-screen {
+  background:
+    radial-gradient(circle at 50% 40%, rgba(0, 234, 255, 0.08), transparent 48%),
+    linear-gradient(180deg, rgba(3, 8, 12, 0.98), rgba(0, 0, 0, 0.98)),
+    #010306;
+  border-color: rgba(0, 234, 255, 0.5);
+  box-shadow:
+    inset 0 0 18px rgba(0, 234, 255, 0.08),
+    inset 0 0 70px rgba(0, 0, 0, 0.94),
+    0 0 32px rgba(0, 234, 255, 0.2);
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
   min-height: calc(100vh - 60px);
   overflow: hidden;
 }
@@ -480,8 +494,9 @@ button:disabled {
 .terminal-screen::before,
 .checkpoint-panel::before {
   background:
-    linear-gradient(90deg, rgba(0, 234, 255, 0.16), transparent 25%, rgba(255, 79, 216, 0.16)),
-    repeating-linear-gradient(0deg, transparent 0 7px, rgba(0, 234, 255, 0.04) 8px);
+    linear-gradient(90deg, rgba(0, 234, 255, 0.12), transparent 25%, rgba(255, 79, 216, 0.12)),
+    repeating-linear-gradient(0deg, transparent 0 5px, rgba(0, 234, 255, 0.075) 6px),
+    repeating-linear-gradient(90deg, rgba(255, 79, 216, 0.025) 0 1px, transparent 1px 5px);
   border-radius: 10px;
   content: "";
   inset: 10px;
@@ -521,11 +536,87 @@ button:disabled {
 }
 
 .terminal-content {
-  max-height: calc(100vh - 164px);
+  max-height: calc(100vh - 260px);
   overflow: auto;
   padding: 22px;
   position: relative;
   z-index: 1;
+}
+
+.command-terminal {
+  background:
+    linear-gradient(180deg, rgba(0, 234, 255, 0.06), rgba(0, 0, 0, 0.92)),
+    var(--recess);
+  border-top: 1px solid rgba(0, 234, 255, 0.32);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 -12px 28px rgba(0, 0, 0, 0.45);
+  display: grid;
+  gap: 9px;
+  padding: 14px 18px 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.command-terminal label {
+  color: var(--pink);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-shadow: var(--shadow-pink);
+}
+
+.command-input-row {
+  align-items: center;
+  background: rgba(0, 0, 0, 0.56);
+  border: 1px solid rgba(0, 234, 255, 0.34);
+  border-radius: 4px;
+  box-shadow:
+    inset 0 0 18px rgba(0, 234, 255, 0.07),
+    0 0 16px rgba(0, 234, 255, 0.12);
+  display: grid;
+  gap: 10px;
+  grid-template-columns: auto minmax(0, 1fr);
+  min-height: 46px;
+  padding: 0 12px;
+}
+
+.command-input-row span {
+  color: var(--lime);
+  font-size: 0.8rem;
+  font-weight: 900;
+  text-shadow: 0 0 10px rgba(108, 255, 98, 0.45);
+  white-space: nowrap;
+}
+
+.command-input-row input {
+  background: transparent;
+  border: 0;
+  color: var(--cyan);
+  caret-color: var(--pink);
+  font-family: var(--terminal-font);
+  font-size: 1rem;
+  font-weight: 900;
+  min-width: 0;
+  outline: 0;
+  text-shadow: var(--shadow-cyan);
+  text-transform: uppercase;
+  width: 100%;
+}
+
+.command-input-row input::placeholder {
+  color: rgba(114, 174, 185, 0.72);
+  text-transform: none;
+}
+
+.command-terminal p {
+  color: var(--cyan);
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  margin: 0;
+  min-height: 1.2em;
+  text-shadow: var(--shadow-cyan);
 }
 
 .module-loading {
@@ -570,12 +661,14 @@ button:disabled {
 .assessment-panel,
 .denial-panel {
   background:
-    linear-gradient(180deg, rgba(13, 17, 24, 0.96), rgba(2, 3, 6, 0.98)),
+    repeating-linear-gradient(0deg, rgba(0, 234, 255, 0.035) 0 1px, transparent 1px 6px),
+    linear-gradient(180deg, rgba(5, 14, 18, 0.98), rgba(0, 0, 0, 0.98)),
     var(--panel);
   border: 1px solid var(--border-cyan);
-  border-radius: 12px;
+  border-radius: 6px;
   box-shadow:
-    inset 0 0 34px rgba(0, 0, 0, 0.9),
+    inset 0 0 16px rgba(0, 234, 255, 0.05),
+    inset 0 0 42px rgba(0, 0, 0, 0.94),
     var(--shadow-cyan),
     var(--shadow-purple);
   padding: clamp(20px, 4vw, 36px);
@@ -669,6 +762,22 @@ button:disabled {
   min-height: 420px;
 }
 
+.system-typed-text {
+  color: var(--cyan);
+  font-family: var(--terminal-font);
+  font-size: clamp(1rem, 1.9vw, 1.38rem);
+  font-weight: 900;
+  letter-spacing: 0.03em;
+  line-height: 1.65;
+  margin: 0;
+  max-width: 980px;
+  min-height: 210px;
+  text-shadow:
+    0 0 9px rgba(0, 234, 255, 0.72),
+    0 0 24px rgba(0, 234, 255, 0.26);
+  white-space: pre-wrap;
+}
+
 .assessment-panel.direct-panel {
   border-color: rgba(255, 191, 69, 0.72);
   box-shadow:
@@ -707,7 +816,7 @@ button:disabled {
   align-items: center;
   background: rgba(0, 234, 255, 0.06);
   border: 1px solid var(--border-cyan);
-  border-radius: 8px;
+  border-radius: 4px;
   box-shadow: inset 0 0 16px rgba(0, 234, 255, 0.06);
   color: var(--text);
   display: grid;
@@ -777,7 +886,7 @@ button:disabled {
 .pattern-panel {
   background: rgba(0, 234, 255, 0.05);
   border: 1px solid rgba(0, 234, 255, 0.24);
-  border-radius: 10px;
+  border-radius: 4px;
   margin-top: 22px;
   padding: 18px;
 }

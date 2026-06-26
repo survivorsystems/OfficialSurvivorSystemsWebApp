@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { type FormEvent, useCallback, useEffect, useMemo, useState } from "react";
 import {
   BookOpenCheck,
   Compass,
@@ -528,14 +528,24 @@ function usePrefersReducedMotion() {
   return reduced;
 }
 
-function TypedText({ text, onDone }: { text: string; onDone: () => void }) {
+function TypedText({
+  className = "typed-text",
+  onDone,
+  skipLabel = "Skip Typing",
+  text,
+}: {
+  className?: string;
+  onDone?: () => void;
+  skipLabel?: string;
+  text: string;
+}) {
   const prefersReducedMotion = usePrefersReducedMotion();
   const [visibleLength, setVisibleLength] = useState(prefersReducedMotion ? text.length : 0);
 
   useEffect(() => {
     if (prefersReducedMotion) {
       setVisibleLength(text.length);
-      onDone();
+      onDone?.();
       return;
     }
 
@@ -546,7 +556,7 @@ function TypedText({ text, onDone }: { text: string; onDone: () => void }) {
         const next = Math.min(text.length, current + step);
         if (next >= text.length) {
           window.clearInterval(interval);
-          onDone();
+          onDone?.();
         }
         return next;
       });
@@ -559,13 +569,13 @@ function TypedText({ text, onDone }: { text: string; onDone: () => void }) {
 
   return (
     <>
-      <pre className="typed-text">
+      <pre className={className}>
         {text.slice(0, visibleLength)}
         <span className="terminal-cursor" aria-hidden="true" />
       </pre>
       {!finished && (
         <button className="text-button" type="button" onClick={() => setVisibleLength(text.length)}>
-          Skip Typing
+          {skipLabel}
         </button>
       )}
     </>
@@ -696,6 +706,114 @@ function ModuleLoading({ label }: { label: string }) {
   );
 }
 
+function resolveCommand(query: string) {
+  const normalized = query.trim().toLowerCase();
+
+  if (!normalized) {
+    return { message: "NO QUERY ENTERED. TYPE A MODULE NAME OR A NEED.", target: null };
+  }
+
+  if (
+    normalized === "exit" ||
+    normalized === "escape" ||
+    normalized.includes("quick exit") ||
+    normalized.includes("iluvrocks")
+  ) {
+    return { message: "QUICK EXIT COMMAND ACCEPTED.", target: "quick-exit" as const };
+  }
+
+  if (/\b(help|menu|options|commands|where)\b/.test(normalized)) {
+    return {
+      message:
+        "AVAILABLE COMMANDS: AM I CRAZY, PLANNING, LEAVING, REBUILDING, LOCAL HELP, LEGAL, QUICK EXIT.",
+      target: null,
+    };
+  }
+
+  const match = navItems.find((item) => {
+    const label = item.label.toLowerCase();
+    return normalized.includes(label) || label.includes(normalized);
+  });
+
+  if (match) {
+    return { message: `QUERY ACCEPTED. ROUTING TO ${match.label.toUpperCase()}...`, target: match };
+  }
+
+  if (/\b(crazy|abused|abuse|assessment|gaslight|gaslighting|reality)\b/.test(normalized)) {
+    return { message: "QUERY ACCEPTED. ROUTING TO AM I CRAZY...", target: navItems[1] };
+  }
+
+  if (/\b(plan|safety|prepare|documents|checklist)\b/.test(normalized)) {
+    return { message: "QUERY ACCEPTED. ROUTING TO PLANNING...", target: navItems[2] };
+  }
+
+  if (/\b(leave|leaving|go bag|escape|exit plan)\b/.test(normalized)) {
+    return { message: "QUERY ACCEPTED. ROUTING TO LEAVING...", target: navItems[3] };
+  }
+
+  if (/\b(rebuild|money|housing|future|after)\b/.test(normalized)) {
+    return { message: "QUERY ACCEPTED. ROUTING TO REBUILDING...", target: navItems[4] };
+  }
+
+  if (/\b(local|hotline|shelter|support|near)\b/.test(normalized)) {
+    return { message: "QUERY ACCEPTED. ROUTING TO FIND LOCAL HELP...", target: navItems[5] };
+  }
+
+  if (/\b(legal|rights|court|order|documents)\b/.test(normalized)) {
+    return { message: "QUERY ACCEPTED. ROUTING TO LEGAL...", target: navItems[6] };
+  }
+
+  return {
+    message:
+      "QUERY NOT RECOGNIZED. TRY: AM I CRAZY, PLANNING, LEAVING, REBUILDING, LOCAL HELP, LEGAL, OR QUICK EXIT.",
+    target: null,
+  };
+}
+
+function TerminalCommand({
+  onNavigate,
+}: {
+  onNavigate: (module: ModuleKey, path: string) => void;
+}) {
+  const [query, setQuery] = useState("");
+  const [systemReply, setSystemReply] = useState("SYSTEM READY. TYPE A MODULE NAME OR WHAT YOU NEED.");
+
+  function submitCommand(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const result = resolveCommand(query);
+    setSystemReply(result.message);
+    setQuery("");
+
+    if (result.target === "quick-exit") {
+      window.setTimeout(leaveSite, 240);
+      return;
+    }
+
+    if (result.target) {
+      window.setTimeout(() => onNavigate(result.target.key, result.target.path), 420);
+    }
+  }
+
+  return (
+    <form className="command-terminal" onSubmit={submitCommand}>
+      <label htmlFor="terminal-command">SYSTEM QUERY</label>
+      <div className="command-input-row">
+        <span aria-hidden="true">user@survivor-systems:~$</span>
+        <input
+          autoComplete="off"
+          id="terminal-command"
+          onChange={(event) => setQuery(event.target.value)}
+          placeholder="type: am i crazy, planning, legal, quick exit..."
+          spellCheck={false}
+          type="search"
+          value={query}
+        />
+      </div>
+      <p aria-live="polite">{systemReply}</p>
+    </form>
+  );
+}
+
 function TerminalChrome({
   activeModule,
   children,
@@ -761,6 +879,7 @@ function TerminalChrome({
           </div>
         </header>
         <div className="terminal-content">{children}</div>
+        <TerminalCommand onNavigate={onNavigate} />
       </section>
     </main>
   );
@@ -806,6 +925,7 @@ function AmICrazyModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: 
   const [activeResponse, setActiveResponse] = useState<AssessmentAnswer | null>(null);
   const [mode, setMode] = useState<"intro" | "question" | "response" | "denial" | "complete">("intro");
   const [denialImage, setDenialImage] = useState(denialImages[0]);
+  const [responseDone, setResponseDone] = useState(false);
 
   const currentQuestion = assessmentQuestions[questionIndex];
   const patterns = Array.from(new Set(answers.map((answer) => answer.pattern).filter(Boolean)));
@@ -818,6 +938,7 @@ function AmICrazyModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: 
   function selectAnswer(answer: AssessmentAnswer) {
     setAnswers((current) => [...current, answer]);
     setActiveResponse(answer);
+    setResponseDone(false);
     setMode("response");
   }
 
@@ -852,6 +973,8 @@ function AmICrazyModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: 
   function startPlanning() {
     onNavigate("planning", "/planning");
   }
+
+  const completeSystemTyping = useCallback(() => setResponseDone(true), []);
 
   return (
     <section className="assessment-shell" aria-labelledby="assessment-title">
@@ -900,13 +1023,20 @@ function AmICrazyModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: 
         <div className={activeResponse.safetyFocused ? "assessment-panel direct-panel" : "assessment-panel"}>
           <div className="terminal-label">SYSTEM RESPONSE</div>
           <h2>{activeResponse.responseTitle}</h2>
-          <p>{activeResponse.response}</p>
-          <ProceedControls
-            onDeny={showDenial}
-            onExit={clearAndExit}
-            onNext={loadNextQuestion}
-            onPlanning={startPlanning}
+          <TypedText
+            className="system-typed-text"
+            onDone={completeSystemTyping}
+            skipLabel="Print Response"
+            text={`SYSTEM:\n${activeResponse.response}`}
           />
+          {responseDone && (
+            <ProceedControls
+              onDeny={showDenial}
+              onExit={clearAndExit}
+              onNext={loadNextQuestion}
+              onPlanning={startPlanning}
+            />
+          )}
         </div>
       )}
 
