@@ -9,6 +9,7 @@ import {
   ShieldCheck,
   Sprout,
 } from "lucide-react";
+import clarityMeterImage from "./assets/support/clarity-meter.png";
 import denialSupportOne from "./assets/support/denial-support-1.png";
 import denialSupportTwo from "./assets/support/denial-support-2.png";
 
@@ -42,6 +43,12 @@ type GaugeValue = {
   highLabel: string;
   state: string;
   tone: "cyan" | "pink" | "purple";
+};
+
+type ControlPanelState = {
+  emphasis: string | null;
+  gauges: GaugeValue[];
+  notice: string;
 };
 
 type AssessmentGauges = {
@@ -800,6 +807,12 @@ const privateBrowsingHelp = [
   "If it is safe, open a private window from your browser menu before continuing.",
 ];
 
+const defaultControlPanel: ControlPanelState = {
+  emphasis: null,
+  gauges: [],
+  notice: "CLARITY METER ONLINE. MODULE READINGS STANDBY.",
+};
+
 function leaveSite() {
   window.location.replace("https://iluvrocks.rocks");
 }
@@ -924,16 +937,18 @@ function exitGaugeValues(gauges: ExitGaugeState): GaugeValue[] {
 }
 
 function GaugeDeck({
+  compact = false,
   emphasis,
   gauges,
   notice,
 }: {
+  compact?: boolean;
   emphasis?: string | null;
   gauges: GaugeValue[];
   notice?: string;
 }) {
   return (
-    <section className="gauge-deck" aria-label="Temporary system readings">
+    <section className={compact ? "gauge-deck compact-gauges" : "gauge-deck"} aria-label="Temporary system readings">
       <div className="gauge-row">
         {gauges.map((gauge) => (
           <article
@@ -956,6 +971,30 @@ function GaugeDeck({
         ))}
       </div>
       <p className="gauge-notice">{notice || "GAUGES INITIALIZED. CURRENT DATA: INSUFFICIENT. NO CONCLUSIONS LOADED."}</p>
+    </section>
+  );
+}
+
+function BrandLogo({ className = "" }: { className?: string }) {
+  return (
+    <span className={`brand-logo ${className}`}>
+      <span>Survivor</span>
+      <span>Systems</span>
+    </span>
+  );
+}
+
+function ControlPanel({ panel }: { panel: ControlPanelState }) {
+  return (
+    <section className="control-panel" aria-label="Control panel">
+      <div className="control-panel-header">
+        <span className="terminal-label">CONTROL PANEL</span>
+        <p>{panel.notice}</p>
+      </div>
+      <img src={clarityMeterImage} alt="Clarity meter" />
+      {panel.gauges.length > 0 && (
+        <GaugeDeck compact emphasis={panel.emphasis} gauges={panel.gauges} notice={panel.notice} />
+      )}
     </section>
   );
 }
@@ -1032,7 +1071,9 @@ function WelcomeCheckpoint({ onComplete }: { onComplete: () => void }) {
       </button>
       <section className="checkpoint-panel" aria-labelledby="checkpoint-title">
         <div className="terminal-label">SYSTEM CHECKPOINT</div>
-        <h1 id="checkpoint-title">Survivor Systems</h1>
+        <h1 id="checkpoint-title">
+          <BrandLogo className="checkpoint-logo" />
+        </h1>
         <TypedText text={typedIntro} onDone={() => setTypingComplete(true)} />
 
         {typingComplete && mode === "options" && (
@@ -1249,10 +1290,12 @@ function TerminalCommand({
 function TerminalChrome({
   activeModule,
   children,
+  controlPanel,
   onNavigate,
 }: {
   activeModule: ModuleKey;
   children: React.ReactNode;
+  controlPanel: ControlPanelState;
   onNavigate: (module: ModuleKey, path: string) => void;
 }) {
   return (
@@ -1271,7 +1314,7 @@ function TerminalChrome({
             <span />
             <span />
           </span>
-          <span>Survivor Systems</span>
+          <BrandLogo />
         </a>
         <p className="sidebar-tagline">TOOLS FOR CLARITY. POWER FOR YOUR FUTURE.</p>
         <nav aria-label="Primary navigation">
@@ -1294,7 +1337,7 @@ function TerminalChrome({
           Quick Exit
         </button>
         <div className="clarity-meter" aria-hidden="true">
-          <span />
+          <img src={clarityMeterImage} alt="" />
           <strong>CLARITY METER</strong>
         </div>
       </aside>
@@ -1311,6 +1354,7 @@ function TerminalChrome({
           </div>
         </header>
         <div className="terminal-content">{children}</div>
+        <ControlPanel panel={controlPanel} />
         <TerminalCommand onNavigate={onNavigate} />
       </section>
     </main>
@@ -1350,7 +1394,13 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
   );
 }
 
-function AmICrazyModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: string) => void }) {
+function AmICrazyModule({
+  onControlPanelChange,
+  onNavigate,
+}: {
+  onControlPanelChange: (panel: ControlPanelState) => void;
+  onNavigate: (module: ModuleKey, path: string) => void;
+}) {
   const [started, setStarted] = useState(false);
   const [questionIndex, setQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<AssessmentAnswer[]>([]);
@@ -1369,6 +1419,14 @@ function AmICrazyModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: 
 
   const currentQuestion = assessmentQuestions[questionIndex];
   const patterns = Array.from(new Set(answers.map((answer) => answer.pattern).filter(Boolean)));
+
+  useEffect(() => {
+    onControlPanelChange({
+      emphasis: gaugeEmphasis,
+      gauges: assessmentGaugeValues(gauges),
+      notice: gaugeNotice,
+    });
+  }, [gaugeEmphasis, gaugeNotice, gauges, onControlPanelChange]);
 
   function beginAssessment() {
     setStarted(true);
@@ -1574,12 +1632,6 @@ function AmICrazyModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: 
           </div>
         </div>
       )}
-
-      <GaugeDeck
-        emphasis={gaugeEmphasis}
-        gauges={assessmentGaugeValues(gauges)}
-        notice={gaugeNotice}
-      />
     </section>
   );
 }
@@ -1616,7 +1668,13 @@ function ProceedControls({
   );
 }
 
-function ExitPlanningModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: string) => void }) {
+function ExitPlanningModule({
+  onControlPanelChange,
+  onNavigate,
+}: {
+  onControlPanelChange: (panel: ControlPanelState) => void;
+  onNavigate: (module: ModuleKey, path: string) => void;
+}) {
   const [mode, setMode] = useState<"intro" | "question" | "response" | "complete">("intro");
   const [questionIndex, setQuestionIndex] = useState(0);
   const [activeAnswer, setActiveAnswer] = useState<ExitAnswer | null>(null);
@@ -1632,6 +1690,14 @@ function ExitPlanningModule({ onNavigate }: { onNavigate: (module: ModuleKey, pa
   const [gaugeEmphasis, setGaugeEmphasis] = useState<string | null>(null);
 
   const currentQuestion = exitPlanningQuestions[questionIndex];
+
+  useEffect(() => {
+    onControlPanelChange({
+      emphasis: gaugeEmphasis,
+      gauges: exitGaugeValues(gauges),
+      notice: gaugeNotice,
+    });
+  }, [gaugeEmphasis, gaugeNotice, gauges, onControlPanelChange]);
 
   function beginPlanning() {
     setMode("question");
@@ -1825,8 +1891,6 @@ function ExitPlanningModule({ onNavigate }: { onNavigate: (module: ModuleKey, pa
           </div>
         </div>
       )}
-
-      <GaugeDeck emphasis={gaugeEmphasis} gauges={exitGaugeValues(gauges)} notice={gaugeNotice} />
       {answered.length > 0 && <p className="session-note">Temporary planning signals are erased when this session clears, refreshes, or exits.</p>}
     </section>
   );
@@ -1865,12 +1929,23 @@ function ResourceModule({ moduleKey }: { moduleKey: Exclude<ModuleKey, "home" | 
 export function App() {
   const [checkpointPassed, setCheckpointPassed] = useState(() => getCheckpointCleared());
   const [activeModule, setActiveModule] = useState<ModuleKey>(() => getInitialModule());
+  const [controlPanel, setControlPanel] = useState<ControlPanelState>(defaultControlPanel);
   const [loadingModule, setLoadingModule] = useState<ModuleKey | null>(null);
 
   useEffect(() => {
     const syncRoute = () => setActiveModule(getInitialModule());
     window.addEventListener("popstate", syncRoute);
     return () => window.removeEventListener("popstate", syncRoute);
+  }, []);
+
+  useEffect(() => {
+    if (activeModule !== "am-i-crazy" && activeModule !== "planning") {
+      setControlPanel(defaultControlPanel);
+    }
+  }, [activeModule]);
+
+  const updateControlPanel = useCallback((panel: ControlPanelState) => {
+    setControlPanel(panel);
   }, []);
 
   function navigate(module: ModuleKey, path: string) {
@@ -1898,15 +1973,15 @@ export function App() {
   const loadingLabel = navItems.find((item) => item.key === loadingModule)?.label;
 
   return (
-    <TerminalChrome activeModule={loadingModule ?? activeModule} onNavigate={navigate}>
+    <TerminalChrome activeModule={loadingModule ?? activeModule} controlPanel={controlPanel} onNavigate={navigate}>
       {loadingModule && loadingLabel ? (
         <ModuleLoading label={loadingLabel} />
       ) : activeModule === "home" ? (
         <HomeModule onNavigate={navigate} />
       ) : activeModule === "am-i-crazy" ? (
-        <AmICrazyModule onNavigate={navigate} />
+        <AmICrazyModule onControlPanelChange={updateControlPanel} onNavigate={navigate} />
       ) : activeModule === "planning" ? (
-        <ExitPlanningModule onNavigate={navigate} />
+        <ExitPlanningModule onControlPanelChange={updateControlPanel} onNavigate={navigate} />
       ) : (
         <ResourceModule moduleKey={activeModule} />
       )}
