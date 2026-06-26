@@ -140,8 +140,6 @@ button:disabled {
 .support-card,
 .library-panel,
 .featured-section,
-.downloads-section,
-.download-row,
 .blank-state {
   background:
     linear-gradient(180deg, rgba(13, 17, 24, 0.96), rgba(2, 3, 6, 0.98)),
@@ -228,7 +226,6 @@ button:disabled {
 .terminal-actions button,
 .primary-action,
 .secondary-action,
-.download-row button,
 .quick-exit,
 .text-link {
   background: rgba(255, 79, 216, 0.1);
@@ -287,7 +284,6 @@ button:disabled {
 .support-card h2,
 .library-header h2,
 .featured-section h2,
-.downloads-section h2,
 .blank-state h2 {
   color: var(--hot-text);
   font-size: clamp(1.2rem, 2.4vw, 1.85rem);
@@ -300,7 +296,6 @@ button:disabled {
 .support-card p,
 .library-header p,
 .resource-card p,
-.download-row p,
 .featured-card p,
 .blank-state p,
 .page-shell > p {
@@ -565,7 +560,6 @@ button:disabled {
 .hero,
 .resource-section,
 .featured-section,
-.downloads-section,
 .page-shell {
   position: relative;
 }
@@ -697,7 +691,6 @@ button:disabled {
 
 .library-panel,
 .featured-section,
-.downloads-section,
 .page-shell {
   padding: 24px;
 }
@@ -783,8 +776,7 @@ button:disabled {
   margin-top: 12px;
 }
 
-.featured-section,
-.downloads-section {
+.featured-section {
   margin-top: 20px;
 }
 
@@ -838,42 +830,6 @@ button:disabled {
     inset 0 0 20px rgba(108, 255, 98, 0.08),
     0 0 18px rgba(108, 255, 98, 0.28);
   color: var(--lime);
-}
-
-.download-list {
-  border-top: 1px solid rgba(0, 234, 255, 0.18);
-}
-
-.download-row {
-  align-items: center;
-  border-radius: 0;
-  border-width: 0 0 1px;
-  box-shadow: none;
-  display: grid;
-  gap: 18px;
-  grid-template-columns: auto 1fr auto auto;
-  padding: 20px 0;
-}
-
-.download-row > svg {
-  color: var(--cyan);
-  filter: drop-shadow(0 0 8px rgba(0, 234, 255, 0.7));
-  height: 30px;
-  width: 30px;
-}
-
-.download-row h3,
-.download-row p {
-  margin-bottom: 4px;
-}
-
-.download-row strong {
-  color: var(--amber);
-  text-shadow: 0 0 12px rgba(255, 191, 69, 0.42);
-}
-
-.download-row button {
-  min-height: 42px;
 }
 
 .page-shell {
@@ -1039,14 +995,8 @@ button:disabled {
   }
 
   .support-card,
-  .featured-card,
-  .download-row {
+  .featured-card {
     align-items: start;
     grid-template-columns: 1fr;
-  }
-
-  .download-row strong,
-  .download-row button {
-    justify-self: start;
   }
 }

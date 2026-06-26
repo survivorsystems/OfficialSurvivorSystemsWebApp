@@ -1,7 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
 import {
-  ArrowDownToLine,
-  BadgeDollarSign,
   BookOpenCheck,
   Compass,
   FileText,
@@ -19,7 +17,7 @@ type Resource = {
   items: string[];
 };
 
-type ModuleKey = "home" | "planning" | "leaving" | "rebuilding" | "local-help" | "legal" | "downloads";
+type ModuleKey = "home" | "planning" | "leaving" | "rebuilding" | "local-help" | "legal";
 
 const resources: Resource[] = [
   {
@@ -54,36 +52,8 @@ const resources: Resource[] = [
   },
 ];
 
-const downloads = [
-  {
-    name: "Immediate Safety Checklist",
-    price: "Free",
-    description: "One-page checklist for urgent safety decisions.",
-  },
-  {
-    name: "Safety Plan Worksheet",
-    price: "$1.99",
-    description: "A focused printable for mapping people, places, documents, and next moves.",
-  },
-  {
-    name: "Go-Bag Checklist",
-    price: "$1.99",
-    description: "A practical packing list for essentials, medications, children, pets, and copies.",
-  },
-  {
-    name: "Document Tracker",
-    price: "$0.99",
-    description: "A simple way to list IDs, records, benefits paperwork, and replacement steps.",
-  },
-  {
-    name: "Rebuilding Budget Starter",
-    price: "$1.99",
-    description: "A low-pressure worksheet for urgent costs, income, aid, bills, and first goals.",
-  },
-];
-
 const modulePages: Record<
-  Exclude<ModuleKey, "home" | "downloads">,
+  Exclude<ModuleKey, "home">,
   {
     eyebrow: string;
     title: string;
@@ -128,7 +98,6 @@ const navItems: Array<{ key: ModuleKey; label: string; path: string }> = [
   { key: "rebuilding", label: "Rebuilding", path: "/rebuilding" },
   { key: "local-help", label: "Find Local Help", path: "/local-help" },
   { key: "legal", label: "Legal", path: "/legal" },
-  { key: "downloads", label: "Downloads", path: "/#downloads" },
 ];
 
 const checkpointMessage =
@@ -146,11 +115,6 @@ function leaveSite() {
 
 function getInitialModule(): ModuleKey {
   const path = window.location.pathname;
-  const hash = window.location.hash;
-
-  if (hash === "#downloads") {
-    return "downloads";
-  }
 
   const match = navItems.find((item) => item.path === path);
   return match?.key ?? "home";
@@ -482,7 +446,6 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
       </section>
 
       <FeaturedGuides />
-      <DownloadsModule />
     </>
   );
 }
@@ -492,9 +455,6 @@ function FeaturedGuides() {
     <section className="featured-section" aria-labelledby="featured-title">
       <div className="section-heading row-heading">
         <h2 id="featured-title">Featured Guides</h2>
-        <a className="text-link" href="#downloads">
-          View all guides
-        </a>
       </div>
       <div className="featured-grid">
         <article className="featured-card">
@@ -529,38 +489,7 @@ function FeaturedGuides() {
   );
 }
 
-function DownloadsModule() {
-  return (
-    <section className="downloads-section" id="downloads" aria-labelledby="downloads-title">
-      <div className="section-heading">
-        <p className="eyebrow">Choose only what helps</p>
-        <h2 id="downloads-title">Individual downloads</h2>
-      </div>
-      <div className="download-list">
-        {downloads.map((download) => (
-          <article className="download-row" key={download.name}>
-            <FileText aria-hidden="true" />
-            <div>
-              <h3>{download.name}</h3>
-              <p>{download.description}</p>
-            </div>
-            <strong>{download.price}</strong>
-            <button type="button" disabled>
-              {download.price === "Free" ? (
-                <ArrowDownToLine aria-hidden="true" />
-              ) : (
-                <BadgeDollarSign aria-hidden="true" />
-              )}
-              Coming Soon
-            </button>
-          </article>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function ResourceModule({ moduleKey }: { moduleKey: Exclude<ModuleKey, "home" | "downloads"> }) {
+function ResourceModule({ moduleKey }: { moduleKey: Exclude<ModuleKey, "home"> }) {
   const page = modulePages[moduleKey];
 
   return (
@@ -575,8 +504,8 @@ function ResourceModule({ moduleKey }: { moduleKey: Exclude<ModuleKey, "home" | 
         <FileText aria-hidden="true" />
         <h2>Resources coming soon</h2>
         <p>
-          This space is ready for the downloadable guides, checklists, and support content we
-          will add next.
+          This space is ready for the guided tools, checklists, and support content we will add
+          next.
         </p>
       </div>
     </section>
@@ -619,8 +548,6 @@ export function App() {
         <ModuleLoading label={loadingLabel} />
       ) : activeModule === "home" ? (
         <HomeModule onNavigate={navigate} />
-      ) : activeModule === "downloads" ? (
-        <DownloadsModule />
       ) : (
         <ResourceModule moduleKey={activeModule} />
       )}
