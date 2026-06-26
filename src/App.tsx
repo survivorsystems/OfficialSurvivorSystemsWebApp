@@ -1,7 +1,9 @@
 import {
   ArrowDownToLine,
+  ArrowLeft,
   BadgeDollarSign,
   BookOpenCheck,
+  Compass,
   ExternalLink,
   FileText,
   HeartHandshake,
@@ -30,7 +32,7 @@ const resources: Resource[] = [
     ],
   },
   {
-    title: "Escape",
+    title: "Leaving",
     description: "Practical steps for leaving, relocating, or reaching immediate help.",
     items: [
       "Go-bag checklist",
@@ -80,27 +82,104 @@ const downloads = [
 ];
 
 function leaveSite() {
-  window.location.replace("https://weather.com");
+  window.location.replace("https://iluvrocks.rocks");
+}
+
+const resourcePages: Record<
+  string,
+  {
+    eyebrow: string;
+    title: string;
+    description: string;
+  }
+> = {
+  "/planning": {
+    eyebrow: "Planning resources",
+    title: "Planning",
+    description:
+      "This page will hold safety planning tools, document checklists, contact worksheets, and preparation resources.",
+  },
+  "/leaving": {
+    eyebrow: "Leaving resources",
+    title: "Leaving",
+    description:
+      "This page will hold go-bag resources, device safety reminders, transportation planning, and immediate support links.",
+  },
+  "/rebuilding": {
+    eyebrow: "Rebuilding resources",
+    title: "Rebuilding",
+    description:
+      "This page will hold housing, legal, money, support network, and stabilization resources for the next chapter.",
+  },
+};
+
+function Header() {
+  return (
+    <header className="site-header">
+      <a className="brand" href="/" aria-label="Survivor Systems home">
+        <ShieldCheck aria-hidden="true" />
+        <span>Survivor Systems</span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="/planning">Planning</a>
+        <a href="/leaving">Leaving</a>
+        <a href="/rebuilding">Rebuilding</a>
+        <a href="/#downloads">Downloads</a>
+      </nav>
+      <button className="quick-exit" type="button" onClick={leaveSite}>
+        <ShieldAlert aria-hidden="true" />
+        Leave Site
+      </button>
+    </header>
+  );
+}
+
+function ResourcePage({
+  eyebrow,
+  title,
+  description,
+}: {
+  eyebrow: string;
+  title: string;
+  description: string;
+}) {
+  return (
+    <main>
+      <Header />
+      <section className="page-shell">
+        <a className="back-link" href="/">
+          <ArrowLeft aria-hidden="true" />
+          Home
+        </a>
+        <div className="page-kicker">
+          <Compass aria-hidden="true" />
+          <p className="eyebrow">{eyebrow}</p>
+        </div>
+        <h1>{title}</h1>
+        <p>{description}</p>
+        <div className="blank-state" aria-label={`${title} resources coming soon`}>
+          <FileText aria-hidden="true" />
+          <h2>Resources coming soon</h2>
+          <p>
+            This space is ready for the downloadable guides, checklists, and support content we
+            will add next.
+          </p>
+        </div>
+      </section>
+    </main>
+  );
 }
 
 export function App() {
+  const currentPage = resourcePages[window.location.pathname];
+
+  if (currentPage) {
+    return <ResourcePage {...currentPage} />;
+  }
+
   return (
     <main>
-      <header className="site-header">
-        <a className="brand" href="#home" aria-label="Survivor Systems home">
-          <ShieldCheck aria-hidden="true" />
-          <span>Survivor Systems</span>
-        </a>
-        <nav aria-label="Primary navigation">
-          <a href="#resources">Resources</a>
-          <a href="#downloads">Downloads</a>
-          <a href="#privacy">Privacy</a>
-        </nav>
-        <button className="quick-exit" type="button" onClick={leaveSite}>
-          <ShieldAlert aria-hidden="true" />
-          Leave Site
-        </button>
-      </header>
+      <Header />
 
       <section className="hero" id="home">
         <div className="hero-copy">
@@ -141,7 +220,7 @@ export function App() {
             <article className="resource-card" key={resource.title}>
               <div className="card-icon">
                 {resource.title === "Planning" && <Map aria-hidden="true" />}
-                {resource.title === "Escape" && <ShieldAlert aria-hidden="true" />}
+                {resource.title === "Leaving" && <ShieldAlert aria-hidden="true" />}
                 {resource.title === "Rebuilding" && <HeartHandshake aria-hidden="true" />}
               </div>
               <h3>{resource.title}</h3>
@@ -151,6 +230,9 @@ export function App() {
                   <li key={item}>{item}</li>
                 ))}
               </ul>
+              <a className="text-link" href={`/${resource.title.toLowerCase()}`}>
+                Open {resource.title}
+              </a>
             </article>
           ))}
         </div>

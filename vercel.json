@@ -1,0 +1,16 @@
+{
+  "rewrites": [
+    {
+      "source": "/planning",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/leaving",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/rebuilding",
+      "destination": "/index.html"
+    }
+  ]
+}
