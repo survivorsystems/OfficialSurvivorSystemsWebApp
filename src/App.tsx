@@ -4,15 +4,16 @@ import {
   BadgeDollarSign,
   BookOpenCheck,
   Compass,
-  ExternalLink,
   FileText,
-  HeartHandshake,
-  Home,
-  Lock,
   Map,
+  MessageCircle,
+  Scale,
+  Search,
   ShieldAlert,
   ShieldCheck,
+  Sprout,
 } from "lucide-react";
+import heroLandscape from "./assets/brand/hero-landscape.webp";
 
 type Resource = {
   title: string;
@@ -111,19 +112,37 @@ const resourcePages: Record<
     description:
       "This page will hold housing, legal, money, support network, and stabilization resources for the next chapter.",
   },
+  "/local-help": {
+    eyebrow: "Local support",
+    title: "Find Local Help",
+    description:
+      "This page will hold links and tools for finding survivor-centered support in your area.",
+  },
+  "/legal": {
+    eyebrow: "Legal basics",
+    title: "Legal",
+    description:
+      "This page will hold plain-language legal rights resources, document checklists, and next-step guides.",
+  },
 };
 
 function Header() {
   return (
     <header className="site-header">
       <a className="brand" href="/" aria-label="Survivor Systems home">
-        <ShieldCheck aria-hidden="true" />
+        <span className="brand-mark" aria-hidden="true">
+          <span />
+          <span />
+          <span />
+        </span>
         <span>Survivor Systems</span>
       </a>
       <nav aria-label="Primary navigation">
         <a href="/planning">Planning</a>
         <a href="/leaving">Leaving</a>
         <a href="/rebuilding">Rebuilding</a>
+        <a href="/local-help">Find Local Help</a>
+        <a href="/legal">Legal</a>
         <a href="/#downloads">Downloads</a>
       </nav>
       <button className="quick-exit" type="button" onClick={leaveSite}>
@@ -183,58 +202,115 @@ export function App() {
 
       <section className="hero" id="home">
         <div className="hero-copy">
-          <p className="eyebrow">Private, practical, survivor-centered</p>
-          <h1>Survivor Systems is here for your next steps.</h1>
+          <h1>Survivor Systems: Built for support.</h1>
           <p>
-            A quiet resource library for planning, leaving, and rebuilding at your own pace.
-            Find clear tools, practical downloads, and support that does not require an account.
+            Explore practical tools and resources designed to help you move forward in the way
+            that feels right for you.
           </p>
           <div className="hero-actions">
             <a className="primary-action" href="#resources">
               <BookOpenCheck aria-hidden="true" />
-              View Resources
+              Get Started
             </a>
-            <a className="secondary-action" href="#downloads">
-              <ArrowDownToLine aria-hidden="true" />
-              See Downloads
+            <a className="secondary-action" href="/local-help">
+              <MessageCircle aria-hidden="true" />
+              Talk to Someone
             </a>
           </div>
         </div>
-        <aside className="safety-panel" aria-labelledby="safety-title">
-          <Lock aria-hidden="true" />
-          <h2 id="safety-title">Safety note</h2>
-          <p>
-            This site will not ask for accounts or personal details. Browser history, shared
-            devices, phone monitoring, and payment records may still create risk.
-          </p>
-        </aside>
+        <img
+          className="hero-art"
+          src={heroLandscape}
+          alt="Watercolor hills with a winding path and sunrise"
+        />
       </section>
 
       <section className="resource-section" id="resources" aria-labelledby="resources-title">
-        <div className="section-heading">
-          <p className="eyebrow">MVP content map</p>
-          <h2 id="resources-title">Three core paths</h2>
-        </div>
-        <div className="resource-grid">
-          {resources.map((resource) => (
-            <article className="resource-card" key={resource.title}>
+        <aside className="support-card" aria-labelledby="support-title">
+          <div className="support-icon">
+            <ShieldCheck aria-hidden="true" />
+          </div>
+          <div>
+            <h2 id="support-title">Support is available.</h2>
+            <p>Wherever you are on your path, you can access resources that fit your needs.</p>
+            <a className="text-link" href="/local-help">
+              Find local help near you
+            </a>
+          </div>
+        </aside>
+        <div className="library-panel">
+          <div className="library-header">
+            <div>
+              <h2 id="resources-title">Resource Library</h2>
+              <p>Search trusted guides, checklists, and tools.</p>
+            </div>
+            <label className="search-box">
+              <Search aria-hidden="true" />
+              <input type="search" placeholder="Search resources..." aria-label="Search resources" />
+            </label>
+          </div>
+          <div className="resource-grid">
+            {resources.map((resource) => (
+              <article className="resource-card" key={resource.title}>
+                <div className="card-icon">
+                  {resource.title === "Planning" && <Map aria-hidden="true" />}
+                  {resource.title === "Leaving" && <ShieldAlert aria-hidden="true" />}
+                  {resource.title === "Rebuilding" && <Sprout aria-hidden="true" />}
+                </div>
+                <h3>{resource.title === "Planning" ? "Safety Planning Checklist" : resource.title}</h3>
+                <p>{resource.description}</p>
+                <a className="text-link" href={`/${resource.title.toLowerCase()}`}>
+                  View Resource
+                </a>
+              </article>
+            ))}
+            <article className="resource-card">
               <div className="card-icon">
-                {resource.title === "Planning" && <Map aria-hidden="true" />}
-                {resource.title === "Leaving" && <ShieldAlert aria-hidden="true" />}
-                {resource.title === "Rebuilding" && <HeartHandshake aria-hidden="true" />}
+                <Scale aria-hidden="true" />
               </div>
-              <h3>{resource.title}</h3>
-              <p>{resource.description}</p>
-              <ul>
-                {resource.items.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-              <a className="text-link" href={`/${resource.title.toLowerCase()}`}>
-                Open {resource.title}
+              <h3>Legal Rights Basics</h3>
+              <p>Understand basic rights, documents, and next-step options.</p>
+              <a className="text-link" href="/legal">
+                View Resource
               </a>
             </article>
-          ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="featured-section" aria-labelledby="featured-title">
+        <div className="section-heading row-heading">
+          <h2 id="featured-title">Featured Guides</h2>
+          <a className="text-link" href="#downloads">
+            View all guides
+          </a>
+        </div>
+        <div className="featured-grid">
+          <article className="featured-card">
+            <div className="guide-art portrait-art" aria-hidden="true">
+              <ShieldCheck />
+            </div>
+            <div>
+              <h3>A Guide to Safety and Confidence</h3>
+              <p>Practical ways to protect yourself and your well-being.</p>
+            </div>
+          </article>
+          <article className="featured-card">
+            <div className="guide-art calm-art" aria-hidden="true">
+              <Sprout />
+            </div>
+            <div>
+              <h3>Emotional Support and Healing</h3>
+              <p>Care for your mind and body as you move forward.</p>
+            </div>
+          </article>
+          <article className="featured-card">
+            <img src={heroLandscape} alt="" />
+            <div>
+              <h3>Building a New Future</h3>
+              <p>Set goals, build confidence, and create the life you deserve.</p>
+            </div>
+          </article>
         </div>
       </section>
 
@@ -265,29 +341,20 @@ export function App() {
         </div>
       </section>
 
-      <section className="privacy-section" id="privacy" aria-labelledby="privacy-title">
-        <div>
-          <p className="eyebrow">Architecture boundary</p>
-          <h2 id="privacy-title">What we will and will not store</h2>
-        </div>
-        <div className="privacy-grid">
-          <article>
-            <Home aria-hidden="true" />
-            <h3>Public app</h3>
-            <p>Pages and free downloads can be static, cacheable, and hosted on Vercel.</p>
-          </article>
-          <article>
-            <BadgeDollarSign aria-hidden="true" />
-            <h3>Stripe</h3>
-            <p>Stripe Checkout handles payments. Survivor Systems does not touch card data.</p>
-          </article>
-          <article>
-            <ExternalLink aria-hidden="true" />
-            <h3>Supabase later</h3>
-            <p>Supabase can store public resource metadata or protected download files, not profiles.</p>
-          </article>
-        </div>
-      </section>
+      <footer className="site-footer">
+        <a className="brand" href="/" aria-label="Survivor Systems home">
+          <span className="brand-mark" aria-hidden="true">
+            <span />
+            <span />
+            <span />
+          </span>
+          <span>Survivor Systems</span>
+        </a>
+        <button className="quick-exit" type="button" onClick={leaveSite}>
+          <ShieldAlert aria-hidden="true" />
+          Leave Site
+        </button>
+      </footer>
     </main>
   );
 }

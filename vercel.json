@@ -11,6 +11,14 @@
     {
       "source": "/rebuilding",
       "destination": "/index.html"
+    },
+    {
+      "source": "/local-help",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/legal",
+      "destination": "/index.html"
     }
   ]
 }
