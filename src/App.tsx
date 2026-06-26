@@ -113,6 +113,24 @@ function leaveSite() {
   window.location.replace("https://iluvrocks.rocks");
 }
 
+const checkpointSessionKey = "survivorSystemsCheckpointCleared";
+
+function getCheckpointCleared() {
+  try {
+    return window.sessionStorage.getItem(checkpointSessionKey) === "true";
+  } catch {
+    return false;
+  }
+}
+
+function markCheckpointCleared() {
+  try {
+    window.sessionStorage.setItem(checkpointSessionKey, "true");
+  } catch {
+    // If sessionStorage is unavailable, the in-memory state still lets this visit continue.
+  }
+}
+
 function getInitialModule(): ModuleKey {
   const path = window.location.pathname;
 
@@ -513,7 +531,7 @@ function ResourceModule({ moduleKey }: { moduleKey: Exclude<ModuleKey, "home"> }
 }
 
 export function App() {
-  const [checkpointPassed, setCheckpointPassed] = useState(false);
+  const [checkpointPassed, setCheckpointPassed] = useState(() => getCheckpointCleared());
   const [activeModule, setActiveModule] = useState<ModuleKey>(() => getInitialModule());
   const [loadingModule, setLoadingModule] = useState<ModuleKey | null>(null);
 
@@ -536,8 +554,13 @@ export function App() {
     }, 520);
   }
 
+  function completeCheckpoint() {
+    markCheckpointCleared();
+    setCheckpointPassed(true);
+  }
+
   if (!checkpointPassed) {
-    return <WelcomeCheckpoint onComplete={() => setCheckpointPassed(true)} />;
+    return <WelcomeCheckpoint onComplete={completeCheckpoint} />;
   }
 
   const loadingLabel = navItems.find((item) => item.key === loadingModule)?.label;
