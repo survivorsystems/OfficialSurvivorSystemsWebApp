@@ -58,14 +58,24 @@ const downloads = [
     description: "One-page checklist for urgent safety decisions.",
   },
   {
-    name: "Planning Bundle",
+    name: "Safety Plan Worksheet",
     price: "$1.99",
-    description: "Printable planning worksheets and document trackers.",
+    description: "A focused printable for mapping people, places, documents, and next moves.",
   },
   {
-    name: "Rebuilding Bundle",
+    name: "Go-Bag Checklist",
     price: "$1.99",
-    description: "Housing, money, legal, and support planning sheets.",
+    description: "A practical packing list for essentials, medications, children, pets, and copies.",
+  },
+  {
+    name: "Document Tracker",
+    price: "$0.99",
+    description: "A simple way to list IDs, records, benefits paperwork, and replacement steps.",
+  },
+  {
+    name: "Rebuilding Budget Starter",
+    price: "$1.99",
+    description: "A low-pressure worksheet for urgent costs, income, aid, bills, and first goals.",
   },
 ];
 
@@ -95,11 +105,10 @@ export function App() {
       <section className="hero" id="home">
         <div className="hero-copy">
           <p className="eyebrow">Private, practical, survivor-centered</p>
-          <h1>Planning, escape, and rebuilding resources without accounts or tracking.</h1>
+          <h1>Survivor Systems is here for your next steps.</h1>
           <p>
-            Survivor Systems is being built as a quiet resource library for people navigating
-            domestic violence. The foundation is simple: useful information, low-friction
-            downloads, and no survivor data collection.
+            A quiet resource library for planning, leaving, and rebuilding at your own pace.
+            Find clear tools, practical downloads, and support that does not require an account.
           </p>
           <div className="hero-actions">
             <a className="primary-action" href="#resources">
@@ -149,8 +158,8 @@ export function App() {
 
       <section className="downloads-section" id="downloads" aria-labelledby="downloads-title">
         <div className="section-heading">
-          <p className="eyebrow">Free first, paid optional</p>
-          <h2 id="downloads-title">Downloads</h2>
+          <p className="eyebrow">Choose only what helps</p>
+          <h2 id="downloads-title">Individual downloads</h2>
         </div>
         <div className="download-list">
           {downloads.map((download) => (
