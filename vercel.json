@@ -5,6 +5,10 @@
       "destination": "/index.html"
     },
     {
+      "source": "/go-bag-prep",
+      "destination": "/index.html"
+    },
+    {
       "source": "/planning",
       "destination": "/index.html"
     },

@@ -13,10 +13,12 @@ import clarityMeterImage from "./assets/support/clarity-meter.png";
 import denialSupportOne from "./assets/support/denial-support-1.png";
 import denialSupportTwo from "./assets/support/denial-support-2.png";
 import survivorSystemsLogo from "./assets/support/survivor-systems-logo.png";
+import GoBagSimulator from "./GoBagSimulator";
 
 type ModuleKey =
   | "home"
   | "am-i-crazy"
+  | "go-bag-prep"
   | "planning"
   | "leaving"
   | "rebuilding"
@@ -99,7 +101,7 @@ type ExitQuestion = {
 };
 
 const modulePages: Record<
-  Exclude<ModuleKey, "home" | "am-i-crazy">,
+  Exclude<ModuleKey, "home" | "am-i-crazy" | "go-bag-prep">,
   {
     eyebrow: string;
     title: string;
@@ -140,12 +142,17 @@ const modulePages: Record<
 const navItems: Array<{ key: ModuleKey; label: string; path: string }> = [
   { key: "home", label: "Home", path: "/" },
   { key: "am-i-crazy", label: "Am I Crazy", path: "/am-i-crazy" },
+  { key: "go-bag-prep", label: "Go-Bag Prep", path: "/go-bag-prep" },
   { key: "planning", label: "Planning", path: "/planning" },
   { key: "leaving", label: "Leaving", path: "/leaving" },
   { key: "rebuilding", label: "Rebuilding", path: "/rebuilding" },
   { key: "local-help", label: "Find Local Help", path: "/local-help" },
   { key: "legal", label: "Legal", path: "/legal" },
 ];
+
+function navItemFor(key: ModuleKey) {
+  return navItems.find((item) => item.key === key) ?? navItems[0];
+}
 
 const assessmentQuestions: AssessmentQuestion[] = [
   {
@@ -1196,7 +1203,7 @@ function resolveCommand(query: string) {
   if (/\b(help|menu|options|commands|where)\b/.test(normalized)) {
     return {
       message:
-        "AVAILABLE COMMANDS: AM I CRAZY, PLANNING, LEAVING, REBUILDING, LOCAL HELP, LEGAL, QUICK EXIT.",
+        "AVAILABLE COMMANDS: AM I CRAZY, GO-BAG PREP, PLANNING, LEAVING, REBUILDING, LOCAL HELP, LEGAL, QUICK EXIT.",
       target: null,
     };
   }
@@ -1211,27 +1218,31 @@ function resolveCommand(query: string) {
   }
 
   if (/\b(crazy|abused|abuse|assessment|gaslight|gaslighting|reality)\b/.test(normalized)) {
-    return { message: "QUERY ACCEPTED. ROUTING TO AM I CRAZY...", target: navItems[1] };
+    return { message: "QUERY ACCEPTED. ROUTING TO AM I CRAZY...", target: navItemFor("am-i-crazy") };
+  }
+
+  if (/\b(go.?bag|bag|simulator|arcade|prep|pack)\b/.test(normalized)) {
+    return { message: "QUERY ACCEPTED. ROUTING TO GO-BAG PREP...", target: navItemFor("go-bag-prep") };
   }
 
   if (/\b(plan|safety|prepare|documents|checklist)\b/.test(normalized)) {
-    return { message: "QUERY ACCEPTED. ROUTING TO PLANNING...", target: navItems[2] };
+    return { message: "QUERY ACCEPTED. ROUTING TO PLANNING...", target: navItemFor("planning") };
   }
 
   if (/\b(leave|leaving|go bag|escape|exit plan)\b/.test(normalized)) {
-    return { message: "QUERY ACCEPTED. ROUTING TO LEAVING...", target: navItems[3] };
+    return { message: "QUERY ACCEPTED. ROUTING TO LEAVING...", target: navItemFor("leaving") };
   }
 
   if (/\b(rebuild|money|housing|future|after)\b/.test(normalized)) {
-    return { message: "QUERY ACCEPTED. ROUTING TO REBUILDING...", target: navItems[4] };
+    return { message: "QUERY ACCEPTED. ROUTING TO REBUILDING...", target: navItemFor("rebuilding") };
   }
 
   if (/\b(local|hotline|shelter|support|near)\b/.test(normalized)) {
-    return { message: "QUERY ACCEPTED. ROUTING TO FIND LOCAL HELP...", target: navItems[5] };
+    return { message: "QUERY ACCEPTED. ROUTING TO FIND LOCAL HELP...", target: navItemFor("local-help") };
   }
 
   if (/\b(legal|rights|court|order|documents)\b/.test(normalized)) {
-    return { message: "QUERY ACCEPTED. ROUTING TO LEGAL...", target: navItems[6] };
+    return { message: "QUERY ACCEPTED. ROUTING TO LEGAL...", target: navItemFor("legal") };
   }
 
   return {
@@ -1274,7 +1285,7 @@ function TerminalCommand({
           autoComplete="off"
           id="terminal-command"
           onChange={(event) => setQuery(event.target.value)}
-          placeholder="type: am i crazy, planning, legal, quick exit..."
+          placeholder="type: am i crazy, go-bag prep, planning, legal, quick exit..."
           spellCheck={false}
           type="search"
           value={query}
@@ -1619,6 +1630,9 @@ function AmICrazyModule({
             <button type="button" onClick={() => onNavigate("legal", "/legal")}>
               Understand My Choices
             </button>
+            <button type="button" onClick={() => onNavigate("go-bag-prep", "/go-bag-prep")}>
+              Go-Bag Prep
+            </button>
             <button type="button" onClick={() => setMode("complete")}>
               Review My Patterns
             </button>
@@ -1895,7 +1909,7 @@ function ExitPlanningModule({
   );
 }
 
-function ResourceModule({ moduleKey }: { moduleKey: Exclude<ModuleKey, "home" | "am-i-crazy"> }) {
+function ResourceModule({ moduleKey }: { moduleKey: Exclude<ModuleKey, "home" | "am-i-crazy" | "go-bag-prep"> }) {
   const page = modulePages[moduleKey];
 
   return (
@@ -1979,6 +1993,8 @@ export function App() {
         <HomeModule onNavigate={navigate} />
       ) : activeModule === "am-i-crazy" ? (
         <AmICrazyModule onControlPanelChange={updateControlPanel} onNavigate={navigate} />
+      ) : activeModule === "go-bag-prep" ? (
+        <GoBagSimulator onNavigate={navigate} onQuickExit={leaveSite} />
       ) : activeModule === "planning" ? (
         <ExitPlanningModule onControlPanelChange={updateControlPanel} onNavigate={navigate} />
       ) : (
