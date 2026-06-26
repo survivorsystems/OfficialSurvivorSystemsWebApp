@@ -383,51 +383,24 @@ button:disabled {
 }
 
 .brand-logo {
-  display: grid;
-  gap: 3px;
-  line-height: 1;
-}
-
-.brand-logo span:first-child {
-  color: var(--pink);
-  font-family: "Brush Script MT", "Segoe Script", cursive;
-  font-size: clamp(2rem, 3.5vw, 3.1rem);
-  font-weight: 400;
-  line-height: 0.76;
-  text-shadow:
-    0 0 8px rgba(255, 79, 216, 0.92),
-    0 0 22px rgba(255, 79, 216, 0.58);
-}
-
-.brand-logo span:last-child {
-  color: var(--cyan);
-  font-size: clamp(0.8rem, 1.1vw, 1rem);
-  font-weight: 900;
-  letter-spacing: 0.38em;
-  margin-left: 20px;
-  text-shadow: var(--shadow-cyan);
-  text-transform: uppercase;
-}
-
-.brand::after {
-  color: var(--pink);
-  content: "<3";
-  font-size: 1rem;
-  font-weight: 900;
-  text-shadow: var(--shadow-pink);
+  display: block;
+  filter:
+    drop-shadow(0 0 8px rgba(255, 79, 216, 0.7))
+    drop-shadow(0 0 13px rgba(0, 234, 255, 0.28));
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+  width: min(100%, 220px);
 }
 
 .checkpoint-logo {
-  display: inline-grid;
+  margin-bottom: 20px;
+  width: min(100%, 560px);
 }
 
-.checkpoint-logo span:first-child {
-  font-size: clamp(3rem, 8vw, 6rem);
-}
-
-.checkpoint-logo span:last-child {
-  font-size: clamp(0.95rem, 2vw, 1.35rem);
-  margin-left: clamp(18px, 4vw, 48px);
+.home-logo {
+  margin: 0 0 18px;
+  width: min(100%, 520px);
 }
 
 .sidebar-tagline {
@@ -1628,13 +1601,13 @@ button:disabled {
     display: none;
   }
 
-  .brand-logo span:first-child {
-    font-size: 2.1rem;
+  .brand-logo {
+    width: min(100%, 190px);
   }
 
-  .brand-logo span:last-child {
-    font-size: 0.75rem;
-    margin-left: 18px;
+  .checkpoint-logo,
+  .home-logo {
+    width: min(100%, 360px);
   }
 
   .terminal-topbar {

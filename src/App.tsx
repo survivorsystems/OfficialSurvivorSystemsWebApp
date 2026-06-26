@@ -12,6 +12,7 @@ import {
 import clarityMeterImage from "./assets/support/clarity-meter.png";
 import denialSupportOne from "./assets/support/denial-support-1.png";
 import denialSupportTwo from "./assets/support/denial-support-2.png";
+import survivorSystemsLogo from "./assets/support/survivor-systems-logo.png";
 
 type ModuleKey =
   | "home"
@@ -977,10 +978,7 @@ function GaugeDeck({
 
 function BrandLogo({ className = "" }: { className?: string }) {
   return (
-    <span className={`brand-logo ${className}`}>
-      <span>Survivor</span>
-      <span>Systems</span>
-    </span>
+    <img className={`brand-logo ${className}`} src={survivorSystemsLogo} alt="Survivor Systems" />
   );
 }
 
@@ -1367,6 +1365,7 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
   return (
     <section className="home-terminal" aria-labelledby="home-title">
       <div className="terminal-label">USER TERMINAL</div>
+      <BrandLogo className="home-logo" />
       <h1 id="home-title">CHOOSE HOW TO PROCEED</h1>
       <p>
         Select a module. No account is required, and assessment answers stay only in this browser
