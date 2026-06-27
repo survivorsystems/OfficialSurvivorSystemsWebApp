@@ -764,6 +764,10 @@ button:disabled {
   --gauge-color: var(--magenta);
 }
 
+.analog-gauge.amber {
+  --gauge-color: var(--amber);
+}
+
 .analog-gauge.pulse-gauge {
   animation: gaugePulse 0.78s ease-out;
 }
@@ -867,63 +871,94 @@ button:disabled {
 }
 
 .compact-gauges .gauge-row {
-  gap: 8px;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
-.compact-gauges .analog-gauge {
-  border-radius: 5px;
+.status-bar {
+  --bar-color: var(--cyan);
+  background:
+    repeating-linear-gradient(0deg, rgba(255, 246, 221, 0.035) 0 1px, transparent 1px 5px),
+    linear-gradient(180deg, rgba(3, 6, 9, 0.96), rgba(0, 0, 0, 0.98));
+  border: 1px solid rgba(255, 246, 221, 0.42);
+  border-radius: 4px;
+  box-shadow:
+    inset 0 0 16px rgba(0, 0, 0, 0.92),
+    0 0 12px color-mix(in srgb, var(--bar-color) 20%, transparent);
+  display: grid;
+  gap: 6px;
   height: min(1in, 96px);
+  justify-content: stretch;
   max-height: 1in;
   min-height: 0;
   overflow: hidden;
-  padding: 5px;
+  padding: 8px;
 }
 
-.compact-gauges .gauge-window {
-  aspect-ratio: 2.1;
-  height: 0.4in;
+.status-bar.cyan {
+  --bar-color: var(--cyan);
 }
 
-.compact-gauges .gauge-needle {
-  height: 2px;
+.status-bar.pink {
+  --bar-color: var(--pink);
 }
 
-.compact-gauges .gauge-hub {
-  bottom: calc(17% - 7px);
-  height: 14px;
-  left: calc(50% - 7px);
-  width: 14px;
+.status-bar.purple {
+  --bar-color: var(--magenta);
 }
 
-.compact-gauges .gauge-scale {
-  color: #eafdff;
-  font-size: 0.6rem;
-  letter-spacing: 0.03em;
+.status-bar.amber {
+  --bar-color: var(--amber);
+}
+
+.status-bar h3 {
+  color: var(--bar-color);
+  font-size: clamp(0.78rem, 1.1vw, 0.96rem);
+  letter-spacing: 0.06em;
+  line-height: 1;
+  margin: 0;
   text-shadow:
-    0 0 5px currentColor,
+    0 0 5px var(--bar-color),
+    0 0 14px color-mix(in srgb, var(--bar-color) 45%, transparent),
     0 0 10px rgba(0, 0, 0, 0.92);
+  text-transform: uppercase;
 }
 
-.compact-gauges .analog-gauge h3 {
-  color: #f9feff;
-  font-size: 0.64rem;
-  letter-spacing: 0.05em;
-  line-height: 1;
-  margin: 4px 0 2px;
-  text-shadow:
-    0 0 4px var(--gauge-color),
-    0 0 10px rgba(0, 0, 0, 0.95);
+.status-blocks {
+  display: grid;
+  gap: 3px;
+  grid-template-columns: repeat(10, minmax(4px, 1fr));
+  width: 100%;
 }
 
-.compact-gauges .analog-gauge p {
-  color: #f7fbff;
-  font-size: 0.56rem;
-  letter-spacing: 0.03em;
-  line-height: 1;
+.status-block {
+  background: transparent;
+  border: 1px solid rgba(255, 246, 221, 0.86);
+  box-shadow: inset 0 0 5px rgba(255, 246, 221, 0.08);
+  display: block;
+  height: 13px;
+  min-width: 0;
+}
+
+.status-block.filled {
+  background: var(--bar-color);
+  border-color: var(--bar-color);
+  box-shadow:
+    0 0 5px color-mix(in srgb, var(--bar-color) 75%, transparent),
+    inset 0 0 5px rgba(255, 255, 255, 0.22);
+}
+
+.status-bar p {
+  color: #fff6dd;
+  font-size: 0.6rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  line-height: 1.05;
+  margin: 0;
   text-shadow:
-    0 0 4px var(--gauge-color),
+    0 0 4px var(--bar-color),
     0 0 9px rgba(0, 0, 0, 0.95);
+  text-transform: uppercase;
 }
 
 .compact-gauges .gauge-notice {
@@ -2123,7 +2158,7 @@ button:disabled {
   }
 
   .compact-gauges .gauge-row {
-    grid-template-columns: repeat(3, minmax(92px, 1fr));
+    grid-template-columns: repeat(4, minmax(128px, 1fr));
     overflow-x: auto;
   }
 

@@ -44,7 +44,7 @@ type GaugeValue = {
   lowLabel: string;
   highLabel: string;
   state: string;
-  tone: "cyan" | "pink" | "purple";
+  tone: "cyan" | "pink" | "purple" | "amber";
 };
 
 type ControlPanelState = {
@@ -818,7 +818,7 @@ const defaultControlPanel: ControlPanelState = {
   emphasis: null,
   gauges: [
     {
-      label: "CLARITY METER",
+      label: "CLARITY",
       value: 58,
       lowLabel: "FOG",
       highLabel: "CLEAR",
@@ -834,11 +834,19 @@ const defaultControlPanel: ControlPanelState = {
       tone: "pink",
     },
     {
-      label: "AUTONOMY",
+      label: "REALITY",
       value: 62,
       lowLabel: "LOCKED",
       highLabel: "ONLINE",
       state: "STANDBY",
+      tone: "amber",
+    },
+    {
+      label: "OPTIONS",
+      value: 64,
+      lowLabel: "LOCKED",
+      highLabel: "OPEN",
+      state: "AVAILABLE",
       tone: "purple",
     },
   ],
@@ -891,6 +899,64 @@ function usePrefersReducedMotion() {
 
 function clampGauge(value: number) {
   return Math.max(0, Math.min(100, value));
+}
+
+function gaugeState(value: number, strong = "READY", mid = "BUILDING", low = "LOW") {
+  if (value >= 76) return strong;
+  if (value >= 51) return mid;
+  if (value >= 26) return low;
+  return "NEEDS INPUT";
+}
+
+function gaugeByLabel(gauges: GaugeValue[], labels: string[], fallbackIndex: number) {
+  const match = gauges.find((gauge) => labels.some((label) => gauge.label.toLowerCase().includes(label)));
+  return match ?? gauges[fallbackIndex] ?? defaultControlPanel.gauges[fallbackIndex] ?? defaultControlPanel.gauges[0];
+}
+
+function commandCenterBars(gauges: GaugeValue[]): GaugeValue[] {
+  const clarity = gaugeByLabel(gauges, ["clarity", "autonomy"], 0);
+  const preparedness = gaugeByLabel(gauges, ["preparedness", "readiness", "bag", "core", "backup"], 1);
+  const reality = gaugeByLabel(gauges, ["reality"], 2);
+  const options = gaugeByLabel(gauges, ["options"], 3);
+  const optionValue =
+    options.label.toLowerCase().includes("options") && options.value
+      ? options.value
+      : Math.round((clarity.value + preparedness.value + reality.value) / 3);
+
+  return [
+    {
+      label: "CLARITY",
+      value: clarity.value,
+      lowLabel: "FOG",
+      highLabel: "CLEAR",
+      state: clarity.state || gaugeState(clarity.value, "CLEAR", "ONLINE", "FUZZY"),
+      tone: "cyan",
+    },
+    {
+      label: "PREPAREDNESS",
+      value: preparedness.value,
+      lowLabel: "LOW",
+      highLabel: "READY",
+      state: preparedness.state || gaugeState(preparedness.value),
+      tone: "pink",
+    },
+    {
+      label: "REALITY",
+      value: reality.value,
+      lowLabel: "DISTORTED",
+      highLabel: "STABLE",
+      state: reality.state || gaugeState(reality.value, "STABLE", "CLEARING", "STATIC"),
+      tone: "amber",
+    },
+    {
+      label: "OPTIONS",
+      value: optionValue,
+      lowLabel: "LIMITED",
+      highLabel: "OPEN",
+      state: gaugeState(optionValue, "AVAILABLE", "OPENING", "LIMITED"),
+      tone: "purple",
+    },
+  ];
 }
 
 function assessmentGaugeValues(gauges: AssessmentGauges): GaugeValue[] {
@@ -980,6 +1046,32 @@ function GaugeDeck({
   gauges: GaugeValue[];
   notice?: string;
 }) {
+  if (compact) {
+    const bars = commandCenterBars(gauges);
+
+    return (
+      <section className="gauge-deck compact-gauges" aria-label="Command center status bars">
+        <div className="gauge-row">
+          {bars.map((gauge) => {
+            const filledBlocks = Math.round(clampGauge(gauge.value) / 10);
+
+            return (
+              <article className={`status-bar ${gauge.tone} ${emphasis === gauge.label ? "pulse-gauge" : ""}`} key={gauge.label}>
+                <h3>{gauge.label}</h3>
+                <div className="status-blocks" aria-label={`${gauge.label} ${filledBlocks} out of 10`}>
+                  {Array.from({ length: 10 }, (_, index) => (
+                    <span className={index < filledBlocks ? "status-block filled" : "status-block"} key={index} />
+                  ))}
+                </div>
+                <p>{gauge.state}</p>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className={compact ? "gauge-deck compact-gauges" : "gauge-deck"} aria-label="Temporary system readings">
       <div className="gauge-row">
