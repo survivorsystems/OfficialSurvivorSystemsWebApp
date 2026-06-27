@@ -582,7 +582,7 @@ button:disabled {
 }
 
 .command-center {
-  align-items: center;
+  align-items: stretch;
   background:
     linear-gradient(180deg, rgba(20, 15, 18, 0.96), rgba(1, 2, 5, 0.98)),
     var(--metal);
@@ -592,7 +592,11 @@ button:disabled {
     0 -12px 28px rgba(0, 0, 0, 0.42);
   display: grid;
   gap: 8px;
-  grid-template-columns: minmax(150px, 0.22fr) minmax(58px, 0.72in) minmax(220px, 0.48fr) minmax(280px, 0.72fr);
+  grid-template-areas:
+    "status meter gauges"
+    "command command command";
+  grid-template-columns: minmax(150px, 0.28fr) minmax(58px, 0.72in) minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1in) auto;
   max-height: 2.5in;
   min-height: 0;
   overflow: hidden;
@@ -602,6 +606,8 @@ button:disabled {
 }
 
 .command-center-status {
+  align-self: center;
+  grid-area: status;
   min-width: 0;
 }
 
@@ -623,12 +629,14 @@ button:disabled {
 }
 
 .command-center > img {
+  align-self: center;
   border: 1px solid rgba(0, 234, 255, 0.28);
   border-radius: 6px;
   box-shadow:
     inset 0 0 12px rgba(0, 0, 0, 0.8),
     0 0 16px rgba(0, 234, 255, 0.18);
   display: block;
+  grid-area: meter;
   height: min(0.72in, 69px);
   max-height: 1in;
   max-width: 0.78in;
@@ -647,6 +655,7 @@ button:disabled {
     inset 0 0 18px rgba(0, 234, 255, 0.06);
   display: grid;
   gap: 6px;
+  grid-area: command;
   padding: 8px 10px;
   position: relative;
   z-index: 1;
@@ -849,14 +858,17 @@ button:disabled {
 }
 
 .compact-gauges {
+  align-self: center;
   background: transparent;
   border: 0;
+  grid-area: gauges;
   box-shadow: none;
   padding: 0;
 }
 
 .compact-gauges .gauge-row {
-  gap: 6px;
+  gap: 8px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .compact-gauges .analog-gauge {
@@ -865,7 +877,7 @@ button:disabled {
   max-height: 1in;
   min-height: 0;
   overflow: hidden;
-  padding: 4px;
+  padding: 5px;
 }
 
 .compact-gauges .gauge-window {
@@ -885,20 +897,33 @@ button:disabled {
 }
 
 .compact-gauges .gauge-scale {
-  font-size: 0.54rem;
-  letter-spacing: 0.04em;
+  color: #eafdff;
+  font-size: 0.6rem;
+  letter-spacing: 0.03em;
+  text-shadow:
+    0 0 5px currentColor,
+    0 0 10px rgba(0, 0, 0, 0.92);
 }
 
 .compact-gauges .analog-gauge h3 {
-  font-size: 0.52rem;
-  letter-spacing: 0.04em;
-  margin: 3px 0 2px;
+  color: #f9feff;
+  font-size: 0.64rem;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  margin: 4px 0 2px;
+  text-shadow:
+    0 0 4px var(--gauge-color),
+    0 0 10px rgba(0, 0, 0, 0.95);
 }
 
 .compact-gauges .analog-gauge p {
-  font-size: 0.46rem;
+  color: #f7fbff;
+  font-size: 0.56rem;
   letter-spacing: 0.03em;
-  line-height: 1.1;
+  line-height: 1;
+  text-shadow:
+    0 0 4px var(--gauge-color),
+    0 0 9px rgba(0, 0, 0, 0.95);
 }
 
 .compact-gauges .gauge-notice {
@@ -1960,7 +1985,12 @@ button:disabled {
   }
 
   .command-center {
-    grid-template-columns: minmax(150px, 0.35fr) minmax(58px, 0.72in) minmax(0, 1fr);
+    grid-template-areas:
+      "status meter"
+      "gauges gauges"
+      "command command";
+    grid-template-columns: minmax(150px, 1fr) minmax(58px, 0.72in);
+    grid-template-rows: auto minmax(0, 1in) auto;
   }
 
   .command-center > img {
@@ -2076,6 +2106,11 @@ button:disabled {
   }
 
   .command-center {
+    grid-template-areas:
+      "status"
+      "meter"
+      "gauges"
+      "command";
     grid-template-columns: 1fr;
     max-height: none;
   }
@@ -2088,7 +2123,8 @@ button:disabled {
   }
 
   .compact-gauges .gauge-row {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, minmax(92px, 1fr));
+    overflow-x: auto;
   }
 
   .character-grid,

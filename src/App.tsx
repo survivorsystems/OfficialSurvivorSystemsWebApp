@@ -999,7 +999,7 @@ function GaugeDeck({
               </div>
             </div>
             <h3>{gauge.label}</h3>
-            <p>CURRENT STATE: {gauge.state}</p>
+            <p>{compact ? gauge.state : `CURRENT STATE: ${gauge.state}`}</p>
           </article>
         ))}
       </div>
