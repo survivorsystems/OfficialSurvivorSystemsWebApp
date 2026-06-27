@@ -12,7 +12,6 @@ import {
 import clarityMeterImage from "./assets/support/clarity-meter.png";
 import denialSupportOne from "./assets/support/denial-support-1.png";
 import denialSupportTwo from "./assets/support/denial-support-2.png";
-import survivorSystemsLogo from "./assets/support/survivor-systems-logo.png";
 import GoBagSimulator from "./GoBagSimulator";
 
 type ModuleKey =
@@ -548,11 +547,11 @@ const assessmentGaugeEffects: Record<string, AssessmentGaugeEffect> = {
   "1b": { autonomy: -3, danger: 2, reality: -14, emphasis: "reality", notice: "REALITY INTERFERENCE DETECTED." },
   "1c": { autonomy: -4, danger: 3, reality: -12, emphasis: "reality", notice: "REALITY INTERFERENCE DETECTED." },
   "1d": { autonomy: -5, danger: 4, reality: -10, emphasis: "reality", notice: "REALITY INTERFERENCE DETECTED." },
-  "1e": { autonomy: -10, danger: 18, reality: -8, emphasis: "danger", notice: "DANGER LEVEL ELEVATED.", minDanger: 21 },
+  "1e": { autonomy: -10, danger: 18, reality: -8, emphasis: "danger", notice: "PREPAREDNESS CHECK REQUIRED.", minDanger: 21 },
   "2a": { autonomy: 5, danger: -2, reality: 3, emphasis: "autonomy", notice: "HEALTHY FUNCTION DETECTED." },
   "2b": { autonomy: -1, danger: 2, reality: 0, emphasis: "danger", notice: "CONFLICT LOAD REGISTERED." },
   "2c": { autonomy: -10, danger: 9, reality: -3, emphasis: "autonomy", notice: "AUTONOMY SIGNAL DECREASED." },
-  "2d": { autonomy: -16, danger: 16, reality: -5, emphasis: "danger", notice: "DANGER LEVEL ELEVATED.", minDanger: 21 },
+  "2d": { autonomy: -16, danger: 16, reality: -5, emphasis: "danger", notice: "PREPAREDNESS CHECK REQUIRED.", minDanger: 21 },
   "3a": { autonomy: 3, danger: -2, reality: 6, emphasis: "reality", notice: "HEALTHY FUNCTION DETECTED." },
   "3b": { autonomy: -7, danger: 3, reality: -10, emphasis: "reality", notice: "REALITY INTERFERENCE DETECTED." },
   "3c": { autonomy: -5, danger: 5, reality: -5, emphasis: "danger", notice: "REPEATING CYCLE PRESSURE DETECTED." },
@@ -561,7 +560,7 @@ const assessmentGaugeEffects: Record<string, AssessmentGaugeEffect> = {
   "4b": { autonomy: -2, danger: 3, reality: 0, emphasis: "danger", notice: "CONFLICT LOAD REGISTERED." },
   "4c": { autonomy: -10, danger: 10, reality: -2, emphasis: "autonomy", notice: "AUTONOMY SIGNAL DECREASED." },
   "4d": { autonomy: -15, danger: 15, reality: -4, emphasis: "autonomy", notice: "AUTONOMY SIGNAL DECREASED." },
-  "4e": { autonomy: -18, danger: 24, reality: -5, emphasis: "danger", notice: "DANGER LEVEL HIGH.", minDanger: 46 },
+  "4e": { autonomy: -18, danger: 24, reality: -5, emphasis: "danger", notice: "PREPAREDNESS SIGNAL LOW.", minDanger: 46 },
   "5a": { autonomy: 6, danger: -2, reality: 2, emphasis: "autonomy", notice: "HEALTHY FUNCTION DETECTED." },
   "5b": { autonomy: -5, danger: 2, reality: -3, emphasis: "autonomy", notice: "AUTONOMY SIGNAL DECREASED." },
   "5c": { autonomy: -12, danger: 8, reality: -4, emphasis: "autonomy", notice: "AUTONOMY SIGNAL DECREASED." },
@@ -569,8 +568,8 @@ const assessmentGaugeEffects: Record<string, AssessmentGaugeEffect> = {
   "6a": { autonomy: 8, danger: -3, reality: 2, emphasis: "autonomy", notice: "HEALTHY FUNCTION DETECTED." },
   "6b": { autonomy: 5, danger: -2, reality: 2, emphasis: "autonomy", notice: "HEALTHY FUNCTION DETECTED." },
   "6c": { autonomy: -10, danger: 8, reality: -4, emphasis: "autonomy", notice: "RESOURCE CONTROL SIGNAL DETECTED." },
-  "6d": { autonomy: -20, danger: 18, reality: -5, emphasis: "danger", notice: "DANGER LEVEL HIGH.", minDanger: 46 },
-  "6e": { autonomy: -16, danger: 14, reality: -7, emphasis: "danger", notice: "DANGER LEVEL HIGH.", minDanger: 46 },
+  "6d": { autonomy: -20, danger: 18, reality: -5, emphasis: "danger", notice: "PREPAREDNESS SIGNAL LOW.", minDanger: 46 },
+  "6e": { autonomy: -16, danger: 14, reality: -7, emphasis: "danger", notice: "PREPAREDNESS SIGNAL LOW.", minDanger: 46 },
   "7a": { autonomy: 7, danger: -3, reality: 2, emphasis: "autonomy", notice: "HEALTHY FUNCTION DETECTED." },
   "7b": { autonomy: -8, danger: 7, reality: -3, emphasis: "autonomy", notice: "AUTONOMY SIGNAL DECREASED." },
   "7c": { autonomy: -14, danger: 13, reality: -4, emphasis: "autonomy", notice: "MONITORING SIGNAL DETECTED.", minDanger: 21 },
@@ -583,7 +582,7 @@ const assessmentGaugeEffects: Record<string, AssessmentGaugeEffect> = {
   "9b": { autonomy: -4, danger: 7, reality: -5, emphasis: "reality", notice: "REALITY INTERFERENCE DETECTED." },
   "9c": { autonomy: -3, danger: 5, reality: -7, emphasis: "reality", notice: "REALITY INTERFERENCE DETECTED." },
   "9d": { autonomy: -4, danger: 6, reality: -10, emphasis: "reality", notice: "REALITY INTERFERENCE DETECTED." },
-  "9e": { autonomy: -8, danger: 13, reality: -8, emphasis: "danger", notice: "DANGER LEVEL ELEVATED.", minDanger: 21 },
+  "9e": { autonomy: -8, danger: 13, reality: -8, emphasis: "danger", notice: "PREPAREDNESS CHECK REQUIRED.", minDanger: 21 },
   "10a": { autonomy: 3, danger: -3, reality: 3, emphasis: "autonomy", notice: "FUTURE STATUS WORKABLE." },
   "10b": { autonomy: -10, danger: 8, reality: 2, emphasis: "autonomy", notice: "AUTONOMY SIGNAL DECREASED." },
   "10c": { autonomy: -8, danger: 16, reality: 3, emphasis: "danger", notice: "ESCALATION FORECAST DETECTED.", minDanger: 21 },
@@ -817,8 +816,33 @@ const privateBrowsingHelp = [
 
 const defaultControlPanel: ControlPanelState = {
   emphasis: null,
-  gauges: [],
-  notice: "CLARITY METER ONLINE. MODULE READINGS STANDBY.",
+  gauges: [
+    {
+      label: "CLARITY METER",
+      value: 58,
+      lowLabel: "FOG",
+      highLabel: "CLEAR",
+      state: "STANDBY",
+      tone: "cyan",
+    },
+    {
+      label: "PREPAREDNESS",
+      value: 28,
+      lowLabel: "LOW",
+      highLabel: "READY",
+      state: "RULES PENDING",
+      tone: "pink",
+    },
+    {
+      label: "AUTONOMY",
+      value: 62,
+      lowLabel: "LOCKED",
+      highLabel: "ONLINE",
+      state: "STANDBY",
+      tone: "purple",
+    },
+  ],
+  notice: "COMMAND CENTER ONLINE. MODULE READINGS STANDBY.",
 };
 
 function leaveSite() {
@@ -878,8 +902,9 @@ function assessmentGaugeValues(gauges: AssessmentGauges): GaugeValue[] {
         : gauges.autonomy >= 26
           ? "RESTRICTED"
           : "SEVERELY RESTRICTED";
-  const dangerState =
-    gauges.danger >= 71 ? "CRITICAL" : gauges.danger >= 46 ? "HIGH" : gauges.danger >= 21 ? "ELEVATED" : "LOW";
+  const preparedness = clampGauge(100 - gauges.danger);
+  const preparednessState =
+    preparedness >= 76 ? "READY" : preparedness >= 51 ? "BUILDING" : preparedness >= 26 ? "LOW" : "NEEDS SUPPORT";
   const realityState =
     gauges.reality >= 76 ? "STABLE" : gauges.reality >= 51 ? "CLEARING" : gauges.reality >= 26 ? "UNSTABLE" : "DISTORTED";
 
@@ -893,11 +918,11 @@ function assessmentGaugeValues(gauges: AssessmentGauges): GaugeValue[] {
       tone: "cyan",
     },
     {
-      label: "DANGER LEVEL",
-      value: gauges.danger,
+      label: "PREPAREDNESS",
+      value: preparedness,
       lowLabel: "LOW",
-      highLabel: "CRITICAL",
-      state: dangerState,
+      highLabel: "READY",
+      state: preparednessState,
       tone: "pink",
     },
     {
@@ -985,21 +1010,29 @@ function GaugeDeck({
 
 function BrandLogo({ className = "" }: { className?: string }) {
   return (
-    <img className={`brand-logo ${className}`} src={survivorSystemsLogo} alt="Survivor Systems" />
+    <span className={`brand-logo ${className}`} aria-label="Survivor Systems">
+      <span className="brand-logo-survivor">Survivor</span>
+      <span className="brand-logo-systems">Systems</span>
+    </span>
   );
 }
 
-function ControlPanel({ panel }: { panel: ControlPanelState }) {
+function CommandCenter({
+  onNavigate,
+  panel,
+}: {
+  onNavigate: (module: ModuleKey, path: string) => void;
+  panel: ControlPanelState;
+}) {
   return (
-    <section className="control-panel" aria-label="Control panel">
-      <div className="control-panel-header">
-        <span className="terminal-label">CONTROL PANEL</span>
+    <section className="command-center" aria-label="Command center">
+      <div className="command-center-status">
+        <span className="terminal-label">COMMAND CENTER</span>
         <p>{panel.notice}</p>
       </div>
       <img src={clarityMeterImage} alt="Clarity meter" />
-      {panel.gauges.length > 0 && (
-        <GaugeDeck compact emphasis={panel.emphasis} gauges={panel.gauges} notice={panel.notice} />
-      )}
+      <GaugeDeck compact emphasis={panel.emphasis} gauges={panel.gauges} notice={panel.notice} />
+      <TerminalCommand onNavigate={onNavigate} />
     </section>
   );
 }
@@ -1278,7 +1311,7 @@ function TerminalCommand({
 
   return (
     <form className="command-terminal" onSubmit={submitCommand}>
-      <label htmlFor="terminal-command">SYSTEM QUERY</label>
+      <label htmlFor="terminal-command">NAV QUERY</label>
       <div className="command-input-row">
         <span aria-hidden="true">user@survivor-systems:~$</span>
         <input
@@ -1318,11 +1351,6 @@ function TerminalChrome({
             onNavigate("home", "/");
           }}
         >
-          <span className="brand-mark" aria-hidden="true">
-            <span />
-            <span />
-            <span />
-          </span>
           <BrandLogo />
         </a>
         <p className="sidebar-tagline">TOOLS FOR CLARITY. POWER FOR YOUR FUTURE.</p>
@@ -1363,8 +1391,7 @@ function TerminalChrome({
           </div>
         </header>
         <div className="terminal-content">{children}</div>
-        <ControlPanel panel={controlPanel} />
-        <TerminalCommand onNavigate={onNavigate} />
+        <CommandCenter panel={controlPanel} onNavigate={onNavigate} />
       </section>
     </main>
   );
@@ -1508,7 +1535,7 @@ function AmICrazyModule({
         effect.emphasis === "autonomy"
           ? "AUTONOMY METER"
           : effect.emphasis === "danger"
-            ? "DANGER LEVEL"
+            ? "PREPAREDNESS"
             : "REALITY SIGNAL",
       );
     }

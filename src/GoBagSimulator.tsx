@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { type CSSProperties, useEffect, useMemo, useState } from "react";
 import characterFemaleOne from "./assets/game/character-female-1.png";
 import characterMaleOne from "./assets/game/character-male-1.png";
 import characterNeonFemaleOne from "./assets/game/character-neon-female-1.png";
@@ -49,6 +49,7 @@ type Item = {
   label: string;
   required: boolean;
   room: RoomKey;
+  size?: "large" | "medium" | "small";
   x: number;
   y: number;
 };
@@ -83,16 +84,16 @@ const roomLinks: Record<RoomKey, RoomKey[]> = {
 };
 
 const items: Item[] = [
-  { id: "bag", label: "Go-Bag", icon: "BAG", required: true, room: "bedroom", x: 16, y: 70 },
-  { id: "medication", label: "Medication", icon: "MED", required: true, room: "bathroom", x: 37, y: 20 },
+  { id: "bag", label: "Go-Bag", icon: "BAG", required: true, room: "bedroom", size: "large", x: 16, y: 70 },
+  { id: "medication", label: "Medication", icon: "MED", required: true, room: "bathroom", x: 38, y: 69 },
   { id: "charger", label: "Phone Charger", icon: "CHG", required: true, room: "living", x: 74, y: 36 },
   { id: "phone", label: "Phone", icon: "PHN", required: true, room: "bedroom", x: 19, y: 38 },
-  { id: "keys", label: "Keys", icon: "KEY", required: true, room: "living", x: 20, y: 55 },
-  { id: "identification", label: "Identification", icon: "ID", required: true, room: "bedroom", x: 42, y: 72 },
-  { id: "documents", label: "Documents Folder", icon: "DOC", required: true, room: "bedroom", x: 48, y: 72 },
-  { id: "clothes", label: "Change Of Clothes", icon: "CLO", required: true, room: "bedroom", x: 68, y: 70 },
+  { id: "keys", label: "Keys", icon: "KEY", required: true, room: "living", x: 44, y: 55 },
+  { id: "identification", label: "Identification", icon: "ID", required: true, room: "bedroom", size: "medium", x: 42, y: 72 },
+  { id: "documents", label: "Documents Folder", icon: "DOC", required: true, room: "bedroom", size: "medium", x: 48, y: 72 },
+  { id: "clothes", label: "Change Of Clothes", icon: "CLO", required: true, room: "bedroom", size: "large", x: 68, y: 70 },
   { id: "hygiene", label: "Hygiene Supplies", icon: "HYG", required: true, room: "bathroom", x: 74, y: 49 },
-  { id: "water", label: "Water Bottle", icon: "H2O", required: true, room: "kitchen", x: 24, y: 57 },
+  { id: "water", label: "Water Bottle", icon: "H2O", required: true, room: "kitchen", size: "medium", x: 24, y: 57 },
   { id: "wallet", label: "Wallet Or Cash", icon: "CASH", required: true, room: "living", x: 42, y: 58 },
   { id: "glasses", label: "Glasses Or Medical Item", icon: "MED2", required: false, room: "bathroom", x: 30, y: 41 },
   { id: "pet", label: "Pet Supplies", icon: "PET", required: false, room: "kitchen", x: 31, y: 57 },
@@ -100,6 +101,17 @@ const items: Item[] = [
 ];
 
 const requiredItemIds = items.filter((item) => item.required).map((item) => item.id);
+const inventorySlots = [
+  { x: 83.1, y: 18.9 },
+  { x: 88.3, y: 18.9 },
+  { x: 93.5, y: 18.9 },
+  { x: 83.1, y: 28.4 },
+  { x: 88.3, y: 28.4 },
+  { x: 93.5, y: 28.4 },
+  { x: 83.1, y: 38 },
+  { x: 88.3, y: 38 },
+  { x: 93.5, y: 38 },
+];
 
 function gameGaugeValues(collected: Set<string>, screen: string): GaugeValue[] {
   const requiredCollected = requiredItemIds.filter((id) => collected.has(id)).length;
@@ -212,6 +224,9 @@ function GoBagSimulator({
     setMessage(`${item.label.toUpperCase()} ADDED TO BAG. SYSTEM CHECK UPDATED.`);
   }
 
+  const collectedItems = items.filter((item) => collectedSet.has(item.id));
+  const roomItems = items.filter((item) => item.room === room && !collectedSet.has(item.id));
+
   if (screen === "intro") {
     return (
       <section className="simulator-shell">
@@ -236,7 +251,7 @@ function GoBagSimulator({
         <ul className="simulator-list">
           <li>Choose a room, then click items to add them to your Go-Bag.</li>
           <li>Find the Go-Bag before collecting additional items.</li>
-          <li>Each action updates the system comms in the CONTROL PANEL.</li>
+          <li>Each action updates the system comms in the COMMAND CENTER.</li>
           <li>The simulator keeps this session temporary and browser-only.</li>
         </ul>
         <div className="terminal-actions compact-actions">
@@ -347,20 +362,21 @@ function GoBagSimulator({
         <>
           <div className="game-stage" aria-label={`${currentRoom.name} game scene`}>
             <div className={`room-floor ${room}`} style={{ backgroundImage: `url(${currentRoom.background})` }}>
-              {items
-                .filter((item) => item.room === room && !collectedSet.has(item.id))
-                .map((item) => (
-                  <button
-                    aria-label={`Add ${item.label} to Go-Bag`}
-                    className={item.required ? "collectible required" : "collectible optional"}
-                    key={item.id}
-                    style={{ left: `${item.x}%`, top: `${item.y}%` }}
-                    type="button"
-                    onClick={() => collectItem(item)}
-                  >
-                    {item.icon}
-                  </button>
-                ))}
+              {roomItems.map((item) => (
+                <button
+                  aria-label={`Add ${item.label} to Go-Bag`}
+                  className={`collectible ${item.required ? "required" : "optional"} ${item.size ?? "small"}`}
+                  key={item.id}
+                  style={{ left: `${item.x}%`, top: `${item.y}%` }}
+                  title={item.label}
+                  type="button"
+                  onClick={() => collectItem(item)}
+                >
+                  <span>{item.label}</span>
+                </button>
+              ))}
+              <SceneInventory collectedItems={collectedItems} />
+              <SceneStatus collectedCount={collected.length} requiredCollected={requiredCollected} />
             </div>
           </div>
           <div className="room-nav" aria-label="Room navigation">
@@ -371,7 +387,6 @@ function GoBagSimulator({
               </button>
             ))}
           </div>
-          <InventoryPanel collected={collectedSet} />
         </>
       )}
     </section>
@@ -405,18 +420,59 @@ function SimulatorHud({
   );
 }
 
-function InventoryPanel({ collected }: { collected: Set<string> }) {
+function SceneInventory({ collectedItems }: { collectedItems: Item[] }) {
+  const visibleItems = collectedItems.slice(0, inventorySlots.length);
+  const overflowCount = Math.max(0, collectedItems.length - inventorySlots.length);
+
   return (
-    <aside className="inventory-panel" aria-label="Inventory">
-      <h2>Go-Bag Inventory</h2>
-      <div>
-        {items.map((item) => (
-          <span className={collected.has(item.id) ? "packed" : ""} key={item.id}>
+    <div className="scene-inventory" aria-label="Items added to Go-Bag">
+      {inventorySlots.map((slot, index) => (
+        <span
+          aria-hidden="true"
+          className="scene-inventory-slot"
+          key={`${slot.x}-${slot.y}-${index}`}
+          style={{ left: `${slot.x}%`, top: `${slot.y}%` }}
+        />
+      ))}
+      {visibleItems.map((item, index) => {
+        const slot = inventorySlots[index];
+        return (
+          <span
+            className="scene-inventory-item"
+            key={item.id}
+            style={{ left: `${slot.x}%`, top: `${slot.y}%` }}
+            title={item.label}
+          >
             {item.icon}
           </span>
-        ))}
-      </div>
-    </aside>
+        );
+      })}
+      {overflowCount > 0 && (
+        <span className="scene-inventory-overflow" style={{ left: "93.5%", top: "38%" }}>
+          +{overflowCount}
+        </span>
+      )}
+    </div>
+  );
+}
+
+function SceneStatus({
+  collectedCount,
+  requiredCollected,
+}: {
+  collectedCount: number;
+  requiredCollected: number;
+}) {
+  const requiredPercent = Math.round((requiredCollected / requiredItemIds.length) * 100);
+  const bagPercent = Math.round((collectedCount / items.length) * 100);
+
+  return (
+    <div className="scene-status" aria-hidden="true">
+      <span className="scene-status-bar time" style={{ "--status-fill": "72%" } as CSSProperties} />
+      <span className="scene-status-bar bag" style={{ "--status-fill": `${bagPercent}%` } as CSSProperties} />
+      <span className="scene-status-bar energy" style={{ "--status-fill": "64%" } as CSSProperties} />
+      <span className="scene-status-bar options" style={{ "--status-fill": `${requiredPercent}%` } as CSSProperties} />
+    </div>
   );
 }
 
