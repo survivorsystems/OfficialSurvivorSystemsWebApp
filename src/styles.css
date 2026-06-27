@@ -1072,7 +1072,9 @@ button:disabled {
 .room-backdrop {
   inset: 0;
   overflow: hidden;
+  pointer-events: none;
   position: absolute;
+  z-index: 0;
 }
 
 .room-ceiling {
@@ -1197,6 +1199,11 @@ button:disabled {
   width: 18%;
 }
 
+.pixel-couch .cushion,
+.pixel-chair .cushion {
+  display: none;
+}
+
 .pixel-chair {
   background: #9f237e;
   border: 4px solid #05070d;
@@ -1234,6 +1241,13 @@ button:disabled {
   height: 5px;
   left: 25%;
   width: 50%;
+}
+
+.pixel-tv::before {
+  background:
+    linear-gradient(135deg, transparent 0 42%, #00eaff 43% 48%, transparent 49%),
+    linear-gradient(45deg, transparent 0 42%, #ff4fd8 43% 48%, transparent 49%);
+  inset: 15%;
 }
 
 .pixel-lamp {
@@ -1323,6 +1337,16 @@ button:disabled {
 
 .pixel-dresser::before {
   background: repeating-linear-gradient(0deg, #05070d 0 3px, transparent 3px 14px);
+  inset: 18% 8%;
+}
+
+.pixel-dresser::after {
+  background:
+    radial-gradient(circle, #fff6dd 0 2px, transparent 3px),
+    radial-gradient(circle, #fff6dd 0 2px, transparent 3px);
+  background-position: 23% 32%, 74% 32%;
+  background-repeat: repeat-y;
+  background-size: 100% 16px;
   inset: 18% 8%;
 }
 
@@ -1446,6 +1470,23 @@ button:disabled {
   width: 12%;
 }
 
+.pixel-fridge::before {
+  background: #05070d;
+  height: 4px;
+  left: 0;
+  right: 0;
+  top: 44%;
+}
+
+.pixel-fridge::after {
+  background: #00eaff;
+  box-shadow: 0 26px 0 #00eaff;
+  height: 18px;
+  right: 16%;
+  top: 18%;
+  width: 4px;
+}
+
 .pixel-counter {
   background: #007987;
   border: 4px solid #05070d;
@@ -1463,6 +1504,23 @@ button:disabled {
   left: 35%;
   top: 37%;
   width: 13%;
+}
+
+.pixel-stove::before {
+  background:
+    radial-gradient(circle, #05070d 0 5px, transparent 6px),
+    radial-gradient(circle, #05070d 0 5px, transparent 6px);
+  background-position: 22% 18%, 74% 18%;
+  background-repeat: no-repeat;
+  inset: 0;
+}
+
+.pixel-stove::after {
+  background: #9f237e;
+  bottom: 12%;
+  height: 28%;
+  left: 16%;
+  width: 68%;
 }
 
 .pixel-sink-kitchen {
@@ -1490,16 +1548,20 @@ button:disabled {
 
 .collectible {
   align-items: center;
-  background: transparent;
-  border: 0;
-  border-radius: 8px;
-  box-shadow: none;
+  background:
+    repeating-linear-gradient(0deg, rgba(255, 246, 221, 0.08) 0 1px, transparent 1px 5px),
+    linear-gradient(180deg, rgba(0, 234, 255, 0.14), rgba(0, 0, 0, 0.78));
+  border: 2px solid rgba(255, 246, 221, 0.78);
+  border-radius: 6px;
+  box-shadow:
+    inset 0 0 12px rgba(0, 0, 0, 0.88),
+    0 0 12px rgba(0, 234, 255, 0.34);
   color: var(--cyan);
   cursor: pointer;
   display: grid;
   font-size: clamp(0.58rem, 1vw, 0.78rem);
   font-weight: 900;
-  height: clamp(44px, 6.5vw, 70px);
+  height: clamp(58px, 8vw, 88px);
   justify-content: center;
   line-height: 1;
   place-content: center;
@@ -1507,8 +1569,19 @@ button:disabled {
   text-shadow: var(--shadow-cyan);
   transform: translate(-50%, -50%);
   transition: background 140ms ease, border-color 140ms ease, box-shadow 140ms ease, transform 140ms ease;
-  width: clamp(46px, 7vw, 78px);
-  z-index: 2;
+  width: clamp(62px, 9vw, 98px);
+  z-index: 5;
+}
+
+.collectible::after {
+  background: var(--pink);
+  bottom: -7px;
+  box-shadow: var(--shadow-pink);
+  content: "";
+  height: 4px;
+  left: 15%;
+  position: absolute;
+  right: 15%;
 }
 
 .collectible:hover,
@@ -1520,13 +1593,13 @@ button:disabled {
 }
 
 .collectible.medium {
-  height: clamp(50px, 7vw, 76px);
-  width: clamp(58px, 8vw, 86px);
+  height: clamp(64px, 9vw, 94px);
+  width: clamp(70px, 10vw, 104px);
 }
 
 .collectible.large {
-  height: clamp(58px, 8.5vw, 92px);
-  width: clamp(76px, 11vw, 116px);
+  height: clamp(74px, 10vw, 108px);
+  width: clamp(86px, 12vw, 128px);
 }
 
 .collectible img {
@@ -1538,17 +1611,22 @@ button:disabled {
   max-height: 100%;
   max-width: 100%;
   object-fit: contain;
+  padding: 5px;
 }
 
 .collectible span {
-  background: rgba(0, 0, 0, 0.78);
-  border: 1px solid rgba(0, 234, 255, 0.42);
+  background: rgba(0, 0, 0, 0.86);
+  border: 1px solid rgba(255, 246, 221, 0.68);
   border-radius: 4px;
-  bottom: calc(100% + 4px);
+  bottom: -26px;
   box-shadow: var(--shadow-cyan);
+  color: #fff6dd;
+  font-size: clamp(0.46rem, 0.8vw, 0.62rem);
+  font-weight: 900;
+  letter-spacing: 0.04em;
   left: 50%;
   max-width: 130px;
-  opacity: 0;
+  opacity: 1;
   padding: 4px 6px;
   pointer-events: none;
   position: absolute;

@@ -142,7 +142,7 @@ function GoBagSimulator({
   onQuickExit: () => void;
 }) {
   const [screen, setScreen] = useState<"intro" | "how" | "play" | "pause" | "complete" | "review">("intro");
-  const [room, setRoom] = useState<RoomKey>("living");
+  const [room, setRoom] = useState<RoomKey>("bedroom");
   const [collected, setCollected] = useState<string[]>([]);
   const [message, setMessage] = useState("OBJECTIVE: FIND THE GO-BAG.");
 
@@ -171,7 +171,7 @@ function GoBagSimulator({
   }, [requiredCollected, screen]);
 
   function resetGame() {
-    setRoom("living");
+    setRoom("bedroom");
     setCollected([]);
     setMessage("OBJECTIVE: FIND THE GO-BAG.");
   }
@@ -184,7 +184,7 @@ function GoBagSimulator({
   function startGame() {
     resetGame();
     setScreen("play");
-    setMessage("ENTERING: LIVING ROOM. LOCATE THE GO-BAG FIRST. ROOM PATHS CAN TAKE YOU TO THE BEDROOM.");
+    setMessage("ENTERING: BEDROOM. LOCATE THE GO-BAG FIRST, THEN PACK THE REST.");
   }
 
   function enterRoom(nextRoom: RoomKey) {
