@@ -325,7 +325,7 @@ function GoBagSimulator({
                   </span>
                 </button>
               ))}
-              <SceneInventory collectedItems={collectedItems} />
+              <SceneInventory collectedItems={collectedItems} collectedSet={collectedSet} />
             </div>
           </div>
           <div className="room-nav" aria-label="Room navigation">
@@ -371,7 +371,13 @@ function SimulatorHud({
   );
 }
 
-function SceneInventory({ collectedItems }: { collectedItems: Item[] }) {
+function SceneInventory({
+  collectedItems,
+  collectedSet,
+}: {
+  collectedItems: Item[];
+  collectedSet: Set<string>;
+}) {
   const visibleItems = collectedItems.slice(0, inventorySlots.length);
   const overflowCount = Math.max(0, collectedItems.length - inventorySlots.length);
 
@@ -398,6 +404,14 @@ function SceneInventory({ collectedItems }: { collectedItems: Item[] }) {
           +{overflowCount}
         </span>
       )}
+      <div className="scene-item-list" aria-label="Go-Bag item checklist">
+        <strong>Collect</strong>
+        {items.map((item) => (
+          <span className={collectedSet.has(item.id) ? "packed" : ""} key={item.id}>
+            {item.label}
+          </span>
+        ))}
+      </div>
     </div>
   );
 }
