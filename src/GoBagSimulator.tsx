@@ -322,9 +322,7 @@ function GoBagSimulator({
                 >
                   <span className="pickup-art">
                     <img src={item.image} alt="" />
-                    <strong>{item.icon}</strong>
                   </span>
-                  <span>{item.label}</span>
                 </button>
               ))}
               <SceneInventory collectedItems={collectedItems} />
