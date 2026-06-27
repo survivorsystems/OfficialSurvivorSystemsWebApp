@@ -1061,12 +1061,431 @@ button:disabled {
 
 .room-floor {
   aspect-ratio: 3 / 2;
-  background-color: #05070d;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  background:
+    linear-gradient(180deg, #05070d 0 64%, #020609 64% 100%);
+  border: 4px solid #fff6dd;
+  box-shadow: inset 0 0 0 2px #05070d;
   position: relative;
   width: 100%;
+}
+
+.room-backdrop {
+  inset: 0;
+  overflow: hidden;
+  position: absolute;
+}
+
+.room-ceiling {
+  background: #fff6dd;
+  height: 4.5%;
+  left: 2%;
+  position: absolute;
+  right: 2%;
+  top: 2%;
+}
+
+.room-wall {
+  background:
+    radial-gradient(circle at 16% 15%, rgba(255, 79, 216, 0.18), transparent 18%),
+    radial-gradient(circle at 72% 20%, rgba(0, 234, 255, 0.12), transparent 20%),
+    repeating-linear-gradient(90deg, transparent 0 26px, rgba(0, 234, 255, 0.05) 27px 28px),
+    #05070d;
+  border-bottom: 3px solid #fff6dd;
+  height: 62%;
+  left: 2%;
+  position: absolute;
+  right: 21%;
+  top: 6%;
+}
+
+.room-floor-grid {
+  background:
+    linear-gradient(90deg, rgba(0, 234, 255, 0.38) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(0, 234, 255, 0.38) 1px, transparent 1px),
+    radial-gradient(circle at 44% 72%, rgba(255, 79, 216, 0.18), transparent 26%);
+  background-size: 48px 48px, 48px 48px, 100% 100%;
+  bottom: 2%;
+  clip-path: polygon(6% 0, 79% 0, 96% 100%, 0 100%);
+  left: 2%;
+  position: absolute;
+  right: 21%;
+  top: 64%;
+}
+
+.room-backdrop span {
+  position: absolute;
+  image-rendering: pixelated;
+}
+
+.room-backdrop span::before,
+.room-backdrop span::after {
+  content: "";
+  position: absolute;
+}
+
+.pixel-window {
+  background: #061827;
+  border: 4px solid #fff6dd;
+  box-shadow:
+    inset 0 -18px 0 rgba(255, 79, 216, 0.42),
+    inset 0 0 0 4px #05070d;
+  height: 23%;
+  width: 14%;
+}
+
+.pixel-window::before {
+  background: #fff6dd;
+  height: 4px;
+  left: 0;
+  right: 0;
+  top: 47%;
+}
+
+.pixel-window::after {
+  background: #fff6dd;
+  bottom: 0;
+  left: 47%;
+  top: 0;
+  width: 4px;
+}
+
+.living-window {
+  left: 7%;
+  top: 14%;
+}
+
+.bedroom-window {
+  left: 7%;
+  top: 15%;
+}
+
+.kitchen-window {
+  left: 57%;
+  top: 16%;
+  width: 12%;
+}
+
+.pixel-couch {
+  background: #007987;
+  border: 4px solid #05070d;
+  box-shadow:
+    inset 0 8px 0 #00a8b8,
+    inset 0 -8px 0 #004c58,
+    0 0 0 3px #fff6dd;
+  height: 16%;
+  left: 25%;
+  top: 43%;
+  width: 31%;
+}
+
+.pixel-couch::before,
+.pixel-chair::before {
+  background: #9f237e;
+  border: 3px solid #05070d;
+  height: 38%;
+  left: 9%;
+  top: -16%;
+  width: 22%;
+}
+
+.pixel-couch::after {
+  background: #fff6dd;
+  border: 3px solid #05070d;
+  height: 36%;
+  right: 9%;
+  top: -13%;
+  width: 18%;
+}
+
+.pixel-chair {
+  background: #9f237e;
+  border: 4px solid #05070d;
+  box-shadow: 0 0 0 3px #fff6dd;
+  height: 18%;
+  left: 7%;
+  top: 44%;
+  width: 13%;
+}
+
+.pixel-table,
+.pixel-table-kitchen {
+  background: #007987;
+  border: 4px solid #05070d;
+  box-shadow: 0 0 0 3px #fff6dd;
+  height: 9%;
+  left: 31%;
+  top: 64%;
+  width: 22%;
+}
+
+.pixel-tv {
+  background: #06202a;
+  border: 5px solid #007987;
+  box-shadow: 0 0 0 3px #05070d, 0 0 0 6px #fff6dd;
+  height: 18%;
+  left: 62%;
+  top: 38%;
+  width: 12%;
+}
+
+.pixel-tv::after {
+  background: #fff6dd;
+  bottom: -10px;
+  height: 5px;
+  left: 25%;
+  width: 50%;
+}
+
+.pixel-lamp {
+  background: #fff6dd;
+  height: 26%;
+  left: 20%;
+  top: 31%;
+  width: 3px;
+}
+
+.pixel-lamp::before {
+  border-bottom: 22px solid #fff6dd;
+  border-left: 18px solid transparent;
+  border-right: 18px solid transparent;
+  height: 0;
+  left: -16px;
+  top: 0;
+  width: 0;
+}
+
+.pixel-plant {
+  background: #00a66f;
+  height: 13%;
+  width: 9%;
+}
+
+.pixel-plant::after {
+  background: #9f237e;
+  bottom: 0;
+  height: 32%;
+  left: 27%;
+  width: 46%;
+}
+
+.living-plant {
+  left: 16%;
+  top: 55%;
+}
+
+.pixel-door {
+  background: #fff6dd;
+  border: 4px solid #05070d;
+  height: 35%;
+  left: 57%;
+  top: 23%;
+  width: 10%;
+}
+
+.pixel-bed {
+  background: #007987;
+  border: 4px solid #05070d;
+  box-shadow: inset 0 -18px 0 #9f237e, 0 0 0 3px #fff6dd;
+  height: 20%;
+  left: 24%;
+  top: 42%;
+  width: 31%;
+}
+
+.pixel-bed::before {
+  background: #fff6dd;
+  border: 3px solid #05070d;
+  height: 34%;
+  left: 50%;
+  top: 8%;
+  width: 18%;
+}
+
+.pixel-nightstand {
+  background: #007987;
+  border: 4px solid #05070d;
+  box-shadow: 0 0 0 3px #fff6dd;
+  height: 12%;
+  left: 16%;
+  top: 47%;
+  width: 9%;
+}
+
+.pixel-dresser {
+  background: #007987;
+  border: 4px solid #05070d;
+  box-shadow: inset 0 -8px 0 #004c58, 0 0 0 3px #fff6dd;
+  height: 21%;
+  left: 56%;
+  top: 33%;
+  width: 19%;
+}
+
+.pixel-dresser::before {
+  background: repeating-linear-gradient(0deg, #05070d 0 3px, transparent 3px 14px);
+  inset: 18% 8%;
+}
+
+.pixel-closet {
+  background: #005966;
+  border: 4px solid #05070d;
+  box-shadow: 0 0 0 3px #fff6dd;
+  height: 36%;
+  left: 72%;
+  top: 17%;
+  width: 8%;
+}
+
+.pixel-rug {
+  background: #9f237e;
+  border: 4px solid #fff6dd;
+  box-shadow: inset 0 0 0 5px #05070d;
+}
+
+.bedroom-rug {
+  height: 10%;
+  left: 37%;
+  top: 73%;
+  width: 25%;
+}
+
+.bathroom-rug {
+  height: 10%;
+  left: 31%;
+  top: 77%;
+  width: 20%;
+}
+
+.pixel-shelf {
+  background: #fff6dd;
+  height: 3%;
+}
+
+.bedroom-shelf {
+  left: 19%;
+  top: 22%;
+  width: 20%;
+}
+
+.pixel-mirror {
+  background: #061827;
+  border: 4px solid #9f237e;
+  box-shadow: inset 0 0 0 3px #05070d, 0 0 0 3px #fff6dd;
+  height: 23%;
+  left: 16%;
+  top: 18%;
+  width: 19%;
+}
+
+.pixel-sink {
+  background: #fff6dd;
+  border: 4px solid #05070d;
+  box-shadow: 0 0 0 3px #007987;
+  height: 11%;
+  left: 15%;
+  top: 48%;
+  width: 28%;
+}
+
+.pixel-sink::after {
+  background: #05070d;
+  border-radius: 999px;
+  height: 38%;
+  left: 36%;
+  top: 24%;
+  width: 28%;
+}
+
+.pixel-toilet {
+  background: #fff6dd;
+  border: 4px solid #05070d;
+  box-shadow: 0 0 0 3px #fff6dd;
+  height: 18%;
+  left: 47%;
+  top: 47%;
+  width: 13%;
+}
+
+.pixel-tub {
+  background: #fff6dd;
+  border: 4px solid #05070d;
+  box-shadow: inset 0 14px 0 #9f237e, 0 0 0 3px #fff6dd;
+  height: 22%;
+  left: 60%;
+  top: 42%;
+  width: 20%;
+}
+
+.pixel-cabinet {
+  background: #007987;
+  border: 4px solid #05070d;
+  box-shadow: 0 0 0 3px #fff6dd;
+  height: 21%;
+  left: 37%;
+  top: 20%;
+  width: 13%;
+}
+
+.pixel-towel {
+  background: #9f237e;
+  border: 4px solid #05070d;
+  box-shadow: 0 0 0 3px #fff6dd;
+  height: 22%;
+  left: 7%;
+  top: 35%;
+  width: 7%;
+}
+
+.pixel-fridge {
+  background: #fff6dd;
+  border: 4px solid #05070d;
+  box-shadow: 0 0 0 3px #fff6dd;
+  height: 43%;
+  left: 7%;
+  top: 17%;
+  width: 12%;
+}
+
+.pixel-counter {
+  background: #007987;
+  border: 4px solid #05070d;
+  box-shadow: inset 0 8px 0 #fff6dd, 0 0 0 3px #fff6dd;
+  height: 20%;
+  left: 22%;
+  top: 40%;
+  width: 49%;
+}
+
+.pixel-stove {
+  background: #fff6dd;
+  border: 4px solid #05070d;
+  height: 22%;
+  left: 35%;
+  top: 37%;
+  width: 13%;
+}
+
+.pixel-sink-kitchen {
+  background: #061827;
+  border: 4px solid #fff6dd;
+  height: 9%;
+  left: 52%;
+  top: 45%;
+  width: 15%;
+}
+
+.pixel-table-kitchen {
+  background: #b0804f;
+  height: 14%;
+  left: 27%;
+  top: 65%;
+  width: 28%;
+}
+
+.kitchen-shelf {
+  left: 58%;
+  top: 25%;
+  width: 17%;
 }
 
 .collectible {

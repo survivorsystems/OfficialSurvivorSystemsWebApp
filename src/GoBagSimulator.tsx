@@ -11,10 +11,6 @@ import snack from "./assets/game/items/snack.svg";
 import toiletryBag from "./assets/game/items/toiletry-bag.svg";
 import wallet from "./assets/game/items/wallet.svg";
 import waterBottle from "./assets/game/items/water-bottle.svg";
-import roomBathroom from "./assets/game/room-bathroom.png";
-import roomBedroom from "./assets/game/room-bedroom.png";
-import roomKitchen from "./assets/game/room-kitchen.png";
-import roomLiving from "./assets/game/room-living.png";
 
 type ModuleKey =
   | "home"
@@ -56,16 +52,15 @@ type Item = {
 };
 
 type Room = {
-  background: string;
   key: RoomKey;
   name: string;
 };
 
 const rooms: Record<RoomKey, Room> = {
-  living: { background: roomLiving, key: "living", name: "Living Room" },
-  kitchen: { background: roomKitchen, key: "kitchen", name: "Kitchen" },
-  bedroom: { background: roomBedroom, key: "bedroom", name: "Bedroom" },
-  bathroom: { background: roomBathroom, key: "bathroom", name: "Bathroom" },
+  living: { key: "living", name: "Living Room" },
+  kitchen: { key: "kitchen", name: "Kitchen" },
+  bedroom: { key: "bedroom", name: "Bedroom" },
+  bathroom: { key: "bathroom", name: "Bathroom" },
 };
 
 const roomLinks: Record<RoomKey, RoomKey[]> = {
@@ -189,7 +184,7 @@ function GoBagSimulator({
   function startGame() {
     resetGame();
     setScreen("play");
-    setMessage("ENTERING: LIVING ROOM. CLICK ITEMS TO ADD THEM TO YOUR BAG.");
+    setMessage("ENTERING: LIVING ROOM. LOCATE THE GO-BAG FIRST. ROOM PATHS CAN TAKE YOU TO THE BEDROOM.");
   }
 
   function enterRoom(nextRoom: RoomKey) {
@@ -198,6 +193,11 @@ function GoBagSimulator({
   }
 
   function collectItem(item: Item) {
+    if (item.id !== "bag" && !collectedSet.has("bag")) {
+      setMessage("GO-BAG REQUIRED. FIND THE GO-BAG FIRST, THEN RETURN FOR THIS ITEM.");
+      return;
+    }
+
     setCollected((current) => (current.includes(item.id) ? current : [...current, item.id]));
     setMessage(`${item.label.toUpperCase()} ADDED TO BAG. SYSTEM CHECK UPDATED.`);
   }
@@ -228,6 +228,7 @@ function GoBagSimulator({
         <h1>OREGON TRAIL MODE</h1>
         <ul className="simulator-list">
           <li>Choose a room, then click items to add them to your Go-Bag.</li>
+          <li>Find the Go-Bag first. Other items can be packed after the bag is collected.</li>
           <li>Collected items appear in the inventory panel on the right side of the room screen.</li>
           <li>Each action updates the system comms in the COMMAND CENTER.</li>
           <li>The simulator keeps this session temporary and browser-only.</li>
@@ -301,7 +302,8 @@ function GoBagSimulator({
       ) : (
         <>
           <div className="game-stage" aria-label={`${currentRoom.name} game scene`}>
-            <div className={`room-floor ${room}`} style={{ backgroundImage: `url(${currentRoom.background})` }}>
+            <div className={`room-floor ${room}`}>
+              <RoomBackdrop room={room} />
               {roomItems.map((item) => (
                 <button
                   aria-label={`Add ${item.label} to Go-Bag`}
@@ -330,6 +332,61 @@ function GoBagSimulator({
         </>
       )}
     </section>
+  );
+}
+
+function RoomBackdrop({ room }: { room: RoomKey }) {
+  return (
+    <div className="room-backdrop" aria-hidden="true">
+      <div className="room-ceiling" />
+      <div className="room-wall" />
+      <div className="room-floor-grid" />
+      {room === "living" ? (
+        <>
+          <span className="pixel-window living-window" />
+          <span className="pixel-couch" />
+          <span className="pixel-chair" />
+          <span className="pixel-table" />
+          <span className="pixel-tv" />
+          <span className="pixel-lamp" />
+          <span className="pixel-plant living-plant" />
+          <span className="pixel-door" />
+        </>
+      ) : null}
+      {room === "bedroom" ? (
+        <>
+          <span className="pixel-window bedroom-window" />
+          <span className="pixel-bed" />
+          <span className="pixel-nightstand" />
+          <span className="pixel-dresser" />
+          <span className="pixel-closet" />
+          <span className="pixel-rug bedroom-rug" />
+          <span className="pixel-shelf bedroom-shelf" />
+        </>
+      ) : null}
+      {room === "bathroom" ? (
+        <>
+          <span className="pixel-mirror" />
+          <span className="pixel-sink" />
+          <span className="pixel-toilet" />
+          <span className="pixel-tub" />
+          <span className="pixel-cabinet" />
+          <span className="pixel-towel" />
+          <span className="pixel-rug bathroom-rug" />
+        </>
+      ) : null}
+      {room === "kitchen" ? (
+        <>
+          <span className="pixel-fridge" />
+          <span className="pixel-counter" />
+          <span className="pixel-stove" />
+          <span className="pixel-sink-kitchen" />
+          <span className="pixel-table-kitchen" />
+          <span className="pixel-window kitchen-window" />
+          <span className="pixel-shelf kitchen-shelf" />
+        </>
+      ) : null}
+    </div>
   );
 }
 
