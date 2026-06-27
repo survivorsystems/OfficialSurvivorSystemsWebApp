@@ -11,6 +11,10 @@ import snack from "./assets/game/items/snack.svg";
 import toiletryBag from "./assets/game/items/toiletry-bag.svg";
 import wallet from "./assets/game/items/wallet.svg";
 import waterBottle from "./assets/game/items/water-bottle.svg";
+import bathroomRoom from "./assets/game/room-bathroom.png";
+import bedroomRoom from "./assets/game/room-bedroom.png";
+import kitchenRoom from "./assets/game/room-kitchen.png";
+import livingRoom from "./assets/game/room-living.png";
 
 type ModuleKey =
   | "home"
@@ -52,15 +56,16 @@ type Item = {
 };
 
 type Room = {
+  background: string;
   key: RoomKey;
   name: string;
 };
 
 const rooms: Record<RoomKey, Room> = {
-  living: { key: "living", name: "Living Room" },
-  kitchen: { key: "kitchen", name: "Kitchen" },
-  bedroom: { key: "bedroom", name: "Bedroom" },
-  bathroom: { key: "bathroom", name: "Bathroom" },
+  living: { background: livingRoom, key: "living", name: "Living Room" },
+  kitchen: { background: kitchenRoom, key: "kitchen", name: "Kitchen" },
+  bedroom: { background: bedroomRoom, key: "bedroom", name: "Bedroom" },
+  bathroom: { background: bathroomRoom, key: "bathroom", name: "Bathroom" },
 };
 
 const roomLinks: Record<RoomKey, RoomKey[]> = {
@@ -149,6 +154,7 @@ function GoBagSimulator({
   const collectedSet = useMemo(() => new Set(collected), [collected]);
   const currentRoom = rooms[room];
   const requiredCollected = requiredItemIds.filter((id) => collectedSet.has(id)).length;
+  const isPacked = requiredCollected === requiredItemIds.length;
 
   useEffect(() => {
     onControlPanelChange({
@@ -164,11 +170,10 @@ function GoBagSimulator({
   }, [collectedSet, message, onControlPanelChange, screen]);
 
   useEffect(() => {
-    if (requiredCollected === requiredItemIds.length && screen === "play") {
-      setScreen("complete");
-      setMessage("GO-BAG READY. CORE ITEMS COLLECTED. SELECT I'M READY TO GO WHEN YOU WANT THE NEXT PLANNING PROMPT.");
+    if (isPacked && screen === "play") {
+      setMessage("GO-BAG READY. CORE ITEMS COLLECTED. SELECT FINISH SIMULATOR.");
     }
-  }, [requiredCollected, screen]);
+  }, [isPacked, screen]);
 
   function resetGame() {
     setRoom("bedroom");
@@ -303,7 +308,8 @@ function GoBagSimulator({
         <>
           <div className="game-stage" aria-label={`${currentRoom.name} game scene`}>
             <div className={`room-floor ${room}`}>
-              <RoomBackdrop room={room} />
+              <img className="room-backdrop" src={currentRoom.background} alt="" />
+              <div className="room-side-mask" aria-hidden="true" />
               {roomItems.map((item) => (
                 <button
                   aria-label={`Add ${item.label} to Go-Bag`}
@@ -314,7 +320,10 @@ function GoBagSimulator({
                   type="button"
                   onClick={() => collectItem(item)}
                 >
-                  <img src={item.image} alt="" />
+                  <span className="pickup-art">
+                    <img src={item.image} alt="" />
+                    <strong>{item.icon}</strong>
+                  </span>
                   <span>{item.label}</span>
                 </button>
               ))}
@@ -328,131 +337,15 @@ function GoBagSimulator({
                 Go To {rooms[linkedRoom].name}
               </button>
             ))}
+            {isPacked ? (
+              <button type="button" onClick={() => setScreen("complete")}>
+                Finish Simulator
+              </button>
+            ) : null}
           </div>
         </>
       )}
     </section>
-  );
-}
-
-function RoomBackdrop({ room }: { room: RoomKey }) {
-  return (
-    <svg className="room-backdrop" aria-hidden="true" viewBox="0 0 1024 682">
-      <defs>
-        <pattern id={`floor-grid-${room}`} width="48" height="48" patternUnits="userSpaceOnUse">
-          <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#00eaff" strokeOpacity="0.32" strokeWidth="2" />
-        </pattern>
-        <pattern id={`scan-${room}`} width="4" height="4" patternUnits="userSpaceOnUse">
-          <path d="M0 0H4" stroke="#fff6dd" strokeOpacity="0.045" />
-        </pattern>
-      </defs>
-      <rect x="0" y="0" width="1024" height="682" fill="#05070d" />
-      <rect x="22" y="22" width="808" height="420" fill="#07111a" stroke="#fff6dd" strokeWidth="8" />
-      <rect x="22" y="442" width="808" height="218" fill={`url(#floor-grid-${room})`} stroke="#fff6dd" strokeWidth="8" />
-      <rect x="22" y="22" width="808" height="638" fill={`url(#scan-${room})`} />
-      {room === "living" ? <LivingRoomArt /> : null}
-      {room === "bedroom" ? <BedroomArt /> : null}
-      {room === "bathroom" ? <BathroomArt /> : null}
-      {room === "kitchen" ? <KitchenArt /> : null}
-    </svg>
-  );
-}
-
-function LivingRoomArt() {
-  return (
-    <g>
-      <rect x="84" y="86" width="134" height="150" fill="#061827" stroke="#fff6dd" strokeWidth="8" />
-      <path d="M100 210h102v-52l-32 28-24-36-46 60Z" fill="#9f237e" />
-      <rect x="278" y="300" width="300" height="116" rx="10" fill="#007987" stroke="#05070d" strokeWidth="10" />
-      <rect x="300" y="322" width="78" height="56" fill="#9f237e" stroke="#05070d" strokeWidth="6" />
-      <rect x="460" y="322" width="76" height="56" fill="#fff6dd" stroke="#05070d" strokeWidth="6" />
-      <rect x="250" y="378" width="354" height="44" fill="#004c58" />
-      <rect x="110" y="328" width="118" height="130" rx="8" fill="#9f237e" stroke="#05070d" strokeWidth="10" />
-      <rect x="132" y="352" width="74" height="52" fill="#fff6dd" stroke="#05070d" strokeWidth="6" />
-      <rect x="340" y="456" width="210" height="70" fill="#007987" stroke="#fff6dd" strokeWidth="8" />
-      <rect x="666" y="250" width="122" height="122" fill="#061827" stroke="#00eaff" strokeWidth="10" />
-      <path d="M690 340l74-66M690 282l70 54" stroke="#fff6dd" strokeWidth="10" />
-      <rect x="690" y="382" width="78" height="28" fill="#fff6dd" />
-      <rect x="236" y="182" width="6" height="190" fill="#fff6dd" />
-      <path d="M205 176h68l-16-52h-36Z" fill="#fff6dd" stroke="#05070d" strokeWidth="6" />
-      <rect x="194" y="448" width="50" height="80" fill="#00a66f" />
-      <rect x="202" y="500" width="62" height="42" fill="#9f237e" stroke="#05070d" strokeWidth="6" />
-      <rect x="632" y="100" width="96" height="244" fill="#fff6dd" stroke="#05070d" strokeWidth="8" />
-      <circle cx="704" cy="230" r="7" fill="#05070d" />
-    </g>
-  );
-}
-
-function BedroomArt() {
-  return (
-    <g>
-      <rect x="82" y="82" width="142" height="152" fill="#061827" stroke="#fff6dd" strokeWidth="8" />
-      <path d="M100 216h104v-58l-34 28-24-38-46 68Z" fill="#9f237e" />
-      <rect x="268" y="286" width="340" height="154" rx="8" fill="#007987" stroke="#05070d" strokeWidth="10" />
-      <rect x="288" y="316" width="240" height="96" fill="#119eb0" />
-      <rect x="526" y="316" width="64" height="96" fill="#9f237e" />
-      <rect x="342" y="300" width="84" height="52" fill="#fff6dd" stroke="#05070d" strokeWidth="6" />
-      <rect x="158" y="350" width="94" height="88" fill="#007987" stroke="#fff6dd" strokeWidth="8" />
-      <rect x="172" y="382" width="66" height="12" fill="#05070d" />
-      <rect x="628" y="170" width="162" height="216" fill="#007987" stroke="#fff6dd" strokeWidth="8" />
-      <path d="M660 220h98M660 270h98M660 320h98" stroke="#05070d" strokeWidth="8" />
-      <circle cx="690" cy="246" r="6" fill="#fff6dd" />
-      <circle cx="728" cy="246" r="6" fill="#fff6dd" />
-      <rect x="770" y="86" width="64" height="296" fill="#005966" stroke="#fff6dd" strokeWidth="8" />
-      <path d="M802 104v260" stroke="#05070d" strokeWidth="6" />
-      <rect x="404" y="486" width="260" height="76" fill="#9f237e" stroke="#fff6dd" strokeWidth="8" />
-      <rect x="274" y="142" width="190" height="18" fill="#fff6dd" />
-      <rect x="318" y="92" width="92" height="38" fill="#9f237e" stroke="#05070d" strokeWidth="6" />
-    </g>
-  );
-}
-
-function BathroomArt() {
-  return (
-    <g>
-      <rect x="136" y="92" width="188" height="138" fill="#061827" stroke="#9f237e" strokeWidth="10" />
-      <path d="M156 210l136-90M170 124l96 74" stroke="#fff6dd" strokeOpacity="0.75" strokeWidth="6" />
-      <rect x="102" y="296" width="282" height="78" fill="#fff6dd" stroke="#05070d" strokeWidth="10" />
-      <ellipse cx="244" cy="334" rx="54" ry="22" fill="#061827" />
-      <path d="M232 292v-38h52" stroke="#fff6dd" strokeWidth="10" fill="none" />
-      <rect x="442" y="288" width="104" height="168" fill="#fff6dd" stroke="#05070d" strokeWidth="10" />
-      <rect x="464" y="250" width="84" height="70" fill="#fff6dd" stroke="#05070d" strokeWidth="10" />
-      <ellipse cx="494" cy="464" rx="78" ry="30" fill="#fff6dd" stroke="#05070d" strokeWidth="8" />
-      <rect x="618" y="218" width="190" height="210" fill="#fff6dd" stroke="#05070d" strokeWidth="10" />
-      <rect x="630" y="218" width="166" height="76" fill="#9f237e" />
-      <path d="M626 204h180" stroke="#fff6dd" strokeWidth="8" />
-      <path d="M744 170v64h54" stroke="#fff6dd" strokeWidth="8" fill="none" />
-      <rect x="392" y="108" width="128" height="156" fill="#007987" stroke="#fff6dd" strokeWidth="8" />
-      <path d="M418 142h76M418 178h76M418 214h76" stroke="#05070d" strokeWidth="8" />
-      <rect x="84" y="244" width="62" height="164" fill="#9f237e" stroke="#05070d" strokeWidth="8" />
-      <rect x="330" y="506" width="220" height="70" fill="#9f237e" stroke="#fff6dd" strokeWidth="8" />
-    </g>
-  );
-}
-
-function KitchenArt() {
-  return (
-    <g>
-      <rect x="72" y="96" width="122" height="306" fill="#fff6dd" stroke="#05070d" strokeWidth="10" />
-      <path d="M72 238h122M170 156v38M170 278v56" stroke="#05070d" strokeWidth="8" />
-      <rect x="238" y="124" width="372" height="90" fill="#007987" stroke="#05070d" strokeWidth="10" />
-      <path d="M300 124v90M392 124v90M506 124v90" stroke="#05070d" strokeWidth="8" />
-      <rect x="214" y="322" width="484" height="118" fill="#007987" stroke="#05070d" strokeWidth="10" />
-      <rect x="214" y="300" width="484" height="34" fill="#fff6dd" />
-      <rect x="356" y="270" width="122" height="170" fill="#fff6dd" stroke="#05070d" strokeWidth="10" />
-      <circle cx="386" cy="296" r="12" fill="#05070d" />
-      <circle cx="448" cy="296" r="12" fill="#05070d" />
-      <rect x="382" y="354" width="72" height="48" fill="#9f237e" />
-      <rect x="530" y="326" width="128" height="54" fill="#061827" stroke="#fff6dd" strokeWidth="8" />
-      <rect x="650" y="110" width="126" height="150" fill="#061827" stroke="#fff6dd" strokeWidth="8" />
-      <path d="M668 242h88v-54l-28 22-20-28-40 60Z" fill="#9f237e" />
-      <rect x="292" y="496" width="288" height="96" fill="#b0804f" stroke="#05070d" strokeWidth="10" />
-      <rect x="316" y="520" width="70" height="42" fill="#00eaff" stroke="#05070d" strokeWidth="6" />
-      <rect x="410" y="520" width="70" height="42" fill="#9f237e" stroke="#05070d" strokeWidth="6" />
-      <rect x="594" y="166" width="142" height="18" fill="#fff6dd" />
-      <circle cx="616" cy="210" r="16" fill="#00a66f" />
-      <circle cx="706" cy="210" r="16" fill="#9f237e" />
-    </g>
   );
 }
 
