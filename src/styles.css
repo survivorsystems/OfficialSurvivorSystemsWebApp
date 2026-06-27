@@ -522,7 +522,7 @@ button:disabled {
 }
 
 .terminal-content {
-  max-height: calc(100vh - 330px);
+  max-height: calc(100vh - 290px);
   overflow: auto;
   padding: 22px;
   position: relative;
@@ -539,10 +539,12 @@ button:disabled {
     inset 0 1px 0 rgba(255, 255, 255, 0.04),
     0 -12px 28px rgba(0, 0, 0, 0.42);
   display: grid;
-  gap: 12px;
-  grid-template-columns: minmax(170px, 0.28fr) 112px minmax(0, 1fr);
-  min-height: 124px;
-  padding: 10px 18px;
+  gap: 10px;
+  grid-template-columns: minmax(170px, 0.28fr) minmax(70px, 0.9in) minmax(0, 1fr);
+  max-height: 2.5in;
+  min-height: 0;
+  overflow: hidden;
+  padding: 8px 16px;
   position: relative;
   z-index: 1;
 }
@@ -575,9 +577,11 @@ button:disabled {
     inset 0 0 12px rgba(0, 0, 0, 0.8),
     0 0 16px rgba(0, 234, 255, 0.18);
   display: block;
-  height: 92px;
+  height: min(1in, 92px);
+  max-height: 1in;
+  max-width: 1.05in;
   object-fit: cover;
-  width: 104px;
+  width: auto;
 }
 
 .command-terminal {
@@ -804,11 +808,15 @@ button:disabled {
 
 .compact-gauges .analog-gauge {
   border-radius: 5px;
-  padding: 8px;
+  max-height: 1in;
+  min-height: 0;
+  overflow: hidden;
+  padding: 5px;
 }
 
 .compact-gauges .gauge-window {
   aspect-ratio: 2.1;
+  height: 0.42in;
 }
 
 .compact-gauges .gauge-needle {
@@ -828,14 +836,15 @@ button:disabled {
 }
 
 .compact-gauges .analog-gauge h3 {
-  font-size: clamp(0.66rem, 0.9vw, 0.78rem);
+  font-size: 0.58rem;
   letter-spacing: 0.05em;
-  margin: 6px 0 4px;
+  margin: 3px 0 2px;
 }
 
 .compact-gauges .analog-gauge p {
-  font-size: 0.58rem;
+  font-size: 0.5rem;
   letter-spacing: 0.04em;
+  line-height: 1.1;
 }
 
 .compact-gauges .gauge-notice {
@@ -960,7 +969,7 @@ button:disabled {
 }
 
 .simulator-hud button,
-.game-controls button {
+.room-nav button {
   background: rgba(0, 234, 255, 0.08);
   border: 1px solid var(--cyan);
   border-radius: 4px;
@@ -986,48 +995,17 @@ button:disabled {
   outline: 0;
   overflow: hidden;
   position: relative;
-  width: 640px;
+  width: min(100%, 860px);
 }
 
 .room-floor {
-  aspect-ratio: 64 / 42;
-  background:
-    linear-gradient(rgba(0, 234, 255, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 79, 216, 0.045) 1px, transparent 1px),
-    radial-gradient(circle at 50% 50%, rgba(0, 234, 255, 0.08), transparent 52%),
-    #05070d;
-  background-size: 40px 40px, 40px 40px, auto, auto;
+  aspect-ratio: 3 / 2;
+  background-color: #05070d;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   position: relative;
   width: 100%;
-}
-
-.room-floor.kitchen {
-  background-color: #06100f;
-}
-
-.room-floor.bedroom {
-  background-color: #090713;
-}
-
-.room-floor.bathroom {
-  background-color: #050d14;
-}
-
-.furniture {
-  align-items: center;
-  background: rgba(255, 79, 216, 0.1);
-  border: 1px solid rgba(255, 79, 216, 0.36);
-  border-radius: 4px;
-  box-shadow: inset 0 0 14px rgba(0, 0, 0, 0.86);
-  color: rgba(255, 208, 244, 0.72);
-  display: flex;
-  font-size: 0.62rem;
-  font-weight: 900;
-  justify-content: center;
-  letter-spacing: 0.08em;
-  position: absolute;
-  text-align: center;
-  text-transform: uppercase;
 }
 
 .collectible {
@@ -1037,76 +1015,38 @@ button:disabled {
   border-radius: 999px;
   box-shadow: var(--shadow-cyan);
   color: var(--cyan);
+  cursor: pointer;
   display: flex;
   font-size: 0.6rem;
   font-weight: 900;
-  height: 34px;
+  height: clamp(34px, 5.2vw, 48px);
   justify-content: center;
   position: absolute;
   text-shadow: var(--shadow-cyan);
   transform: translate(-50%, -50%);
-  width: 34px;
+  transition: border-color 140ms ease, box-shadow 140ms ease, transform 140ms ease;
+  width: clamp(34px, 5.2vw, 48px);
 }
 
-.collectible.nearby {
+.collectible:hover,
+.collectible:focus-visible,
+.collectible.required {
   border-color: var(--pink);
   box-shadow: var(--shadow-pink);
   color: var(--hot-text);
 }
 
-.player-sprite {
-  align-items: center;
-  background:
-    radial-gradient(circle at 50% 18%, var(--hot-text) 0 5px, transparent 6px),
-    linear-gradient(180deg, var(--cyan), var(--purple));
-  border: 1px solid var(--pink);
-  border-radius: 999px 999px 8px 8px;
-  box-shadow: var(--shadow-pink), var(--shadow-cyan);
-  display: flex;
-  height: 34px;
-  justify-content: center;
-  position: absolute;
-  transition: left 80ms linear, top 80ms linear, transform 80ms linear;
-  width: 34px;
+.collectible.optional {
+  border-color: var(--cyan);
+  color: var(--cyan);
 }
 
-.player-sprite.left {
-  transform: scaleX(-1);
-}
-
-.player-sprite span {
-  background: var(--pink);
-  border-radius: 999px;
-  height: 9px;
-  width: 18px;
-}
-
-.door-labels {
-  bottom: 8px;
-  color: var(--lime);
-  font-size: 0.68rem;
-  font-weight: 900;
-  left: 10px;
-  letter-spacing: 0.12em;
-  position: absolute;
-  text-shadow: 0 0 10px rgba(108, 255, 98, 0.55);
-}
-
-.interaction-feed,
 .inventory-panel,
 .pause-panel {
   background: rgba(0, 0, 0, 0.62);
   border: 1px solid rgba(0, 234, 255, 0.24);
   border-radius: 6px;
   padding: 12px;
-}
-
-.interaction-feed p {
-  color: var(--lime);
-  font-weight: 900;
-  margin: 0;
-  text-shadow: 0 0 10px rgba(108, 255, 98, 0.55);
-  text-transform: uppercase;
 }
 
 .inventory-panel h2 {
@@ -1143,10 +1083,25 @@ button:disabled {
   color: var(--hot-text);
 }
 
-.game-controls {
-  display: grid;
+.room-nav {
+  align-items: center;
+  background: rgba(0, 0, 0, 0.62);
+  border: 1px solid rgba(255, 79, 216, 0.24);
+  border-radius: 6px;
+  display: flex;
+  flex-wrap: wrap;
   gap: 8px;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  padding: 10px;
+}
+
+.room-nav span {
+  color: var(--pink);
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  margin-right: 4px;
+  text-shadow: var(--shadow-pink);
+  text-transform: uppercase;
 }
 
 .pause-panel {
@@ -1851,8 +1806,9 @@ button:disabled {
   }
 
   .control-panel > img {
-    height: 80px;
-    width: 88px;
+    height: min(0.9in, 80px);
+    max-height: 1in;
+    width: auto;
   }
 
   .hero,
@@ -1871,8 +1827,8 @@ button:disabled {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .game-controls {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+  .room-nav {
+    align-items: stretch;
   }
 }
 
@@ -1963,11 +1919,14 @@ button:disabled {
 
   .control-panel {
     grid-template-columns: 1fr;
+    max-height: none;
   }
 
   .control-panel > img {
-    height: 86px;
-    width: 100%;
+    height: min(1in, 86px);
+    justify-self: start;
+    max-height: 1in;
+    width: auto;
   }
 
   .compact-gauges .gauge-row {
@@ -1987,15 +1946,12 @@ button:disabled {
     width: 86px;
   }
 
-  .game-stage {
-    overflow: auto;
-  }
-
   .room-floor {
-    min-width: 640px;
+    min-width: 0;
   }
 
-  .game-controls {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .room-nav {
+    align-items: stretch;
+    flex-direction: column;
   }
 }

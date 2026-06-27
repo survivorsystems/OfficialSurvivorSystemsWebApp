@@ -1952,7 +1952,7 @@ export function App() {
   }, []);
 
   useEffect(() => {
-    if (activeModule !== "am-i-crazy" && activeModule !== "planning") {
+    if (activeModule !== "am-i-crazy" && activeModule !== "planning" && activeModule !== "go-bag-prep") {
       setControlPanel(defaultControlPanel);
     }
   }, [activeModule]);
@@ -1994,7 +1994,7 @@ export function App() {
       ) : activeModule === "am-i-crazy" ? (
         <AmICrazyModule onControlPanelChange={updateControlPanel} onNavigate={navigate} />
       ) : activeModule === "go-bag-prep" ? (
-        <GoBagSimulator onNavigate={navigate} onQuickExit={leaveSite} />
+        <GoBagSimulator onControlPanelChange={updateControlPanel} onNavigate={navigate} onQuickExit={leaveSite} />
       ) : activeModule === "planning" ? (
         <ExitPlanningModule onControlPanelChange={updateControlPanel} onNavigate={navigate} />
       ) : (
