@@ -1,4 +1,16 @@
 import { useEffect, useMemo, useState } from "react";
+import goBag from "./assets/game/items/go-bag.svg";
+import hairBrush from "./assets/game/items/hair-brush.svg";
+import clothesBag from "./assets/game/items/clothes-bag.svg";
+import importantDocuments from "./assets/game/items/important-documents.svg";
+import keys from "./assets/game/items/keys.svg";
+import medicineBottle from "./assets/game/items/medicine-bottle.svg";
+import phoneCharger from "./assets/game/items/phone-charger.svg";
+import phone from "./assets/game/items/phone.svg";
+import snack from "./assets/game/items/snack.svg";
+import toiletryBag from "./assets/game/items/toiletry-bag.svg";
+import wallet from "./assets/game/items/wallet.svg";
+import waterBottle from "./assets/game/items/water-bottle.svg";
 import roomBathroom from "./assets/game/room-bathroom.png";
 import roomBedroom from "./assets/game/room-bedroom.png";
 import roomKitchen from "./assets/game/room-kitchen.png";
@@ -34,6 +46,7 @@ type RoomKey = "living" | "kitchen" | "bedroom" | "bathroom";
 type Item = {
   id: string;
   icon: string;
+  image: string;
   label: string;
   required: boolean;
   room: RoomKey;
@@ -63,39 +76,37 @@ const roomLinks: Record<RoomKey, RoomKey[]> = {
 };
 
 const items: Item[] = [
-  { id: "bag", label: "Go-Bag", icon: "BAG", required: true, room: "bedroom", size: "large", x: 16, y: 70 },
-  { id: "medication", label: "Medication", icon: "MED", required: true, room: "bathroom", x: 38, y: 69 },
-  { id: "charger", label: "Phone Charger", icon: "CHG", required: true, room: "living", x: 74, y: 36 },
-  { id: "phone", label: "Phone", icon: "PHN", required: true, room: "bedroom", x: 19, y: 38 },
-  { id: "keys", label: "Keys", icon: "KEY", required: true, room: "living", x: 44, y: 55 },
-  { id: "identification", label: "Identification", icon: "ID", required: true, room: "bedroom", size: "medium", x: 42, y: 72 },
-  { id: "documents", label: "Documents Folder", icon: "DOC", required: true, room: "bedroom", size: "medium", x: 48, y: 72 },
-  { id: "clothes", label: "Change Of Clothes", icon: "CLO", required: true, room: "bedroom", size: "large", x: 68, y: 70 },
-  { id: "hygiene", label: "Hygiene Supplies", icon: "HYG", required: true, room: "bathroom", x: 74, y: 49 },
-  { id: "water", label: "Water Bottle", icon: "H2O", required: true, room: "kitchen", size: "medium", x: 24, y: 57 },
-  { id: "wallet", label: "Wallet Or Cash", icon: "CASH", required: true, room: "living", x: 42, y: 58 },
-  { id: "glasses", label: "Glasses Or Medical Item", icon: "MED2", required: false, room: "bathroom", x: 30, y: 41 },
-  { id: "pet", label: "Pet Supplies", icon: "PET", required: false, room: "kitchen", x: 31, y: 57 },
-  { id: "child", label: "Child Supplies", icon: "KID", required: false, room: "living", x: 35, y: 74 },
+  { id: "keys", label: "Keys", icon: "KEY", image: keys, required: true, room: "living", x: 43, y: 61 },
+  { id: "wallet", label: "Wallet", icon: "CASH", image: wallet, required: true, room: "living", x: 51, y: 58 },
+  { id: "phone", label: "Phone", icon: "PHN", image: phone, required: true, room: "living", x: 61, y: 61 },
+  { id: "bag", label: "Go-Bag", icon: "BAG", image: goBag, required: true, room: "bedroom", size: "large", x: 16, y: 70 },
+  {
+    id: "documents",
+    label: "Important Documents",
+    icon: "DOC",
+    image: importantDocuments,
+    required: true,
+    room: "bedroom",
+    size: "medium",
+    x: 46,
+    y: 72,
+  },
+  { id: "charger", label: "Phone Charger", icon: "CHG", image: phoneCharger, required: true, room: "bedroom", x: 62, y: 69 },
+  { id: "clothes", label: "Bag Of Clothes", icon: "CLO", image: clothesBag, required: true, room: "bedroom", size: "large", x: 70, y: 70 },
+  { id: "medication", label: "Medicine Bottle", icon: "MED", image: medicineBottle, required: true, room: "bathroom", x: 34, y: 72 },
+  { id: "brush", label: "Hair Brush", icon: "BRU", image: hairBrush, required: true, room: "bathroom", x: 45, y: 72 },
+  { id: "toiletry", label: "Toiletry Bag", icon: "KIT", image: toiletryBag, required: true, room: "bathroom", size: "medium", x: 74, y: 56 },
+  { id: "water", label: "Water Bottle", icon: "H2O", image: waterBottle, required: true, room: "kitchen", size: "medium", x: 24, y: 57 },
+  { id: "snack", label: "Snack", icon: "SNK", image: snack, required: true, room: "kitchen", x: 36, y: 59 },
 ];
 
 const requiredItemIds = items.filter((item) => item.required).map((item) => item.id);
-const inventorySlots = [
-  { x: 83.1, y: 18.9 },
-  { x: 88.3, y: 18.9 },
-  { x: 93.5, y: 18.9 },
-  { x: 83.1, y: 28.4 },
-  { x: 88.3, y: 28.4 },
-  { x: 93.5, y: 28.4 },
-  { x: 83.1, y: 38 },
-  { x: 88.3, y: 38 },
-  { x: 93.5, y: 38 },
-];
+const inventorySlots = Array.from({ length: 12 }, (_, index) => index);
 
 function gameGaugeValues(collected: Set<string>, screen: string): GaugeValue[] {
   const requiredCollected = requiredItemIds.filter((id) => collected.has(id)).length;
   const coreProgress = Math.round((requiredCollected / requiredItemIds.length) * 100);
-  const bagProgress = collected.has("bag") ? 100 : 0;
+  const bagProgress = Math.round((collected.size / items.length) * 100);
   const readyProgress = screen === "complete" ? 100 : coreProgress >= 100 ? 92 : Math.max(12, coreProgress - 8);
 
   return [
@@ -112,7 +123,7 @@ function gameGaugeValues(collected: Set<string>, screen: string): GaugeValue[] {
       value: bagProgress,
       lowLabel: "NEEDED",
       highLabel: "FOUND",
-      state: collected.has("bag") ? "GO-BAG FOUND" : "LOCATE BAG FIRST",
+      state: `${collected.size}/${items.length} PACKED`,
       tone: "pink",
     },
     {
@@ -149,7 +160,7 @@ function GoBagSimulator({
       emphasis:
         screen === "complete"
           ? "READY SIGNAL"
-          : collectedSet.has("bag")
+          : collectedSet.size > 0
             ? "CORE ITEMS"
             : "BAG STATUS",
       gauges: gameGaugeValues(collectedSet, screen),
@@ -187,11 +198,6 @@ function GoBagSimulator({
   }
 
   function collectItem(item: Item) {
-    if (item.id !== "bag" && !collectedSet.has("bag")) {
-      setMessage("GO-BAG REQUIRED. LOCATE A BAG BEFORE COLLECTING ADDITIONAL ITEMS.");
-      return;
-    }
-
     setCollected((current) => (current.includes(item.id) ? current : [...current, item.id]));
     setMessage(`${item.label.toUpperCase()} ADDED TO BAG. SYSTEM CHECK UPDATED.`);
   }
@@ -222,7 +228,7 @@ function GoBagSimulator({
         <h1>OREGON TRAIL MODE</h1>
         <ul className="simulator-list">
           <li>Choose a room, then click items to add them to your Go-Bag.</li>
-          <li>Find the Go-Bag before collecting additional items.</li>
+          <li>Collected items appear in the inventory panel on the right side of the room screen.</li>
           <li>Each action updates the system comms in the COMMAND CENTER.</li>
           <li>The simulator keeps this session temporary and browser-only.</li>
         </ul>
@@ -248,7 +254,10 @@ function GoBagSimulator({
         </p>
         <div className="inventory-review">
           {collectedItems.map((item) => (
-            <span key={item.id}>{item.icon} {item.label}</span>
+            <span key={item.id}>
+              <img src={item.image} alt="" />
+              {item.label}
+            </span>
           ))}
         </div>
         <div className="terminal-actions denial-actions">
@@ -303,7 +312,7 @@ function GoBagSimulator({
                   type="button"
                   onClick={() => collectItem(item)}
                 >
-                  <strong>{item.icon}</strong>
+                  <img src={item.image} alt="" />
                   <span>{item.label}</span>
                 </button>
               ))}
@@ -354,29 +363,24 @@ function SceneInventory({ collectedItems }: { collectedItems: Item[] }) {
 
   return (
     <div className="scene-inventory" aria-label="Items added to Go-Bag">
-      {inventorySlots.map((slot, index) => (
-        <span
-          aria-hidden="true"
-          className="scene-inventory-slot"
-          key={`${slot.x}-${slot.y}-${index}`}
-          style={{ left: `${slot.x}%`, top: `${slot.y}%` }}
-        />
-      ))}
-      {visibleItems.map((item, index) => {
-        const slot = inventorySlots[index];
+      <span className="scene-inventory-title">Inventory</span>
+      {inventorySlots.map((slot) => {
+        const item = visibleItems[slot];
+
         return (
           <span
-            className="scene-inventory-item"
-            key={item.id}
-            style={{ left: `${slot.x}%`, top: `${slot.y}%` }}
-            title={item.label}
+            aria-label={item?.label}
+            aria-hidden={!item}
+            className={item ? "scene-inventory-slot packed" : "scene-inventory-slot"}
+            key={slot}
+            title={item?.label}
           >
-            {item.icon}
+            {item ? <img src={item.image} alt="" /> : null}
           </span>
         );
       })}
       {overflowCount > 0 && (
-        <span className="scene-inventory-overflow" style={{ left: "93.5%", top: "38%" }}>
+        <span className="scene-inventory-overflow">
           +{overflowCount}
         </span>
       )}
