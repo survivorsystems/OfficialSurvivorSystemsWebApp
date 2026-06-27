@@ -1,10 +1,4 @@
-import { type CSSProperties, useEffect, useMemo, useState } from "react";
-import characterFemaleOne from "./assets/game/character-female-1.png";
-import characterMaleOne from "./assets/game/character-male-1.png";
-import characterNeonFemaleOne from "./assets/game/character-neon-female-1.png";
-import characterNeonFemaleTwo from "./assets/game/character-neon-female-2.png";
-import characterNeonMaleOne from "./assets/game/character-neon-male-1.png";
-import characterNeonMaleTwo from "./assets/game/character-neon-male-2.png";
+import { useEffect, useMemo, useState } from "react";
 import roomBathroom from "./assets/game/room-bathroom.png";
 import roomBedroom from "./assets/game/room-bedroom.png";
 import roomKitchen from "./assets/game/room-kitchen.png";
@@ -35,12 +29,6 @@ type ControlPanelState = {
   notice: string;
 };
 
-type Character = {
-  id: string;
-  label: string;
-  image: string;
-};
-
 type RoomKey = "living" | "kitchen" | "bedroom" | "bathroom";
 
 type Item = {
@@ -59,15 +47,6 @@ type Room = {
   key: RoomKey;
   name: string;
 };
-
-const characters: Character[] = [
-  { id: "neon-male-1", label: "Runner 01", image: characterNeonMaleOne },
-  { id: "neon-female-1", label: "Runner 02", image: characterNeonFemaleOne },
-  { id: "neon-female-2", label: "Runner 03", image: characterNeonFemaleTwo },
-  { id: "neon-male-2", label: "Runner 04", image: characterNeonMaleTwo },
-  { id: "male-1", label: "Runner 05", image: characterMaleOne },
-  { id: "female-1", label: "Runner 06", image: characterFemaleOne },
-];
 
 const rooms: Record<RoomKey, Room> = {
   living: { background: roomLiving, key: "living", name: "Living Room" },
@@ -156,8 +135,7 @@ function GoBagSimulator({
   onNavigate: (module: ModuleKey, path: string) => void;
   onQuickExit: () => void;
 }) {
-  const [screen, setScreen] = useState<"intro" | "how" | "select" | "loading" | "play" | "pause" | "complete" | "review">("intro");
-  const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null);
+  const [screen, setScreen] = useState<"intro" | "how" | "play" | "pause" | "complete" | "review">("intro");
   const [room, setRoom] = useState<RoomKey>("living");
   const [collected, setCollected] = useState<string[]>([]);
   const [message, setMessage] = useState("OBJECTIVE: FIND THE GO-BAG.");
@@ -165,7 +143,6 @@ function GoBagSimulator({
   const collectedSet = useMemo(() => new Set(collected), [collected]);
   const currentRoom = rooms[room];
   const requiredCollected = requiredItemIds.filter((id) => collectedSet.has(id)).length;
-  const selectedPortrait = selectedCharacter?.image ?? characters[0].image;
 
   useEffect(() => {
     onControlPanelChange({
@@ -195,18 +172,13 @@ function GoBagSimulator({
 
   function clearAndExit() {
     resetGame();
-    setSelectedCharacter(null);
     onQuickExit();
   }
 
-  function confirmCharacter() {
-    if (!selectedCharacter) return;
-    setScreen("loading");
-    window.setTimeout(() => {
-      resetGame();
-      setScreen("play");
-      setMessage("CHARACTER SELECTED. ENTERING: LIVING ROOM. CLICK ITEMS TO ADD THEM TO YOUR BAG.");
-    }, 520);
+  function startGame() {
+    resetGame();
+    setScreen("play");
+    setMessage("ENTERING: LIVING ROOM. CLICK ITEMS TO ADD THEM TO YOUR BAG.");
   }
 
   function enterRoom(nextRoom: RoomKey) {
@@ -234,7 +206,7 @@ function GoBagSimulator({
         <h1>OBJECTIVE: GATHER ESSENTIAL ITEMS.</h1>
         <p>SESSION DATA: TEMPORARY. NO INFORMATION WILL BE SAVED.</p>
         <div className="terminal-actions denial-actions">
-          <button type="button" onClick={() => setScreen("select")}>Start Simulator</button>
+          <button type="button" onClick={startGame}>Start Simulator</button>
           <button type="button" onClick={() => setScreen("how")}>How To Play</button>
           <button type="button" onClick={() => onNavigate("planning", "/planning")}>Back To Exit Planning</button>
           <button type="button" onClick={clearAndExit}>Quick Exit</button>
@@ -255,49 +227,9 @@ function GoBagSimulator({
           <li>The simulator keeps this session temporary and browser-only.</li>
         </ul>
         <div className="terminal-actions compact-actions">
-          <button type="button" onClick={() => setScreen("select")}>Choose Character</button>
+          <button type="button" onClick={startGame}>Start Simulator</button>
           <button type="button" onClick={() => setScreen("intro")}>Go Back</button>
           <button type="button" onClick={clearAndExit}>Quick Exit</button>
-        </div>
-      </section>
-    );
-  }
-
-  if (screen === "select") {
-    return (
-      <section className="simulator-shell">
-        <div className="terminal-label">CHARACTER SELECT</div>
-        <h1>SELECT RUNNER</h1>
-        <div className="character-grid">
-          {characters.map((character) => (
-            <button
-              aria-pressed={selectedCharacter?.id === character.id}
-              className={selectedCharacter?.id === character.id ? "character-card selected" : "character-card"}
-              key={character.id}
-              type="button"
-              onClick={() => setSelectedCharacter(character)}
-            >
-              <img src={character.image} alt="" />
-              <span>{character.label}</span>
-            </button>
-          ))}
-        </div>
-        <div className="terminal-actions compact-actions">
-          <button disabled={!selectedCharacter} type="button" onClick={confirmCharacter}>Select Character</button>
-          <button type="button" onClick={() => setScreen("intro")}>Back</button>
-          <button type="button" onClick={clearAndExit}>Quick Exit</button>
-        </div>
-      </section>
-    );
-  }
-
-  if (screen === "loading") {
-    return (
-      <section className="simulator-shell">
-        <div className="module-loading">
-          <p>CHARACTER SELECTED.</p>
-          <p>LOADING HOME ENVIRONMENT...</p>
-          <p>SESSION MEMORY ONLY</p>
         </div>
       </section>
     );
@@ -345,7 +277,6 @@ function GoBagSimulator({
         collectedCount={collected.length}
         onPause={() => setScreen("pause")}
         onQuickExit={clearAndExit}
-        portrait={selectedPortrait}
         roomName={currentRoom.name}
       />
 
@@ -372,11 +303,11 @@ function GoBagSimulator({
                   type="button"
                   onClick={() => collectItem(item)}
                 >
+                  <strong>{item.icon}</strong>
                   <span>{item.label}</span>
                 </button>
               ))}
               <SceneInventory collectedItems={collectedItems} />
-              <SceneStatus collectedCount={collected.length} requiredCollected={requiredCollected} />
             </div>
           </div>
           <div className="room-nav" aria-label="Room navigation">
@@ -397,18 +328,15 @@ function SimulatorHud({
   collectedCount,
   onPause,
   onQuickExit,
-  portrait,
   roomName,
 }: {
   collectedCount: number;
   onPause: () => void;
   onQuickExit: () => void;
-  portrait: string;
   roomName: string;
 }) {
   return (
     <header className="simulator-hud">
-      <img src={portrait} alt="" />
       <div>
         <span>ROOM: {roomName.toUpperCase()}</span>
         <span>ITEMS: {collectedCount} / {items.length}</span>
@@ -452,26 +380,6 @@ function SceneInventory({ collectedItems }: { collectedItems: Item[] }) {
           +{overflowCount}
         </span>
       )}
-    </div>
-  );
-}
-
-function SceneStatus({
-  collectedCount,
-  requiredCollected,
-}: {
-  collectedCount: number;
-  requiredCollected: number;
-}) {
-  const requiredPercent = Math.round((requiredCollected / requiredItemIds.length) * 100);
-  const bagPercent = Math.round((collectedCount / items.length) * 100);
-
-  return (
-    <div className="scene-status" aria-hidden="true">
-      <span className="scene-status-bar time" style={{ "--status-fill": "72%" } as CSSProperties} />
-      <span className="scene-status-bar bag" style={{ "--status-fill": `${bagPercent}%` } as CSSProperties} />
-      <span className="scene-status-bar energy" style={{ "--status-fill": "64%" } as CSSProperties} />
-      <span className="scene-status-bar options" style={{ "--status-fill": `${requiredPercent}%` } as CSSProperties} />
     </div>
   );
 }
