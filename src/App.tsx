@@ -98,6 +98,22 @@ type ExitQuestion = {
   answers: ExitAnswer[];
 };
 
+type LeavingLadderRung = {
+  id: string;
+  title: string;
+  premise: string;
+  systemResponse: string;
+  suggestedAction: string;
+  effect: {
+    clarity: number;
+    preparedness: number;
+    reality: number;
+    options: number;
+    emphasis: string;
+    notice: string;
+  };
+};
+
 const modulePages: Record<
   Exclude<ModuleKey, "home" | "am-i-crazy" | "go-bag-prep">,
   {
@@ -811,6 +827,89 @@ const privateBrowsingHelp = [
   "Private or Incognito windows can reduce some local browser history on this device.",
   "They do not hide activity from monitoring software, shared accounts, phone plans, networks, routers, backups, or someone with device access.",
   "If it is safe, open a private window from your browser menu before continuing.",
+];
+
+const leavingLadderRungs: LeavingLadderRung[] = [
+  {
+    id: "name-it",
+    title: "Name What Is Happening",
+    premise: "You do not have to call it abuse to notice it is costing you.",
+    systemResponse:
+      "SYSTEM:\nNaming the pattern is not betrayal. It is inventory. If your peace, sleep, money, movement, friendships, body, or sense of reality keeps shrinking around one person's reactions, something is asking to be taken seriously.",
+    suggestedAction: "Write one sentence somewhere private: This relationship is costing me ______.",
+    effect: {
+      clarity: 16,
+      preparedness: 4,
+      reality: 10,
+      options: 4,
+      emphasis: "CLARITY",
+      notice: "PATTERN NAMED. CLARITY SIGNAL INCREASED.",
+    },
+  },
+  {
+    id: "safe-hour",
+    title: "Imagine One Safe Hour",
+    premise: "Before you picture a whole new life, picture one hour with less control in it.",
+    systemResponse:
+      "SYSTEM:\nA safer future does not have to arrive fully furnished. Start smaller. One hour at a library. One phone call from a parking lot. One walk where nobody is interrogating your face. Your nervous system may need proof that quiet still exists.",
+    suggestedAction: "Name one place, person, or time of day where control is lower.",
+    effect: {
+      clarity: 8,
+      preparedness: 6,
+      reality: 8,
+      options: 18,
+      emphasis: "OPTIONS",
+      notice: "SAFE-HOUR POSSIBILITY FOUND. OPTIONS SIGNAL INCREASED.",
+    },
+  },
+  {
+    id: "dependency",
+    title: "Reduce One Dependency",
+    premise: "Control gets louder when one person holds too many switches.",
+    systemResponse:
+      "SYSTEM:\nYou do not have to solve money, transportation, documents, phone access, medication, housing, and support all at once. Pick one switch. Make it slightly less theirs. Slightly counts. Quiet preparation is still preparation.",
+    suggestedAction: "Choose one dependency to reduce first: money, transportation, documents, phone, medication, housing, or support.",
+    effect: {
+      clarity: 8,
+      preparedness: 18,
+      reality: 8,
+      options: 8,
+      emphasis: "PREPAREDNESS",
+      notice: "DEPENDENCY TARGET SELECTED. PREPAREDNESS SIGNAL INCREASED.",
+    },
+  },
+  {
+    id: "housing",
+    title: "Housing Is Not One Thing",
+    premise: "Housing does not mean finding a perfect new home immediately.",
+    systemResponse:
+      "SYSTEM:\nHousing can mean a first night, a couch, a shelter, a hotel, a car-safety plan, family, a friend, a motel voucher, transitional housing, or a waitlist. It also means documents, transportation, privacy, pets or kids, money, location safety, and whether they can find you. No perfect choice required. We are mapping possible doors.",
+    suggestedAction: "List two first-night possibilities, even if both are imperfect.",
+    effect: {
+      clarity: 8,
+      preparedness: 16,
+      reality: 18,
+      options: 12,
+      emphasis: "REALITY",
+      notice: "HOUSING DECODED AS A SET OF OPTIONS. REALITY SIGNAL INCREASED.",
+    },
+  },
+  {
+    id: "tiny-move",
+    title: "Choose One Tiny Move",
+    premise: "You do not need a dramatic announcement. You need one next move that belongs to you.",
+    systemResponse:
+      "SYSTEM:\nDecision pressure rejected. You can prepare without promising yourself you will leave today. Pack one thing. Learn one right. Identify one safe contact. Find one local resource. One move is not everything, but it is no longer nothing.",
+    suggestedAction: "Pick one next module: Go-Bag Prep, Exit Planning, Local Help, or Legal.",
+    effect: {
+      clarity: 10,
+      preparedness: 14,
+      reality: 8,
+      options: 18,
+      emphasis: "OPTIONS",
+      notice: "TINY MOVE AVAILABLE. OPTIONS SIGNAL INCREASED.",
+    },
+  },
 ];
 
 const defaultControlPanel: ControlPanelState = {
@@ -1804,6 +1903,239 @@ function ProceedControls({
   );
 }
 
+function ladderGaugeValues(progress: { clarity: number; preparedness: number; reality: number; options: number }): GaugeValue[] {
+  return [
+    {
+      label: "CLARITY",
+      value: progress.clarity,
+      lowLabel: "FOG",
+      highLabel: "CLEAR",
+      state: gaugeState(progress.clarity, "CLEARER", "ONLINE", "WARMING"),
+      tone: "cyan",
+    },
+    {
+      label: "PREPAREDNESS",
+      value: progress.preparedness,
+      lowLabel: "LOW",
+      highLabel: "READY",
+      state: gaugeState(progress.preparedness, "BUILDING", "STARTED", "SPARK"),
+      tone: "pink",
+    },
+    {
+      label: "REALITY",
+      value: progress.reality,
+      lowLabel: "DISTORTED",
+      highLabel: "STABLE",
+      state: gaugeState(progress.reality, "STABLE", "CLEARING", "STATIC"),
+      tone: "amber",
+    },
+    {
+      label: "OPTIONS",
+      value: progress.options,
+      lowLabel: "LIMITED",
+      highLabel: "OPEN",
+      state: gaugeState(progress.options, "AVAILABLE", "OPENING", "LIMITED"),
+      tone: "purple",
+    },
+  ];
+}
+
+function PlanningModule({
+  onControlPanelChange,
+  onNavigate,
+}: {
+  onControlPanelChange: (panel: ControlPanelState) => void;
+  onNavigate: (module: ModuleKey, path: string) => void;
+}) {
+  const [mode, setMode] = useState<"ladder" | "response" | "complete" | "exit-planning">("ladder");
+  const [activeRung, setActiveRung] = useState<LeavingLadderRung | null>(null);
+  const [visitedRungIds, setVisitedRungIds] = useState<string[]>([]);
+  const [responseDone, setResponseDone] = useState(false);
+  const [progress, setProgress] = useState({
+    clarity: 32,
+    preparedness: 18,
+    reality: 34,
+    options: 24,
+  });
+  const [gaugeNotice, setGaugeNotice] = useState("LEAVING LADDER ONLINE. NO DECISION REQUIRED.");
+  const [gaugeEmphasis, setGaugeEmphasis] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (mode === "exit-planning") return;
+
+    onControlPanelChange({
+      emphasis: gaugeEmphasis,
+      gauges: ladderGaugeValues(progress),
+      notice: gaugeNotice,
+    });
+  }, [gaugeEmphasis, gaugeNotice, mode, onControlPanelChange, progress]);
+
+  function openRung(rung: LeavingLadderRung) {
+    setActiveRung(rung);
+    setResponseDone(false);
+    setMode("response");
+  }
+
+  function completeRungTyping() {
+    if (!activeRung) {
+      setResponseDone(true);
+      return;
+    }
+
+    setVisitedRungIds((current) => (current.includes(activeRung.id) ? current : [...current, activeRung.id]));
+    setProgress((current) => ({
+      clarity: clampGauge(current.clarity + activeRung.effect.clarity),
+      preparedness: clampGauge(current.preparedness + activeRung.effect.preparedness),
+      reality: clampGauge(current.reality + activeRung.effect.reality),
+      options: clampGauge(current.options + activeRung.effect.options),
+    }));
+    setGaugeNotice(activeRung.effect.notice);
+    setGaugeEmphasis(activeRung.effect.emphasis);
+    setResponseDone(true);
+  }
+
+  function resetLadder() {
+    setMode("ladder");
+    setActiveRung(null);
+    setVisitedRungIds([]);
+    setResponseDone(false);
+    setProgress({ clarity: 32, preparedness: 18, reality: 34, options: 24 });
+    setGaugeNotice("LEAVING LADDER ONLINE. NO DECISION REQUIRED.");
+    setGaugeEmphasis(null);
+  }
+
+  if (mode === "exit-planning") {
+    return <ExitPlanningModule onControlPanelChange={onControlPanelChange} onNavigate={onNavigate} />;
+  }
+
+  return (
+    <section className="assessment-shell leaving-ladder" aria-labelledby="ladder-title">
+      {mode === "ladder" && (
+        <div className="assessment-panel ladder-panel">
+          <div className="terminal-label">MODULE: LEAVING LADDER</div>
+          <h1 id="ladder-title">NOT READY DOES NOT MEAN STUCK.</h1>
+          <p>
+            You do not have to decide today. You can look at the ladder, touch one rung, and still
+            keep your choices private.
+          </p>
+          <div className="ladder-rung-grid">
+            {leavingLadderRungs.map((rung, index) => (
+              <button
+                className={visitedRungIds.includes(rung.id) ? "ladder-rung visited" : "ladder-rung"}
+                key={rung.id}
+                type="button"
+                onClick={() => openRung(rung)}
+              >
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <strong>{rung.title}</strong>
+                <small>{rung.premise}</small>
+              </button>
+            ))}
+          </div>
+          <div className="terminal-actions denial-actions">
+            <button type="button" onClick={() => setMode("exit-planning")}>
+              Start Exit Planning
+            </button>
+            <button type="button" onClick={() => onNavigate("go-bag-prep", "/go-bag-prep")}>
+              Go-Bag Prep
+            </button>
+            <button type="button" onClick={() => setMode("complete")}>
+              I&apos;m Not Ready, But I Understand More Now
+            </button>
+            <button type="button" onClick={leaveSite}>
+              Quick Exit
+            </button>
+          </div>
+        </div>
+      )}
+
+      {mode === "response" && activeRung && (
+        <div className={activeRung.id === "housing" ? "assessment-panel direct-panel ladder-panel" : "assessment-panel ladder-panel"}>
+          <div className="terminal-label">SYSTEM RESPONSE</div>
+          <h2>{activeRung.title}</h2>
+          <TypedText
+            className="system-typed-text"
+            onDone={completeRungTyping}
+            skipLabel="Print Response"
+            text={activeRung.systemResponse}
+          />
+          {responseDone && (
+            <>
+              <div className="pattern-panel">
+                <h3>ONE SMALL ACTION</h3>
+                <p>{activeRung.suggestedAction}</p>
+              </div>
+              <div className="terminal-actions denial-actions">
+                <button type="button" onClick={() => setMode("ladder")}>
+                  Choose Another Rung
+                </button>
+                <button type="button" onClick={() => setMode("exit-planning")}>
+                  Start Exit Planning
+                </button>
+                <button type="button" onClick={() => onNavigate("go-bag-prep", "/go-bag-prep")}>
+                  Go-Bag Prep
+                </button>
+                <button type="button" onClick={() => onNavigate("local-help", "/local-help")}>
+                  Find Local Help
+                </button>
+                <button type="button" onClick={() => onNavigate("legal", "/legal")}>
+                  Legal
+                </button>
+                <button type="button" onClick={() => setMode("complete")}>
+                  I&apos;m Not Ready, But I Understand More Now
+                </button>
+                <button type="button" onClick={leaveSite}>
+                  Quick Exit
+                </button>
+              </div>
+            </>
+          )}
+        </div>
+      )}
+
+      {mode === "complete" && (
+        <div className="assessment-panel ladder-panel">
+          <div className="terminal-label">LADDER PAUSED</div>
+          <h2>YOU DID NOT FAIL THE MODULE.</h2>
+          <p>
+            Not being ready is information, not a character flaw. Your system noticed more than it
+            did before. That counts.
+          </p>
+          <div className="pattern-panel">
+            <h3>WHAT CHANGED</h3>
+            <p>
+              {visitedRungIds.length > 0
+                ? `${visitedRungIds.length} rung${visitedRungIds.length === 1 ? "" : "s"} reviewed. No answers saved.`
+                : "No rungs selected yet. No answers saved."}
+            </p>
+          </div>
+          <div className="terminal-actions denial-actions">
+            <button type="button" onClick={() => setMode("ladder")}>
+              Return To The Ladder
+            </button>
+            <button type="button" onClick={() => setMode("exit-planning")}>
+              Start Exit Planning
+            </button>
+            <button type="button" onClick={() => onNavigate("home", "/")}>
+              Back To Terminal
+            </button>
+            <button type="button" onClick={resetLadder}>
+              Clear This Session
+            </button>
+            <button type="button" onClick={leaveSite}>
+              Quick Exit
+            </button>
+          </div>
+        </div>
+      )}
+
+      {visitedRungIds.length > 0 && (
+        <p className="session-note">Temporary ladder signals are erased when this session clears, refreshes, or exits.</p>
+      )}
+    </section>
+  );
+}
+
 function ExitPlanningModule({
   onControlPanelChange,
   onNavigate,
@@ -2119,7 +2451,7 @@ export function App() {
       ) : activeModule === "go-bag-prep" ? (
         <GoBagSimulator onControlPanelChange={updateControlPanel} onNavigate={navigate} onQuickExit={leaveSite} />
       ) : activeModule === "planning" ? (
-        <ExitPlanningModule onControlPanelChange={updateControlPanel} onNavigate={navigate} />
+        <PlanningModule onControlPanelChange={updateControlPanel} onNavigate={navigate} />
       ) : (
         <ResourceModule moduleKey={activeModule} />
       )}
