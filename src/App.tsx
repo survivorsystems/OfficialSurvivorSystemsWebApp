@@ -1,4 +1,4 @@
-import { type CSSProperties, type FormEvent, useCallback, useEffect, useMemo, useState } from "react";
+import { type CSSProperties, type FormEvent, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   BookOpenCheck,
   Compass,
@@ -1239,29 +1239,47 @@ function TypedText({
 }) {
   const prefersReducedMotion = usePrefersReducedMotion();
   const [visibleLength, setVisibleLength] = useState(prefersReducedMotion ? text.length : 0);
+  const onDoneRef = useRef(onDone);
+  const completedRef = useRef(false);
 
   useEffect(() => {
+    onDoneRef.current = onDone;
+  }, [onDone]);
+
+  const finishTyping = useCallback(() => {
+    setVisibleLength(text.length);
+    if (!completedRef.current) {
+      completedRef.current = true;
+      onDoneRef.current?.();
+    }
+  }, [text]);
+
+  useEffect(() => {
+    completedRef.current = false;
+
     if (prefersReducedMotion) {
-      setVisibleLength(text.length);
-      onDone?.();
+      finishTyping();
       return;
     }
 
     setVisibleLength(0);
-    const step = Math.max(8, Math.floor(text.length / 90));
+    const charsPerTick = text.length > 420 ? 2 : 1;
     const interval = window.setInterval(() => {
       setVisibleLength((current) => {
-        const next = Math.min(text.length, current + step);
+        const next = Math.min(text.length, current + charsPerTick);
         if (next >= text.length) {
           window.clearInterval(interval);
-          onDone?.();
+          if (!completedRef.current) {
+            completedRef.current = true;
+            onDoneRef.current?.();
+          }
         }
         return next;
       });
-    }, 16);
+    }, 42);
 
     return () => window.clearInterval(interval);
-  }, [onDone, prefersReducedMotion, text]);
+  }, [finishTyping, prefersReducedMotion, text]);
 
   const finished = visibleLength >= text.length;
 
@@ -1272,7 +1290,7 @@ function TypedText({
         <span className="terminal-cursor" aria-hidden="true" />
       </pre>
       {!finished && (
-        <button className="text-button" type="button" onClick={() => setVisibleLength(text.length)}>
+        <button className="text-button" type="button" onClick={finishTyping}>
           {skipLabel}
         </button>
       )}
