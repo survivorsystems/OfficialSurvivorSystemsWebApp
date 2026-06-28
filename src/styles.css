@@ -483,30 +483,6 @@ button:disabled {
   box-shadow: var(--shadow-pink);
 }
 
-.clarity-meter {
-  align-self: end;
-  border: 1px solid rgba(255, 79, 216, 0.3);
-  border-radius: 10px;
-  box-shadow: var(--shadow-purple);
-  color: var(--pink);
-  display: grid;
-  gap: 10px;
-  padding: 20px;
-}
-
-.clarity-meter img {
-  border: 1px solid rgba(0, 234, 255, 0.22);
-  border-radius: 6px;
-  display: block;
-  width: 100%;
-}
-
-.clarity-meter strong {
-  color: var(--cyan);
-  font-size: 0.8rem;
-  text-align: center;
-}
-
 .terminal-screen {
   background:
     radial-gradient(circle at 50% 40%, rgba(0, 234, 255, 0.08), transparent 48%),
@@ -550,6 +526,18 @@ button:disabled {
 
 .terminal-topbar h1 {
   font-size: clamp(1.5rem, 3vw, 2.4rem);
+  line-height: 1;
+  margin: 0;
+}
+
+.terminal-topbar-title {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+
+.terminal-topbar-title .terminal-label {
+  margin: 0;
 }
 
 .system-status {
@@ -593,9 +581,9 @@ button:disabled {
   display: grid;
   gap: 8px;
   grid-template-areas:
-    "status meter gauges"
-    "command command command";
-  grid-template-columns: minmax(150px, 0.28fr) minmax(58px, 0.72in) minmax(0, 1fr);
+    "status gauges"
+    "command command";
+  grid-template-columns: minmax(170px, 0.3fr) minmax(0, 1fr);
   grid-template-rows: minmax(0, 1in) auto;
   max-height: 2.5in;
   min-height: 0;
@@ -626,22 +614,6 @@ button:disabled {
   margin: 0;
   text-shadow: var(--shadow-cyan);
   text-transform: uppercase;
-}
-
-.command-center > img {
-  align-self: center;
-  border: 1px solid rgba(0, 234, 255, 0.28);
-  border-radius: 6px;
-  box-shadow:
-    inset 0 0 12px rgba(0, 0, 0, 0.8),
-    0 0 16px rgba(0, 234, 255, 0.18);
-  display: block;
-  grid-area: meter;
-  height: min(0.72in, 69px);
-  max-height: 1in;
-  max-width: 0.78in;
-  object-fit: cover;
-  width: auto;
 }
 
 .command-terminal {
@@ -1907,6 +1879,36 @@ button:disabled {
   max-width: 860px;
 }
 
+.home-message {
+  border-top: 1px solid rgba(0, 234, 255, 0.2);
+  display: grid;
+  gap: 16px;
+  margin-top: 8px;
+  max-width: 980px;
+  padding-top: 22px;
+}
+
+.home-message h1 {
+  margin-bottom: 2px;
+}
+
+.home-message p {
+  color: var(--text);
+  font-size: clamp(1rem, 1.7vw, 1.18rem);
+  line-height: 1.65;
+  margin: 0;
+  max-width: 900px;
+}
+
+.home-message p:nth-of-type(3) {
+  color: var(--hot-text);
+  font-size: clamp(1.18rem, 2vw, 1.45rem);
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-shadow: var(--shadow-pink);
+  text-transform: uppercase;
+}
+
 .home-option-grid {
   display: grid;
   gap: 14px;
@@ -2520,17 +2522,11 @@ button:disabled {
 
   .command-center {
     grid-template-areas:
-      "status meter"
-      "gauges gauges"
-      "command command";
-    grid-template-columns: minmax(150px, 1fr) minmax(58px, 0.72in);
+      "status"
+      "gauges"
+      "command";
+    grid-template-columns: 1fr;
     grid-template-rows: auto minmax(0, 1in) auto;
-  }
-
-  .command-center > img {
-    height: min(0.72in, 69px);
-    max-height: 1in;
-    width: auto;
   }
 
   .hero,
@@ -2587,7 +2583,6 @@ button:disabled {
   }
 
   .brand-mark,
-  .clarity-meter,
   .hero::after,
   .support-card::after {
     display: none;
@@ -2638,18 +2633,10 @@ button:disabled {
   .command-center {
     grid-template-areas:
       "status"
-      "meter"
       "gauges"
       "command";
     grid-template-columns: 1fr;
     max-height: none;
-  }
-
-  .command-center > img {
-    height: min(0.85in, 82px);
-    justify-self: start;
-    max-height: 1in;
-    width: auto;
   }
 
   .compact-gauges .gauge-row {

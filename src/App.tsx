@@ -9,7 +9,6 @@ import {
   ShieldCheck,
   Sprout,
 } from "lucide-react";
-import clarityMeterImage from "./assets/support/clarity-meter.png";
 import denialSupportOne from "./assets/support/denial-support-1.png";
 import denialSupportTwo from "./assets/support/denial-support-2.png";
 import GoBagSimulator from "./GoBagSimulator";
@@ -1122,7 +1121,6 @@ function CommandCenter({
         <span className="terminal-label">COMMAND CENTER</span>
         <p>{panel.notice}</p>
       </div>
-      <img src={clarityMeterImage} alt="Clarity meter" />
       <GaugeDeck compact emphasis={panel.emphasis} gauges={panel.gauges} notice={panel.notice} />
       <TerminalCommand onNavigate={onNavigate} />
     </section>
@@ -1465,14 +1463,10 @@ function TerminalChrome({
           <ShieldAlert aria-hidden="true" />
           Quick Exit
         </button>
-        <div className="clarity-meter" aria-hidden="true">
-          <img src={clarityMeterImage} alt="" />
-          <strong>CLARITY METER</strong>
-        </div>
       </aside>
       <section className="terminal-screen">
         <header className="terminal-topbar">
-          <div>
+          <div className="terminal-topbar-title">
             <span className="terminal-label">MODULE</span>
             <h1>{navItems.find((item) => item.key === activeModule)?.label ?? "Home"}</h1>
           </div>
@@ -1489,36 +1483,44 @@ function TerminalChrome({
   );
 }
 
-function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: string) => void }) {
-  const homeOptions = navItems.filter((item) => item.key !== "home");
-
+function HomeModule() {
   return (
     <section className="home-terminal" aria-labelledby="home-title">
       <div className="terminal-label">USER TERMINAL</div>
       <BrandLogo className="home-logo" />
-      <h1 id="home-title">CHOOSE HOW TO PROCEED</h1>
-      <p>
-        Select a module. No account is required, and assessment answers stay only in this browser
-        while the tool is open.
-      </p>
-      <div className="home-option-grid">
-        {homeOptions.map((item, index) => (
-          <button
-            className={item.key === "am-i-crazy" ? "home-option primary-module" : "home-option"}
-            key={item.key}
-            type="button"
-            onClick={() => onNavigate(item.key, item.path)}
-          >
-            <span>{String(index + 1).padStart(2, "0")}</span>
-            <strong>{item.label}</strong>
-            <small>
-              {item.key === "am-i-crazy"
-                ? "Start a guided reality check."
-                : `Open the ${item.label.toLowerCase()} module.`}
-            </small>
-          </button>
-        ))}
-      </div>
+      <article className="home-message">
+        <h1 id="home-title">Is There Any Hope?</h1>
+        <p>
+          If one of you has ended up here, wondering how to fix the other, the relationship may
+          already be telling you the truth.
+        </p>
+        <p>
+          Abusive behavior can come from childhood wounds, stress, trauma, or any number of other
+          causes. Those things may explain it. They don&apos;t excuse it. It&apos;s still their
+          responsibility not to pour their unhealed pain into someone else, especially someone they
+          claim to love.
+        </p>
+        <p>Their potential does not make you safe.</p>
+        <p>
+          Leaving can be the most dangerous point in an abusive relationship. A person who has never
+          used physical violence before may escalate when they feel their control slipping. That
+          doesn&apos;t mean you should stay. It means you deserve a plan.
+        </p>
+        <p>
+          Start small. Picture where you could go. Decide who you could call. Create a code word
+          that means, &ldquo;Call the police.&rdquo; Begin preparing yourself for what leaving could
+          involve, even if you are not ready to act yet.
+        </p>
+        <p>
+          You aren&apos;t weak for struggling with this. You are navigating one of the hardest
+          things a person can face.
+        </p>
+        <p>You&apos;re not alone, either.</p>
+        <p>
+          Survivor Systems is here to help you understand your choices, prepare safely, and decide
+          what comes next.
+        </p>
+      </article>
     </section>
   );
 }
@@ -2109,7 +2111,7 @@ export function App() {
       {loadingModule && loadingLabel ? (
         <ModuleLoading label={loadingLabel} />
       ) : activeModule === "home" ? (
-        <HomeModule onNavigate={navigate} />
+        <HomeModule />
       ) : activeModule === "am-i-crazy" ? (
         <AmICrazyModule onControlPanelChange={updateControlPanel} onNavigate={navigate} />
       ) : activeModule === "go-bag-prep" ? (
