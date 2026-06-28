@@ -1486,39 +1486,41 @@ function TerminalChrome({
 function HomeModule() {
   return (
     <section className="home-terminal" aria-labelledby="home-title">
-      <div className="terminal-label">USER TERMINAL</div>
-      <BrandLogo className="home-logo" />
+      <div className="home-terminal-command">
+        <span aria-hidden="true">user@survivor-systems:~$</span>
+        <strong>USER TERMINAL</strong>
+      </div>
       <article className="home-message">
-        <h1 id="home-title">Is There Any Hope?</h1>
+        <h1 id="home-title">&lt;Is There Any Hope?&gt;</h1>
         <p>
-          If one of you has ended up here, wondering how to fix the other, the relationship may
-          already be telling you the truth.
+          &lt;If one of you has ended up here, wondering how to fix the other, the relationship may
+          already be telling you the truth.&gt;
         </p>
         <p>
-          Abusive behavior can come from childhood wounds, stress, trauma, or any number of other
+          &lt;Abusive behavior can come from childhood wounds, stress, trauma, or any number of other
           causes. Those things may explain it. They don&apos;t excuse it. It&apos;s still their
           responsibility not to pour their unhealed pain into someone else, especially someone they
-          claim to love.
+          claim to love.&gt;
         </p>
-        <p>Their potential does not make you safe.</p>
+        <p>&lt;Their potential does not make you safe.&gt;</p>
         <p>
-          Leaving can be the most dangerous point in an abusive relationship. A person who has never
+          &lt;Leaving can be the most dangerous point in an abusive relationship. A person who has never
           used physical violence before may escalate when they feel their control slipping. That
-          doesn&apos;t mean you should stay. It means you deserve a plan.
+          doesn&apos;t mean you should stay. It means you deserve a plan.&gt;
         </p>
         <p>
-          Start small. Picture where you could go. Decide who you could call. Create a code word
+          &lt;Start small. Picture where you could go. Decide who you could call. Create a code word
           that means, &ldquo;Call the police.&rdquo; Begin preparing yourself for what leaving could
-          involve, even if you are not ready to act yet.
+          involve, even if you are not ready to act yet.&gt;
         </p>
         <p>
-          You aren&apos;t weak for struggling with this. You are navigating one of the hardest
-          things a person can face.
+          &lt;You aren&apos;t weak for struggling with this. You are navigating one of the hardest
+          things a person can face.&gt;
         </p>
-        <p>You&apos;re not alone, either.</p>
+        <p>&lt;You&apos;re not alone, either.&gt;</p>
         <p>
-          Survivor Systems is here to help you understand your choices, prepare safely, and decide
-          what comes next.
+          &lt;Survivor Systems is here to help you understand your choices, prepare safely, and decide
+          what comes next.&gt;
         </p>
       </article>
     </section>
