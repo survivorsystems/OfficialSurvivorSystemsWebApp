@@ -103,6 +103,10 @@ type LeavingLadderRung = {
   title: string;
   premise: string;
   systemResponse: string;
+  contextSignal?: {
+    title: string;
+    body: string;
+  };
   suggestedAction: string;
   effect: {
     clarity: number;
@@ -836,6 +840,10 @@ const leavingLadderRungs: LeavingLadderRung[] = [
     premise: "You do not have to call it abuse to notice it is costing you.",
     systemResponse:
       "SYSTEM:\nNaming the pattern is not betrayal. It is inventory. If your peace, sleep, money, movement, friendships, body, or sense of reality keeps shrinking around one person's reactions, something is asking to be taken seriously.",
+    contextSignal: {
+      title: "CONTEXT WITHOUT EXCUSE",
+      body: "Two things can be true: someone can feel like everything you ever wanted and still cause irreparable harm to you.\n\nMaladaptive behaviors can develop from many different kinds of trauma, and they do not look the same in everyone. Some may overlap with traits associated with personality disorders without meeting the criteria for a diagnosis. Understanding where someone's behavior comes from may provide context, but it does not erase the impact that behavior has had on your life.\n\nA diagnosis is not an excuse, and the absence of one does not make the harm less real. Whether that person recognizes their behavior, seeks help, or changes is not your responsibility. Your responsibility is to protect yourself, honor what you experienced, and make the choices that are safest for you.",
+    },
     suggestedAction: "Write one sentence somewhere private: This relationship is costing me ______.",
     effect: {
       clarity: 16,
@@ -2083,6 +2091,14 @@ function PlanningModule({
                 <h3>ONE SMALL ACTION</h3>
                 <p>{activeRung.suggestedAction}</p>
               </div>
+              {activeRung.contextSignal && (
+                <div className="pattern-panel context-signal-panel">
+                  <h3>{activeRung.contextSignal.title}</h3>
+                  {activeRung.contextSignal.body.split("\n\n").map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))}
+                </div>
+              )}
               <div className="terminal-actions denial-actions">
                 <button type="button" onClick={() => setMode("ladder")}>
                   Choose Another Rung
