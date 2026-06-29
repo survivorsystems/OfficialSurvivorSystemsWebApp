@@ -118,6 +118,18 @@ type LeavingLadderRung = {
   };
 };
 
+type SafetyPlanSection = {
+  id: string;
+  title: string;
+  subtitle: string;
+  status: string;
+  screenshotLines: string[];
+  detailGroups: Array<{
+    title: string;
+    items: string[];
+  }>;
+};
+
 const modulePages: Record<
   Exclude<ModuleKey, "home" | "am-i-crazy" | "go-bag-prep">,
   {
@@ -917,6 +929,158 @@ const leavingLadderRungs: LeavingLadderRung[] = [
       emphasis: "OPTIONS",
       notice: "TINY MOVE AVAILABLE. OPTIONS SIGNAL INCREASED.",
     },
+  },
+];
+
+const safetyPlanSections: SafetyPlanSection[] = [
+  {
+    id: "crisis-card",
+    title: "Screenshot Safety Card",
+    subtitle: "For when printing, downloading, or saving a file is not safe.",
+    status: "CRISIS CARD // SCREENSHOT-FRIENDLY",
+    screenshotLines: [
+      "If I need to leave fast, I do not announce it.",
+      "I move toward one safer place: a public building, a neighbor, a friend, a store, a library, a shelter, or emergency services.",
+      "I keep one code word that means: call for help now.",
+      "I grab only what I can safely reach: phone, keys, wallet, meds, documents, charger, water, pet needs, and go-bag.",
+      "If my device may be monitored, I use a safer device or public computer before making sensitive plans.",
+      "One small preparation is still preparation.",
+    ],
+    detailGroups: [
+      {
+        title: "Pick One Safe Signal",
+        items: [
+          "Choose a code word or emoji for one trusted person.",
+          "Decide what the person should do if they receive it: call you, call 911, pick you up, or contact a shelter.",
+          "Do not use a phrase the abusive person would recognize as a plan.",
+        ],
+      },
+      {
+        title: "Pick One First Place",
+        items: [
+          "Public places count: library, hospital, police station lobby, grocery store, school, courthouse, or workplace.",
+          "A first place is not a forever place. It is a place where control is lower.",
+          "If you cannot leave today, identify the closest unlocked door and the fastest route to it.",
+        ],
+      },
+    ],
+  },
+  {
+    id: "digital-traces",
+    title: "Browser Trace Cleanup",
+    subtitle: "Reduce local history without pretending it defeats monitoring software.",
+    status: "DIGITAL SAFETY // REDUCE TRACES",
+    screenshotLines: [
+      "Private or Incognito mode may reduce browser history on this device.",
+      "It does not hide activity from monitoring software, shared accounts, phone plans, routers, backups, or someone with device access.",
+      "If someone may be actively monitoring this device, use a library computer or a trusted person's device instead.",
+      "Clearing history can remove clues, but it can also look suspicious if someone checks often.",
+      "Safest option: plan from a device and account they have never accessed.",
+    ],
+    detailGroups: [
+      {
+        title: "iPhone / Safari",
+        items: [
+          "Settings > Safari > Clear History and Website Data.",
+          "To delete one site: Safari > book icon > clock icon > swipe left on the entry > Delete.",
+          "Private mode: Safari > tabs icon > Private.",
+        ],
+      },
+      {
+        title: "Android / Chrome",
+        items: [
+          "Chrome > three dots > History > Clear Browsing Data.",
+          "Use All Time if you need a broad cleanup.",
+          "Incognito mode: Chrome > three dots > New Incognito Tab.",
+        ],
+      },
+      {
+        title: "Desktop",
+        items: [
+          "Chrome, Edge, Brave: Ctrl + Shift + Delete on Windows, Cmd + Shift + Delete on Mac.",
+          "Firefox: Ctrl + Shift + Delete on Windows, Cmd + Shift + Delete on Mac.",
+          "Private windows: Ctrl + Shift + N for Chrome/Edge/Brave, Ctrl + Shift + P for Firefox.",
+        ],
+      },
+    ],
+  },
+  {
+    id: "pet-plan",
+    title: "Pet Safety Plan",
+    subtitle: "Pets are family. They deserve an exit plan too.",
+    status: "PET SAFETY // FAMILY INCLUDED",
+    screenshotLines: [
+      "Threatening or harming pets can be a control tactic.",
+      "I do not have to choose between my safety and my pet's safety without looking for options first.",
+      "I gather photos, vet records, microchip info, medication labels, and proof that I care for my pet.",
+      "I ask safe people, DV shelters, animal shelters, vets, and rescues about emergency fostering or boarding.",
+      "If I cannot take my pet today, I tell an advocate and document everything.",
+    ],
+    detailGroups: [
+      {
+        title: "Gather Proof",
+        items: [
+          "Recent photos of your pet and one photo of you with your pet.",
+          "Vet records, vaccination proof, microchip number, license, adoption records, or purchase receipts.",
+          "Screenshots, photos, or dated notes about threats or harm to your pet.",
+        ],
+      },
+      {
+        title: "Ask The Right People",
+        items: [
+          "Trusted friends or family who can keep your pet's location private.",
+          "DV shelters: ask if they accept pets or partner with pet-safe housing programs.",
+          "Animal shelters, humane societies, vets, SafePlace for Pets, RedRover Relief, PetFinder rescues, and breed-specific rescues.",
+        ],
+      },
+      {
+        title: "Pet Go-Bag",
+        items: [
+          "Food for at least one week, medications, carrier, leash, crate, blanket, toy, records, and vet contact info.",
+          "Keep prescription labels intact when possible.",
+          "If the safest exit is without your pet, that does not make you a bad pet owner.",
+        ],
+      },
+    ],
+  },
+  {
+    id: "resource-map",
+    title: "Who To Call For What",
+    subtitle: "Know the difference between national, state, and local help.",
+    status: "RESOURCE MAP // LESS BOUNCING AROUND",
+    screenshotLines: [
+      "National coalitions usually make policy, publish guidance, and fund the system.",
+      "State coalitions often maintain directories and support local organizations.",
+      "Local DV organizations and shelters are where direct help usually lives.",
+      "If you need shelter, legal advocacy, safety planning, benefits help, or court support, start local.",
+      "If you do not know where to start, the National Domestic Violence Hotline can route you.",
+    ],
+    detailGroups: [
+      {
+        title: "National Help",
+        items: [
+          "National DV Hotline: 1-800-799-7233.",
+          "Text START to 88788 if speaking is not safe.",
+          "Use thehotline.org chat if calling is not safe.",
+        ],
+      },
+      {
+        title: "State Coalitions",
+        items: [
+          "Search: your state + domestic violence coalition.",
+          "Look for statewide shelter directories and legal/resource links.",
+          "Most state coalitions support local programs rather than offering direct services themselves.",
+        ],
+      },
+      {
+        title: "Local Organizations",
+        items: [
+          "Ask about emergency shelter, transportation, legal advocacy, benefits, counseling, children's support, and transitional housing.",
+          "If you enter shelter, ask what happens at day 30 or 60 on the first day, not the last day.",
+          "Shelter can feel like a finish line, but it is usually planning time with safer walls.",
+        ],
+      },
+    ],
   },
 ];
 
@@ -1966,6 +2130,103 @@ function ladderGaugeValues(progress: { clarity: number; preparedness: number; re
   ];
 }
 
+function SafetyPlanningModule({
+  onControlPanelChange,
+  onNavigate,
+  onBack,
+}: {
+  onControlPanelChange: (panel: ControlPanelState) => void;
+  onNavigate: (module: ModuleKey, path: string) => void;
+  onBack: () => void;
+}) {
+  const [activeSectionId, setActiveSectionId] = useState(safetyPlanSections[0].id);
+  const activeSection = safetyPlanSections.find((section) => section.id === activeSectionId) ?? safetyPlanSections[0];
+  const activeIndex = safetyPlanSections.findIndex((section) => section.id === activeSection.id);
+
+  useEffect(() => {
+    onControlPanelChange({
+      emphasis: activeSection.id === "digital-traces" ? "REALITY" : "PREPAREDNESS",
+      gauges: ladderGaugeValues({
+        clarity: activeSection.id === "resource-map" ? 74 : 62,
+        preparedness: activeSection.id === "crisis-card" ? 82 : 68,
+        reality: activeSection.id === "digital-traces" ? 84 : 70,
+        options: activeSection.id === "pet-plan" || activeSection.id === "resource-map" ? 78 : 62,
+      }),
+      notice: `${activeSection.status}. NO ANSWERS SAVED.`,
+    });
+  }, [activeSection, onControlPanelChange]);
+
+  return (
+    <section className="assessment-shell safety-planning-module" aria-labelledby="safety-plan-title">
+      <div className="assessment-panel safety-plan-panel">
+        <div className="terminal-label">MODULE: SAFETY PLANNING</div>
+        <h1 id="safety-plan-title">SCREENSHOT ONLY MODE.</h1>
+        <p>
+          This module assumes printing, downloading, or saving a document may not be safe. Each panel
+          is built to be readable as a screenshot and useful without an account.
+        </p>
+        <div className="safety-section-grid" aria-label="Safety planning sections">
+          {safetyPlanSections.map((section, index) => (
+            <button
+              className={section.id === activeSection.id ? "safety-section-key active" : "safety-section-key"}
+              key={section.id}
+              type="button"
+              onClick={() => setActiveSectionId(section.id)}
+            >
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <strong>{section.title}</strong>
+              <small>{section.subtitle}</small>
+            </button>
+          ))}
+        </div>
+
+        <article className="screenshot-plan-card" aria-labelledby="active-safety-section">
+          <div className="screenshot-card-header">
+            <span>{activeSection.status}</span>
+            <span>SCREENSHOT {String(activeIndex + 1).padStart(2, "0")}/{String(safetyPlanSections.length).padStart(2, "0")}</span>
+          </div>
+          <h2 id="active-safety-section">&lt;{activeSection.title}&gt;</h2>
+          <p>{activeSection.subtitle}</p>
+          <ul>
+            {activeSection.screenshotLines.map((line) => (
+              <li key={line}>{line}</li>
+            ))}
+          </ul>
+        </article>
+
+        <div className="safety-detail-grid">
+          {activeSection.detailGroups.map((group) => (
+            <section className="pattern-panel safety-detail-card" key={group.title}>
+              <h3>{group.title}</h3>
+              <ul>
+                {group.items.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </section>
+          ))}
+        </div>
+
+        <div className="terminal-actions denial-actions">
+          <button type="button" onClick={() => onNavigate("go-bag-prep", "/go-bag-prep")}>
+            Go-Bag Prep
+          </button>
+          <button type="button" onClick={() => onNavigate("local-help", "/local-help")}>
+            Find Local Help
+          </button>
+          <button type="button" onClick={onBack}>
+            Back To Leaving Ladder
+          </button>
+          <button type="button" onClick={leaveSite}>
+            Quick Exit
+          </button>
+        </div>
+      </div>
+      <p className="session-note">Nothing entered here is saved. Screenshot only if it is safe to store images on this device.</p>
+    </section>
+  );
+}
+
 function PlanningModule({
   onControlPanelChange,
   onNavigate,
@@ -1973,7 +2234,7 @@ function PlanningModule({
   onControlPanelChange: (panel: ControlPanelState) => void;
   onNavigate: (module: ModuleKey, path: string) => void;
 }) {
-  const [mode, setMode] = useState<"ladder" | "response" | "complete" | "exit-planning">("ladder");
+  const [mode, setMode] = useState<"ladder" | "response" | "complete" | "exit-planning" | "safety-planning">("ladder");
   const [activeRung, setActiveRung] = useState<LeavingLadderRung | null>(null);
   const [visitedRungIds, setVisitedRungIds] = useState<string[]>([]);
   const [responseDone, setResponseDone] = useState(false);
@@ -1987,7 +2248,7 @@ function PlanningModule({
   const [gaugeEmphasis, setGaugeEmphasis] = useState<string | null>(null);
 
   useEffect(() => {
-    if (mode === "exit-planning") return;
+    if (mode === "exit-planning" || mode === "safety-planning") return;
 
     onControlPanelChange({
       emphasis: gaugeEmphasis,
@@ -2034,6 +2295,16 @@ function PlanningModule({
     return <ExitPlanningModule onControlPanelChange={onControlPanelChange} onNavigate={onNavigate} />;
   }
 
+  if (mode === "safety-planning") {
+    return (
+      <SafetyPlanningModule
+        onBack={() => setMode("ladder")}
+        onControlPanelChange={onControlPanelChange}
+        onNavigate={onNavigate}
+      />
+    );
+  }
+
   return (
     <section className="assessment-shell leaving-ladder" aria-labelledby="ladder-title">
       {mode === "ladder" && (
@@ -2059,6 +2330,9 @@ function PlanningModule({
             ))}
           </div>
           <div className="terminal-actions denial-actions">
+            <button type="button" onClick={() => setMode("safety-planning")}>
+              Build A Screenshot Safety Plan
+            </button>
             <button type="button" onClick={() => setMode("exit-planning")}>
               Start Exit Planning
             </button>
@@ -2103,6 +2377,9 @@ function PlanningModule({
                 <button type="button" onClick={() => setMode("ladder")}>
                   Choose Another Rung
                 </button>
+                <button type="button" onClick={() => setMode("safety-planning")}>
+                  Build Safety Plan
+                </button>
                 <button type="button" onClick={() => setMode("exit-planning")}>
                   Start Exit Planning
                 </button>
@@ -2146,6 +2423,9 @@ function PlanningModule({
           <div className="terminal-actions denial-actions">
             <button type="button" onClick={() => setMode("ladder")}>
               Return To The Ladder
+            </button>
+            <button type="button" onClick={() => setMode("safety-planning")}>
+              Build Safety Plan
             </button>
             <button type="button" onClick={() => setMode("exit-planning")}>
               Start Exit Planning

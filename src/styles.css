@@ -2393,6 +2393,178 @@ button:disabled {
   content: " / REVIEWED";
 }
 
+.safety-planning-module .assessment-panel {
+  min-height: 560px;
+}
+
+.safety-plan-panel > p {
+  color: var(--text);
+  line-height: 1.65;
+  max-width: 900px;
+}
+
+.safety-section-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 24px 0;
+}
+
+.safety-section-key {
+  align-items: start;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.11), transparent 34%),
+    linear-gradient(180deg, rgba(10, 31, 39, 0.98), rgba(2, 8, 12, 0.98));
+  border: 1px solid rgba(0, 234, 255, 0.42);
+  border-bottom-color: rgba(0, 234, 255, 0.84);
+  border-radius: 7px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    inset 0 -5px 0 rgba(0, 0, 0, 0.7),
+    0 5px 0 rgba(0, 0, 0, 0.9),
+    0 0 16px rgba(0, 234, 255, 0.14);
+  color: var(--text);
+  display: grid;
+  gap: 8px;
+  min-height: 154px;
+  padding: 15px;
+  position: relative;
+  text-align: left;
+  transition:
+    border-color 0.16s ease,
+    box-shadow 0.16s ease,
+    filter 0.16s ease,
+    transform 0.16s ease;
+}
+
+.safety-section-key::before {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  content: "";
+  inset: 5px;
+  pointer-events: none;
+  position: absolute;
+}
+
+.safety-section-key span {
+  color: var(--lime);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-shadow: 0 0 10px rgba(108, 255, 98, 0.45);
+}
+
+.safety-section-key strong {
+  color: var(--hot-text);
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  line-height: 1.15;
+  text-shadow: var(--shadow-pink);
+  text-transform: uppercase;
+}
+
+.safety-section-key small {
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+
+.safety-section-key:hover,
+.safety-section-key:focus-visible,
+.safety-section-key.active {
+  border-color: var(--pink);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    inset 0 -5px 0 rgba(0, 0, 0, 0.7),
+    0 5px 0 rgba(0, 0, 0, 0.9),
+    0 0 22px rgba(255, 79, 216, 0.28);
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+.screenshot-plan-card {
+  background:
+    linear-gradient(180deg, rgba(0, 234, 255, 0.08), transparent 32%),
+    rgba(2, 4, 8, 0.94);
+  border: 1px solid rgba(0, 234, 255, 0.46);
+  border-radius: 8px;
+  box-shadow:
+    inset 0 0 28px rgba(0, 0, 0, 0.9),
+    0 0 22px rgba(0, 234, 255, 0.16);
+  margin-top: 20px;
+  max-width: 980px;
+  padding: clamp(18px, 3vw, 28px);
+}
+
+.screenshot-card-header {
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 234, 255, 0.18);
+  color: var(--cyan);
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 0.76rem;
+  font-weight: 900;
+  gap: 10px;
+  justify-content: space-between;
+  letter-spacing: 0.14em;
+  margin-bottom: 18px;
+  padding-bottom: 12px;
+  text-shadow: var(--shadow-cyan);
+  text-transform: uppercase;
+}
+
+.screenshot-plan-card h2 {
+  color: var(--hot-text);
+  font-size: clamp(1.45rem, 3vw, 2.5rem);
+  letter-spacing: 0.04em;
+  margin-bottom: 10px;
+  text-shadow: var(--shadow-pink);
+}
+
+.screenshot-plan-card p {
+  color: var(--text);
+  line-height: 1.55;
+  margin: 0 0 16px;
+  max-width: 760px;
+}
+
+.screenshot-plan-card ul,
+.safety-detail-card ul {
+  display: grid;
+  gap: 10px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.screenshot-plan-card li,
+.safety-detail-card li {
+  color: var(--text);
+  line-height: 1.5;
+  padding-left: 24px;
+  position: relative;
+}
+
+.screenshot-plan-card li::before,
+.safety-detail-card li::before {
+  color: var(--pink);
+  content: ">>";
+  font-weight: 900;
+  left: 0;
+  position: absolute;
+  text-shadow: var(--shadow-pink);
+}
+
+.safety-detail-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.safety-detail-card {
+  margin-top: 18px;
+}
+
 .proceed-terminal {
   border-top: 1px solid rgba(0, 234, 255, 0.18);
   margin-top: 28px;
@@ -2881,6 +3053,8 @@ button:disabled {
 
   .home-option-grid,
   .ladder-rung-grid,
+  .safety-section-grid,
+  .safety-detail-grid,
   .resource-grid,
   .featured-grid,
   .gauge-row {
@@ -2918,6 +3092,8 @@ button:disabled {
   .terminal-sidebar nav,
   .home-option-grid,
   .ladder-rung-grid,
+  .safety-section-grid,
+  .safety-detail-grid,
   .resource-grid,
   .featured-grid,
   .gauge-row,
