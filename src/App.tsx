@@ -932,7 +932,7 @@ const leavingLadderRungs: LeavingLadderRung[] = [
   },
 ];
 
-const safetyPlanSections: SafetyPlanSection[] = [
+const planningResourcePages: SafetyPlanSection[] = [
   {
     id: "crisis-card",
     title: "Screenshot Safety Card",
@@ -1078,6 +1078,101 @@ const safetyPlanSections: SafetyPlanSection[] = [
           "Ask about emergency shelter, transportation, legal advocacy, benefits, counseling, children's support, and transitional housing.",
           "If you enter shelter, ask what happens at day 30 or 60 on the first day, not the last day.",
           "Shelter can feel like a finish line, but it is usually planning time with safer walls.",
+        ],
+      },
+    ],
+  },
+];
+
+const safetyPlanSections: SafetyPlanSection[] = [
+  {
+    id: "people",
+    title: "People",
+    subtitle: "Who knows, who can help, and who should not know yet.",
+    status: "SAFETY PLANNING // PEOPLE",
+    screenshotLines: [
+      "Who is one trusted contact who would take you seriously?",
+      "Who could call police or emergency services if you used a code word?",
+      "Who could help you reach a DV advocate, shelter, or crisis center?",
+      "Who might accidentally tell the abusive person where you are?",
+      "Who should not know details until you are safer?",
+    ],
+    detailGroups: [
+      {
+        title: "Consider",
+        items: [
+          "A trusted contact may be safer when they know exactly what kind of help you want from them.",
+          "An advocate at a DV shelter or crisis center can help think through options without requiring one specific decision.",
+          "If you are in immediate danger, contacting police or emergency services may be the fastest outside intervention available.",
+        ],
+      },
+    ],
+  },
+  {
+    id: "places",
+    title: "Places",
+    subtitle: "Where control is lower, even temporarily.",
+    status: "SAFETY PLANNING // PLACES",
+    screenshotLines: [
+      "Where could you be around other people if things escalate?",
+      "What places are open late near you?",
+      "Where could an advocate, trusted contact, or police meet you if needed?",
+      "What locations would the abusive person check first?",
+      "What places feel safer but may still need privacy planning?",
+    ],
+    detailGroups: [
+      {
+        title: "Consider",
+        items: [
+          "A safe place is not a promise of total safety. It is a place where isolation may be lower.",
+          "Shelters, crisis centers, and advocates may know local options that are not obvious from a search engine.",
+          "Location privacy matters if the abusive person tracks devices, vehicles, accounts, or shared contacts.",
+        ],
+      },
+    ],
+  },
+  {
+    id: "traces",
+    title: "Traces",
+    subtitle: "Devices, accounts, browser history, shared bills, and screenshots.",
+    status: "SAFETY PLANNING // DIGITAL TRACES",
+    screenshotLines: [
+      "Could this device, browser, account, or phone plan be monitored?",
+      "Could a screenshot in your camera roll be found later?",
+      "Are backups, shared albums, cloud accounts, or synced devices connected?",
+      "Would clearing history create suspicion?",
+      "Is there a safer device or account you can use to contact an advocate, police, or trusted person?",
+    ],
+    detailGroups: [
+      {
+        title: "Consider",
+        items: [
+          "Private browsing can reduce some local traces, but it does not defeat monitoring software or shared account access.",
+          "A hidden folder may still sync, back up, or appear in device activity depending on settings.",
+          "If device monitoring is possible, a DV advocate or crisis center can help talk through tech-safety options.",
+        ],
+      },
+    ],
+  },
+  {
+    id: "dependents",
+    title: "Dependents",
+    subtitle: "Kids, pets, medication, transportation, and documents.",
+    status: "SAFETY PLANNING // DEPENDENTS",
+    screenshotLines: [
+      "Who or what depends on you if you leave quickly?",
+      "Are there kids, pets, medications, mobility needs, or documents to consider?",
+      "Could a trusted contact, advocate, shelter, vet, school, or crisis center help coordinate support?",
+      "What information would a helper need to know without exposing your plan?",
+      "What would be difficult to replace if left behind?",
+    ],
+    detailGroups: [
+      {
+        title: "Consider",
+        items: [
+          "Pets, kids, medications, IDs, and transportation can all affect what leaving realistically requires.",
+          "An advocate may know local shelter policies, pet-safe programs, transportation help, and document replacement options.",
+          "Not having every piece handled does not mean you failed. It means the plan has constraints.",
         ],
       },
     ],
@@ -2145,12 +2240,12 @@ function SafetyPlanningModule({
 
   useEffect(() => {
     onControlPanelChange({
-      emphasis: activeSection.id === "digital-traces" ? "REALITY" : "PREPAREDNESS",
+      emphasis: activeSection.id === "traces" ? "REALITY" : "PREPAREDNESS",
       gauges: ladderGaugeValues({
-        clarity: activeSection.id === "resource-map" ? 74 : 62,
-        preparedness: activeSection.id === "crisis-card" ? 82 : 68,
-        reality: activeSection.id === "digital-traces" ? 84 : 70,
-        options: activeSection.id === "pet-plan" || activeSection.id === "resource-map" ? 78 : 62,
+        clarity: activeSection.id === "people" ? 74 : 62,
+        preparedness: activeSection.id === "dependents" ? 78 : 68,
+        reality: activeSection.id === "traces" ? 84 : 70,
+        options: activeSection.id === "places" ? 78 : 62,
       }),
       notice: `${activeSection.status}. NO ANSWERS SAVED.`,
     });
@@ -2160,10 +2255,12 @@ function SafetyPlanningModule({
     <section className="assessment-shell safety-planning-module" aria-labelledby="safety-plan-title">
       <div className="assessment-panel safety-plan-panel">
         <div className="terminal-label">MODULE: SAFETY PLANNING</div>
-        <h1 id="safety-plan-title">SCREENSHOT ONLY MODE.</h1>
+        <h1 id="safety-plan-title">CONSIDERATION MAP.</h1>
         <p>
-          This module assumes printing, downloading, or saving a document may not be safe. Each panel
-          is built to be readable as a screenshot and useful without an account.
+          This module cannot guarantee safety or tell you what to do. It helps name what may need to
+          be considered before, during, or after leaving. If action is needed, the safest next human
+          contact is usually a trusted person, police or emergency services, or an advocate at a DV
+          shelter or crisis center.
         </p>
         <div className="safety-section-grid" aria-label="Safety planning sections">
           {safetyPlanSections.map((section, index) => (
@@ -2208,21 +2305,135 @@ function SafetyPlanningModule({
         </div>
 
         <div className="terminal-actions denial-actions">
-          <button type="button" onClick={() => onNavigate("go-bag-prep", "/go-bag-prep")}>
-            Go-Bag Prep
-          </button>
           <button type="button" onClick={() => onNavigate("local-help", "/local-help")}>
-            Find Local Help
+            Find Advocate Or Crisis Help
+          </button>
+          <button type="button" onClick={() => onNavigate("legal", "/legal")}>
+            Understand Reporting Options
           </button>
           <button type="button" onClick={onBack}>
-            Back To Leaving Ladder
+            Back To Planning
           </button>
           <button type="button" onClick={leaveSite}>
             Quick Exit
           </button>
         </div>
       </div>
-      <p className="session-note">Nothing entered here is saved. Screenshot only if it is safe to store images on this device.</p>
+      <p className="session-note">Nothing entered here is saved. Screenshot only if storing images is safe on this device.</p>
+    </section>
+  );
+}
+
+function PlanningLanding({
+  onOpenLadder,
+  onOpenResource,
+  onOpenSafety,
+  onOpenExitPlanning,
+  onNavigate,
+}: {
+  onOpenLadder: () => void;
+  onOpenResource: (resourceId: string) => void;
+  onOpenSafety: () => void;
+  onOpenExitPlanning: () => void;
+  onNavigate: (module: ModuleKey, path: string) => void;
+}) {
+  return (
+    <section className="assessment-shell planning-landing" aria-labelledby="planning-landing-title">
+      <div className="assessment-panel planning-landing-panel">
+        <div className="terminal-label">MOTHER PAGE: PLANNING</div>
+        <h1 id="planning-landing-title">CHOOSE THE PLANNING TOOL.</h1>
+        <p>
+          Planning does not mean deciding today. It means understanding the moving parts: people,
+          places, devices, pets, documents, shelter systems, and what kind of help exists.
+        </p>
+
+        <div className="planning-module-grid">
+          <button className="planning-module-key primary" type="button" onClick={onOpenLadder}>
+            <span>START HERE</span>
+            <strong>Leaving Ladder</strong>
+            <small>For not-ready, unsure, or still-sorting-it-out mode.</small>
+          </button>
+          <button className="planning-module-key" type="button" onClick={onOpenSafety}>
+            <span>LIVE TOOL</span>
+            <strong>Safety Considerations</strong>
+            <small>Names what to think through without guaranteeing safety or prescribing a plan.</small>
+          </button>
+          <button className="planning-module-key" type="button" onClick={onOpenExitPlanning}>
+            <span>DEEPER TOOL</span>
+            <strong>Exit Planning</strong>
+            <small>For when the user wants to map barriers and possible next supports.</small>
+          </button>
+          <button className="planning-module-key" type="button" onClick={() => onNavigate("go-bag-prep", "/go-bag-prep")}>
+            <span>SIMULATOR</span>
+            <strong>Go-Bag Prep</strong>
+            <small>A no-save, in-browser simulator for thinking through urgent items.</small>
+          </button>
+        </div>
+
+        <div className="planning-resource-section">
+          <div className="terminal-label">PLANNING RESOURCE PAGES</div>
+          <div className="planning-resource-grid">
+            {planningResourcePages.map((resource, index) => (
+              <button className="planning-resource-key" key={resource.id} type="button" onClick={() => onOpenResource(resource.id)}>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <strong>{resource.title}</strong>
+                <small>{resource.subtitle}</small>
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function PlanningResourcePage({
+  onBack,
+  resourceId,
+}: {
+  onBack: () => void;
+  resourceId: string;
+}) {
+  const resource = planningResourcePages.find((page) => page.id === resourceId) ?? planningResourcePages[0];
+
+  return (
+    <section className="assessment-shell planning-resource-page" aria-labelledby="planning-resource-title">
+      <div className="assessment-panel safety-plan-panel">
+        <div className="terminal-label">PLANNING RESOURCE</div>
+        <article className="screenshot-plan-card" aria-labelledby="planning-resource-title">
+          <div className="screenshot-card-header">
+            <span>{resource.status}</span>
+            <span>LIVE PAGE // NO PDF EMBED</span>
+          </div>
+          <h1 id="planning-resource-title">&lt;{resource.title}&gt;</h1>
+          <p>{resource.subtitle}</p>
+          <ul>
+            {resource.screenshotLines.map((line) => (
+              <li key={line}>{line}</li>
+            ))}
+          </ul>
+        </article>
+        <div className="safety-detail-grid">
+          {resource.detailGroups.map((group) => (
+            <section className="pattern-panel safety-detail-card" key={group.title}>
+              <h3>{group.title}</h3>
+              <ul>
+                {group.items.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </section>
+          ))}
+        </div>
+        <div className="terminal-actions denial-actions">
+          <button type="button" onClick={onBack}>
+            Back To Planning
+          </button>
+          <button type="button" onClick={leaveSite}>
+            Quick Exit
+          </button>
+        </div>
+      </div>
     </section>
   );
 }
@@ -2234,7 +2445,8 @@ function PlanningModule({
   onControlPanelChange: (panel: ControlPanelState) => void;
   onNavigate: (module: ModuleKey, path: string) => void;
 }) {
-  const [mode, setMode] = useState<"ladder" | "response" | "complete" | "exit-planning" | "safety-planning">("ladder");
+  const [mode, setMode] = useState<"landing" | "ladder" | "response" | "complete" | "exit-planning" | "safety-planning" | "resource">("landing");
+  const [activeResourceId, setActiveResourceId] = useState(planningResourcePages[0].id);
   const [activeRung, setActiveRung] = useState<LeavingLadderRung | null>(null);
   const [visitedRungIds, setVisitedRungIds] = useState<string[]>([]);
   const [responseDone, setResponseDone] = useState(false);
@@ -2248,7 +2460,7 @@ function PlanningModule({
   const [gaugeEmphasis, setGaugeEmphasis] = useState<string | null>(null);
 
   useEffect(() => {
-    if (mode === "exit-planning" || mode === "safety-planning") return;
+    if (mode === "exit-planning" || mode === "safety-planning" || mode === "resource") return;
 
     onControlPanelChange({
       emphasis: gaugeEmphasis,
@@ -2282,7 +2494,7 @@ function PlanningModule({
   }
 
   function resetLadder() {
-    setMode("ladder");
+    setMode("landing");
     setActiveRung(null);
     setVisitedRungIds([]);
     setResponseDone(false);
@@ -2298,9 +2510,28 @@ function PlanningModule({
   if (mode === "safety-planning") {
     return (
       <SafetyPlanningModule
-        onBack={() => setMode("ladder")}
+        onBack={() => setMode("landing")}
         onControlPanelChange={onControlPanelChange}
         onNavigate={onNavigate}
+      />
+    );
+  }
+
+  if (mode === "resource") {
+    return <PlanningResourcePage onBack={() => setMode("landing")} resourceId={activeResourceId} />;
+  }
+
+  if (mode === "landing") {
+    return (
+      <PlanningLanding
+        onNavigate={onNavigate}
+        onOpenExitPlanning={() => setMode("exit-planning")}
+        onOpenLadder={() => setMode("ladder")}
+        onOpenResource={(resourceId) => {
+          setActiveResourceId(resourceId);
+          setMode("resource");
+        }}
+        onOpenSafety={() => setMode("safety-planning")}
       />
     );
   }
@@ -2331,7 +2562,7 @@ function PlanningModule({
           </div>
           <div className="terminal-actions denial-actions">
             <button type="button" onClick={() => setMode("safety-planning")}>
-              Build A Screenshot Safety Plan
+              Safety Considerations
             </button>
             <button type="button" onClick={() => setMode("exit-planning")}>
               Start Exit Planning
@@ -2341,6 +2572,9 @@ function PlanningModule({
             </button>
             <button type="button" onClick={() => setMode("complete")}>
               I&apos;m Not Ready, But I Understand More Now
+            </button>
+            <button type="button" onClick={() => setMode("landing")}>
+              Back To Planning
             </button>
             <button type="button" onClick={leaveSite}>
               Quick Exit
@@ -2395,6 +2629,9 @@ function PlanningModule({
                 <button type="button" onClick={() => setMode("complete")}>
                   I&apos;m Not Ready, But I Understand More Now
                 </button>
+                <button type="button" onClick={() => setMode("landing")}>
+                  Back To Planning
+                </button>
                 <button type="button" onClick={leaveSite}>
                   Quick Exit
                 </button>
@@ -2432,6 +2669,9 @@ function PlanningModule({
             </button>
             <button type="button" onClick={() => onNavigate("home", "/")}>
               Back To Terminal
+            </button>
+            <button type="button" onClick={() => setMode("landing")}>
+              Back To Planning
             </button>
             <button type="button" onClick={resetLadder}>
               Clear This Session
