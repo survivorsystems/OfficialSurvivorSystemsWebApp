@@ -139,6 +139,27 @@ type RebuildingGuideSection = {
   items?: string[];
 };
 
+type LegalCategory = {
+  id: string;
+  label: string;
+  title: string;
+  description: string;
+  status: string;
+  available?: boolean;
+};
+
+type LegalGuideSection = {
+  title: string;
+  tag?: string;
+  blocks: Array<{
+    title: string;
+    items: Array<{
+      name?: string;
+      text: string;
+    }>;
+  }>;
+};
+
 const modulePages: Record<
   Exclude<ModuleKey, "home" | "am-i-crazy" | "go-bag-prep">,
   {
@@ -183,6 +204,161 @@ const modulePages: Record<
       "This page will hold free downloads, paid subscriptions, previews, and the deeper Survivor Systems resource library.",
   },
 };
+
+const legalCategories: LegalCategory[] = [
+  {
+    id: "family-court",
+    label: "01",
+    title: "Family Court",
+    description: "Custody, parenting time, support, temporary orders, protective orders, and court prep.",
+    status: "MODULE READY",
+    available: true,
+  },
+  {
+    id: "civil-court",
+    label: "02",
+    title: "Civil Court",
+    description: "Civil filings, claims, responses, deadlines, and paperwork that is not family-court specific.",
+    status: "QUEUE OPEN",
+  },
+  {
+    id: "reporting",
+    label: "03",
+    title: "Reporting",
+    description: "Police reports, incident documentation, advocate support, and what to ask before reporting.",
+    status: "QUEUE OPEN",
+  },
+  {
+    id: "immigration",
+    label: "04",
+    title: "Immigration",
+    description: "Immigration-related survivor protections, documentation, referrals, and legal-aid pathways.",
+    status: "QUEUE OPEN",
+  },
+];
+
+const motionDraftingSteps = [
+  {
+    number: "01",
+    title: "Identify Your Court And Case Type",
+    text:
+      'Find out which court your case lives in, such as family court, district court, or county court. The name varies by state. Then pull up that court\'s local rules. Most counties post these online, searchable as "[county name] family court local rules."',
+  },
+  {
+    number: "02",
+    title: "Get Your Case Number And Existing Orders",
+    text:
+      "Any motion you file has to reference your case number and connect to what is already on record: the original petition, standing orders, custody agreements, protective orders, or other existing orders. Pull these before drafting.",
+  },
+  {
+    number: "03",
+    title: "Match The Problem To The Motion",
+    text:
+      'Do not start with "what motion sounds right." Start with "what specifically do I need the court to change or decide?" Then work backward to the motion type that matches that exact ask.',
+  },
+  {
+    number: "04",
+    title: "Check For A Required Form",
+    text:
+      "Some courts require a specific fillable form for certain motions. Others accept a self-drafted motion if it follows formatting rules. Check before drafting from scratch because the wrong format can get a filing rejected on sight.",
+  },
+];
+
+const familyCourtMotionSections: LegalGuideSection[] = [
+  {
+    title: "Custody & Parenting Time",
+    tag: "General Reference",
+    blocks: [
+      {
+        title: "Common Motions",
+        items: [
+          {
+            name: "Motion to Modify Custody",
+            text: 'Requests a change to an existing custody order, usually requiring a "material change in circumstances."',
+          },
+          {
+            name: "Motion to Modify Visitation / Parenting Time",
+            text: "Requests a change to the existing schedule without changing custody itself.",
+          },
+          {
+            name: "Emergency Motion for Custody",
+            text: "Used when a child is in immediate danger. This usually has a higher bar and faster timeline than a standard modification.",
+          },
+          {
+            name: "Motion to Enforce Custody Order",
+            text: "Filed when the other party is not following the existing order.",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    title: "Protection & Safety",
+    blocks: [
+      {
+        title: "Protective Order Filings",
+        items: [
+          {
+            name: "Petition for Protective Order",
+            text: 'The initial request. It is not technically a "motion," but it starts this type of case.',
+          },
+          {
+            name: "Motion to Extend Protective Order",
+            text: "Requests more time on an order that is set to expire.",
+          },
+          {
+            name: "Motion to Modify Protective Order",
+            text: "Requests a change to the terms, such as distance, contact, or included parties.",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    title: "Financial & Support",
+    blocks: [
+      {
+        title: "Support Motions",
+        items: [
+          {
+            name: "Motion to Modify Child Support",
+            text: "Requests a change based on income change, custody change, or another qualifying factor.",
+          },
+          {
+            name: "Motion for Temporary Orders",
+            text: "Requests short-term rulings on support, custody, or property while the larger case is still pending.",
+          },
+          {
+            name: "Motion to Enforce Support Order",
+            text: "Filed when court-ordered payments are not being made.",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    title: "Procedural",
+    blocks: [
+      {
+        title: "Process Motions",
+        items: [
+          {
+            name: "Motion for Continuance",
+            text: "Requests more time before a hearing or deadline.",
+          },
+          {
+            name: "Motion to Compel",
+            text: "Requests that the court order the other party to comply with something they are refusing to do, such as turning over documents or answering discovery.",
+          },
+          {
+            name: "Motion for Contempt",
+            text: "Alleges the other party is violating a court order and asks for enforcement or penalties.",
+          },
+        ],
+      },
+    ],
+  },
+];
 
 const housingGuideSections: RebuildingGuideSection[] = [
   {
@@ -3243,6 +3419,171 @@ function RebuildingModule({
   );
 }
 
+function LegalModule() {
+  const [activeView, setActiveView] = useState<"landing" | "motion-drafting">("landing");
+
+  if (activeView === "motion-drafting") {
+    return (
+      <section className="page-shell legal-module" aria-labelledby="motion-drafting-title">
+        <div className="page-kicker">
+          <Scale aria-hidden="true" />
+          <p className="eyebrow">Legal // Family Court</p>
+        </div>
+
+        <div className="legal-guide-shell">
+          <div className="terminal-label">user@survivor-systems:~$ LOAD MODULE // MOTION DRAFTING</div>
+          <h1 id="motion-drafting-title">&lt;Motion Drafting Basics&gt;</h1>
+          <p className="legal-tagline">// Tools for clarity. Power for your future.</p>
+
+          <div className="legal-intro">
+            &lt;A motion is just a written request asking the court to do something. Before you write
+            one word, you need to know which one you are actually filing. The wrong motion can get
+            you a denial or delay instead of a hearing. This module starts where every filing
+            should: research.&gt;
+          </div>
+
+          <div className="legal-warning">
+            <strong>&gt;&gt; Read This First</strong>
+            <p>
+              This is general orientation, not legal advice. Motion names, formats, and filing rules
+              are different in every state and sometimes every county. Nothing here replaces your
+              local court's rules, your county clerk, or a legal aid attorney. Always confirm with
+              your specific court before you file.
+            </p>
+          </div>
+
+          <section className="legal-step-section" aria-labelledby="motion-step-title">
+            <h2 id="motion-step-title">&gt;&gt; Step One: Research Before You Write</h2>
+            <div className="legal-step-grid">
+              {motionDraftingSteps.map((step) => (
+                <article className="legal-step-card" key={step.number}>
+                  <span>// {step.number}</span>
+                  <h3>{step.title}</h3>
+                  <p>{step.text}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section className="legal-motion-section" aria-labelledby="family-motion-title">
+            <h2 id="family-motion-title">&gt;&gt; Common Family Court Motions</h2>
+            <div className="legal-motion-grid">
+              {familyCourtMotionSections.map((section) => (
+                <article className="legal-motion-card" key={section.title}>
+                  <h3>
+                    {section.title}
+                    {section.tag ? <span>{section.tag}</span> : null}
+                  </h3>
+                  {section.blocks.map((block) => (
+                    <div className="legal-motion-block" key={block.title}>
+                      <strong>&gt;&gt; {block.title}</strong>
+                      <ul>
+                        {block.items.map((item) => (
+                          <li key={item.name ?? item.text}>
+                            {item.name ? <span>{item.name}</span> : null}
+                            {item.text}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <div className="legal-note-grid">
+            <div className="legal-note">
+              <strong>&gt;&gt; Note</strong>
+              <p>
+                Not every state uses these exact names. Some call a Motion to Modify a Petition to
+                Modify. Some fold temporary orders and emergency relief into one filing. The category
+                matters more than the exact label. Use this list to identify what you need, then
+                confirm the correct name and form in your jurisdiction.
+              </p>
+            </div>
+            <div className="legal-note">
+              <strong>&gt;&gt; Subscriber Library Connection</strong>
+              <p>
+                The Court Planner in the subscriber library is built for everything that happens
+                around the filing, not the motion itself: case numbers, court contacts, local
+                resources, evidence logs, statement practice, court vocabulary, logistics, and
+                after-court notes.
+              </p>
+            </div>
+          </div>
+
+          <div className="legal-reminder">
+            <strong>&gt;&gt; Remember</strong>
+            <p>
+              You do not have to get the legal language perfect on the first try. Courts see
+              self-represented filers regularly. What matters most: the right motion type, the right
+              case number, a clear statement of what you are asking for, and why.
+            </p>
+          </div>
+
+          <div className="terminal-actions denial-actions">
+            <button type="button" onClick={() => setActiveView("landing")}>
+              Back To Legal
+            </button>
+            <button type="button" onClick={leaveSite}>
+              Quick Exit
+            </button>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  return (
+    <section className="page-shell legal-module" aria-labelledby="legal-title">
+      <div className="page-kicker">
+        <Scale aria-hidden="true" />
+        <p className="eyebrow">Legal basics</p>
+      </div>
+
+      <div className="legal-header">
+        <div>
+          <p className="terminal-label">SURVIVOR OPERATING SYSTEM // LEGAL</p>
+          <h1 id="legal-title">&lt;Legal Navigation&gt;</h1>
+          <p>
+            Legal systems can be intimidating because they are systems with rules, deadlines,
+            vocabulary, and power. This section is for orientation, language, and preparation before
+            you ask a court, agency, advocate, or attorney for the next step.
+          </p>
+        </div>
+        <aside className="legal-status" aria-label="Legal module status">
+          <span>SYSTEM STATUS</span>
+          <strong>LEGAL MODE ONLINE</strong>
+          <small>GENERAL INFO // NOT LEGAL ADVICE</small>
+        </aside>
+      </div>
+
+      <div className="legal-category-grid">
+        {legalCategories.map((category) => (
+          <article className={category.available ? "legal-category-card ready" : "legal-category-card"} key={category.id}>
+            <div className="legal-category-card-header">
+              <span>{category.label}</span>
+              <small>{category.status}</small>
+            </div>
+            <h2>&lt;{category.title}&gt;</h2>
+            <p>{category.description}</p>
+            {category.id === "family-court" ? (
+              <button type="button" onClick={() => setActiveView("motion-drafting")}>
+                Motion Drafting Basics
+              </button>
+            ) : (
+              <button type="button" disabled>
+                Protocol Coming Soon
+              </button>
+            )}
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 export function App() {
   const [checkpointPassed, setCheckpointPassed] = useState(() => getCheckpointCleared());
   const [activeModule, setActiveModule] = useState<ModuleKey>(() => getInitialModule());
@@ -3303,6 +3644,8 @@ export function App() {
         <PlanningModule onControlPanelChange={updateControlPanel} onNavigate={navigate} />
       ) : activeModule === "rebuilding" ? (
         <RebuildingModule onNavigate={navigate} />
+      ) : activeModule === "legal" ? (
+        <LegalModule />
       ) : (
         <ResourceModule moduleKey={activeModule} />
       )}
