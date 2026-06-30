@@ -21,7 +21,8 @@ type ModuleKey =
   | "leaving"
   | "rebuilding"
   | "local-help"
-  | "legal";
+  | "legal"
+  | "library";
 
 type AssessmentAnswer = {
   id: string;
@@ -157,9 +158,9 @@ const modulePages: Record<
       "This page will hold housing, legal, money, support network, and stabilization resources for the next chapter.",
   },
   "local-help": {
-    eyebrow: "Local support",
-    title: "Find Local Help",
-    description: "This page will hold links and tools for finding survivor-centered support in your area.",
+    eyebrow: "Resources",
+    title: "Resources",
+    description: "This page will hold live crisis resources, local help links, and survivor-centered support tools.",
   },
   legal: {
     eyebrow: "Legal basics",
@@ -167,21 +168,49 @@ const modulePages: Record<
     description:
       "This page will hold plain-language legal rights resources, document checklists, and next-step guides.",
   },
+  library: {
+    eyebrow: "Resource library",
+    title: "Library",
+    description:
+      "This page will hold free downloads, paid subscriptions, previews, and the deeper Survivor Systems resource library.",
+  },
 };
 
-const navItems: Array<{ key: ModuleKey; label: string; path: string }> = [
-  { key: "home", label: "Home", path: "/" },
+const moduleRoutes: Record<ModuleKey, { label: string; path: string }> = {
+  home: { label: "Home", path: "/" },
+  "am-i-crazy": { label: "Am I Crazy", path: "/am-i-crazy" },
+  "go-bag-prep": { label: "Go-Bag Prep", path: "/go-bag-prep" },
+  planning: { label: "Prep / First Steps", path: "/planning" },
+  leaving: { label: "Leaving", path: "/leaving" },
+  rebuilding: { label: "Rebuilding", path: "/rebuilding" },
+  "local-help": { label: "Resources", path: "/resources" },
+  legal: { label: "Legal", path: "/legal" },
+  library: { label: "Library", path: "/library" },
+};
+
+const allNavTargets: Array<{ key: ModuleKey; label: string; path: string }> = [
+  { key: "home", ...moduleRoutes.home },
   { key: "am-i-crazy", label: "Am I Crazy", path: "/am-i-crazy" },
   { key: "go-bag-prep", label: "Go-Bag Prep", path: "/go-bag-prep" },
-  { key: "planning", label: "Planning", path: "/planning" },
-  { key: "leaving", label: "Leaving", path: "/leaving" },
-  { key: "rebuilding", label: "Rebuilding", path: "/rebuilding" },
-  { key: "local-help", label: "Find Local Help", path: "/local-help" },
-  { key: "legal", label: "Legal", path: "/legal" },
+  { key: "planning", ...moduleRoutes.planning },
+  { key: "leaving", ...moduleRoutes.leaving },
+  { key: "rebuilding", ...moduleRoutes.rebuilding },
+  { key: "local-help", ...moduleRoutes["local-help"] },
+  { key: "legal", ...moduleRoutes.legal },
+  { key: "library", ...moduleRoutes.library },
+];
+
+const navItems: Array<{ key: ModuleKey; label: string; path: string; decoded: string }> = [
+  { key: "planning", label: "Ctrl+Esc", path: "/planning", decoded: "Prep / First Steps" },
+  { key: "leaving", label: "Ctrl+Space", path: "/leaving", decoded: "Leaving" },
+  { key: "rebuilding", label: "Ctrl+Shift", path: "/rebuilding", decoded: "Rebuilding" },
+  { key: "local-help", label: "Ctrl+Fn", path: "/resources", decoded: "Resources" },
+  { key: "library", label: "Ctrl+L", path: "/library", decoded: "Library" },
 ];
 
 function navItemFor(key: ModuleKey) {
-  return navItems.find((item) => item.key === key) ?? navItems[0];
+  const route = moduleRoutes[key] ?? moduleRoutes.home;
+  return { key, ...route };
 }
 
 const assessmentQuestions: AssessmentQuestion[] = [
@@ -1242,8 +1271,9 @@ function markCheckpointCleared() {
 
 function getInitialModule(): ModuleKey {
   const path = window.location.pathname;
+  if (path === "/local-help") return "local-help";
 
-  const match = navItems.find((item) => item.path === path);
+  const match = allNavTargets.find((item) => item.path === path);
   return match?.key ?? "home";
 }
 
@@ -1710,18 +1740,38 @@ function resolveCommand(query: string) {
   if (/\b(help|menu|options|commands|where)\b/.test(normalized)) {
     return {
       message:
-        "AVAILABLE COMMANDS: AM I CRAZY, GO-BAG PREP, PLANNING, LEAVING, REBUILDING, LOCAL HELP, LEGAL, QUICK EXIT.",
+        "AVAILABLE COMMANDS: PREP, LEAVING, REBUILDING, RESOURCES, LIBRARY, AM I CRAZY, GO-BAG PREP, LEGAL, QUICK EXIT.",
       target: null,
     };
   }
 
-  const match = navItems.find((item) => {
+  const match = allNavTargets.find((item) => {
     const label = item.label.toLowerCase();
     return normalized.includes(label) || label.includes(normalized);
   });
 
   if (match) {
     return { message: `QUERY ACCEPTED. ROUTING TO ${match.label.toUpperCase()}...`, target: match };
+  }
+
+  if (/ctrl\s*\+\s*esc|\bfirst steps?\b|\bprep\b/.test(normalized)) {
+    return { message: "QUERY ACCEPTED. ROUTING TO PREP / FIRST STEPS...", target: navItemFor("planning") };
+  }
+
+  if (/ctrl\s*\+\s*space/.test(normalized)) {
+    return { message: "QUERY ACCEPTED. ROUTING TO LEAVING...", target: navItemFor("leaving") };
+  }
+
+  if (/ctrl\s*\+\s*shift/.test(normalized)) {
+    return { message: "QUERY ACCEPTED. ROUTING TO REBUILDING...", target: navItemFor("rebuilding") };
+  }
+
+  if (/ctrl\s*\+\s*fn|\bresources?\b/.test(normalized)) {
+    return { message: "QUERY ACCEPTED. ROUTING TO RESOURCES...", target: navItemFor("local-help") };
+  }
+
+  if (/ctrl\s*\+\s*l\b|\b(library|download|downloads|subscription|subscribe|paid|stripe)\b/.test(normalized)) {
+    return { message: "QUERY ACCEPTED. ROUTING TO LIBRARY...", target: navItemFor("library") };
   }
 
   if (/\b(crazy|abused|abuse|assessment|gaslight|gaslighting|reality)\b/.test(normalized)) {
@@ -1745,7 +1795,7 @@ function resolveCommand(query: string) {
   }
 
   if (/\b(local|hotline|shelter|support|near)\b/.test(normalized)) {
-    return { message: "QUERY ACCEPTED. ROUTING TO FIND LOCAL HELP...", target: navItemFor("local-help") };
+    return { message: "QUERY ACCEPTED. ROUTING TO RESOURCES...", target: navItemFor("local-help") };
   }
 
   if (/\b(legal|rights|court|order|documents)\b/.test(normalized)) {
@@ -1754,7 +1804,7 @@ function resolveCommand(query: string) {
 
   return {
     message:
-      "QUERY NOT RECOGNIZED. TRY: AM I CRAZY, PLANNING, LEAVING, REBUILDING, LOCAL HELP, LEGAL, OR QUICK EXIT.",
+      "QUERY NOT RECOGNIZED. TRY: PREP, LEAVING, REBUILDING, RESOURCES, LIBRARY, LEGAL, OR QUICK EXIT.",
     target: null,
   };
 }
@@ -1792,7 +1842,7 @@ function TerminalCommand({
           autoComplete="off"
           id="terminal-command"
           onChange={(event) => setQuery(event.target.value)}
-          placeholder="type: am i crazy, go-bag prep, planning, legal, quick exit..."
+          placeholder="type: prep, leaving, resources, library, legal, quick exit..."
           spellCheck={false}
           type="search"
           value={query}
@@ -1839,7 +1889,8 @@ function TerminalChrome({
                 onNavigate(item.key, item.path);
               }}
             >
-              {item.label}
+              <span>{item.label}</span>
+              <small>{item.decoded}</small>
             </a>
           ))}
         </nav>
@@ -1852,7 +1903,7 @@ function TerminalChrome({
         <header className="terminal-topbar">
           <div className="terminal-topbar-title">
             <span className="terminal-label">MODULE</span>
-            <h1>{navItems.find((item) => item.key === activeModule)?.label ?? "Home"}</h1>
+            <h1>{moduleRoutes[activeModule]?.label ?? "Home"}</h1>
           </div>
           <div className="system-status">
             <span>SYSTEM STATUS</span>
@@ -1868,45 +1919,47 @@ function TerminalChrome({
 }
 
 function HomeModule() {
+  const navLegend = [
+    ["Ctrl+Esc", "Prep / First Steps"],
+    ["Ctrl+Space", "Leaving"],
+    ["Ctrl+Shift", "Rebuilding"],
+    ["Ctrl+Fn", "Resources"],
+    ["Ctrl+L", "Library"],
+  ];
+
   return (
     <section className="home-terminal" aria-labelledby="home-title">
       <div className="home-terminal-command">
         <span aria-hidden="true">user@survivor-systems:~$</span>
         <strong>USER TERMINAL</strong>
       </div>
-      <article className="home-message">
-        <h1 id="home-title">&lt;Is There Any Hope?&gt;</h1>
-        <p>
-          &lt;If one of you has ended up here, wondering how to fix the other, the relationship may
-          already be telling you the truth.&gt;
-        </p>
-        <p>
-          &lt;Abusive behavior can come from childhood wounds, stress, trauma, or any number of other
-          causes. Those things may explain it. They don&apos;t excuse it. It&apos;s still their
-          responsibility not to pour their unhealed pain into someone else, especially someone they
-          claim to love.&gt;
-        </p>
-        <p>&lt;Their potential does not make you safe.&gt;</p>
-        <p>
-          &lt;Leaving can be the most dangerous point in an abusive relationship. A person who has never
-          used physical violence before may escalate when they feel their control slipping. That
-          doesn&apos;t mean you should stay. It means you deserve a plan.&gt;
-        </p>
-        <p>
-          &lt;Start small. Picture where you could go. Decide who you could call. Create a code word
-          that means, &ldquo;Call the police.&rdquo; Begin preparing yourself for what leaving could
-          involve, even if you are not ready to act yet.&gt;
-        </p>
-        <p>
-          &lt;You aren&apos;t weak for struggling with this. You are navigating one of the hardest
-          things a person can face.&gt;
-        </p>
-        <p>&lt;You&apos;re not alone, either.&gt;</p>
-        <p>
-          &lt;Survivor Systems is here to help you understand your choices, prepare safely, and decide
-          what comes next.&gt;
-        </p>
-      </article>
+      <div className="home-grid">
+        <article className="home-message">
+          <h1 id="home-title">&lt;Welcome To Survivor Systems&gt;</h1>
+          <p>
+            &lt;Survivor Systems is a browser-based command center for people trying to understand
+            what is happening, what might be possible, and what deserves consideration next.&gt;
+          </p>
+          <p>
+            &lt;The mission is autonomy: practical tools, live planning modules, crisis-aware
+            resources, and deeper guides without forcing an account before someone can think
+            clearly.&gt;
+          </p>
+          <p>
+            &lt;This system does not promise safety, make decisions for you, or store your answers. It
+            helps organize choices so the next step feels less like fog and more like a door.&gt;
+          </p>
+        </article>
+        <aside className="nav-legend" aria-label="Navigation legend">
+          <div className="terminal-label">NAV LEGEND</div>
+          {navLegend.map(([shortcut, decoded]) => (
+            <div className="legend-row" key={shortcut}>
+              <kbd>{shortcut}</kbd>
+              <span>{decoded}</span>
+            </div>
+          ))}
+        </aside>
+      </div>
     </section>
   );
 }
@@ -2305,7 +2358,7 @@ function SafetyPlanningModule({
         </div>
 
         <div className="terminal-actions denial-actions">
-          <button type="button" onClick={() => onNavigate("local-help", "/local-help")}>
+          <button type="button" onClick={() => onNavigate("local-help", "/resources")}>
             Find Advocate Or Crisis Help
           </button>
           <button type="button" onClick={() => onNavigate("legal", "/legal")}>
@@ -2620,8 +2673,8 @@ function PlanningModule({
                 <button type="button" onClick={() => onNavigate("go-bag-prep", "/go-bag-prep")}>
                   Go-Bag Prep
                 </button>
-                <button type="button" onClick={() => onNavigate("local-help", "/local-help")}>
-                  Find Local Help
+                <button type="button" onClick={() => onNavigate("local-help", "/resources")}>
+                  Resources
                 </button>
                 <button type="button" onClick={() => onNavigate("legal", "/legal")}>
                   Legal
@@ -2895,7 +2948,7 @@ function ExitPlanningModule({
             <p>ONE ACTION IS STILL ACTION. CONTROL RETURNS IN INCREMENTS.</p>
           </div>
           <div className="terminal-actions denial-actions">
-            <button type="button" onClick={() => onNavigate("local-help", "/local-help")}>
+            <button type="button" onClick={() => onNavigate("local-help", "/resources")}>
               Show Relevant Free Resources
             </button>
             <button type="button" onClick={() => onNavigate("legal", "/legal")}>
@@ -2992,7 +3045,7 @@ export function App() {
     return <WelcomeCheckpoint onComplete={completeCheckpoint} />;
   }
 
-  const loadingLabel = navItems.find((item) => item.key === loadingModule)?.label;
+  const loadingLabel = loadingModule ? moduleRoutes[loadingModule]?.label : null;
 
   return (
     <TerminalChrome activeModule={loadingModule ?? activeModule} controlPanel={controlPanel} onNavigate={navigate}>
