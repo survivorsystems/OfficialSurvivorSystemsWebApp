@@ -2078,7 +2078,7 @@ button:disabled {
 .home-message {
   border-top: 1px solid rgba(0, 234, 255, 0.2);
   display: grid;
-  gap: 16px;
+  gap: 18px;
   margin-top: 0;
   max-width: 980px;
   padding-top: 22px;
@@ -2100,24 +2100,87 @@ button:disabled {
 }
 
 .home-message h1 {
-  margin-bottom: 2px;
+  margin-bottom: 0;
 }
 
 .home-message p {
   color: var(--text);
-  font-size: clamp(0.96rem, 1.48vw, 1.1rem);
-  line-height: 1.65;
+  font-size: clamp(0.92rem, 1.24vw, 1.02rem);
+  line-height: 1.8;
   margin: 0;
   max-width: 900px;
 }
 
-.home-message p:nth-of-type(3) {
+.mission-prompt {
+  color: var(--cyan);
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-shadow: var(--shadow-cyan);
+  text-transform: uppercase;
+}
+
+.home-message .home-tagline {
+  color: var(--purple);
+  font-size: 0.84rem;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.home-pull-quote {
+  background:
+    linear-gradient(90deg, rgba(255, 79, 216, 0.14), transparent 76%),
+    rgba(0, 0, 0, 0.28);
+  border-left: 3px solid var(--pink);
+  border-radius: 0 6px 6px 0;
+  box-shadow: inset 0 0 18px rgba(255, 79, 216, 0.06);
+  padding: 14px 18px;
+}
+
+.home-pull-quote p {
   color: var(--hot-text);
-  font-size: clamp(1.18rem, 2vw, 1.45rem);
+  font-size: clamp(0.96rem, 1.35vw, 1.08rem);
+  font-style: italic;
+  line-height: 1.75;
+  text-shadow: 0 0 10px rgba(255, 79, 216, 0.16);
+}
+
+.home-message .mission-emphasis {
+  color: var(--hot-text);
+  font-size: clamp(1rem, 1.5vw, 1.16rem);
   font-weight: 900;
   letter-spacing: 0.04em;
+  line-height: 1.65;
   text-shadow: var(--shadow-pink);
   text-transform: uppercase;
+}
+
+.founder-note {
+  background:
+    linear-gradient(180deg, rgba(184, 82, 255, 0.1), transparent 50%),
+    rgba(0, 0, 0, 0.38);
+  border: 1px solid rgba(184, 82, 255, 0.34);
+  border-left: 3px solid var(--purple);
+  border-radius: 6px;
+  box-shadow: inset 0 0 18px rgba(184, 82, 255, 0.05);
+  display: grid;
+  gap: 12px;
+  margin-top: 8px;
+  padding: 18px;
+}
+
+.founder-note p {
+  color: #d9b8ff;
+  font-size: clamp(0.88rem, 1.12vw, 0.98rem);
+  line-height: 1.8;
+}
+
+.founder-note strong {
+  color: var(--hot-text);
+  font-weight: 900;
+  text-shadow: var(--shadow-pink);
 }
 
 .nav-legend {

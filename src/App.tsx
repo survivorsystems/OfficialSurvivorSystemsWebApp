@@ -2041,20 +2041,63 @@ function HomeModule() {
       </div>
       <div className="home-grid">
         <article className="home-message">
-          <h1 id="home-title">&lt;Welcome To Survivor Systems&gt;</h1>
+          <div className="mission-prompt">user@survivor-systems:~$ LOAD MODULE // MISSION</div>
+          <h1 id="home-title">&lt;You Are Not Alone Here&gt;</h1>
+          <p className="home-tagline">// And it's okay if this is complicated</p>
           <p>
-            &lt;Survivor Systems is a browser-based command center for people trying to understand
-            what is happening, what might be possible, and what deserves consideration next.&gt;
+            Leaving a partner is one of the hardest things a person can do. Leaving one who has hurt
+            you is even harder, because the hurt and the love do not cancel each other out. They
+            exist at the same time, in the same body, pulling in opposite directions. If you have
+            ever felt confused about why you still miss them, still defend them, still reach for your
+            phone to call them, that is not weakness. That is what this actually feels like.
           </p>
           <p>
-            &lt;The mission is autonomy: practical tools, live planning modules, crisis-aware
-            resources, and deeper guides without forcing an account before someone can think
-            clearly.&gt;
+            Research suggests that trauma bonding is a neurological process, not a character flaw.
+            When a relationship cycles between fear and comfort, tension and relief, your nervous
+            system learns to attach to the person who provides both. The moments of warmth feel more
+            intense against the backdrop of pain. The relief of making up can feel like love because,
+            to your body, it registers as safety returning.
+          </p>
+          <div className="home-pull-quote">
+            <p>
+              You love parts of them. You are used to them. They feel safe sometimes. You remember
+              who they were at the beginning, or who you believed they could be. Grieving all of that
+              is real grief.
+            </p>
+          </div>
+          <p>
+            Research also tells us that women in particular tend to respond to threat by moving
+            toward connection: tending to the people around them, keeping the peace, making
+            themselves smaller or more agreeable to reduce tension. This is not a flaw in your
+            wiring. It is a deeply human response to an unsafe situation. The problem is that it can
+            look, from the inside, exactly like love.
           </p>
           <p>
-            &lt;This system does not promise safety, make decisions for you, or store your answers. It
-            helps organize choices so the next step feels less like fog and more like a door.&gt;
+            You may leave and go back. You may go back more than once. You may remember things
+            differently as time passes. Moments that felt normal at the time may later land
+            differently in the light of what you now understand. That is not you being dramatic. That
+            is clarity arriving on its own timeline, which it always does.
           </p>
+          <p className="mission-emphasis">
+            No one here is pretending this is simple. This system was built for the reality of what
+            it actually is: complicated, painful, nonlinear, and survivable.
+          </p>
+          <p>
+            You get to move through it at your own pace. Your autonomy, your right to choose when,
+            how, and in what direction, belongs to you. It always has. Someone else just convinced
+            you otherwise for a while.
+          </p>
+          <div className="founder-note">
+            <div className="terminal-label">&gt;&gt; A Note From The Founder</div>
+            <p>
+              Survivor Systems was built by <strong>Krista Sanders</strong>, researcher, advocate,
+              somatic trauma specialist, and survivor. After escaping a situation that led to
+              trafficking and homelessness, Krista found that the resources available to her were
+              clinical, complicated, and clearly not built by anyone who had actually needed them. So
+              she built something different. Something that talks to you like a person. Every tool in
+              this system exists because someone needed it and it was not there. It is here now.
+            </p>
+          </div>
         </article>
         <aside className="nav-legend" aria-label="Navigation legend">
           <div className="terminal-label">NAV LEGEND</div>
