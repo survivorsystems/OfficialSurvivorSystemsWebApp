@@ -213,30 +213,38 @@ const modulePages: Record<
 
 const legalCategories: LegalCategory[] = [
   {
-    id: "family-court",
+    id: "protective-orders",
     label: "01",
+    title: "Protective Orders",
+    description: "Emergency orders, civil protection orders, hearing types, filing help, and what courts may be able to grant.",
+    status: "MODULE READY",
+    available: true,
+  },
+  {
+    id: "family-court",
+    label: "02",
     title: "Family Court",
-    description: "Custody, parenting time, support, temporary orders, protective orders, and court prep.",
+    description: "Custody, parenting time, support, temporary orders, motion drafting, and court prep.",
     status: "MODULE READY",
     available: true,
   },
   {
     id: "civil-court",
-    label: "02",
+    label: "03",
     title: "Civil Court",
     description: "Civil filings, claims, responses, deadlines, and paperwork that is not family-court specific.",
     status: "QUEUE OPEN",
   },
   {
     id: "reporting",
-    label: "03",
+    label: "04",
     title: "Reporting",
     description: "Police reports, incident documentation, advocate support, and what to ask before reporting.",
     status: "QUEUE OPEN",
   },
   {
     id: "immigration",
-    label: "04",
+    label: "05",
     title: "Immigration",
     description: "Immigration-related survivor protections, documentation, referrals, and legal-aid pathways.",
     status: "QUEUE OPEN",
@@ -3645,7 +3653,7 @@ function LegalModule() {
       <section className="page-shell legal-module" aria-labelledby="protective-orders-title">
         <div className="page-kicker">
           <Scale aria-hidden="true" />
-          <p className="eyebrow">Legal // Family Court</p>
+          <p className="eyebrow">Legal // Protective Orders</p>
         </div>
 
         <div className="legal-guide-shell">
@@ -3802,11 +3810,12 @@ function LegalModule() {
             </div>
             <h2>&lt;{category.title}&gt;</h2>
             <p>{category.description}</p>
-            {category.id === "family-court" ? (
+            {category.id === "protective-orders" ? (
+              <button type="button" onClick={() => setActiveView("protective-orders")}>
+                Protective Orders
+              </button>
+            ) : category.id === "family-court" ? (
               <div className="legal-category-actions">
-                <button type="button" onClick={() => setActiveView("protective-orders")}>
-                  Protective Orders
-                </button>
                 <button type="button" onClick={() => setActiveView("motion-drafting")}>
                   Motion Drafting Basics
                 </button>
