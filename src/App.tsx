@@ -160,6 +160,12 @@ type LegalGuideSection = {
   }>;
 };
 
+type LegalStep = {
+  number: string;
+  title: string;
+  text: string;
+};
+
 const modulePages: Record<
   Exclude<ModuleKey, "home" | "am-i-crazy" | "go-bag-prep">,
   {
@@ -237,7 +243,7 @@ const legalCategories: LegalCategory[] = [
   },
 ];
 
-const motionDraftingSteps = [
+const motionDraftingSteps: LegalStep[] = [
   {
     number: "01",
     title: "Identify Your Court And Case Type",
@@ -360,6 +366,103 @@ const familyCourtMotionSections: LegalGuideSection[] = [
   },
 ];
 
+const protectiveOrderTypes: LegalStep[] = [
+  {
+    number: "TYPE 01",
+    title: "Emergency Protective Order (EPO)",
+    text:
+      "A short-term order, often issued within hours, usually after police respond to an incident. In many counties, law enforcement can request this directly from a judge on your behalf. It is meant to create immediate breathing room and typically lasts only a few days to a couple of weeks, long enough to get to the next step.",
+  },
+  {
+    number: "TYPE 02",
+    title: "Criminal Protective Order",
+    text:
+      "This comes out of a criminal case, meaning the state, not you, is prosecuting. It is typically issued as a condition of bail, probation, or a no-contact requirement while criminal charges are pending or after a conviction. You may be the protected person, but the prosecutor drives the legal proceeding.",
+  },
+  {
+    number: "TYPE 03",
+    title: "Civil Protection Order / DVRO",
+    text:
+      "This is the one most people mean when they say protective order. You file it yourself as the petitioner in civil court, separate from any criminal case. It can run from one to five years depending on the state, and it usually carries the most detailed, customizable terms.",
+  },
+];
+
+const protectiveOrderSections: LegalGuideSection[] = [
+  {
+    title: "Common DVRO Hearings",
+    blocks: [
+      {
+        title: "What You May Go Through",
+        items: [
+          {
+            name: "Ex Parte / Temporary Order Hearing",
+            text: "Happens fast, often the same day you file, before the other party is notified. The judge decides whether to grant short-term protection based on your statement alone.",
+          },
+          {
+            name: "Service of Process",
+            text: "Not a hearing, but a required step. The other party has to be formally notified of the order and upcoming full hearing before it can become permanent.",
+          },
+          {
+            name: "Full / Final Hearing",
+            text: "Both sides appear, evidence and testimony are presented, and the judge decides whether to issue a longer-term order.",
+          },
+          {
+            name: "Continuance Hearing",
+            text: "Happens if either side requests more time. Your temporary order typically stays in effect while you wait for the rescheduled date.",
+          },
+          {
+            name: "Modification Hearing",
+            text: "Requested later if either party wants to change the terms of an existing order.",
+          },
+          {
+            name: "Renewal / Extension Hearing",
+            text: "Happens before an order expires, if you need protection to continue.",
+          },
+          {
+            name: "Contempt / Violation Hearing",
+            text: "Happens if the order is violated and you report it. This addresses enforcement, separate from the original case.",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    title: "What You Can Ask The Court For",
+    blocks: [
+      {
+        title: "Common Terms Courts Can Grant",
+        items: [
+          { text: "No-contact provisions: no calling, texting, emailing, or showing up in person." },
+          { text: "Stay-away distance requirements from your home, work, school, or other named places." },
+          { text: "Removal from a shared residence, even if both names are on the lease." },
+          { text: "Temporary custody or visitation terms for shared children." },
+          { text: "Removal of firearms or other weapons from the restrained person, where state law allows it." },
+          { text: "No third-party contact, meaning they cannot send someone else to contact you on their behalf." },
+          { text: "Coverage of pets named in the order, in states that allow it." },
+          { text: "Temporary financial provisions, such as continued bill payments, in some jurisdictions." },
+        ],
+      },
+    ],
+  },
+  {
+    title: "Where You Can Get Help Filing",
+    blocks: [
+      {
+        title: "Places That Can Help",
+        items: [
+          { text: "Local courthouse self-help center or family law facilitator's office." },
+          { text: "Domestic violence shelters and crisis centers with advocates who help with paperwork." },
+          { text: "Legal aid organizations offering free or low-cost help for qualifying income levels." },
+          { text: "County victim services or victim-witness assistance offices." },
+          { text: "Law enforcement, who can sometimes request an Emergency Order directly and connect you to local resources." },
+          { text: "Hospital-based or school-based advocacy programs, if the incident involved a medical visit or a child." },
+          { text: "State or national domestic violence hotlines, which can help locate nearby resources." },
+        ],
+      },
+    ],
+  },
+];
+
 const housingGuideSections: RebuildingGuideSection[] = [
   {
     id: "coordinated-entry",
@@ -447,7 +550,7 @@ const housingGuideSections: RebuildingGuideSection[] = [
     title: "When You Are Ready To Go Deeper",
     body: [
       "Once you have some privacy back and a space to plan from, staying on top of housing applications, utility assistance, and benefits can feel overwhelming.",
-      "Survivor Systems subscribers will get access to dedicated trackers built specifically for this stage of the process, designed to keep everything in one place so nothing falls through the cracks.",
+      "Subscribers have access to dedicated trackers built specifically for this stage of the process, designed to keep everything in one place so nothing falls through the cracks.",
     ],
     items: [
       "Housing Assistance Tracker for applications, deadlines, caseworkers, and follow-up.",
@@ -466,7 +569,7 @@ const moduleRoutes: Record<ModuleKey, { label: string; path: string }> = {
   leaving: { label: "Leaving", path: "/leaving" },
   rebuilding: { label: "Rebuilding", path: "/rebuilding" },
   "local-help": { label: "Resources", path: "/resources" },
-  legal: { label: "Legal", path: "/legal" },
+  legal: { label: "Ctrl+Alt+Del", path: "/legal" },
   library: { label: "Library", path: "/library" },
 };
 
@@ -487,6 +590,7 @@ const navItems: Array<{ key: ModuleKey; label: string; path: string; decoded: st
   { key: "leaving", label: "Ctrl+Space", path: "/leaving", decoded: "Leaving" },
   { key: "rebuilding", label: "Ctrl+Shift", path: "/rebuilding", decoded: "Rebuilding" },
   { key: "local-help", label: "Ctrl+Fn", path: "/resources", decoded: "Resources" },
+  { key: "legal", label: "Ctrl+Alt+Del", path: "/legal", decoded: "Legal" },
   { key: "library", label: "Ctrl+L", path: "/library", decoded: "Library" },
 ];
 
@@ -2206,6 +2310,7 @@ function HomeModule() {
     ["Ctrl+Space", "Leaving"],
     ["Ctrl+Shift", "Rebuilding"],
     ["Ctrl+Fn", "Resources"],
+    ["Ctrl+Alt+Del", "Legal"],
     ["Ctrl+L", "Library"],
   ];
 
@@ -3420,7 +3525,7 @@ function RebuildingModule({
 }
 
 function LegalModule() {
-  const [activeView, setActiveView] = useState<"landing" | "motion-drafting">("landing");
+  const [activeView, setActiveView] = useState<"landing" | "motion-drafting" | "protective-orders">("landing");
 
   if (activeView === "motion-drafting") {
     return (
@@ -3505,8 +3610,8 @@ function LegalModule() {
             <div className="legal-note">
               <strong>&gt;&gt; Subscriber Library Connection</strong>
               <p>
-                The Court Planner in the subscriber library is built for everything that happens
-                around the filing, not the motion itself: case numbers, court contacts, local
+                Subscribers have access to the Court Planner, which is built for everything that
+                happens around the filing, not the motion itself: case numbers, court contacts, local
                 resources, evidence logs, statement practice, court vocabulary, logistics, and
                 after-court notes.
               </p>
@@ -3535,17 +3640,146 @@ function LegalModule() {
     );
   }
 
+  if (activeView === "protective-orders") {
+    return (
+      <section className="page-shell legal-module" aria-labelledby="protective-orders-title">
+        <div className="page-kicker">
+          <Scale aria-hidden="true" />
+          <p className="eyebrow">Legal // Family Court</p>
+        </div>
+
+        <div className="legal-guide-shell">
+          <div className="terminal-label">user@survivor-systems:~$ LOAD MODULE // PROTECTIVE ORDERS</div>
+          <h1 id="protective-orders-title">&lt;Protective Orders: What To Expect&gt;</h1>
+          <p className="legal-tagline">// Tools for clarity. Power for your future.</p>
+
+          <div className="legal-intro">
+            &lt;Going to court to ask for protection is its own kind of hard. Not knowing what is
+            coming makes it harder. This module walks through what a protective order does, the
+            different types you may run into, who can help you get one, and what tends to make the
+            process survivable.&gt;
+          </div>
+
+          <div className="legal-warning">
+            <strong>&gt;&gt; Not Legal Advice</strong>
+            <p>
+              This module is general education, not legal advice. Protective order names, processes,
+              and what a judge can grant differ by state and county. It does not create an
+              attorney-client relationship and should not replace advice from a licensed attorney or
+              local legal aid office. Confirm everything here against your specific court before you
+              act on it.
+            </p>
+          </div>
+
+          <section className="legal-step-section" aria-labelledby="protective-types-title">
+            <h2 id="protective-types-title">&gt;&gt; The Three Types You May Hear About</h2>
+            <div className="legal-step-grid three-up">
+              {protectiveOrderTypes.map((type) => (
+                <article className="legal-step-card" key={type.number}>
+                  <span>// {type.number}</span>
+                  <h3>{type.title}</h3>
+                  <p>{type.text}</p>
+                </article>
+              ))}
+            </div>
+            <div className="legal-note">
+              <strong>&gt;&gt; Note</strong>
+              <p>
+                These types can overlap. You might have an Emergency Order in the first 48 hours, a
+                Criminal Protective Order if charges get filed, and a Civil Protection Order running
+                alongside or after both. Ask the court clerk or an advocate which type applies to
+                your situation.
+              </p>
+            </div>
+          </section>
+
+          <section className="legal-motion-section" aria-labelledby="protective-sections-title">
+            <h2 id="protective-sections-title">&gt;&gt; Protective Order Process Map</h2>
+            <div className="legal-motion-grid">
+              {protectiveOrderSections.map((section) => (
+                <article className="legal-motion-card" key={section.title}>
+                  <h3>{section.title}</h3>
+                  {section.blocks.map((block) => (
+                    <div className="legal-motion-block" key={block.title}>
+                      <strong>&gt;&gt; {block.title}</strong>
+                      <ul>
+                        {block.items.map((item) => (
+                          <li key={item.name ?? item.text}>
+                            {item.name ? <span>{item.name}</span> : null}
+                            {item.text}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </article>
+              ))}
+            </div>
+            <div className="legal-note">
+              <strong>&gt;&gt; Note</strong>
+              <p>
+                Not every court can grant every term, and weapons removal has different rules state
+                to state. Ask specifically for what you need at your hearing. Judges generally cannot
+                grant something you never requested.
+              </p>
+            </div>
+          </section>
+
+          <div className="legal-note-grid">
+            <div className="legal-note">
+              <strong>&gt;&gt; Do Not Carry It Alone</strong>
+              <p>
+                Filing for protection can mean retelling what happened more than once to people who
+                do not know you. That can be retraumatizing, even when the outcome is what you want.
+                Identify one trusted person, advocate, or counselor before you start so all of it is
+                not sitting on you alone.
+              </p>
+            </div>
+            <div className="legal-note">
+              <strong>&gt;&gt; Use The Court Planner</strong>
+              <p>
+                Subscribers have access to the Court Planner for case numbers, court contacts,
+                prioritized tasks, statement practice, evidence logs, vocabulary, logistics, and
+                after-court notes. You do not have to hold the logistics in your head on top of
+                everything else.
+              </p>
+            </div>
+          </div>
+
+          <div className="legal-reminder">
+            <strong>&gt;&gt; Remember</strong>
+            <p>
+              You are allowed to ask questions in court. You are allowed to ask for a continuance if
+              you are not ready. You are allowed to bring support with you in most settings. Wanting
+              protection and feeling scared of the process are not contradictions.
+            </p>
+          </div>
+
+          <div className="terminal-actions denial-actions">
+            <button type="button" onClick={() => setActiveView("landing")}>
+              Back To Legal
+            </button>
+            <button type="button" onClick={leaveSite}>
+              Quick Exit
+            </button>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className="page-shell legal-module" aria-labelledby="legal-title">
       <div className="page-kicker">
         <Scale aria-hidden="true" />
-        <p className="eyebrow">Legal basics</p>
+        <p className="eyebrow">Legal</p>
       </div>
 
       <div className="legal-header">
         <div>
           <p className="terminal-label">SURVIVOR OPERATING SYSTEM // LEGAL</p>
-          <h1 id="legal-title">&lt;Legal Navigation&gt;</h1>
+          <h1 id="legal-title">&lt;Ctrl+Alt+Del&gt;</h1>
+          <p className="legal-command-subtitle">LEGAL</p>
           <p>
             Legal systems can be intimidating because they are systems with rules, deadlines,
             vocabulary, and power. This section is for orientation, language, and preparation before
@@ -3569,9 +3803,14 @@ function LegalModule() {
             <h2>&lt;{category.title}&gt;</h2>
             <p>{category.description}</p>
             {category.id === "family-court" ? (
-              <button type="button" onClick={() => setActiveView("motion-drafting")}>
-                Motion Drafting Basics
-              </button>
+              <div className="legal-category-actions">
+                <button type="button" onClick={() => setActiveView("protective-orders")}>
+                  Protective Orders
+                </button>
+                <button type="button" onClick={() => setActiveView("motion-drafting")}>
+                  Motion Drafting Basics
+                </button>
+              </div>
             ) : (
               <button type="button" disabled>
                 Protocol Coming Soon

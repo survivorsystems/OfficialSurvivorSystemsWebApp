@@ -2960,6 +2960,16 @@ button:disabled {
   text-transform: uppercase;
 }
 
+.legal-command-subtitle {
+  color: var(--cyan);
+  font-size: clamp(0.92rem, 1.4vw, 1.1rem);
+  font-weight: 900;
+  letter-spacing: 0.32em;
+  margin: -2px 0 16px;
+  text-shadow: var(--shadow-cyan);
+  text-transform: uppercase;
+}
+
 .legal-intro {
   border-left: 3px solid var(--purple);
 }
@@ -3064,6 +3074,11 @@ button:disabled {
   text-transform: uppercase;
 }
 
+.legal-category-actions {
+  display: grid;
+  gap: 8px;
+}
+
 .legal-category-card button:disabled {
   border-color: rgba(184, 82, 255, 0.28);
   color: rgba(201, 248, 255, 0.45);
@@ -3074,6 +3089,10 @@ button:disabled {
 .legal-motion-section {
   display: grid;
   gap: 14px;
+}
+
+.legal-step-grid.three-up {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .legal-motion-card h3 {
@@ -3924,6 +3943,7 @@ button:disabled {
   .home-option-grid,
   .legal-category-grid,
   .legal-step-grid,
+  .legal-step-grid.three-up,
   .legal-motion-grid,
   .legal-note-grid,
   .ladder-rung-grid,
@@ -3971,6 +3991,7 @@ button:disabled {
   .home-option-grid,
   .legal-category-grid,
   .legal-step-grid,
+  .legal-step-grid.three-up,
   .legal-motion-grid,
   .legal-note-grid,
   .ladder-rung-grid,
