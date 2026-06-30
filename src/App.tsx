@@ -131,6 +131,14 @@ type SafetyPlanSection = {
   }>;
 };
 
+type RebuildingGuideSection = {
+  id: string;
+  label: string;
+  title: string;
+  body: string[];
+  items?: string[];
+};
+
 const modulePages: Record<
   Exclude<ModuleKey, "home" | "am-i-crazy" | "go-bag-prep">,
   {
@@ -175,6 +183,104 @@ const modulePages: Record<
       "This page will hold free downloads, paid subscriptions, previews, and the deeper Survivor Systems resource library.",
   },
 };
+
+const housingGuideSections: RebuildingGuideSection[] = [
+  {
+    id: "coordinated-entry",
+    label: "START HERE",
+    title: "Coordinated Entry",
+    body: [
+      "Housing is the hardest part of rebuilding. It can feel impossible because everything else seems to depend on it. The good news: there are more options than most people know about, and there is a system designed specifically to connect people in crisis to housing resources.",
+      "Coordinated Entry is a federally mandated system that exists in every county in the United States. It was created by HUD to help people experiencing housing crises connect to the right resources without having to call twenty different places and tell their story twenty times.",
+    ],
+    items: [
+      "It screens for available housing resources in your area at once.",
+      "It connects people to emergency shelter, transitional housing, rapid rehousing programs, and permanent supportive housing depending on the situation.",
+      "DV survivors may receive priority status in some Coordinated Entry systems. Ask specifically about this.",
+      "A shelter advocate may be able to submit the Coordinated Entry assessment on your behalf. Ask about this early.",
+    ],
+  },
+  {
+    id: "access",
+    label: "ACCESS POINTS",
+    title: "How To Access Coordinated Entry",
+    body: [
+      "The access point varies by county, but the first few doors are usually the same. The point is to get into the system early, even if you are not ready to move today.",
+      "Waitlists are real. Getting assessed sooner matters because the clock on your waitlist position usually starts when you apply, not when you suddenly need housing.",
+    ],
+    items: [
+      "Call 211. This is often the fastest route to your local Coordinated Entry access point.",
+      'Search "Coordinated Entry" plus your county name to find the local system directly.',
+      "Ask a DV shelter advocate. They often work with Coordinated Entry and can help you navigate it faster.",
+      "Expect a standardized assessment such as VI-SPDAT or a similar local tool. Answer honestly because it affects priority level.",
+      "Follow up regularly after assessment. Do not assume silence means no movement.",
+    ],
+  },
+  {
+    id: "hud-rights",
+    label: "HUD / RIGHTS",
+    title: "Federal Housing Programs And Protections",
+    body: [
+      "Some housing options are connected to HUD programs. Availability changes by area, but knowing the language can help you ask clearer questions.",
+      "Legal protections can also matter. Under VAWA, survivors have specific housing rights in federally assisted housing. A legal advocate can help translate what those rights mean in your state and situation.",
+    ],
+    items: [
+      "Rapid Rehousing may cover move-in costs, security deposits, and short-term rent assistance, often with case management.",
+      "Emergency Housing Vouchers may cover a portion of private-market rent for survivors of domestic violence, dating violence, sexual assault, and stalking, depending on availability.",
+      "Landlords in federally assisted housing cannot evict you because of DV-related incidents alone.",
+      "You may be able to break a lease early without penalty when fleeing DV. Ask a legal advocate.",
+      "In some cases, the abusive person can be removed from a shared lease without you losing housing.",
+    ],
+  },
+  {
+    id: "community",
+    label: "CAST A WIDE NET",
+    title: "Community Resources",
+    body: [
+      "Housing help is not only one door. It can be churches, community action agencies, transitional programs, 211 navigators, and local nonprofits that know the hidden resource map better than Google does.",
+      "Some options will not be a fit. Some will have requirements. That does not mean you failed. It means you are gathering doors.",
+    ],
+    items: [
+      "Faith communities may have emergency funds, housing ministries, or connections to affordable rentals. Most do not require you to share their beliefs to receive help.",
+      "Catholic Charities, Lutheran Social Services, Jewish Family Services, YWCA programs, and local missions may offer housing support or referrals.",
+      "Ask about requirements upfront, including religious programming, children, pets, accessibility, and length of stay.",
+      "Community Action Agencies can sometimes help with deposits, first month's rent, utilities, and referrals.",
+      "Call or text 211, or visit 211.org, for local housing, utility, food, and financial assistance listings.",
+    ],
+  },
+  {
+    id: "organized",
+    label: "TRACK EVERYTHING",
+    title: "The Part Nobody Talks About",
+    body: [
+      "Navigating housing assistance means tracking applications, deadlines, callback numbers, caseworker names, document requirements, and follow-up dates across multiple programs while also rebuilding your life. It is a lot.",
+      "Staying organized is not a personality trait. It is a survival skill. Write everything down when it is safe to do so.",
+    ],
+    items: [
+      "Program name and contact information for every application.",
+      "Date applied, confirmation numbers, and case numbers.",
+      "Caseworker or contact person names.",
+      "Required documents and whether each one has been submitted.",
+      "Follow-up dates and deadlines for recertification or renewal.",
+      "Utility assistance, SNAP, Medicaid, TANF, transportation, and other benefits applications.",
+    ],
+  },
+  {
+    id: "subscriber-tools",
+    label: "SUBSCRIBER TOOLS",
+    title: "When You Are Ready To Go Deeper",
+    body: [
+      "Once you have some privacy back and a space to plan from, staying on top of housing applications, utility assistance, and benefits can feel overwhelming.",
+      "Survivor Systems subscribers will get access to dedicated trackers built specifically for this stage of the process, designed to keep everything in one place so nothing falls through the cracks.",
+    ],
+    items: [
+      "Housing Assistance Tracker for applications, deadlines, caseworkers, and follow-up.",
+      "Utility Assistance Tracker for LIHEAP, local programs, and utility account status.",
+      "Benefits Assistance Tracker for SNAP, Medicaid, TANF, and other benefits.",
+      "Local resource category pages for the programs, offices, and organizations worth tracking.",
+    ],
+  },
+];
 
 const moduleRoutes: Record<ModuleKey, { label: string; path: string }> = {
   home: { label: "Home", path: "/" },
@@ -3001,6 +3107,94 @@ function ResourceModule({ moduleKey }: { moduleKey: Exclude<ModuleKey, "home" | 
   );
 }
 
+function RebuildingModule({
+  onNavigate,
+}: {
+  onNavigate: (module: ModuleKey, path: string) => void;
+}) {
+  return (
+    <section className="page-shell rebuilding-module" aria-labelledby="rebuilding-title">
+      <div className="page-kicker">
+        <Sprout aria-hidden="true" />
+        <p className="eyebrow">Ctrl+Shift // Rebuilding</p>
+      </div>
+
+      <div className="rebuilding-hero">
+        <div>
+          <p className="terminal-label">LOAD MODULE // HOUSING NAVIGATION</p>
+          <h1 id="rebuilding-title">&lt;How To Navigate Housing&gt;</h1>
+          <p>
+            Housing can feel like one giant locked door. It is usually a set of smaller doors:
+            first night, waitlists, documents, transportation, privacy, benefits, advocates, and
+            follow-up. This page helps name the system so it gets less impossible to approach.
+          </p>
+        </div>
+        <aside className="rebuilding-status" aria-label="Housing navigation status">
+          <span>SYSTEMS ONLINE</span>
+          <strong>REBUILDING MODE</strong>
+          <small>LIVE PAGE // NO PDF EMBED</small>
+        </aside>
+      </div>
+
+      <div className="housing-command-strip" aria-label="Housing quick signals">
+        <span>211</span>
+        <span>Coordinated Entry</span>
+        <span>DV Advocate</span>
+        <span>Waitlists</span>
+        <span>VAWA</span>
+        <span>Track Everything</span>
+      </div>
+
+      <div className="rebuilding-section-grid">
+        {housingGuideSections.map((section, index) => (
+          <article className="rebuilding-guide-card" key={section.id}>
+            <div className="rebuilding-guide-card-header">
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <small>{section.label}</small>
+            </div>
+            <h2>&lt;{section.title}&gt;</h2>
+            {section.body.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+            {section.items && (
+              <ul>
+                {section.items.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            )}
+          </article>
+        ))}
+      </div>
+
+      <section className="rebuilding-bottom-line" aria-labelledby="housing-bottom-line">
+        <p className="terminal-label">BOTTOM LINE</p>
+        <h2 id="housing-bottom-line">&lt;One Mountain, Smaller Steps&gt;</h2>
+        <p>
+          Housing feels like one mountain, but it is actually a series of smaller steps, each one
+          unlocking the next. Coordinated Entry gets you into the system. Community resources bridge
+          gaps. Tracking helps you avoid losing ground you already gained. You do not have to figure
+          all of this out at once. Start with the next step.
+        </p>
+        <div className="terminal-actions denial-actions">
+          <button type="button" onClick={() => onNavigate("planning", "/planning")}>
+            Prep / First Steps
+          </button>
+          <button type="button" onClick={() => onNavigate("local-help", "/resources")}>
+            Find Resources
+          </button>
+          <button type="button" onClick={() => onNavigate("legal", "/legal")}>
+            Legal Basics
+          </button>
+          <button type="button" onClick={leaveSite}>
+            Quick Exit
+          </button>
+        </div>
+      </section>
+    </section>
+  );
+}
+
 export function App() {
   const [checkpointPassed, setCheckpointPassed] = useState(() => getCheckpointCleared());
   const [activeModule, setActiveModule] = useState<ModuleKey>(() => getInitialModule());
@@ -3059,6 +3253,8 @@ export function App() {
         <GoBagSimulator onControlPanelChange={updateControlPanel} onNavigate={navigate} onQuickExit={leaveSite} />
       ) : activeModule === "planning" ? (
         <PlanningModule onControlPanelChange={updateControlPanel} onNavigate={navigate} />
+      ) : activeModule === "rebuilding" ? (
+        <RebuildingModule onNavigate={navigate} />
       ) : (
         <ResourceModule moduleKey={activeModule} />
       )}
