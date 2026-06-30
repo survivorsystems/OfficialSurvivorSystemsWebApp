@@ -268,7 +268,7 @@ const motionDraftingSteps: LegalStep[] = [
     number: "03",
     title: "Match The Problem To The Motion",
     text:
-      'Do not start with "what motion sounds right." Start with "what specifically do I need the court to change or decide?" Then work backward to the motion type that matches that exact ask.',
+      'Do not start with "what motion sounds right." Start with "what specifically needs the court to change or decide?" Then work backward to the motion type that matches that exact ask.',
   },
   {
     number: "04",
@@ -1279,7 +1279,7 @@ const leavingLadderRungs: LeavingLadderRung[] = [
       title: "CONTEXT WITHOUT EXCUSE",
       body: "Two things can be true: someone can feel like everything you ever wanted and still cause irreparable harm to you.\n\nMaladaptive behaviors can develop from many different kinds of trauma, and they do not look the same in everyone. Some may overlap with traits associated with personality disorders without meeting the criteria for a diagnosis. Understanding where someone's behavior comes from may provide context, but it does not erase the impact that behavior has had on your life.\n\nA diagnosis is not an excuse, and the absence of one does not make the harm less real. Whether that person recognizes their behavior, seeks help, or changes is not your responsibility. Your responsibility is to protect yourself, honor what you experienced, and make the choices that are safest for you.",
     },
-    suggestedAction: "Write one sentence somewhere private: This relationship is costing me ______.",
+    suggestedAction: "Complete one private prompt: This relationship is costing ______.",
     effect: {
       clarity: 16,
       preparedness: 4,
@@ -1358,15 +1358,15 @@ const leavingLadderRungs: LeavingLadderRung[] = [
 const planningResourcePages: SafetyPlanSection[] = [
   {
     id: "crisis-card",
-    title: "Screenshot Safety Card",
+    title: "Survivor Operating Systems Safety Protocol 001",
     subtitle: "For when printing, downloading, or saving a file is not safe.",
-    status: "CRISIS CARD // SCREENSHOT-FRIENDLY",
+    status: "SAFETY PROTOCOL 001 // SCREENSHOT-FRIENDLY",
     screenshotLines: [
-      "If I need to leave fast, I do not announce it.",
-      "I move toward one safer place: a public building, a neighbor, a friend, a store, a library, a shelter, or emergency services.",
-      "I keep one code word that means: call for help now.",
-      "I grab only what I can safely reach: phone, keys, wallet, meds, documents, charger, water, pet needs, and go-bag.",
-      "If my device may be monitored, I use a safer device or public computer before making sensitive plans.",
+      "Fast-exit protocol: departure is not announced.",
+      "Move toward one safer place: a public building, a neighbor, a friend, a store, a library, a shelter, or emergency services.",
+      "Maintain one code word that means: call for help now.",
+      "Collect only safely reachable essentials: phone, keys, wallet, meds, documents, charger, water, pet needs, and go-bag.",
+      "If device monitoring may be active, use a safer device or public computer before making sensitive plans.",
       "One small preparation is still preparation.",
     ],
     detailGroups: [
@@ -1434,10 +1434,10 @@ const planningResourcePages: SafetyPlanSection[] = [
     status: "PET SAFETY // FAMILY INCLUDED",
     screenshotLines: [
       "Threatening or harming pets can be a control tactic.",
-      "I do not have to choose between my safety and my pet's safety without looking for options first.",
-      "I gather photos, vet records, microchip info, medication labels, and proof that I care for my pet.",
-      "I ask safe people, DV shelters, animal shelters, vets, and rescues about emergency fostering or boarding.",
-      "If I cannot take my pet today, I tell an advocate and document everything.",
+      "Survivor safety and pet safety can both be explored before choosing an option.",
+      "Gather photos, vet records, microchip info, medication labels, and proof of care.",
+      "Ask safe people, DV shelters, animal shelters, vets, and rescues about emergency fostering or boarding.",
+      "If a pet cannot leave today, tell an advocate and document everything.",
     ],
     detailGroups: [
       {
@@ -2018,7 +2018,7 @@ function WelcomeCheckpoint({ onComplete }: { onComplete: () => void }) {
               Open Private Browsing Instructions
             </button>
             <button type="button" onClick={onComplete}>
-              I&apos;m Already Using Private Browsing
+              Private Browsing Active
             </button>
             <button type="button" onClick={() => setMode("ack")}>
               Continue Without Private Browsing
@@ -2042,7 +2042,7 @@ function WelcomeCheckpoint({ onComplete }: { onComplete: () => void }) {
             </ul>
             <div className="terminal-actions compact-actions">
               <button type="button" onClick={onComplete}>
-                I&apos;m Already Using Private Browsing
+                Private Browsing Active
               </button>
               <button type="button" onClick={() => setMode("ack")}>
                 Continue Without Private Browsing
@@ -2076,8 +2076,8 @@ function WelcomeCheckpoint({ onComplete }: { onComplete: () => void }) {
         {typingComplete && mode === "ack" && (
           <div className="sub-terminal">
             <p>
-              I understand that continuing may leave visible traces on this device, browser,
-              connected accounts, network, bills, backups, or monitoring tools.
+              Continuing may leave visible traces on this device, browser, connected accounts,
+              network, bills, backups, or monitoring tools.
             </p>
             <label className="ack-check">
               <input
@@ -2085,11 +2085,11 @@ function WelcomeCheckpoint({ onComplete }: { onComplete: () => void }) {
                 onChange={(event) => setAcknowledged(event.target.checked)}
                 type="checkbox"
               />
-              <span>I understand</span>
+              <span>Risk protocol acknowledged</span>
             </label>
             <div className="terminal-actions compact-actions">
               <button disabled={!acknowledged} type="button" onClick={onComplete}>
-                I Understand - Continue
+                Acknowledge Risk - Continue
               </button>
               <button type="button" onClick={() => setMode("options")}>
                 Go Back
@@ -2590,10 +2590,10 @@ function AmICrazyModule({
               Rude. Keep Asking Questions
             </button>
             <button type="button" onClick={startPlanning}>
-              Fine. Start Planning My Exit
+              Start Exit Planning
             </button>
             <button type="button" onClick={() => onNavigate("legal", "/legal")}>
-              Understand My Choices
+              Understand Choices
             </button>
             <button type="button" onClick={() => onNavigate("home", "/")}>
               Return To Homepage
@@ -2623,19 +2623,19 @@ function AmICrazyModule({
           </div>
           <div className="terminal-actions denial-actions">
             <button type="button" onClick={startPlanning}>
-              Start Planning My Exit
+              Start Exit Planning
             </button>
             <button type="button" onClick={() => onNavigate("legal", "/legal")}>
-              Understand My Choices
+              Understand Choices
             </button>
             <button type="button" onClick={() => onNavigate("go-bag-prep", "/go-bag-prep")}>
               Go-Bag Prep
             </button>
             <button type="button" onClick={() => setMode("complete")}>
-              Review My Patterns
+              Review Patterns
             </button>
             <button type="button" onClick={showDenial}>
-              I Choose Denial
+              Choose Denial
             </button>
             <button type="button" onClick={clearAndExit}>
               Clear And Exit
@@ -2663,13 +2663,13 @@ function ProceedControls({
       <div className="terminal-label">HOW WOULD YOU LIKE TO PROCEED?</div>
       <div className="terminal-actions denial-actions">
         <button type="button" onClick={onPlanning}>
-          Start Planning My Exit
+          Start Exit Planning
         </button>
         <button type="button" onClick={onNext}>
           Still Not Sure
         </button>
         <button type="button" onClick={onDeny}>
-          I Choose Denial
+          Choose Denial
         </button>
         <button type="button" onClick={onExit}>
           Quick Exit
@@ -3067,7 +3067,7 @@ function PlanningModule({
               Go-Bag Prep
             </button>
             <button type="button" onClick={() => setMode("complete")}>
-              I&apos;m Not Ready, But I Understand More Now
+              Not Ready // Understanding Increased
             </button>
             <button type="button" onClick={() => setMode("landing")}>
               Back To Planning
@@ -3123,7 +3123,7 @@ function PlanningModule({
                   Legal
                 </button>
                 <button type="button" onClick={() => setMode("complete")}>
-                  I&apos;m Not Ready, But I Understand More Now
+                  Not Ready // Understanding Increased
                 </button>
                 <button type="button" onClick={() => setMode("landing")}>
                   Back To Planning
@@ -3302,7 +3302,7 @@ function ExitPlanningModule({
       {mode === "intro" && (
         <div className="assessment-panel">
           <div className="terminal-label">MODULE: EXIT PLANNING</div>
-          <h1 id="exit-title">I KNOW I NEED TO LEAVE - NOW WHAT?</h1>
+          <h1 id="exit-title">EXIT PLANNING PROTOCOL // NOW WHAT?</h1>
           <TypedText
             className="system-typed-text"
             skipLabel="Print Module Brief"
@@ -3315,10 +3315,10 @@ function ExitPlanningModule({
               Begin Exit Planning
             </button>
             <button type="button" onClick={showEmergencyOptions}>
-              I Need Emergency Options
+              Emergency Options
             </button>
             <button type="button" onClick={() => onNavigate("legal", "/legal")}>
-              Understand My Choices First
+              Understand Choices First
             </button>
             <button type="button" onClick={() => onNavigate("home", "/")}>
               Back To Homepage
@@ -3363,13 +3363,13 @@ function ExitPlanningModule({
               <div className="terminal-label">HOW WOULD YOU LIKE TO PROCEED?</div>
               <div className="terminal-actions denial-actions">
                 <button type="button" onClick={continuePlan}>
-                  Continue Building My Plan
+                  Continue Building Plan
                 </button>
                 <button type="button" onClick={showEmergencyOptions}>
                   Show Emergency Options
                 </button>
                 <button type="button" onClick={() => onNavigate("home", "/")}>
-                  I Need To Think
+                  Pause And Think
                 </button>
                 <button type="button" onClick={quickExitPlanning}>
                   Quick Exit
@@ -3395,7 +3395,7 @@ function ExitPlanningModule({
               Show Relevant Free Resources
             </button>
             <button type="button" onClick={() => onNavigate("legal", "/legal")}>
-              Understand My Choices
+              Understand Choices
             </button>
             <button type="button" onClick={clearPlanning}>
               Restart With A Different Barrier

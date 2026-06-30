@@ -433,7 +433,7 @@ function GoBagSimulator({
               onNavigate("planning", "/planning");
             }}
           >
-            I'm Ready To Go
+            Ready To Go
           </button>
           <button type="button" onClick={() => onNavigate("leaving", "/leaving")}>Show Go-Bag Resources</button>
           <button type="button" onClick={() => { resetGame(); setScreen("checklist"); }}>Clear Session</button>
