@@ -2550,6 +2550,11 @@ function PlanningLanding({
         </p>
 
         <div className="planning-module-grid">
+          <button className="planning-module-key primary" type="button" onClick={() => onNavigate("am-i-crazy", "/am-i-crazy")}>
+            <span>FIRST TOOL</span>
+            <strong>Am I Crazy?</strong>
+            <small>A reality-check assessment for confusion, gaslighting, control, and self-doubt.</small>
+          </button>
           <button className="planning-module-key primary" type="button" onClick={onOpenLadder}>
             <span>START HERE</span>
             <strong>Leaving Ladder</strong>
