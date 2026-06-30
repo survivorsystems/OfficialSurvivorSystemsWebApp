@@ -2090,12 +2090,12 @@ function HomeModule() {
           <div className="founder-note">
             <div className="terminal-label">&gt;&gt; A Note From The Founder</div>
             <p>
-              Survivor Systems was built by <strong>Krista Sanders</strong>, researcher, advocate,
-              somatic trauma specialist, and survivor. After escaping a situation that led to
-              trafficking and homelessness, Krista found that the resources available to her were
-              clinical, complicated, and clearly not built by anyone who had actually needed them. So
-              she built something different. Something that talks to you like a person. Every tool in
-              this system exists because someone needed it and it was not there. It is here now.
+              Survivor Systems was built by a researcher, advocate, somatic trauma specialist, and
+              survivor. After escaping a situation that led to trafficking and homelessness, the
+              founder found that the resources available to her were clinical, complicated, and
+              clearly not built by anyone who had actually needed them. So she built something
+              different. Something that talks to you like a person. Every tool in this system exists
+              because someone needed it and it was not there. It is here now.
             </p>
           </div>
         </article>
