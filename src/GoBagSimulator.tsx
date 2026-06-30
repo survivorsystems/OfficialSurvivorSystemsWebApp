@@ -61,12 +61,105 @@ type Room = {
   name: string;
 };
 
+type ChecklistGroup = {
+  id: string;
+  title: string;
+  tag?: string;
+  blocks: Array<{
+    title: string;
+    items: string[];
+  }>;
+};
+
 const rooms: Record<RoomKey, Room> = {
   living: { background: livingRoom, key: "living", name: "Living Room" },
   kitchen: { background: kitchenRoom, key: "kitchen", name: "Kitchen" },
   bedroom: { background: bedroomRoom, key: "bedroom", name: "Bedroom" },
   bathroom: { background: bathroomRoom, key: "bathroom", name: "Bathroom" },
 };
+
+const checklistGroups: ChecklistGroup[] = [
+  {
+    id: "you",
+    title: "For You",
+    blocks: [
+      {
+        title: "Documents",
+        items: [
+          "ID: driver's license, passport, or state ID",
+          "Social Security card",
+          "Birth certificate",
+          "Any protection orders or legal paperwork already in place",
+          "Insurance cards: health, auto, renters",
+          "Bank cards or a small amount of cash",
+          "Lease, deed, or proof of address",
+        ],
+      },
+      {
+        title: "Essentials",
+        items: [
+          "Phone and charger",
+          "A change of clothes",
+          "Any medications you take, with prescription labels intact",
+          "Toiletries: a small bag is enough",
+          "House and car keys, or a spare set",
+          "A list of important phone numbers written down, in case your phone is not accessible",
+        ],
+      },
+    ],
+  },
+  {
+    id: "kids",
+    title: "For Your Kids",
+    tag: "If Applicable",
+    blocks: [
+      {
+        title: "Documents",
+        items: [
+          "Birth certificates",
+          "Social Security cards",
+          "Insurance cards",
+          "Custody paperwork, if any exists",
+          "School enrollment or immunization records",
+        ],
+      },
+      {
+        title: "Essentials",
+        items: [
+          "A change of clothes per child",
+          "Diapers, formula, or bottles if needed",
+          "Any medications, with labels intact",
+          "A comfort item: a small toy or blanket they know",
+          "Snacks that do not need refrigeration",
+        ],
+      },
+    ],
+  },
+  {
+    id: "pet",
+    title: "For Your Pet",
+    tag: "If Applicable",
+    blocks: [
+      {
+        title: "Documents",
+        items: [
+          "Vet records and vaccination proof",
+          "Microchip number, if chipped",
+          "A recent photo of you with your pet",
+        ],
+      },
+      {
+        title: "Essentials",
+        items: [
+          "Food for a few days, in a sealed bag or container",
+          "Any medications, with labels intact",
+          "Leash, carrier, or crate",
+          "A familiar toy or blanket",
+        ],
+      },
+    ],
+  },
+];
 
 const roomLinks: Record<RoomKey, RoomKey[]> = {
   living: ["kitchen", "bedroom"],
@@ -146,9 +239,10 @@ function GoBagSimulator({
   onNavigate: (module: ModuleKey, path: string) => void;
   onQuickExit: () => void;
 }) {
-  const [screen, setScreen] = useState<"intro" | "how" | "play" | "pause" | "complete" | "review">("intro");
+  const [screen, setScreen] = useState<"checklist" | "how" | "play" | "pause" | "complete" | "review">("checklist");
   const [room, setRoom] = useState<RoomKey>("bedroom");
   const [collected, setCollected] = useState<string[]>([]);
+  const [checkedChecklistItems, setCheckedChecklistItems] = useState<string[]>([]);
   const [message, setMessage] = useState("OBJECTIVE: FIND THE GO-BAG.");
 
   const collectedSet = useMemo(() => new Set(collected), [collected]);
@@ -192,6 +286,12 @@ function GoBagSimulator({
     setMessage("ENTERING: BEDROOM. LOCATE THE GO-BAG FIRST, THEN PACK THE REST.");
   }
 
+  function toggleChecklistItem(id: string) {
+    setCheckedChecklistItems((current) =>
+      current.includes(id) ? current.filter((itemId) => itemId !== id) : [...current, id],
+    );
+  }
+
   function enterRoom(nextRoom: RoomKey) {
     setRoom(nextRoom);
     setMessage(`ENTERING: ${rooms[nextRoom].name.toUpperCase()}. SEARCH THE ROOM AND CLICK USEFUL ITEMS.`);
@@ -210,12 +310,69 @@ function GoBagSimulator({
   const collectedItems = items.filter((item) => collectedSet.has(item.id));
   const roomItems = items.filter((item) => item.room === room && !collectedSet.has(item.id));
 
-  if (screen === "intro") {
+  if (screen === "checklist") {
     return (
-      <section className="simulator-shell">
-        <div className="terminal-label">GO-BAG SIMULATOR</div>
-        <h1>OBJECTIVE: GATHER ESSENTIAL ITEMS.</h1>
-        <p>SESSION DATA: TEMPORARY. NO INFORMATION WILL BE SAVED.</p>
+      <section className="simulator-shell go-bag-checklist-shell">
+        <div className="terminal-label">user@survivor-systems:~$ LOAD MODULE // GO-BAG PREP</div>
+        <h1>&lt;Go-Bag Checklist&gt;</h1>
+        <p className="go-bag-tagline">// Tools for clarity. Power for your future.</p>
+        <div className="go-bag-intro">
+          &lt;A go-bag is a small set of essentials packed ahead of time so you can leave quickly if
+          you need to. It does not need to be elaborate. It needs to be ready. Check off what applies
+          to you. Skip the rest.&gt;
+        </div>
+        <div className="go-bag-warning">
+          <strong>&gt;&gt; Pack Smart</strong>
+          <p>
+            Keep this bag somewhere your partner will not think to check: at a trusted friend's
+            house, in your car, or at work. If you cannot store it outside the home safely, consider
+            keeping a digital copy of important documents in a separate account instead of physical
+            copies.
+          </p>
+        </div>
+
+        <div className="go-bag-checklist-grid">
+          {checklistGroups.map((group) => (
+            <section className="go-bag-checklist-section" key={group.id}>
+              <h2>
+                &gt;&gt; {group.title}
+                {group.tag ? <span>{group.tag}</span> : null}
+              </h2>
+              {group.blocks.map((block) => (
+                <div className="go-bag-checklist-block" key={block.title}>
+                  <h3>&gt;&gt; {block.title}</h3>
+                  {block.items.map((item, itemIndex) => {
+                    const id = `${group.id}-${block.title}-${itemIndex}`;
+                    const checked = checkedChecklistItems.includes(id);
+
+                    return (
+                      <button
+                        aria-pressed={checked}
+                        className={checked ? "check-item checked" : "check-item"}
+                        key={id}
+                        type="button"
+                        onClick={() => toggleChecklistItem(id)}
+                      >
+                        <span aria-hidden="true">{checked ? "[x]" : "[ ]"}</span>
+                        <strong>{item}</strong>
+                      </button>
+                    );
+                  })}
+                </div>
+              ))}
+            </section>
+          ))}
+        </div>
+
+        <div className="go-bag-reminder">
+          <strong>&gt;&gt; Remember</strong>
+          <p>
+            You do not have to have everything on this list to leave. A bag with your ID and a
+            change of clothes is still a go-bag. Start with what you have and build from there when
+            you can.
+          </p>
+        </div>
+
         <div className="terminal-actions denial-actions">
           <button type="button" onClick={startGame}>Start Simulator</button>
           <button type="button" onClick={() => setScreen("how")}>How To Play</button>
@@ -240,7 +397,7 @@ function GoBagSimulator({
         </ul>
         <div className="terminal-actions compact-actions">
           <button type="button" onClick={startGame}>Start Simulator</button>
-          <button type="button" onClick={() => setScreen("intro")}>Go Back</button>
+          <button type="button" onClick={() => setScreen("checklist")}>Go Back</button>
           <button type="button" onClick={clearAndExit}>Quick Exit</button>
         </div>
       </section>
@@ -279,7 +436,7 @@ function GoBagSimulator({
             I'm Ready To Go
           </button>
           <button type="button" onClick={() => onNavigate("leaving", "/leaving")}>Show Go-Bag Resources</button>
-          <button type="button" onClick={() => { resetGame(); setScreen("intro"); }}>Clear Session</button>
+          <button type="button" onClick={() => { resetGame(); setScreen("checklist"); }}>Clear Session</button>
           <button type="button" onClick={clearAndExit}>Quick Exit</button>
         </div>
       </section>
@@ -300,7 +457,7 @@ function GoBagSimulator({
           <h1>SIMULATOR PAUSED</h1>
           <div className="terminal-actions compact-actions">
             <button type="button" onClick={() => setScreen("play")}>Resume</button>
-            <button type="button" onClick={() => { resetGame(); setScreen("intro"); }}>Clear Session</button>
+            <button type="button" onClick={() => { resetGame(); setScreen("checklist"); }}>Clear Session</button>
             <button type="button" onClick={clearAndExit}>Quick Exit</button>
           </div>
         </div>

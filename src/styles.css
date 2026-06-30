@@ -1098,6 +1098,159 @@ button:disabled {
   padding-left: 22px;
 }
 
+.go-bag-checklist-shell {
+  gap: 20px;
+}
+
+.go-bag-tagline {
+  color: var(--purple);
+  font-size: 0.84rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  line-height: 1.35;
+  margin: -8px 0 0;
+  text-transform: uppercase;
+}
+
+.go-bag-intro,
+.go-bag-warning,
+.go-bag-reminder {
+  background: rgba(0, 0, 0, 0.36);
+  border-left: 3px solid var(--purple);
+  border-radius: 0 6px 6px 0;
+  color: var(--text);
+  line-height: 1.75;
+  padding: 14px 18px;
+}
+
+.go-bag-warning {
+  background:
+    linear-gradient(90deg, rgba(255, 79, 216, 0.12), transparent 70%),
+    rgba(0, 0, 0, 0.38);
+  border-color: var(--pink);
+}
+
+.go-bag-reminder {
+  background:
+    linear-gradient(90deg, rgba(108, 255, 98, 0.1), transparent 70%),
+    rgba(0, 0, 0, 0.38);
+  border-color: var(--lime);
+}
+
+.go-bag-warning strong,
+.go-bag-reminder strong {
+  color: var(--hot-text);
+  display: block;
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  margin-bottom: 8px;
+  text-shadow: var(--shadow-pink);
+  text-transform: uppercase;
+}
+
+.go-bag-reminder strong {
+  color: var(--lime);
+  text-shadow: 0 0 10px rgba(108, 255, 98, 0.45);
+}
+
+.go-bag-checklist-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.go-bag-checklist-section {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 30%),
+    rgba(2, 8, 12, 0.86);
+  border: 1px solid rgba(0, 234, 255, 0.24);
+  border-radius: 7px;
+  box-shadow: inset 0 0 18px rgba(0, 234, 255, 0.04);
+  display: grid;
+  gap: 14px;
+  padding: 16px;
+}
+
+.go-bag-checklist-section h2 {
+  align-items: center;
+  color: var(--cyan);
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 0.98rem;
+  gap: 8px;
+  letter-spacing: 0.14em;
+  margin: 0;
+  text-shadow: var(--shadow-cyan);
+  text-transform: uppercase;
+}
+
+.go-bag-checklist-section h2 span {
+  border: 1px solid var(--amber);
+  border-radius: 4px;
+  color: var(--amber);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  padding: 3px 7px;
+  text-shadow: 0 0 8px rgba(255, 184, 77, 0.34);
+}
+
+.go-bag-checklist-block {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 79, 216, 0.18);
+  border-left: 3px solid var(--pink);
+  border-radius: 5px;
+  display: grid;
+  gap: 8px;
+  padding: 13px;
+}
+
+.go-bag-checklist-block h3 {
+  color: var(--hot-text);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  margin: 0 0 2px;
+  text-shadow: var(--shadow-pink);
+  text-transform: uppercase;
+}
+
+.go-bag-checklist-block .check-item {
+  align-items: start;
+  background: transparent;
+  border: 0;
+  color: var(--text);
+  cursor: pointer;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: auto 1fr;
+  line-height: 1.45;
+  padding: 2px 0;
+  text-align: left;
+}
+
+.go-bag-checklist-block .check-item span {
+  color: var(--purple);
+  font-weight: 900;
+  text-shadow: var(--shadow-purple);
+}
+
+.go-bag-checklist-block .check-item strong {
+  color: var(--text);
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.go-bag-checklist-block .check-item.checked strong {
+  color: var(--lime);
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+  text-shadow: 0 0 8px rgba(108, 255, 98, 0.32);
+}
+
+.go-bag-checklist-block .check-item.checked span {
+  color: var(--lime);
+  text-shadow: 0 0 8px rgba(108, 255, 98, 0.42);
+}
+
 .simulator-hud {
   align-items: center;
   background: rgba(0, 0, 0, 0.62);
@@ -3500,6 +3653,7 @@ button:disabled {
 
   .home-option-grid,
   .ladder-rung-grid,
+  .go-bag-checklist-grid,
   .planning-module-grid,
   .planning-resource-grid,
   .rebuilding-section-grid,
@@ -3542,6 +3696,7 @@ button:disabled {
   .terminal-sidebar nav,
   .home-option-grid,
   .ladder-rung-grid,
+  .go-bag-checklist-grid,
   .planning-module-grid,
   .planning-resource-grid,
   .rebuilding-section-grid,
