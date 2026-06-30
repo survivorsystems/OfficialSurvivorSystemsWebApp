@@ -376,7 +376,7 @@ button:disabled {
 .app-frame {
   display: grid;
   gap: 18px;
-  grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
+  grid-template-columns: minmax(260px, 340px) minmax(0, 1fr);
   padding: 20px;
 }
 
@@ -389,10 +389,9 @@ button:disabled {
 }
 
 .brand {
-  align-items: center;
+  align-items: flex-start;
   color: var(--pink);
-  display: inline-flex;
-  gap: 10px;
+  display: block;
   min-width: 0;
   position: relative;
   text-shadow: var(--shadow-pink);
@@ -474,12 +473,12 @@ button:disabled {
 }
 
 .brand .brand-logo-survivor {
-  font-size: 2.35rem;
+  font-size: clamp(2.75rem, 3.4vw, 3.65rem);
 }
 
 .brand .brand-logo-systems {
-  font-size: 0.78rem;
-  letter-spacing: 0.44em;
+  font-size: clamp(0.88rem, 1.08vw, 1.05rem);
+  letter-spacing: 0.5em;
 }
 
 .home-logo .brand-logo-survivor {
