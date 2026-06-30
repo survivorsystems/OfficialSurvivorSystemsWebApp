@@ -313,7 +313,7 @@ function GoBagSimulator({
   if (screen === "checklist") {
     return (
       <section className="simulator-shell go-bag-checklist-shell">
-        <div className="terminal-label">user@survivor-systems:~$ LOAD MODULE // GO-BAG PREP</div>
+        <div className="terminal-label">user@survivor-os:~$ LOAD MODULE // GO-BAG PREP</div>
         <h1>&lt;Go-Bag Checklist&gt;</h1>
         <p className="go-bag-tagline">// Tools for clarity. Power for your future.</p>
         <div className="go-bag-intro">

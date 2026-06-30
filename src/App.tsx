@@ -207,7 +207,7 @@ const modulePages: Record<
     eyebrow: "Resource library",
     title: "Library",
     description:
-      "This page will hold free downloads, paid subscriptions, previews, and the deeper Survivor Systems resource library.",
+      "This page will hold free downloads, paid subscriptions, previews, and the deeper Survivor Operating System resource library.",
   },
 };
 
@@ -1260,7 +1260,7 @@ const exitPlanningQuestions: ExitQuestion[] = [
 const denialImages = [denialSupportOne, denialSupportTwo];
 
 const checkpointMessage =
-  "Survivor Systems cannot tell whether your device, browser, accounts, or connection are being monitored.\n\nPrivate or Incognito browsing may reduce some local history, but it does not hide activity from monitoring software, shared accounts, phone plans, networks, connected devices, or someone with access to this device.\n\nIf you think someone may be monitoring you, consider using a device and account they have never accessed before.\n\nContinuing is your choice.";
+  "Survivor Operating System cannot tell whether your device, browser, accounts, or connection are being monitored.\n\nPrivate or Incognito browsing may reduce some local history, but it does not hide activity from monitoring software, shared accounts, phone plans, networks, connected devices, or someone with access to this device.\n\nIf you think someone may be monitoring you, consider using a device and account they have never accessed before.\n\nContinuing is your choice.";
 
 const privateBrowsingHelp = [
   "Private or Incognito windows can reduce some local browser history on this device.",
@@ -1891,7 +1891,7 @@ function GaugeDeck({
 
 function BrandLogo({ className = "" }: { className?: string }) {
   return (
-    <span className={`brand-logo ${className}`} aria-label="Survivor Systems">
+    <span className={`brand-logo ${className}`} aria-label="Survivor Operating System">
       <span className="brand-logo-survivor">Survivor</span>
       <span className="brand-logo-systems">Systems</span>
     </span>
@@ -1995,7 +1995,7 @@ function WelcomeCheckpoint({ onComplete }: { onComplete: () => void }) {
   const [acknowledged, setAcknowledged] = useState(false);
 
   const typedIntro = useMemo(
-    () => `Welcome To Survivor Systems.\n\n${checkpointMessage}`,
+    () => `Welcome To Survivor Operating System.\n\n${checkpointMessage}`,
     [],
   );
 
@@ -2231,7 +2231,7 @@ function TerminalCommand({
     <form className="command-terminal" onSubmit={submitCommand}>
       <label htmlFor="terminal-command">NAV QUERY</label>
       <div className="command-input-row">
-        <span aria-hidden="true">user@survivor-systems:~$</span>
+        <span aria-hidden="true">user@survivor-os:~$</span>
         <input
           autoComplete="off"
           id="terminal-command"
@@ -2260,7 +2260,7 @@ function TerminalChrome({
 }) {
   return (
     <main className="terminal-frame app-frame">
-      <aside className="terminal-sidebar" aria-label="Survivor Systems navigation">
+      <aside className="terminal-sidebar" aria-label="Survivor Operating System navigation">
         <a
           className="brand"
           href="/"
@@ -2325,12 +2325,12 @@ function HomeModule() {
   return (
     <section className="home-terminal" aria-labelledby="home-title">
       <div className="home-terminal-command">
-        <span aria-hidden="true">user@survivor-systems:~$</span>
+        <span aria-hidden="true">user@survivor-os:~$</span>
         <strong>USER TERMINAL</strong>
       </div>
       <div className="home-grid">
         <article className="home-message">
-          <div className="mission-prompt">user@survivor-systems:~$ LOAD MODULE // MISSION</div>
+          <div className="mission-prompt">user@survivor-os:~$ LOAD MODULE // MISSION</div>
           <h1 id="home-title">&lt;You Are Not Alone Here&gt;</h1>
           <p className="home-tagline">// And it's okay if this is complicated</p>
           <p>
@@ -2379,12 +2379,12 @@ function HomeModule() {
           <div className="founder-note">
             <div className="terminal-label">&gt;&gt; A Note From The Founder</div>
             <p>
-              Survivor Systems was built by a researcher, advocate, somatic trauma specialist, and
-              survivor. After escaping a situation that led to trafficking and homelessness, the
-              founder found that the resources available to her were clinical, complicated, and
-              clearly not built by anyone who had actually needed them. So she built something
-              different. Something that talks to you like a person. Every tool in this system exists
-              because someone needed it and it was not there. It is here now.
+              Survivor Operating System was built by a researcher, advocate, somatic trauma
+              specialist, and survivor. After escaping a situation that led to trafficking and
+              homelessness, the founder found that the resources available to her were clinical,
+              complicated, and clearly not built by anyone who had actually needed them. So she
+              built something different. Something that talks to you like a person. Every tool in
+              this system exists because someone needed it and it was not there. It is here now.
             </p>
           </div>
         </article>
@@ -3544,7 +3544,7 @@ function LegalModule() {
         </div>
 
         <div className="legal-guide-shell">
-          <div className="terminal-label">user@survivor-systems:~$ LOAD MODULE // MOTION DRAFTING</div>
+          <div className="terminal-label">user@survivor-os:~$ LOAD MODULE // MOTION DRAFTING</div>
           <h1 id="motion-drafting-title">&lt;Motion Drafting Basics&gt;</h1>
           <p className="legal-tagline">// Tools for clarity. Power for your future.</p>
 
@@ -3657,7 +3657,7 @@ function LegalModule() {
         </div>
 
         <div className="legal-guide-shell">
-          <div className="terminal-label">user@survivor-systems:~$ LOAD MODULE // PROTECTIVE ORDERS</div>
+          <div className="terminal-label">user@survivor-os:~$ LOAD MODULE // PROTECTIVE ORDERS</div>
           <h1 id="protective-orders-title">&lt;Protective Orders: What To Expect&gt;</h1>
           <p className="legal-tagline">// Tools for clarity. Power for your future.</p>
 
