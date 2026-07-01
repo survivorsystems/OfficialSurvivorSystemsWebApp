@@ -167,6 +167,23 @@ type LegalStep = {
   text: string;
 };
 
+type LegalGuidePageData = {
+  title: string;
+  eyebrow: string;
+  terminalLabel: string;
+  intro: string;
+  warning: string;
+  sections: LegalGuideSection[];
+  notes?: Array<{
+    title: string;
+    body: string;
+  }>;
+  reminder?: {
+    title: string;
+    body: string;
+  };
+};
+
 type LibraryCategory = {
   id: string;
   title: string;
@@ -988,102 +1005,330 @@ const familyCourtMotionSections: LegalGuideSection[] = [
   },
 ];
 
-const protectiveOrderTypes: LegalStep[] = [
+const civilProtectiveOrderGuideSections: LegalGuideSection[] = [
   {
-    number: "TYPE 01",
-    title: "Emergency Protective Order (EPO)",
-    text:
-      "A short-term order, often issued within hours, usually after police respond to an incident. In many counties, law enforcement can request this directly from a judge on your behalf. It is meant to create immediate breathing room and typically lasts only a few days to a couple of weeks, long enough to get to the next step.",
+    title: "What A Civil Protective Order Can Do",
+    blocks: [
+      {
+        title: "Common Restrictions You May Request",
+        items: [
+          { text: "Stop abuse, threats, stalking, harassment, sexual violence, repeated unwanted contact, and third-party contact." },
+          { text: "Block contact by phone, email, text, social media, apps, shared accounts, or other digital channels." },
+          { text: "Require the other person to stay away from home, work, school, childcare, named locations, children, pets, or household members." },
+          { text: "Require move-out from a shared home, return of keys or documents, surrender of firearms where state law allows, or law-enforcement help retrieving belongings." },
+          { text: "Address temporary custody, supervised parenting time, safe exchanges, child or spousal support, use of a shared vehicle, and other safety terms when local law allows." },
+        ],
+      },
+      {
+        title: "System Note",
+        items: [
+          { text: "Ask for each protection directly. A general no-contact order may not automatically cover every location, device, child, pet, account, workplace, or communication method." },
+        ],
+      },
+    ],
   },
   {
-    number: "TYPE 02",
-    title: "Criminal Protective Order",
-    text:
-      "This comes out of a criminal case, meaning the state, not you, is prosecuting. It is typically issued as a condition of bail, probation, or a no-contact requirement while criminal charges are pending or after a conviction. You may be the protected person, but the prosecutor drives the legal proceeding.",
+    title: "Types Of Orders And The Usual Process",
+    blocks: [
+      {
+        title: "Order Types",
+        items: [
+          { name: "Emergency Order", text: "A short-term order for urgent situations, sometimes available through law enforcement, a magistrate, an after-hours court process, or a judge." },
+          { name: "Temporary / Ex Parte Order", text: "A temporary order issued before the other person has participated in a full hearing. The court usually needs recent facts and a reason immediate protection is needed." },
+          { name: "Final / Long-Term Order", text: "An order issued after notice and a hearing where both sides can participate. Length depends on state law and the judge's decision." },
+          { name: "Criminal No-Contact Order", text: "An order attached to a criminal case, bond, probation, or sentencing. It is separate from a civil protective order." },
+        ],
+      },
+      {
+        title: "Process Map",
+        items: [
+          { text: "File the petition with specific facts, dates, threats, injuries, stalking, tracking, and the protections requested." },
+          { text: "Ask whether emergency or temporary protection is available." },
+          { text: "The judge may grant temporary relief, grant part of it, ask for more information, set a hearing, or deny the request." },
+          { text: "The respondent must usually be served with the petition, temporary order, and hearing notice." },
+          { text: "Attend the full hearing with evidence, notes, witnesses, and the exact protections being requested." },
+          { text: "If granted, read the signed order before leaving and confirm who is protected, which addresses are covered, contact rules, custody terms, firearm terms, expiration date, and violation reporting steps." },
+        ],
+      },
+    ],
   },
   {
-    number: "TYPE 03",
-    title: "Civil Protection Order / DVRO",
-    text:
-      "This is the one most people mean when they say protective order. You file it yourself as the petitioner in civil court, separate from any criminal case. It can run from one to five years depending on the state, and it usually carries the most detailed, customizable terms.",
+    title: "Statement, Timeline, And Evidence",
+    blocks: [
+      {
+        title: "What To Include",
+        items: [
+          { text: "Focus on conduct that shows violence, threats, stalking, harassment, sexual violence, property damage, strangulation, weapon access, tracking, surveillance, repeated contact, or threats involving children, pets, work, housing, or immigration." },
+          { text: "Use exact words when remembered. Explain why the conduct caused fear or created a safety concern." },
+          { text: "A short timeline is often easier to follow than one long paragraph." },
+        ],
+      },
+      {
+        title: "Evidence Examples",
+        items: [
+          { text: "Texts, emails, voicemails, call logs, social media messages, photos, videos, medical records, police reports, witness statements, property-damage records, location-sharing records, tracking alerts, account-login notices, hidden-camera evidence, prior court orders, incident logs, or records of unwanted gifts and appearances." },
+          { text: "Save original files when possible. Do not crop screenshots in a way that removes dates, usernames, phone numbers, or surrounding context." },
+          { text: "Check local rules for recordings, electronic evidence, exhibit labels, filing deadlines, and required copy counts." },
+        ],
+      },
+    ],
+  },
+  {
+    title: "Custody, Stalking, And Digital Safety",
+    blocks: [
+      {
+        title: "If Custody Is Involved",
+        items: [
+          { text: "Existing custody orders usually remain active until a judge changes them." },
+          { text: "Some protective-order courts can enter temporary custody or parenting-time terms. Others require custody changes in the existing family-court case." },
+          { text: "Ask whether temporary custody can be included, whether an emergency family-court motion is needed, whether cases can be coordinated, and how exchanges and communication should happen safely." },
+          { text: "Bring every current custody order and protective order to both courts." },
+        ],
+      },
+      {
+        title: "Stalking And Tech Abuse",
+        items: [
+          { text: "Stalking may include following, watching, showing up, repeated messages, fake accounts, third-party contact, unwanted gifts, hidden cameras, GPS tracking, stalkerware, social-media monitoring, or threats to expose information." },
+          { text: "Track date, time, location, what happened, exact words, witnesses, screenshots, report numbers, and how the incident affected safety." },
+          { text: "Changing passwords alone may not stop access. Review shared Apple or Google accounts, phone plans, location sharing, calendars, cloud photos, email forwarding, recovery contacts, saved passwords, logged-in devices, smart-home accounts, cameras, vehicle apps, trackers, children's devices, banking, shopping, and social media sessions." },
+          { text: "Use a safer device when researching or changing accounts if monitoring is possible. Before removing a tracker or stalkerware, consider whether it will alert the person, preserve evidence, and speak with an advocate or technology-safety specialist when possible." },
+        ],
+      },
+    ],
+  },
+  {
+    title: "Hearing Prep And What Happens Next",
+    blocks: [
+      {
+        title: "Bring To Court",
+        items: [
+          { text: "Petition, temporary order, proof of service, current custody orders, written statement, short timeline, labeled exhibits, witness information, requested protections, and a proposed order if required." },
+          { text: "Be ready to explain what happened, when it happened, why protection is needed, what evidence supports the request, and what the judge is being asked to order." },
+          { text: "Keep answers direct. Ask for clarification before agreeing to language that is unclear." },
+        ],
+      },
+      {
+        title: "If Granted, Violated, Or Denied",
+        items: [
+          { text: "If granted, ask about certified copies, system entry, service, violation reporting, school or childcare copies, secure digital backup, custody terms, and the expiration date." },
+          { text: "If violated, call law enforcement when safe, show the order, save evidence, write down what happened, record the report number, notify an attorney or advocate, and ask whether enforcement or contempt is appropriate." },
+          { text: "If denied, ask why, whether amendment or refiling is possible, whether another hearing or order type is available, whether family court is an option, and whether legal aid or an advocate can review the filing." },
+        ],
+      },
+    ],
+  },
+  {
+    title: "State Rules Control The Details",
+    blocks: [
+      {
+        title: "Confirm Locally",
+        items: [
+          { text: "Protective-order laws are different in every state. State law controls who can file, what conduct qualifies, which court handles the case, available relief, temporary custody, service, evidence, hearing deadlines, firearm restrictions, length, renewal, changes, and enforcement." },
+          { text: "Check your state judiciary website, local court rules, courthouse self-help center, domestic violence advocate, legal aid, or a qualified attorney before filing." },
+        ],
+      },
+    ],
   },
 ];
 
-const protectiveOrderSections: LegalGuideSection[] = [
+const familyCourtGuideSections: LegalGuideSection[] = [
   {
-    title: "Common DVRO Hearings",
+    title: "What Family Court Handles",
     blocks: [
       {
-        title: "What You May Go Through",
+        title: "Common Case Types",
         items: [
-          {
-            name: "Ex Parte / Temporary Order Hearing",
-            text: "Happens fast, often the same day you file, before the other party is notified. The judge decides whether to grant short-term protection based on your statement alone.",
-          },
-          {
-            name: "Service of Process",
-            text: "Not a hearing, but a required step. The other party has to be formally notified of the order and upcoming full hearing before it can become permanent.",
-          },
-          {
-            name: "Full / Final Hearing",
-            text: "Both sides appear, evidence and testimony are presented, and the judge decides whether to issue a longer-term order.",
-          },
-          {
-            name: "Continuance Hearing",
-            text: "Happens if either side requests more time. Your temporary order typically stays in effect while you wait for the rescheduled date.",
-          },
-          {
-            name: "Modification Hearing",
-            text: "Requested later if either party wants to change the terms of an existing order.",
-          },
-          {
-            name: "Renewal / Extension Hearing",
-            text: "Happens before an order expires, if you need protection to continue.",
-          },
-          {
-            name: "Contempt / Violation Hearing",
-            text: "Happens if the order is violated and you report it. This addresses enforcement, separate from the original case.",
-          },
+          { text: "Divorce, legal separation, custody, parenting time or visitation, child support, spousal support, parentage or paternity, property division, protective orders, guardianship, adoption, relocation with a child, enforcement, and modification." },
+          { text: "The court may be called Family Court, Domestic Relations Court, District Court, Circuit Court, Superior Court, or Probate and Family Court depending on the state." },
+          { text: "Local rules, forms, procedures, and deadlines can vary by county. Always check the specific court before filing." },
+        ],
+      },
+      {
+        title: "How A Case Usually Moves",
+        items: [
+          { text: "A case opens when one party files a petition or complaint." },
+          { text: "The other party is served and usually files an answer or response by a deadline." },
+          { text: "Temporary orders may address custody, parenting time, support, property, bills, communication, or use of the home while the case is pending." },
+          { text: "Information may be exchanged through discovery, and mediation, parenting classes, custody evaluations, or settlement conferences may be required." },
+          { text: "The court holds a hearing or trial, the judge signs an order, and the case may return later for enforcement, modification, clarification, reconsideration, or appeal." },
         ],
       },
     ],
   },
   {
-    title: "What You Can Ask The Court For",
+    title: "Common Filings And Motions",
     blocks: [
       {
-        title: "Common Terms Courts Can Grant",
+        title: "Core Filings",
         items: [
-          { text: "No-contact provisions: no calling, texting, emailing, or showing up in person." },
-          { text: "Stay-away distance requirements from your home, work, school, or other named places." },
-          { text: "Removal from a shared residence, even if both names are on the lease." },
-          { text: "Temporary custody or visitation terms for shared children." },
-          { text: "Removal of firearms or other weapons from the restrained person, where state law allows it." },
-          { text: "No third-party contact, meaning they cannot send someone else to contact you on their behalf." },
-          { text: "Coverage of pets named in the order, in states that allow it." },
-          { text: "Temporary financial provisions, such as continued bill payments, in some jurisdictions." },
+          { name: "Petition / Complaint", text: "Opens a case and explains what the filing party wants the court to order." },
+          { name: "Answer / Response", text: "The responding party's written reply." },
+          { name: "Counterpetition / Counterclaim", text: "A responding party's request for orders in the same case." },
+          { name: "Motion", text: "A formal request asking the judge to make a decision in an existing case. Some states use names like request for order, application, petition, or motion." },
+          { name: "Affidavit / Declaration", text: "A written statement of facts made under oath or penalty of perjury." },
+          { name: "Parenting Plan", text: "A proposed plan for schedule, exchanges, communication, decision-making, holidays, travel, and parenting terms." },
+          { name: "Proof / Certificate Of Service", text: "Shows court papers were delivered as required." },
+        ],
+      },
+      {
+        title: "Common Motions",
+        items: [
+          { text: "Temporary orders, emergency or ex parte relief, modification, enforcement, contempt, clarification, continuance, compel, discovery protective order, alternative service, transfer, consolidation, guardian ad litem, custody evaluation, attorney's fees, dismissal, default, reconsideration, new trial, and appeal." },
         ],
       },
     ],
   },
   {
-    title: "Where You Can Get Help Filing",
+    title: "Terms That Show Up Everywhere",
     blocks: [
       {
-        title: "Places That Can Help",
+        title: "Court Language",
         items: [
-          { text: "Local courthouse self-help center or family law facilitator's office." },
-          { text: "Domestic violence shelters and crisis centers with advocates who help with paperwork." },
-          { text: "Legal aid organizations offering free or low-cost help for qualifying income levels." },
-          { text: "County victim services or victim-witness assistance offices." },
-          { text: "Law enforcement, who can sometimes request an Emergency Order directly and connect you to local resources." },
-          { text: "Hospital-based or school-based advocacy programs, if the incident involved a medical visit or a child." },
-          { text: "State or national domestic violence hotlines, which can help locate nearby resources." },
+          { name: "Petitioner / Plaintiff", text: "The person who opens the case." },
+          { name: "Respondent / Defendant", text: "The person responding to the case." },
+          { name: "Moving Party / Movant", text: "The person filing a motion." },
+          { name: "Pro Se / Self-Represented", text: "Handling a case without an attorney." },
+          { name: "Jurisdiction", text: "The court's authority to hear a case and make orders." },
+          { name: "Venue", text: "The county or location where the case is heard." },
+          { name: "Service", text: "Formal delivery of court papers." },
+          { name: "Docket", text: "The official list of activity in the case." },
+          { name: "Order", text: "A written direction signed by the judge." },
+        ],
+      },
+      {
+        title: "Evidence And Hearing Terms",
+        items: [
+          { name: "Discovery", text: "The formal process used to request information before hearing or trial, including requests for production, interrogatories, admissions, depositions, and subpoenas." },
+          { name: "Exhibit", text: "A document, photo, message, recording, record, or other item offered as evidence." },
+          { name: "Foundation", text: "Information showing what an exhibit is, where it came from, and why it is reliable." },
+          { name: "Objection", text: "A request asking the judge not to allow certain evidence, testimony, or procedures." },
+          { name: "Burden Of Proof", text: "The level of proof required to establish a claim." },
+          { name: "Best Interests Of The Child", text: "The state-defined factors courts consider when deciding child-related issues." },
+        ],
+      },
+    ],
+  },
+  {
+    title: "Custody, Support, And Interstate Issues",
+    blocks: [
+      {
+        title: "Child-Related Terms",
+        items: [
+          { name: "Legal Custody", text: "Authority to make major decisions for a child." },
+          { name: "Physical Custody", text: "Where the child lives and who provides daily care." },
+          { name: "Parenting Time / Visitation", text: "The schedule for when a child is with each parent or another approved person." },
+          { name: "Guardian Ad Litem", text: "A court-appointed person whose role is defined by state law and the appointment order." },
+          { name: "Custody Evaluator", text: "A professional appointed or approved to assess parenting and custody issues." },
+          { name: "Arrears", text: "Past-due child support or spousal support." },
+        ],
+      },
+      {
+        title: "Across State Lines",
+        items: [
+          { text: "Interstate custody cases usually involve UCCJEA rules. These help determine which state can make the first custody order, which state keeps authority, when another state may enforce an order, when emergency jurisdiction may apply, and when a case may be transferred." },
+          { text: "Tell the court about every state where the child has lived, other custody cases, protective-order cases, child welfare cases, and existing custody orders." },
+          { text: "Interstate child support generally uses UIFSA-based rules to determine which order controls, where enforcement happens, which state may modify an order, and how support is collected across state lines." },
+        ],
+      },
+    ],
+  },
+  {
+    title: "Before Filing Or Going To Hearing",
+    blocks: [
+      {
+        title: "Before You File",
+        items: [
+          { text: "Check whether the correct case is being used, whether the court has jurisdiction, the exact order requested, the correct state or local form, filing fees or fee-waiver forms, signature and notarization requirements, hearing-request procedures, notice rules, service rules, deadlines, page limits, required attachments, and whether a proposed order is needed." },
+          { text: "Keep a stamped or electronically accepted copy of every filing." },
+          { text: "Court self-help centers may provide forms, procedural information, and referrals for self-represented parties." },
+        ],
+      },
+      {
+        title: "Before A Hearing",
+        items: [
+          { text: "Prepare a short explanation of what is being requested, the exact order requested, a timeline, exhibits, witness information, notes about the current order, proof of service, required financial documents, and a proposed order if required." },
+          { text: "Bring enough copies for yourself, the judge, the other party, and the witness stand or clerk if local rules require it." },
+          { text: "Be ready to explain what order currently exists, what happened, when it happened, what evidence supports it, what order is being requested, and why it meets the legal standard." },
+        ],
+      },
+    ],
+  },
+  {
+    title: "Orders Remain In Effect",
+    blocks: [
+      {
+        title: "Do Not Treat A Verbal Agreement Like A Signed Order",
+        items: [
+          { text: "Follow the current signed order until the court changes it, a higher court changes it, the order expires, or the order states that it ends after a specific event." },
+          { text: "A verbal agreement usually does not replace a signed court order." },
+          { text: "File for enforcement when the existing order is not being followed. File for modification when the order needs to change." },
+        ],
+      },
+      {
+        title: "Court Planner Connection",
+        items: [
+          { text: "Subscribers have access to the Court Planner for case information, court dates, filing deadlines, motions, service attempts, evidence, witnesses, requested orders, hearing preparation, and follow-up tasks." },
         ],
       },
     ],
   },
 ];
+
+const civilProtectiveOrderGuide: LegalGuidePageData = {
+  title: "Civil Protective Order Guide",
+  eyebrow: "Legal // Protective Orders",
+  terminalLabel: "user@survivor-os:~$ LOAD GUIDE // CIVIL PROTECTIVE ORDER",
+  intro:
+    "A civil protective order is a court order that can place restrictions on someone who has abused, threatened, stalked, harassed, or sexually assaulted another person. The exact name, eligibility rules, forms, evidence rules, and available protections depend on state law.",
+  warning:
+    "This is general education, not legal advice. Protective-order rules are different in every state and sometimes every county. Confirm local rules with the court, legal aid, a domestic violence advocate, or a licensed attorney before filing.",
+  sections: civilProtectiveOrderGuideSections,
+  notes: [
+    {
+      title: "Names Change By State",
+      body:
+        "You may see protective order, order of protection, restraining order, domestic violence restraining order, protection from abuse order, civil harassment order, stalking protection order, or injunction for protection.",
+    },
+    {
+      title: "Use The Court Planner",
+      body:
+        "Subscribers have access to court-planning resources for case overview, dates, deadlines, evidence, witnesses, requested protections, pre-court prep, after-court notes, follow-up tasks, and expiration-date tracking.",
+    },
+  ],
+  reminder: {
+    title: "Permission Protocol",
+    body:
+      "Wanting protection and feeling afraid of the process can both be true. Court can be intimidating. Preparation is not overreacting. It is the system choosing not to walk in blind.",
+  },
+};
+
+const familyCourtGuide: LegalGuidePageData = {
+  title: "Family Court Guide",
+  eyebrow: "Legal // Family Court",
+  terminalLabel: "user@survivor-os:~$ LOAD GUIDE // FAMILY COURT",
+  intro:
+    "Family court is a system with rules, deadlines, forms, vocabulary, power, and paperwork. This guide is a general map of what family court may handle, how cases usually move, what filings and motions mean, and how to prepare before asking the court for something.",
+  warning:
+    "This is general education, not legal advice. Family court rules are different in every state and may vary by county. Review your state judiciary website, local rules, court forms, filing procedures, and deadlines before submitting anything.",
+  sections: familyCourtGuideSections,
+  notes: [
+    {
+      title: "Local Names Matter",
+      body:
+        "Custody, parenting time, motions, petitions, requests for order, conservatorship, and other terms may change by state. Use this guide to understand the category, then confirm the exact local label.",
+    },
+    {
+      title: "Self-Represented Does Not Mean Unprepared",
+      body:
+        "Courts see self-represented filers every day. The goal is not to sound like a lawyer. The goal is to be clear about the current order, what happened, what is being requested, and what evidence supports the request.",
+    },
+  ],
+  reminder: {
+    title: "System Rule",
+    body:
+      "The signed order is the operating rule until the court changes it. If the order is not being followed, think enforcement. If the order needs to change, think modification.",
+  },
+};
 
 const housingGuideSections: RebuildingGuideSection[] = [
   {
@@ -4511,8 +4756,93 @@ function RebuildingModule({
   );
 }
 
+function LegalGuidePage({
+  guide,
+  onBack,
+}: {
+  guide: LegalGuidePageData;
+  onBack: () => void;
+}) {
+  return (
+    <section className="page-shell legal-module" aria-labelledby={`${guide.title.replaceAll(" ", "-").toLowerCase()}-title`}>
+      <div className="page-kicker">
+        <Scale aria-hidden="true" />
+        <p className="eyebrow">{guide.eyebrow}</p>
+      </div>
+
+      <div className="legal-guide-shell">
+        <div className="terminal-label">{guide.terminalLabel}</div>
+        <h1 id={`${guide.title.replaceAll(" ", "-").toLowerCase()}-title`}>&lt;{guide.title}&gt;</h1>
+        <p className="legal-tagline">// Legal orientation. No shame. No blindfold.</p>
+
+        <div className="legal-intro">&lt;{guide.intro}&gt;</div>
+
+        <div className="legal-warning">
+          <strong>&gt;&gt; Not Legal Advice</strong>
+          <p>{guide.warning}</p>
+        </div>
+
+        <section className="legal-motion-section" aria-label={`${guide.title} sections`}>
+          <div className="legal-motion-grid">
+            {guide.sections.map((section) => (
+              <article className="legal-motion-card" key={section.title}>
+                <h3>
+                  {section.title}
+                  {section.tag ? <span>{section.tag}</span> : null}
+                </h3>
+                {section.blocks.map((block) => (
+                  <div className="legal-motion-block" key={block.title}>
+                    <strong>&gt;&gt; {block.title}</strong>
+                    <ul>
+                      {block.items.map((item) => (
+                        <li key={item.name ?? item.text}>
+                          {item.name ? <span>{item.name}</span> : null}
+                          {item.text}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </article>
+            ))}
+          </div>
+        </section>
+
+        {guide.notes ? (
+          <div className="legal-note-grid">
+            {guide.notes.map((note) => (
+              <div className="legal-note" key={note.title}>
+                <strong>&gt;&gt; {note.title}</strong>
+                <p>{note.body}</p>
+              </div>
+            ))}
+          </div>
+        ) : null}
+
+        {guide.reminder ? (
+          <div className="legal-reminder">
+            <strong>&gt;&gt; {guide.reminder.title}</strong>
+            <p>{guide.reminder.body}</p>
+          </div>
+        ) : null}
+
+        <div className="terminal-actions denial-actions">
+          <button type="button" onClick={onBack}>
+            Back To Legal
+          </button>
+          <button type="button" onClick={leaveSite}>
+            Quick Exit
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function LegalModule() {
-  const [activeView, setActiveView] = useState<"landing" | "motion-drafting" | "protective-orders">("landing");
+  const [activeView, setActiveView] = useState<"landing" | "motion-drafting" | "protective-orders" | "family-court-guide">(
+    "landing",
+  );
 
   if (activeView === "motion-drafting") {
     return (
@@ -4627,132 +4957,12 @@ function LegalModule() {
     );
   }
 
+  if (activeView === "family-court-guide") {
+    return <LegalGuidePage guide={familyCourtGuide} onBack={() => setActiveView("landing")} />;
+  }
+
   if (activeView === "protective-orders") {
-    return (
-      <section className="page-shell legal-module" aria-labelledby="protective-orders-title">
-        <div className="page-kicker">
-          <Scale aria-hidden="true" />
-          <p className="eyebrow">Legal // Protective Orders</p>
-        </div>
-
-        <div className="legal-guide-shell">
-          <div className="terminal-label">user@survivor-os:~$ LOAD MODULE // PROTECTIVE ORDERS</div>
-          <h1 id="protective-orders-title">&lt;Protective Orders: What To Expect&gt;</h1>
-          <p className="legal-tagline">// Tools for clarity. Power for your future.</p>
-
-          <div className="legal-intro">
-            &lt;Going to court to ask for protection is its own kind of hard. Not knowing what is
-            coming makes it harder. This module walks through what a protective order does, the
-            different types you may run into, who can help you get one, and what tends to make the
-            process survivable.&gt;
-          </div>
-
-          <div className="legal-warning">
-            <strong>&gt;&gt; Not Legal Advice</strong>
-            <p>
-              This module is general education, not legal advice. Protective order names, processes,
-              and what a judge can grant differ by state and county. It does not create an
-              attorney-client relationship and should not replace advice from a licensed attorney or
-              local legal aid office. Confirm everything here against your specific court before you
-              act on it.
-            </p>
-          </div>
-
-          <section className="legal-step-section" aria-labelledby="protective-types-title">
-            <h2 id="protective-types-title">&gt;&gt; The Three Types You May Hear About</h2>
-            <div className="legal-step-grid three-up">
-              {protectiveOrderTypes.map((type) => (
-                <article className="legal-step-card" key={type.number}>
-                  <span>// {type.number}</span>
-                  <h3>{type.title}</h3>
-                  <p>{type.text}</p>
-                </article>
-              ))}
-            </div>
-            <div className="legal-note">
-              <strong>&gt;&gt; Note</strong>
-              <p>
-                These types can overlap. You might have an Emergency Order in the first 48 hours, a
-                Criminal Protective Order if charges get filed, and a Civil Protection Order running
-                alongside or after both. Ask the court clerk or an advocate which type applies to
-                your situation.
-              </p>
-            </div>
-          </section>
-
-          <section className="legal-motion-section" aria-labelledby="protective-sections-title">
-            <h2 id="protective-sections-title">&gt;&gt; Protective Order Process Map</h2>
-            <div className="legal-motion-grid">
-              {protectiveOrderSections.map((section) => (
-                <article className="legal-motion-card" key={section.title}>
-                  <h3>{section.title}</h3>
-                  {section.blocks.map((block) => (
-                    <div className="legal-motion-block" key={block.title}>
-                      <strong>&gt;&gt; {block.title}</strong>
-                      <ul>
-                        {block.items.map((item) => (
-                          <li key={item.name ?? item.text}>
-                            {item.name ? <span>{item.name}</span> : null}
-                            {item.text}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
-                </article>
-              ))}
-            </div>
-            <div className="legal-note">
-              <strong>&gt;&gt; Note</strong>
-              <p>
-                Not every court can grant every term, and weapons removal has different rules state
-                to state. Ask specifically for what you need at your hearing. Judges generally cannot
-                grant something you never requested.
-              </p>
-            </div>
-          </section>
-
-          <div className="legal-note-grid">
-            <div className="legal-note">
-              <strong>&gt;&gt; Do Not Carry It Alone</strong>
-              <p>
-                Filing for protection can mean retelling what happened more than once to people who
-                do not know you. That can be retraumatizing, even when the outcome is what you want.
-                Identify one trusted person, advocate, or counselor before you start so all of it is
-                not sitting on you alone.
-              </p>
-            </div>
-            <div className="legal-note">
-              <strong>&gt;&gt; Use The Court Planner</strong>
-              <p>
-                Subscribers have access to the Court Planner for case numbers, court contacts,
-                prioritized tasks, statement practice, evidence logs, vocabulary, logistics, and
-                after-court notes. You do not have to hold the logistics in your head on top of
-                everything else.
-              </p>
-            </div>
-          </div>
-
-          <div className="legal-reminder">
-            <strong>&gt;&gt; Remember</strong>
-            <p>
-              You are allowed to ask questions in court. You are allowed to ask for a continuance if
-              you are not ready. You are allowed to bring support with you in most settings. Wanting
-              protection and feeling scared of the process are not contradictions.
-            </p>
-          </div>
-
-          <div className="terminal-actions denial-actions">
-            <button type="button" onClick={() => setActiveView("landing")}>
-              Back To Legal
-            </button>
-            <button type="button" onClick={leaveSite}>
-              Quick Exit
-            </button>
-          </div>
-        </div>
-      </section>
-    );
+    return <LegalGuidePage guide={civilProtectiveOrderGuide} onBack={() => setActiveView("landing")} />;
   }
 
   return (
@@ -4791,10 +5001,13 @@ function LegalModule() {
             <p>{category.description}</p>
             {category.id === "protective-orders" ? (
               <button type="button" onClick={() => setActiveView("protective-orders")}>
-                Protective Orders
+                Civil Protective Order Guide
               </button>
             ) : category.id === "family-court" ? (
               <div className="legal-category-actions">
+                <button type="button" onClick={() => setActiveView("family-court-guide")}>
+                  Family Court Guide
+                </button>
                 <button type="button" onClick={() => setActiveView("motion-drafting")}>
                   Motion Drafting Basics
                 </button>
