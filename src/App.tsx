@@ -166,6 +166,33 @@ type LegalStep = {
   text: string;
 };
 
+type LibraryCategory = {
+  id: string;
+  title: string;
+  description: string;
+  resourceCount: number;
+};
+
+type LibraryPass = {
+  id: string;
+  title: string;
+  price: string;
+  scope: string;
+  viewing: string;
+  unlocks: string;
+  renewal: string;
+  stripeStatus: string;
+};
+
+type LibraryResource = {
+  id: string;
+  title: string;
+  category: string;
+  format: string;
+  preview: string;
+  access: string;
+};
+
 const modulePages: Record<
   Exclude<ModuleKey, "home" | "am-i-crazy" | "go-bag-prep">,
   {
@@ -248,6 +275,111 @@ const legalCategories: LegalCategory[] = [
     title: "Immigration",
     description: "Immigration-related survivor protections, documentation, referrals, and legal-aid pathways.",
     status: "QUEUE OPEN",
+  },
+];
+
+const libraryCategories: LibraryCategory[] = [
+  {
+    id: "court-systems",
+    title: "Court & Systems Navigation",
+    description: "Court planners, filing trackers, protective-order prep, benefits, agencies, and appointment logs.",
+    resourceCount: 8,
+  },
+  {
+    id: "recovery",
+    title: "Recovery",
+    description: "Nervous-system repair, reflection tools, trauma recovery maps, relationship pattern guides, and support scripts.",
+    resourceCount: 7,
+  },
+  {
+    id: "survivor-university",
+    title: "Survivor University / Economic Independence",
+    description: "Work-from-home ideas, income maps, budget templates, equipment lists, digital skills, and system-building guides.",
+    resourceCount: 9,
+  },
+  {
+    id: "life-rebuilding",
+    title: "Life Rebuilding",
+    description: "Housing trackers, transportation logs, SNAP/contact trackers, routines, future planning, and practical rebuild tools.",
+    resourceCount: 10,
+  },
+];
+
+const libraryPasses: LibraryPass[] = [
+  {
+    id: "one-thing",
+    title: "I Just Need One Thing",
+    price: "Individual pricing",
+    scope: "Buy one resource permanently.",
+    viewing: "Preview before buying. Purchased resource remains viewable.",
+    unlocks: "Includes permanent access to that one resource.",
+    renewal: "No pass. No renewal.",
+    stripeStatus: "Stripe product per resource",
+  },
+  {
+    id: "focus-pass",
+    title: "30-Day Focus Pass",
+    price: "$4.99",
+    scope: "Choose one category for 30 days.",
+    viewing: "Unlimited in-browser viewing inside the selected category during the active pass.",
+    unlocks: "Includes 2 Permanent Unlocks for downloads that remain available after the pass ends.",
+    renewal: "Expires automatically. Renewal must be deliberately purchased again.",
+    stripeStatus: "Stripe one-time product per category",
+  },
+  {
+    id: "all-access",
+    title: "30-Day All-Access Pass",
+    price: "$9.99",
+    scope: "Every paid library category for 30 days.",
+    viewing: "Unlimited in-browser viewing across all paid categories during the active pass.",
+    unlocks: "Includes 3 Permanent Unlocks for downloads that remain available after the pass ends.",
+    renewal: "Expires automatically. No auto-renew subscription behavior.",
+    stripeStatus: "Stripe one-time product",
+  },
+  {
+    id: "extra-unlocks",
+    title: "Add Permanent Unlocks",
+    price: "$2.99 / $4.99",
+    scope: "Add 1 or 2 extra download credits after checkout, when needed.",
+    viewing: "Does not change pass viewing access.",
+    unlocks: "Adds extra Permanent Unlock credits to the active library account.",
+    renewal: "One-time credit purchase. No renewal.",
+    stripeStatus: "Stripe one-time add-on products",
+  },
+];
+
+const previewResources: LibraryResource[] = [
+  {
+    id: "court-planner",
+    title: "Court Planner",
+    category: "Court & Systems Navigation",
+    format: "Bundle",
+    preview: "Case numbers, court contacts, evidence logs, statement practice, logistics, and after-court notes.",
+    access: "Included in Court Focus Pass or All-Access Pass. Permanent Unlock available.",
+  },
+  {
+    id: "housing-tracker",
+    title: "Housing Assistance Tracker",
+    category: "Life Rebuilding",
+    format: "Tracker",
+    preview: "Applications, deadlines, caseworkers, follow-ups, waitlists, document requests, and next actions.",
+    access: "Included in Life Rebuilding Focus Pass or All-Access Pass. Permanent Unlock available.",
+  },
+  {
+    id: "snap-benefits-log",
+    title: "SNAP & Benefits Contact Log",
+    category: "Life Rebuilding",
+    format: "Worksheet",
+    preview: "Interview dates, office contacts, upload confirmations, missing documents, renewal deadlines, and notes.",
+    access: "Included in Life Rebuilding Focus Pass or All-Access Pass. Permanent Unlock available.",
+  },
+  {
+    id: "survivor-university-income-map",
+    title: "Work-From-Home Income Map",
+    category: "Survivor University / Economic Independence",
+    format: "Guide",
+    preview: "Business ideas, equipment needs, startup costs, skill ladders, scam filters, and first-offer planning.",
+    access: "Included in Survivor University Focus Pass or All-Access Pass. Permanent Unlock available.",
   },
 ];
 
@@ -3444,6 +3576,120 @@ function ResourceModule({ moduleKey }: { moduleKey: Exclude<ModuleKey, "home" | 
   );
 }
 
+function LibraryModule() {
+  return (
+    <section className="page-shell library-module" aria-labelledby="library-title">
+      <div className="page-kicker">
+        <BookOpenCheck aria-hidden="true" />
+        <p className="eyebrow">Ctrl+L // Library</p>
+      </div>
+
+      <div className="library-hero-panel">
+        <div>
+          <p className="terminal-label">LOAD MODULE // PAID RESOURCE LIBRARY</p>
+          <h1 id="library-title">&lt;Survivor Operating System Library&gt;</h1>
+          <p>
+            Free crisis tools stay live in the app. The paid library holds deeper templates,
+            trackers, guides, and long-form systems for people who want more structure without a
+            forced subscription.
+          </p>
+        </div>
+        <aside className="library-status-panel" aria-label="Library access status">
+          <span>ACCESS MODEL</span>
+          <strong>FLEXIBLE PASSES</strong>
+          <small>STRIPE + SUPABASE WIRING PENDING</small>
+        </aside>
+      </div>
+
+      <div className="library-rule-strip" aria-label="Library rules">
+        <span>Unlimited Viewing During Active Pass</span>
+        <span>Permanent Unlocks Stay Available</span>
+        <span>Signed Download Links</span>
+        <span>No Forced Renewal</span>
+      </div>
+
+      <section className="library-section" aria-labelledby="library-options-title">
+        <div className="terminal-label">PURCHASE PATHS</div>
+        <h2 id="library-options-title">&lt;Choose Access Mode&gt;</h2>
+        <div className="library-pass-grid">
+          {libraryPasses.map((pass) => (
+            <article className="library-pass-card" key={pass.id}>
+              <div className="library-card-header">
+                <span>{pass.price}</span>
+                <small>{pass.stripeStatus}</small>
+              </div>
+              <h3>{pass.title}</h3>
+              <p>{pass.scope}</p>
+              <ul>
+                <li>{pass.viewing}</li>
+                <li>{pass.unlocks}</li>
+                <li>{pass.renewal}</li>
+              </ul>
+              <button type="button" disabled>
+                Stripe Checkout Pending
+              </button>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="library-section" aria-labelledby="library-categories-title">
+        <div className="terminal-label">FOCUS PASS CATEGORIES</div>
+        <h2 id="library-categories-title">&lt;Choose One Area&gt;</h2>
+        <div className="library-category-grid">
+          {libraryCategories.map((category) => (
+            <article className="library-category-card" key={category.id}>
+              <span>{String(category.resourceCount).padStart(2, "0")} RESOURCES</span>
+              <h3>{category.title}</h3>
+              <p>{category.description}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="library-section" aria-labelledby="library-preview-title">
+        <div className="terminal-label">RESOURCE PREVIEWS</div>
+        <h2 id="library-preview-title">&lt;Look Inside Before Unlocking&gt;</h2>
+        <div className="library-preview-grid">
+          {previewResources.map((resource) => (
+            <article className="library-preview-card" key={resource.id}>
+              <div className="library-preview-frame" aria-hidden="true">
+                <span />
+                <span />
+                <span />
+              </div>
+              <div>
+                <span className="library-resource-format">{resource.format}</span>
+                <h3>{resource.title}</h3>
+                <p>{resource.preview}</p>
+                <small>{resource.category}</small>
+                <p className="library-access-note">{resource.access}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="library-system-grid" aria-label="Library implementation notes">
+        <article className="library-system-card">
+          <h2>&lt;Founder Access Bonus&gt;</h2>
+          <p>
+            First 100 unique paying library customers receive one extra Permanent Unlock. This is
+            granted after payment by the webhook, without public discount codes or pricing changes.
+          </p>
+        </article>
+        <article className="library-system-card">
+          <h2>&lt;Access Enforcement&gt;</h2>
+          <p>
+            Stripe confirms payment. Supabase records access, pass expiration, unlock credits, and
+            permanent unlocks. Private files are served with short-lived signed links only.
+          </p>
+        </article>
+      </section>
+    </section>
+  );
+}
+
 function RebuildingModule({
   onNavigate,
 }: {
@@ -3894,6 +4140,8 @@ export function App() {
         <RebuildingModule onNavigate={navigate} />
       ) : activeModule === "legal" ? (
         <LegalModule />
+      ) : activeModule === "library" ? (
+        <LibraryModule />
       ) : (
         <ResourceModule moduleKey={activeModule} />
       )}
