@@ -21,6 +21,7 @@ type ModuleKey =
   | "leaving"
   | "rebuilding"
   | "local-help"
+  | "how-to"
   | "legal"
   | "library";
 
@@ -193,6 +194,25 @@ type LibraryResource = {
   access: string;
 };
 
+type HowToGuide = {
+  id: string;
+  title: string;
+  subtitle: string;
+  status: string;
+  description: string;
+  action: "open" | "navigate";
+  target?: ModuleKey;
+  path?: string;
+};
+
+type SnapTanfSection = {
+  id: string;
+  title: string;
+  body: string[];
+  items?: string[];
+  phrases?: string[];
+};
+
 const modulePages: Record<
   Exclude<ModuleKey, "home" | "am-i-crazy" | "go-bag-prep">,
   {
@@ -223,6 +243,12 @@ const modulePages: Record<
     eyebrow: "Resources",
     title: "Resources",
     description: "This page will hold live crisis resources, local help links, and survivor-centered support tools.",
+  },
+  "how-to": {
+    eyebrow: "How To Guides",
+    title: "How To Guides",
+    description:
+      "This page collects practical, step-by-step guides for navigating systems, paperwork, benefits, safety logistics, and rebuilding tasks.",
   },
   legal: {
     eyebrow: "Legal basics",
@@ -380,6 +406,174 @@ const previewResources: LibraryResource[] = [
     format: "Guide",
     preview: "Business ideas, equipment needs, startup costs, skill ladders, scam filters, and first-offer planning.",
     access: "Included in Survivor University Focus Pass or All-Access Pass. Permanent Unlock available.",
+  },
+];
+
+const howToGuides: HowToGuide[] = [
+  {
+    id: "snap-tanf",
+    title: "How To Navigate SNAP & TANF",
+    subtitle: "Food, cash assistance, interviews, documents, denials, and safe-contact planning.",
+    status: "LIVE GUIDE",
+    description:
+      "A practical benefits-navigation guide for starting the application, asking for expedited SNAP, handling missing documents, and understanding TANF domestic violence protections.",
+    action: "open",
+  },
+  {
+    id: "safety-protocol-001",
+    title: "Survivor Operating Systems Safety Protocol 001",
+    subtitle: "Screenshot-friendly crisis card for fast-exit thinking.",
+    status: "PLANNING GUIDE",
+    description:
+      "A compact protocol for safer places, code words, reachable essentials, and device-monitoring concerns.",
+    action: "open",
+  },
+  {
+    id: "browser-trace-cleanup",
+    title: "How To Clear Browser Traces",
+    subtitle: "Reduce local history without pretending it defeats monitoring.",
+    status: "PLANNING GUIDE",
+    description:
+      "Private browsing, browser cleanup, device caveats, and safer-device reminders for planning with fewer local traces.",
+    action: "open",
+  },
+  {
+    id: "pet-safety-plan",
+    title: "How To Make A Safety Plan For Your Pet",
+    subtitle: "Pets, records, emergency fostering, proof of care, and pet go-bag basics.",
+    status: "PLANNING GUIDE",
+    description:
+      "A practical guide for including pets in safety planning without pretending every option is simple or immediate.",
+    action: "open",
+  },
+  {
+    id: "housing-navigation",
+    title: "How To Navigate Housing",
+    subtitle: "Coordinated Entry, shelters, waitlists, privacy, documents, and follow-up.",
+    status: "REBUILDING GUIDE",
+    description:
+      "A live guide to housing systems and the many smaller doors that can sit inside the word housing.",
+    action: "navigate",
+    target: "rebuilding",
+    path: "/rebuilding",
+  },
+  {
+    id: "go-bag-checklist",
+    title: "How To Think Through A Go-Bag",
+    subtitle: "A checklist-first path into the in-browser Go-Bag simulator.",
+    status: "SIMULATOR GUIDE",
+    description:
+      "A lightweight prep guide before the simulator, built for thinking through urgent items without saving user data.",
+    action: "navigate",
+    target: "go-bag-prep",
+    path: "/go-bag-prep",
+  },
+];
+
+const snapTanfSections: SnapTanfSection[] = [
+  {
+    id: "what-are-they",
+    title: "What SNAP And TANF Are",
+    body: [
+      "SNAP helps eligible households buy groceries. Benefits are usually loaded onto an EBT card, which works like a debit card at approved stores.",
+      "TANF may provide temporary cash assistance and support services for families with children. Each state runs its own program, so the name, rules, benefits, and requirements may be different where the user lives.",
+      "SNAP and TANF can often be applied for at the same time.",
+    ],
+  },
+  {
+    id: "apply-fast",
+    title: "Apply As Soon As Possible",
+    body: [
+      "The application can usually be started before every document is gathered. Submitting may protect the filing date, which can affect when benefits begin.",
+      "Save the confirmation number, submission screenshot, application date, and copies of anything uploaded.",
+      "Ask about expedited SNAP if food access is urgent or money available for food is very low.",
+    ],
+    phrases: ["Please screen this application for expedited SNAP."],
+  },
+  {
+    id: "household",
+    title: "Household Rules",
+    body: [
+      "SNAP household rules can depend on who lives together, who buys food together, who prepares meals together, marriage status, and whether children under 22 live with a parent.",
+      "People at the same address may sometimes apply separately when they buy and prepare food separately. Answer honestly and let the worker apply the rules.",
+    ],
+    phrases: ["We live at the same address, but buy and prepare food separately."],
+  },
+  {
+    id: "documents",
+    title: "Information The Agency May Request",
+    body: [
+      "The agency may ask for identity, household member information, income, expenses, and TANF-specific information.",
+      "Income can include pay stubs, employer statements, self-employment income, unemployment, disability benefits, Social Security, child support, or regular financial help from another person.",
+      "Expenses can include rent or mortgage, utilities, childcare, dependent care, child support paid, and certain medical expenses for elderly or disabled household members.",
+    ],
+    items: [
+      "Identity: driver's license, state ID, birth certificate, school/work ID, benefits card, or a statement from someone who knows the applicant.",
+      "Household: names, dates of birth, relationships, Social Security numbers for people applying, and citizenship or immigration information when required.",
+      "TANF: proof of pregnancy, proof a child lives with the applicant, school information, child-support information, work/training information, and vehicle or asset information.",
+    ],
+  },
+  {
+    id: "missing-documents",
+    title: "When Documents Are Not Safely Accessible",
+    body: [
+      "The user may not have access to documents, accounts, mail, identification, or household records. That does not mean the application has to stop.",
+      "Possible alternatives may include employer records, bank records, a landlord statement, a shelter worker, a caseworker, a school employee, a medical provider, a domestic violence advocate, or a written statement.",
+      "Ask what the agency will accept and request a written list of anything still needed.",
+    ],
+    phrases: [
+      "That document cannot be safely accessed. What else can be used to verify this?",
+      "Another person controls that information, and contacting them may create risk.",
+    ],
+  },
+  {
+    id: "interview",
+    title: "The Interview",
+    body: [
+      "Most SNAP applicants complete an interview by phone or in person. The worker may ask about household members, income, expenses, missing documents, recent changes, work requirements, or safety concerns.",
+      "Keep paperwork nearby and take notes. If exact numbers are not available, estimates can be offered with verification later.",
+    ],
+    phrases: ["The exact amount is not available right now. An estimate can be provided, with verification afterward."],
+  },
+  {
+    id: "dv-protections",
+    title: "TANF And Domestic Violence Protections",
+    body: [
+      "Some TANF requirements can create safety concerns, including child-support cooperation, work requirements, appointments, address verification, residency rules, and program deadlines.",
+      "Some states offer domestic violence waivers, good-cause exceptions, or modified requirements. Ask for private screening, a supervisor, a domestic violence specialist, confidential contact, alternative verification, or a modified participation plan.",
+    ],
+    phrases: [
+      "This applicant is a domestic violence survivor and needs private screening for family violence protections and good-cause exceptions.",
+      "Child-support enforcement may reveal location information or increase stalking or retaliation risk.",
+      "Domestic violence is affecting safe completion of this requirement. What exemptions or modified requirements are available?",
+    ],
+  },
+  {
+    id: "safe-contact",
+    title: "Create A Safe Contact Plan",
+    body: [
+      "Use contact information the abusive person cannot access. Ask the agency to use only the provided safe contact methods.",
+      "Safety steps may include using a new password, logging out of shared devices, removing saved passwords, checking portal notifications, changing the EBT PIN, reviewing EBT transactions, and removing unsafe authorized representatives.",
+    ],
+    phrases: ["Please only use the contact information provided. Other contact methods may create risk."],
+  },
+  {
+    id: "after-apply",
+    title: "After Applying",
+    body: [
+      "Watch for interview calls, voicemails, portal messages, document requests, deadlines, and approval or denial notices.",
+      "A request for more information does not mean the application was denied. If an interview is missed, call back, leave a message, send a portal message, write down the date and time, and ask to reschedule.",
+    ],
+  },
+  {
+    id: "denied-approved",
+    title: "If Denied Or Approved",
+    body: [
+      "If denied, read the reason carefully. Common issues include missing documents, missed deadlines, incorrect income, an outdated address, the wrong household members, missing expenses, a missed interview, or a domestic violence exception that was not considered.",
+      "Ask why the case was denied, what information was used, whether missing documents can still be submitted, whether the case can be reopened, the appeal deadline, how to request a hearing, and how to get a copy of the case record.",
+      "After approval, review the benefit amount, issue date, reporting requirements, renewal date, TANF work requirements, and scheduled appointments. Add every deadline to a calendar.",
+    ],
+    phrases: ["This decision is disputed, and a hearing is requested."],
   },
 ];
 
@@ -709,6 +903,7 @@ const moduleRoutes: Record<ModuleKey, { label: string; path: string }> = {
   leaving: { label: "Leaving", path: "/leaving" },
   rebuilding: { label: "Rebuilding", path: "/rebuilding" },
   "local-help": { label: "Resources", path: "/resources" },
+  "how-to": { label: "Ctrl+C", path: "/how-to" },
   legal: { label: "Ctrl+Alt+Del", path: "/legal" },
   library: { label: "Library", path: "/library" },
 };
@@ -721,6 +916,7 @@ const allNavTargets: Array<{ key: ModuleKey; label: string; path: string }> = [
   { key: "leaving", ...moduleRoutes.leaving },
   { key: "rebuilding", ...moduleRoutes.rebuilding },
   { key: "local-help", ...moduleRoutes["local-help"] },
+  { key: "how-to", ...moduleRoutes["how-to"] },
   { key: "legal", ...moduleRoutes.legal },
   { key: "library", ...moduleRoutes.library },
 ];
@@ -730,6 +926,7 @@ const navItems: Array<{ key: ModuleKey; label: string; path: string; decoded: st
   { key: "leaving", label: "Ctrl+Space", path: "/leaving", decoded: "Leaving" },
   { key: "rebuilding", label: "Ctrl+Shift", path: "/rebuilding", decoded: "Rebuilding" },
   { key: "local-help", label: "Ctrl+Fn", path: "/resources", decoded: "Resources" },
+  { key: "how-to", label: "Ctrl+C", path: "/how-to", decoded: "How To Guides" },
   { key: "legal", label: "Ctrl+Alt+Del", path: "/legal", decoded: "Legal" },
   { key: "library", label: "Ctrl+L", path: "/library", decoded: "Library" },
 ];
@@ -2266,7 +2463,7 @@ function resolveCommand(query: string) {
   if (/\b(help|menu|options|commands|where)\b/.test(normalized)) {
     return {
       message:
-        "AVAILABLE COMMANDS: PREP, LEAVING, REBUILDING, RESOURCES, LIBRARY, AM I CRAZY, GO-BAG PREP, LEGAL, QUICK EXIT.",
+        "AVAILABLE COMMANDS: PREP, LEAVING, REBUILDING, RESOURCES, HOW TO GUIDES, LIBRARY, AM I CRAZY, GO-BAG PREP, LEGAL, QUICK EXIT.",
       target: null,
     };
   }
@@ -2294,6 +2491,10 @@ function resolveCommand(query: string) {
 
   if (/ctrl\s*\+\s*fn|\bresources?\b/.test(normalized)) {
     return { message: "QUERY ACCEPTED. ROUTING TO RESOURCES...", target: navItemFor("local-help") };
+  }
+
+  if (/ctrl\s*\+\s*c\b|\bhow to\b|\b(guides?|snap|tanf|benefits)\b/.test(normalized)) {
+    return { message: "QUERY ACCEPTED. ROUTING TO HOW TO GUIDES...", target: navItemFor("how-to") };
   }
 
   if (/ctrl\s*\+\s*l\b|\b(library|download|downloads|subscription|subscribe|paid|stripe)\b/.test(normalized)) {
@@ -2368,7 +2569,7 @@ function TerminalCommand({
           autoComplete="off"
           id="terminal-command"
           onChange={(event) => setQuery(event.target.value)}
-          placeholder="type: prep, leaving, resources, library, legal, quick exit..."
+          placeholder="type: prep, leaving, how to guides, resources, library, legal, quick exit..."
           spellCheck={false}
           type="search"
           value={query}
@@ -2450,6 +2651,7 @@ function HomeModule() {
     ["Ctrl+Space", "Leaving"],
     ["Ctrl+Shift", "Rebuilding"],
     ["Ctrl+Fn", "Resources"],
+    ["Ctrl+C", "How To Guides"],
     ["Ctrl+Alt+Del", "Legal"],
     ["Ctrl+L", "Library"],
   ];
@@ -2949,13 +3151,11 @@ function SafetyPlanningModule({
 
 function PlanningLanding({
   onOpenLadder,
-  onOpenResource,
   onOpenSafety,
   onOpenExitPlanning,
   onNavigate,
 }: {
   onOpenLadder: () => void;
-  onOpenResource: (resourceId: string) => void;
   onOpenSafety: () => void;
   onOpenExitPlanning: () => void;
   onNavigate: (module: ModuleKey, path: string) => void;
@@ -2997,28 +3197,17 @@ function PlanningLanding({
             <small>A no-save, in-browser simulator for thinking through urgent items.</small>
           </button>
         </div>
-
-        <div className="planning-resource-section">
-          <div className="terminal-label">PLANNING RESOURCE PAGES</div>
-          <div className="planning-resource-grid">
-            {planningResourcePages.map((resource, index) => (
-              <button className="planning-resource-key" key={resource.id} type="button" onClick={() => onOpenResource(resource.id)}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <strong>{resource.title}</strong>
-                <small>{resource.subtitle}</small>
-              </button>
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   );
 }
 
 function PlanningResourcePage({
+  backLabel = "Back To How To Guides",
   onBack,
   resourceId,
 }: {
+  backLabel?: string;
   onBack: () => void;
   resourceId: string;
 }) {
@@ -3055,7 +3244,7 @@ function PlanningResourcePage({
         </div>
         <div className="terminal-actions denial-actions">
           <button type="button" onClick={onBack}>
-            Back To Planning
+            {backLabel}
           </button>
           <button type="button" onClick={leaveSite}>
             Quick Exit
@@ -3073,8 +3262,7 @@ function PlanningModule({
   onControlPanelChange: (panel: ControlPanelState) => void;
   onNavigate: (module: ModuleKey, path: string) => void;
 }) {
-  const [mode, setMode] = useState<"landing" | "ladder" | "response" | "complete" | "exit-planning" | "safety-planning" | "resource">("landing");
-  const [activeResourceId, setActiveResourceId] = useState(planningResourcePages[0].id);
+  const [mode, setMode] = useState<"landing" | "ladder" | "response" | "complete" | "exit-planning" | "safety-planning">("landing");
   const [activeRung, setActiveRung] = useState<LeavingLadderRung | null>(null);
   const [visitedRungIds, setVisitedRungIds] = useState<string[]>([]);
   const [responseDone, setResponseDone] = useState(false);
@@ -3088,7 +3276,7 @@ function PlanningModule({
   const [gaugeEmphasis, setGaugeEmphasis] = useState<string | null>(null);
 
   useEffect(() => {
-    if (mode === "exit-planning" || mode === "safety-planning" || mode === "resource") return;
+    if (mode === "exit-planning" || mode === "safety-planning") return;
 
     onControlPanelChange({
       emphasis: gaugeEmphasis,
@@ -3145,20 +3333,12 @@ function PlanningModule({
     );
   }
 
-  if (mode === "resource") {
-    return <PlanningResourcePage onBack={() => setMode("landing")} resourceId={activeResourceId} />;
-  }
-
   if (mode === "landing") {
     return (
       <PlanningLanding
         onNavigate={onNavigate}
         onOpenExitPlanning={() => setMode("exit-planning")}
         onOpenLadder={() => setMode("ladder")}
-        onOpenResource={(resourceId) => {
-          setActiveResourceId(resourceId);
-          setMode("resource");
-        }}
         onOpenSafety={() => setMode("safety-planning")}
       />
     );
@@ -3314,6 +3494,164 @@ function PlanningModule({
       {visitedRungIds.length > 0 && (
         <p className="session-note">Temporary ladder signals are erased when this session clears, refreshes, or exits.</p>
       )}
+    </section>
+  );
+}
+
+function SnapTanfGuide({ onBack, onNavigate }: { onBack: () => void; onNavigate: (module: ModuleKey, path: string) => void }) {
+  return (
+    <section className="page-shell how-to-guide-page snap-tanf-guide" aria-labelledby="snap-tanf-title">
+      <div className="page-kicker">
+        <BookOpenCheck aria-hidden="true" />
+        <p className="eyebrow">Ctrl+C // How To Guides</p>
+      </div>
+
+      <div className="how-to-hero">
+        <div>
+          <p className="terminal-label">LOAD GUIDE // SNAP + TANF</p>
+          <h1 id="snap-tanf-title">&lt;How To Navigate SNAP &amp; TANF&gt;</h1>
+          <p>
+            Applying for benefits can feel overwhelming, especially when housing, money, safety,
+            childcare, or transportation are already in motion. This guide breaks the system into
+            steps: apply, document, interview, protect contact information, and follow up.
+          </p>
+        </div>
+        <aside className="how-to-status-panel" aria-label="SNAP and TANF guide status">
+          <span>GUIDE STATUS</span>
+          <strong>LIVE PAGE</strong>
+          <small>NO PDF EMBED // SCREENSHOT-FRIENDLY</small>
+        </aside>
+      </div>
+
+      <div className="how-to-command-strip" aria-label="Guide quick map">
+        <span>Apply First</span>
+        <span>Ask Expedited</span>
+        <span>Safe Contact</span>
+        <span>DV Protections</span>
+        <span>Appeal Deadline</span>
+      </div>
+
+      <div className="snap-guide-grid">
+        {snapTanfSections.map((section, index) => (
+          <article className="snap-guide-card" key={section.id}>
+            <div className="snap-guide-card-header">
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <small>{section.id.replaceAll("-", " ")}</small>
+            </div>
+            <h2>&lt;{section.title}&gt;</h2>
+            {section.body.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+            {section.items ? (
+              <ul>
+                {section.items.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            ) : null}
+            {section.phrases ? (
+              <div className="phrase-bank">
+                <div className="terminal-label">PHRASES TO USE</div>
+                {section.phrases.map((phrase) => (
+                  <code key={phrase}>{phrase}</code>
+                ))}
+              </div>
+            ) : null}
+          </article>
+        ))}
+      </div>
+
+      <section className="how-to-system-note" aria-labelledby="snap-navigation-system-title">
+        <h2 id="snap-navigation-system-title">&lt;When One Application Turns Into Six&gt;</h2>
+        <p>
+          SNAP and TANF may only cover part of what is needed. Childcare, transportation, housing,
+          utility assistance, emergency financial help, and local services can each bring their own
+          forms, deadlines, calls, and document requests.
+        </p>
+        <p>
+          The Access Library will hold the deeper Resource Navigation System: trackers for
+          applications, case numbers, worker information, documents, deadlines, phone-call notes,
+          local resources, and what to work on next.
+        </p>
+        <div className="terminal-actions denial-actions">
+          <button type="button" onClick={() => onNavigate("library", "/library")}>
+            View Access Options
+          </button>
+          <button type="button" onClick={onBack}>
+            Back To How To Guides
+          </button>
+          <button type="button" onClick={leaveSite}>
+            Quick Exit
+          </button>
+        </div>
+      </section>
+    </section>
+  );
+}
+
+function HowToModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: string) => void }) {
+  const [activeGuideId, setActiveGuideId] = useState<string | null>(null);
+  const planningResourceMap: Record<string, string> = {
+    "safety-protocol-001": "crisis-card",
+    "browser-trace-cleanup": "digital-traces",
+    "pet-safety-plan": "pet-plan",
+  };
+  const activeResourceId = activeGuideId ? planningResourceMap[activeGuideId] : null;
+
+  if (activeGuideId === "snap-tanf") {
+    return <SnapTanfGuide onBack={() => setActiveGuideId(null)} onNavigate={onNavigate} />;
+  }
+
+  if (activeResourceId) {
+    return <PlanningResourcePage onBack={() => setActiveGuideId(null)} resourceId={activeResourceId} />;
+  }
+
+  return (
+    <section className="page-shell how-to-module" aria-labelledby="how-to-title">
+      <div className="page-kicker">
+        <BookOpenCheck aria-hidden="true" />
+        <p className="eyebrow">Ctrl+C // How To Guides</p>
+      </div>
+
+      <div className="how-to-hero">
+        <div>
+          <p className="terminal-label">LOAD MODULE // HOW TO GUIDES</p>
+          <h1 id="how-to-title">&lt;Ctrl+C&gt;</h1>
+          <p className="how-to-subtitle">HOW TO GUIDES</p>
+          <p>
+            Practical guides for the systems that make people feel like they need a second brain:
+            benefits, housing, device traces, pets, go-bags, paperwork, and rebuilding logistics.
+          </p>
+        </div>
+        <aside className="how-to-status-panel" aria-label="How to guide status">
+          <span>GUIDE INDEX</span>
+          <strong>ONLINE</strong>
+          <small>LIVE PAGES // NO STATIC PDF EMBEDS</small>
+        </aside>
+      </div>
+
+      <div className="how-to-guide-grid">
+        {howToGuides.map((guide, index) => (
+          <article className="how-to-guide-card" key={guide.id}>
+            <div className="how-to-guide-card-header">
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <small>{guide.status}</small>
+            </div>
+            <h2>&lt;{guide.title}&gt;</h2>
+            <p className="how-to-guide-subtitle">{guide.subtitle}</p>
+            <p>{guide.description}</p>
+            {guide.action === "navigate" ? (
+              <button type="button" onClick={() => onNavigate(guide.target ?? "home", guide.path ?? "/")}>
+                Open Guide
+              </button>
+            ) : (
+              <button type="button" onClick={() => setActiveGuideId(guide.id)}>
+                Open Guide
+              </button>
+            )}
+          </article>
+        ))}
+      </div>
     </section>
   );
 }
@@ -4138,6 +4476,8 @@ export function App() {
         <PlanningModule onControlPanelChange={updateControlPanel} onNavigate={navigate} />
       ) : activeModule === "rebuilding" ? (
         <RebuildingModule onNavigate={navigate} />
+      ) : activeModule === "how-to" ? (
+        <HowToModule onNavigate={navigate} />
       ) : activeModule === "legal" ? (
         <LegalModule />
       ) : activeModule === "library" ? (
