@@ -213,6 +213,24 @@ type SnapTanfSection = {
   phrases?: string[];
 };
 
+type PracticalGuide = {
+  id: string;
+  title: string;
+  terminalLabel: string;
+  intro: string;
+  quickMap: string[];
+  sections: SnapTanfSection[];
+  systemNote?: {
+    title: string;
+    body: string[];
+    primaryAction?: {
+      label: string;
+      target: ModuleKey;
+      path: string;
+    };
+  };
+};
+
 const modulePages: Record<
   Exclude<ModuleKey, "home" | "am-i-crazy" | "go-bag-prep">,
   {
@@ -420,6 +438,24 @@ const howToGuides: HowToGuide[] = [
     action: "open",
   },
   {
+    id: "routine-chaos",
+    title: "How To Create Routine While Life Is Chaotic",
+    subtitle: "Small anchors, rest, self-care, space, creativity, and future-building when life keeps moving.",
+    status: "LIVE GUIDE",
+    description:
+      "A stabilizing guide for creating routines that can survive disrupted days, low energy, temporary housing, grief, and rebuilding.",
+    action: "open",
+  },
+  {
+    id: "live-in-your-car",
+    title: "How To Live In Your Car",
+    subtitle: "Vehicle readiness, storage, sleep, privacy, bathrooms, food, parking, pets, kids, and safety basics.",
+    status: "LIVE GUIDE",
+    description:
+      "A practical harm-reduction guide for making vehicle living safer, calmer, more organized, and easier to manage.",
+    action: "open",
+  },
+  {
     id: "safety-protocol-001",
     title: "Survivor Operating Systems Safety Protocol 001",
     subtitle: "Screenshot-friendly crisis card for fast-exit thinking.",
@@ -576,6 +612,258 @@ const snapTanfSections: SnapTanfSection[] = [
     phrases: ["This decision is disputed, and a hearing is requested."],
   },
 ];
+
+const routineSections: SnapTanfSection[] = [
+  {
+    id: "daily-anchors",
+    title: "Choose A Few Daily Anchors",
+    body: [
+      "When life feels unpredictable, routine can give the mind and body something steady to return to. It does not need to be impressive.",
+      "Pick two or three things that can happen most days, wherever the user is. Keep the routine short and add more later only if it actually helps.",
+    ],
+    items: [
+      "Drink water after waking.",
+      "Take medication.",
+      "Wash face or brush teeth.",
+      "Eat something with protein.",
+      "Check the calendar.",
+      "Stretch before sleeping.",
+    ],
+  },
+  {
+    id: "rest-emotions",
+    title: "Let Rest And Emotions Count",
+    body: [
+      "Rest is part of rebuilding. Tired can mean the system needs sleep, food, water, quiet, comfort, movement, or fewer decisions for a while.",
+      "Chaos can bring grief, relief, fear, anger, numbness, confusion, or several emotions at the same time. The task is not to solve every feeling. The task is to notice what is there without turning it into a trial.",
+    ],
+    phrases: [
+      "This makes sense after what happened.",
+      "Not everything has to be understood today.",
+    ],
+  },
+  {
+    id: "morning-night",
+    title: "Create Morning And Night Defaults",
+    body: [
+      "A morning routine can take five minutes: drink water, take medication or vitamins, open curtains or step outside, wash face, and choose one useful task.",
+      "A nighttime routine tells the body the day is ending: keys in the same place, phone charging, water filled, tomorrow checked, worry list written down, and important items set out.",
+    ],
+    items: [
+      "Useful task options: make one phone call, submit one application, gather one document, wash clothes, schedule one appointment, or rest without guilt.",
+      "Keep nighttime gentle. Surviving the day already counts.",
+    ],
+  },
+  {
+    id: "self-care",
+    title: "Keep Basic Self-Care Simple",
+    body: [
+      "Skincare and body care can create a quick moment of normalcy. A washcloth, cleanser, moisturizer, lip balm, and sunscreen can be enough.",
+      "Small maintenance tasks can help create a sense of order when other parts of life feel out of control.",
+    ],
+    items: [
+      "Trim or file nails.",
+      "Brush or style hair.",
+      "Wash bedding or change clothes.",
+      "Clean glasses.",
+      "Take care of teeth.",
+      "Wash and refill a water bottle.",
+    ],
+  },
+  {
+    id: "mind-creative",
+    title: "Read, Journal, Or Make Something",
+    body: [
+      "Reading can give the mind somewhere else to go. One page, five minutes, or one audiobook chapter counts.",
+      "A journal does not have to be profound. It only needs to belong to the user. Creative routines can also help a person stay connected to themselves.",
+    ],
+    phrases: [
+      "Today the system feels...",
+      "Right now the next need is...",
+      "One thing handled well was...",
+      "One thing being built toward is...",
+    ],
+  },
+  {
+    id: "space-future",
+    title: "Organize One Corner And One Future Step",
+    body: [
+      "The space matters, even when it is temporary: car, shelter, couch, hotel, one room, temporary housing, or a new apartment. One organized corner can make a space feel calmer.",
+      "Planning can help remind the nervous system that the current situation is not the whole story. Start with housing, work, education, money, health, parenting, transportation, legal needs, friendships, creativity, or personal goals.",
+    ],
+    items: [
+      "Fold clothes, organize a shelf, make a charging station, display one photo, keep books nearby, or arrange hobby supplies.",
+      "Future-building can be one application, one saved document, one housing option researched, one skill learned, or one question asked.",
+    ],
+  },
+  {
+    id: "low-energy",
+    title: "Build Low-Energy Versions",
+    body: [
+      "A routine should still work when the user is exhausted. Both the full version and low-energy version count.",
+      "Missing a day does not erase the routine. Restart with the next available action without waiting for Monday, next month, or a calmer life.",
+    ],
+    items: [
+      "Full version: shower, complete skincare, journal, clean the room, make calls, cook dinner.",
+      "Low-energy version: use a washcloth, apply moisturizer, write one sentence, throw away three pieces of trash, send one email, eat something easy.",
+    ],
+  },
+];
+
+const carLivingSections: SnapTanfSection[] = [
+  {
+    id: "ready-to-move",
+    title: "Keep The Car Ready To Move",
+    body: [
+      "The vehicle is both shelter and transportation. The driver seat, pedals, doors, seat belts, windows, and emergency brake should stay usable.",
+      "Park facing the easiest exit when possible. If something feels wrong, leave. No suspicious parking lot is owed a second chance.",
+    ],
+    items: [
+      "Driver seat empty.",
+      "Keys in the same place every night.",
+      "Shoes within reach.",
+      "Enough gas to relocate.",
+      "Important items secured while driving.",
+    ],
+  },
+  {
+    id: "storage-sleep",
+    title: "Start With Cheap Storage And A Sleep Setup",
+    body: [
+      "Expensive vehicle-storage equipment is not required. Discount-store bins, baskets, zip bags, laundry bags, hooks, clips, and drawer organizers can make the space workable.",
+      "A basic sleep setup may include a camping mattress or foam pad, sleeping bag, blanket, small pillow, clean socks, and weather-appropriate clothing.",
+    ],
+    items: [
+      "Separate containers for food, clothing, toiletries, documents, medication, pets, electronics, trash, and laundry.",
+      "Keep daily-use items closest to doors and backup supplies underneath or behind them.",
+      "Dry damp bedding during the day whenever possible.",
+    ],
+  },
+  {
+    id: "privacy-bathroom",
+    title: "Create Privacy And A Bathroom Plan",
+    body: [
+      "Privacy covers help with sleep, changing clothes, organizing, and emergencies. Test covers at night with a light on inside the car and look for gaps from outside.",
+      "A bathroom plan should include several restroom options. Do not depend on one location because hours, policies, and access can change.",
+    ],
+    items: [
+      "Cheap privacy options: towels, dark fabric, black poster board, cardboard, sunshades, curtains, or pillowcases.",
+      "Bathroom kit: toilet paper, wipes, sanitizer, gloves, towel, sealable bags, cleaning spray, and a secure container for urine if needed.",
+      "Restroom options: libraries, grocery stores, truck stops, recreation centers, campgrounds, rest areas, 24-hour businesses, shelters, or day centers.",
+    ],
+  },
+  {
+    id: "within-reach",
+    title: "Keep Critical Items Within Reach",
+    body: [
+      "Important items should not require digging through the whole car at night. Documents should stay together in a waterproof pouch when possible.",
+      "Photos of documents can be saved somewhere secure when that is safe to do.",
+    ],
+    items: [
+      "Keys, phone, charger, battery bank, wallet, ID, medication, flashlight, water, shoes, jacket, glasses, emergency contacts.",
+      "Pet leash and waste bags, window breaker, and seat-belt cutter if available.",
+    ],
+  },
+  {
+    id: "food-temperature",
+    title: "Plan Food, Water, Temperature, And Air Safety",
+    body: [
+      "Choose foods that are easy to store and require little preparation. Keep a manual can opener even if most cans have pull tabs.",
+      "Cars can become dangerously hot or cold. Watch weather daily and plan where the hottest or coldest hours can be spent.",
+      "Never use charcoal grills, camp stoves, propane stoves, generators, candles, or fuel-burning heaters inside the vehicle. Carbon monoxide has no color or smell.",
+    ],
+    items: [
+      "Food options: peanut butter, crackers, tortillas, tuna/chicken pouches, pull-tab cans, protein bars, nuts, dried fruit, apples, oranges, oatmeal cups, and ready-to-eat meals.",
+      "Indoor options during extreme temperatures: libraries, malls, recreation centers, cooling/warming centers, day shelters, pet-friendly businesses, or trusted spaces.",
+    ],
+  },
+  {
+    id: "parking-low-profile",
+    title: "Find Safer Parking And Stay Low-Profile",
+    body: [
+      "Parking rules vary by city. Look for places where overnight parking is clearly allowed and avoid tow-away zones, private property without permission, school property, overnight-restricted roads, trapped areas, isolated locations, and places where people approach vehicles.",
+      "Finish organizing, eating, and changing locations before parking for the night when possible. Keep noise low, lights covered, belongings inside, and trash cleaned up.",
+    ],
+    items: [
+      "Possible options: official safe-parking programs, campgrounds, designated rest areas, approved church/nonprofit lots, trusted property, or businesses that gave permission.",
+      "Call 211 and ask about safe-parking programs, Coordinated Entry, day shelters, vehicle-homelessness programs, gas vouchers, showers, laundry, pet-friendly shelters, and local housing resources.",
+    ],
+  },
+  {
+    id: "car-maintenance",
+    title: "Keep Up With The Car",
+    body: [
+      "Small vehicle problems can become housing emergencies quickly. Keep a small amount reserved for gas whenever possible.",
+      "Emergency supplies can reduce the chance that one car problem becomes a crisis.",
+    ],
+    items: [
+      "Check gas, oil, coolant, tire pressure, battery, registration, insurance, inspection requirements, and warning lights.",
+      "Useful supplies: jumper cables or jump pack, tire inflator, tire-pressure gauge, basic tool kit, spare tire, roadside-assistance information, emergency water, and flashlight.",
+    ],
+  },
+  {
+    id: "pets-kids",
+    title: "Plan Differently With Pets Or Children",
+    body: [
+      "Pets add comfort, routine, security, and extra planning. Children require a more detailed plan for temperature safety, sleep, car seats, school, food, bathrooms, privacy, childcare, medical needs, parking, documents, and keeping the vehicle ready to drive.",
+      "Never leave a pet or child alone in a parked car during hot or cold weather. Cracking windows does not prevent dangerous heat, and cold vehicles can also become unsafe.",
+    ],
+    items: [
+      "Pet planning: food, water, bowls, bedding, leash, waste bags, medication, vaccination records, grooming supplies, cleaning supplies, carrier/restraint, pet food banks, foster programs, and low-cost vet clinics.",
+      "Child planning: correctly installed car seats, clear seat belts, school access, medical needs, documents, and early help from advocates or local programs.",
+    ],
+  },
+  {
+    id: "personhood",
+    title: "Build Routines And Bring Something That Belongs To You",
+    body: [
+      "Vehicle living can involve long stretches of waiting: housing applications, benefit decisions, callbacks, court dates, paychecks, shelter openings, and transportation help.",
+      "Use waiting time to build small routines that support the user. Bring one small hobby or comfort item that fits the space. The day does not have to revolve only around applications and survival paperwork.",
+    ],
+    items: [
+      "Daily anchors: brush teeth, take medication, fill water, eat protein, clean one section of the car, charge phone, check applications, move the body, rest, and plan tomorrow's first step.",
+      "Small hobby bag: crochet, knitting, drawing, journaling, reading, guitar, puzzles, photography, language learning, hand sewing, or online classes.",
+    ],
+  },
+];
+
+const practicalGuides: Record<string, PracticalGuide> = {
+  "routine-chaos": {
+    id: "routine-chaos",
+    title: "How To Create Routine While Life Is Chaotic",
+    terminalLabel: "LOAD GUIDE // ROUTINE WHILE LIFE IS CHAOTIC",
+    intro:
+      "When everything keeps changing, routine can be small enough to survive the chaos. This guide focuses on anchors, low-energy defaults, self-care, space, creativity, and future-building.",
+    quickMap: ["Daily Anchors", "Rest Counts", "Low Energy", "One Corner", "Begin Again"],
+    sections: routineSections,
+    systemNote: {
+      title: "Start With Today",
+      body: [
+        "No perfect schedule required. Choose one thing that cares for the body, one thing that supports the future, and one thing that helps the user feel like themselves.",
+        "Do those three things as often as possible. Let familiar become steady. Let steady become the beginning of the next life.",
+      ],
+      primaryAction: { label: "Explore Access Library", target: "library", path: "/library" },
+    },
+  },
+  "live-in-your-car": {
+    id: "live-in-your-car",
+    title: "How To Live In Your Car",
+    terminalLabel: "LOAD GUIDE // VEHICLE LIVING",
+    intro:
+      "Living in a car takes planning, but the space can become safer, calmer, and easier to manage. Start with movement, sleep, privacy, water, food, and a bathroom plan.",
+    quickMap: ["Ready To Move", "Privacy", "Bathroom Plan", "Safe Parking", "211"],
+    sections: carLivingSections,
+    systemNote: {
+      title: "First Car-Living Checklist",
+      body: [
+        "Clear the driver seat and pedals. Choose two possible parking locations. Create basic window covers. Make a sleeping area. Pack water and easy food. Create a bathroom kit.",
+        "Put important documents together. Charge phone and battery pack. Check gas and tire pressure. Pack medication. Make a plan for children or pets. Call 211 for local resources. Bring something enjoyable.",
+        "Everything does not have to be solved tonight. Make the car safer. Get some sleep. Take the next step tomorrow.",
+      ],
+      primaryAction: { label: "Open Housing Navigation", target: "rebuilding", path: "/rebuilding" },
+    },
+  },
+};
 
 const motionDraftingSteps: LegalStep[] = [
   {
@@ -3589,6 +3877,103 @@ function SnapTanfGuide({ onBack, onNavigate }: { onBack: () => void; onNavigate:
   );
 }
 
+function PracticalHowToGuide({
+  guide,
+  onBack,
+  onNavigate,
+}: {
+  guide: PracticalGuide;
+  onBack: () => void;
+  onNavigate: (module: ModuleKey, path: string) => void;
+}) {
+  return (
+    <section className="page-shell how-to-guide-page" aria-labelledby={`${guide.id}-title`}>
+      <div className="page-kicker">
+        <BookOpenCheck aria-hidden="true" />
+        <p className="eyebrow">Ctrl+C // How To Guides</p>
+      </div>
+
+      <div className="how-to-hero">
+        <div>
+          <p className="terminal-label">{guide.terminalLabel}</p>
+          <h1 id={`${guide.id}-title`}>&lt;{guide.title}&gt;</h1>
+          <p>{guide.intro}</p>
+        </div>
+        <aside className="how-to-status-panel" aria-label={`${guide.title} status`}>
+          <span>GUIDE STATUS</span>
+          <strong>LIVE PAGE</strong>
+          <small>NO PDF EMBED // SCREENSHOT-FRIENDLY</small>
+        </aside>
+      </div>
+
+      <div className="how-to-command-strip" aria-label="Guide quick map">
+        {guide.quickMap.map((item) => (
+          <span key={item}>{item}</span>
+        ))}
+      </div>
+
+      <div className="snap-guide-grid">
+        {guide.sections.map((section, index) => (
+          <article className="snap-guide-card" key={section.id}>
+            <div className="snap-guide-card-header">
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <small>{section.id.replaceAll("-", " ")}</small>
+            </div>
+            <h2>&lt;{section.title}&gt;</h2>
+            {section.body.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+            {section.items ? (
+              <ul>
+                {section.items.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            ) : null}
+            {section.phrases ? (
+              <div className="phrase-bank">
+                <div className="terminal-label">PHRASES / PROMPTS</div>
+                {section.phrases.map((phrase) => (
+                  <code key={phrase}>{phrase}</code>
+                ))}
+              </div>
+            ) : null}
+          </article>
+        ))}
+      </div>
+
+      {guide.systemNote ? (
+        <section className="how-to-system-note" aria-labelledby={`${guide.id}-system-note`}>
+          <h2 id={`${guide.id}-system-note`}>&lt;{guide.systemNote.title}&gt;</h2>
+          {guide.systemNote.body.map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
+          ))}
+          <div className="terminal-actions denial-actions">
+            {guide.systemNote.primaryAction ? (
+              <button
+                type="button"
+                onClick={() =>
+                  guide.systemNote?.primaryAction
+                    ? onNavigate(guide.systemNote.primaryAction.target, guide.systemNote.primaryAction.path)
+                    : undefined
+                }
+              >
+                {guide.systemNote.primaryAction.label}
+              </button>
+            ) : null}
+            <button type="button" onClick={onBack}>
+              Back To How To Guides
+            </button>
+            <button type="button" onClick={leaveSite}>
+              Quick Exit
+            </button>
+          </div>
+        </section>
+      ) : null}
+    </section>
+  );
+}
+
 function HowToModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: string) => void }) {
   const [activeGuideId, setActiveGuideId] = useState<string | null>(null);
   const planningResourceMap: Record<string, string> = {
@@ -3600,6 +3985,16 @@ function HowToModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: str
 
   if (activeGuideId === "snap-tanf") {
     return <SnapTanfGuide onBack={() => setActiveGuideId(null)} onNavigate={onNavigate} />;
+  }
+
+  if (activeGuideId && practicalGuides[activeGuideId]) {
+    return (
+      <PracticalHowToGuide
+        guide={practicalGuides[activeGuideId]}
+        onBack={() => setActiveGuideId(null)}
+        onNavigate={onNavigate}
+      />
+    );
   }
 
   if (activeResourceId) {
