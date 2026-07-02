@@ -2,11 +2,8 @@ import { type CSSProperties, type FormEvent, useCallback, useEffect, useMemo, us
 import {
   BookOpenCheck,
   Compass,
-  FileText,
-  Map,
   Scale,
   ShieldAlert,
-  ShieldCheck,
   Sprout,
 } from "lucide-react";
 import denialSupportOne from "./assets/support/denial-support-1.png";
@@ -246,51 +243,6 @@ type PracticalGuide = {
       path: string;
     };
   };
-};
-
-const modulePages: Record<
-  Exclude<ModuleKey, "home" | "am-i-crazy" | "go-bag-prep">,
-  {
-    eyebrow: string;
-    title: string;
-    description: string;
-  }
-> = {
-  planning: {
-    eyebrow: "Planning resources",
-    title: "Planning",
-    description:
-      "This page will hold safety planning tools, document checklists, contact worksheets, and preparation resources.",
-  },
-  rebuilding: {
-    eyebrow: "Rebuilding resources",
-    title: "Rebuilding",
-    description:
-      "This page will hold housing, legal, money, support network, and stabilization resources for the next chapter.",
-  },
-  "local-help": {
-    eyebrow: "Resources",
-    title: "Resources",
-    description: "This page will hold live crisis resources, local help links, and survivor-centered support tools.",
-  },
-  "how-to": {
-    eyebrow: "How To Guides",
-    title: "How To Guides",
-    description:
-      "This page collects practical, step-by-step guides for navigating systems, paperwork, benefits, safety logistics, and rebuilding tasks.",
-  },
-  legal: {
-    eyebrow: "Legal basics",
-    title: "Legal",
-    description:
-      "This page will hold plain-language legal rights resources, document checklists, and next-step guides.",
-  },
-  library: {
-    eyebrow: "Resource library",
-    title: "Library",
-    description:
-      "This page will hold free downloads, paid subscriptions, previews, and the deeper Survivor Operating System resource library.",
-  },
 };
 
 const legalCategories: LegalCategory[] = [
@@ -880,7 +832,7 @@ const practicalGuides: Record<string, PracticalGuide> = {
         "No perfect schedule required. Choose one thing that cares for the body, one thing that supports the future, and one thing that helps the user feel like themselves.",
         "Do those three things as often as possible. Let familiar become steady. Let steady become the beginning of the next life.",
       ],
-      primaryAction: { label: "Explore Access Library", target: "library", path: "/library" },
+      primaryAction: { label: "Explore Access Library", target: "library", path: "/resources" },
     },
   },
   "live-in-your-car": {
@@ -1456,9 +1408,9 @@ const moduleRoutes: Record<ModuleKey, { label: string; path: string }> = {
   planning: { label: "Prep / First Steps", path: "/planning" },
   rebuilding: { label: "Rebuilding", path: "/rebuilding" },
   "local-help": { label: "Resources", path: "/resources" },
-  "how-to": { label: "Ctrl+C", path: "/how-to" },
-  legal: { label: "Ctrl+Alt+Del", path: "/legal" },
-  library: { label: "Library", path: "/library" },
+  "how-to": { label: "Resources", path: "/resources" },
+  legal: { label: "Resources", path: "/resources" },
+  library: { label: "Resources", path: "/resources" },
 };
 
 const allNavTargets: Array<{ key: ModuleKey; label: string; path: string }> = [
@@ -1477,9 +1429,6 @@ const navItems: Array<{ key: ModuleKey; label: string; path: string; decoded: st
   { key: "planning", label: "Ctrl+Esc", path: "/planning", decoded: "Prep / First Steps" },
   { key: "rebuilding", label: "Ctrl+Shift", path: "/rebuilding", decoded: "Rebuilding" },
   { key: "local-help", label: "Ctrl+Fn", path: "/resources", decoded: "Resources" },
-  { key: "how-to", label: "Ctrl+C", path: "/how-to", decoded: "How To Guides" },
-  { key: "legal", label: "Ctrl+Alt+Del", path: "/legal", decoded: "Legal" },
-  { key: "library", label: "Ctrl+L", path: "/library", decoded: "Library" },
 ];
 
 function navItemFor(key: ModuleKey) {
@@ -2514,6 +2463,9 @@ function markCheckpointCleared() {
 function getInitialModule(): ModuleKey {
   const path = window.location.pathname;
   if (path === "/local-help") return "local-help";
+  if (path === "/how-to") return "how-to";
+  if (path === "/legal") return "legal";
+  if (path === "/library") return "library";
 
   const match = allNavTargets.find((item) => item.path === path);
   return match?.key ?? "home";
@@ -2982,7 +2934,7 @@ function resolveCommand(query: string) {
   if (/\b(help|menu|options|commands|where)\b/.test(normalized)) {
     return {
       message:
-        "AVAILABLE COMMANDS: PREP, REBUILDING, RESOURCES, HOW TO GUIDES, LIBRARY, AM I CRAZY, GO-BAG PREP, LEGAL, QUICK EXIT.",
+        "AVAILABLE COMMANDS: PREP, REBUILDING, RESOURCES, AM I CRAZY, GO-BAG PREP, QUICK EXIT.",
       target: null,
     };
   }
@@ -3009,11 +2961,11 @@ function resolveCommand(query: string) {
   }
 
   if (/ctrl\s*\+\s*c\b|\bhow to\b|\b(guides?|snap|tanf|benefits)\b/.test(normalized)) {
-    return { message: "QUERY ACCEPTED. ROUTING TO HOW TO GUIDES...", target: navItemFor("how-to") };
+    return { message: "QUERY ACCEPTED. ROUTING TO RESOURCES...", target: navItemFor("how-to") };
   }
 
   if (/ctrl\s*\+\s*l\b|\b(library|download|downloads|subscription|subscribe|paid|stripe)\b/.test(normalized)) {
-    return { message: "QUERY ACCEPTED. ROUTING TO LIBRARY...", target: navItemFor("library") };
+    return { message: "QUERY ACCEPTED. ROUTING TO RESOURCES...", target: navItemFor("library") };
   }
 
   if (/\b(crazy|abused|abuse|assessment|gaslight|gaslighting|reality)\b/.test(normalized)) {
@@ -3041,7 +2993,7 @@ function resolveCommand(query: string) {
   }
 
   if (/\b(legal|rights|court|order|documents)\b/.test(normalized)) {
-    return { message: "QUERY ACCEPTED. ROUTING TO LEGAL...", target: navItemFor("legal") };
+    return { message: "QUERY ACCEPTED. ROUTING TO RESOURCES...", target: navItemFor("legal") };
   }
 
   return {
@@ -3084,7 +3036,7 @@ function TerminalCommand({
           autoComplete="off"
           id="terminal-command"
           onChange={(event) => setQuery(event.target.value)}
-          placeholder="type: prep, how to guides, resources, library, legal, quick exit..."
+          placeholder="type: prep, resources, rebuilding, go-bag prep, quick exit..."
           spellCheck={false}
           type="search"
           value={query}
@@ -3165,9 +3117,6 @@ function HomeModule() {
     ["Ctrl+Esc", "Prep / First Steps"],
     ["Ctrl+Shift", "Rebuilding"],
     ["Ctrl+Fn", "Resources"],
-    ["Ctrl+C", "How To Guides"],
-    ["Ctrl+Alt+Del", "Legal"],
-    ["Ctrl+L", "Library"],
   ];
 
   return (
@@ -3440,7 +3389,7 @@ function AmICrazyModule({
             <button type="button" onClick={startPlanning}>
               Start Exit Planning
             </button>
-            <button type="button" onClick={() => onNavigate("legal", "/legal")}>
+            <button type="button" onClick={() => onNavigate("legal", "/resources")}>
               Understand Choices
             </button>
             <button type="button" onClick={() => onNavigate("home", "/")}>
@@ -3473,7 +3422,7 @@ function AmICrazyModule({
             <button type="button" onClick={startPlanning}>
               Start Exit Planning
             </button>
-            <button type="button" onClick={() => onNavigate("legal", "/legal")}>
+            <button type="button" onClick={() => onNavigate("legal", "/resources")}>
               Understand Choices
             </button>
             <button type="button" onClick={() => onNavigate("go-bag-prep", "/go-bag-prep")}>
@@ -3647,7 +3596,7 @@ function SafetyPlanningModule({
           <button type="button" onClick={() => onNavigate("local-help", "/resources")}>
             Find Advocate Or Crisis Help
           </button>
-          <button type="button" onClick={() => onNavigate("legal", "/legal")}>
+          <button type="button" onClick={() => onNavigate("legal", "/resources")}>
             Understand Reporting Options
           </button>
           <button type="button" onClick={onBack}>
@@ -3945,7 +3894,7 @@ function PlanningModule({
                 <button type="button" onClick={() => onNavigate("local-help", "/resources")}>
                   Resources
                 </button>
-                <button type="button" onClick={() => onNavigate("legal", "/legal")}>
+                <button type="button" onClick={() => onNavigate("legal", "/resources")}>
                   Legal
                 </button>
                 <button type="button" onClick={() => setMode("complete")}>
@@ -4017,7 +3966,7 @@ function SnapTanfGuide({ onBack, onNavigate }: { onBack: () => void; onNavigate:
     <section className="page-shell how-to-guide-page snap-tanf-guide" aria-labelledby="snap-tanf-title">
       <div className="page-kicker">
         <BookOpenCheck aria-hidden="true" />
-        <p className="eyebrow">Ctrl+C // How To Guides</p>
+        <p className="eyebrow">Resources // How To Guides</p>
       </div>
 
       <div className="how-to-hero">
@@ -4088,7 +4037,7 @@ function SnapTanfGuide({ onBack, onNavigate }: { onBack: () => void; onNavigate:
           local resources, and what to work on next.
         </p>
         <div className="terminal-actions denial-actions">
-          <button type="button" onClick={() => onNavigate("library", "/library")}>
+          <button type="button" onClick={() => onNavigate("library", "/resources")}>
             View Access Options
           </button>
           <button type="button" onClick={onBack}>
@@ -4116,7 +4065,7 @@ function PracticalHowToGuide({
     <section className="page-shell how-to-guide-page" aria-labelledby={`${guide.id}-title`}>
       <div className="page-kicker">
         <BookOpenCheck aria-hidden="true" />
-        <p className="eyebrow">Ctrl+C // How To Guides</p>
+        <p className="eyebrow">Resources // How To Guides</p>
       </div>
 
       <div className="how-to-hero">
@@ -4200,9 +4149,17 @@ function PracticalHowToGuide({
   );
 }
 
-function HowToModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: string) => void }) {
+function HowToModule({
+  initialPriority = null,
+  onBackToResources,
+  onNavigate,
+}: {
+  initialPriority?: HowToGuide["priority"] | null;
+  onBackToResources?: () => void;
+  onNavigate: (module: ModuleKey, path: string) => void;
+}) {
   const [activeGuideId, setActiveGuideId] = useState<string | null>(null);
-  const [activePriorityId, setActivePriorityId] = useState<HowToGuide["priority"] | null>(null);
+  const [activePriorityId, setActivePriorityId] = useState<HowToGuide["priority"] | null>(initialPriority);
   const planningResourceMap: Record<string, string> = {
     "browser-trace-cleanup": "digital-traces",
     "pet-safety-plan": "pet-plan",
@@ -4210,6 +4167,11 @@ function HowToModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: str
   const activeResourceId = activeGuideId ? planningResourceMap[activeGuideId] : null;
   const activePriority = activePriorityId ? howToPriorities.find((priority) => priority.id === activePriorityId) : null;
   const visibleGuides = activePriorityId ? howToGuides.filter((guide) => guide.priority === activePriorityId) : [];
+
+  useEffect(() => {
+    setActiveGuideId(null);
+    setActivePriorityId(initialPriority);
+  }, [initialPriority]);
 
   if (activeGuideId === "snap-tanf") {
     return <SnapTanfGuide onBack={() => setActiveGuideId(null)} onNavigate={onNavigate} />;
@@ -4233,13 +4195,13 @@ function HowToModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: str
     <section className="page-shell how-to-module" aria-labelledby="how-to-title">
       <div className="page-kicker">
         <BookOpenCheck aria-hidden="true" />
-        <p className="eyebrow">Ctrl+C // How To Guides</p>
+        <p className="eyebrow">Resources // How To Guides</p>
       </div>
 
       <div className="how-to-hero">
         <div>
-          <p className="terminal-label">LOAD MODULE // HOW TO GUIDES</p>
-          <h1 id="how-to-title">&lt;Ctrl+C&gt;</h1>
+          <p className="terminal-label">LOAD RESOURCES // HOW TO GUIDES</p>
+          <h1 id="how-to-title">&lt;Resource Priorities&gt;</h1>
           <p className="how-to-subtitle">HOW TO GUIDES</p>
           <p>
             Practical guides are sorted by priority so the screen does not throw the whole system at
@@ -4279,8 +4241,8 @@ function HowToModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: str
               <p className="terminal-label">FOLDER OPEN</p>
               <h2>&lt;{activePriority.title}&gt;</h2>
             </div>
-            <button type="button" onClick={() => setActivePriorityId(null)}>
-              Back To Priority Folders
+            <button type="button" onClick={onBackToResources ?? (() => setActivePriorityId(null))}>
+              {onBackToResources ? "Back To Resource Folders" : "Back To Priority Folders"}
             </button>
           </div>
 
@@ -4443,7 +4405,7 @@ function ExitPlanningModule({
             <button type="button" onClick={showEmergencyOptions}>
               Emergency Options
             </button>
-            <button type="button" onClick={() => onNavigate("legal", "/legal")}>
+            <button type="button" onClick={() => onNavigate("legal", "/resources")}>
               Understand Choices First
             </button>
             <button type="button" onClick={() => onNavigate("home", "/")}>
@@ -4520,7 +4482,7 @@ function ExitPlanningModule({
             <button type="button" onClick={() => onNavigate("local-help", "/resources")}>
               Show Relevant Free Resources
             </button>
-            <button type="button" onClick={() => onNavigate("legal", "/legal")}>
+            <button type="button" onClick={() => onNavigate("legal", "/resources")}>
               Understand Choices
             </button>
             <button type="button" onClick={clearPlanning}>
@@ -4540,31 +4502,134 @@ function ExitPlanningModule({
   );
 }
 
-function ResourceModule({ moduleKey }: { moduleKey: Exclude<ModuleKey, "home" | "am-i-crazy" | "go-bag-prep"> }) {
-  const page = modulePages[moduleKey];
+type ResourceFolder = "landing" | HowToGuide["priority"] | "legal" | "library";
+
+function getInitialResourceFolder(moduleKey: Exclude<ModuleKey, "home" | "am-i-crazy" | "go-bag-prep">): ResourceFolder {
+  if (moduleKey === "how-to") return "landing";
+  if (moduleKey === "legal") return "legal";
+  if (moduleKey === "library") return "library";
+  return "landing";
+}
+
+function ResourceModule({
+  moduleKey,
+  onNavigate,
+}: {
+  moduleKey: Exclude<ModuleKey, "home" | "am-i-crazy" | "go-bag-prep">;
+  onNavigate: (module: ModuleKey, path: string) => void;
+}) {
+  const [activeFolder, setActiveFolder] = useState<ResourceFolder>(() => getInitialResourceFolder(moduleKey));
+
+  useEffect(() => {
+    setActiveFolder(getInitialResourceFolder(moduleKey));
+  }, [moduleKey]);
+
+  if (activeFolder === "legal") {
+    return (
+      <section className="resources-nested-shell">
+        <button className="resource-back-button" type="button" onClick={() => setActiveFolder("landing")}>
+          Back To Resource Folders
+        </button>
+        <LegalModule />
+      </section>
+    );
+  }
+
+  if (activeFolder === "library") {
+    return (
+      <section className="resources-nested-shell">
+        <button className="resource-back-button" type="button" onClick={() => setActiveFolder("landing")}>
+          Back To Resource Folders
+        </button>
+        <LibraryModule />
+      </section>
+    );
+  }
+
+  if (activeFolder === "priority-1" || activeFolder === "priority-2" || activeFolder === "priority-3") {
+    return (
+      <HowToModule
+        initialPriority={activeFolder}
+        onBackToResources={() => setActiveFolder("landing")}
+        onNavigate={onNavigate}
+      />
+    );
+  }
 
   return (
-    <section className="page-shell">
+    <section className="page-shell resources-module" aria-labelledby="resources-title">
       <div className="page-kicker">
         <Compass aria-hidden="true" />
-        <p className="eyebrow">{page.eyebrow}</p>
+        <p className="eyebrow">Ctrl+Fn // Resources</p>
       </div>
-      <h1>{page.title}</h1>
-      <p>{page.description}</p>
-      <div className="blank-state" aria-label={`${page.title} resources coming soon`}>
-        <FileText aria-hidden="true" />
-        <h2>Resources coming soon</h2>
-        <p>
-          This space is ready for the guided tools, checklists, and support content we will add
-          next.
-        </p>
+
+      <div className="resources-hero">
+        <div>
+          <p className="terminal-label">LOAD MODULE // RESOURCE FOLDERS</p>
+          <h1 id="resources-title">&lt;Resources&gt;</h1>
+          <p>
+            Resources are grouped by urgency so the user can open one folder at a time. Priority 1
+            holds first moves. Priority 2 holds systems navigation. Priority 3 holds stabilizing and
+            rebuilding. Legal and Library live here too.
+          </p>
+        </div>
+        <aside className="how-to-status-panel" aria-label="Resources status">
+          <span>RESOURCE INDEX</span>
+          <strong>ONLINE</strong>
+          <small>FOLDER MODE // NO INFORMATION DUMP</small>
+        </aside>
       </div>
-      <div className="module-chip-row" aria-hidden="true">
-        <span><BookOpenCheck /> Planning</span>
-        <span><Map /> Steps</span>
-        <span><ShieldCheck /> Safety</span>
-        <span><Sprout /> Rebuilding</span>
-        <span><Scale /> Choices</span>
+
+      <div className="resource-folder-grid">
+        {howToPriorities.map((priority) => {
+          const count = howToGuides.filter((guide) => guide.priority === priority.id).length;
+          return (
+            <article className="resource-folder-card" key={priority.id}>
+              <div className="how-to-guide-card-header">
+                <span>{priority.label}</span>
+                <small>{count} GUIDES</small>
+              </div>
+              <h2>&lt;Resources {priority.label.replace("Priority ", "Priority ")}&gt;</h2>
+              <h3>{priority.title}</h3>
+              <p>{priority.description}</p>
+              <button type="button" onClick={() => setActiveFolder(priority.id)}>
+                Open Folder
+              </button>
+            </article>
+          );
+        })}
+
+        <article className="resource-folder-card">
+          <div className="how-to-guide-card-header">
+            <span>LEGAL</span>
+            <small>2 GUIDES</small>
+          </div>
+          <h2>&lt;Legal Resources&gt;</h2>
+          <h3>Family Court + Protective Orders</h3>
+          <p>
+            Legal orientation lives here: Family Court Guide and Civil Protective Order Guide. No
+            legal advice, just language, structure, and what to ask before filing.
+          </p>
+          <button type="button" onClick={() => setActiveFolder("legal")}>
+            Open Folder
+          </button>
+        </article>
+
+        <article className="resource-folder-card">
+          <div className="how-to-guide-card-header">
+            <span>LIBRARY</span>
+            <small>ACCESS</small>
+          </div>
+          <h2>&lt;Resource Library&gt;</h2>
+          <h3>Paid Guides + Deeper Systems</h3>
+          <p>
+            The Access Library holds previews, pass options, permanent unlocks, and deeper resource
+            systems once Stripe and Supabase are fully wired.
+          </p>
+          <button type="button" onClick={() => setActiveFolder("library")}>
+            Open Folder
+          </button>
+        </article>
       </div>
     </section>
   );
@@ -4575,7 +4640,7 @@ function LibraryModule() {
     <section className="page-shell library-module" aria-labelledby="library-title">
       <div className="page-kicker">
         <BookOpenCheck aria-hidden="true" />
-        <p className="eyebrow">Ctrl+L // Library</p>
+        <p className="eyebrow">Resources // Library</p>
       </div>
 
       <div className="library-hero-panel">
@@ -4760,7 +4825,7 @@ function RebuildingModule({
           <button type="button" onClick={() => onNavigate("local-help", "/resources")}>
             Find Resources
           </button>
-          <button type="button" onClick={() => onNavigate("legal", "/legal")}>
+          <button type="button" onClick={() => onNavigate("legal", "/resources")}>
             Legal Basics
           </button>
           <button type="button" onClick={leaveSite}>
@@ -4991,8 +5056,8 @@ function LegalModule() {
       <div className="legal-header">
         <div>
           <p className="terminal-label">SURVIVOR OPERATING SYSTEM // LEGAL</p>
-          <h1 id="legal-title">&lt;Ctrl+Alt+Del&gt;</h1>
-          <p className="legal-command-subtitle">LEGAL</p>
+          <h1 id="legal-title">&lt;Legal Resources&gt;</h1>
+          <p className="legal-command-subtitle">LEGAL RESOURCES</p>
           <p>
             Legal systems can be intimidating because they are systems with rules, deadlines,
             vocabulary, and power. This section is for orientation, language, and preparation before
@@ -5007,34 +5072,27 @@ function LegalModule() {
       </div>
 
       <div className="legal-category-grid">
-        {legalCategories.map((category) => (
-          <article className={category.available ? "legal-category-card ready" : "legal-category-card"} key={category.id}>
-            <div className="legal-category-card-header">
-              <span>{category.label}</span>
-              <small>{category.status}</small>
-            </div>
-            <h2>&lt;{category.title}&gt;</h2>
-            <p>{category.description}</p>
-            {category.id === "protective-orders" ? (
-              <button type="button" onClick={() => setActiveView("protective-orders")}>
-                Civil Protective Order Guide
-              </button>
-            ) : category.id === "family-court" ? (
-              <div className="legal-category-actions">
+        {legalCategories
+          .filter((category) => category.id === "protective-orders" || category.id === "family-court")
+          .map((category) => (
+            <article className="legal-category-card ready" key={category.id}>
+              <div className="legal-category-card-header">
+                <span>{category.label}</span>
+                <small>LIVE GUIDE</small>
+              </div>
+              <h2>&lt;{category.title}&gt;</h2>
+              <p>{category.description}</p>
+              {category.id === "protective-orders" ? (
+                <button type="button" onClick={() => setActiveView("protective-orders")}>
+                  Civil Protective Order Guide
+                </button>
+              ) : category.id === "family-court" ? (
                 <button type="button" onClick={() => setActiveView("family-court-guide")}>
                   Family Court Guide
                 </button>
-                <button type="button" onClick={() => setActiveView("motion-drafting")}>
-                  Motion Drafting Basics
-                </button>
-              </div>
-            ) : (
-              <button type="button" disabled>
-                Protocol Coming Soon
-              </button>
-            )}
-          </article>
-        ))}
+              ) : null}
+            </article>
+          ))}
       </div>
     </section>
   );
@@ -5100,14 +5158,10 @@ export function App() {
         <PlanningModule onControlPanelChange={updateControlPanel} onNavigate={navigate} />
       ) : activeModule === "rebuilding" ? (
         <RebuildingModule onNavigate={navigate} />
-      ) : activeModule === "how-to" ? (
-        <HowToModule onNavigate={navigate} />
-      ) : activeModule === "legal" ? (
-        <LegalModule />
-      ) : activeModule === "library" ? (
-        <LibraryModule />
+      ) : activeModule === "local-help" || activeModule === "how-to" || activeModule === "legal" || activeModule === "library" ? (
+        <ResourceModule moduleKey={activeModule} onNavigate={navigate} />
       ) : (
-        <ResourceModule moduleKey={activeModule} />
+        <ResourceModule moduleKey={activeModule} onNavigate={navigate} />
       )}
     </TerminalChrome>
   );

@@ -436,7 +436,7 @@ function GoBagSimulator({
           >
             Ready To Go
           </button>
-          <button type="button" onClick={() => onNavigate("how-to", "/how-to")}>Show Go-Bag Resources</button>
+          <button type="button" onClick={() => onNavigate("how-to", "/resources")}>Show Go-Bag Resources</button>
           <button type="button" onClick={() => { resetGame(); setScreen("checklist"); }}>Clear Session</button>
           <button type="button" onClick={clearAndExit}>Quick Exit</button>
         </div>

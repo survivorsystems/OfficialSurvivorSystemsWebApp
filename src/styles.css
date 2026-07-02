@@ -3968,6 +3968,93 @@ button:disabled {
   padding-top: 12px;
 }
 
+.resources-module,
+.resources-nested-shell {
+  display: grid;
+  gap: 22px;
+}
+
+.resources-hero,
+.resource-folder-card {
+  background:
+    linear-gradient(180deg, rgba(14, 18, 28, 0.96), rgba(4, 5, 10, 0.98)),
+    var(--panel-2);
+  border: 1px solid rgba(0, 234, 255, 0.28);
+  border-radius: 10px;
+  box-shadow:
+    inset 0 0 18px rgba(0, 234, 255, 0.05),
+    0 0 18px rgba(0, 234, 255, 0.12);
+}
+
+.resources-hero {
+  align-items: stretch;
+  display: grid;
+  gap: 18px;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 0.34fr);
+  padding: 22px;
+}
+
+.resources-hero h1,
+.resource-folder-card h2,
+.resource-folder-card h3 {
+  color: var(--cream);
+  text-shadow: 0 0 12px rgba(255, 79, 216, 0.42);
+}
+
+.resources-hero p,
+.resource-folder-card p {
+  color: rgba(236, 250, 255, 0.78);
+  line-height: 1.65;
+}
+
+.resource-folder-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.resource-folder-card {
+  overflow: hidden;
+  padding: 18px;
+}
+
+.resource-folder-card::before {
+  background:
+    linear-gradient(90deg, rgba(0, 234, 255, 0.7), rgba(255, 79, 216, 0.72)),
+    var(--cyan);
+  box-shadow:
+    0 0 16px rgba(0, 234, 255, 0.32),
+    0 0 22px rgba(255, 79, 216, 0.2);
+  content: "";
+  display: block;
+  height: 8px;
+  margin: -18px -18px 16px;
+}
+
+.resource-folder-card h2 {
+  font-size: clamp(1.05rem, 1.6vw, 1.42rem);
+}
+
+.resource-folder-card h3 {
+  color: var(--cyan);
+  font-size: 0.98rem;
+  text-shadow: var(--shadow-cyan);
+}
+
+.resource-folder-card button,
+.resource-back-button {
+  width: 100%;
+}
+
+.resource-folder-card button {
+  margin-top: 14px;
+}
+
+.resource-back-button {
+  justify-self: start;
+  max-width: 280px;
+}
+
 .how-to-module,
 .how-to-guide-page {
   display: grid;
@@ -4373,6 +4460,7 @@ button:disabled {
   .home-grid,
   .legal-header,
   .library-hero-panel,
+  .resources-hero,
   .how-to-hero,
   .rebuilding-hero {
     grid-template-columns: 1fr;
@@ -4398,6 +4486,7 @@ button:disabled {
   .library-preview-grid,
   .library-rule-strip,
   .library-system-grid,
+  .resource-folder-grid,
   .how-to-command-strip,
   .how-to-guide-grid,
   .how-to-priority-grid,
@@ -4455,6 +4544,7 @@ button:disabled {
   .library-preview-grid,
   .library-rule-strip,
   .library-system-grid,
+  .resource-folder-grid,
   .how-to-command-strip,
   .how-to-guide-grid,
   .how-to-priority-grid,
