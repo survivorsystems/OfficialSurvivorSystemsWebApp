@@ -3125,7 +3125,7 @@ function TerminalChrome({
         <nav aria-label="Primary navigation">
           {navItems.map((item) => (
             <a
-              className={isPrimaryNavActive(activeModule, item.key) ? "active" : ""}
+              className={`shell-nav-control${isPrimaryNavActive(activeModule, item.key) ? " active" : ""}`}
               href={item.path}
               key={item.key}
               onClick={(event) => {
@@ -3133,8 +3133,12 @@ function TerminalChrome({
                 onNavigate(item.key, item.path);
               }}
             >
-              <span>{item.label}</span>
-              <small>{item.decoded}</small>
+              <span className="shell-nav-indicator" aria-hidden="true" />
+              <span className="shell-nav-copy">
+                <span>{item.label}</span>
+                <small>{item.decoded}</small>
+              </span>
+              <span className="shell-nav-button" aria-hidden="true" />
             </a>
           ))}
         </nav>
