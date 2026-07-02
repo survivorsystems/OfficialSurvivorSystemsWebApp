@@ -1417,7 +1417,7 @@ const moduleRoutes: Record<ModuleKey, { label: string; path: string }> = {
   home: { label: "Home", path: "/" },
   "am-i-crazy": { label: "Am I Crazy", path: "/am-i-crazy" },
   "go-bag-prep": { label: "Go-Bag Prep", path: "/go-bag-prep" },
-  planning: { label: "Prep / First Steps", path: "/planning" },
+  planning: { label: "How To Make A Leaving Plan", path: "/planning" },
   rebuilding: { label: "Rebuilding", path: "/rebuilding" },
   "local-help": { label: "Resources", path: "/resources" },
   "how-to": { label: "Resources", path: "/resources" },
@@ -1438,10 +1438,10 @@ const allNavTargets: Array<{ key: ModuleKey; label: string; path: string }> = [
   { key: "access", ...moduleRoutes.access },
 ];
 
-const navItems: Array<{ key: ModuleKey; label: string; path: string; decoded: string }> = [
-  { key: "planning", label: "Ctrl+Esc", path: "/planning", decoded: "Prep / First Steps" },
-  { key: "local-help", label: "Ctrl+Fn", path: "/resources", decoded: "Resources" },
-  { key: "access", label: "Ctrl+A", path: "/resources/access", decoded: "Database" },
+const navItems: Array<{ key: ModuleKey; label: string; path: string; decoded: string; icon: string }> = [
+  { key: "planning", label: "Ctrl+Esc", path: "/planning", decoded: "Leaving Plan", icon: "folder" },
+  { key: "local-help", label: "Ctrl+Fn", path: "/resources", decoded: "Resources", icon: "folder" },
+  { key: "access", label: "Ctrl+A", path: "/resources/access", decoded: "Database", icon: "database" },
 ];
 
 function navItemFor(key: ModuleKey) {
@@ -3101,62 +3101,83 @@ function TerminalChrome({
   controlPanel: ControlPanelState;
   onNavigate: (module: ModuleKey, path: string) => void;
 }) {
+  const activeLabel = moduleRoutes[activeModule]?.label ?? "Home";
+
   return (
-    <main className="terminal-frame app-frame">
-      <aside className="terminal-sidebar" aria-label="Survivor Operating System navigation">
-        <a
-          className="brand"
-          href="/"
-          onClick={(event) => {
-            event.preventDefault();
-            onNavigate("home", "/");
-          }}
-        >
-          <BrandLogo />
-        </a>
-        <p className="sidebar-tagline">TOOLS FOR CLARITY. POWER FOR YOUR FUTURE.</p>
-        <nav aria-label="Primary navigation">
+    <main className="terminal-frame app-frame win95-frame">
+      <section className="win95-desktop" aria-label="Survivor Operating System desktop">
+        <nav className="desktop-icon-grid" aria-label="Desktop navigation">
+          <button
+            className={`desktop-icon desktop-icon-home${activeModule === "home" ? " active" : ""}`}
+            type="button"
+            onClick={() => onNavigate("home", "/")}
+          >
+            <span className="desktop-icon-art desktop-icon-art-computer" aria-hidden="true" />
+            <span className="desktop-icon-title">Home</span>
+            <small>Terminal</small>
+          </button>
           {navItems.map((item) => (
-            <a
-              className={`shell-nav-control${isPrimaryNavActive(activeModule, item.key) ? " active" : ""}`}
-              href={item.path}
+            <button
+              className={`desktop-icon${isPrimaryNavActive(activeModule, item.key) ? " active" : ""}`}
               key={item.key}
-              onClick={(event) => {
-                event.preventDefault();
-                onNavigate(item.key, item.path);
-              }}
+              type="button"
+              onClick={() => onNavigate(item.key, item.path)}
             >
-              <span className="shell-nav-indicator" aria-hidden="true" />
-              <span className="shell-nav-copy">
-                <span>{item.label}</span>
-                <small>{item.decoded}</small>
-              </span>
-              <span className="shell-nav-button" aria-hidden="true" />
-            </a>
+              <span className={`desktop-icon-art desktop-icon-art-${item.icon}`} aria-hidden="true" />
+              <span className="desktop-icon-title">{item.label}</span>
+              <small>{item.decoded}</small>
+            </button>
           ))}
+          <button className="desktop-icon desktop-icon-exit" type="button" onClick={leaveSite}>
+            <span className="desktop-icon-art desktop-icon-art-exit" aria-hidden="true" />
+            <span className="desktop-icon-title">Quick Exit</span>
+            <small>iluvrocks</small>
+          </button>
         </nav>
-        <button className="quick-exit" type="button" onClick={leaveSite}>
-          <ShieldAlert aria-hidden="true" />
-          Quick Exit
-        </button>
-      </aside>
-      <section className="terminal-screen">
-        <header className="terminal-topbar">
-          <GaugeDeck compact emphasis={controlPanel.emphasis} gauges={controlPanel.gauges} notice={controlPanel.notice} />
-          <div className="terminal-heading-row">
-            <div className="terminal-topbar-title">
-              <span className="terminal-label">MODULE</span>
-              <h1>{moduleRoutes[activeModule]?.label ?? "Home"}</h1>
+
+        <section className="terminal-screen win95-window" aria-label={`${activeLabel} window`}>
+          <div className="win95-titlebar">
+            <div className="win95-titlebar-label">
+              <span className="win95-titlebar-icon" aria-hidden="true" />
+              <span>{activeLabel}</span>
             </div>
-            <div className="system-status">
-              <span>DATE {new Date().toLocaleDateString([], { month: "2-digit", day: "2-digit", year: "numeric" })}</span>
-              <span>TIME {new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</span>
-              <strong>SYSTEM ONLINE</strong>
+            <div className="win95-window-controls" aria-hidden="true">
+              <span />
+              <span />
+              <span />
             </div>
           </div>
-          <TerminalCommand onNavigate={onNavigate} />
-        </header>
-        <div className="terminal-content">{children}</div>
+
+          <header className="terminal-topbar">
+            <GaugeDeck compact emphasis={controlPanel.emphasis} gauges={controlPanel.gauges} notice={controlPanel.notice} />
+            <div className="terminal-heading-row">
+              <div className="terminal-topbar-title">
+                <span className="terminal-label">USER TERMINAL</span>
+                <h1>{activeLabel}</h1>
+              </div>
+              <div className="system-status">
+                <span>DATE {new Date().toLocaleDateString([], { month: "2-digit", day: "2-digit", year: "numeric" })}</span>
+                <span>TIME {new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</span>
+                <strong>SYSTEM ONLINE</strong>
+              </div>
+            </div>
+            <TerminalCommand onNavigate={onNavigate} />
+          </header>
+          <div className="terminal-content">{children}</div>
+        </section>
+
+        <footer className="win95-taskbar">
+          <button className="win95-start" type="button" onClick={() => onNavigate("home", "/")}>
+            Start
+          </button>
+          <div className="win95-taskbar-slot">
+            <span aria-hidden="true" />
+            {activeLabel}
+          </div>
+          <button className="win95-taskbar-exit" type="button" onClick={leaveSite}>
+            Quick Exit
+          </button>
+        </footer>
       </section>
     </main>
   );
@@ -3164,7 +3185,7 @@ function TerminalChrome({
 
 function HomeModule() {
   const navLegend = [
-    ["Ctrl+Esc", "Prep / First Steps"],
+    ["Ctrl+Esc", "How To Make A Leaving Plan"],
     ["Ctrl+Fn", "Resources"],
     ["Ctrl+A", "Database"],
   ];
@@ -3410,7 +3431,7 @@ function AmICrazyModule({
           <TypedText
             className="system-typed-text"
             onDone={completeSystemTyping}
-            skipLabel="Print Response"
+            skipLabel="Skip Typing"
             text={`SYSTEM:\n${activeResponse.response}`}
           />
           {responseDone && (
@@ -3682,7 +3703,7 @@ function PlanningLanding({
     },
     {
       id: "ladder",
-      label: "Leaving Ladder",
+      label: "How To Make A Leaving Plan",
       status: "Folder",
       onClick: onOpenLadder,
     },
@@ -3726,7 +3747,7 @@ function PlanningLanding({
           </button>
           <button className="planning-module-key module-file primary" type="button" onClick={onOpenLadder}>
             <span>FOLDER</span>
-            <strong>Leaving Ladder</strong>
+            <strong>How To Make A Leaving Plan</strong>
             <small>For not-ready, unsure, or still-sorting-it-out mode.</small>
           </button>
           <button className="planning-module-key module-file" type="button" onClick={onOpenSafety}>
@@ -3946,7 +3967,7 @@ function PlanningModule({
           <TypedText
             className="system-typed-text"
             onDone={completeRungTyping}
-            skipLabel="Print Response"
+            skipLabel="Skip Typing"
             text={activeRung.systemResponse}
           />
           {responseDone && (
@@ -4484,7 +4505,7 @@ function ExitPlanningModule({
           <h1 id="exit-title">EXIT PLANNING PROTOCOL // NOW WHAT?</h1>
           <TypedText
             className="system-typed-text"
-            skipLabel="Print Module Brief"
+            skipLabel="Skip Typing"
             text={
               "SYSTEM:\nEXIT REQUEST RECEIVED.\n\nKnowing you need to leave and being able to leave are not the same thing.\n\nThis module will not tell you to just leave. It will help identify what must happen first, what could go wrong, what options are available, and what you can do next.\n\nYour answers will not be saved."
             }
@@ -4534,7 +4555,7 @@ function ExitPlanningModule({
           <TypedText
             className="system-typed-text"
             onDone={completeExitTyping}
-            skipLabel="Print Response"
+            skipLabel="Skip Typing"
             text={`SYSTEM:\n${activeAnswer.response}`}
           />
           {responseDone && (
@@ -5036,7 +5057,7 @@ function RebuildingModule({
             </button>
           ) : null}
           <button type="button" onClick={() => onNavigate("planning", "/planning")}>
-            Prep / First Steps
+            Make A Leaving Plan
           </button>
           <button type="button" onClick={() => onNavigate("local-help", "/resources")}>
             Find Resources

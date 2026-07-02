@@ -5167,3 +5167,406 @@ button:disabled {
     font-size: clamp(0.66rem, 3.8vw, 0.8rem);
   }
 }
+
+/* Windows-style Survivor OS first pass */
+.win95-frame {
+  background:
+    linear-gradient(135deg, rgba(255, 79, 216, 0.1), transparent 28%),
+    linear-gradient(315deg, rgba(0, 234, 255, 0.12), transparent 24%),
+    #071b24;
+  border: 2px solid #f6efd9;
+  box-shadow:
+    inset 2px 2px 0 rgba(255, 255, 255, 0.28),
+    inset -3px -3px 0 rgba(0, 0, 0, 0.76),
+    0 0 0 2px rgba(0, 0, 0, 0.72),
+    0 16px 44px rgba(0, 0, 0, 0.74);
+  display: block;
+  padding: 0;
+}
+
+.win95-frame::before,
+.win95-frame::after {
+  display: none;
+}
+
+.win95-desktop {
+  background:
+    radial-gradient(circle at 14% 18%, rgba(255, 79, 216, 0.1), transparent 18%),
+    radial-gradient(circle at 84% 78%, rgba(0, 234, 255, 0.12), transparent 22%),
+    linear-gradient(180deg, rgba(8, 30, 42, 0.96), rgba(3, 12, 18, 0.98));
+  display: grid;
+  gap: 18px;
+  grid-template-columns: 118px minmax(0, 1fr);
+  min-height: calc(100vh - 24px);
+  padding: 18px 18px 54px;
+  position: relative;
+}
+
+.desktop-icon-grid {
+  align-content: start;
+  display: grid;
+  gap: 18px;
+  justify-items: center;
+  position: relative;
+  z-index: 3;
+}
+
+.desktop-icon {
+  align-items: center;
+  background: transparent;
+  border: 1px dotted transparent;
+  color: #fff6dd;
+  display: grid;
+  gap: 5px;
+  justify-items: center;
+  min-height: 88px;
+  padding: 7px 5px;
+  text-align: center;
+  text-shadow: 1px 1px 0 #000;
+  width: 98px;
+}
+
+.desktop-icon:hover,
+.desktop-icon:focus-visible,
+.desktop-icon.active {
+  background: rgba(0, 22, 86, 0.64);
+  border-color: rgba(255, 246, 221, 0.86);
+  outline: 0;
+}
+
+.desktop-icon-title {
+  background: rgba(0, 0, 0, 0.46);
+  color: #fff6dd;
+  font-size: 0.82rem;
+  font-weight: 900;
+  line-height: 1.1;
+  padding: 1px 4px;
+}
+
+.desktop-icon small {
+  color: #d5fffb;
+  font-size: 0.62rem;
+  font-weight: 900;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.desktop-icon-art {
+  display: block;
+  height: 42px;
+  image-rendering: pixelated;
+  position: relative;
+  width: 48px;
+}
+
+.desktop-icon-art-folder::before,
+.desktop-icon-art-folder::after {
+  background: #ffd56b;
+  border: 2px solid #1b0e0a;
+  box-shadow:
+    inset -4px -4px 0 #c98b27,
+    inset 3px 3px 0 #fff6bb,
+    2px 2px 0 rgba(0, 0, 0, 0.6);
+  content: "";
+  position: absolute;
+}
+
+.desktop-icon-art-folder::before {
+  height: 13px;
+  left: 4px;
+  top: 7px;
+  width: 24px;
+}
+
+.desktop-icon-art-folder::after {
+  height: 26px;
+  left: 2px;
+  top: 16px;
+  width: 42px;
+}
+
+.desktop-icon-art-database {
+  background:
+    linear-gradient(180deg, #00eaff 0 10px, #063440 10px 13px, #00eaff 13px 23px, #063440 23px 26px, #00eaff 26px 37px);
+  border: 2px solid #001318;
+  border-radius: 50% / 16%;
+  box-shadow:
+    inset 4px 0 0 rgba(255, 246, 221, 0.58),
+    inset -5px -5px 0 rgba(0, 0, 0, 0.42),
+    0 0 12px rgba(0, 234, 255, 0.34);
+  width: 39px;
+}
+
+.desktop-icon-art-computer::before {
+  background: #101014;
+  border: 3px solid #d7d1bd;
+  box-shadow:
+    inset 0 0 0 3px #002c38,
+    inset 0 0 0 6px #00eaff,
+    3px 3px 0 #000;
+  content: "";
+  height: 28px;
+  left: 2px;
+  position: absolute;
+  top: 2px;
+  width: 42px;
+}
+
+.desktop-icon-art-computer::after {
+  background: #d7d1bd;
+  box-shadow: 10px 7px 0 #d7d1bd;
+  content: "";
+  height: 6px;
+  left: 15px;
+  position: absolute;
+  top: 33px;
+  width: 18px;
+}
+
+.desktop-icon-art-exit::before {
+  background: #101014;
+  border: 3px solid #ff4fd8;
+  box-shadow:
+    inset 0 0 0 3px rgba(255, 246, 221, 0.2),
+    0 0 14px rgba(255, 79, 216, 0.42);
+  content: "";
+  height: 34px;
+  left: 9px;
+  position: absolute;
+  top: 2px;
+  width: 28px;
+}
+
+.desktop-icon-art-exit::after {
+  color: #00eaff;
+  content: ">";
+  font-size: 2rem;
+  font-weight: 900;
+  left: 16px;
+  line-height: 1;
+  position: absolute;
+  text-shadow: 0 0 8px rgba(0, 234, 255, 0.7);
+  top: 7px;
+}
+
+.win95-window {
+  align-self: stretch;
+  background: #c3c3c3;
+  border: 2px solid;
+  border-color: #fff6dd #1b1b1b #1b1b1b #fff6dd;
+  border-radius: 0;
+  box-shadow:
+    inset 1px 1px 0 #ffffff,
+    inset -1px -1px 0 #777,
+    4px 5px 0 rgba(0, 0, 0, 0.62);
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr);
+  min-height: calc(100vh - 104px);
+  overflow: hidden;
+  position: relative;
+}
+
+.win95-titlebar {
+  align-items: center;
+  background: linear-gradient(90deg, #001a7a, #008fb5 70%, #6f1a91);
+  color: #fff6dd;
+  display: flex;
+  font-size: 0.86rem;
+  font-weight: 900;
+  justify-content: space-between;
+  letter-spacing: 0.04em;
+  min-height: 30px;
+  padding: 3px 5px;
+  text-shadow: 1px 1px 0 #000;
+}
+
+.win95-titlebar-label {
+  align-items: center;
+  display: inline-flex;
+  gap: 8px;
+  min-width: 0;
+}
+
+.win95-titlebar-icon {
+  background: #ffd56b;
+  border: 1px solid #141414;
+  box-shadow: inset -2px -2px 0 #b87916, inset 1px 1px 0 #fff6bb;
+  height: 14px;
+  width: 18px;
+}
+
+.win95-window-controls {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.win95-window-controls span {
+  background: #c3c3c3;
+  border: 2px solid;
+  border-color: #ffffff #424242 #424242 #ffffff;
+  box-shadow: 1px 1px 0 #000;
+  height: 18px;
+  width: 18px;
+}
+
+.win95-window .terminal-topbar {
+  background: #d7d1bd;
+  border: 2px solid;
+  border-color: #7a7469 #ffffff #ffffff #7a7469;
+  border-radius: 0;
+  box-shadow: inset 1px 1px 0 #888;
+  color: #020607;
+  margin: 0;
+  padding: 10px 12px;
+}
+
+.win95-window .terminal-topbar h1 {
+  color: #050505;
+  font-size: clamp(1.25rem, 2.2vw, 1.75rem);
+  text-shadow: none;
+}
+
+.win95-window .terminal-label {
+  color: #003f4a;
+  text-shadow: none;
+}
+
+.win95-window .system-status {
+  color: #030303;
+  text-shadow: none;
+}
+
+.win95-window .system-status span,
+.win95-window .system-status strong {
+  background: #c3c3c3;
+  border: 2px solid;
+  border-color: #ffffff #777 #777 #ffffff;
+  color: #090909;
+  text-shadow: none;
+}
+
+.win95-window .command-terminal {
+  background: #0a0a0d;
+  border: 2px solid;
+  border-color: #777 #ffffff #ffffff #777;
+  border-radius: 0;
+  box-shadow: inset 0 0 0 1px #000;
+}
+
+.win95-window .terminal-content {
+  background: #000;
+  border: 2px solid;
+  border-color: #777 #ffffff #ffffff #777;
+  border-radius: 0;
+  box-shadow:
+    inset 0 0 0 1px #000,
+    inset 0 0 24px rgba(0, 234, 255, 0.06);
+  margin: 0;
+  padding: clamp(18px, 2.2vw, 30px);
+}
+
+.win95-window .terminal-screen::after,
+.win95-window::before,
+.win95-window::after {
+  display: none;
+}
+
+.terminal-content .page-kicker,
+.access-module > .library-hero-panel {
+  display: none;
+}
+
+.win95-taskbar {
+  align-items: center;
+  background: #c3c3c3;
+  border-top: 2px solid #fff6dd;
+  bottom: 0;
+  box-shadow: inset 0 1px 0 #ffffff;
+  display: grid;
+  gap: 8px;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  left: 0;
+  min-height: 42px;
+  padding: 5px 8px;
+  position: absolute;
+  right: 0;
+  z-index: 5;
+}
+
+.win95-start,
+.win95-taskbar-exit,
+.win95-taskbar-slot {
+  align-items: center;
+  background: #c3c3c3;
+  border: 2px solid;
+  border-color: #ffffff #424242 #424242 #ffffff;
+  box-shadow: 1px 1px 0 #000;
+  color: #050505;
+  display: inline-flex;
+  font-weight: 900;
+  gap: 7px;
+  min-height: 28px;
+  padding: 3px 10px;
+  text-shadow: none;
+}
+
+.win95-start:active,
+.win95-taskbar-exit:active {
+  border-color: #424242 #ffffff #ffffff #424242;
+  box-shadow: inset 1px 1px 0 #777;
+  transform: translateY(1px);
+}
+
+.win95-taskbar-slot {
+  justify-content: start;
+  overflow: hidden;
+}
+
+.win95-taskbar-slot span {
+  background: #ffd56b;
+  border: 1px solid #111;
+  display: inline-block;
+  height: 14px;
+  width: 18px;
+}
+
+@media (max-width: 860px) {
+  .win95-desktop {
+    grid-template-columns: 1fr;
+    padding: 10px 10px 54px;
+  }
+
+  .desktop-icon-grid {
+    grid-auto-columns: 86px;
+    grid-auto-flow: column;
+    grid-template-columns: none;
+    justify-content: start;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+
+  .desktop-icon {
+    min-height: 78px;
+    width: 86px;
+  }
+
+  .win95-window {
+    min-height: calc(100vh - 170px);
+  }
+
+  .win95-window .terminal-topbar {
+    padding: 8px;
+  }
+
+  .win95-window .terminal-content {
+    padding: 14px;
+  }
+
+  .win95-taskbar {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .win95-taskbar-exit {
+    display: none;
+  }
+}
