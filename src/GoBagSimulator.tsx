@@ -25,7 +25,8 @@ type ModuleKey =
   | "local-help"
   | "how-to"
   | "legal"
-  | "library";
+  | "library"
+  | "access";
 
 type GaugeValue = {
   label: string;

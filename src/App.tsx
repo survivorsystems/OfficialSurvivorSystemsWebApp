@@ -19,7 +19,8 @@ type ModuleKey =
   | "local-help"
   | "how-to"
   | "legal"
-  | "library";
+  | "library"
+  | "access";
 
 type AssessmentAnswer = {
   id: string;
@@ -1411,6 +1412,7 @@ const moduleRoutes: Record<ModuleKey, { label: string; path: string }> = {
   "how-to": { label: "Resources", path: "/resources" },
   legal: { label: "Resources", path: "/resources" },
   library: { label: "Resources", path: "/resources" },
+  access: { label: "Resources", path: "/resources/access" },
 };
 
 const allNavTargets: Array<{ key: ModuleKey; label: string; path: string }> = [
@@ -1423,6 +1425,7 @@ const allNavTargets: Array<{ key: ModuleKey; label: string; path: string }> = [
   { key: "how-to", ...moduleRoutes["how-to"] },
   { key: "legal", ...moduleRoutes.legal },
   { key: "library", ...moduleRoutes.library },
+  { key: "access", ...moduleRoutes.access },
 ];
 
 const navItems: Array<{ key: ModuleKey; label: string; path: string; decoded: string }> = [
@@ -2466,6 +2469,7 @@ function getInitialModule(): ModuleKey {
   if (path === "/how-to") return "how-to";
   if (path === "/legal") return "legal";
   if (path === "/library") return "library";
+  if (path === "/resources/access") return "access";
 
   const match = allNavTargets.find((item) => item.path === path);
   return match?.key ?? "home";
@@ -2962,6 +2966,10 @@ function resolveCommand(query: string) {
 
   if (/ctrl\s*\+\s*c\b|\bhow to\b|\b(guides?|snap|tanf|benefits)\b/.test(normalized)) {
     return { message: "QUERY ACCEPTED. ROUTING TO RESOURCES...", target: navItemFor("how-to") };
+  }
+
+  if (/ctrl\s*\+\s*a\b|\b(access pass|access information|access info|passes|pass options)\b/.test(normalized)) {
+    return { message: "QUERY ACCEPTED. ROUTING TO RESOURCES...", target: navItemFor("access") };
   }
 
   if (/ctrl\s*\+\s*l\b|\b(library|download|downloads|subscription|subscribe|paid|stripe)\b/.test(normalized)) {
@@ -4032,7 +4040,7 @@ function SnapTanfGuide({ onBack, onNavigate }: { onBack: () => void; onNavigate:
           forms, deadlines, calls, and document requests.
         </p>
         <p>
-          The Access Library will hold the deeper Resource Navigation System: trackers for
+          The access library holds the deeper Resource Navigation System: trackers for
           applications, case numbers, worker information, documents, deadlines, phone-call notes,
           local resources, and what to work on next.
         </p>
@@ -4502,13 +4510,70 @@ function ExitPlanningModule({
   );
 }
 
-type ResourceFolder = "landing" | HowToGuide["priority"] | "legal" | "library";
+type ResourceFolder = "landing" | HowToGuide["priority"] | "legal" | "library" | "access";
 
 function getInitialResourceFolder(moduleKey: Exclude<ModuleKey, "home" | "am-i-crazy" | "go-bag-prep">): ResourceFolder {
   if (moduleKey === "how-to") return "landing";
   if (moduleKey === "legal") return "legal";
   if (moduleKey === "library") return "library";
+  if (moduleKey === "access") return "access";
   return "landing";
+}
+
+function AccessInformationModule() {
+  return (
+    <section className="page-shell library-module access-module" aria-labelledby="access-title">
+      <div className="page-kicker">
+        <BookOpenCheck aria-hidden="true" />
+        <p className="eyebrow">Ctrl+A // Access Information</p>
+      </div>
+
+      <div className="library-hero-panel">
+        <div>
+          <p className="terminal-label">LOAD MODULE // ACCESS PASS INFORMATION</p>
+          <h1 id="access-title">&lt;Access Pass Information&gt;</h1>
+          <p>
+            Access passes are designed to keep resources flexible: preview what is available, choose
+            a short access window, and use permanent unlocks only for downloads that matter most.
+          </p>
+        </div>
+        <aside className="library-status-panel" aria-label="Access pass status">
+          <span>CTRL+A</span>
+          <strong>ACCESS INFO</strong>
+          <small>VIEWING + UNLOCK RULES</small>
+        </aside>
+      </div>
+
+      <div className="library-rule-strip" aria-label="Access pass basics">
+        <span>Short Access Windows</span>
+        <span>Unlimited Viewing During Active Pass</span>
+        <span>Limited Permanent Unlocks</span>
+        <span>No Forced Subscription</span>
+      </div>
+
+      <section className="library-section" aria-labelledby="access-options-title">
+        <div className="terminal-label">ACCESS OPTIONS</div>
+        <h2 id="access-options-title">&lt;Choose The Amount Of Help Needed&gt;</h2>
+        <div className="library-pass-grid">
+          {libraryPasses.map((pass) => (
+            <article className="library-pass-card" key={pass.id}>
+              <div className="library-card-header">
+                <span>{pass.price}</span>
+                <small>{pass.stripeStatus}</small>
+              </div>
+              <h3>{pass.title}</h3>
+              <p>{pass.scope}</p>
+              <ul>
+                <li>{pass.viewing}</li>
+                <li>{pass.unlocks}</li>
+                <li>{pass.renewal}</li>
+              </ul>
+            </article>
+          ))}
+        </div>
+      </section>
+    </section>
+  );
 }
 
 function ResourceModule({
@@ -4542,6 +4607,17 @@ function ResourceModule({
           Back To Resource Folders
         </button>
         <LibraryModule />
+      </section>
+    );
+  }
+
+  if (activeFolder === "access") {
+    return (
+      <section className="resources-nested-shell">
+        <button className="resource-back-button" type="button" onClick={() => setActiveFolder("landing")}>
+          Back To Resource Folders
+        </button>
+        <AccessInformationModule />
       </section>
     );
   }
@@ -4584,7 +4660,10 @@ function ResourceModule({
         {howToPriorities.map((priority) => {
           const count = howToGuides.filter((guide) => guide.priority === priority.id).length;
           return (
-            <article className="resource-folder-card" key={priority.id}>
+            <article className="resource-folder-card priority-folder-card" key={priority.id}>
+              <div className="folder-icon" aria-hidden="true">
+                <span />
+              </div>
               <div className="how-to-guide-card-header">
                 <span>{priority.label}</span>
                 <small>{count} GUIDES</small>
@@ -4623,10 +4702,26 @@ function ResourceModule({
           <h2>&lt;Resource Library&gt;</h2>
           <h3>Paid Guides + Deeper Systems</h3>
           <p>
-            The Access Library holds previews, pass options, permanent unlocks, and deeper resource
-            systems once Stripe and Supabase are fully wired.
+            The access library holds resources such as planners, trackers and more in depth guides.
+            See "Ctrl+A for Access Pass Information."
           </p>
           <button type="button" onClick={() => setActiveFolder("library")}>
+            Open Folder
+          </button>
+        </article>
+
+        <article className="resource-folder-card">
+          <div className="how-to-guide-card-header">
+            <span>CTRL+A</span>
+            <small>ACCESS INFO</small>
+          </div>
+          <h2>&lt;Access Information&gt;</h2>
+          <h3>Pass Options + Unlock Rules</h3>
+          <p>
+            Review access windows, viewing rules, permanent unlocks, and how downloads will work
+            before choosing a pass.
+          </p>
+          <button type="button" onClick={() => setActiveFolder("access")}>
             Open Folder
           </button>
         </article>

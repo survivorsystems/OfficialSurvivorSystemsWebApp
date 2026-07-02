@@ -13,6 +13,7 @@
   --amber: #ffbf45;
   --text: #c9f8ff;
   --muted: #72aeb9;
+  --cream: #fff6dd;
   --hot-text: #ffd0f4;
   --border-cyan: rgba(0, 234, 255, 0.42);
   --border-pink: rgba(255, 79, 216, 0.48);
@@ -177,12 +178,13 @@ button:disabled {
 .terminal-topbar h1,
 .hero-copy h1,
 .page-shell h1 {
-  color: var(--hot-text);
+  color: var(--cream);
   font-weight: 800;
   margin: 0 0 18px;
   text-shadow:
-    0 0 8px rgba(255, 79, 216, 0.78),
-    0 0 22px rgba(184, 76, 255, 0.42);
+    0 0 7px rgba(0, 234, 255, 0.42),
+    0 0 18px rgba(255, 191, 69, 0.18),
+    0 0 26px rgba(184, 76, 255, 0.18);
 }
 
 .checkpoint-panel h1 {
@@ -436,6 +438,7 @@ button:disabled {
   justify-items: center;
   line-height: 0.95;
   max-width: 100%;
+  width: max-content;
 }
 
 .checkpoint-logo {
@@ -481,6 +484,7 @@ button:disabled {
 .brand .brand-logo-systems {
   font-size: clamp(0.88rem, 1.08vw, 1.05rem);
   letter-spacing: 0.5em;
+  transform: translateX(0.25em);
 }
 
 .home-logo .brand-logo-survivor {
@@ -4018,7 +4022,7 @@ button:disabled {
   padding: 18px;
 }
 
-.resource-folder-card::before {
+.resource-folder-card:not(.priority-folder-card)::before {
   background:
     linear-gradient(90deg, rgba(0, 234, 255, 0.7), rgba(255, 79, 216, 0.72)),
     var(--cyan);
@@ -4029,6 +4033,64 @@ button:disabled {
   display: block;
   height: 8px;
   margin: -18px -18px 16px;
+}
+
+.priority-folder-card {
+  background:
+    linear-gradient(180deg, rgba(16, 14, 20, 0.98), rgba(3, 4, 8, 0.98)),
+    var(--panel-2);
+  border-color: rgba(255, 191, 69, 0.46);
+  box-shadow:
+    inset 0 0 24px rgba(255, 191, 69, 0.05),
+    0 0 24px rgba(255, 191, 69, 0.14);
+}
+
+.folder-icon {
+  aspect-ratio: 1.45;
+  background:
+    linear-gradient(180deg, #ffd66c 0 18%, #ffbf45 18% 62%, #d88b22 62% 100%);
+  border: 2px solid #fff1ca;
+  box-shadow:
+    5px 5px 0 rgba(0, 0, 0, 0.7),
+    inset 0 -7px 0 rgba(93, 52, 11, 0.38),
+    0 0 18px rgba(255, 191, 69, 0.24);
+  image-rendering: pixelated;
+  margin: 0 0 18px;
+  max-width: 148px;
+  position: relative;
+}
+
+.folder-icon::before {
+  background: #ffd66c;
+  border: 2px solid #fff1ca;
+  border-bottom: 0;
+  content: "";
+  height: 26%;
+  left: -2px;
+  position: absolute;
+  top: -22%;
+  width: 48%;
+}
+
+.folder-icon::after {
+  background:
+    repeating-linear-gradient(90deg, rgba(255, 241, 202, 0.22) 0 4px, transparent 4px 8px),
+    linear-gradient(180deg, rgba(255, 241, 202, 0.18), transparent);
+  content: "";
+  inset: 11% 7% 12%;
+  position: absolute;
+}
+
+.folder-icon span {
+  background: #f39b2f;
+  bottom: 14%;
+  box-shadow: 0 0 0 2px rgba(93, 52, 11, 0.24);
+  display: block;
+  height: 10%;
+  position: absolute;
+  right: 10%;
+  width: 22%;
+  z-index: 1;
 }
 
 .resource-folder-card h2 {
@@ -4453,6 +4515,7 @@ button:disabled {
       "command";
     grid-template-columns: 1fr;
     grid-template-rows: auto minmax(0, 1in) auto;
+    justify-items: stretch;
   }
 
   .hero,
@@ -4578,12 +4641,24 @@ button:disabled {
   }
 
   .brand-logo {
-    width: min(100%, 190px);
+    max-width: 220px;
+    width: max-content;
   }
 
   .checkpoint-logo,
   .home-logo {
-    width: min(100%, 360px);
+    max-width: 360px;
+    width: max-content;
+  }
+
+  .brand .brand-logo-survivor {
+    font-size: clamp(2.35rem, 13vw, 3.2rem);
+  }
+
+  .brand .brand-logo-systems {
+    font-size: clamp(0.78rem, 4.1vw, 0.95rem);
+    letter-spacing: 0.46em;
+    transform: translateX(0.23em);
   }
 
   .terminal-topbar {
@@ -4626,12 +4701,20 @@ button:disabled {
       "gauges"
       "command";
     grid-template-columns: 1fr;
+    justify-items: stretch;
     max-height: none;
+    padding: 10px;
   }
 
   .compact-gauges .gauge-row {
-    grid-template-columns: repeat(4, minmax(128px, 1fr));
-    overflow-x: auto;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    overflow-x: visible;
+  }
+
+  .command-center-status,
+  .compact-gauges,
+  .command-terminal {
+    width: 100%;
   }
 
   .simulator-hud {
@@ -4645,5 +4728,19 @@ button:disabled {
   .room-nav {
     align-items: stretch;
     flex-direction: column;
+  }
+}
+
+@media (max-width: 430px) {
+  .compact-gauges .gauge-row {
+    grid-template-columns: 1fr;
+  }
+
+  .brand .brand-logo-survivor {
+    font-size: clamp(2.05rem, 12vw, 2.65rem);
+  }
+
+  .brand .brand-logo-systems {
+    font-size: clamp(0.66rem, 3.8vw, 0.8rem);
   }
 }
