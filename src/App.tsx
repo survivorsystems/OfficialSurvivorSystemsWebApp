@@ -471,22 +471,22 @@ const howToGuides: HowToGuide[] = [
 const howToPriorities = [
   {
     id: "priority-1",
-    label: "Priority 1",
-    title: "Immediate Safety + First Moves",
+    label: "triage.exe",
+    title: "Triage",
     description:
       "Start here when the task is urgent, private, or close to the body: device traces, pets, go-bags, vehicle living, and first-step safety logistics.",
   },
   {
     id: "priority-2",
-    label: "Priority 2",
-    title: "Systems Navigation",
+    label: "stabilize.exe",
+    title: "Stabilize",
     description:
       "Use this folder for benefits, housing, coordinated entry, applications, follow-ups, and the bureaucracy that starts multiplying.",
   },
   {
     id: "priority-3",
-    label: "Priority 3",
-    title: "Stabilizing + Rebuilding",
+    label: "rebuild.exe",
+    title: "Rebuild",
     description:
       "Use this folder when the fire is a little lower and the next task is rhythm, routine, recovery, and building a life that belongs to the user again.",
   },
@@ -1411,8 +1411,8 @@ const moduleRoutes: Record<ModuleKey, { label: string; path: string }> = {
   "local-help": { label: "Resources", path: "/resources" },
   "how-to": { label: "Resources", path: "/resources" },
   legal: { label: "Resources", path: "/resources" },
-  library: { label: "Resources", path: "/resources" },
-  access: { label: "Resources", path: "/resources/access" },
+  library: { label: "Access Information", path: "/resources/access" },
+  access: { label: "Access Information", path: "/resources/access" },
 };
 
 const allNavTargets: Array<{ key: ModuleKey; label: string; path: string }> = [
@@ -1432,11 +1432,24 @@ const navItems: Array<{ key: ModuleKey; label: string; path: string; decoded: st
   { key: "planning", label: "Ctrl+Esc", path: "/planning", decoded: "Prep / First Steps" },
   { key: "rebuilding", label: "Ctrl+Shift", path: "/rebuilding", decoded: "Rebuilding" },
   { key: "local-help", label: "Ctrl+Fn", path: "/resources", decoded: "Resources" },
+  { key: "access", label: "Ctrl+A", path: "/resources/access", decoded: "Access Information" },
 ];
 
 function navItemFor(key: ModuleKey) {
   const route = moduleRoutes[key] ?? moduleRoutes.home;
   return { key, ...route };
+}
+
+function isPrimaryNavActive(activeModule: ModuleKey, navKey: ModuleKey) {
+  if (navKey === "local-help") {
+    return activeModule === "local-help" || activeModule === "how-to" || activeModule === "legal";
+  }
+
+  if (navKey === "access") {
+    return activeModule === "access" || activeModule === "library";
+  }
+
+  return activeModule === navKey;
 }
 
 const assessmentQuestions: AssessmentQuestion[] = [
@@ -2468,7 +2481,7 @@ function getInitialModule(): ModuleKey {
   if (path === "/local-help") return "local-help";
   if (path === "/how-to") return "how-to";
   if (path === "/legal") return "legal";
-  if (path === "/library") return "library";
+  if (path === "/library") return "access";
   if (path === "/resources/access") return "access";
 
   const match = allNavTargets.find((item) => item.path === path);
@@ -2699,22 +2712,6 @@ function BrandLogo({ className = "" }: { className?: string }) {
       <span className="brand-logo-survivor">Survivor</span>
       <span className="brand-logo-systems">Systems</span>
     </span>
-  );
-}
-
-function CommandCenter({
-  onNavigate,
-}: {
-  onNavigate: (module: ModuleKey, path: string) => void;
-}) {
-  return (
-    <section className="command-center" aria-label="Command center">
-      <div className="command-center-status">
-        <span className="terminal-label">COMMAND CENTER</span>
-        <p>NAV QUERY READY.</p>
-      </div>
-      <TerminalCommand onNavigate={onNavigate} />
-    </section>
   );
 }
 
@@ -3001,7 +2998,7 @@ function resolveCommand(query: string) {
   }
 
   if (/ctrl\s*\+\s*l\b|\b(library|download|downloads|subscription|subscribe|paid|stripe)\b/.test(normalized)) {
-    return { message: "QUERY ACCEPTED. ROUTING TO RESOURCES...", target: navItemFor("library") };
+    return { message: "QUERY ACCEPTED. ROUTING TO ACCESS INFORMATION...", target: navItemFor("access") };
   }
 
   if (/\b(crazy|abused|abuse|assessment|gaslight|gaslighting|reality)\b/.test(normalized)) {
@@ -3111,7 +3108,7 @@ function TerminalChrome({
         <nav aria-label="Primary navigation">
           {navItems.map((item) => (
             <a
-              className={activeModule === item.key ? "active" : ""}
+              className={isPrimaryNavActive(activeModule, item.key) ? "active" : ""}
               href={item.path}
               key={item.key}
               onClick={(event) => {
@@ -3135,6 +3132,7 @@ function TerminalChrome({
             <span className="terminal-label">MODULE</span>
             <h1>{moduleRoutes[activeModule]?.label ?? "Home"}</h1>
           </div>
+          <TerminalCommand onNavigate={onNavigate} />
           <GaugeDeck compact emphasis={controlPanel.emphasis} gauges={controlPanel.gauges} notice={controlPanel.notice} />
           <div className="system-status">
             <span>SYSTEM STATUS</span>
@@ -3143,7 +3141,6 @@ function TerminalChrome({
           </div>
         </header>
         <div className="terminal-content">{children}</div>
-        <CommandCenter onNavigate={onNavigate} />
       </section>
     </main>
   );
@@ -3154,6 +3151,7 @@ function HomeModule() {
     ["Ctrl+Esc", "Prep / First Steps"],
     ["Ctrl+Shift", "Rebuilding"],
     ["Ctrl+Fn", "Resources"],
+    ["Ctrl+A", "Access Information"],
   ];
 
   return (
@@ -4222,15 +4220,17 @@ function PracticalHowToGuide({
 }
 
 function HowToModule({
+  initialGuideId = null,
   initialPriority = null,
   onBackToResources,
   onNavigate,
 }: {
+  initialGuideId?: string | null;
   initialPriority?: HowToGuide["priority"] | null;
   onBackToResources?: () => void;
   onNavigate: (module: ModuleKey, path: string) => void;
 }) {
-  const [activeGuideId, setActiveGuideId] = useState<string | null>(null);
+  const [activeGuideId, setActiveGuideId] = useState<string | null>(initialGuideId);
   const [activePriorityId, setActivePriorityId] = useState<HowToGuide["priority"] | null>(initialPriority);
   const planningResourceMap: Record<string, string> = {
     "browser-trace-cleanup": "digital-traces",
@@ -4241,9 +4241,9 @@ function HowToModule({
   const visibleGuides = activePriorityId ? howToGuides.filter((guide) => guide.priority === activePriorityId) : [];
 
   useEffect(() => {
-    setActiveGuideId(null);
+    setActiveGuideId(initialGuideId);
     setActivePriorityId(initialPriority);
-  }, [initialPriority]);
+  }, [initialGuideId, initialPriority]);
 
   if (activeGuideId === "snap-tanf") {
     return <SnapTanfGuide onBack={() => setActiveGuideId(null)} onNavigate={onNavigate} />;
@@ -4574,17 +4574,35 @@ function ExitPlanningModule({
   );
 }
 
-type ResourceFolder = "landing" | HowToGuide["priority"] | "legal" | "library" | "access";
+type ResourceFolder = "landing" | HowToGuide["priority"] | "legal" | "access";
+
+type GuideLaunch = {
+  guideId: string;
+  priorityId: HowToGuide["priority"];
+};
 
 function getInitialResourceFolder(moduleKey: Exclude<ModuleKey, "home" | "am-i-crazy" | "go-bag-prep">): ResourceFolder {
   if (moduleKey === "how-to") return "landing";
   if (moduleKey === "legal") return "legal";
-  if (moduleKey === "library") return "library";
+  if (moduleKey === "library") return "access";
   if (moduleKey === "access") return "access";
   return "landing";
 }
 
 function AccessInformationModule() {
+  const [showLibrary, setShowLibrary] = useState(false);
+
+  if (showLibrary) {
+    return (
+      <section className="resources-nested-shell">
+        <button className="resource-back-button" type="button" onClick={() => setShowLibrary(false)}>
+          Back To Access Information
+        </button>
+        <LibraryModule />
+      </section>
+    );
+  }
+
   return (
     <section className="page-shell library-module access-module" aria-labelledby="access-title">
       <div className="page-kicker">
@@ -4636,6 +4654,18 @@ function AccessInformationModule() {
           ))}
         </div>
       </section>
+
+      <section className="library-section" aria-labelledby="paid-library-entry-title">
+        <div className="terminal-label">PAID RESOURCE LIBRARY</div>
+        <h2 id="paid-library-entry-title">&lt;Open Access Library&gt;</h2>
+        <p>
+          Preview the deeper planners, trackers, and guide systems from here. Access rules stay
+          visible before the paid library opens.
+        </p>
+        <button className="resource-back-button" type="button" onClick={() => setShowLibrary(true)}>
+          Open Paid Access Library
+        </button>
+      </section>
     </section>
   );
 }
@@ -4648,10 +4678,22 @@ function ResourceModule({
   onNavigate: (module: ModuleKey, path: string) => void;
 }) {
   const [activeFolder, setActiveFolder] = useState<ResourceFolder>(() => getInitialResourceFolder(moduleKey));
+  const [guideLaunch, setGuideLaunch] = useState<GuideLaunch | null>(null);
 
   useEffect(() => {
     setActiveFolder(getInitialResourceFolder(moduleKey));
+    setGuideLaunch(null);
   }, [moduleKey]);
+
+  function openGuide(guide: HowToGuide) {
+    if (guide.action === "navigate") {
+      onNavigate(guide.target ?? "home", guide.path ?? "/");
+      return;
+    }
+
+    setGuideLaunch({ guideId: guide.id, priorityId: guide.priority });
+    setActiveFolder(guide.priority);
+  }
 
   if (activeFolder === "legal") {
     return (
@@ -4660,17 +4702,6 @@ function ResourceModule({
           Back To Resource Folders
         </button>
         <LegalModule />
-      </section>
-    );
-  }
-
-  if (activeFolder === "library") {
-    return (
-      <section className="resources-nested-shell">
-        <button className="resource-back-button" type="button" onClick={() => setActiveFolder("landing")}>
-          Back To Resource Folders
-        </button>
-        <LibraryModule />
       </section>
     );
   }
@@ -4689,8 +4720,12 @@ function ResourceModule({
   if (activeFolder === "priority-1" || activeFolder === "priority-2" || activeFolder === "priority-3") {
     return (
       <HowToModule
+        initialGuideId={guideLaunch?.priorityId === activeFolder ? guideLaunch.guideId : null}
         initialPriority={activeFolder}
-        onBackToResources={() => setActiveFolder("landing")}
+        onBackToResources={() => {
+          setGuideLaunch(null);
+          setActiveFolder("landing");
+        }}
         onNavigate={onNavigate}
       />
     );
@@ -4708,9 +4743,8 @@ function ResourceModule({
           <p className="terminal-label">LOAD MODULE // RESOURCE FOLDERS</p>
           <h1 id="resources-title">&lt;Resources&gt;</h1>
           <p>
-            Resources are grouped by urgency so the user can open one folder at a time. Priority 1
-            holds first moves. Priority 2 holds systems navigation. Priority 3 holds stabilizing and
-            rebuilding. Legal and Library live here too.
+            Resources are grouped like a file system: open one folder, or jump directly into a file
+            if the next task is already obvious.
           </p>
         </div>
         <aside className="how-to-status-panel" aria-label="Resources status">
@@ -4722,27 +4756,40 @@ function ResourceModule({
 
       <div className="resource-folder-grid">
         {howToPriorities.map((priority) => {
-          const count = howToGuides.filter((guide) => guide.priority === priority.id).length;
+          const priorityGuides = howToGuides.filter((guide) => guide.priority === priority.id);
           return (
-            <article className="resource-folder-card priority-folder-card" key={priority.id}>
-              <div className="folder-icon" aria-hidden="true">
-                <span />
+            <article className="resource-folder-card priority-folder-card system-folder-card" key={priority.id}>
+              <div className="system-folder-heading">
+                <div className="folder-icon" aria-hidden="true">
+                  <span />
+                </div>
+                <div>
+                  <div className="how-to-guide-card-header">
+                    <span>{priority.label}</span>
+                    <small>{priorityGuides.length} FILES</small>
+                  </div>
+                  <h2>&lt;{priority.title}&gt;</h2>
+                </div>
               </div>
-              <div className="how-to-guide-card-header">
-                <span>{priority.label}</span>
-                <small>{count} GUIDES</small>
-              </div>
-              <h2>&lt;Resources {priority.label.replace("Priority ", "Priority ")}&gt;</h2>
-              <h3>{priority.title}</h3>
               <p>{priority.description}</p>
+              <ul className="system-file-list">
+                {priorityGuides.map((guide) => (
+                  <li key={guide.id}>
+                    <button type="button" onClick={() => openGuide(guide)}>
+                      <span>{guide.action === "navigate" ? "shortcut" : "file"}</span>
+                      {guide.title}
+                    </button>
+                  </li>
+                ))}
+              </ul>
               <button type="button" onClick={() => setActiveFolder(priority.id)}>
-                Open Folder
+                Open {priority.label}
               </button>
             </article>
           );
         })}
 
-        <article className="resource-folder-card">
+        <article className="resource-folder-card system-folder-card">
           <div className="how-to-guide-card-header">
             <span>LEGAL</span>
             <small>2 GUIDES</small>
@@ -4757,24 +4804,7 @@ function ResourceModule({
             Open Folder
           </button>
         </article>
-
-        <article className="resource-folder-card">
-          <div className="how-to-guide-card-header">
-            <span>LIBRARY</span>
-            <small>ACCESS</small>
-          </div>
-          <h2>&lt;Resource Library&gt;</h2>
-          <h3>Paid Guides + Deeper Systems</h3>
-          <p>
-            The access library holds resources such as planners, trackers and more in depth guides.
-            See "Ctrl+A for Access Pass Information."
-          </p>
-          <button type="button" onClick={() => setActiveFolder("library")}>
-            Open Folder
-          </button>
-        </article>
-
-        <article className="resource-folder-card">
+        <article className="resource-folder-card system-folder-card">
           <div className="how-to-guide-card-header">
             <span>CTRL+A</span>
             <small>ACCESS INFO</small>
@@ -4782,8 +4812,8 @@ function ResourceModule({
           <h2>&lt;Access Information&gt;</h2>
           <h3>Pass Options + Unlock Rules</h3>
           <p>
-            Review access windows, viewing rules, permanent unlocks, and how downloads will work
-            before choosing a pass.
+            The access library holds resources such as planners, trackers and more in depth guides.
+            See "Ctrl+A for Access Pass Information."
           </p>
           <button type="button" onClick={() => setActiveFolder("access")}>
             Open Folder
