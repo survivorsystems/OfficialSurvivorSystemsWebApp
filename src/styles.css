@@ -426,6 +426,16 @@ button:disabled {
 }
 
 .app-frame {
+  background:
+    linear-gradient(90deg, rgba(255, 246, 221, 0.06), transparent 14%, transparent 86%, rgba(255, 246, 221, 0.035)),
+    repeating-linear-gradient(90deg, rgba(255, 246, 221, 0.018) 0 1px, transparent 1px 22px),
+    linear-gradient(180deg, rgba(55, 48, 48, 0.96), rgba(17, 15, 16, 0.99) 48%, rgba(4, 4, 6, 0.99)),
+    var(--steel-dark);
+  border: 2px solid rgba(255, 246, 221, 0.16);
+  box-shadow:
+    inset 2px 2px 0 rgba(255, 246, 221, 0.08),
+    inset -10px -10px 30px rgba(0, 0, 0, 0.82),
+    0 0 80px rgba(0, 0, 0, 0.86);
   display: grid;
   gap: 18px;
   grid-template-columns: minmax(260px, 340px) minmax(0, 1fr);
@@ -728,10 +738,10 @@ button:disabled {
 
 .terminal-screen {
   background:
-    linear-gradient(180deg, rgba(255, 246, 221, 0.035), transparent 12%),
-    linear-gradient(180deg, rgba(23, 24, 26, 0.98), rgba(4, 5, 8, 0.99)),
+    linear-gradient(90deg, rgba(255, 246, 221, 0.055), transparent 18%, transparent 82%, rgba(0, 0, 0, 0.24)),
+    linear-gradient(180deg, rgba(39, 35, 35, 0.98), rgba(12, 11, 12, 0.99)),
     var(--steel-dark);
-  border: 2px solid rgba(255, 246, 221, 0.2);
+  border: 2px solid rgba(255, 246, 221, 0.24);
   box-shadow:
     inset 2px 2px 0 rgba(255, 246, 221, 0.08),
     inset -8px -8px 24px rgba(0, 0, 0, 0.82),
@@ -759,13 +769,16 @@ button:disabled {
   background:
     radial-gradient(circle at 50% 50%, #ff4fd8 0 4px, #35152f 5px 12px, #080305 13px 17px, transparent 18px),
     radial-gradient(circle at 50% 50%, #00eaff 0 4px, #103943 5px 12px, #020607 13px 17px, transparent 18px),
-    linear-gradient(180deg, rgba(255, 246, 221, 0.12), rgba(0, 0, 0, 0.42));
+    radial-gradient(circle at 50% 50%, #ffbf45 0 3px, #3d2b0d 4px 10px, #080603 11px 14px, transparent 15px),
+    linear-gradient(180deg, rgba(255, 246, 221, 0.14), rgba(0, 0, 0, 0.54));
   background-position:
     calc(100% - 34px) 48px,
     calc(100% - 34px) 102px,
+    calc(100% - 34px) 154px,
     0 0;
   background-repeat: no-repeat;
   background-size:
+    36px 36px,
     36px 36px,
     36px 36px,
     100% 100%;
@@ -778,7 +791,7 @@ button:disabled {
   right: 10px;
   top: 18px;
   width: 48px;
-  z-index: 0;
+  z-index: 3;
 }
 
 .terminal-topbar {
@@ -797,7 +810,7 @@ button:disabled {
   margin: 14px 64px 0 14px;
   padding: 12px 16px;
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 .terminal-topbar h1 {
@@ -856,7 +869,7 @@ button:disabled {
   overflow: auto;
   padding: 22px;
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 .terminal-topbar .command-terminal {
