@@ -3148,17 +3148,19 @@ function TerminalChrome({
       </aside>
       <section className="terminal-screen">
         <header className="terminal-topbar">
-          <div className="terminal-topbar-title">
-            <span className="terminal-label">MODULE</span>
-            <h1>{moduleRoutes[activeModule]?.label ?? "Home"}</h1>
+          <GaugeDeck compact emphasis={controlPanel.emphasis} gauges={controlPanel.gauges} notice={controlPanel.notice} />
+          <div className="terminal-heading-row">
+            <div className="terminal-topbar-title">
+              <span className="terminal-label">MODULE</span>
+              <h1>{moduleRoutes[activeModule]?.label ?? "Home"}</h1>
+            </div>
+            <div className="system-status">
+              <span>SYSTEM STATUS</span>
+              <strong>ONLINE</strong>
+              <small>{new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</small>
+            </div>
           </div>
           <TerminalCommand onNavigate={onNavigate} />
-          <GaugeDeck compact emphasis={controlPanel.emphasis} gauges={controlPanel.gauges} notice={controlPanel.notice} />
-          <div className="system-status">
-            <span>SYSTEM STATUS</span>
-            <strong>ONLINE</strong>
-            <small>{new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</small>
-          </div>
         </header>
         <div className="terminal-content">{children}</div>
       </section>
@@ -4644,13 +4646,6 @@ function AccessInformationModule() {
           <strong>ACCESS INFO</strong>
           <small>VIEWING + UNLOCK RULES</small>
         </aside>
-      </div>
-
-      <div className="library-rule-strip" aria-label="Access pass basics">
-        <span>Short Access Windows</span>
-        <span>Unlimited Viewing During Active Pass</span>
-        <span>Limited Permanent Unlocks</span>
-        <span>No Forced Subscription</span>
       </div>
 
       <section className="library-section" aria-labelledby="access-options-title">
