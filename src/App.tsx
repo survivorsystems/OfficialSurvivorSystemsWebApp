@@ -2704,20 +2704,48 @@ function BrandLogo({ className = "" }: { className?: string }) {
 
 function CommandCenter({
   onNavigate,
-  panel,
 }: {
   onNavigate: (module: ModuleKey, path: string) => void;
-  panel: ControlPanelState;
 }) {
   return (
     <section className="command-center" aria-label="Command center">
       <div className="command-center-status">
         <span className="terminal-label">COMMAND CENTER</span>
-        <p>{panel.notice}</p>
+        <p>NAV QUERY READY.</p>
       </div>
-      <GaugeDeck compact emphasis={panel.emphasis} gauges={panel.gauges} notice={panel.notice} />
       <TerminalCommand onNavigate={onNavigate} />
     </section>
+  );
+}
+
+function FolderTabMenu({
+  activeId,
+  items,
+  label,
+}: {
+  activeId?: string;
+  items: Array<{
+    id: string;
+    label: string;
+    status?: string;
+    onClick: () => void;
+  }>;
+  label: string;
+}) {
+  return (
+    <nav className="folder-tab-menu" aria-label={label}>
+      {items.map((item) => (
+        <button
+          className={activeId === item.id ? "folder-tab active" : "folder-tab"}
+          key={item.id}
+          type="button"
+          onClick={item.onClick}
+        >
+          <span>{item.label}</span>
+          {item.status ? <small>{item.status}</small> : null}
+        </button>
+      ))}
+    </nav>
   );
 }
 
@@ -3107,6 +3135,7 @@ function TerminalChrome({
             <span className="terminal-label">MODULE</span>
             <h1>{moduleRoutes[activeModule]?.label ?? "Home"}</h1>
           </div>
+          <GaugeDeck compact emphasis={controlPanel.emphasis} gauges={controlPanel.gauges} notice={controlPanel.notice} />
           <div className="system-status">
             <span>SYSTEM STATUS</span>
             <strong>ONLINE</strong>
@@ -3114,7 +3143,7 @@ function TerminalChrome({
           </div>
         </header>
         <div className="terminal-content">{children}</div>
-        <CommandCenter panel={controlPanel} onNavigate={onNavigate} />
+        <CommandCenter onNavigate={onNavigate} />
       </section>
     </main>
   );
@@ -3631,6 +3660,39 @@ function PlanningLanding({
   onOpenExitPlanning: () => void;
   onNavigate: (module: ModuleKey, path: string) => void;
 }) {
+  const planningTabs = [
+    {
+      id: "am-i-crazy",
+      label: "Am I Crazy",
+      status: "Interactive",
+      onClick: () => onNavigate("am-i-crazy", "/am-i-crazy"),
+    },
+    {
+      id: "ladder",
+      label: "Leaving Ladder",
+      status: "Folder",
+      onClick: onOpenLadder,
+    },
+    {
+      id: "safety",
+      label: "Safety Considerations",
+      status: "File",
+      onClick: onOpenSafety,
+    },
+    {
+      id: "exit-planning",
+      label: "Exit Planning",
+      status: "Deep Tool",
+      onClick: onOpenExitPlanning,
+    },
+    {
+      id: "go-bag",
+      label: "Go-Bag",
+      status: "Simulator",
+      onClick: () => onNavigate("go-bag-prep", "/go-bag-prep"),
+    },
+  ];
+
   return (
     <section className="assessment-shell planning-landing" aria-labelledby="planning-landing-title">
       <div className="assessment-panel planning-landing-panel">
@@ -3641,29 +3703,31 @@ function PlanningLanding({
           places, devices, pets, documents, shelter systems, and what kind of help exists.
         </p>
 
+        <FolderTabMenu activeId="root" items={planningTabs} label="Planning folders" />
+
         <div className="planning-module-grid">
-          <button className="planning-module-key primary" type="button" onClick={() => onNavigate("am-i-crazy", "/am-i-crazy")}>
-            <span>FIRST TOOL</span>
+          <button className="planning-module-key module-file primary" type="button" onClick={() => onNavigate("am-i-crazy", "/am-i-crazy")}>
+            <span>INTERACTIVE FILE</span>
             <strong>Am I Crazy?</strong>
             <small>A reality-check assessment for confusion, gaslighting, control, and self-doubt.</small>
           </button>
-          <button className="planning-module-key primary" type="button" onClick={onOpenLadder}>
-            <span>START HERE</span>
+          <button className="planning-module-key module-file primary" type="button" onClick={onOpenLadder}>
+            <span>FOLDER</span>
             <strong>Leaving Ladder</strong>
             <small>For not-ready, unsure, or still-sorting-it-out mode.</small>
           </button>
-          <button className="planning-module-key" type="button" onClick={onOpenSafety}>
-            <span>LIVE TOOL</span>
+          <button className="planning-module-key module-file" type="button" onClick={onOpenSafety}>
+            <span>LIVE FILE</span>
             <strong>Safety Considerations</strong>
             <small>Names what to think through without guaranteeing safety or prescribing a plan.</small>
           </button>
-          <button className="planning-module-key" type="button" onClick={onOpenExitPlanning}>
-            <span>DEEPER TOOL</span>
+          <button className="planning-module-key module-file" type="button" onClick={onOpenExitPlanning}>
+            <span>DEEPER FILE</span>
             <strong>Exit Planning</strong>
             <small>For when the user wants to map barriers and possible next supports.</small>
           </button>
-          <button className="planning-module-key" type="button" onClick={() => onNavigate("go-bag-prep", "/go-bag-prep")}>
-            <span>SIMULATOR</span>
+          <button className="planning-module-key module-file" type="button" onClick={() => onNavigate("go-bag-prep", "/go-bag-prep")}>
+            <span>INTERACTIVE FILE</span>
             <strong>Go-Bag Prep</strong>
             <small>A no-save, in-browser simulator for thinking through urgent items.</small>
           </button>
