@@ -196,7 +196,6 @@ type LibraryPass = {
   viewing: string;
   unlocks: string;
   renewal: string;
-  stripeStatus: string;
 };
 
 type LibraryResource = {
@@ -322,7 +321,6 @@ const libraryPasses: LibraryPass[] = [
     viewing: "View the library for 7 days.",
     unlocks: "No permanent file unlocks included.",
     renewal: "One-time access pass. No subscription or auto-renewal.",
-    stripeStatus: "Stripe one-time product",
   },
   {
     id: "unlock-resource",
@@ -332,7 +330,6 @@ const libraryPasses: LibraryPass[] = [
     viewing: "View the library for 14 days.",
     unlocks: "Includes 1 Permanent Unlock.",
     renewal: "One-time access pass. No subscription or auto-renewal.",
-    stripeStatus: "Stripe one-time product",
   },
   {
     id: "two-week-access",
@@ -342,7 +339,6 @@ const libraryPasses: LibraryPass[] = [
     viewing: "View the library for 14 days.",
     unlocks: "Includes 2 Permanent Unlocks.",
     renewal: "One-time access pass. No subscription or auto-renewal.",
-    stripeStatus: "Stripe one-time product",
   },
   {
     id: "all-access",
@@ -352,7 +348,6 @@ const libraryPasses: LibraryPass[] = [
     viewing: "View the library for 30 days.",
     unlocks: "Includes 3 Permanent Unlocks.",
     renewal: "One-time access pass. No subscription or auto-renewal.",
-    stripeStatus: "Stripe one-time product",
   },
   {
     id: "one-more-resource",
@@ -362,7 +357,6 @@ const libraryPasses: LibraryPass[] = [
     viewing: "Does not change pass viewing access.",
     unlocks: "Adds 1 Permanent Unlock.",
     renewal: "One-time add-on. No subscription or auto-renewal.",
-    stripeStatus: "Stripe one-time add-on product",
   },
   {
     id: "two-more-resources",
@@ -372,7 +366,6 @@ const libraryPasses: LibraryPass[] = [
     viewing: "Does not change pass viewing access.",
     unlocks: "Adds 2 Permanent Unlocks.",
     renewal: "One-time add-on. No subscription or auto-renewal.",
-    stripeStatus: "Stripe one-time add-on product",
   },
 ];
 
@@ -1429,8 +1422,8 @@ const moduleRoutes: Record<ModuleKey, { label: string; path: string }> = {
   "local-help": { label: "Resources", path: "/resources" },
   "how-to": { label: "Resources", path: "/resources" },
   legal: { label: "Resources", path: "/resources" },
-  library: { label: "Access Information", path: "/resources/access" },
-  access: { label: "Access Information", path: "/resources/access" },
+  library: { label: "Database", path: "/resources/access" },
+  access: { label: "Database", path: "/resources/access" },
 };
 
 const allNavTargets: Array<{ key: ModuleKey; label: string; path: string }> = [
@@ -1448,7 +1441,7 @@ const allNavTargets: Array<{ key: ModuleKey; label: string; path: string }> = [
 const navItems: Array<{ key: ModuleKey; label: string; path: string; decoded: string }> = [
   { key: "planning", label: "Ctrl+Esc", path: "/planning", decoded: "Prep / First Steps" },
   { key: "local-help", label: "Ctrl+Fn", path: "/resources", decoded: "Resources" },
-  { key: "access", label: "Ctrl+A", path: "/resources/access", decoded: "Access Information" },
+  { key: "access", label: "Ctrl+A", path: "/resources/access", decoded: "Database" },
 ];
 
 function navItemFor(key: ModuleKey) {
@@ -3010,12 +3003,12 @@ function resolveCommand(query: string) {
     return { message: "QUERY ACCEPTED. ROUTING TO RESOURCES...", target: navItemFor("how-to") };
   }
 
-  if (/ctrl\s*\+\s*a\b|\b(access pass|access information|access info|passes|pass options)\b/.test(normalized)) {
-    return { message: "QUERY ACCEPTED. ROUTING TO RESOURCES...", target: navItemFor("access") };
+  if (/ctrl\s*\+\s*a\b|\b(database|access pass|access information|access info|passes|pass options)\b/.test(normalized)) {
+    return { message: "QUERY ACCEPTED. ROUTING TO DATABASE...", target: navItemFor("access") };
   }
 
   if (/ctrl\s*\+\s*l\b|\b(library|download|downloads|subscription|subscribe|paid|stripe)\b/.test(normalized)) {
-    return { message: "QUERY ACCEPTED. ROUTING TO ACCESS INFORMATION...", target: navItemFor("access") };
+    return { message: "QUERY ACCEPTED. ROUTING TO DATABASE...", target: navItemFor("access") };
   }
 
   if (/\b(crazy|abused|abuse|assessment|gaslight|gaslighting|reality)\b/.test(normalized)) {
@@ -3086,7 +3079,7 @@ function TerminalCommand({
           autoComplete="off"
           id="terminal-command"
           onChange={(event) => setQuery(event.target.value)}
-          placeholder="type: prep, resources, access, housing, go-bag prep, quick exit..."
+          placeholder="type: prep, resources, database, housing, go-bag prep, quick exit..."
           spellCheck={false}
           type="search"
           value={query}
@@ -3156,9 +3149,9 @@ function TerminalChrome({
               <h1>{moduleRoutes[activeModule]?.label ?? "Home"}</h1>
             </div>
             <div className="system-status">
-              <span>SYSTEM STATUS</span>
-              <strong>ONLINE</strong>
-              <small>{new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</small>
+              <span>DATE {new Date().toLocaleDateString([], { month: "2-digit", day: "2-digit", year: "numeric" })}</span>
+              <span>TIME {new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</span>
+              <strong>SYSTEM ONLINE</strong>
             </div>
           </div>
           <TerminalCommand onNavigate={onNavigate} />
@@ -3173,7 +3166,7 @@ function HomeModule() {
   const navLegend = [
     ["Ctrl+Esc", "Prep / First Steps"],
     ["Ctrl+Fn", "Resources"],
-    ["Ctrl+A", "Access Information"],
+    ["Ctrl+A", "Database"],
   ];
 
   return (
@@ -3211,8 +3204,8 @@ function HomeModule() {
           <p>
             Research also tells us that women in particular tend to respond to threat by moving
             toward connection: tending to the people around them, keeping the peace, making
-            themselves smaller or more agreeable to reduce tension. This is not a flaw in your
-            wiring. It is a deeply human response to an unsafe situation. The problem is that it can
+            themselves smaller or more agreeable to reduce tension. This is not a personal defect.
+            It is a deeply human response to an unsafe situation. The problem is that it can
             look, from the inside, exactly like love.
           </p>
           <p>
@@ -4124,13 +4117,13 @@ function SnapTanfGuide({ onBack, onNavigate }: { onBack: () => void; onNavigate:
           forms, deadlines, calls, and document requests.
         </p>
         <p>
-          The access library holds the deeper Resource Navigation System: trackers for
+          The Database holds the deeper Resource Navigation System: trackers for
           applications, case numbers, worker information, documents, deadlines, phone-call notes,
           local resources, and what to work on next.
         </p>
         <div className="terminal-actions denial-actions">
           <button type="button" onClick={() => onNavigate("library", "/resources")}>
-            View Access Options
+            View Database
           </button>
           <button type="button" onClick={onBack}>
             Back To How To Guides
@@ -4622,7 +4615,7 @@ function AccessInformationModule() {
     return (
       <section className="resources-nested-shell">
         <button className="resource-back-button" type="button" onClick={() => setShowLibrary(false)}>
-          Back To Access Information
+          Back To Database
         </button>
         <LibraryModule />
       </section>
@@ -4633,34 +4626,34 @@ function AccessInformationModule() {
     <section className="page-shell library-module access-module" aria-labelledby="access-title">
       <div className="page-kicker">
         <BookOpenCheck aria-hidden="true" />
-        <p className="eyebrow">Ctrl+A // Access Information</p>
+        <p className="eyebrow">Ctrl+A // Database</p>
       </div>
 
       <div className="library-hero-panel">
         <div>
-          <p className="terminal-label">LOAD MODULE // ACCESS PASS INFORMATION</p>
-          <h1 id="access-title">&lt;Access Pass Information&gt;</h1>
+          <p className="terminal-label">LOAD MODULE // DATABASE</p>
+          <h1 id="access-title">&lt;Database&gt;</h1>
           <p>
-            Access passes are designed to keep resources flexible: preview what is available, choose
-            a short access window, and use permanent unlocks only for downloads that matter most.
+            The Database holds indexed previews, Cheat Code Library access paths, and download
+            unlock rules for deeper planners, trackers, and long-form guides.
           </p>
         </div>
         <aside className="library-status-panel" aria-label="Access pass status">
           <span>CTRL+A</span>
-          <strong>ACCESS INFO</strong>
+          <strong>DATABASE</strong>
           <small>VIEWING + UNLOCK RULES</small>
         </aside>
       </div>
 
       <section className="library-section" aria-labelledby="access-options-title">
-        <div className="terminal-label">ACCESS OPTIONS</div>
-        <h2 id="access-options-title">&lt;Choose The Amount Of Help Needed&gt;</h2>
+        <div className="terminal-label">DATABASE ACCESS OPTIONS</div>
+        <h2 id="access-options-title">&lt;Access Paths&gt;</h2>
         <div className="library-pass-grid">
           {libraryPasses.map((pass) => (
             <article className="library-pass-card" key={pass.id}>
               <div className="library-card-header">
                 <span>{pass.price}</span>
-                <small>{pass.stripeStatus}</small>
+                <small>ACCESS PATH</small>
               </div>
               <h3>{pass.title}</h3>
               <p>{pass.scope}</p>
@@ -4675,14 +4668,14 @@ function AccessInformationModule() {
       </section>
 
       <section className="library-section" aria-labelledby="paid-library-entry-title">
-        <div className="terminal-label">PAID RESOURCE LIBRARY</div>
-        <h2 id="paid-library-entry-title">&lt;Open Access Library&gt;</h2>
+        <div className="terminal-label">CHEAT CODE LIBRARY</div>
+        <h2 id="paid-library-entry-title">&lt;Open Cheat Code Library&gt;</h2>
         <p>
-          Preview the deeper planners, trackers, and guide systems from here. Access rules stay
-          visible before the paid library opens.
+          Preview the deeper planners, trackers, and guide systems from here. The index is organized
+          by resource category so the user can scan before unlocking.
         </p>
         <button className="resource-back-button" type="button" onClick={() => setShowLibrary(true)}>
-          Open Paid Access Library
+          Open Cheat Code Library
         </button>
       </section>
     </section>
@@ -4809,31 +4802,39 @@ function ResourceModule({
         })}
 
         <article className="resource-folder-card system-folder-card">
-          <div className="how-to-guide-card-header">
-            <span>LEGAL</span>
-            <small>2 GUIDES</small>
+          <div className="system-folder-heading">
+            <div className="folder-icon" aria-hidden="true">
+              <span />
+            </div>
+            <div>
+              <div className="how-to-guide-card-header">
+                <span>LEGAL</span>
+                <small>2 GUIDES</small>
+              </div>
+              <h2>&lt;Legal Resources&gt;</h2>
+            </div>
           </div>
-          <h2>&lt;Legal Resources&gt;</h2>
           <h3>Family Court + Protective Orders</h3>
-          <p>
-            Legal orientation lives here: Family Court Guide and Civil Protective Order Guide. No
-            legal advice, just language, structure, and what to ask before filing.
-          </p>
+          <p>Family Court Guide, Civil Protective Order Guide.</p>
           <button type="button" onClick={() => setActiveFolder("legal")}>
             Open Folder
           </button>
         </article>
         <article className="resource-folder-card system-folder-card">
-          <div className="how-to-guide-card-header">
-            <span>CTRL+A</span>
-            <small>ACCESS INFO</small>
+          <div className="system-folder-heading">
+            <div className="folder-icon" aria-hidden="true">
+              <span />
+            </div>
+            <div>
+              <div className="how-to-guide-card-header">
+                <span>CTRL+A</span>
+                <small>DATABASE</small>
+              </div>
+              <h2>&lt;Database&gt;</h2>
+            </div>
           </div>
-          <h2>&lt;Access Information&gt;</h2>
-          <h3>Pass Options + Unlock Rules</h3>
-          <p>
-            The access library holds resources such as planners, trackers and more in depth guides.
-            See "Ctrl+A for Access Pass Information."
-          </p>
+          <h3>Cheat Code Library + Unlock Rules</h3>
+          <p>The Cheat Code Library holds planners, trackers, and deeper guides.</p>
           <button type="button" onClick={() => setActiveFolder("access")}>
             Open Folder
           </button>
@@ -4853,18 +4854,18 @@ function LibraryModule() {
 
       <div className="library-hero-panel">
         <div>
-          <p className="terminal-label">LOAD MODULE // PAID RESOURCE LIBRARY</p>
-          <h1 id="library-title">&lt;Survivor Operating System Library&gt;</h1>
+          <p className="terminal-label">LOAD MODULE // CHEAT CODE LIBRARY</p>
+          <h1 id="library-title">&lt;Cheat Code Library&gt;</h1>
           <p>
-            Free crisis tools stay live in the app. The paid library holds deeper templates,
+            Free crisis tools stay live in the app. The Cheat Code Library holds deeper templates,
             trackers, guides, and long-form systems for people who want more structure without a
-            forced subscription.
+            forced subscription or a forced category choice.
           </p>
         </div>
         <aside className="library-status-panel" aria-label="Library access status">
-          <span>ACCESS MODEL</span>
-          <strong>FLEXIBLE PASSES</strong>
-          <small>STRIPE + SUPABASE WIRING PENDING</small>
+          <span>DATABASE INDEX</span>
+          <strong>CHEAT CODES</strong>
+          <small>VIEW FIRST // UNLOCK WHAT MATTERS</small>
         </aside>
       </div>
 
@@ -4876,14 +4877,14 @@ function LibraryModule() {
       </div>
 
       <section className="library-section" aria-labelledby="library-options-title">
-        <div className="terminal-label">PURCHASE PATHS</div>
-        <h2 id="library-options-title">&lt;Choose Access Mode&gt;</h2>
+        <div className="terminal-label">DATABASE ACCESS PATHS</div>
+        <h2 id="library-options-title">&lt;Access Paths&gt;</h2>
         <div className="library-pass-grid">
           {libraryPasses.map((pass) => (
             <article className="library-pass-card" key={pass.id}>
               <div className="library-card-header">
                 <span>{pass.price}</span>
-                <small>{pass.stripeStatus}</small>
+                <small>ACCESS PATH</small>
               </div>
               <h3>{pass.title}</h3>
               <p>{pass.scope}</p>
@@ -4893,7 +4894,7 @@ function LibraryModule() {
                 <li>{pass.renewal}</li>
               </ul>
               <button type="button" disabled>
-                Stripe Checkout Pending
+                Checkout Coming Soon
               </button>
             </article>
           ))}
@@ -4901,8 +4902,8 @@ function LibraryModule() {
       </section>
 
       <section className="library-section" aria-labelledby="library-categories-title">
-        <div className="terminal-label">FOCUS PASS CATEGORIES</div>
-        <h2 id="library-categories-title">&lt;Choose One Area&gt;</h2>
+        <div className="terminal-label">DATABASE INDEX</div>
+        <h2 id="library-categories-title">&lt;Indexed Categories&gt;</h2>
         <div className="library-category-grid">
           {libraryCategories.map((category) => (
             <article className="library-category-card" key={category.id}>
@@ -4937,19 +4938,19 @@ function LibraryModule() {
         </div>
       </section>
 
-      <section className="library-system-grid" aria-label="Library implementation notes">
+      <section className="library-system-grid" aria-label="Library access notes">
         <article className="library-system-card">
           <h2>&lt;Founder Access Bonus&gt;</h2>
           <p>
-            First 100 unique paying library customers receive one extra Permanent Unlock. This is
-            granted after payment by the webhook, without public discount codes or pricing changes.
+            The first 100 paying library users receive one extra Permanent Unlock as a quiet thank-you
+            for helping the system come online.
           </p>
         </article>
         <article className="library-system-card">
-          <h2>&lt;Access Enforcement&gt;</h2>
+          <h2>&lt;Download Access&gt;</h2>
           <p>
-            Stripe confirms payment. Supabase records access, pass expiration, unlock credits, and
-            permanent unlocks. Private files are served with short-lived signed links only.
+            Library files can be previewed during an active access window. Permanent Unlocks are for
+            the downloads the user wants to keep.
           </p>
         </article>
       </section>
