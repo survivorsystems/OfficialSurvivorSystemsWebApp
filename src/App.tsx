@@ -469,10 +469,8 @@ const howToGuides: HowToGuide[] = [
     status: "REBUILDING GUIDE",
     description:
       "A live guide to housing systems and the many smaller doors that can sit inside the word housing.",
-    action: "navigate",
+    action: "open",
     priority: "priority-2",
-    target: "rebuilding",
-    path: "/rebuilding",
   },
   {
     id: "go-bag-checklist",
@@ -1440,7 +1438,6 @@ const allNavTargets: Array<{ key: ModuleKey; label: string; path: string }> = [
   { key: "am-i-crazy", label: "Am I Crazy", path: "/am-i-crazy" },
   { key: "go-bag-prep", label: "Go-Bag Prep", path: "/go-bag-prep" },
   { key: "planning", ...moduleRoutes.planning },
-  { key: "rebuilding", ...moduleRoutes.rebuilding },
   { key: "local-help", ...moduleRoutes["local-help"] },
   { key: "how-to", ...moduleRoutes["how-to"] },
   { key: "legal", ...moduleRoutes.legal },
@@ -1450,7 +1447,6 @@ const allNavTargets: Array<{ key: ModuleKey; label: string; path: string }> = [
 
 const navItems: Array<{ key: ModuleKey; label: string; path: string; decoded: string }> = [
   { key: "planning", label: "Ctrl+Esc", path: "/planning", decoded: "Prep / First Steps" },
-  { key: "rebuilding", label: "Ctrl+Shift", path: "/rebuilding", decoded: "Rebuilding" },
   { key: "local-help", label: "Ctrl+Fn", path: "/resources", decoded: "Resources" },
   { key: "access", label: "Ctrl+A", path: "/resources/access", decoded: "Access Information" },
 ];
@@ -2498,6 +2494,7 @@ function markCheckpointCleared() {
 
 function getInitialModule(): ModuleKey {
   const path = window.location.pathname;
+  if (path === "/rebuilding") return "local-help";
   if (path === "/local-help") return "local-help";
   if (path === "/how-to") return "how-to";
   if (path === "/legal") return "legal";
@@ -3002,7 +2999,7 @@ function resolveCommand(query: string) {
   }
 
   if (/ctrl\s*\+\s*shift/.test(normalized)) {
-    return { message: "QUERY ACCEPTED. ROUTING TO REBUILDING...", target: navItemFor("rebuilding") };
+    return { message: "QUERY ACCEPTED. REBUILDING FILES LIVE UNDER RESOURCES...", target: navItemFor("local-help") };
   }
 
   if (/ctrl\s*\+\s*fn|\bresources?\b/.test(normalized)) {
@@ -3038,7 +3035,7 @@ function resolveCommand(query: string) {
   }
 
   if (/\b(rebuild|money|housing|future|after)\b/.test(normalized)) {
-    return { message: "QUERY ACCEPTED. ROUTING TO REBUILDING...", target: navItemFor("rebuilding") };
+    return { message: "QUERY ACCEPTED. ROUTING TO RESOURCES...", target: navItemFor("local-help") };
   }
 
   if (/\b(local|hotline|shelter|support|near)\b/.test(normalized)) {
@@ -3089,7 +3086,7 @@ function TerminalCommand({
           autoComplete="off"
           id="terminal-command"
           onChange={(event) => setQuery(event.target.value)}
-          placeholder="type: prep, resources, rebuilding, go-bag prep, quick exit..."
+          placeholder="type: prep, resources, access, housing, go-bag prep, quick exit..."
           spellCheck={false}
           type="search"
           value={query}
@@ -3171,7 +3168,6 @@ function TerminalChrome({
 function HomeModule() {
   const navLegend = [
     ["Ctrl+Esc", "Prep / First Steps"],
-    ["Ctrl+Shift", "Rebuilding"],
     ["Ctrl+Fn", "Resources"],
     ["Ctrl+A", "Access Information"],
   ];
@@ -4271,6 +4267,10 @@ function HowToModule({
     return <SnapTanfGuide onBack={() => setActiveGuideId(null)} onNavigate={onNavigate} />;
   }
 
+  if (activeGuideId === "housing-navigation") {
+    return <RebuildingModule onBack={() => setActiveGuideId(null)} onNavigate={onNavigate} />;
+  }
+
   if (activeGuideId && practicalGuides[activeGuideId]) {
     return (
       <PracticalHowToGuide
@@ -4954,15 +4954,17 @@ function LibraryModule() {
 }
 
 function RebuildingModule({
+  onBack,
   onNavigate,
 }: {
+  onBack?: () => void;
   onNavigate: (module: ModuleKey, path: string) => void;
 }) {
   return (
     <section className="page-shell rebuilding-module" aria-labelledby="rebuilding-title">
       <div className="page-kicker">
         <Sprout aria-hidden="true" />
-        <p className="eyebrow">Ctrl+Shift // Rebuilding</p>
+        <p className="eyebrow">Resources // stabilize.exe</p>
       </div>
 
       <div className="rebuilding-hero">
@@ -5023,6 +5025,11 @@ function RebuildingModule({
           all of this out at once. Start with the next step.
         </p>
         <div className="terminal-actions denial-actions">
+          {onBack ? (
+            <button type="button" onClick={onBack}>
+              Back To stabilize.exe
+            </button>
+          ) : null}
           <button type="button" onClick={() => onNavigate("planning", "/planning")}>
             Prep / First Steps
           </button>
