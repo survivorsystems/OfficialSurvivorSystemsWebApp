@@ -18,7 +18,6 @@ type ModuleKey =
   | "am-i-crazy"
   | "go-bag-prep"
   | "planning"
-  | "leaving"
   | "rebuilding"
   | "local-help"
   | "how-to"
@@ -218,6 +217,7 @@ type HowToGuide = {
   status: string;
   description: string;
   action: "open" | "navigate";
+  priority: "priority-1" | "priority-2" | "priority-3";
   target?: ModuleKey;
   path?: string;
 };
@@ -261,12 +261,6 @@ const modulePages: Record<
     title: "Planning",
     description:
       "This page will hold safety planning tools, document checklists, contact worksheets, and preparation resources.",
-  },
-  leaving: {
-    eyebrow: "Leaving resources",
-    title: "Leaving",
-    description:
-      "This page will hold go-bag resources, device safety reminders, transportation planning, and immediate support links.",
   },
   rebuilding: {
     eyebrow: "Rebuilding resources",
@@ -453,6 +447,7 @@ const howToGuides: HowToGuide[] = [
     description:
       "A practical benefits-navigation guide for starting the application, asking for expedited SNAP, handling missing documents, and understanding TANF domestic violence protections.",
     action: "open",
+    priority: "priority-2",
   },
   {
     id: "routine-chaos",
@@ -462,6 +457,7 @@ const howToGuides: HowToGuide[] = [
     description:
       "A stabilizing guide for creating routines that can survive disrupted days, low energy, temporary housing, grief, and rebuilding.",
     action: "open",
+    priority: "priority-3",
   },
   {
     id: "live-in-your-car",
@@ -471,24 +467,17 @@ const howToGuides: HowToGuide[] = [
     description:
       "A practical harm-reduction guide for making vehicle living safer, calmer, more organized, and easier to manage.",
     action: "open",
-  },
-  {
-    id: "safety-protocol-001",
-    title: "Survivor Operating Systems Safety Protocol 001",
-    subtitle: "Screenshot-friendly crisis card for fast-exit thinking.",
-    status: "PLANNING GUIDE",
-    description:
-      "A compact protocol for safer places, code words, reachable essentials, and device-monitoring concerns.",
-    action: "open",
+    priority: "priority-1",
   },
   {
     id: "browser-trace-cleanup",
-    title: "How To Clear Browser Traces",
+    title: "How To Clear Your Browser History",
     subtitle: "Reduce local history without pretending it defeats monitoring.",
     status: "PLANNING GUIDE",
     description:
       "Private browsing, browser cleanup, device caveats, and safer-device reminders for planning with fewer local traces.",
     action: "open",
+    priority: "priority-1",
   },
   {
     id: "pet-safety-plan",
@@ -498,6 +487,7 @@ const howToGuides: HowToGuide[] = [
     description:
       "A practical guide for including pets in safety planning without pretending every option is simple or immediate.",
     action: "open",
+    priority: "priority-1",
   },
   {
     id: "housing-navigation",
@@ -507,6 +497,7 @@ const howToGuides: HowToGuide[] = [
     description:
       "A live guide to housing systems and the many smaller doors that can sit inside the word housing.",
     action: "navigate",
+    priority: "priority-2",
     target: "rebuilding",
     path: "/rebuilding",
   },
@@ -518,10 +509,40 @@ const howToGuides: HowToGuide[] = [
     description:
       "A lightweight prep guide before the simulator, built for thinking through urgent items without saving user data.",
     action: "navigate",
+    priority: "priority-1",
     target: "go-bag-prep",
     path: "/go-bag-prep",
   },
 ];
+
+const howToPriorities = [
+  {
+    id: "priority-1",
+    label: "Priority 1",
+    title: "Immediate Safety + First Moves",
+    description:
+      "Start here when the task is urgent, private, or close to the body: device traces, pets, go-bags, vehicle living, and first-step safety logistics.",
+  },
+  {
+    id: "priority-2",
+    label: "Priority 2",
+    title: "Systems Navigation",
+    description:
+      "Use this folder for benefits, housing, coordinated entry, applications, follow-ups, and the bureaucracy that starts multiplying.",
+  },
+  {
+    id: "priority-3",
+    label: "Priority 3",
+    title: "Stabilizing + Rebuilding",
+    description:
+      "Use this folder when the fire is a little lower and the next task is rhythm, routine, recovery, and building a life that belongs to the user again.",
+  },
+] satisfies Array<{
+  id: HowToGuide["priority"];
+  label: string;
+  title: string;
+  description: string;
+}>;
 
 const snapTanfSections: SnapTanfSection[] = [
   {
@@ -1433,7 +1454,6 @@ const moduleRoutes: Record<ModuleKey, { label: string; path: string }> = {
   "am-i-crazy": { label: "Am I Crazy", path: "/am-i-crazy" },
   "go-bag-prep": { label: "Go-Bag Prep", path: "/go-bag-prep" },
   planning: { label: "Prep / First Steps", path: "/planning" },
-  leaving: { label: "Leaving", path: "/leaving" },
   rebuilding: { label: "Rebuilding", path: "/rebuilding" },
   "local-help": { label: "Resources", path: "/resources" },
   "how-to": { label: "Ctrl+C", path: "/how-to" },
@@ -1446,7 +1466,6 @@ const allNavTargets: Array<{ key: ModuleKey; label: string; path: string }> = [
   { key: "am-i-crazy", label: "Am I Crazy", path: "/am-i-crazy" },
   { key: "go-bag-prep", label: "Go-Bag Prep", path: "/go-bag-prep" },
   { key: "planning", ...moduleRoutes.planning },
-  { key: "leaving", ...moduleRoutes.leaving },
   { key: "rebuilding", ...moduleRoutes.rebuilding },
   { key: "local-help", ...moduleRoutes["local-help"] },
   { key: "how-to", ...moduleRoutes["how-to"] },
@@ -1456,7 +1475,6 @@ const allNavTargets: Array<{ key: ModuleKey; label: string; path: string }> = [
 
 const navItems: Array<{ key: ModuleKey; label: string; path: string; decoded: string }> = [
   { key: "planning", label: "Ctrl+Esc", path: "/planning", decoded: "Prep / First Steps" },
-  { key: "leaving", label: "Ctrl+Space", path: "/leaving", decoded: "Leaving" },
   { key: "rebuilding", label: "Ctrl+Shift", path: "/rebuilding", decoded: "Rebuilding" },
   { key: "local-help", label: "Ctrl+Fn", path: "/resources", decoded: "Resources" },
   { key: "how-to", label: "Ctrl+C", path: "/how-to", decoded: "How To Guides" },
@@ -2219,38 +2237,6 @@ const leavingLadderRungs: LeavingLadderRung[] = [
 
 const planningResourcePages: SafetyPlanSection[] = [
   {
-    id: "crisis-card",
-    title: "Survivor Operating Systems Safety Protocol 001",
-    subtitle: "For when printing, downloading, or saving a file is not safe.",
-    status: "SAFETY PROTOCOL 001 // SCREENSHOT-FRIENDLY",
-    screenshotLines: [
-      "Fast-exit protocol: departure is not announced.",
-      "Move toward one safer place: a public building, a neighbor, a friend, a store, a library, a shelter, or emergency services.",
-      "Maintain one code word that means: call for help now.",
-      "Collect only safely reachable essentials: phone, keys, wallet, meds, documents, charger, water, pet needs, and go-bag.",
-      "If device monitoring may be active, use a safer device or public computer before making sensitive plans.",
-      "One small preparation is still preparation.",
-    ],
-    detailGroups: [
-      {
-        title: "Pick One Safe Signal",
-        items: [
-          "Choose a code word or emoji for one trusted person.",
-          "Decide what the person should do if they receive it: call you, call 911, pick you up, or contact a shelter.",
-          "Do not use a phrase the abusive person would recognize as a plan.",
-        ],
-      },
-      {
-        title: "Pick One First Place",
-        items: [
-          "Public places count: library, hospital, police station lobby, grocery store, school, courthouse, or workplace.",
-          "A first place is not a forever place. It is a place where control is lower.",
-          "If you cannot leave today, identify the closest unlocked door and the fastest route to it.",
-        ],
-      },
-    ],
-  },
-  {
     id: "digital-traces",
     title: "Browser Trace Cleanup",
     subtitle: "Reduce local history without pretending it defeats monitoring software.",
@@ -2996,7 +2982,7 @@ function resolveCommand(query: string) {
   if (/\b(help|menu|options|commands|where)\b/.test(normalized)) {
     return {
       message:
-        "AVAILABLE COMMANDS: PREP, LEAVING, REBUILDING, RESOURCES, HOW TO GUIDES, LIBRARY, AM I CRAZY, GO-BAG PREP, LEGAL, QUICK EXIT.",
+        "AVAILABLE COMMANDS: PREP, REBUILDING, RESOURCES, HOW TO GUIDES, LIBRARY, AM I CRAZY, GO-BAG PREP, LEGAL, QUICK EXIT.",
       target: null,
     };
   }
@@ -3012,10 +2998,6 @@ function resolveCommand(query: string) {
 
   if (/ctrl\s*\+\s*esc|\bfirst steps?\b|\bprep\b/.test(normalized)) {
     return { message: "QUERY ACCEPTED. ROUTING TO PREP / FIRST STEPS...", target: navItemFor("planning") };
-  }
-
-  if (/ctrl\s*\+\s*space/.test(normalized)) {
-    return { message: "QUERY ACCEPTED. ROUTING TO LEAVING...", target: navItemFor("leaving") };
   }
 
   if (/ctrl\s*\+\s*shift/.test(normalized)) {
@@ -3047,7 +3029,7 @@ function resolveCommand(query: string) {
   }
 
   if (/\b(leave|leaving|go bag|escape|exit plan)\b/.test(normalized)) {
-    return { message: "QUERY ACCEPTED. ROUTING TO LEAVING...", target: navItemFor("leaving") };
+    return { message: "QUERY ACCEPTED. ROUTING TO PREP / FIRST STEPS...", target: navItemFor("planning") };
   }
 
   if (/\b(rebuild|money|housing|future|after)\b/.test(normalized)) {
@@ -3102,7 +3084,7 @@ function TerminalCommand({
           autoComplete="off"
           id="terminal-command"
           onChange={(event) => setQuery(event.target.value)}
-          placeholder="type: prep, leaving, how to guides, resources, library, legal, quick exit..."
+          placeholder="type: prep, how to guides, resources, library, legal, quick exit..."
           spellCheck={false}
           type="search"
           value={query}
@@ -3181,7 +3163,6 @@ function TerminalChrome({
 function HomeModule() {
   const navLegend = [
     ["Ctrl+Esc", "Prep / First Steps"],
-    ["Ctrl+Space", "Leaving"],
     ["Ctrl+Shift", "Rebuilding"],
     ["Ctrl+Fn", "Resources"],
     ["Ctrl+C", "How To Guides"],
@@ -4221,12 +4202,14 @@ function PracticalHowToGuide({
 
 function HowToModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: string) => void }) {
   const [activeGuideId, setActiveGuideId] = useState<string | null>(null);
+  const [activePriorityId, setActivePriorityId] = useState<HowToGuide["priority"] | null>(null);
   const planningResourceMap: Record<string, string> = {
-    "safety-protocol-001": "crisis-card",
     "browser-trace-cleanup": "digital-traces",
     "pet-safety-plan": "pet-plan",
   };
   const activeResourceId = activeGuideId ? planningResourceMap[activeGuideId] : null;
+  const activePriority = activePriorityId ? howToPriorities.find((priority) => priority.id === activePriorityId) : null;
+  const visibleGuides = activePriorityId ? howToGuides.filter((guide) => guide.priority === activePriorityId) : [];
 
   if (activeGuideId === "snap-tanf") {
     return <SnapTanfGuide onBack={() => setActiveGuideId(null)} onNavigate={onNavigate} />;
@@ -4259,39 +4242,72 @@ function HowToModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: str
           <h1 id="how-to-title">&lt;Ctrl+C&gt;</h1>
           <p className="how-to-subtitle">HOW TO GUIDES</p>
           <p>
-            Practical guides for the systems that make people feel like they need a second brain:
-            benefits, housing, device traces, pets, go-bags, paperwork, and rebuilding logistics.
+            Practical guides are sorted by priority so the screen does not throw the whole system at
+            the user at once. Open a folder first, then choose the guide that matches the next move.
           </p>
         </div>
         <aside className="how-to-status-panel" aria-label="How to guide status">
-          <span>GUIDE INDEX</span>
+          <span>{activePriority ? activePriority.label : "GUIDE INDEX"}</span>
           <strong>ONLINE</strong>
-          <small>LIVE PAGES // NO STATIC PDF EMBEDS</small>
+          <small>{activePriority ? "FOLDER OPEN // LIVE GUIDES" : "PRIORITY FOLDERS // NO STATIC PDF EMBEDS"}</small>
         </aside>
       </div>
 
-      <div className="how-to-guide-grid">
-        {howToGuides.map((guide, index) => (
-          <article className="how-to-guide-card" key={guide.id}>
-            <div className="how-to-guide-card-header">
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <small>{guide.status}</small>
+      {!activePriority ? (
+        <div className="how-to-priority-grid">
+          {howToPriorities.map((priority) => {
+            const count = howToGuides.filter((guide) => guide.priority === priority.id).length;
+            return (
+              <article className="how-to-priority-card" key={priority.id}>
+                <div className="how-to-guide-card-header">
+                  <span>{priority.label}</span>
+                  <small>{count} GUIDES</small>
+                </div>
+                <h2>&lt;{priority.title}&gt;</h2>
+                <p>{priority.description}</p>
+                <button type="button" onClick={() => setActivePriorityId(priority.id)}>
+                  Open Folder
+                </button>
+              </article>
+            );
+          })}
+        </div>
+      ) : (
+        <>
+          <div className="how-to-folder-bar">
+            <div>
+              <p className="terminal-label">FOLDER OPEN</p>
+              <h2>&lt;{activePriority.title}&gt;</h2>
             </div>
-            <h2>&lt;{guide.title}&gt;</h2>
-            <p className="how-to-guide-subtitle">{guide.subtitle}</p>
-            <p>{guide.description}</p>
-            {guide.action === "navigate" ? (
-              <button type="button" onClick={() => onNavigate(guide.target ?? "home", guide.path ?? "/")}>
-                Open Guide
-              </button>
-            ) : (
-              <button type="button" onClick={() => setActiveGuideId(guide.id)}>
-                Open Guide
-              </button>
-            )}
-          </article>
-        ))}
-      </div>
+            <button type="button" onClick={() => setActivePriorityId(null)}>
+              Back To Priority Folders
+            </button>
+          </div>
+
+          <div className="how-to-guide-grid">
+            {visibleGuides.map((guide, index) => (
+              <article className="how-to-guide-card" key={guide.id}>
+                <div className="how-to-guide-card-header">
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <small>{guide.status}</small>
+                </div>
+                <h2>&lt;{guide.title}&gt;</h2>
+                <p className="how-to-guide-subtitle">{guide.subtitle}</p>
+                <p>{guide.description}</p>
+                {guide.action === "navigate" ? (
+                  <button type="button" onClick={() => onNavigate(guide.target ?? "home", guide.path ?? "/")}>
+                    Open Guide
+                  </button>
+                ) : (
+                  <button type="button" onClick={() => setActiveGuideId(guide.id)}>
+                    Open Guide
+                  </button>
+                )}
+              </article>
+            ))}
+          </div>
+        </>
+      )}
     </section>
   );
 }

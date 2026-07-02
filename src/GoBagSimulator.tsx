@@ -21,10 +21,11 @@ type ModuleKey =
   | "am-i-crazy"
   | "go-bag-prep"
   | "planning"
-  | "leaving"
   | "rebuilding"
   | "local-help"
-  | "legal";
+  | "how-to"
+  | "legal"
+  | "library";
 
 type GaugeValue = {
   label: string;
@@ -435,7 +436,7 @@ function GoBagSimulator({
           >
             Ready To Go
           </button>
-          <button type="button" onClick={() => onNavigate("leaving", "/leaving")}>Show Go-Bag Resources</button>
+          <button type="button" onClick={() => onNavigate("how-to", "/how-to")}>Show Go-Bag Resources</button>
           <button type="button" onClick={() => { resetGame(); setScreen("checklist"); }}>Clear Session</button>
           <button type="button" onClick={clearAndExit}>Quick Exit</button>
         </div>

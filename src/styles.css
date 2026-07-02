@@ -3977,6 +3977,8 @@ button:disabled {
 .how-to-hero,
 .how-to-status-panel,
 .how-to-guide-card,
+.how-to-priority-card,
+.how-to-folder-bar,
 .snap-guide-card,
 .how-to-system-note {
   background:
@@ -3999,6 +4001,8 @@ button:disabled {
 
 .how-to-hero h1,
 .how-to-guide-card h2,
+.how-to-priority-card h2,
+.how-to-folder-bar h2,
 .snap-guide-card h2,
 .how-to-system-note h2 {
   color: var(--cream);
@@ -4007,6 +4011,7 @@ button:disabled {
 
 .how-to-hero p,
 .how-to-guide-card p,
+.how-to-priority-card p,
 .snap-guide-card p,
 .how-to-system-note p {
   color: rgba(236, 250, 255, 0.78);
@@ -4048,12 +4053,14 @@ button:disabled {
 }
 
 .how-to-guide-grid,
+.how-to-priority-grid,
 .snap-guide-grid {
   display: grid;
   gap: 14px;
 }
 
-.how-to-guide-grid {
+.how-to-guide-grid,
+.how-to-priority-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
@@ -4062,6 +4069,8 @@ button:disabled {
 }
 
 .how-to-guide-card,
+.how-to-priority-card,
+.how-to-folder-bar,
 .snap-guide-card,
 .how-to-system-note {
   padding: 18px;
@@ -4091,6 +4100,50 @@ button:disabled {
 .how-to-guide-card button {
   margin-top: 14px;
   width: 100%;
+}
+
+.how-to-priority-card {
+  overflow: hidden;
+  position: relative;
+}
+
+.how-to-priority-card::before {
+  background:
+    linear-gradient(90deg, rgba(0, 234, 255, 0.7), rgba(255, 79, 216, 0.72)),
+    var(--cyan);
+  box-shadow:
+    0 0 16px rgba(0, 234, 255, 0.32),
+    0 0 22px rgba(255, 79, 216, 0.2);
+  content: "";
+  display: block;
+  height: 8px;
+  margin: -18px -18px 16px;
+}
+
+.how-to-priority-card h2 {
+  font-size: clamp(1.05rem, 1.6vw, 1.42rem);
+}
+
+.how-to-priority-card button,
+.how-to-folder-bar button {
+  margin-top: 14px;
+  width: 100%;
+}
+
+.how-to-folder-bar {
+  align-items: center;
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+}
+
+.how-to-folder-bar h2 {
+  margin: 0;
+}
+
+.how-to-folder-bar button {
+  flex: 0 0 min(260px, 100%);
+  margin-top: 0;
 }
 
 .how-to-command-strip {
@@ -4347,6 +4400,7 @@ button:disabled {
   .library-system-grid,
   .how-to-command-strip,
   .how-to-guide-grid,
+  .how-to-priority-grid,
   .snap-guide-grid,
   .gauge-row {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -4403,6 +4457,7 @@ button:disabled {
   .library-system-grid,
   .how-to-command-strip,
   .how-to-guide-grid,
+  .how-to-priority-grid,
   .snap-guide-grid,
   .gauge-row,
   .library-header {
@@ -4411,6 +4466,15 @@ button:disabled {
 
   .library-preview-card {
     grid-template-columns: 1fr;
+  }
+
+  .how-to-folder-bar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .how-to-folder-bar button {
+    flex-basis: auto;
   }
 
   .app-frame {
