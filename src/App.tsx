@@ -2725,37 +2725,6 @@ function BrandLogo({ className = "" }: { className?: string }) {
   );
 }
 
-function FolderTabMenu({
-  activeId,
-  items,
-  label,
-}: {
-  activeId?: string;
-  items: Array<{
-    id: string;
-    label: string;
-    status?: string;
-    onClick: () => void;
-  }>;
-  label: string;
-}) {
-  return (
-    <nav className="folder-tab-menu" aria-label={label}>
-      {items.map((item) => (
-        <button
-          className={activeId === item.id ? "folder-tab active" : "folder-tab"}
-          key={item.id}
-          type="button"
-          onClick={item.onClick}
-        >
-          <span>{item.label}</span>
-          {item.status ? <small>{item.status}</small> : null}
-        </button>
-      ))}
-    </nav>
-  );
-}
-
 function TypedText({
   className = "typed-text",
   onDone,
@@ -3700,76 +3669,36 @@ function PlanningLanding({
   onOpenExitPlanning: () => void;
   onNavigate: (module: ModuleKey, path: string) => void;
 }) {
-  const planningTabs = [
-    {
-      id: "am-i-crazy",
-      label: "Am I Crazy",
-      status: "Interactive",
-      onClick: () => onNavigate("am-i-crazy", "/am-i-crazy"),
-    },
-    {
-      id: "ladder",
-      label: "How To Make A Leaving Plan",
-      status: "Folder",
-      onClick: onOpenLadder,
-    },
-    {
-      id: "safety",
-      label: "Safety Considerations",
-      status: "File",
-      onClick: onOpenSafety,
-    },
-    {
-      id: "exit-planning",
-      label: "Exit Planning",
-      status: "Deep Tool",
-      onClick: onOpenExitPlanning,
-    },
-    {
-      id: "go-bag",
-      label: "Go-Bag",
-      status: "Simulator",
-      onClick: () => onNavigate("go-bag-prep", "/go-bag-prep"),
-    },
-  ];
-
   return (
     <section className="assessment-shell planning-landing" aria-labelledby="planning-landing-title">
       <div className="assessment-panel planning-landing-panel">
         <div className="terminal-label">MOTHER PAGE: PLANNING</div>
         <h1 id="planning-landing-title">CHOOSE THE PLANNING TOOL.</h1>
-        <p>
-          Planning does not mean deciding today. It means understanding the moving parts: people,
-          places, devices, pets, documents, shelter systems, and what kind of help exists.
-        </p>
 
-        <FolderTabMenu activeId="root" items={planningTabs} label="Planning folders" />
-
-        <div className="planning-module-grid">
-          <button className="planning-module-key module-file primary" type="button" onClick={() => onNavigate("am-i-crazy", "/am-i-crazy")}>
-            <span>INTERACTIVE FILE</span>
+        <div className="planning-document-grid" aria-label="Planning documents">
+          <button className="planning-document-key" type="button" onClick={() => onNavigate("am-i-crazy", "/am-i-crazy")}>
+            <span className="planning-document-icon emoji-icon" aria-hidden="true">
+              🤪
+            </span>
             <strong>Am I Crazy?</strong>
-            <small>A reality-check assessment for confusion, gaslighting, control, and self-doubt.</small>
           </button>
-          <button className="planning-module-key module-file primary" type="button" onClick={onOpenLadder}>
-            <span>FOLDER</span>
+          <button className="planning-document-key" type="button" onClick={onOpenLadder}>
+            <span className="planning-document-icon emoji-icon" aria-hidden="true">
+              🚪
+            </span>
             <strong>How To Make A Leaving Plan</strong>
-            <small>For not-ready, unsure, or still-sorting-it-out mode.</small>
           </button>
-          <button className="planning-module-key module-file" type="button" onClick={onOpenSafety}>
-            <span>LIVE FILE</span>
+          <button className="planning-document-key" type="button" onClick={onOpenSafety}>
+            <span className="planning-document-icon caution-icon" aria-hidden="true" />
             <strong>Safety Considerations</strong>
-            <small>Names what to think through without guaranteeing safety or prescribing a plan.</small>
           </button>
-          <button className="planning-module-key module-file" type="button" onClick={onOpenExitPlanning}>
-            <span>DEEPER FILE</span>
+          <button className="planning-document-key" type="button" onClick={onOpenExitPlanning}>
+            <span className="planning-document-icon route-icon" aria-hidden="true" />
             <strong>Exit Planning</strong>
-            <small>For when the user wants to map barriers and possible next supports.</small>
           </button>
-          <button className="planning-module-key module-file" type="button" onClick={() => onNavigate("go-bag-prep", "/go-bag-prep")}>
-            <span>INTERACTIVE FILE</span>
+          <button className="planning-document-key" type="button" onClick={() => onNavigate("go-bag-prep", "/go-bag-prep")}>
+            <span className="planning-document-icon go-bag-icon" aria-hidden="true" />
             <strong>Go-Bag Prep</strong>
-            <small>A no-save, in-browser simulator for thinking through urgent items.</small>
           </button>
         </div>
       </div>
