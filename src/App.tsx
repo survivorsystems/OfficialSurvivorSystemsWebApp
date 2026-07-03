@@ -1439,9 +1439,9 @@ const allNavTargets: Array<{ key: ModuleKey; label: string; path: string }> = [
 ];
 
 const navItems: Array<{ key: ModuleKey; label: string; path: string; decoded: string; icon: string }> = [
-  { key: "planning", label: "Ctrl+Esc", path: "/planning", decoded: "Leaving Plan", icon: "folder" },
-  { key: "local-help", label: "Ctrl+Fn", path: "/resources", decoded: "Resources", icon: "folder" },
-  { key: "access", label: "Ctrl+A", path: "/resources/access", decoded: "Database", icon: "database" },
+  { key: "planning", label: "Leaving Plan", path: "/planning", decoded: "Ctrl+Esc", icon: "folder" },
+  { key: "local-help", label: "Resources", path: "/resources", decoded: "Ctrl+Fn", icon: "folder" },
+  { key: "access", label: "Database", path: "/resources/access", decoded: "Ctrl+A", icon: "database" },
 ];
 
 function navItemFor(key: ModuleKey) {

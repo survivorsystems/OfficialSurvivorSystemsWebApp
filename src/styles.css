@@ -5607,12 +5607,14 @@ button:disabled {
     inset 1px 1px 0 rgba(255, 255, 255, 0.24),
     inset -2px -2px 0 rgba(0, 0, 0, 0.76),
     4px 4px 0 rgba(0, 0, 0, 0.42);
-  grid-column: 2;
+  grid-column: 1 / -1;
   grid-row: 1;
-  justify-self: start;
-  margin-top: clamp(18px, 8vh, 72px);
+  justify-self: center;
+  margin-top: clamp(22px, 10vh, 92px);
   max-width: min(520px, 70vw);
   padding: clamp(18px, 3vw, 28px);
+  text-align: center;
+  z-index: 1;
 }
 
 .desktop-brand-panel p {
@@ -5628,7 +5630,9 @@ button:disabled {
   border: 1px dotted transparent;
   color: #ffffff;
   min-height: 92px;
+  position: relative;
   text-shadow: 1px 1px 0 #000;
+  z-index: 2;
 }
 
 .desktop-icon:hover,
@@ -5641,6 +5645,8 @@ button:disabled {
 .desktop-icon-title {
   background: rgba(0, 0, 128, 0.78);
   color: #ffffff;
+  max-width: 92px;
+  overflow-wrap: anywhere;
 }
 
 .desktop-icon:hover .desktop-icon-title,
@@ -5808,7 +5814,8 @@ button:disabled {
 .library-hero-panel,
 .how-to-guide-card,
 .system-folder-card {
-  background: #19191f;
+  background:
+    linear-gradient(180deg, #2d2d34, #19191f);
   border: 2px solid;
   border-color: #ffffff #565656 #565656 #ffffff;
   border-radius: 0;
@@ -5816,6 +5823,26 @@ button:disabled {
     inset 1px 1px 0 rgba(255, 255, 255, 0.1),
     2px 2px 0 rgba(0, 0, 0, 0.64);
   color: #ffffff;
+}
+
+.planning-module-key strong,
+.resource-folder-card h2,
+.resource-folder-card h3,
+.library-pass-card h3,
+.library-section h2,
+.how-to-guide-card h3,
+.system-folder-card h2 {
+  color: #ffffff;
+}
+
+.planning-module-key p,
+.planning-module-key small,
+.resource-folder-card p,
+.library-pass-card p,
+.library-pass-card li,
+.library-section p,
+.how-to-guide-card p {
+  color: #e9f7ff;
 }
 
 .planning-module-key span,
@@ -5850,4 +5877,37 @@ button:disabled {
   .win95-window {
     margin: 0;
   }
+}
+
+.win95-taskbar {
+  background:
+    linear-gradient(180deg, #3b3b43, #24242a);
+  border-top: 2px solid #ffffff;
+  min-height: 56px;
+  padding: 8px 10px;
+}
+
+.win95-start,
+.win95-taskbar-exit,
+.win95-taskbar-slot {
+  background:
+    linear-gradient(180deg, #52525c, #2e2e35);
+  border-color: #ffffff #111111 #111111 #ffffff;
+  color: #ffffff;
+  min-height: 36px;
+  text-shadow: 1px 1px 0 #000000;
+}
+
+.win95-start:hover,
+.win95-start:focus-visible,
+.win95-taskbar-exit:hover,
+.win95-taskbar-exit:focus-visible {
+  background: #ff4fd8;
+  color: #111111;
+  text-shadow: none;
+}
+
+.win95-taskbar-slot span {
+  background: #5cff9d;
+  box-shadow: 0 0 8px rgba(92, 255, 157, 0.44);
 }
