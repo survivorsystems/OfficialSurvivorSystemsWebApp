@@ -5582,11 +5582,8 @@ button:disabled {
 }
 
 .win95-desktop {
-  background:
-    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    #008080;
-  background-size: 18px 18px, 18px 18px, auto;
+  background: #000000;
+  background-size: auto;
   gap: 22px;
   grid-template-columns: 116px minmax(0, 1fr);
   overflow: hidden;
@@ -5627,7 +5624,8 @@ button:disabled {
 }
 
 .desktop-icon {
-  border: 1px dotted transparent;
+  border: 1px solid transparent;
+  border-radius: 10px;
   color: #ffffff;
   min-height: 92px;
   position: relative;
@@ -5638,15 +5636,20 @@ button:disabled {
 .desktop-icon:hover,
 .desktop-icon:focus-visible,
 .desktop-icon.active {
-  background: rgba(0, 0, 128, 0.72);
-  border-color: #ffffff;
+  background: rgba(0, 234, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.76);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.12),
+    0 0 18px rgba(0, 234, 255, 0.18);
 }
 
 .desktop-icon-title {
-  background: rgba(0, 0, 128, 0.78);
+  background: rgba(0, 0, 0, 0.72);
+  border-radius: 4px;
   color: #ffffff;
   max-width: 92px;
   overflow-wrap: anywhere;
+  padding: 2px 5px;
 }
 
 .desktop-icon:hover .desktop-icon-title,
@@ -5659,6 +5662,39 @@ button:disabled {
 
 .desktop-icon small {
   color: #ffffff;
+}
+
+.desktop-icon-art {
+  filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.52));
+  image-rendering: auto;
+}
+
+.desktop-icon-art-folder::before,
+.desktop-icon-art-folder::after {
+  border-radius: 4px;
+  box-shadow:
+    inset -3px -3px 0 rgba(201, 139, 39, 0.9),
+    inset 2px 2px 0 #fff6bb,
+    0 3px 8px rgba(0, 0, 0, 0.44);
+}
+
+.desktop-icon-art-database {
+  box-shadow:
+    inset 3px 0 0 rgba(255, 246, 221, 0.52),
+    inset -4px -4px 0 rgba(0, 0, 0, 0.34),
+    0 0 16px rgba(0, 234, 255, 0.28);
+}
+
+.desktop-icon-art-computer::before {
+  border-radius: 5px;
+  box-shadow:
+    inset 0 0 0 3px #002c38,
+    inset 0 0 0 6px #00eaff,
+    0 4px 10px rgba(0, 0, 0, 0.48);
+}
+
+.desktop-icon-art-exit::before {
+  border-radius: 4px;
 }
 
 .win95-window {
@@ -5675,10 +5711,11 @@ button:disabled {
 }
 
 .win95-titlebar {
-  background: #4b168f;
+  background: linear-gradient(90deg, #4b168f, #006dff);
   border-bottom: 2px solid #ffffff;
   color: #ffffff;
-  min-height: 40px;
+  min-height: 32px;
+  padding: 4px 8px;
 }
 
 .win95-window-controls span,
@@ -5733,13 +5770,13 @@ button:disabled {
 .win95-window .system-status strong {
   background: #0b0b0d;
   border-color: #ffffff #5a5a5a #5a5a5a #ffffff;
-  color: #fff200;
+  color: #5cff9d;
   min-width: 112px;
   text-align: center;
 }
 
 .win95-window .system-status strong {
-  color: #fff200;
+  color: #5cff9d;
   min-width: 150px;
 }
 
@@ -5749,26 +5786,26 @@ button:disabled {
 }
 
 .win95-window .terminal-content {
-  background: #050505;
+  background: #f4f1e8;
   border: 2px solid;
   border-color: #ffffff #555555 #555555 #ffffff;
-  color: #ffffff;
+  color: #101010;
 }
 
 .win95-window .terminal-content a,
 .win95-window .terminal-content button:not(.desktop-icon):not(.win95-start):not(.win95-taskbar-exit) {
-  color: #65a7ff;
+  color: #004fd6;
 }
 
 .win95-window .terminal-content h2,
 .win95-window .terminal-content h3,
 .win95-window .terminal-content .terminal-label {
-  color: #5cff9d;
+  color: #4b168f;
 }
 
 .win95-window .terminal-content h2:nth-of-type(even),
 .win95-window .terminal-content h3:nth-of-type(even) {
-  color: #c77dff;
+  color: #006dff;
 }
 
 .terminal-actions button,
