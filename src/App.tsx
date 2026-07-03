@@ -1,7 +1,6 @@
 import { type CSSProperties, type FormEvent, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   BookOpenCheck,
-  Compass,
   Scale,
   ShieldAlert,
   Sprout,
@@ -4653,16 +4652,6 @@ function ResourceModule({
     setGuideLaunch(null);
   }, [moduleKey]);
 
-  function openGuide(guide: HowToGuide) {
-    if (guide.action === "navigate") {
-      onNavigate(guide.target ?? "home", guide.path ?? "/");
-      return;
-    }
-
-    setGuideLaunch({ guideId: guide.id, priorityId: guide.priority });
-    setActiveFolder(guide.priority);
-  }
-
   if (activeFolder === "legal") {
     return (
       <section className="resources-nested-shell">
@@ -4699,102 +4688,45 @@ function ResourceModule({
     );
   }
 
+  const resourceFolderLaunchers = [
+    ...howToPriorities.map((priority) => ({
+      id: priority.id,
+      label: priority.label,
+      title: priority.title,
+      count: `${howToGuides.filter((guide) => guide.priority === priority.id).length} files`,
+      onClick: () => setActiveFolder(priority.id),
+    })),
+    {
+      id: "legal" as const,
+      label: "legal.exe",
+      title: "Legal",
+      count: "2 files",
+      onClick: () => setActiveFolder("legal"),
+    },
+    {
+      id: "access" as const,
+      label: "database.exe",
+      title: "Database",
+      count: "access paths",
+      onClick: () => setActiveFolder("access"),
+    },
+  ];
+
   return (
     <section className="page-shell resources-module" aria-labelledby="resources-title">
-      <div className="page-kicker">
-        <Compass aria-hidden="true" />
-        <p className="eyebrow">Ctrl+Fn // Resources</p>
-      </div>
+      <div className="terminal-label">LOAD MODULE // RESOURCE FOLDERS</div>
+      <h1 id="resources-title">&lt;Resources&gt;</h1>
 
-      <div className="resources-hero">
-        <div>
-          <p className="terminal-label">LOAD MODULE // RESOURCE FOLDERS</p>
-          <h1 id="resources-title">&lt;Resources&gt;</h1>
-          <p>
-            Resources are grouped like a file system: open one folder, or jump directly into a file
-            if the next task is already obvious.
-          </p>
-        </div>
-        <aside className="how-to-status-panel" aria-label="Resources status">
-          <span>RESOURCE INDEX</span>
-          <strong>ONLINE</strong>
-          <small>FOLDER MODE // NO INFORMATION DUMP</small>
-        </aside>
-      </div>
-
-      <div className="resource-folder-grid">
-        {howToPriorities.map((priority) => {
-          const priorityGuides = howToGuides.filter((guide) => guide.priority === priority.id);
-          return (
-            <article className="resource-folder-card priority-folder-card system-folder-card" key={priority.id}>
-              <div className="system-folder-heading">
-                <div className="folder-icon" aria-hidden="true">
-                  <span />
-                </div>
-                <div>
-                  <div className="how-to-guide-card-header">
-                    <span>{priority.label}</span>
-                    <small>{priorityGuides.length} FILES</small>
-                  </div>
-                  <h2>&lt;{priority.title}&gt;</h2>
-                </div>
-              </div>
-              <p>{priority.description}</p>
-              <ul className="system-file-list">
-                {priorityGuides.map((guide) => (
-                  <li key={guide.id}>
-                    <button type="button" onClick={() => openGuide(guide)}>
-                      <span>{guide.action === "navigate" ? "shortcut" : "file"}</span>
-                      {guide.title}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-              <button type="button" onClick={() => setActiveFolder(priority.id)}>
-                Open {priority.label}
-              </button>
-            </article>
-          );
-        })}
-
-        <article className="resource-folder-card system-folder-card">
-          <div className="system-folder-heading">
-            <div className="folder-icon" aria-hidden="true">
+      <div className="resource-document-grid" aria-label="Resource folders">
+        {resourceFolderLaunchers.map((folder) => (
+          <button className="resource-document-key" key={folder.id} type="button" onClick={folder.onClick}>
+            <span className="resource-folder-launch-icon" aria-hidden="true">
               <span />
-            </div>
-            <div>
-              <div className="how-to-guide-card-header">
-                <span>LEGAL</span>
-                <small>2 GUIDES</small>
-              </div>
-              <h2>&lt;Legal Resources&gt;</h2>
-            </div>
-          </div>
-          <h3>Family Court + Protective Orders</h3>
-          <p>Family Court Guide, Civil Protective Order Guide.</p>
-          <button type="button" onClick={() => setActiveFolder("legal")}>
-            Open Folder
+            </span>
+            <strong>{folder.label}</strong>
+            <small>{folder.count}</small>
           </button>
-        </article>
-        <article className="resource-folder-card system-folder-card">
-          <div className="system-folder-heading">
-            <div className="folder-icon" aria-hidden="true">
-              <span />
-            </div>
-            <div>
-              <div className="how-to-guide-card-header">
-                <span>CTRL+A</span>
-                <small>DATABASE</small>
-              </div>
-              <h2>&lt;Database&gt;</h2>
-            </div>
-          </div>
-          <h3>Cheat Code Library + Unlock Rules</h3>
-          <p>The Cheat Code Library holds planners, trackers, and deeper guides.</p>
-          <button type="button" onClick={() => setActiveFolder("access")}>
-            Open Folder
-          </button>
-        </article>
+        ))}
       </div>
     </section>
   );
