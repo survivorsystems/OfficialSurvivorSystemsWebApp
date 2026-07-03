@@ -1,4 +1,4 @@
-import { type FormEvent, type ReactNode, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { type FormEvent, type ReactNode, useCallback, useEffect, useRef, useState } from "react";
 import {
   BookOpenCheck,
   Scale,
@@ -7,7 +7,8 @@ import {
 } from "lucide-react";
 import denialSupportOne from "./assets/support/denial-support-1.png";
 import denialSupportTwo from "./assets/support/denial-support-2.png";
-import GoBagSimulator from "./GoBagSimulator";
+
+const denialImages = [denialSupportOne, denialSupportTwo];
 
 type ModuleKey =
   | "home"
@@ -64,56 +65,6 @@ type AssessmentGaugeEffect = {
   emphasis: keyof Omit<AssessmentGauges, "dangerFloor">;
   notice: string;
   minDanger?: number;
-};
-
-type ExitGaugeState = {
-  readiness: number;
-  exposure: number;
-  backup: number;
-  exposureFloor: number;
-};
-
-type ExitGaugeEffect = {
-  readiness: number;
-  exposure: number;
-  backup: number;
-  emphasis: keyof Omit<ExitGaugeState, "exposureFloor">;
-  notice: string;
-  minExposure?: number;
-};
-
-type ExitAnswer = {
-  id: string;
-  label: string;
-  responseTitle: string;
-  response: string;
-  effect: ExitGaugeEffect;
-};
-
-type ExitQuestion = {
-  phase: string;
-  prompt: string;
-  answers: ExitAnswer[];
-};
-
-type LeavingLadderRung = {
-  id: string;
-  title: string;
-  premise: string;
-  systemResponse: string;
-  contextSignal?: {
-    title: string;
-    body: string;
-  };
-  suggestedAction: string;
-  effect: {
-    clarity: number;
-    preparedness: number;
-    reality: number;
-    options: number;
-    emphasis: string;
-    notice: string;
-  };
 };
 
 type SafetyPlanSection = {
@@ -447,7 +398,7 @@ const howToGuides: HowToGuide[] = [
   {
     id: "pet-safety-plan",
     title: "How To Make A Safety Plan For Your Pet",
-    subtitle: "Pets, records, emergency fostering, proof of care, and pet go-bag basics.",
+    subtitle: "Pets, records, emergency fostering, proof of care, and backup care basics.",
     status: "PLANNING GUIDE",
     description:
       "A practical guide for including pets in safety planning without pretending every option is simple or immediate.",
@@ -464,18 +415,6 @@ const howToGuides: HowToGuide[] = [
     action: "open",
     priority: "priority-2",
   },
-  {
-    id: "go-bag-checklist",
-    title: "How To Think Through A Go-Bag",
-    subtitle: "A checklist-first path into the in-browser Go-Bag simulator.",
-    status: "SIMULATOR GUIDE",
-    description:
-      "A lightweight prep guide before the simulator, built for thinking through urgent items without saving user data.",
-    action: "navigate",
-    priority: "priority-1",
-    target: "go-bag-prep",
-    path: "/go-bag-prep",
-  },
 ];
 
 const howToPriorities = [
@@ -484,7 +423,7 @@ const howToPriorities = [
     label: "triage.exe",
     title: "Triage",
     description:
-      "Start here when the task is urgent, private, or close to the body: device traces, pets, go-bags, vehicle living, and first-step safety logistics.",
+      "Start here when the task is urgent, private, or close to the body: device traces, pets, vehicle living, and immediate stabilization logistics.",
   },
   {
     id: "priority-2",
@@ -1414,9 +1353,9 @@ const housingGuideSections: RebuildingGuideSection[] = [
 
 const moduleRoutes: Record<ModuleKey, { label: string; path: string }> = {
   home: { label: "Home", path: "/" },
-  "am-i-crazy": { label: "Am I Crazy", path: "/am-i-crazy" },
-  "go-bag-prep": { label: "Go-Bag Prep", path: "/go-bag-prep" },
-  planning: { label: "Not Ready To Leave", path: "/planning" },
+  "am-i-crazy": { label: "Was I Crazy?", path: "/am-i-crazy" },
+  "go-bag-prep": { label: "Crisis Support", path: "/crisis-support" },
+  planning: { label: "Crisis Support", path: "/crisis-support" },
   rebuilding: { label: "Rebuilding", path: "/rebuilding" },
   "local-help": { label: "Resources", path: "/resources" },
   "how-to": { label: "Resources", path: "/resources" },
@@ -1427,9 +1366,8 @@ const moduleRoutes: Record<ModuleKey, { label: string; path: string }> = {
 
 const allNavTargets: Array<{ key: ModuleKey; label: string; path: string }> = [
   { key: "home", ...moduleRoutes.home },
-  { key: "am-i-crazy", label: "Am I Crazy", path: "/am-i-crazy" },
-  { key: "go-bag-prep", label: "Go-Bag Prep", path: "/go-bag-prep" },
-  { key: "planning", ...moduleRoutes.planning },
+  { key: "am-i-crazy", label: "Was I Crazy", path: "/am-i-crazy" },
+  { key: "planning", label: "Crisis Support", path: "/crisis-support" },
   { key: "local-help", ...moduleRoutes["local-help"] },
   { key: "how-to", ...moduleRoutes["how-to"] },
   { key: "legal", ...moduleRoutes.legal },
@@ -1438,7 +1376,9 @@ const allNavTargets: Array<{ key: ModuleKey; label: string; path: string }> = [
 ];
 
 const navItems: Array<{ key: ModuleKey; label: string; path: string; decoded: string; icon: string }> = [
-  { key: "planning", label: "Leaving Plan", path: "/planning", decoded: "Ctrl+Esc", icon: "folder" },
+  { key: "am-i-crazy", label: "Was I Crazy?", path: "/am-i-crazy", decoded: "Ctrl+?", icon: "computer" },
+  { key: "planning", label: "Crisis Support", path: "/crisis-support", decoded: "Ctrl+Esc", icon: "exit" },
+  { key: "rebuilding", label: "Rebuilding", path: "/rebuilding", decoded: "Ctrl+Shift", icon: "folder" },
   { key: "local-help", label: "Resources", path: "/resources", decoded: "Ctrl+Fn", icon: "folder" },
   { key: "access", label: "Database", path: "/resources/access", decoded: "Ctrl+A", icon: "database" },
 ];
@@ -1897,317 +1837,6 @@ const assessmentGaugeEffects: Record<string, AssessmentGaugeEffect> = {
   "10e": { autonomy: -2, danger: 2, reality: -2, emphasis: "reality", notice: "FUTURE DATA UNAVAILABLE." },
 };
 
-const exitPlanningQuestions: ExitQuestion[] = [
-  {
-    phase: "PHASE 1 - IMMEDIATE CONDITIONS",
-    prompt: "Are you currently in immediate danger, or do you believe something may happen very soon?",
-    answers: [
-      {
-        id: "ep1a",
-        label: "No. I have time to think and plan.",
-        responseTitle: "PLANNING WINDOW DETECTED",
-        response: "Time appears available. System will focus on preparation, reducing exposure, and creating backup options before conditions change.",
-        effect: { readiness: 8, exposure: -4, backup: 4, emphasis: "readiness", notice: "PLANNING WINDOW DETECTED." },
-      },
-      {
-        id: "ep1b",
-        label: "I am not sure.",
-        responseTitle: "CONDITIONS UNCLEAR",
-        response: "Uncertainty may mean the environment is unpredictable. System will continue cautiously and include an emergency backup plan.",
-        effect: { readiness: 2, exposure: 8, backup: 6, emphasis: "exposure", notice: "EXPOSURE LEVEL ELEVATED." },
-      },
-      {
-        id: "ep1c",
-        label: "Things are escalating, but I am not in immediate danger right now.",
-        responseTitle: "ESCALATION DETECTED",
-        response: "Humor suspended. System will prioritize speed, safer communication, transportation, and emergency alternatives.",
-        effect: { readiness: 4, exposure: 18, backup: 8, emphasis: "exposure", notice: "EXPOSURE LEVEL HIGH.", minExposure: 46 },
-      },
-      {
-        id: "ep1d",
-        label: "Yes. I may need to leave very soon.",
-        responseTitle: "EXIT WINDOW MAY BE LIMITED",
-        response: "Humor suspended. System will skip nonessential planning and identify the fastest available route to a safer location.",
-        effect: { readiness: 5, exposure: 24, backup: 12, emphasis: "exposure", notice: "URGENT EXIT CONDITIONS LOGGED.", minExposure: 46 },
-      },
-      {
-        id: "ep1e",
-        label: "Yes. I need emergency help now.",
-        responseTitle: "IMMEDIATE SAFETY MODE ACTIVATED",
-        response: "Humor suspended. If contacting emergency services is safe and appropriate, use local emergency services. If calling is not safe, consider moving toward a public or populated location, contacting a trusted person, or using a safer device.",
-        effect: { readiness: 0, exposure: 35, backup: 14, emphasis: "exposure", notice: "IMMEDIATE SAFETY MODE ACTIVE.", minExposure: 71 },
-      },
-    ],
-  },
-  {
-    phase: "PHASE 1 - RETALIATION FORECAST",
-    prompt: "What do you believe this person may do if they realize you are preparing to leave?",
-    answers: [
-      {
-        id: "ep2a",
-        label: "They may be upset, but I do not expect retaliation.",
-        responseTitle: "LOW RETALIATION EXPECTATION",
-        response: "Preparation may still be useful. System will continue without assuming cooperation.",
-        effect: { readiness: 5, exposure: -4, backup: 3, emphasis: "readiness", notice: "RETALIATION EXPECTATION LOW." },
-      },
-      {
-        id: "ep2b",
-        label: "They may pressure, guilt, manipulate, or promise to change.",
-        responseTitle: "EMOTIONAL OVERRIDE ATTEMPT ANTICIPATED",
-        response: "Possible incoming commands include promises to change, guilt, blame, or one more chance. Promises made after loss of control is detected are not automatically software updates.",
-        effect: { readiness: 2, exposure: 10, backup: 4, emphasis: "exposure", notice: "EXPOSURE LEVEL ELEVATED." },
-      },
-      {
-        id: "ep2c",
-        label: "They may interfere with money, transportation, housing, work, or communication.",
-        responseTitle: "RESOURCE INTERFERENCE POSSIBLE",
-        response: "Access may become restricted. System will prioritize independent access and backup routes.",
-        effect: { readiness: -4, exposure: 18, backup: 8, emphasis: "exposure", notice: "RESOURCE INTERFERENCE POSSIBLE.", minExposure: 46 },
-      },
-      {
-        id: "ep2d",
-        label: "They may monitor, follow, threaten, expose, or punish me.",
-        responseTitle: "HIGH-RISK RETALIATION PATTERN",
-        response: "Humor suspended. Planning may need to occur through a safer device, safer account, trusted person, or location outside the other person's access.",
-        effect: { readiness: -5, exposure: 26, backup: 10, emphasis: "exposure", notice: "HIGH-RISK RETALIATION PATTERN.", minExposure: 46 },
-      },
-      {
-        id: "ep2e",
-        label: "They may harm me, themselves, children, pets, family members, or property.",
-        responseTitle: "SEVERE RETALIATION RISK",
-        response: "Humor suspended. Threats involving harm, weapons, stalking, forced confinement, children, pets, or self-harm require a more cautious plan. System will build an emergency route before continuing.",
-        effect: { readiness: -6, exposure: 35, backup: 16, emphasis: "exposure", notice: "SEVERE RETALIATION RISK.", minExposure: 71 },
-      },
-      {
-        id: "ep2f",
-        label: "I genuinely do not know what they may do.",
-        responseTitle: "BEHAVIORAL FORECAST UNAVAILABLE",
-        response: "Unpredictability is itself relevant data. System will not assume a calm response.",
-        effect: { readiness: 0, exposure: 14, backup: 8, emphasis: "exposure", notice: "UNPREDICTABILITY LOGGED." },
-      },
-    ],
-  },
-  {
-    phase: "PHASE 1 - DEVICE AND ACCOUNT SAFETY",
-    prompt: "Are you confident that this device, browser, email, phone plan, and connected accounts are private?",
-    answers: [
-      {
-        id: "ep3a",
-        label: "Yes, as far as I know.",
-        responseTitle: "DEVICE APPEARS USABLE",
-        response: "No device is guaranteed safe. Continue with awareness of browser history, downloads, email alerts, shared accounts, backups, and billing notifications.",
-        effect: { readiness: 5, exposure: -3, backup: 2, emphasis: "readiness", notice: "DEVICE APPEARS USABLE." },
-      },
-      {
-        id: "ep3b",
-        label: "I am not sure.",
-        responseTitle: "DEVICE PRIVACY UNKNOWN",
-        response: "System recommends avoiding saved plans, obvious filenames, password changes, or sensitive downloads until a safer device is available.",
-        effect: { readiness: -3, exposure: 10, backup: 5, emphasis: "exposure", notice: "DEVICE PRIVACY UNKNOWN." },
-      },
-      {
-        id: "ep3c",
-        label: "They know my passwords or have access to my accounts.",
-        responseTitle: "ACCOUNT ACCESS COMPROMISED",
-        response: "Changing passwords from a monitored device may alert the person or expose the new password. Consider using a safer device and an account they do not know exists.",
-        effect: { readiness: -7, exposure: 18, backup: 6, emphasis: "exposure", notice: "ACCOUNT ACCESS COMPROMISED.", minExposure: 46 },
-      },
-      {
-        id: "ep3d",
-        label: "They check my phone, location, messages, or browser activity.",
-        responseTitle: "ACTIVE MONITORING POSSIBLE",
-        response: "System recommends minimizing visible searches and downloads. Use Quick Exit whenever needed.",
-        effect: { readiness: -8, exposure: 22, backup: 8, emphasis: "exposure", notice: "ACTIVE MONITORING POSSIBLE.", minExposure: 46 },
-      },
-      {
-        id: "ep3e",
-        label: "I believe the device may be tracked, monitored, or recorded.",
-        responseTitle: "POSSIBLE DEVICE EXPOSURE",
-        response: "Humor suspended. A safer device may be a library computer, trusted person's phone, workplace device where permitted, advocacy office, or device the other person has never accessed.",
-        effect: { readiness: -10, exposure: 28, backup: 10, emphasis: "exposure", notice: "POSSIBLE DEVICE EXPOSURE.", minExposure: 46 },
-      },
-    ],
-  },
-  {
-    phase: "PHASE 3 - PLAN A",
-    prompt: "Where is the safest realistic place you could go first? No address needed.",
-    answers: [
-      {
-        id: "ep4a",
-        label: "Trusted person, shelter, hotel, hospital, or public location.",
-        responseTitle: "PLAN A DESTINATION TYPE LOGGED",
-        response: "Destination category identified. System will keep backup options online.",
-        effect: { readiness: 16, exposure: -2, backup: 5, emphasis: "readiness", notice: "EXIT READINESS INCREASED." },
-      },
-      {
-        id: "ep4b",
-        label: "I have nowhere yet or cannot safely contact anyone.",
-        responseTitle: "DESTINATION NOT YET IDENTIFIED",
-        response: "This is a planning problem, not a moral failure. Relevant housing resources can be routed here later.",
-        effect: { readiness: 4, exposure: 6, backup: 8, emphasis: "backup", notice: "BACKUP STATUS UPDATED." },
-      },
-    ],
-  },
-  {
-    phase: "PHASE 3 - PLAN A",
-    prompt: "How would you get there?",
-    answers: [
-      {
-        id: "ep5a",
-        label: "My vehicle, someone can drive me, rideshare, taxi, or public transportation.",
-        responseTitle: "PRIMARY TRANSPORT IDENTIFIED",
-        response: "Primary route logged. Backup route remains useful if timing changes.",
-        effect: { readiness: 15, exposure: -2, backup: 5, emphasis: "readiness", notice: "EXIT READINESS INCREASED." },
-      },
-      {
-        id: "ep5b",
-        label: "I could walk to a safer location or I have no transportation option yet.",
-        responseTitle: "TRANSPORTATION GAP LOGGED",
-        response: "System will treat transportation as a primary blocker and keep emergency alternatives in view.",
-        effect: { readiness: -4, exposure: 8, backup: 8, emphasis: "backup", notice: "BACKUP STATUS UPDATED." },
-      },
-    ],
-  },
-  {
-    phase: "PHASE 3 - PLAN A",
-    prompt: "When would leaving be least likely to trigger interference?",
-    answers: [
-      {
-        id: "ep6a",
-        label: "When they are away, while I am already out, during work, or with another person present.",
-        responseTitle: "TIMING WINDOW IDENTIFIED",
-        response: "Timing is a safety variable. No date is required today.",
-        effect: { readiness: 14, exposure: -4, backup: 3, emphasis: "readiness", notice: "TIMING WINDOW IDENTIFIED." },
-      },
-      {
-        id: "ep6b",
-        label: "There is no predictable safe window or I am not ready to choose a time.",
-        responseTitle: "TIMING WINDOW NOT YET IDENTIFIED",
-        response: "No date required today. System will keep emergency and lower-visibility options available.",
-        effect: { readiness: -3, exposure: 8, backup: 8, emphasis: "backup", notice: "BACKUP STATUS UPDATED." },
-      },
-    ],
-  },
-  {
-    phase: "PLAN B - EMERGENCY EXIT",
-    prompt: "If you had to leave within ten minutes, what could you do?",
-    answers: [
-      {
-        id: "ep7a",
-        label: "Leave to a known location, contact pickup, move to public place, or contact emergency services.",
-        responseTitle: "EMERGENCY ROUTE IDENTIFIED",
-        response: "Emergency plan does not need to be elegant. It needs to create distance and time.",
-        effect: { readiness: 8, exposure: -2, backup: 24, emphasis: "backup", notice: "BACKUP STATUS AVAILABLE." },
-      },
-      {
-        id: "ep7b",
-        label: "I would have to leave without belongings or I do not have an emergency route yet.",
-        responseTitle: "EMERGENCY ROUTE INCOMPLETE",
-        response: "System will recommend one small next step instead of a giant checklist.",
-        effect: { readiness: 0, exposure: 8, backup: 6, emphasis: "backup", notice: "BACKUP STATUS INCOMPLETE." },
-      },
-    ],
-  },
-];
-
-const denialImages = [denialSupportOne, denialSupportTwo];
-
-const checkpointMessage =
-  "Survivor Operating System cannot tell whether your device, browser, accounts, or connection are being monitored.\n\nPrivate or Incognito browsing may reduce some local history, but it does not hide activity from monitoring software, shared accounts, phone plans, networks, connected devices, or someone with access to this device.\n\nIf you think someone may be monitoring you, consider using a device and account they have never accessed before.\n\nContinuing is your choice.";
-
-const privateBrowsingHelp = [
-  "Private or Incognito windows can reduce some local browser history on this device.",
-  "They do not hide activity from monitoring software, shared accounts, phone plans, networks, routers, backups, or someone with device access.",
-  "If it is safe, open a private window from your browser menu before continuing.",
-];
-
-const leavingLadderRungs: LeavingLadderRung[] = [
-  {
-    id: "name-it",
-    title: "Name What Is Happening",
-    premise: "You do not have to call it abuse to notice it is costing you.",
-    systemResponse:
-      "SYSTEM:\nNaming the pattern is not betrayal. It is inventory. If your peace, sleep, money, movement, friendships, body, or sense of reality keeps shrinking around one person's reactions, something is asking to be taken seriously.",
-    contextSignal: {
-      title: "CONTEXT WITHOUT EXCUSE",
-      body: "Two things can be true: someone can feel like everything you ever wanted and still cause irreparable harm to you.\n\nMaladaptive behaviors can develop from many different kinds of trauma, and they do not look the same in everyone. Some may overlap with traits associated with personality disorders without meeting the criteria for a diagnosis. Understanding where someone's behavior comes from may provide context, but it does not erase the impact that behavior has had on your life.\n\nA diagnosis is not an excuse, and the absence of one does not make the harm less real. Whether that person recognizes their behavior, seeks help, or changes is not your responsibility. Your responsibility is to protect yourself, honor what you experienced, and make the choices that are safest for you.",
-    },
-    suggestedAction: "Complete one private prompt: This relationship is costing ______.",
-    effect: {
-      clarity: 16,
-      preparedness: 4,
-      reality: 10,
-      options: 4,
-      emphasis: "CLARITY",
-      notice: "PATTERN NAMED. CLARITY SIGNAL INCREASED.",
-    },
-  },
-  {
-    id: "safe-hour",
-    title: "Imagine One Safe Hour",
-    premise: "Before you picture a whole new life, picture one hour with less control in it.",
-    systemResponse:
-      "SYSTEM:\nA safer future does not have to arrive fully furnished. Start smaller. One hour at a library. One phone call from a parking lot. One walk where nobody is interrogating your face. Your nervous system may need proof that quiet still exists.",
-    suggestedAction: "Name one place, person, or time of day where control is lower.",
-    effect: {
-      clarity: 8,
-      preparedness: 6,
-      reality: 8,
-      options: 18,
-      emphasis: "OPTIONS",
-      notice: "SAFE-HOUR POSSIBILITY FOUND. OPTIONS SIGNAL INCREASED.",
-    },
-  },
-  {
-    id: "dependency",
-    title: "Reduce One Dependency",
-    premise: "Control gets louder when one person holds too many switches.",
-    systemResponse:
-      "SYSTEM:\nYou do not have to solve money, transportation, documents, phone access, medication, housing, and support all at once. Pick one switch. Make it slightly less theirs. Slightly counts. Quiet preparation is still preparation.",
-    suggestedAction: "Choose one dependency to reduce first: money, transportation, documents, phone, medication, housing, or support.",
-    effect: {
-      clarity: 8,
-      preparedness: 18,
-      reality: 8,
-      options: 8,
-      emphasis: "PREPAREDNESS",
-      notice: "DEPENDENCY TARGET SELECTED. PREPAREDNESS SIGNAL INCREASED.",
-    },
-  },
-  {
-    id: "housing",
-    title: "Housing Is Not One Thing",
-    premise: "Housing does not mean finding a perfect new home immediately.",
-    systemResponse:
-      "SYSTEM:\nHousing can mean a first night, a couch, a shelter, a hotel, a car-safety plan, family, a friend, a motel voucher, transitional housing, or a waitlist. It also means documents, transportation, privacy, pets or kids, money, location safety, and whether they can find you. No perfect choice required. We are mapping possible doors.",
-    suggestedAction: "List two first-night possibilities, even if both are imperfect.",
-    effect: {
-      clarity: 8,
-      preparedness: 16,
-      reality: 18,
-      options: 12,
-      emphasis: "REALITY",
-      notice: "HOUSING DECODED AS A SET OF OPTIONS. REALITY SIGNAL INCREASED.",
-    },
-  },
-  {
-    id: "tiny-move",
-    title: "Choose One Tiny Move",
-    premise: "You do not need a dramatic announcement. You need one next move that belongs to you.",
-    systemResponse:
-      "SYSTEM:\nDecision pressure rejected. You can prepare without promising yourself you will leave today. Pack one thing. Learn one right. Identify one safe contact. Find one local resource. One move is not everything, but it is no longer nothing.",
-    suggestedAction: "Pick one next module: Go-Bag Prep, Exit Planning, Local Help, or Legal.",
-    effect: {
-      clarity: 10,
-      preparedness: 14,
-      reality: 8,
-      options: 18,
-      emphasis: "OPTIONS",
-      notice: "TINY MOVE AVAILABLE. OPTIONS SIGNAL INCREASED.",
-    },
-  },
-];
-
 const planningResourcePages: SafetyPlanSection[] = [
   {
     id: "digital-traces",
@@ -2278,7 +1907,7 @@ const planningResourcePages: SafetyPlanSection[] = [
         ],
       },
       {
-        title: "Pet Go-Bag",
+        title: "Pet Backup Kit",
         items: [
           "Food for at least one week, medications, carrier, leash, crate, blanket, toy, records, and vet contact info.",
           "Keep prescription labels intact when possible.",
@@ -2328,101 +1957,6 @@ const planningResourcePages: SafetyPlanSection[] = [
   },
 ];
 
-const safetyPlanSections: SafetyPlanSection[] = [
-  {
-    id: "people",
-    title: "People",
-    subtitle: "Who knows, who can help, and who should not know yet.",
-    status: "SAFETY PLANNING // PEOPLE",
-    screenshotLines: [
-      "Who is one trusted contact who would take you seriously?",
-      "Who could call police or emergency services if you used a code word?",
-      "Who could help you reach a DV advocate, shelter, or crisis center?",
-      "Who might accidentally tell the abusive person where you are?",
-      "Who should not know details until you are safer?",
-    ],
-    detailGroups: [
-      {
-        title: "Consider",
-        items: [
-          "A trusted contact may be safer when they know exactly what kind of help you want from them.",
-          "An advocate at a DV shelter or crisis center can help think through options without requiring one specific decision.",
-          "If you are in immediate danger, contacting police or emergency services may be the fastest outside intervention available.",
-        ],
-      },
-    ],
-  },
-  {
-    id: "places",
-    title: "Places",
-    subtitle: "Where control is lower, even temporarily.",
-    status: "SAFETY PLANNING // PLACES",
-    screenshotLines: [
-      "Where could you be around other people if things escalate?",
-      "What places are open late near you?",
-      "Where could an advocate, trusted contact, or police meet you if needed?",
-      "What locations would the abusive person check first?",
-      "What places feel safer but may still need privacy planning?",
-    ],
-    detailGroups: [
-      {
-        title: "Consider",
-        items: [
-          "A safe place is not a promise of total safety. It is a place where isolation may be lower.",
-          "Shelters, crisis centers, and advocates may know local options that are not obvious from a search engine.",
-          "Location privacy matters if the abusive person tracks devices, vehicles, accounts, or shared contacts.",
-        ],
-      },
-    ],
-  },
-  {
-    id: "traces",
-    title: "Traces",
-    subtitle: "Devices, accounts, browser history, shared bills, and screenshots.",
-    status: "SAFETY PLANNING // DIGITAL TRACES",
-    screenshotLines: [
-      "Could this device, browser, account, or phone plan be monitored?",
-      "Could a screenshot in your camera roll be found later?",
-      "Are backups, shared albums, cloud accounts, or synced devices connected?",
-      "Would clearing history create suspicion?",
-      "Is there a safer device or account you can use to contact an advocate, police, or trusted person?",
-    ],
-    detailGroups: [
-      {
-        title: "Consider",
-        items: [
-          "Private browsing can reduce some local traces, but it does not defeat monitoring software or shared account access.",
-          "A hidden folder may still sync, back up, or appear in device activity depending on settings.",
-          "If device monitoring is possible, a DV advocate or crisis center can help talk through tech-safety options.",
-        ],
-      },
-    ],
-  },
-  {
-    id: "dependents",
-    title: "Dependents",
-    subtitle: "Kids, pets, medication, transportation, and documents.",
-    status: "SAFETY PLANNING // DEPENDENTS",
-    screenshotLines: [
-      "Who or what depends on you if you leave quickly?",
-      "Are there kids, pets, medications, mobility needs, or documents to consider?",
-      "Could a trusted contact, advocate, shelter, vet, school, or crisis center help coordinate support?",
-      "What information would a helper need to know without exposing your plan?",
-      "What would be difficult to replace if left behind?",
-    ],
-    detailGroups: [
-      {
-        title: "Consider",
-        items: [
-          "Pets, kids, medications, IDs, and transportation can all affect what leaving realistically requires.",
-          "An advocate may know local shelter policies, pet-safe programs, transportation help, and document replacement options.",
-          "Not having every piece handled does not mean you failed. It means the plan has constraints.",
-        ],
-      },
-    ],
-  },
-];
-
 const defaultControlPanel: ControlPanelState = {
   emphasis: null,
   gauges: [
@@ -2462,6 +1996,12 @@ const defaultControlPanel: ControlPanelState = {
   notice: "COMMAND CENTER ONLINE. MODULE READINGS STANDBY.",
 };
 
+const privateBrowsingHelp = [
+  "Private or Incognito windows can reduce some local browser history on this device.",
+  "They do not hide activity from monitoring software, shared accounts, phone plans, networks, routers, backups, or someone with device access.",
+  "If it is safe, open a private window from your browser menu before continuing.",
+];
+
 function leaveSite() {
   window.location.replace("https://iluvrocks.rocks");
 }
@@ -2486,7 +2026,8 @@ function markCheckpointCleared() {
 
 function getInitialModule(): ModuleKey {
   const path = window.location.pathname;
-  if (path === "/rebuilding") return "local-help";
+  if (path === "/rebuilding") return "rebuilding";
+  if (path === "/planning" || path === "/go-bag-prep" || path === "/crisis-support") return "planning";
   if (path === "/local-help") return "local-help";
   if (path === "/how-to") return "how-to";
   if (path === "/legal") return "legal";
@@ -2514,13 +2055,6 @@ function usePrefersReducedMotion() {
 
 function clampGauge(value: number) {
   return Math.max(0, Math.min(100, value));
-}
-
-function gaugeState(value: number, strong = "READY", mid = "BUILDING", low = "LOW") {
-  if (value >= 76) return strong;
-  if (value >= 51) return mid;
-  if (value >= 26) return low;
-  return "NEEDS INPUT";
 }
 
 function assessmentGaugeValues(gauges: AssessmentGauges): GaugeValue[] {
@@ -2561,39 +2095,6 @@ function assessmentGaugeValues(gauges: AssessmentGauges): GaugeValue[] {
       lowLabel: "DISTORTED",
       highLabel: "STABLE",
       state: realityState,
-      tone: "purple",
-    },
-  ];
-}
-
-function exitGaugeValues(gauges: ExitGaugeState): GaugeValue[] {
-  const readinessState = gauges.readiness >= 76 ? "ROUTE IDENTIFIED" : gauges.readiness >= 41 ? "PARTIAL" : "BLOCKED";
-  const exposureState = gauges.exposure >= 66 ? "HIGH" : gauges.exposure >= 31 ? "ELEVATED" : "LOW";
-  const backupState = gauges.backup >= 76 ? "AVAILABLE" : gauges.backup >= 36 ? "INCOMPLETE" : "OFFLINE";
-
-  return [
-    {
-      label: "EXIT READINESS",
-      value: gauges.readiness,
-      lowLabel: "BLOCKED",
-      highLabel: "ROUTE IDENTIFIED",
-      state: readinessState,
-      tone: "cyan",
-    },
-    {
-      label: "EXPOSURE LEVEL",
-      value: gauges.exposure,
-      lowLabel: "LOW",
-      highLabel: "HIGH",
-      state: exposureState,
-      tone: "pink",
-    },
-    {
-      label: "BACKUP STATUS",
-      value: gauges.backup,
-      lowLabel: "OFFLINE",
-      highLabel: "AVAILABLE",
-      state: backupState,
       tone: "purple",
     },
   ];
@@ -2684,14 +2185,14 @@ const moduleIntroSeen = new Set<string>();
 
 const moduleIntroCopy: Partial<Record<ModuleKey, { title: string; text: string }>> = {
   "go-bag-prep": {
-    title: "Go-Bag Prep",
+    title: "Crisis Support",
     text:
-      "SYSTEM PLACEHOLDER // GO-BAG PREP\n\nThis module will help the user think through what they may need close at hand. No answers are stored. No progress is saved. The point is rehearsal, not perfection.\n\nLoading interactive unit...",
+      "SYSTEM PLACEHOLDER // CRISIS SUPPORT\n\nThis system is not an emergency service and does not guide active escape planning. If someone is in immediate danger, contact emergency services, the National Domestic Violence Hotline, or a local crisis intervention option.\n\nLoading support options...",
   },
   planning: {
-    title: "Not Ready To Leave",
+    title: "Crisis Support",
     text:
-      "SYSTEM PLACEHOLDER // NOT READY TO LEAVE\n\nThis module is for the part before certainty. The user does not have to decide today. The system will offer tools, questions, and small next steps without forcing a conclusion.\n\nLoading planning files...",
+      "SYSTEM PLACEHOLDER // CRISIS SUPPORT\n\nThis system is for rebuilding, not active extraction planning. If someone is still in crisis, the safest next step is direct human support: the National Domestic Violence Hotline, emergency services, or a local crisis resource.\n\nLoading support options...",
   },
   rebuilding: {
     title: "Rebuilding",
@@ -2756,110 +2257,128 @@ function ModuleIntroGate({
   );
 }
 
-function WelcomeCheckpoint({ onComplete }: { onComplete: () => void }) {
+function WelcomeCheckpoint({
+  onComplete,
+}: {
+  onComplete: (target?: { module: ModuleKey; path: string }) => void;
+}) {
   const [typingComplete, setTypingComplete] = useState(false);
-  const [mode, setMode] = useState<"options" | "instructions" | "ack" | "safer-device">("options");
-  const [acknowledged, setAcknowledged] = useState(false);
+  const [mode, setMode] = useState<"ready" | "proximity" | "proximity-detail" | "cyber-warning">("ready");
+  const [answer, setAnswer] = useState("");
 
-  const typedIntro = useMemo(
-    () => `Welcome To Survivor Operating System.\n\n${checkpointMessage}`,
-    [],
-  );
+  const promptText = mode === "ready" ? "Welcome. Are you ready to begin? y/n" : "Are you still in close proximity to your abuser? y/n";
+
+  function resetPrompt(nextMode: typeof mode) {
+    setAnswer("");
+    setTypingComplete(false);
+    setMode(nextMode);
+  }
+
+  function submitPrompt(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const normalized = answer.trim().toLowerCase();
+
+    if (normalized !== "y" && normalized !== "n" && normalized !== "yes" && normalized !== "no") {
+      return;
+    }
+
+    if (mode === "ready") {
+      if (normalized.startsWith("n")) {
+        leaveSite();
+        return;
+      }
+      resetPrompt("proximity");
+      return;
+    }
+
+    if (mode === "proximity") {
+      if (normalized.startsWith("y")) {
+        setAnswer("");
+        setMode("proximity-detail");
+        return;
+      }
+      setMode("cyber-warning");
+    }
+  }
 
   return (
-    <main className="terminal-frame checkpoint-frame">
+    <main className="terminal-frame checkpoint-frame matrix-checkpoint">
       <button className="quick-exit global-exit" type="button" onClick={leaveSite}>
         <ShieldAlert aria-hidden="true" />
         Quick Exit
       </button>
-      <section className="checkpoint-panel" aria-labelledby="checkpoint-title">
-        <div className="terminal-label">SYSTEM CHECKPOINT</div>
-        <h1 id="checkpoint-title">
-          <BrandLogo className="checkpoint-logo" />
-        </h1>
-        <TypedText text={typedIntro} onDone={() => setTypingComplete(true)} />
+      <section className="checkpoint-panel matrix-gate-panel" aria-labelledby="checkpoint-title">
+        {mode === "ready" || mode === "proximity" ? (
+          <>
+            <h1 className="sr-only" id="checkpoint-title">Survivor Operating System checkpoint</h1>
+            <TypedText
+              key={mode}
+              className="matrix-typed-prompt"
+              text={promptText}
+              onDone={() => setTypingComplete(true)}
+              skipLabel="Show Prompt"
+            />
+            {typingComplete ? (
+              <form className="matrix-yn-form" onSubmit={submitPrompt}>
+                <span aria-hidden="true">&gt;</span>
+                <input
+                  autoComplete="off"
+                  autoFocus
+                  aria-label={promptText}
+                  maxLength={3}
+                  onChange={(event) => setAnswer(event.target.value)}
+                  spellCheck={false}
+                  value={answer}
+                />
+                <button type="submit">ENTER</button>
+              </form>
+            ) : null}
+          </>
+        ) : null}
 
-        {typingComplete && mode === "options" && (
-          <div className="terminal-actions" aria-label="Welcome checkpoint options">
-            <button type="button" onClick={() => setMode("instructions")}>
-              Open Private Browsing Instructions
-            </button>
-            <button type="button" onClick={onComplete}>
-              Private Browsing Active
-            </button>
-            <button type="button" onClick={() => setMode("ack")}>
-              Continue Without Private Browsing
-            </button>
-            <button type="button" onClick={() => setMode("safer-device")}>
-              Use a Safer Device Instead
-            </button>
-            <button type="button" onClick={leaveSite}>
-              Quick Exit
-            </button>
+        {mode === "proximity-detail" && (
+          <div className="matrix-warning-panel">
+            <div className="terminal-label">PROXIMITY CLARIFIER</div>
+            <h1 id="checkpoint-title">Select the closest signal.</h1>
+            <div className="terminal-actions">
+              <button type="button" onClick={() => setMode("cyber-warning")}>
+                Sharing custody or legal contact
+              </button>
+              <button type="button" onClick={() => onComplete({ module: "planning", path: "/crisis-support" })}>
+                Still romantic / trying to escape
+              </button>
+              <button type="button" onClick={() => setMode("cyber-warning")}>
+                Still romantic / confused
+              </button>
+              <button type="button" onClick={() => setMode("cyber-warning")}>
+                Something else / not sure
+              </button>
+              <button type="button" onClick={leaveSite}>
+                Quick Exit
+              </button>
+            </div>
           </div>
         )}
 
-        {typingComplete && mode === "instructions" && (
-          <div className="sub-terminal">
-            <h2>Private Browsing Instructions</h2>
+        {mode === "cyber-warning" && (
+          <div className="matrix-warning-panel">
+            <div className="terminal-label">CYBERSTALKING WARNING</div>
+            <h1 id="checkpoint-title">Before the user terminal opens.</h1>
+            <p>
+              Cyberstalking is real and extremely common. If you believe this device, browser,
+              account, location, phone plan, cloud backup, shared login, or network is being
+              monitored, please exit this site now and use a safer device or account if one is
+              available.
+            </p>
             <ul>
               {privateBrowsingHelp.map((item) => (
                 <li key={item}>{item}</li>
               ))}
+              <li>Use Quick Exit at any time if staying here starts to feel unsafe.</li>
             </ul>
             <div className="terminal-actions compact-actions">
-              <button type="button" onClick={onComplete}>
-                Private Browsing Active
-              </button>
-              <button type="button" onClick={() => setMode("ack")}>
-                Continue Without Private Browsing
-              </button>
-              <button type="button" onClick={() => setMode("options")}>
-                Go Back
-              </button>
-            </div>
-          </div>
-        )}
-
-        {typingComplete && mode === "safer-device" && (
-          <div className="sub-terminal">
-            <h2>Use a Safer Device Instead</h2>
-            <p>
-              If you think this device, browser, account, network, or phone plan may be monitored,
-              consider leaving now and using a device and account the other person has never
-              accessed before.
-            </p>
-            <div className="terminal-actions compact-actions">
-              <button type="button" onClick={leaveSite}>
-                Quick Exit
-              </button>
-              <button type="button" onClick={() => setMode("options")}>
-                Go Back
-              </button>
-            </div>
-          </div>
-        )}
-
-        {typingComplete && mode === "ack" && (
-          <div className="sub-terminal">
-            <p>
-              Continuing may leave visible traces on this device, browser, connected accounts,
-              network, bills, backups, or monitoring tools.
-            </p>
-            <label className="ack-check">
-              <input
-                checked={acknowledged}
-                onChange={(event) => setAcknowledged(event.target.checked)}
-                type="checkbox"
-              />
-              <span>Risk protocol acknowledged</span>
-            </label>
-            <div className="terminal-actions compact-actions">
-              <button disabled={!acknowledged} type="button" onClick={onComplete}>
-                Acknowledge Risk - Continue
-              </button>
-              <button type="button" onClick={() => setMode("options")}>
-                Go Back
+              <button type="button" onClick={() => onComplete()}>
+                Open User Terminal
               </button>
               <button type="button" onClick={leaveSite}>
                 Quick Exit
@@ -2901,7 +2420,7 @@ function resolveCommand(query: string) {
   if (/\b(help|menu|options|commands|where)\b/.test(normalized)) {
     return {
       message:
-        "AVAILABLE COMMANDS: PREP, REBUILDING, RESOURCES, AM I CRAZY, GO-BAG PREP, QUICK EXIT.",
+        "AVAILABLE COMMANDS: WAS I CRAZY, CRISIS SUPPORT, REBUILDING, RESOURCES, DATABASE, QUICK EXIT.",
       target: null,
     };
   }
@@ -2916,7 +2435,7 @@ function resolveCommand(query: string) {
   }
 
   if (/ctrl\s*\+\s*esc|\bfirst steps?\b|\bprep\b/.test(normalized)) {
-    return { message: "QUERY ACCEPTED. ROUTING TO PREP / FIRST STEPS...", target: navItemFor("planning") };
+    return { message: "CRISIS QUERY DETECTED. ROUTING TO DIRECT SUPPORT OPTIONS...", target: navItemFor("planning") };
   }
 
   if (/ctrl\s*\+\s*shift/.test(normalized)) {
@@ -2940,19 +2459,19 @@ function resolveCommand(query: string) {
   }
 
   if (/\b(crazy|abused|abuse|assessment|gaslight|gaslighting|reality)\b/.test(normalized)) {
-    return { message: "QUERY ACCEPTED. ROUTING TO AM I CRAZY...", target: navItemFor("am-i-crazy") };
+    return { message: "QUERY ACCEPTED. ROUTING TO WAS I CRAZY?...", target: navItemFor("am-i-crazy") };
   }
 
   if (/\b(go.?bag|bag|simulator|arcade|prep|pack)\b/.test(normalized)) {
-    return { message: "QUERY ACCEPTED. ROUTING TO GO-BAG PREP...", target: navItemFor("go-bag-prep") };
+    return { message: "CRISIS PREP QUERY DETECTED. ROUTING TO DIRECT SUPPORT OPTIONS...", target: navItemFor("planning") };
   }
 
   if (/\b(plan|safety|prepare|documents|checklist)\b/.test(normalized)) {
-    return { message: "QUERY ACCEPTED. ROUTING TO PLANNING...", target: navItemFor("planning") };
+    return { message: "CRISIS PLANNING QUERY DETECTED. ROUTING TO DIRECT SUPPORT OPTIONS...", target: navItemFor("planning") };
   }
 
   if (/\b(leave|leaving|go bag|escape|exit plan)\b/.test(normalized)) {
-    return { message: "QUERY ACCEPTED. ROUTING TO PREP / FIRST STEPS...", target: navItemFor("planning") };
+    return { message: "ESCAPE QUERY DETECTED. ROUTING TO DIRECT SUPPORT OPTIONS...", target: navItemFor("planning") };
   }
 
   if (/\b(rebuild|money|housing|future|after)\b/.test(normalized)) {
@@ -2969,7 +2488,7 @@ function resolveCommand(query: string) {
 
   return {
     message:
-      "QUERY NOT RECOGNIZED. TRY: PREP, LEAVING, REBUILDING, RESOURCES, LIBRARY, LEGAL, OR QUICK EXIT.",
+      "QUERY NOT RECOGNIZED. TRY: WAS I CRAZY, CRISIS SUPPORT, REBUILDING, RESOURCES, DATABASE, LEGAL, OR QUICK EXIT.",
     target: null,
   };
 }
@@ -3007,7 +2526,7 @@ function TerminalCommand({
           autoComplete="off"
           id="terminal-command"
           onChange={(event) => setQuery(event.target.value)}
-          placeholder="type: prep, resources, database, housing, go-bag prep, quick exit..."
+          placeholder="type: was i crazy, crisis support, resources, database, rebuilding, quick exit..."
           spellCheck={false}
           type="search"
           value={query}
@@ -3031,12 +2550,12 @@ function TerminalChrome({
   const isDesktopHome = activeModule === "home";
 
   return (
-    <main className="terminal-frame app-frame win95-frame">
+    <main className={`terminal-frame app-frame win95-frame hud-frame module-${activeModule}`}>
       <section className="win95-desktop" aria-label="Survivor Operating System desktop">
         {isDesktopHome ? (
           <div className="desktop-brand-panel" aria-hidden="true">
             <BrandLogo />
-            <p>Choose a folder to open Survivor Operating System.</p>
+            <p>User terminal online. Stabilize. Rebuild. Return to self.</p>
           </div>
         ) : null}
         <nav className="desktop-icon-grid" aria-label="Desktop navigation">
@@ -3059,8 +2578,7 @@ function TerminalChrome({
           </button>
         </nav>
 
-        {!isDesktopHome ? (
-        <section className="terminal-screen win95-window" aria-label={`${activeLabel} window`}>
+        <section className={`terminal-screen win95-window hud-window hud-window-${activeModule}`} aria-label={`${activeLabel} window`}>
           <div className="win95-titlebar">
             <div className="win95-titlebar-label">
               <span className="win95-titlebar-icon" aria-hidden="true" />
@@ -3095,7 +2613,6 @@ function TerminalChrome({
           </header>
           <div className="terminal-content">{children}</div>
         </section>
-        ) : null}
 
         <footer className="win95-taskbar">
           <button className="win95-start" type="button" onClick={() => onNavigate("home", "/")}>
@@ -3116,7 +2633,9 @@ function TerminalChrome({
 
 function HomeModule() {
   const navLegend = [
-    ["Ctrl+Esc", "Not Ready To Leave"],
+    ["Ctrl+?", "Was I Crazy?"],
+    ["Ctrl+Esc", "Crisis Support"],
+    ["Ctrl+Shift", "Rebuilding"],
     ["Ctrl+Fn", "Resources"],
     ["Ctrl+A", "Database"],
   ];
@@ -3130,50 +2649,43 @@ function HomeModule() {
       <div className="home-grid">
         <article className="home-message">
           <div className="mission-prompt">user@survivor-os:~$ LOAD MODULE // MISSION</div>
-          <h1 id="home-title">&lt;You Are Not Alone Here&gt;</h1>
-          <p className="home-tagline">// And it's okay if this is complicated</p>
+          <h1 id="home-title">&lt;Rebuilding Starts Here&gt;</h1>
+          <p className="home-tagline">// Survivor Operating System is for the part after survival starts asking for structure</p>
           <p>
-            Leaving a partner is one of the hardest things a person can do. Leaving one who has hurt
-            you is even harder, because the hurt and the love do not cancel each other out. They
-            exist at the same time, in the same body, pulling in opposite directions. If you have
-            ever felt confused about why you still miss them, still defend them, still reach for your
-            phone to call them, that is not weakness. That is what this actually feels like.
+            Survivor Operating System is not an emergency service and it is not an escape-planning
+            command center. If you are in immediate danger, still being monitored, or actively trying
+            to get out, route to direct human support first: emergency services, the National Domestic
+            Violence Hotline, law enforcement, or the nearest crisis intervention option you trust.
           </p>
           <p>
-            Research suggests that trauma bonding is a neurological process, not a character flaw.
-            When a relationship cycles between fear and comfort, tension and relief, your nervous
-            system learns to attach to the person who provides both. The moments of warmth feel more
-            intense against the backdrop of pain. The relief of making up can feel like love because,
-            to your body, it registers as safety returning.
+            This system is for rebuilding: understanding what happened, sorting paperwork, tracking
+            benefits, navigating housing systems, learning legal basics, rebuilding routines, and
+            getting your life back into a shape that belongs to you.
           </p>
           <div className="home-pull-quote">
             <p>
-              You love parts of them. You are used to them. They feel safe sometimes. You remember
-              who they were at the beginning, or who you believed they could be. Grieving all of that
-              is real grief.
+              No one here is asking you to prove you were hurt enough. No one here is collecting your
+              answers. No one here is making your next choice for you.
             </p>
           </div>
           <p>
-            Research also tells us that women in particular tend to respond to threat by moving
-            toward connection: tending to the people around them, keeping the peace, making
-            themselves smaller or more agreeable to reduce tension. This is not a personal defect.
-            It is a deeply human response to an unsafe situation. The problem is that it can
-            look, from the inside, exactly like love.
+            The tools here are designed to be temporary, browser-only, and low-pressure wherever
+            possible. Use what helps. Close what does not. Screenshot only if storing images is safe
+            on your device.
           </p>
           <p>
-            You may leave and go back. You may go back more than once. You may remember things
-            differently as time passes. Moments that felt normal at the time may later land
-            differently in the light of what you now understand. That is not you being dramatic. That
-            is clarity arriving on its own timeline, which it always does.
+            If you came here asking whether you were crazy, start with the reality-check assessment.
+            If you came here because the immediate crisis is still unfolding, open Crisis Support.
+            If you are beginning the slow work after the emergency, open Rebuilding or Resources.
           </p>
           <p className="mission-emphasis">
-            No one here is pretending this is simple. This system was built for the reality of what
-            it actually is: complicated, painful, nonlinear, and survivable.
+            This is not about being perfect, obedient, healed, brave, grateful, or ready. This is
+            about getting oriented again.
           </p>
           <p>
-            You get to move through it at your own pace. Your autonomy, your right to choose when,
-            how, and in what direction, belongs to you. It always has. Someone else just convinced
-            you otherwise for a while.
+            Your autonomy, your right to choose when, how, and in what direction, belongs to you. It
+            always has. Someone else may have convinced you otherwise for a while. The system does
+            not agree with them.
           </p>
           <div className="founder-note">
             <div className="terminal-label">&gt;&gt; A Note From The Founder</div>
@@ -3279,8 +2791,8 @@ function AmICrazyModule({
     leaveSite();
   }
 
-  function startPlanning() {
-    onNavigate("planning", "/planning");
+  function openCrisisSupport() {
+    onNavigate("planning", "/crisis-support");
   }
 
   const completeSystemTyping = useCallback(() => {
@@ -3317,10 +2829,10 @@ function AmICrazyModule({
       {mode === "intro" && (
         <div className="assessment-panel">
           <div className="terminal-label">INITIALIZING REALITY CHECK...</div>
-          <h1 id="assessment-title">AM I CRAZY?</h1>
+          <h1 id="assessment-title">WAS I CRAZY?</h1>
           <p>
-            Confusion is one of the telltale signs of abuse. People who want control benefit when
-            you are too busy questioning yourself to question them.
+            Confusion is one of the telltale signs of coercive control. People who want control
+            benefit when you are too busy questioning yourself to question what happened.
           </p>
           <p className="neon-punch">Clarity is kryptonite.</p>
           <div className="terminal-actions compact-actions">
@@ -3370,7 +2882,7 @@ function AmICrazyModule({
               onDeny={showDenial}
               onExit={clearAndExit}
               onNext={loadNextQuestion}
-              onPlanning={startPlanning}
+              onCrisisSupport={openCrisisSupport}
             />
           )}
         </div>
@@ -3388,8 +2900,8 @@ function AmICrazyModule({
             <button type="button" onClick={loadNextQuestion}>
               Rude. Keep Asking Questions
             </button>
-            <button type="button" onClick={startPlanning}>
-              Start Exit Planning
+            <button type="button" onClick={openCrisisSupport}>
+              Crisis Support
             </button>
             <button type="button" onClick={() => onNavigate("legal", "/resources")}>
               Understand Choices
@@ -3421,14 +2933,14 @@ function AmICrazyModule({
             )}
           </div>
           <div className="terminal-actions denial-actions">
-            <button type="button" onClick={startPlanning}>
-              Start Exit Planning
+            <button type="button" onClick={openCrisisSupport}>
+              Crisis Support
             </button>
             <button type="button" onClick={() => onNavigate("legal", "/resources")}>
               Understand Choices
             </button>
-            <button type="button" onClick={() => onNavigate("go-bag-prep", "/go-bag-prep")}>
-              Go-Bag Prep
+            <button type="button" onClick={() => onNavigate("rebuilding", "/rebuilding")}>
+              Rebuilding Tools
             </button>
             <button type="button" onClick={() => setMode("complete")}>
               Review Patterns
@@ -3450,19 +2962,19 @@ function ProceedControls({
   onDeny,
   onExit,
   onNext,
-  onPlanning,
+  onCrisisSupport,
 }: {
   onDeny: () => void;
   onExit: () => void;
   onNext: () => void;
-  onPlanning: () => void;
+  onCrisisSupport: () => void;
 }) {
   return (
     <div className="proceed-terminal">
       <div className="terminal-label">HOW WOULD YOU LIKE TO PROCEED?</div>
       <div className="terminal-actions denial-actions">
-        <button type="button" onClick={onPlanning}>
-          Start Exit Planning
+        <button type="button" onClick={onCrisisSupport}>
+          Crisis Support
         </button>
         <button type="button" onClick={onNext}>
           Still Not Sure
@@ -3478,183 +2990,47 @@ function ProceedControls({
   );
 }
 
-function ladderGaugeValues(progress: { clarity: number; preparedness: number; reality: number; options: number }): GaugeValue[] {
-  return [
-    {
-      label: "CLARITY",
-      value: progress.clarity,
-      lowLabel: "FOG",
-      highLabel: "CLEAR",
-      state: gaugeState(progress.clarity, "CLEARER", "ONLINE", "WARMING"),
-      tone: "cyan",
-    },
-    {
-      label: "PREPAREDNESS",
-      value: progress.preparedness,
-      lowLabel: "LOW",
-      highLabel: "READY",
-      state: gaugeState(progress.preparedness, "BUILDING", "STARTED", "SPARK"),
-      tone: "pink",
-    },
-    {
-      label: "REALITY",
-      value: progress.reality,
-      lowLabel: "DISTORTED",
-      highLabel: "STABLE",
-      state: gaugeState(progress.reality, "STABLE", "CLEARING", "STATIC"),
-      tone: "amber",
-    },
-    {
-      label: "OPTIONS",
-      value: progress.options,
-      lowLabel: "LIMITED",
-      highLabel: "OPEN",
-      state: gaugeState(progress.options, "AVAILABLE", "OPENING", "LIMITED"),
-      tone: "purple",
-    },
-  ];
-}
-
-function SafetyPlanningModule({
-  onControlPanelChange,
-  onNavigate,
-  onBack,
-}: {
-  onControlPanelChange: (panel: ControlPanelState) => void;
-  onNavigate: (module: ModuleKey, path: string) => void;
-  onBack: () => void;
-}) {
-  const [activeSectionId, setActiveSectionId] = useState(safetyPlanSections[0].id);
-  const activeSection = safetyPlanSections.find((section) => section.id === activeSectionId) ?? safetyPlanSections[0];
-  const activeIndex = safetyPlanSections.findIndex((section) => section.id === activeSection.id);
-
-  useEffect(() => {
-    onControlPanelChange({
-      emphasis: activeSection.id === "traces" ? "REALITY" : "PREPAREDNESS",
-      gauges: ladderGaugeValues({
-        clarity: activeSection.id === "people" ? 74 : 62,
-        preparedness: activeSection.id === "dependents" ? 78 : 68,
-        reality: activeSection.id === "traces" ? 84 : 70,
-        options: activeSection.id === "places" ? 78 : 62,
-      }),
-      notice: `${activeSection.status}. NO ANSWERS SAVED.`,
-    });
-  }, [activeSection, onControlPanelChange]);
-
-  return (
-    <section className="assessment-shell safety-planning-module" aria-labelledby="safety-plan-title">
-      <div className="assessment-panel safety-plan-panel">
-        <div className="terminal-label">MODULE: SAFETY PLANNING</div>
-        <h1 id="safety-plan-title">CONSIDERATION MAP.</h1>
-        <p>
-          This module cannot guarantee safety or tell you what to do. It helps name what may need to
-          be considered before, during, or after leaving. If action is needed, the safest next human
-          contact is usually a trusted person, police or emergency services, or an advocate at a DV
-          shelter or crisis center.
-        </p>
-        <div className="safety-section-grid" aria-label="Safety planning sections">
-          {safetyPlanSections.map((section, index) => (
-            <button
-              className={section.id === activeSection.id ? "safety-section-key active" : "safety-section-key"}
-              key={section.id}
-              type="button"
-              onClick={() => setActiveSectionId(section.id)}
-            >
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <strong>{section.title}</strong>
-              <small>{section.subtitle}</small>
-            </button>
-          ))}
-        </div>
-
-        <article className="screenshot-plan-card" aria-labelledby="active-safety-section">
-          <div className="screenshot-card-header">
-            <span>{activeSection.status}</span>
-            <span>SCREENSHOT {String(activeIndex + 1).padStart(2, "0")}/{String(safetyPlanSections.length).padStart(2, "0")}</span>
-          </div>
-          <h2 id="active-safety-section">&lt;{activeSection.title}&gt;</h2>
-          <p>{activeSection.subtitle}</p>
-          <ul>
-            {activeSection.screenshotLines.map((line) => (
-              <li key={line}>{line}</li>
-            ))}
-          </ul>
-        </article>
-
-        <div className="safety-detail-grid">
-          {activeSection.detailGroups.map((group) => (
-            <section className="pattern-panel safety-detail-card" key={group.title}>
-              <h3>{group.title}</h3>
-              <ul>
-                {group.items.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </section>
-          ))}
-        </div>
-
-        <div className="terminal-actions denial-actions">
-          <button type="button" onClick={() => onNavigate("local-help", "/resources")}>
-            Find Advocate Or Crisis Help
-          </button>
-          <button type="button" onClick={() => onNavigate("legal", "/resources")}>
-            Understand Reporting Options
-          </button>
-          <button type="button" onClick={onBack}>
-            Back To Planning
-          </button>
-          <button type="button" onClick={leaveSite}>
-            Quick Exit
-          </button>
-        </div>
-      </div>
-      <p className="session-note">Nothing entered here is saved. Screenshot only if storing images is safe on this device.</p>
-    </section>
-  );
-}
-
 function PlanningLanding({
-  onOpenLadder,
-  onOpenSafety,
-  onOpenExitPlanning,
   onNavigate,
 }: {
-  onOpenLadder: () => void;
-  onOpenSafety: () => void;
-  onOpenExitPlanning: () => void;
   onNavigate: (module: ModuleKey, path: string) => void;
 }) {
   return (
     <section className="assessment-shell planning-landing" aria-labelledby="planning-landing-title">
       <div className="assessment-panel planning-landing-panel">
-        <div className="terminal-label">LOAD MODULE // NOT READY TO LEAVE</div>
-        <h1 id="planning-landing-title">&lt;Not Ready To Leave&gt;</h1>
+        <div className="terminal-label">LOAD MODULE // CRISIS SUPPORT</div>
+        <h1 id="planning-landing-title">&lt;Crisis Support&gt;</h1>
+        <p>
+          Survivor Operating System is not an emergency service and does not guide active escape
+          planning. If someone is still in danger or currently trying to get out, this system should
+          route them toward direct human support instead.
+        </p>
 
-        <div className="planning-document-grid" aria-label="Planning documents">
-          <button className="planning-document-key" type="button" onClick={() => onNavigate("am-i-crazy", "/am-i-crazy")}>
-            <span className="planning-document-icon emoji-icon" aria-hidden="true">
-              🤪
-            </span>
-            <strong>Am I Crazy?</strong>
-          </button>
-          <button className="planning-document-key" type="button" onClick={onOpenLadder}>
-            <span className="planning-document-icon emoji-icon" aria-hidden="true">
-              🚪
-            </span>
-            <strong>Not Ready To Leave</strong>
-          </button>
-          <button className="planning-document-key" type="button" onClick={onOpenSafety}>
+        <div className="planning-document-grid" aria-label="Crisis support options">
+          <a className="planning-document-key" href="https://www.thehotline.org/" rel="noreferrer" target="_blank">
+            <span className="planning-document-icon hotline-icon" aria-hidden="true" />
+            <strong>NHDV Hotline</strong>
+            <small>thehotline.org</small>
+          </a>
+          <a className="planning-document-key" href="sms:88788?body=START">
+            <span className="planning-document-icon message-icon" aria-hidden="true" />
+            <strong>Text START</strong>
+            <small>88788</small>
+          </a>
+          <a className="planning-document-key" href="tel:18007997233">
+            <span className="planning-document-icon phone-icon" aria-hidden="true" />
+            <strong>Call Hotline</strong>
+            <small>1.800.799.7233</small>
+          </a>
+          <button className="planning-document-key" type="button" onClick={() => onNavigate("legal", "/resources")}>
             <span className="planning-document-icon caution-icon" aria-hidden="true" />
-            <strong>Safety Considerations</strong>
+            <strong>Legal / Local Resources</strong>
+            <small>resource folder</small>
           </button>
-          <button className="planning-document-key" type="button" onClick={onOpenExitPlanning}>
+          <button className="planning-document-key" type="button" onClick={() => onNavigate("rebuilding", "/rebuilding")}>
             <span className="planning-document-icon route-icon" aria-hidden="true" />
-            <strong>Exit Planning</strong>
-          </button>
-          <button className="planning-document-key" type="button" onClick={() => onNavigate("go-bag-prep", "/go-bag-prep")}>
-            <span className="planning-document-icon go-bag-icon" aria-hidden="true" />
-            <strong>Go-Bag Prep</strong>
+            <strong>Rebuilding Tools</strong>
+            <small>when safe enough</small>
           </button>
         </div>
       </div>
@@ -3716,246 +3092,12 @@ function PlanningResourcePage({
 }
 
 function PlanningModule({
-  onControlPanelChange,
   onNavigate,
 }: {
   onControlPanelChange: (panel: ControlPanelState) => void;
   onNavigate: (module: ModuleKey, path: string) => void;
 }) {
-  const [mode, setMode] = useState<"landing" | "ladder" | "response" | "complete" | "exit-planning" | "safety-planning">("landing");
-  const [activeRung, setActiveRung] = useState<LeavingLadderRung | null>(null);
-  const [visitedRungIds, setVisitedRungIds] = useState<string[]>([]);
-  const [responseDone, setResponseDone] = useState(false);
-  const [progress, setProgress] = useState({
-    clarity: 32,
-    preparedness: 18,
-    reality: 34,
-    options: 24,
-  });
-  const [gaugeNotice, setGaugeNotice] = useState("LEAVING LADDER ONLINE. NO DECISION REQUIRED.");
-  const [gaugeEmphasis, setGaugeEmphasis] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (mode === "exit-planning" || mode === "safety-planning") return;
-
-    onControlPanelChange({
-      emphasis: gaugeEmphasis,
-      gauges: ladderGaugeValues(progress),
-      notice: gaugeNotice,
-    });
-  }, [gaugeEmphasis, gaugeNotice, mode, onControlPanelChange, progress]);
-
-  function openRung(rung: LeavingLadderRung) {
-    setActiveRung(rung);
-    setResponseDone(false);
-    setMode("response");
-  }
-
-  function completeRungTyping() {
-    if (!activeRung) {
-      setResponseDone(true);
-      return;
-    }
-
-    setVisitedRungIds((current) => (current.includes(activeRung.id) ? current : [...current, activeRung.id]));
-    setProgress((current) => ({
-      clarity: clampGauge(current.clarity + activeRung.effect.clarity),
-      preparedness: clampGauge(current.preparedness + activeRung.effect.preparedness),
-      reality: clampGauge(current.reality + activeRung.effect.reality),
-      options: clampGauge(current.options + activeRung.effect.options),
-    }));
-    setGaugeNotice(activeRung.effect.notice);
-    setGaugeEmphasis(activeRung.effect.emphasis);
-    setResponseDone(true);
-  }
-
-  function resetLadder() {
-    setMode("landing");
-    setActiveRung(null);
-    setVisitedRungIds([]);
-    setResponseDone(false);
-    setProgress({ clarity: 32, preparedness: 18, reality: 34, options: 24 });
-    setGaugeNotice("LEAVING LADDER ONLINE. NO DECISION REQUIRED.");
-    setGaugeEmphasis(null);
-  }
-
-  if (mode === "exit-planning") {
-    return <ExitPlanningModule onControlPanelChange={onControlPanelChange} onNavigate={onNavigate} />;
-  }
-
-  if (mode === "safety-planning") {
-    return (
-      <SafetyPlanningModule
-        onBack={() => setMode("landing")}
-        onControlPanelChange={onControlPanelChange}
-        onNavigate={onNavigate}
-      />
-    );
-  }
-
-  if (mode === "landing") {
-    return (
-      <PlanningLanding
-        onNavigate={onNavigate}
-        onOpenExitPlanning={() => setMode("exit-planning")}
-        onOpenLadder={() => setMode("ladder")}
-        onOpenSafety={() => setMode("safety-planning")}
-      />
-    );
-  }
-
-  return (
-    <section className="assessment-shell leaving-ladder" aria-labelledby="ladder-title">
-      {mode === "ladder" && (
-        <div className="assessment-panel ladder-panel">
-          <div className="terminal-label">MODULE: LEAVING LADDER</div>
-          <h1 id="ladder-title">NOT READY DOES NOT MEAN STUCK.</h1>
-          <p>
-            You do not have to decide today. You can look at the ladder, touch one rung, and still
-            keep your choices private.
-          </p>
-          <div className="ladder-rung-grid">
-            {leavingLadderRungs.map((rung, index) => (
-              <button
-                className={visitedRungIds.includes(rung.id) ? "ladder-rung visited" : "ladder-rung"}
-                key={rung.id}
-                type="button"
-                onClick={() => openRung(rung)}
-              >
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <strong>{rung.title}</strong>
-                <small>{rung.premise}</small>
-              </button>
-            ))}
-          </div>
-          <div className="terminal-actions denial-actions">
-            <button type="button" onClick={() => setMode("safety-planning")}>
-              Safety Considerations
-            </button>
-            <button type="button" onClick={() => setMode("exit-planning")}>
-              Start Exit Planning
-            </button>
-            <button type="button" onClick={() => onNavigate("go-bag-prep", "/go-bag-prep")}>
-              Go-Bag Prep
-            </button>
-            <button type="button" onClick={() => setMode("complete")}>
-              Not Ready // Understanding Increased
-            </button>
-            <button type="button" onClick={() => setMode("landing")}>
-              Back To Planning
-            </button>
-            <button type="button" onClick={leaveSite}>
-              Quick Exit
-            </button>
-          </div>
-        </div>
-      )}
-
-      {mode === "response" && activeRung && (
-        <div className={activeRung.id === "housing" ? "assessment-panel direct-panel ladder-panel" : "assessment-panel ladder-panel"}>
-          <div className="terminal-label">SYSTEM RESPONSE</div>
-          <h2>{activeRung.title}</h2>
-          <TypedText
-            className="system-typed-text"
-            onDone={completeRungTyping}
-            skipLabel="Skip Typing"
-            text={activeRung.systemResponse}
-          />
-          {responseDone && (
-            <>
-              <div className="pattern-panel">
-                <h3>ONE SMALL ACTION</h3>
-                <p>{activeRung.suggestedAction}</p>
-              </div>
-              {activeRung.contextSignal && (
-                <div className="pattern-panel context-signal-panel">
-                  <h3>{activeRung.contextSignal.title}</h3>
-                  {activeRung.contextSignal.body.split("\n\n").map((paragraph) => (
-                    <p key={paragraph}>{paragraph}</p>
-                  ))}
-                </div>
-              )}
-              <div className="terminal-actions denial-actions">
-                <button type="button" onClick={() => setMode("ladder")}>
-                  Choose Another Rung
-                </button>
-                <button type="button" onClick={() => setMode("safety-planning")}>
-                  Build Safety Plan
-                </button>
-                <button type="button" onClick={() => setMode("exit-planning")}>
-                  Start Exit Planning
-                </button>
-                <button type="button" onClick={() => onNavigate("go-bag-prep", "/go-bag-prep")}>
-                  Go-Bag Prep
-                </button>
-                <button type="button" onClick={() => onNavigate("local-help", "/resources")}>
-                  Resources
-                </button>
-                <button type="button" onClick={() => onNavigate("legal", "/resources")}>
-                  Legal
-                </button>
-                <button type="button" onClick={() => setMode("complete")}>
-                  Not Ready // Understanding Increased
-                </button>
-                <button type="button" onClick={() => setMode("landing")}>
-                  Back To Planning
-                </button>
-                <button type="button" onClick={leaveSite}>
-                  Quick Exit
-                </button>
-              </div>
-            </>
-          )}
-        </div>
-      )}
-
-      {mode === "complete" && (
-        <div className="assessment-panel ladder-panel">
-          <div className="terminal-label">LADDER PAUSED</div>
-          <h2>YOU DID NOT FAIL THE MODULE.</h2>
-          <p>
-            Not being ready is information, not a character flaw. Your system noticed more than it
-            did before. That counts.
-          </p>
-          <div className="pattern-panel">
-            <h3>WHAT CHANGED</h3>
-            <p>
-              {visitedRungIds.length > 0
-                ? `${visitedRungIds.length} rung${visitedRungIds.length === 1 ? "" : "s"} reviewed. No answers saved.`
-                : "No rungs selected yet. No answers saved."}
-            </p>
-          </div>
-          <div className="terminal-actions denial-actions">
-            <button type="button" onClick={() => setMode("ladder")}>
-              Return To The Ladder
-            </button>
-            <button type="button" onClick={() => setMode("safety-planning")}>
-              Build Safety Plan
-            </button>
-            <button type="button" onClick={() => setMode("exit-planning")}>
-              Start Exit Planning
-            </button>
-            <button type="button" onClick={() => onNavigate("home", "/")}>
-              Back To Terminal
-            </button>
-            <button type="button" onClick={() => setMode("landing")}>
-              Back To Planning
-            </button>
-            <button type="button" onClick={resetLadder}>
-              Clear This Session
-            </button>
-            <button type="button" onClick={leaveSite}>
-              Quick Exit
-            </button>
-          </div>
-        </div>
-      )}
-
-      {visitedRungIds.length > 0 && (
-        <p className="session-note">Temporary ladder signals are erased when this session clears, refreshes, or exits.</p>
-      )}
-    </section>
-  );
+  return <PlanningLanding onNavigate={onNavigate} />;
 }
 
 function SnapTanfGuide({ onBack, onNavigate }: { onBack: () => void; onNavigate: (module: ModuleKey, path: string) => void }) {
@@ -4273,234 +3415,6 @@ function HowToModule({
           </div>
         </>
       )}
-    </section>
-  );
-}
-
-function ExitPlanningModule({
-  onControlPanelChange,
-  onNavigate,
-}: {
-  onControlPanelChange: (panel: ControlPanelState) => void;
-  onNavigate: (module: ModuleKey, path: string) => void;
-}) {
-  const [mode, setMode] = useState<"intro" | "question" | "response" | "complete">("intro");
-  const [questionIndex, setQuestionIndex] = useState(0);
-  const [activeAnswer, setActiveAnswer] = useState<ExitAnswer | null>(null);
-  const [responseDone, setResponseDone] = useState(false);
-  const [answered, setAnswered] = useState<ExitAnswer[]>([]);
-  const [gauges, setGauges] = useState<ExitGaugeState>({
-    readiness: 25,
-    exposure: 12,
-    backup: 18,
-    exposureFloor: 12,
-  });
-  const [gaugeNotice, setGaugeNotice] = useState("GAUGES INITIALIZED. CURRENT DATA: INSUFFICIENT. NO PLAN LOADED.");
-  const [gaugeEmphasis, setGaugeEmphasis] = useState<string | null>(null);
-
-  const currentQuestion = exitPlanningQuestions[questionIndex];
-
-  useEffect(() => {
-    onControlPanelChange({
-      emphasis: gaugeEmphasis,
-      gauges: exitGaugeValues(gauges),
-      notice: gaugeNotice,
-    });
-  }, [gaugeEmphasis, gaugeNotice, gauges, onControlPanelChange]);
-
-  function beginPlanning() {
-    setMode("question");
-  }
-
-  function showEmergencyOptions() {
-    setActiveAnswer(null);
-    setResponseDone(false);
-    setQuestionIndex(0);
-    setMode("question");
-  }
-
-  function selectExitAnswer(answer: ExitAnswer) {
-    setAnswered((current) => [...current, answer]);
-    setActiveAnswer(answer);
-    setResponseDone(false);
-    setGaugeEmphasis(null);
-    setMode("response");
-  }
-
-  function continuePlan() {
-    setActiveAnswer(null);
-    if (questionIndex >= exitPlanningQuestions.length - 1) {
-      setMode("complete");
-      return;
-    }
-    setQuestionIndex((current) => current + 1);
-    setMode("question");
-  }
-
-  function clearPlanning() {
-    setMode("intro");
-    setQuestionIndex(0);
-    setActiveAnswer(null);
-    setResponseDone(false);
-    setAnswered([]);
-    setGauges({ readiness: 25, exposure: 12, backup: 18, exposureFloor: 12 });
-    setGaugeNotice("GAUGES INITIALIZED. CURRENT DATA: INSUFFICIENT. NO PLAN LOADED.");
-    setGaugeEmphasis(null);
-  }
-
-  function quickExitPlanning() {
-    clearPlanning();
-    leaveSite();
-  }
-
-  const completeExitTyping = useCallback(() => {
-    if (!activeAnswer) {
-      setResponseDone(true);
-      return;
-    }
-
-    const effect = activeAnswer.effect;
-    setGauges((current) => {
-      const exposureFloor = Math.max(current.exposureFloor, effect.minExposure ?? current.exposureFloor);
-      return {
-        readiness: clampGauge(current.readiness + effect.readiness),
-        exposure: Math.max(exposureFloor, clampGauge(current.exposure + effect.exposure)),
-        backup: clampGauge(current.backup + effect.backup),
-        exposureFloor,
-      };
-    });
-    setGaugeNotice(`UPDATING EXIT READINGS... ${effect.notice}`);
-    setGaugeEmphasis(
-      effect.emphasis === "readiness"
-        ? "EXIT READINESS"
-        : effect.emphasis === "exposure"
-          ? "EXPOSURE LEVEL"
-          : "BACKUP STATUS",
-    );
-    setResponseDone(true);
-  }, [activeAnswer]);
-
-  const highExposure = gauges.exposure >= 66;
-  const backupAvailable = gauges.backup >= 76;
-  const recommendedStep = highExposure
-    ? "review device safety before making further plans"
-    : backupAvailable
-      ? "identify one possible first-night destination"
-      : "identify one public place reachable without transportation";
-
-  return (
-    <section className="assessment-shell" aria-labelledby="exit-title">
-      {mode === "intro" && (
-        <div className="assessment-panel">
-          <div className="terminal-label">MODULE: EXIT PLANNING</div>
-          <h1 id="exit-title">EXIT PLANNING PROTOCOL // NOW WHAT?</h1>
-          <TypedText
-            className="system-typed-text"
-            skipLabel="Skip Typing"
-            text={
-              "SYSTEM:\nEXIT REQUEST RECEIVED.\n\nKnowing you need to leave and being able to leave are not the same thing.\n\nThis module will not tell you to just leave. It will help identify what must happen first, what could go wrong, what options are available, and what you can do next.\n\nYour answers will not be saved."
-            }
-          />
-          <div className="terminal-actions denial-actions">
-            <button type="button" onClick={beginPlanning}>
-              Begin Exit Planning
-            </button>
-            <button type="button" onClick={showEmergencyOptions}>
-              Emergency Options
-            </button>
-            <button type="button" onClick={() => onNavigate("legal", "/resources")}>
-              Understand Choices First
-            </button>
-            <button type="button" onClick={() => onNavigate("home", "/")}>
-              Back To Homepage
-            </button>
-            <button type="button" onClick={quickExitPlanning}>
-              Quick Exit
-            </button>
-          </div>
-        </div>
-      )}
-
-      {mode === "question" && currentQuestion && (
-        <div className="assessment-panel">
-          <div className="question-status">
-            <span>{currentQuestion.phase}</span>
-            <span>TEMP MEMORY ONLY</span>
-          </div>
-          <h2>{currentQuestion.prompt}</h2>
-          <div className="answer-grid">
-            {currentQuestion.answers.map((answer, index) => (
-              <button key={answer.id} type="button" onClick={() => selectExitAnswer(answer)}>
-                <span>{String.fromCharCode(65 + index)}</span>
-                {answer.label}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {mode === "response" && activeAnswer && (
-        <div className={activeAnswer.effect.minExposure && activeAnswer.effect.minExposure >= 46 ? "assessment-panel direct-panel" : "assessment-panel"}>
-          <div className="terminal-label">SYSTEM RESPONSE</div>
-          <h2>{activeAnswer.responseTitle}</h2>
-          <TypedText
-            className="system-typed-text"
-            onDone={completeExitTyping}
-            skipLabel="Skip Typing"
-            text={`SYSTEM:\n${activeAnswer.response}`}
-          />
-          {responseDone && (
-            <div className="proceed-terminal">
-              <div className="terminal-label">HOW WOULD YOU LIKE TO PROCEED?</div>
-              <div className="terminal-actions denial-actions">
-                <button type="button" onClick={continuePlan}>
-                  Continue Building Plan
-                </button>
-                <button type="button" onClick={showEmergencyOptions}>
-                  Show Emergency Options
-                </button>
-                <button type="button" onClick={() => onNavigate("home", "/")}>
-                  Pause And Think
-                </button>
-                <button type="button" onClick={quickExitPlanning}>
-                  Quick Exit
-                </button>
-              </div>
-            </div>
-          )}
-        </div>
-      )}
-
-      {mode === "complete" && (
-        <div className="assessment-panel">
-          <div className="terminal-label">EXIT SYSTEM STATUS</div>
-          <h2>EXIT PLAN INITIALIZED.</h2>
-          <p>You do not have to complete every task today. You do not have to announce your plan.</p>
-          <div className="pattern-panel">
-            <h3>NEXT RECOMMENDED STEP</h3>
-            <p>{recommendedStep.toUpperCase()}.</p>
-            <p>ONE ACTION IS STILL ACTION. CONTROL RETURNS IN INCREMENTS.</p>
-          </div>
-          <div className="terminal-actions denial-actions">
-            <button type="button" onClick={() => onNavigate("local-help", "/resources")}>
-              Show Relevant Free Resources
-            </button>
-            <button type="button" onClick={() => onNavigate("legal", "/resources")}>
-              Understand Choices
-            </button>
-            <button type="button" onClick={clearPlanning}>
-              Restart With A Different Barrier
-            </button>
-            <button type="button" onClick={clearPlanning}>
-              Clear This Session
-            </button>
-            <button type="button" onClick={quickExitPlanning}>
-              Quick Exit
-            </button>
-          </div>
-        </div>
-      )}
-      {answered.length > 0 && <p className="session-note">Temporary planning signals are erased when this session clears, refreshes, or exits.</p>}
     </section>
   );
 }
@@ -4880,8 +3794,8 @@ function RebuildingModule({
               Back To stabilize.exe
             </button>
           ) : null}
-          <button type="button" onClick={() => onNavigate("planning", "/planning")}>
-            Make A Leaving Plan
+          <button type="button" onClick={() => onNavigate("planning", "/crisis-support")}>
+            Crisis Support
           </button>
           <button type="button" onClick={() => onNavigate("local-help", "/resources")}>
             Find Resources
@@ -5194,8 +4108,12 @@ export function App() {
     }, 520);
   }
 
-  function completeCheckpoint() {
+  function completeCheckpoint(target?: { module: ModuleKey; path: string }) {
     markCheckpointCleared();
+    if (target) {
+      window.history.pushState({}, "", target.path);
+      setActiveModule(target.module);
+    }
     setCheckpointPassed(true);
   }
 
@@ -5210,7 +4128,7 @@ export function App() {
   ) : activeModule === "am-i-crazy" ? (
     <AmICrazyModule onControlPanelChange={updateControlPanel} onNavigate={navigate} />
   ) : activeModule === "go-bag-prep" ? (
-    <GoBagSimulator onControlPanelChange={updateControlPanel} onNavigate={navigate} onQuickExit={leaveSite} />
+    <PlanningModule onControlPanelChange={updateControlPanel} onNavigate={navigate} />
   ) : activeModule === "planning" ? (
     <PlanningModule onControlPanelChange={updateControlPanel} onNavigate={navigate} />
   ) : activeModule === "rebuilding" ? (
