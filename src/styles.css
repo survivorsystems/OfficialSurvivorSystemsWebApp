@@ -5972,6 +5972,59 @@ button:disabled {
   text-shadow: 1px 1px 0 #000000;
 }
 
+.module-intro-unit {
+  align-content: start;
+  background:
+    linear-gradient(180deg, rgba(10, 10, 12, 0.98), rgba(0, 0, 0, 0.98));
+  border: 2px solid;
+  border-color: #ffffff #555555 #555555 #ffffff;
+  box-shadow:
+    inset 1px 1px 0 rgba(255, 255, 255, 0.12),
+    2px 2px 0 rgba(0, 0, 0, 0.78);
+  display: grid;
+  gap: 18px;
+  min-height: min(52vh, 520px);
+  padding: clamp(18px, 3vw, 34px);
+}
+
+.module-intro-unit h1 {
+  color: #ffffff;
+  font-size: clamp(1.35rem, 2.7vw, 2.35rem);
+  margin: 0;
+  text-shadow: 1px 1px 0 #000000;
+}
+
+.module-intro-typed {
+  color: #5cff9d;
+  font-family: var(--terminal-font);
+  font-size: clamp(1rem, 1.9vw, 1.28rem);
+  font-weight: 900;
+  line-height: 1.62;
+  margin: 0;
+  max-width: 980px;
+  min-height: 230px;
+  text-shadow:
+    0 0 7px rgba(92, 255, 157, 0.42),
+    0 0 18px rgba(0, 0, 0, 0.8);
+  white-space: pre-wrap;
+}
+
+.module-intro-unit .text-button {
+  background: #5cff9d;
+  border: 2px solid;
+  border-color: #d8ffe8 #0f5e32 #0f5e32 #d8ffe8;
+  box-shadow:
+    inset 1px 1px 0 rgba(255, 255, 255, 0.6),
+    inset -2px -2px 0 rgba(0, 0, 0, 0.34),
+    2px 2px 0 #000000;
+  color: #050505;
+  justify-self: start;
+  min-height: 42px;
+  padding: 0 16px;
+  text-shadow: none;
+  width: auto;
+}
+
 .planning-document-grid {
   display: grid;
   gap: 22px;

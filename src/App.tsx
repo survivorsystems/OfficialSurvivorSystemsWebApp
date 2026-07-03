@@ -1,4 +1,4 @@
-import { type CSSProperties, type FormEvent, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { type CSSProperties, type FormEvent, type ReactNode, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   BookOpenCheck,
   Scale,
@@ -2796,6 +2796,82 @@ function TypedText({
   );
 }
 
+const moduleIntroSeen = new Set<string>();
+
+const moduleIntroCopy: Partial<Record<ModuleKey, { title: string; text: string }>> = {
+  "go-bag-prep": {
+    title: "Go-Bag Prep",
+    text:
+      "SYSTEM PLACEHOLDER // GO-BAG PREP\n\nThis module will help the user think through what they may need close at hand. No answers are stored. No progress is saved. The point is rehearsal, not perfection.\n\nLoading interactive unit...",
+  },
+  planning: {
+    title: "Not Ready To Leave",
+    text:
+      "SYSTEM PLACEHOLDER // NOT READY TO LEAVE\n\nThis module is for the part before certainty. The user does not have to decide today. The system will offer tools, questions, and small next steps without forcing a conclusion.\n\nLoading planning files...",
+  },
+  rebuilding: {
+    title: "Rebuilding",
+    text:
+      "SYSTEM PLACEHOLDER // REBUILDING\n\nThis module will collect resources for after the emergency shifts: benefits, housing, routines, recovery, documents, and the slow work of getting a life back under the user's own control.\n\nLoading rebuild files...",
+  },
+  "local-help": {
+    title: "Resources",
+    text:
+      "SYSTEM PLACEHOLDER // RESOURCES\n\nThis module opens the resource file system. Folders are sorted so the user can choose one area at a time instead of being hit with everything at once.\n\nLoading resource folders...",
+  },
+  "how-to": {
+    title: "Resources",
+    text:
+      "SYSTEM PLACEHOLDER // RESOURCES\n\nThis module opens the resource file system. Folders are sorted so the user can choose one area at a time instead of being hit with everything at once.\n\nLoading resource folders...",
+  },
+  legal: {
+    title: "Legal Resources",
+    text:
+      "SYSTEM PLACEHOLDER // LEGAL RESOURCES\n\nThis module will organize court, reporting, immigration, and protective-order information into files the user can open when they are ready.\n\nLoading legal files...",
+  },
+  library: {
+    title: "Database",
+    text:
+      "SYSTEM PLACEHOLDER // DATABASE\n\nThis module will explain viewing access, unlocks, and the deeper resource library without pretending the system needs more information than it does.\n\nLoading database...",
+  },
+  access: {
+    title: "Database",
+    text:
+      "SYSTEM PLACEHOLDER // DATABASE\n\nThis module will explain viewing access, unlocks, and the deeper resource library without pretending the system needs more information than it does.\n\nLoading database...",
+  },
+};
+
+function ModuleIntroGate({
+  children,
+  introKey,
+  text,
+  title,
+}: {
+  children: ReactNode;
+  introKey: string;
+  text: string;
+  title: string;
+}) {
+  const [ready, setReady] = useState(() => moduleIntroSeen.has(introKey));
+
+  const finishIntro = useCallback(() => {
+    moduleIntroSeen.add(introKey);
+    setReady(true);
+  }, [introKey]);
+
+  if (ready) {
+    return <>{children}</>;
+  }
+
+  return (
+    <section className="module-intro-unit" aria-labelledby={`${introKey}-intro-title`}>
+      <div className="terminal-label">INITIALIZE MODULE</div>
+      <h1 id={`${introKey}-intro-title`}>&lt;{title}&gt;</h1>
+      <TypedText className="module-intro-typed" text={text} onDone={finishIntro} skipLabel="Open Now" />
+    </section>
+  );
+}
+
 function WelcomeCheckpoint({ onComplete }: { onComplete: () => void }) {
   const [typingComplete, setTypingComplete] = useState(false);
   const [mode, setMode] = useState<"options" | "instructions" | "ack" | "safer-device">("options");
@@ -5247,25 +5323,33 @@ export function App() {
   }
 
   const loadingLabel = loadingModule ? moduleRoutes[loadingModule]?.label : null;
+  const activeIntro = !loadingModule ? moduleIntroCopy[activeModule] : null;
+  const moduleContent = activeModule === "home" ? (
+    <HomeModule />
+  ) : activeModule === "am-i-crazy" ? (
+    <AmICrazyModule onControlPanelChange={updateControlPanel} onNavigate={navigate} />
+  ) : activeModule === "go-bag-prep" ? (
+    <GoBagSimulator onControlPanelChange={updateControlPanel} onNavigate={navigate} onQuickExit={leaveSite} />
+  ) : activeModule === "planning" ? (
+    <PlanningModule onControlPanelChange={updateControlPanel} onNavigate={navigate} />
+  ) : activeModule === "rebuilding" ? (
+    <RebuildingModule onNavigate={navigate} />
+  ) : activeModule === "local-help" || activeModule === "how-to" || activeModule === "legal" || activeModule === "library" ? (
+    <ResourceModule moduleKey={activeModule} onNavigate={navigate} />
+  ) : (
+    <ResourceModule moduleKey={activeModule} onNavigate={navigate} />
+  );
 
   return (
     <TerminalChrome activeModule={loadingModule ?? activeModule} controlPanel={controlPanel} onNavigate={navigate}>
       {loadingModule && loadingLabel ? (
         <ModuleLoading label={loadingLabel} />
-      ) : activeModule === "home" ? (
-        <HomeModule />
-      ) : activeModule === "am-i-crazy" ? (
-        <AmICrazyModule onControlPanelChange={updateControlPanel} onNavigate={navigate} />
-      ) : activeModule === "go-bag-prep" ? (
-        <GoBagSimulator onControlPanelChange={updateControlPanel} onNavigate={navigate} onQuickExit={leaveSite} />
-      ) : activeModule === "planning" ? (
-        <PlanningModule onControlPanelChange={updateControlPanel} onNavigate={navigate} />
-      ) : activeModule === "rebuilding" ? (
-        <RebuildingModule onNavigate={navigate} />
-      ) : activeModule === "local-help" || activeModule === "how-to" || activeModule === "legal" || activeModule === "library" ? (
-        <ResourceModule moduleKey={activeModule} onNavigate={navigate} />
+      ) : activeIntro ? (
+        <ModuleIntroGate introKey={activeModule} title={activeIntro.title} text={activeIntro.text}>
+          {moduleContent}
+        </ModuleIntroGate>
       ) : (
-        <ResourceModule moduleKey={activeModule} onNavigate={navigate} />
+        moduleContent
       )}
     </TerminalChrome>
   );
