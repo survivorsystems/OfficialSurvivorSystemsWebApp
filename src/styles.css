@@ -6290,3 +6290,56 @@ button:disabled {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
+.win95-desktop,
+.win95-window,
+.desktop-brand-panel,
+.win95-taskbar {
+  background: #000000;
+}
+
+.win95-window {
+  border-color: #000000;
+}
+
+.win95-taskbar {
+  border-top-color: #111111;
+}
+
+button:not(.desktop-icon):not(.planning-document-key):not(.resource-document-key) {
+  background: #5cff9d;
+  border: 2px solid;
+  border-color: #d8ffe8 #0f5e32 #0f5e32 #d8ffe8;
+  border-radius: 0;
+  box-shadow:
+    inset 1px 1px 0 rgba(255, 255, 255, 0.62),
+    inset -2px -2px 0 rgba(0, 0, 0, 0.36),
+    2px 2px 0 #000000;
+  color: #050505;
+  text-shadow: none;
+}
+
+button:not(.desktop-icon):not(.planning-document-key):not(.resource-document-key):hover,
+button:not(.desktop-icon):not(.planning-document-key):not(.resource-document-key):focus-visible {
+  background: #8dffb8;
+  border-color: #ffffff #0f5e32 #0f5e32 #ffffff;
+  color: #050505;
+  outline: 1px dotted #050505;
+  text-shadow: none;
+}
+
+button:not(.desktop-icon):not(.planning-document-key):not(.resource-document-key):active {
+  background: #30d979;
+  border-color: #0f5e32 #d8ffe8 #d8ffe8 #0f5e32;
+  box-shadow:
+    inset 2px 2px 0 rgba(0, 0, 0, 0.44),
+    1px 1px 0 #000000;
+  color: #050505;
+  transform: translateY(1px);
+}
+
+.win95-window .terminal-content button:not(.desktop-icon):not(.planning-document-key):not(.resource-document-key),
+.win95-window .terminal-content button:not(.desktop-icon):not(.planning-document-key):not(.resource-document-key):hover,
+.win95-window .terminal-content button:not(.desktop-icon):not(.planning-document-key):not(.resource-document-key):focus-visible {
+  color: #050505;
+}
