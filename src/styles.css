@@ -6300,10 +6300,55 @@ button:disabled {
 
 .win95-window {
   border-color: #000000;
+  box-shadow: none;
+  outline: 0;
 }
 
 .win95-taskbar {
   border-top-color: #111111;
+}
+
+.win95-window .terminal-topbar {
+  color: #050505;
+}
+
+.win95-window .terminal-topbar h1,
+.win95-window .terminal-topbar .terminal-label {
+  color: #050505;
+  text-shadow: none;
+}
+
+.win95-window .command-terminal {
+  background: #f4f1e8;
+  border-color: #111111;
+  box-shadow: inset 1px 1px 0 #ffffff, inset -1px -1px 0 #8a867a;
+}
+
+.win95-window .command-terminal label,
+.win95-window .command-terminal p {
+  color: #050505;
+  text-shadow: none;
+}
+
+.win95-window .command-input-row {
+  background: #ffffff;
+  border-color: #111111;
+  box-shadow: inset 1px 1px 0 #8a867a;
+}
+
+.win95-window .command-input-row span {
+  color: #0f7a3d;
+  text-shadow: none;
+}
+
+.win95-window .command-input-row input {
+  color: #050505;
+  caret-color: #4b168f;
+  text-shadow: none;
+}
+
+.win95-window .command-input-row input::placeholder {
+  color: #555555;
 }
 
 button:not(.desktop-icon):not(.planning-document-key):not(.resource-document-key) {

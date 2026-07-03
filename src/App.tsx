@@ -1,4 +1,4 @@
-import { type CSSProperties, type FormEvent, type ReactNode, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { type FormEvent, type ReactNode, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   BookOpenCheck,
   Scale,
@@ -2523,57 +2523,6 @@ function gaugeState(value: number, strong = "READY", mid = "BUILDING", low = "LO
   return "NEEDS INPUT";
 }
 
-function gaugeByLabel(gauges: GaugeValue[], labels: string[], fallbackIndex: number) {
-  const match = gauges.find((gauge) => labels.some((label) => gauge.label.toLowerCase().includes(label)));
-  return match ?? gauges[fallbackIndex] ?? defaultControlPanel.gauges[fallbackIndex] ?? defaultControlPanel.gauges[0];
-}
-
-function commandCenterBars(gauges: GaugeValue[]): GaugeValue[] {
-  const clarity = gaugeByLabel(gauges, ["clarity", "autonomy"], 0);
-  const preparedness = gaugeByLabel(gauges, ["preparedness", "readiness", "bag", "core", "backup"], 1);
-  const reality = gaugeByLabel(gauges, ["reality"], 2);
-  const options = gaugeByLabel(gauges, ["options"], 3);
-  const optionValue =
-    options.label.toLowerCase().includes("options") && options.value
-      ? options.value
-      : Math.round((clarity.value + preparedness.value + reality.value) / 3);
-
-  return [
-    {
-      label: "CLARITY",
-      value: clarity.value,
-      lowLabel: "FOG",
-      highLabel: "CLEAR",
-      state: clarity.state || gaugeState(clarity.value, "CLEAR", "ONLINE", "FUZZY"),
-      tone: "cyan",
-    },
-    {
-      label: "PREPAREDNESS",
-      value: preparedness.value,
-      lowLabel: "LOW",
-      highLabel: "READY",
-      state: preparedness.state || gaugeState(preparedness.value),
-      tone: "pink",
-    },
-    {
-      label: "REALITY",
-      value: reality.value,
-      lowLabel: "DISTORTED",
-      highLabel: "STABLE",
-      state: reality.state || gaugeState(reality.value, "STABLE", "CLEARING", "STATIC"),
-      tone: "amber",
-    },
-    {
-      label: "OPTIONS",
-      value: optionValue,
-      lowLabel: "LIMITED",
-      highLabel: "OPEN",
-      state: gaugeState(optionValue, "AVAILABLE", "OPENING", "LIMITED"),
-      tone: "purple",
-    },
-  ];
-}
-
 function assessmentGaugeValues(gauges: AssessmentGauges): GaugeValue[] {
   const autonomyState =
     gauges.autonomy >= 76
@@ -2648,71 +2597,6 @@ function exitGaugeValues(gauges: ExitGaugeState): GaugeValue[] {
       tone: "purple",
     },
   ];
-}
-
-function GaugeDeck({
-  compact = false,
-  emphasis,
-  gauges,
-  notice,
-}: {
-  compact?: boolean;
-  emphasis?: string | null;
-  gauges: GaugeValue[];
-  notice?: string;
-}) {
-  if (compact) {
-    const bars = commandCenterBars(gauges);
-
-    return (
-      <section className="gauge-deck compact-gauges" aria-label="Command center status bars">
-        <div className="gauge-row">
-          {bars.map((gauge) => {
-            const filledBlocks = Math.round(clampGauge(gauge.value) / 10);
-
-            return (
-              <article className={`status-bar ${gauge.tone} ${emphasis === gauge.label ? "pulse-gauge" : ""}`} key={gauge.label}>
-                <h3>{gauge.label}</h3>
-                <div className="status-blocks" aria-label={`${gauge.label} ${filledBlocks} out of 10`}>
-                  {Array.from({ length: 10 }, (_, index) => (
-                    <span className={index < filledBlocks ? "status-block filled" : "status-block"} key={index} />
-                  ))}
-                </div>
-                <p>{gauge.state}</p>
-              </article>
-            );
-          })}
-        </div>
-      </section>
-    );
-  }
-
-  return (
-    <section className={compact ? "gauge-deck compact-gauges" : "gauge-deck"} aria-label="Temporary system readings">
-      <div className="gauge-row">
-        {gauges.map((gauge) => (
-          <article
-            className={`analog-gauge ${gauge.tone} ${emphasis === gauge.label ? "pulse-gauge" : ""}`}
-            key={gauge.label}
-            style={{ "--gauge-value": gauge.value } as CSSProperties}
-          >
-            <div className="gauge-window">
-              <div className="gauge-arc" />
-              <div className="gauge-needle" />
-              <div className="gauge-hub" />
-              <div className="gauge-scale">
-                <span>{gauge.lowLabel}</span>
-                <span>{gauge.highLabel}</span>
-              </div>
-            </div>
-            <h3>{gauge.label}</h3>
-            <p>{compact ? gauge.state : `CURRENT STATE: ${gauge.state}`}</p>
-          </article>
-        ))}
-      </div>
-      <p className="gauge-notice">{notice || "GAUGES INITIALIZED. CURRENT DATA: INSUFFICIENT. NO CONCLUSIONS LOADED."}</p>
-    </section>
-  );
 }
 
 function BrandLogo({ className = "" }: { className?: string }) {
@@ -3137,12 +3021,10 @@ function TerminalCommand({
 function TerminalChrome({
   activeModule,
   children,
-  controlPanel,
   onNavigate,
 }: {
   activeModule: ModuleKey;
   children: React.ReactNode;
-  controlPanel: ControlPanelState;
   onNavigate: (module: ModuleKey, path: string) => void;
 }) {
   const activeLabel = moduleRoutes[activeModule]?.label ?? "Home";
@@ -3198,7 +3080,6 @@ function TerminalChrome({
           </div>
 
           <header className="terminal-topbar">
-            <GaugeDeck compact emphasis={controlPanel.emphasis} gauges={controlPanel.gauges} notice={controlPanel.notice} />
             <div className="terminal-heading-row">
               <div className="terminal-topbar-title">
                 <span className="terminal-label">USER TERMINAL</span>
@@ -5281,7 +5162,7 @@ function LegalModule() {
 export function App() {
   const [checkpointPassed, setCheckpointPassed] = useState(() => getCheckpointCleared());
   const [activeModule, setActiveModule] = useState<ModuleKey>(() => getInitialModule());
-  const [controlPanel, setControlPanel] = useState<ControlPanelState>(defaultControlPanel);
+  const [, setControlPanel] = useState<ControlPanelState>(defaultControlPanel);
   const [loadingModule, setLoadingModule] = useState<ModuleKey | null>(null);
 
   useEffect(() => {
@@ -5341,7 +5222,7 @@ export function App() {
   );
 
   return (
-    <TerminalChrome activeModule={loadingModule ?? activeModule} controlPanel={controlPanel} onNavigate={navigate}>
+    <TerminalChrome activeModule={loadingModule ?? activeModule} onNavigate={navigate}>
       {loadingModule && loadingLabel ? (
         <ModuleLoading label={loadingLabel} />
       ) : activeIntro ? (
