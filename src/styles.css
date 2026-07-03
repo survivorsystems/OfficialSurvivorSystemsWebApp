@@ -5776,26 +5776,66 @@ button:disabled {
 .resource-folder-card button,
 .library-pass-card button,
 .how-to-folder-bar button {
-  background: #c0c0c0;
+  background: #5cff9d;
   border: 2px solid;
-  border-color: #ffffff #404040 #404040 #ffffff;
+  border-color: #d8ffe8 #0f5e32 #0f5e32 #d8ffe8;
   border-radius: 0;
-  box-shadow: 1px 1px 0 #000000;
-  color: #111111;
+  box-shadow:
+    inset 1px 1px 0 rgba(255, 255, 255, 0.6),
+    inset -2px -2px 0 rgba(0, 0, 0, 0.34),
+    2px 2px 0 #000000;
+  color: #050505;
   text-shadow: none;
 }
 
 .terminal-actions button:hover,
 .terminal-actions button:focus-visible,
 .primary-action:hover,
+.primary-action:focus-visible,
 .secondary-action:hover,
+.secondary-action:focus-visible,
 .resource-back-button:hover,
+.resource-back-button:focus-visible,
 .planning-module-key:hover,
+.planning-module-key:focus-visible,
 .resource-folder-card button:hover,
-.how-to-folder-bar button:hover {
-  background: #ff4fd8;
-  color: #111111;
+.resource-folder-card button:focus-visible,
+.library-pass-card button:hover,
+.library-pass-card button:focus-visible,
+.how-to-folder-bar button:hover,
+.how-to-folder-bar button:focus-visible {
+  background: #8dffb8;
+  border-color: #ffffff #0f5e32 #0f5e32 #ffffff;
+  color: #050505;
+  outline: 1px dotted #050505;
   text-shadow: none;
+}
+
+.terminal-actions button:active,
+.primary-action:active,
+.secondary-action:active,
+.resource-back-button:active,
+.planning-module-key:active,
+.resource-folder-card button:active,
+.library-pass-card button:active,
+.how-to-folder-bar button:active {
+  background: #30d979;
+  border-color: #0f5e32 #d8ffe8 #d8ffe8 #0f5e32;
+  box-shadow:
+    inset 2px 2px 0 rgba(0, 0, 0, 0.44),
+    1px 1px 0 #000000;
+  transform: translateY(1px);
+}
+
+.win95-window .terminal-content .terminal-actions button,
+.win95-window .terminal-content .primary-action,
+.win95-window .terminal-content .secondary-action,
+.win95-window .terminal-content .resource-back-button,
+.win95-window .terminal-content .planning-module-key,
+.win95-window .terminal-content .resource-folder-card button,
+.win95-window .terminal-content .library-pass-card button,
+.win95-window .terminal-content .how-to-folder-bar button {
+  color: #050505;
 }
 
 .planning-module-grid,
