@@ -10,7 +10,7 @@
   --magenta: #b84cff;
   --purple: #7e35ff;
   --lime: #6cff62;
-  --amber: #ffbf45;
+  --amber: #fff200;
   --text: #c9f8ff;
   --muted: #72aeb9;
   --cream: #fff6dd;
@@ -825,7 +825,7 @@ button:disabled {
   align-items: end;
   display: grid;
   gap: 14px;
-  grid-template-columns: minmax(0, 1fr) minmax(130px, auto);
+  grid-template-columns: minmax(0, 1fr) minmax(340px, auto);
 }
 
 .system-status {
@@ -5675,10 +5675,10 @@ button:disabled {
 }
 
 .win95-titlebar {
-  background: linear-gradient(90deg, #000080, #0b4fb4);
+  background: linear-gradient(90deg, #3d0b7a, #7c24b8 62%, #ff4fd8);
   border-bottom: 2px solid #ffffff;
   color: #ffffff;
-  min-height: 32px;
+  min-height: 40px;
 }
 
 .win95-window-controls span,
@@ -5715,29 +5715,32 @@ button:disabled {
 }
 
 .win95-window .terminal-topbar {
-  background: #2a2a2f;
+  background: #f4f1e8;
   border: 2px solid;
-  border-color: #ffffff #5a5a5a #5a5a5a #ffffff;
-  color: #ffffff;
+  border-color: #ffffff #8a867a #8a867a #ffffff;
+  color: #050505;
 }
 
 .win95-window .terminal-topbar h1 {
-  color: #ffffff;
+  color: #050505;
 }
 
 .win95-window .terminal-label {
-  color: #5cff9d;
+  color: #4f1187;
 }
 
 .win95-window .system-status span,
 .win95-window .system-status strong {
-  background: #1a1a1f;
+  background: #0b0b0d;
   border-color: #ffffff #5a5a5a #5a5a5a #ffffff;
-  color: #ffffff;
+  color: #fff200;
+  min-width: 112px;
+  text-align: center;
 }
 
 .win95-window .system-status strong {
-  color: #c77dff;
+  color: #fff200;
+  min-width: 150px;
 }
 
 .win95-window .command-terminal {
@@ -5830,6 +5833,8 @@ button:disabled {
 .win95-window .terminal-content .terminal-actions button,
 .win95-window .terminal-content .primary-action,
 .win95-window .terminal-content .secondary-action,
+.win95-window .terminal-content .quick-exit,
+.win95-window .terminal-content .text-link,
 .win95-window .terminal-content .resource-back-button,
 .win95-window .terminal-content .planning-module-key,
 .win95-window .terminal-content .resource-folder-card button,
@@ -6047,11 +6052,11 @@ button:disabled {
 .planning-document-icon {
   align-items: center;
   background:
-    linear-gradient(180deg, #353540, #141418);
+    linear-gradient(180deg, #ffffff, #eee8da);
   border: 2px solid;
-  border-color: #ffffff #4f4f58 #4f4f58 #ffffff;
+  border-color: #ffffff #8d887c #8d887c #ffffff;
   box-shadow:
-    inset 1px 1px 0 rgba(255, 255, 255, 0.18),
+    inset 1px 1px 0 rgba(255, 255, 255, 0.85),
     2px 2px 0 #000000;
   display: grid;
   height: 58px;

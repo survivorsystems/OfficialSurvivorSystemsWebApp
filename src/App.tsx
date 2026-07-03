@@ -1416,7 +1416,7 @@ const moduleRoutes: Record<ModuleKey, { label: string; path: string }> = {
   home: { label: "Home", path: "/" },
   "am-i-crazy": { label: "Am I Crazy", path: "/am-i-crazy" },
   "go-bag-prep": { label: "Go-Bag Prep", path: "/go-bag-prep" },
-  planning: { label: "How To Make A Leaving Plan", path: "/planning" },
+  planning: { label: "Not Ready To Leave", path: "/planning" },
   rebuilding: { label: "Rebuilding", path: "/rebuilding" },
   "local-help": { label: "Resources", path: "/resources" },
   "how-to": { label: "Resources", path: "/resources" },
@@ -3159,7 +3159,7 @@ function TerminalChrome({
 
 function HomeModule() {
   const navLegend = [
-    ["Ctrl+Esc", "How To Make A Leaving Plan"],
+    ["Ctrl+Esc", "Not Ready To Leave"],
     ["Ctrl+Fn", "Resources"],
     ["Ctrl+A", "Database"],
   ];
@@ -3671,8 +3671,8 @@ function PlanningLanding({
   return (
     <section className="assessment-shell planning-landing" aria-labelledby="planning-landing-title">
       <div className="assessment-panel planning-landing-panel">
-        <div className="terminal-label">MOTHER PAGE: PLANNING</div>
-        <h1 id="planning-landing-title">CHOOSE THE PLANNING TOOL.</h1>
+        <div className="terminal-label">LOAD MODULE // NOT READY TO LEAVE</div>
+        <h1 id="planning-landing-title">&lt;Not Ready To Leave&gt;</h1>
 
         <div className="planning-document-grid" aria-label="Planning documents">
           <button className="planning-document-key" type="button" onClick={() => onNavigate("am-i-crazy", "/am-i-crazy")}>
@@ -3685,7 +3685,7 @@ function PlanningLanding({
             <span className="planning-document-icon emoji-icon" aria-hidden="true">
               🚪
             </span>
-            <strong>How To Make A Leaving Plan</strong>
+            <strong>Not Ready To Leave</strong>
           </button>
           <button className="planning-document-key" type="button" onClick={onOpenSafety}>
             <span className="planning-document-icon caution-icon" aria-hidden="true" />
