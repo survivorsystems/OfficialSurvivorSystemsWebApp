@@ -5675,7 +5675,7 @@ button:disabled {
 }
 
 .win95-titlebar {
-  background: linear-gradient(90deg, #3d0b7a, #7c24b8 62%, #ff4fd8);
+  background: #4b168f;
   border-bottom: 2px solid #ffffff;
   color: #ffffff;
   min-height: 40px;
