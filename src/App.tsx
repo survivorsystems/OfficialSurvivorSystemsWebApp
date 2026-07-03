@@ -3102,20 +3102,18 @@ function TerminalChrome({
   onNavigate: (module: ModuleKey, path: string) => void;
 }) {
   const activeLabel = moduleRoutes[activeModule]?.label ?? "Home";
+  const isDesktopHome = activeModule === "home";
 
   return (
     <main className="terminal-frame app-frame win95-frame">
       <section className="win95-desktop" aria-label="Survivor Operating System desktop">
+        {isDesktopHome ? (
+          <div className="desktop-brand-panel" aria-hidden="true">
+            <BrandLogo />
+            <p>Choose a folder to open Survivor Operating System.</p>
+          </div>
+        ) : null}
         <nav className="desktop-icon-grid" aria-label="Desktop navigation">
-          <button
-            className={`desktop-icon desktop-icon-home${activeModule === "home" ? " active" : ""}`}
-            type="button"
-            onClick={() => onNavigate("home", "/")}
-          >
-            <span className="desktop-icon-art desktop-icon-art-computer" aria-hidden="true" />
-            <span className="desktop-icon-title">Home</span>
-            <small>Terminal</small>
-          </button>
           {navItems.map((item) => (
             <button
               className={`desktop-icon${isPrimaryNavActive(activeModule, item.key) ? " active" : ""}`}
@@ -3135,16 +3133,23 @@ function TerminalChrome({
           </button>
         </nav>
 
+        {!isDesktopHome ? (
         <section className="terminal-screen win95-window" aria-label={`${activeLabel} window`}>
           <div className="win95-titlebar">
             <div className="win95-titlebar-label">
               <span className="win95-titlebar-icon" aria-hidden="true" />
               <span>{activeLabel}</span>
             </div>
-            <div className="win95-window-controls" aria-hidden="true">
-              <span />
-              <span />
-              <span />
+            <div className="win95-window-controls">
+              <span aria-hidden="true" />
+              <span aria-hidden="true" />
+              <button
+                aria-label="Close window and return to desktop"
+                type="button"
+                onClick={() => onNavigate("home", "/")}
+              >
+                x
+              </button>
             </div>
           </div>
 
@@ -3165,6 +3170,7 @@ function TerminalChrome({
           </header>
           <div className="terminal-content">{children}</div>
         </section>
+        ) : null}
 
         <footer className="win95-taskbar">
           <button className="win95-start" type="button" onClick={() => onNavigate("home", "/")}>
