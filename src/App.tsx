@@ -1354,8 +1354,8 @@ const housingGuideSections: RebuildingGuideSection[] = [
 const moduleRoutes: Record<ModuleKey, { label: string; path: string }> = {
   home: { label: "Home", path: "/" },
   "am-i-crazy": { label: "Was I Crazy?", path: "/am-i-crazy" },
-  "go-bag-prep": { label: "Crisis Support", path: "/crisis-support" },
-  planning: { label: "Crisis Support", path: "/crisis-support" },
+  "go-bag-prep": { label: "Immediate Support", path: "/crisis-support" },
+  planning: { label: "Immediate Support", path: "/crisis-support" },
   rebuilding: { label: "Rebuilding", path: "/rebuilding" },
   "local-help": { label: "Resources", path: "/resources" },
   "how-to": { label: "Resources", path: "/resources" },
@@ -1367,7 +1367,7 @@ const moduleRoutes: Record<ModuleKey, { label: string; path: string }> = {
 const allNavTargets: Array<{ key: ModuleKey; label: string; path: string }> = [
   { key: "home", ...moduleRoutes.home },
   { key: "am-i-crazy", label: "Was I Crazy", path: "/am-i-crazy" },
-  { key: "planning", label: "Crisis Support", path: "/crisis-support" },
+  { key: "planning", label: "Immediate Support", path: "/crisis-support" },
   { key: "local-help", ...moduleRoutes["local-help"] },
   { key: "how-to", ...moduleRoutes["how-to"] },
   { key: "legal", ...moduleRoutes.legal },
@@ -1376,9 +1376,8 @@ const allNavTargets: Array<{ key: ModuleKey; label: string; path: string }> = [
 ];
 
 const navItems: Array<{ key: ModuleKey; label: string; path: string; code: string }> = [
-  { key: "planning", label: "Crisis", path: "/crisis-support", code: "CRS" },
   { key: "rebuilding", label: "Rebuild", path: "/rebuilding", code: "RBL" },
-  { key: "local-help", label: "Files", path: "/resources", code: "FIL" },
+  { key: "local-help", label: "Resources", path: "/resources", code: "RES" },
   { key: "access", label: "Database", path: "/resources/access", code: "DBS" },
 ];
 
@@ -2525,7 +2524,7 @@ function TerminalCommand({
           autoComplete="off"
           id="terminal-command"
           onChange={(event) => setQuery(event.target.value)}
-          placeholder="type: was i crazy, crisis support, resources, database, rebuilding, quick exit..."
+          placeholder="type: was i crazy, resources, database, rebuilding, quick exit..."
           spellCheck={false}
           type="search"
           value={query}
@@ -2629,13 +2628,6 @@ function TerminalChrome({
 }
 
 function HomeModule() {
-  const navLegend = [
-    ["CRS", "Crisis support routing"],
-    ["RBL", "Rebuilding tools and reality checks"],
-    ["FIL", "Guides, resources, and legal files"],
-    ["DBS", "Database access paths"],
-  ];
-
   return (
     <section className="home-terminal" aria-labelledby="home-title">
       <div className="home-terminal-command">
@@ -2670,9 +2662,9 @@ function HomeModule() {
             on your device.
           </p>
           <p>
-            If you came here asking whether you were crazy, start with the reality-check assessment.
-            If you came here because the immediate crisis is still unfolding, open Crisis Support.
-            If you are beginning the slow work after the emergency, open Rebuilding or Resources.
+            If you came here asking whether you were crazy, start with Rebuilding and open the
+            reality-check file. If you are beginning the slow work after the emergency, open
+            Resources or Database.
           </p>
           <p className="mission-emphasis">
             This is not about being perfect, obedient, healed, brave, grateful, or ready. This is
@@ -2695,15 +2687,6 @@ function HomeModule() {
             </p>
           </div>
         </article>
-        <aside className="nav-legend" aria-label="Navigation legend">
-          <div className="terminal-label">NAV LEGEND</div>
-          {navLegend.map(([shortcut, decoded]) => (
-            <div className="legend-row" key={shortcut}>
-              <kbd>{shortcut}</kbd>
-              <span>{decoded}</span>
-            </div>
-          ))}
-        </aside>
       </div>
     </section>
   );
@@ -3513,6 +3496,7 @@ function ResourceModule({
 }) {
   const [activeFolder, setActiveFolder] = useState<ResourceFolder>(() => getInitialResourceFolder(moduleKey));
   const [guideLaunch, setGuideLaunch] = useState<GuideLaunch | null>(null);
+  const [activeDirectory, setActiveDirectory] = useState<string | null>("housing");
 
   useEffect(() => {
     setActiveFolder(getInitialResourceFolder(moduleKey));
@@ -3555,27 +3539,92 @@ function ResourceModule({
     );
   }
 
-  const resourceFolderLaunchers = [
-    ...howToPriorities.map((priority) => ({
-      id: priority.id,
-      label: priority.label,
-      title: priority.title,
-      count: `${howToGuides.filter((guide) => guide.priority === priority.id).length} files`,
-      onClick: () => setActiveFolder(priority.id),
-    })),
+  const resourceDirectories = [
     {
-      id: "legal" as const,
-      label: "legal.exe",
-      title: "Legal",
-      count: "2 files",
-      onClick: () => setActiveFolder("legal"),
+      id: "housing",
+      label: "housing.dir",
+      description: "Coordinated Entry, vehicle living, shelter logistics, documents, and housing navigation.",
+      files: [
+        {
+          label: "How To Navigate Housing",
+          action: () => {
+            setGuideLaunch({ guideId: "housing-navigation", priorityId: "priority-2" });
+            setActiveFolder("priority-2");
+          },
+        },
+        {
+          label: "How To Live In Your Car",
+          action: () => {
+            setGuideLaunch({ guideId: "live-in-your-car", priorityId: "priority-1" });
+            setActiveFolder("priority-1");
+          },
+        },
+      ],
     },
     {
-      id: "access" as const,
-      label: "database.exe",
-      title: "Database",
-      count: "access paths",
-      onClick: () => setActiveFolder("access"),
+      id: "benefits",
+      label: "benefits.dir",
+      description: "SNAP, TANF, application tracking, interviews, deadlines, and recertification basics.",
+      files: [
+        {
+          label: "How To Navigate SNAP & TANF",
+          action: () => {
+            setGuideLaunch({ guideId: "snap-tanf", priorityId: "priority-2" });
+            setActiveFolder("priority-2");
+          },
+        },
+      ],
+    },
+    {
+      id: "legal",
+      label: "legal.dir",
+      description: "Protective order, family court, civil court, and legal-system orientation files.",
+      files: [
+        { label: "Legal Resource Folder", action: () => setActiveFolder("legal") },
+        { label: "Protective Order Guide", action: () => setActiveFolder("legal") },
+        { label: "Family Court Guide", action: () => setActiveFolder("legal") },
+      ],
+    },
+    {
+      id: "digital",
+      label: "digital-safety.dir",
+      description: "Browser history, private browsing limits, screenshots, and local trace cleanup.",
+      files: [
+        {
+          label: "How To Clear Your Browser History",
+          action: () => {
+            setGuideLaunch({ guideId: "browser-trace-cleanup", priorityId: "priority-1" });
+            setActiveFolder("priority-1");
+          },
+        },
+      ],
+    },
+    {
+      id: "stabilize",
+      label: "stabilize.dir",
+      description: "Pets, routines, first systems, and the pieces that make life feel less impossible.",
+      files: [
+        {
+          label: "How To Make A Safety Plan For Your Pet",
+          action: () => {
+            setGuideLaunch({ guideId: "pet-safety-plan", priorityId: "priority-1" });
+            setActiveFolder("priority-1");
+          },
+        },
+        {
+          label: "How To Create Routine While Life Is Chaotic",
+          action: () => {
+            setGuideLaunch({ guideId: "routine-chaos", priorityId: "priority-3" });
+            setActiveFolder("priority-3");
+          },
+        },
+      ],
+    },
+    {
+      id: "database",
+      label: "database.dir",
+      description: "Access paths, preview rules, paid resource viewing, and permanent unlock information.",
+      files: [{ label: "Database Access Information", action: () => setActiveFolder("access") }],
     },
   ];
 
@@ -3584,16 +3633,37 @@ function ResourceModule({
       <div className="terminal-label">LOAD MODULE // RESOURCE FOLDERS</div>
       <h1 id="resources-title">&lt;Resources&gt;</h1>
 
-      <div className="resource-document-grid" aria-label="Resource folders">
-        {resourceFolderLaunchers.map((folder) => (
-          <button className="resource-document-key" key={folder.id} type="button" onClick={folder.onClick}>
-            <span className="resource-folder-launch-icon" aria-hidden="true">
-              <span />
-            </span>
-            <strong>{folder.label}</strong>
-            <small>{folder.count}</small>
-          </button>
-        ))}
+      <div className="resource-directory-tree" aria-label="Resource directories">
+        {resourceDirectories.map((directory) => {
+          const isOpen = activeDirectory === directory.id;
+
+          return (
+            <section className={`resource-directory${isOpen ? " open" : ""}`} key={directory.id}>
+              <button
+                className="resource-directory-toggle"
+                type="button"
+                onClick={() => setActiveDirectory(isOpen ? null : directory.id)}
+                aria-expanded={isOpen}
+              >
+                <span className="resource-directory-icon" aria-hidden="true" />
+                <span>
+                  <strong>{directory.label}</strong>
+                  <small>{directory.description}</small>
+                </span>
+              </button>
+              {isOpen ? (
+                <div className="resource-file-list">
+                  {directory.files.map((file) => (
+                    <button className="resource-file-row" key={file.label} type="button" onClick={file.action}>
+                      <span aria-hidden="true">&gt;</span>
+                      {file.label}
+                    </button>
+                  ))}
+                </div>
+              ) : null}
+            </section>
+          );
+        })}
       </div>
     </section>
   );
