@@ -6821,3 +6821,331 @@ button:not(.desktop-icon):not(.planning-document-key):not(.resource-document-key
     display: none;
   }
 }
+
+/* Mission terminal pass: one green system shell, fewer nested panels. */
+.hud-frame,
+.hud-frame.module-access,
+.hud-frame.module-library,
+.hud-frame.module-am-i-crazy,
+.hud-frame.module-rebuilding,
+.hud-frame.module-local-help,
+.hud-frame.module-how-to,
+.hud-frame.module-legal,
+.hud-frame.module-planning,
+.hud-frame.module-go-bag-prep {
+  --hud: #20ff2c;
+  --hud-dim: #0b6519;
+  --hud-hot: #72ff78;
+  --hud-readable: #2ccf3d;
+  --hud-bg: #000000;
+  --hud-panel: #000000;
+  background: #000000;
+  color: var(--hud-readable);
+}
+
+.hud-frame .win95-desktop {
+  background:
+    radial-gradient(circle at 74% 14%, rgba(32, 255, 44, 0.08), transparent 24%),
+    linear-gradient(rgba(32, 255, 44, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(32, 255, 44, 0.08) 1px, transparent 1px),
+    #000000;
+  background-size: auto, 54px 54px, 54px 54px, auto;
+  grid-template-columns: minmax(112px, 152px) minmax(0, 1fr);
+}
+
+.hud-frame .desktop-brand-panel {
+  color: var(--hud);
+  filter: saturate(0.8);
+  opacity: 0.88;
+}
+
+.hud-frame .desktop-icon-grid {
+  align-content: start;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(2, minmax(44px, 1fr));
+  padding: 12px 8px;
+}
+
+.hud-frame .desktop-icon {
+  align-items: center;
+  aspect-ratio: 1 / 0.78;
+  background: #0b7e1d;
+  border: 1px solid #22ff31;
+  box-shadow:
+    inset 0 0 0 1px rgba(0, 0, 0, 0.55),
+    inset 0 -8px 0 rgba(0, 0, 0, 0.18);
+  color: #031006;
+  justify-content: center;
+  min-height: 48px;
+  padding: 6px 4px;
+  text-shadow: none;
+}
+
+.hud-frame .desktop-icon:hover,
+.hud-frame .desktop-icon:focus-visible,
+.hud-frame .desktop-icon.active {
+  background: #20ff2c;
+  border-color: #8cff91;
+  box-shadow:
+    inset 0 0 0 1px rgba(0, 0, 0, 0.65),
+    0 0 14px rgba(32, 255, 44, 0.32);
+  color: #000000;
+  transform: translateY(1px);
+}
+
+.hud-frame .desktop-icon-code {
+  color: inherit;
+  display: block;
+  font-family: var(--font-pixel);
+  font-size: clamp(0.62rem, 1.2vw, 0.78rem);
+  line-height: 1;
+}
+
+.hud-frame .desktop-icon-title {
+  background: transparent;
+  color: inherit;
+  font-size: clamp(0.5rem, 0.95vw, 0.64rem);
+  line-height: 1.1;
+  margin-top: 4px;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  padding: 0;
+  text-transform: uppercase;
+}
+
+.hud-frame .desktop-icon-art,
+.hud-frame .desktop-icon small {
+  display: none;
+}
+
+.hud-frame .win95-window {
+  background: #000000;
+  border: 1px solid var(--hud-dim);
+  box-shadow:
+    0 0 0 1px rgba(32, 255, 44, 0.18),
+    0 0 30px rgba(32, 255, 44, 0.12);
+}
+
+.hud-frame .win95-titlebar {
+  background: #010901;
+  border-bottom: 1px solid var(--hud-dim);
+  color: var(--hud);
+  min-height: 34px;
+}
+
+.hud-frame .win95-titlebar::after {
+  color: var(--hud-readable);
+  content: "SYS 01  RUN  NET";
+}
+
+.hud-frame .win95-titlebar-label {
+  color: var(--hud);
+}
+
+.hud-frame .win95-window-controls span,
+.hud-frame .win95-window-controls button {
+  background: #0b7e1d;
+  border-color: #22ff31;
+  box-shadow: none;
+  color: #020902;
+  font-size: 0.58rem;
+  min-width: 36px;
+}
+
+.hud-frame .win95-window-controls span:nth-child(2) {
+  background: #20ff2c;
+}
+
+.hud-frame .win95-window-controls button:hover,
+.hud-frame .win95-window-controls button:focus-visible {
+  background: #72ff78;
+  color: #000000;
+}
+
+.hud-frame .terminal-topbar,
+.hud-frame .win95-window .terminal-topbar,
+.hud-frame .terminal-content,
+.hud-frame .win95-window .terminal-content {
+  background: #000000;
+  border: 0;
+  box-shadow: none;
+  color: var(--hud-readable);
+}
+
+.hud-frame .terminal-topbar {
+  border-bottom: 1px solid rgba(32, 255, 44, 0.24);
+}
+
+.hud-frame .terminal-content {
+  min-height: calc(100vh - 164px);
+}
+
+.hud-frame .terminal-content::before,
+.hud-frame .terminal-content::after {
+  opacity: 0.18;
+}
+
+.hud-frame .terminal-topbar h1,
+.hud-frame .win95-window .terminal-topbar h1,
+.hud-frame .terminal-label,
+.hud-frame .win95-window .terminal-label,
+.hud-frame .terminal-content h1,
+.hud-frame .terminal-content h2,
+.hud-frame .terminal-content h3,
+.hud-frame .terminal-content strong {
+  color: var(--hud);
+  text-shadow: 0 0 6px rgba(32, 255, 44, 0.18);
+}
+
+.hud-frame .terminal-content p,
+.hud-frame .terminal-content li,
+.hud-frame .terminal-content small,
+.hud-frame .terminal-content span {
+  color: var(--hud-readable);
+}
+
+.hud-frame .system-status span,
+.hud-frame .system-status strong,
+.hud-frame .win95-window .system-status span,
+.hud-frame .win95-window .system-status strong {
+  background: transparent;
+  border: 0;
+  color: var(--hud-readable);
+}
+
+.hud-frame .command-terminal,
+.hud-frame .win95-window .command-terminal {
+  background: #010901;
+  border: 1px solid rgba(32, 255, 44, 0.28);
+  box-shadow: none;
+}
+
+.hud-frame .command-input-row input,
+.hud-frame .command-input-row span,
+.hud-frame .command-terminal label,
+.hud-frame .command-terminal p {
+  color: var(--hud);
+}
+
+.hud-frame .terminal-content .page-shell,
+.hud-frame .terminal-content .home-terminal,
+.hud-frame .terminal-content .home-message,
+.hud-frame .terminal-content .home-legend,
+.hud-frame .terminal-content .library-hero-panel,
+.hud-frame .terminal-content .library-section,
+.hud-frame .terminal-content .library-pass-card,
+.hud-frame .terminal-content .library-system-card,
+.hud-frame .terminal-content .resources-hero,
+.hud-frame .terminal-content .resource-folder-card,
+.hud-frame .terminal-content .resource-document-card,
+.hud-frame .terminal-content .how-to-folder-card,
+.hud-frame .terminal-content .how-to-guide-card,
+.hud-frame .terminal-content .rebuilding-hero,
+.hud-frame .terminal-content .rebuilding-status,
+.hud-frame .terminal-content .rebuilding-guide-card,
+.hud-frame .terminal-content .rebuilding-bottom-line,
+.hud-frame .terminal-content .legal-header,
+.hud-frame .terminal-content .legal-card,
+.hud-frame .terminal-content .assessment-panel,
+.hud-frame .terminal-content .assessment-card,
+.hud-frame .terminal-content .support-card {
+  background: transparent;
+  border-color: rgba(32, 255, 44, 0.24);
+  box-shadow: none;
+}
+
+.hud-frame .terminal-content .library-pass-card,
+.hud-frame .terminal-content .resource-folder-card,
+.hud-frame .terminal-content .resource-document-card,
+.hud-frame .terminal-content .how-to-folder-card,
+.hud-frame .terminal-content .how-to-guide-card,
+.hud-frame .terminal-content .rebuilding-guide-card,
+.hud-frame .terminal-content .legal-card,
+.hud-frame .terminal-content .assessment-card,
+.hud-frame .terminal-content .support-card {
+  background: rgba(1, 9, 1, 0.82);
+}
+
+.hud-frame .terminal-content button:not(.desktop-icon),
+.hud-frame .terminal-content .primary-action,
+.hud-frame .terminal-content .secondary-action,
+.hud-frame .terminal-content .quick-exit,
+.hud-frame .terminal-content .text-link,
+.hud-frame .terminal-content .resource-back-button {
+  background: #20ff2c;
+  border-color: #8cff91;
+  box-shadow: none;
+  color: #000000;
+  text-shadow: none;
+}
+
+.hud-frame .terminal-content button:not(.desktop-icon):hover,
+.hud-frame .terminal-content button:not(.desktop-icon):focus-visible,
+.hud-frame .terminal-content .text-link:hover,
+.hud-frame .terminal-content .text-link:focus-visible {
+  background: #72ff78;
+  color: #000000;
+}
+
+.rebuilding-mission-files {
+  align-items: center;
+  border: 1px solid rgba(32, 255, 44, 0.28);
+  display: grid;
+  gap: 18px;
+  grid-template-columns: minmax(0, 1fr) minmax(190px, 260px);
+  margin: 18px 0;
+  padding: clamp(16px, 2vw, 24px);
+}
+
+.rebuilding-mission-files button {
+  align-items: center;
+  display: grid;
+  gap: 6px;
+  justify-items: start;
+}
+
+.rebuilding-mission-files button span {
+  color: #000000;
+  font-family: var(--font-pixel);
+  font-size: 0.64rem;
+}
+
+.rebuilding-mission-files button strong,
+.rebuilding-mission-files button small {
+  color: #000000;
+}
+
+.win95-taskbar {
+  display: none;
+}
+
+@media (max-width: 860px) {
+  .hud-frame .win95-desktop {
+    grid-template-columns: 1fr;
+  }
+
+  .hud-frame .desktop-icon-grid {
+    grid-template-columns: repeat(5, minmax(48px, 1fr));
+    padding: 8px 0;
+  }
+
+  .hud-frame .desktop-icon {
+    min-height: 42px;
+  }
+
+  .hud-frame .desktop-icon-title {
+    font-size: 0.48rem;
+  }
+
+  .hud-frame .win95-window {
+    grid-column: 1;
+  }
+
+  .rebuilding-mission-files {
+    grid-template-columns: 1fr;
+  }
+}

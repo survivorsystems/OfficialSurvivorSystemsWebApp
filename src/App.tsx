@@ -1375,12 +1375,11 @@ const allNavTargets: Array<{ key: ModuleKey; label: string; path: string }> = [
   { key: "access", ...moduleRoutes.access },
 ];
 
-const navItems: Array<{ key: ModuleKey; label: string; path: string; decoded: string; icon: string }> = [
-  { key: "am-i-crazy", label: "Was I Crazy?", path: "/am-i-crazy", decoded: "Ctrl+?", icon: "computer" },
-  { key: "planning", label: "Crisis Support", path: "/crisis-support", decoded: "Ctrl+Esc", icon: "exit" },
-  { key: "rebuilding", label: "Rebuilding", path: "/rebuilding", decoded: "Ctrl+Shift", icon: "folder" },
-  { key: "local-help", label: "Resources", path: "/resources", decoded: "Ctrl+Fn", icon: "folder" },
-  { key: "access", label: "Database", path: "/resources/access", decoded: "Ctrl+A", icon: "database" },
+const navItems: Array<{ key: ModuleKey; label: string; path: string; code: string }> = [
+  { key: "planning", label: "Crisis", path: "/crisis-support", code: "CRS" },
+  { key: "rebuilding", label: "Rebuild", path: "/rebuilding", code: "RBL" },
+  { key: "local-help", label: "Files", path: "/resources", code: "FIL" },
+  { key: "access", label: "Database", path: "/resources/access", code: "DBS" },
 ];
 
 function navItemFor(key: ModuleKey) {
@@ -2566,15 +2565,13 @@ function TerminalChrome({
               type="button"
               onClick={() => onNavigate(item.key, item.path)}
             >
-              <span className={`desktop-icon-art desktop-icon-art-${item.icon}`} aria-hidden="true" />
+              <span className="desktop-icon-code" aria-hidden="true">{item.code}</span>
               <span className="desktop-icon-title">{item.label}</span>
-              <small>{item.decoded}</small>
             </button>
           ))}
           <button className="desktop-icon desktop-icon-exit" type="button" onClick={leaveSite}>
-            <span className="desktop-icon-art desktop-icon-art-exit" aria-hidden="true" />
+            <span className="desktop-icon-code" aria-hidden="true">EXT</span>
             <span className="desktop-icon-title">Quick Exit</span>
-            <small>iluvrocks</small>
           </button>
         </nav>
 
@@ -2585,8 +2582,8 @@ function TerminalChrome({
               <span>{activeLabel}</span>
             </div>
             <div className="win95-window-controls">
-              <span aria-hidden="true" />
-              <span aria-hidden="true" />
+              <span aria-hidden="true">SYS</span>
+              <span aria-hidden="true">MAP</span>
               <button
                 aria-label="Close window and return to desktop"
                 type="button"
@@ -2633,11 +2630,10 @@ function TerminalChrome({
 
 function HomeModule() {
   const navLegend = [
-    ["Ctrl+?", "Was I Crazy?"],
-    ["Ctrl+Esc", "Crisis Support"],
-    ["Ctrl+Shift", "Rebuilding"],
-    ["Ctrl+Fn", "Resources"],
-    ["Ctrl+A", "Database"],
+    ["CRS", "Crisis support routing"],
+    ["RBL", "Rebuilding tools and reality checks"],
+    ["FIL", "Guides, resources, and legal files"],
+    ["DBS", "Database access paths"],
   ];
 
   return (
@@ -3452,7 +3448,7 @@ function AccessInformationModule() {
     <section className="page-shell library-module access-module" aria-labelledby="access-title">
       <div className="page-kicker">
         <BookOpenCheck aria-hidden="true" />
-        <p className="eyebrow">Ctrl+A // Database</p>
+        <p className="eyebrow">DATABASE // ACCESS</p>
       </div>
 
       <div className="library-hero-panel">
@@ -3465,7 +3461,7 @@ function AccessInformationModule() {
           </p>
         </div>
         <aside className="library-status-panel" aria-label="Access pass status">
-          <span>CTRL+A</span>
+          <span>DATABASE</span>
           <strong>DATABASE</strong>
           <small>VIEWING + UNLOCK RULES</small>
         </aside>
@@ -3756,6 +3752,22 @@ function RebuildingModule({
         <span>VAWA</span>
         <span>Track Everything</span>
       </div>
+
+      <section className="rebuilding-mission-files" aria-labelledby="rebuilding-mission-files-title">
+        <div>
+          <p className="terminal-label">MISSION FILE</p>
+          <h2 id="rebuilding-mission-files-title">&lt;Reality Check Tools&gt;</h2>
+          <p>
+            For the part where the brain keeps replaying the old argument and asking whether the
+            harm was real. Spoiler: the system can run diagnostics without giving them admin access.
+          </p>
+        </div>
+        <button type="button" onClick={() => onNavigate("am-i-crazy", "/am-i-crazy")}>
+          <span aria-hidden="true">RUN</span>
+          <strong>Was I Crazy?</strong>
+          <small>Open assessment</small>
+        </button>
+      </section>
 
       <div className="rebuilding-section-grid">
         {housingGuideSections.map((section, index) => (
