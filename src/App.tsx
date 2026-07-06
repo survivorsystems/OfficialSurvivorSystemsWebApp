@@ -2,7 +2,6 @@ import { type FormEvent, type ReactNode, useCallback, useEffect, useRef, useStat
 import {
   BookOpenCheck,
   Scale,
-  ShieldAlert,
   Sprout,
 } from "lucide-react";
 import denialSupportOne from "./assets/support/denial-support-1.png";
@@ -1994,32 +1993,8 @@ const defaultControlPanel: ControlPanelState = {
   notice: "COMMAND CENTER ONLINE. MODULE READINGS STANDBY.",
 };
 
-const privateBrowsingHelp = [
-  "Private or Incognito windows can reduce some local browser history on this device.",
-  "They do not hide activity from monitoring software, shared accounts, phone plans, networks, routers, backups, or someone with device access.",
-  "If it is safe, open a private window from your browser menu before continuing.",
-];
-
 function leaveSite() {
   window.location.replace("https://iluvrocks.rocks");
-}
-
-const checkpointSessionKey = "survivorSystemsCheckpointCleared";
-
-function getCheckpointCleared() {
-  try {
-    return window.sessionStorage.getItem(checkpointSessionKey) === "true";
-  } catch {
-    return false;
-  }
-}
-
-function markCheckpointCleared() {
-  try {
-    window.sessionStorage.setItem(checkpointSessionKey, "true");
-  } catch {
-    // If sessionStorage is unavailable, the in-memory state still lets this visit continue.
-  }
 }
 
 function getInitialModule(): ModuleKey {
@@ -2179,216 +2154,6 @@ function TypedText({
   );
 }
 
-const moduleIntroSeen = new Set<string>();
-
-const moduleIntroCopy: Partial<Record<ModuleKey, { title: string; text: string }>> = {
-  "go-bag-prep": {
-    title: "Crisis Support",
-    text:
-      "SYSTEM PLACEHOLDER // CRISIS SUPPORT\n\nThis system is not an emergency service and does not guide active escape planning. If someone is in immediate danger, contact emergency services, the National Domestic Violence Hotline, or a local crisis intervention option.\n\nLoading support options...",
-  },
-  planning: {
-    title: "Crisis Support",
-    text:
-      "SYSTEM PLACEHOLDER // CRISIS SUPPORT\n\nThis system is for rebuilding, not active extraction planning. If someone is still in crisis, the safest next step is direct human support: the National Domestic Violence Hotline, emergency services, or a local crisis resource.\n\nLoading support options...",
-  },
-  rebuilding: {
-    title: "Rebuilding",
-    text:
-      "SYSTEM PLACEHOLDER // REBUILDING\n\nThis module will collect resources for after the emergency shifts: benefits, housing, routines, recovery, documents, and the slow work of getting a life back under the user's own control.\n\nLoading rebuild files...",
-  },
-  "local-help": {
-    title: "Resources",
-    text:
-      "SYSTEM PLACEHOLDER // RESOURCES\n\nThis module opens the resource file system. Folders are sorted so the user can choose one area at a time instead of being hit with everything at once.\n\nLoading resource folders...",
-  },
-  "how-to": {
-    title: "Resources",
-    text:
-      "SYSTEM PLACEHOLDER // RESOURCES\n\nThis module opens the resource file system. Folders are sorted so the user can choose one area at a time instead of being hit with everything at once.\n\nLoading resource folders...",
-  },
-  legal: {
-    title: "Legal Resources",
-    text:
-      "SYSTEM PLACEHOLDER // LEGAL RESOURCES\n\nThis module will organize court, reporting, immigration, and protective-order information into files the user can open when they are ready.\n\nLoading legal files...",
-  },
-  library: {
-    title: "Database",
-    text:
-      "SYSTEM PLACEHOLDER // DATABASE\n\nThis module will explain viewing access, unlocks, and the deeper resource library without pretending the system needs more information than it does.\n\nLoading database...",
-  },
-  access: {
-    title: "Database",
-    text:
-      "SYSTEM PLACEHOLDER // DATABASE\n\nThis module will explain viewing access, unlocks, and the deeper resource library without pretending the system needs more information than it does.\n\nLoading database...",
-  },
-};
-
-function ModuleIntroGate({
-  children,
-  introKey,
-  text,
-  title,
-}: {
-  children: ReactNode;
-  introKey: string;
-  text: string;
-  title: string;
-}) {
-  const [ready, setReady] = useState(() => moduleIntroSeen.has(introKey));
-
-  const finishIntro = useCallback(() => {
-    moduleIntroSeen.add(introKey);
-    setReady(true);
-  }, [introKey]);
-
-  if (ready) {
-    return <>{children}</>;
-  }
-
-  return (
-    <section className="module-intro-unit" aria-labelledby={`${introKey}-intro-title`}>
-      <div className="terminal-label">INITIALIZE MODULE</div>
-      <h1 id={`${introKey}-intro-title`}>&lt;{title}&gt;</h1>
-      <TypedText className="module-intro-typed" text={text} onDone={finishIntro} skipLabel="Open Now" />
-    </section>
-  );
-}
-
-function WelcomeCheckpoint({
-  onComplete,
-}: {
-  onComplete: (target?: { module: ModuleKey; path: string }) => void;
-}) {
-  const [typingComplete, setTypingComplete] = useState(false);
-  const [mode, setMode] = useState<"ready" | "proximity" | "proximity-detail" | "cyber-warning">("ready");
-  const [answer, setAnswer] = useState("");
-
-  const promptText = mode === "ready" ? "Welcome. Are you ready to begin? y/n" : "Are you still in close proximity to your abuser? y/n";
-
-  function resetPrompt(nextMode: typeof mode) {
-    setAnswer("");
-    setTypingComplete(false);
-    setMode(nextMode);
-  }
-
-  function submitPrompt(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const normalized = answer.trim().toLowerCase();
-
-    if (normalized !== "y" && normalized !== "n" && normalized !== "yes" && normalized !== "no") {
-      return;
-    }
-
-    if (mode === "ready") {
-      if (normalized.startsWith("n")) {
-        leaveSite();
-        return;
-      }
-      resetPrompt("proximity");
-      return;
-    }
-
-    if (mode === "proximity") {
-      if (normalized.startsWith("y")) {
-        setAnswer("");
-        setMode("proximity-detail");
-        return;
-      }
-      setMode("cyber-warning");
-    }
-  }
-
-  return (
-    <main className="terminal-frame checkpoint-frame matrix-checkpoint">
-      <button className="quick-exit global-exit" type="button" onClick={leaveSite}>
-        <ShieldAlert aria-hidden="true" />
-        Quick Exit
-      </button>
-      <section className="checkpoint-panel matrix-gate-panel" aria-labelledby="checkpoint-title">
-        {mode === "ready" || mode === "proximity" ? (
-          <>
-            <h1 className="sr-only" id="checkpoint-title">Survivor Operating System checkpoint</h1>
-            <TypedText
-              key={mode}
-              className="matrix-typed-prompt"
-              text={promptText}
-              onDone={() => setTypingComplete(true)}
-              skipLabel="Show Prompt"
-            />
-            {typingComplete ? (
-              <form className="matrix-yn-form" onSubmit={submitPrompt}>
-                <span aria-hidden="true">&gt;</span>
-                <input
-                  autoComplete="off"
-                  autoFocus
-                  aria-label={promptText}
-                  maxLength={3}
-                  onChange={(event) => setAnswer(event.target.value)}
-                  spellCheck={false}
-                  value={answer}
-                />
-                <button type="submit">ENTER</button>
-              </form>
-            ) : null}
-          </>
-        ) : null}
-
-        {mode === "proximity-detail" && (
-          <div className="matrix-warning-panel">
-            <div className="terminal-label">PROXIMITY CLARIFIER</div>
-            <h1 id="checkpoint-title">Select the closest signal.</h1>
-            <div className="terminal-actions">
-              <button type="button" onClick={() => setMode("cyber-warning")}>
-                Sharing custody or legal contact
-              </button>
-              <button type="button" onClick={() => onComplete({ module: "planning", path: "/crisis-support" })}>
-                Still romantic / trying to escape
-              </button>
-              <button type="button" onClick={() => setMode("cyber-warning")}>
-                Still romantic / confused
-              </button>
-              <button type="button" onClick={() => setMode("cyber-warning")}>
-                Something else / not sure
-              </button>
-              <button type="button" onClick={leaveSite}>
-                Quick Exit
-              </button>
-            </div>
-          </div>
-        )}
-
-        {mode === "cyber-warning" && (
-          <div className="matrix-warning-panel">
-            <div className="terminal-label">CYBERSTALKING WARNING</div>
-            <h1 id="checkpoint-title">Before the user terminal opens.</h1>
-            <p>
-              Cyberstalking is real and extremely common. If you believe this device, browser,
-              account, location, phone plan, cloud backup, shared login, or network is being
-              monitored, please exit this site now and use a safer device or account if one is
-              available.
-            </p>
-            <ul>
-              {privateBrowsingHelp.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-              <li>Use Quick Exit at any time if staying here starts to feel unsafe.</li>
-            </ul>
-            <div className="terminal-actions compact-actions">
-              <button type="button" onClick={() => onComplete()}>
-                Open User Terminal
-              </button>
-              <button type="button" onClick={leaveSite}>
-                Quick Exit
-              </button>
-            </div>
-          </div>
-        )}
-      </section>
-    </main>
-  );
-}
-
 function ModuleLoading({ label }: { label: string }) {
   return (
     <div className="module-loading" role="status" aria-live="polite">
@@ -2541,7 +2306,7 @@ function TerminalChrome({
   onNavigate,
 }: {
   activeModule: ModuleKey;
-  children: React.ReactNode;
+  children: ReactNode;
   onNavigate: (module: ModuleKey, path: string) => void;
 }) {
   const activeLabel = moduleRoutes[activeModule]?.label ?? "Home";
@@ -4156,7 +3921,6 @@ function LegalModule() {
 }
 
 export function App() {
-  const [checkpointPassed, setCheckpointPassed] = useState(() => getCheckpointCleared());
   const [activeModule, setActiveModule] = useState<ModuleKey>(() => getInitialModule());
   const [, setControlPanel] = useState<ControlPanelState>(defaultControlPanel);
   const [loadingModule, setLoadingModule] = useState<ModuleKey | null>(null);
@@ -4190,21 +3954,7 @@ export function App() {
     }, 520);
   }
 
-  function completeCheckpoint(target?: { module: ModuleKey; path: string }) {
-    markCheckpointCleared();
-    if (target) {
-      window.history.pushState({}, "", target.path);
-      setActiveModule(target.module);
-    }
-    setCheckpointPassed(true);
-  }
-
-  if (!checkpointPassed) {
-    return <WelcomeCheckpoint onComplete={completeCheckpoint} />;
-  }
-
   const loadingLabel = loadingModule ? moduleRoutes[loadingModule]?.label : null;
-  const activeIntro = !loadingModule ? moduleIntroCopy[activeModule] : null;
   const moduleContent = activeModule === "home" ? (
     <HomeModule />
   ) : activeModule === "am-i-crazy" ? (
@@ -4225,10 +3975,6 @@ export function App() {
     <TerminalChrome activeModule={loadingModule ?? activeModule} onNavigate={navigate}>
       {loadingModule && loadingLabel ? (
         <ModuleLoading label={loadingLabel} />
-      ) : activeIntro ? (
-        <ModuleIntroGate introKey={activeModule} title={activeIntro.title} text={activeIntro.text}>
-          {moduleContent}
-        </ModuleIntroGate>
       ) : (
         moduleContent
       )}
