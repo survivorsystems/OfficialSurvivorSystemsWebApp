@@ -2635,10 +2635,6 @@ function TerminalChrome({
             ))}
           </nav>
           <div className="sidebar-actions">
-            <button className="sidebar-login" type="button" onClick={() => onNavigate("about", "/about")}>
-              <span aria-hidden="true">□</span>
-              Log in
-            </button>
             <button className="sidebar-support" type="button" onClick={() => onNavigate("advocacy", "/advocacy")}>
               You're Not Alone
             </button>
@@ -2706,118 +2702,136 @@ function TerminalChrome({
 }
 
 function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: string) => void }) {
+  const homeCards: Array<{
+    title: string;
+    copy: string;
+    action: string;
+    module: ModuleKey;
+    path: string;
+    icon: string;
+  }> = [
+    {
+      title: "Assessments",
+      copy: "Understand your experiences, identify patterns, and create a clearer path forward.",
+      action: "Take an Assessment",
+      module: "assessments",
+      path: "/assessments",
+      icon: "flower",
+    },
+    {
+      title: "Guides",
+      copy: "Plain-language support for court, housing, benefits, safety planning, and rebuilding.",
+      action: "Browse Guides",
+      module: "guides",
+      path: "/guides",
+      icon: "sprig",
+    },
+    {
+      title: "Planners & Trackers",
+      copy: "Organize applications, appointments, evidence, deadlines, agencies, and next steps.",
+      action: "Explore Planners",
+      module: "planners",
+      path: "/planners-trackers",
+      icon: "fern",
+    },
+    {
+      title: "Toolkits",
+      copy: "Editable resources for preparation, documentation, support, self-care, and daily resilience.",
+      action: "View Toolkits",
+      module: "toolkits",
+      path: "/toolkits",
+      icon: "arch",
+    },
+    {
+      title: "Education",
+      copy: "Learn about coercive control, trauma, stalking, manipulation, and post-separation abuse.",
+      action: "Start Learning",
+      module: "education",
+      path: "/education-awareness",
+      icon: "book",
+    },
+  ];
+
   return (
     <section className="home-terminal" aria-labelledby="home-title">
-      <div className="home-grid">
-        <article className="home-message">
+      <div className="home-grid refined-home-grid">
+        <article className="home-message refined-home-message">
+          <p className="folk-kicker">Clarity. Protection. Power.</p>
           <h1 id="home-title">Welcome to Survivor Systems</h1>
           <p>
-            You’re allowed to be curious about what’s happening to you, why everything feels so
-            confusing, what your options are, and what your life could look like when you’re no longer
-            organizing yourself around someone else’s control.
+            You are allowed to be curious about what is happening to you, why everything feels so
+            confusing, what your options are, and what your life could look like when you are no
+            longer organizing yourself around someone else's control.
           </p>
           <p>
             This space was built to help you get clear, get practical, and start choosing yourself
-            again—without judgment, pressure, or someone talking down to you like you haven’t already
-            survived enough bullshit.
+            again without judgment, pressure, or someone talking down to you like you have not
+            already survived enough bullshit.
           </p>
           <p>
-            Here, you’ll find assessments that help put language to what you’ve been living through,
-            guides that break complicated next steps into something your brain can actually work with,
-            and planners and trackers that help you navigate the broken, fragmented systems survivors
-            are expected to manage while exhausted and overwhelmed.
+            Start wherever you can today. Take an assessment. Read one guide. Use one planner.
+            Download one toolkit. Learn one thing that makes your situation feel less confusing.
           </p>
-          <p>
-            You’ll also find practical tools for court, housing, benefits, money, documentation,
-            safety, planning, and rebuilding—along with honest education about domestic violence,
-            coercive control, trauma, stalking, manipulation, and post-separation abuse.
-          </p>
-          <p>
-            Start wherever you can today.
-          </p>
-          <p>
-            Take an assessment. Read one guide. Use one planner. Download one toolkit. Learn one
-            thing that makes your situation feel less confusing.
-          </p>
-          <p className="mission-emphasis">You don’t have to solve your entire life before dinner.</p>
-
-          <section className="home-copy-section" aria-labelledby="home-assessments">
-            <h2 id="home-assessments">&lt;Assessments&gt;</h2>
-            <p>Sometimes you need help naming what’s happening before you can decide what to do about it.</p>
-            <p>
-              These assessments are designed to help you recognize patterns, validate your instincts,
-              and look at your situation with more clarity and less self-blame.
-            </p>
-          </section>
-
-          <section className="home-copy-section" aria-labelledby="home-guides">
-            <h2 id="home-guides">&lt;Guides&gt;</h2>
-            <p>Knowing you need help and knowing what the hell to do next are two very different things.</p>
-            <p>
-              These guides break down complicated systems, explain your options in plain language,
-              and help you understand the steps involved in court, housing, benefits, safety
-              planning, documentation, and rebuilding your life.
-            </p>
-          </section>
-
-          <section className="home-copy-section" aria-labelledby="home-planners-trackers">
-            <h2 id="home-planners-trackers">&lt;Planners and Trackers&gt;</h2>
-            <p>
-              Broken systems love deadlines, paperwork, phone calls, conflicting instructions, and
-              making you repeat the same story seventeen times.
-            </p>
-            <p>
-              These planners and trackers help you organize what happened, what you’ve submitted,
-              who you spoke with, what they told you, what’s due next, and what still needs your
-              attention.
-            </p>
-            <p>
-              Use them to track court dates, evidence, applications, appointments, agencies, housing
-              leads, benefits, communications, expenses, and next steps without expecting your
-              traumatized brain to function like a filing cabinet.
-            </p>
-          </section>
-
-          <section className="home-copy-section" aria-labelledby="home-toolkits">
-            <h2 id="home-toolkits">&lt;Toolkits&gt;</h2>
-            <p>These editable resources are built to help you take action.</p>
-            <p>
-              You’ll find checklists, worksheets, templates, planners, trackers, and examples that
-              help you prepare, organize, document, and move forward one manageable step at a time.
-            </p>
-          </section>
-
-          <section className="home-copy-section" aria-labelledby="home-education">
-            <h2 id="home-education">&lt;Education&gt;</h2>
-            <p>
-              Abuse is often explained in ways that are vague, sanitized, or completely disconnected
-              from how it actually feels to live through it.
-            </p>
-            <p>
-              Here, we talk candidly about coercive control, trauma responses, financial abuse,
-              stalking, manipulation, legal-system abuse, post-separation abuse, and the quiet
-              patterns that can be difficult to explain but impossible to ignore once you see them.
-            </p>
-          </section>
-
-          <section className="home-copy-section safety-note" aria-labelledby="home-before-continue">
-            <h2 id="home-before-continue">&lt;Before You Continue&gt;</h2>
-            <p>A quick safety note, because I care what happens to you:</p>
-            <p>Your internet activity, downloads, accounts, and browsing history may be monitored.</p>
-            <p>
-              Use a safer device whenever possible, clear your browsing history when it’s safe to do
-              so, and be careful about saving documents or passwords on shared devices.
-            </p>
+          <p className="mission-emphasis">You do not have to solve your entire life before dinner.</p>
+          <div className="home-hero-actions" aria-label="Start options">
             <button type="button" onClick={() => onNavigate("guides", "/guides")}>
-              Online Safety Tips
+              Explore Tools & Guides
             </button>
-          </section>
+            <button type="button" onClick={() => onNavigate("assessments", "/assessments")}>
+              Start with an Assessment
+            </button>
+          </div>
         </article>
+      </div>
+
+      <div className="home-category-grid" aria-label="Resource categories">
+        {homeCards.map((card) => (
+          <article className={`home-category-card home-category-card-${card.icon}`} key={card.title}>
+            <span className={`home-card-ornament home-card-ornament-${card.icon}`} aria-hidden="true" />
+            <h2>{card.title}</h2>
+            <p>{card.copy}</p>
+            <button type="button" onClick={() => onNavigate(card.module, card.path)}>
+              {card.action}
+            </button>
+          </article>
+        ))}
+      </div>
+
+      <div className="home-support-grid">
+        <section className="start-where-you-are" aria-labelledby="home-start-where">
+          <span className="sprout-illustration" aria-hidden="true" />
+          <div>
+            <p className="folk-kicker">Small steps. Real support.</p>
+            <h2 id="home-start-where">Start where you are.</h2>
+            <p>
+              You do not have to have it all figured out. Whether you need information, a plan, or
+              just a place to breathe, you can begin with one manageable next step.
+            </p>
+          </div>
+          <div className="home-choice-list" aria-label="Common starting points">
+            <button type="button" onClick={() => onNavigate("assessments", "/assessments")}>I need clarity</button>
+            <button type="button" onClick={() => onNavigate("planners", "/planners-trackers")}>I need a plan</button>
+            <button type="button" onClick={() => onNavigate("advocacy", "/advocacy")}>I need support</button>
+            <button type="button" onClick={() => onNavigate("education", "/education-awareness")}>I am here to learn</button>
+          </div>
+        </section>
+
+        <section className="home-privacy-panel" aria-labelledby="home-privacy">
+          <span className="privacy-illustration" aria-hidden="true" />
+          <div>
+            <h2 id="home-privacy">Your privacy. Your power.</h2>
+            <p>
+              Your internet activity, downloads, accounts, and browsing history may be monitored.
+              Use a safer device whenever possible, clear history only when it is safe, and be careful
+              about saving documents or passwords on shared devices.
+            </p>
+            <button type="button" onClick={() => onNavigate("guides", "/guides")}>Online Safety Tips</button>
+          </div>
+        </section>
       </div>
     </section>
   );
 }
-
 function CategoryModule({
   category,
   onNavigate,
@@ -2830,7 +2844,7 @@ function CategoryModule({
   return (
     <section className="page-shell category-module" aria-labelledby={`${category}-title`}>
       <div className="terminal-label">OPEN DIRECTORY // {content.title.toUpperCase()}</div>
-      <h1 id={`${category}-title`}>&lt;{content.title}&gt;</h1>
+      <h1 id={`${category}-title`}>{content.title}</h1>
       <p className="category-intro">{content.intro}</p>
 
       <div className="category-file-grid">
@@ -2840,7 +2854,7 @@ function CategoryModule({
               <span>{file.status}</span>
               <small>{file.target ? "OPENABLE" : "PENDING BUILD"}</small>
             </div>
-            <h2>&lt;{file.title}&gt;</h2>
+            <h2>{file.title}</h2>
             <p>{file.description}</p>
             {file.target && file.path ? (
               <button type="button" onClick={() => onNavigate(file.target as ModuleKey, file.path as string)}>
@@ -3144,7 +3158,7 @@ function PlanningLanding({
     <section className="assessment-shell planning-landing" aria-labelledby="planning-landing-title">
       <div className="assessment-panel planning-landing-panel">
         <div className="terminal-label">LOAD MODULE // CRISIS SUPPORT</div>
-        <h1 id="planning-landing-title">&lt;Crisis Support&gt;</h1>
+        <h1 id="planning-landing-title">Crisis Support</h1>
         <p>
           Survivor Operating System is not an emergency service and does not guide active escape
           planning. If someone is still in danger or currently trying to get out, this system should
@@ -3203,7 +3217,7 @@ function PlanningResourcePage({
             <span>{resource.status}</span>
             <span>LIVE PAGE // NO PDF EMBED</span>
           </div>
-          <h1 id="planning-resource-title">&lt;{resource.title}&gt;</h1>
+          <h1 id="planning-resource-title">{resource.title}</h1>
           <p>{resource.subtitle}</p>
           <ul>
             {resource.screenshotLines.map((line) => (
@@ -3256,7 +3270,7 @@ function SnapTanfGuide({ onBack, onNavigate }: { onBack: () => void; onNavigate:
       <div className="how-to-hero">
         <div>
           <p className="terminal-label">LOAD GUIDE // SNAP + TANF</p>
-          <h1 id="snap-tanf-title">&lt;How To Navigate SNAP &amp; TANF&gt;</h1>
+          <h1 id="snap-tanf-title">How To Navigate SNAP &amp; TANF</h1>
           <p>
             Applying for benefits can feel overwhelming, especially when housing, money, safety,
             childcare, or transportation are already in motion. This guide breaks the system into
@@ -3285,7 +3299,7 @@ function SnapTanfGuide({ onBack, onNavigate }: { onBack: () => void; onNavigate:
               <span>{String(index + 1).padStart(2, "0")}</span>
               <small>{section.id.replaceAll("-", " ")}</small>
             </div>
-            <h2>&lt;{section.title}&gt;</h2>
+            <h2>{section.title}</h2>
             {section.body.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
@@ -3309,7 +3323,7 @@ function SnapTanfGuide({ onBack, onNavigate }: { onBack: () => void; onNavigate:
       </div>
 
       <section className="how-to-system-note" aria-labelledby="snap-navigation-system-title">
-        <h2 id="snap-navigation-system-title">&lt;When One Application Turns Into Six&gt;</h2>
+        <h2 id="snap-navigation-system-title">When One Application Turns Into Six</h2>
         <p>
           SNAP and TANF may only cover part of what is needed. Childcare, transportation, housing,
           utility assistance, emergency financial help, and local services can each bring their own
@@ -3355,7 +3369,7 @@ function PracticalHowToGuide({
       <div className="how-to-hero">
         <div>
           <p className="terminal-label">{guide.terminalLabel}</p>
-          <h1 id={`${guide.id}-title`}>&lt;{guide.title}&gt;</h1>
+          <h1 id={`${guide.id}-title`}>{guide.title}</h1>
           <p>{guide.intro}</p>
         </div>
         <aside className="how-to-status-panel" aria-label={`${guide.title} status`}>
@@ -3378,7 +3392,7 @@ function PracticalHowToGuide({
               <span>{String(index + 1).padStart(2, "0")}</span>
               <small>{section.id.replaceAll("-", " ")}</small>
             </div>
-            <h2>&lt;{section.title}&gt;</h2>
+            <h2>{section.title}</h2>
             {section.body.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
@@ -3403,7 +3417,7 @@ function PracticalHowToGuide({
 
       {guide.systemNote ? (
         <section className="how-to-system-note" aria-labelledby={`${guide.id}-system-note`}>
-          <h2 id={`${guide.id}-system-note`}>&lt;{guide.systemNote.title}&gt;</h2>
+          <h2 id={`${guide.id}-system-note`}>{guide.systemNote.title}</h2>
           {guide.systemNote.body.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
           ))}
@@ -3491,7 +3505,7 @@ function HowToModule({
       <div className="how-to-hero">
         <div>
           <p className="terminal-label">LOAD RESOURCES // HOW TO GUIDES</p>
-          <h1 id="how-to-title">&lt;Resource Priorities&gt;</h1>
+          <h1 id="how-to-title">Resource Priorities</h1>
           <p className="how-to-subtitle">HOW TO GUIDES</p>
           <p>
             Practical guides are sorted by priority so the screen does not throw the whole system at
@@ -3515,7 +3529,7 @@ function HowToModule({
                   <span>{priority.label}</span>
                   <small>{count} GUIDES</small>
                 </div>
-                <h2>&lt;{priority.title}&gt;</h2>
+                <h2>{priority.title}</h2>
                 <p>{priority.description}</p>
                 <button type="button" onClick={() => setActivePriorityId(priority.id)}>
                   Open Folder
@@ -3529,7 +3543,7 @@ function HowToModule({
           <div className="how-to-folder-bar">
             <div>
               <p className="terminal-label">FOLDER OPEN</p>
-              <h2>&lt;{activePriority.title}&gt;</h2>
+              <h2>{activePriority.title}</h2>
             </div>
             <button type="button" onClick={onBackToResources ?? (() => setActivePriorityId(null))}>
               {onBackToResources ? "Back To Resource Folders" : "Back To Priority Folders"}
@@ -3543,7 +3557,7 @@ function HowToModule({
                   <span>{String(index + 1).padStart(2, "0")}</span>
                   <small>{guide.status}</small>
                 </div>
-                <h2>&lt;{guide.title}&gt;</h2>
+                <h2>{guide.title}</h2>
                 <p className="how-to-guide-subtitle">{guide.subtitle}</p>
                 <p>{guide.description}</p>
                 {guide.action === "navigate" ? (
@@ -3603,7 +3617,7 @@ function AccessInformationModule() {
       <div className="library-hero-panel">
         <div>
           <p className="terminal-label">LOAD MODULE // DATABASE</p>
-          <h1 id="access-title">&lt;Database&gt;</h1>
+          <h1 id="access-title">Database</h1>
           <p>
             The Database holds indexed previews, Cheat Code Library access paths, and download
             unlock rules for deeper planners, trackers, and long-form guides.
@@ -3618,7 +3632,7 @@ function AccessInformationModule() {
 
       <section className="library-section" aria-labelledby="access-options-title">
         <div className="terminal-label">DATABASE ACCESS OPTIONS</div>
-        <h2 id="access-options-title">&lt;Access Paths&gt;</h2>
+        <h2 id="access-options-title">Access Paths</h2>
         <div className="library-pass-grid">
           {libraryPasses.map((pass) => (
             <article className="library-pass-card" key={pass.id}>
@@ -3640,7 +3654,7 @@ function AccessInformationModule() {
 
       <section className="library-section" aria-labelledby="paid-library-entry-title">
         <div className="terminal-label">CHEAT CODE LIBRARY</div>
-        <h2 id="paid-library-entry-title">&lt;Open Cheat Code Library&gt;</h2>
+        <h2 id="paid-library-entry-title">Open Cheat Code Library</h2>
         <p>
           Preview the deeper planners, trackers, and guide systems from here. The index is organized
           by resource category so the user can scan before unlocking.
@@ -3797,7 +3811,7 @@ function ResourceModule({
   return (
     <section className="page-shell resources-module" aria-labelledby="resources-title">
       <div className="terminal-label">LOAD MODULE // RESOURCE FOLDERS</div>
-      <h1 id="resources-title">&lt;Resources&gt;</h1>
+      <h1 id="resources-title">Resources</h1>
 
       <div className="resource-directory-tree" aria-label="Resource directories">
         {resourceDirectories.map((directory) => {
@@ -3821,7 +3835,7 @@ function ResourceModule({
                 <div className="resource-file-list">
                   {directory.files.map((file) => (
                     <button className="resource-file-row" key={file.label} type="button" onClick={file.action}>
-                      <span aria-hidden="true">&gt;</span>
+                      <span aria-hidden="true"></span>
                       {file.label}
                     </button>
                   ))}
@@ -3846,7 +3860,7 @@ function LibraryModule() {
       <div className="library-hero-panel">
         <div>
           <p className="terminal-label">LOAD MODULE // CHEAT CODE LIBRARY</p>
-          <h1 id="library-title">&lt;Cheat Code Library&gt;</h1>
+          <h1 id="library-title">Cheat Code Library</h1>
           <p>
             Free crisis tools stay live in the app. The Cheat Code Library holds deeper templates,
             trackers, guides, and long-form systems for people who want more structure without a
@@ -3869,7 +3883,7 @@ function LibraryModule() {
 
       <section className="library-section" aria-labelledby="library-options-title">
         <div className="terminal-label">DATABASE ACCESS PATHS</div>
-        <h2 id="library-options-title">&lt;Access Paths&gt;</h2>
+        <h2 id="library-options-title">Access Paths</h2>
         <div className="library-pass-grid">
           {libraryPasses.map((pass) => (
             <article className="library-pass-card" key={pass.id}>
@@ -3894,7 +3908,7 @@ function LibraryModule() {
 
       <section className="library-section" aria-labelledby="library-categories-title">
         <div className="terminal-label">DATABASE INDEX</div>
-        <h2 id="library-categories-title">&lt;Indexed Categories&gt;</h2>
+        <h2 id="library-categories-title">Indexed Categories</h2>
         <div className="library-category-grid">
           {libraryCategories.map((category) => (
             <article className="library-category-card" key={category.id}>
@@ -3908,7 +3922,7 @@ function LibraryModule() {
 
       <section className="library-section" aria-labelledby="library-preview-title">
         <div className="terminal-label">RESOURCE PREVIEWS</div>
-        <h2 id="library-preview-title">&lt;Look Inside Before Unlocking&gt;</h2>
+        <h2 id="library-preview-title">Look Inside Before Unlocking</h2>
         <div className="library-preview-grid">
           {previewResources.map((resource) => (
             <article className="library-preview-card" key={resource.id}>
@@ -3931,14 +3945,14 @@ function LibraryModule() {
 
       <section className="library-system-grid" aria-label="Library access notes">
         <article className="library-system-card">
-          <h2>&lt;Founder Access Bonus&gt;</h2>
+          <h2>Founder Access Bonus</h2>
           <p>
             The first 100 paying library users receive one extra Permanent Unlock as a quiet thank-you
             for helping the system come online.
           </p>
         </article>
         <article className="library-system-card">
-          <h2>&lt;Download Access&gt;</h2>
+          <h2>Download Access</h2>
           <p>
             Library files can be previewed during an active access window. Permanent Unlocks are for
             the downloads the user wants to keep.
@@ -3966,7 +3980,7 @@ function RebuildingModule({
       <div className="rebuilding-hero">
         <div>
           <p className="terminal-label">LOAD MODULE // HOUSING NAVIGATION</p>
-          <h1 id="rebuilding-title">&lt;How To Navigate Housing&gt;</h1>
+          <h1 id="rebuilding-title">How To Navigate Housing</h1>
           <p>
             Housing can feel like one giant locked door. It is usually a set of smaller doors:
             first night, waitlists, documents, transportation, privacy, benefits, advocates, and
@@ -3992,7 +4006,7 @@ function RebuildingModule({
       <section className="rebuilding-mission-files" aria-labelledby="rebuilding-mission-files-title">
         <div>
           <p className="terminal-label">MISSION FILE</p>
-          <h2 id="rebuilding-mission-files-title">&lt;Reality Check Tools&gt;</h2>
+          <h2 id="rebuilding-mission-files-title">Reality Check Tools</h2>
           <p>
             For the part where the brain keeps replaying the old argument and asking whether the
             harm was real. Spoiler: the system can run diagnostics without giving them admin access.
@@ -4012,7 +4026,7 @@ function RebuildingModule({
               <span>{String(index + 1).padStart(2, "0")}</span>
               <small>{section.label}</small>
             </div>
-            <h2>&lt;{section.title}&gt;</h2>
+            <h2>{section.title}</h2>
             {section.body.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
@@ -4029,7 +4043,7 @@ function RebuildingModule({
 
       <section className="rebuilding-bottom-line" aria-labelledby="housing-bottom-line">
         <p className="terminal-label">BOTTOM LINE</p>
-        <h2 id="housing-bottom-line">&lt;One Mountain, Smaller Steps&gt;</h2>
+        <h2 id="housing-bottom-line">One Mountain, Smaller Steps</h2>
         <p>
           Housing feels like one mountain, but it is actually a series of smaller steps, each one
           unlocking the next. Coordinated Entry gets you into the system. Community resources bridge
@@ -4076,13 +4090,13 @@ function LegalGuidePage({
 
       <div className="legal-guide-shell">
         <div className="terminal-label">{guide.terminalLabel}</div>
-        <h1 id={`${guide.title.replaceAll(" ", "-").toLowerCase()}-title`}>&lt;{guide.title}&gt;</h1>
+        <h1 id={`${guide.title.replaceAll(" ", "-").toLowerCase()}-title`}>{guide.title}</h1>
         <p className="legal-tagline">// Legal orientation. No shame. No blindfold.</p>
 
-        <div className="legal-intro">&lt;{guide.intro}&gt;</div>
+        <div className="legal-intro">{guide.intro}</div>
 
         <div className="legal-warning">
-          <strong>&gt;&gt; Not Legal Advice</strong>
+          <strong> Not Legal Advice</strong>
           <p>{guide.warning}</p>
         </div>
 
@@ -4096,7 +4110,7 @@ function LegalGuidePage({
                 </h3>
                 {section.blocks.map((block) => (
                   <div className="legal-motion-block" key={block.title}>
-                    <strong>&gt;&gt; {block.title}</strong>
+                    <strong> {block.title}</strong>
                     <ul>
                       {block.items.map((item) => (
                         <li key={item.name ?? item.text}>
@@ -4116,7 +4130,7 @@ function LegalGuidePage({
           <div className="legal-note-grid">
             {guide.notes.map((note) => (
               <div className="legal-note" key={note.title}>
-                <strong>&gt;&gt; {note.title}</strong>
+                <strong> {note.title}</strong>
                 <p>{note.body}</p>
               </div>
             ))}
@@ -4125,7 +4139,7 @@ function LegalGuidePage({
 
         {guide.reminder ? (
           <div className="legal-reminder">
-            <strong>&gt;&gt; {guide.reminder.title}</strong>
+            <strong> {guide.reminder.title}</strong>
             <p>{guide.reminder.body}</p>
           </div>
         ) : null}
@@ -4158,18 +4172,18 @@ function LegalModule() {
 
         <div className="legal-guide-shell">
           <div className="terminal-label">user@survivor-os:~$ LOAD MODULE // MOTION DRAFTING</div>
-          <h1 id="motion-drafting-title">&lt;Motion Drafting Basics&gt;</h1>
+          <h1 id="motion-drafting-title">Motion Drafting Basics</h1>
           <p className="legal-tagline">// Tools for clarity. Power for your future.</p>
 
           <div className="legal-intro">
-            &lt;A motion is just a written request asking the court to do something. Before you write
+            A motion is just a written request asking the court to do something. Before you write
             one word, you need to know which one you are actually filing. The wrong motion can get
             you a denial or delay instead of a hearing. This module starts where every filing
-            should: research.&gt;
+            should: research.
           </div>
 
           <div className="legal-warning">
-            <strong>&gt;&gt; Read This First</strong>
+            <strong> Read This First</strong>
             <p>
               This is general orientation, not legal advice. Motion names, formats, and filing rules
               are different in every state and sometimes every county. Nothing here replaces your
@@ -4179,7 +4193,7 @@ function LegalModule() {
           </div>
 
           <section className="legal-step-section" aria-labelledby="motion-step-title">
-            <h2 id="motion-step-title">&gt;&gt; Step One: Research Before You Write</h2>
+            <h2 id="motion-step-title"> Step One: Research Before You Write</h2>
             <div className="legal-step-grid">
               {motionDraftingSteps.map((step) => (
                 <article className="legal-step-card" key={step.number}>
@@ -4192,7 +4206,7 @@ function LegalModule() {
           </section>
 
           <section className="legal-motion-section" aria-labelledby="family-motion-title">
-            <h2 id="family-motion-title">&gt;&gt; Common Family Court Motions</h2>
+            <h2 id="family-motion-title"> Common Family Court Motions</h2>
             <div className="legal-motion-grid">
               {familyCourtMotionSections.map((section) => (
                 <article className="legal-motion-card" key={section.title}>
@@ -4202,7 +4216,7 @@ function LegalModule() {
                   </h3>
                   {section.blocks.map((block) => (
                     <div className="legal-motion-block" key={block.title}>
-                      <strong>&gt;&gt; {block.title}</strong>
+                      <strong> {block.title}</strong>
                       <ul>
                         {block.items.map((item) => (
                           <li key={item.name ?? item.text}>
@@ -4220,7 +4234,7 @@ function LegalModule() {
 
           <div className="legal-note-grid">
             <div className="legal-note">
-              <strong>&gt;&gt; Note</strong>
+              <strong> Note</strong>
               <p>
                 Not every state uses these exact names. Some call a Motion to Modify a Petition to
                 Modify. Some fold temporary orders and emergency relief into one filing. The category
@@ -4229,7 +4243,7 @@ function LegalModule() {
               </p>
             </div>
             <div className="legal-note">
-              <strong>&gt;&gt; Subscriber Library Connection</strong>
+              <strong> Subscriber Library Connection</strong>
               <p>
                 Subscribers have access to the Court Planner, which is built for everything that
                 happens around the filing, not the motion itself: case numbers, court contacts, local
@@ -4240,7 +4254,7 @@ function LegalModule() {
           </div>
 
           <div className="legal-reminder">
-            <strong>&gt;&gt; Remember</strong>
+            <strong> Remember</strong>
             <p>
               You do not have to get the legal language perfect on the first try. Courts see
               self-represented filers regularly. What matters most: the right motion type, the right
@@ -4279,7 +4293,7 @@ function LegalModule() {
       <div className="legal-header">
         <div>
           <p className="terminal-label">SURVIVOR OPERATING SYSTEM // LEGAL</p>
-          <h1 id="legal-title">&lt;Legal Resources&gt;</h1>
+          <h1 id="legal-title">Legal Resources</h1>
           <p className="legal-command-subtitle">LEGAL RESOURCES</p>
           <p>
             Legal systems can be intimidating because they are systems with rules, deadlines,
@@ -4303,7 +4317,7 @@ function LegalModule() {
                 <span>{category.label}</span>
                 <small>LIVE GUIDE</small>
               </div>
-              <h2>&lt;{category.title}&gt;</h2>
+              <h2>{category.title}</h2>
               <p>{category.description}</p>
               {category.id === "protective-orders" ? (
                 <button type="button" onClick={() => setActiveView("protective-orders")}>

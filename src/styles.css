@@ -8572,3 +8572,710 @@ a,
   text-shadow: none !important;
   width: 100% !important;
 }
+
+/* July 20 dark boho folk refinement. This is the current visual system. */
+:root {
+  --font-editorial: "Cormorant Garamond", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --font-clean: "Aptos", "Inter", "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+  --folk-ink: #07100c;
+  --folk-ink-deep: #030706;
+  --folk-charcoal: #111714;
+  --folk-forest: #132019;
+  --folk-panel: #17251c;
+  --folk-panel-deep: #0d1711;
+  --folk-moss: #58633b;
+  --folk-sage: #84906f;
+  --folk-teal: #2f6d64;
+  --folk-rust: #c9552d;
+  --folk-rust-dark: #91381e;
+  --folk-coral: #da7d68;
+  --folk-pink: #c4867a;
+  --folk-mustard: #d8a93e;
+  --folk-ochre: #a87424;
+  --folk-cream: #f4dfbd;
+  --folk-parchment: #dfcba9;
+  --folk-muted: #b7a789;
+  --folk-border: rgba(216, 169, 62, 0.34);
+  --folk-border-soft: rgba(244, 223, 189, 0.14);
+  --folk-shadow: rgba(0, 0, 0, 0.42);
+}
+
+body,
+#root {
+  background:
+    radial-gradient(circle at 78% 12%, rgba(201, 85, 45, 0.18), transparent 24rem),
+    radial-gradient(circle at 14% 88%, rgba(47, 109, 100, 0.13), transparent 22rem),
+    linear-gradient(135deg, var(--folk-ink), var(--folk-ink-deep)) !important;
+  color: var(--folk-parchment);
+  font-family: var(--font-clean);
+}
+
+body::before {
+  background:
+    radial-gradient(circle at 14% 18%, rgba(244, 223, 189, 0.06) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 82% 36%, rgba(216, 169, 62, 0.06) 0 1px, transparent 1.5px);
+  background-size: 11px 11px, 17px 17px;
+  opacity: 0.22;
+}
+
+body::after {
+  background:
+    linear-gradient(90deg, transparent 0 97%, rgba(216, 169, 62, 0.05) 97% 100%),
+    repeating-linear-gradient(45deg, rgba(244, 223, 189, 0.012) 0 1px, transparent 1px 9px);
+  opacity: 0.48;
+}
+
+.terminal-frame,
+.hud-frame,
+.win95-frame,
+.app-frame {
+  background:
+    radial-gradient(circle at 77% 18%, rgba(201, 85, 45, 0.14), transparent 26rem),
+    radial-gradient(circle at 18% 80%, rgba(88, 99, 59, 0.18), transparent 22rem),
+    linear-gradient(135deg, #101711, #070b08 58%, #0d150f) !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  color: var(--folk-parchment) !important;
+  font-family: var(--font-clean) !important;
+  margin: 0 !important;
+  min-height: 100vh !important;
+}
+
+.terminal-frame::before,
+.terminal-frame::after,
+.hud-frame::before,
+.hud-frame::after {
+  display: none !important;
+}
+
+.hud-frame .win95-desktop {
+  background:
+    radial-gradient(circle at 84% 14%, rgba(201, 85, 45, 0.12), transparent 20rem),
+    radial-gradient(circle at 22% 72%, rgba(47, 109, 100, 0.14), transparent 18rem),
+    linear-gradient(90deg, rgba(244, 223, 189, 0.025), transparent 15%, transparent 86%, rgba(216, 169, 62, 0.03)),
+    var(--folk-ink) !important;
+  display: grid !important;
+  gap: clamp(22px, 3vw, 48px) !important;
+  grid-template-columns: minmax(226px, 250px) minmax(0, 1fr) !important;
+  min-height: 100vh !important;
+  padding: clamp(12px, 1.6vw, 22px) !important;
+}
+
+.hud-frame .folk-sidebar {
+  background:
+    linear-gradient(180deg, rgba(18, 31, 22, 0.98), rgba(8, 14, 10, 0.985)),
+    repeating-linear-gradient(0deg, rgba(244, 223, 189, 0.028) 0 1px, transparent 1px 6px) !important;
+  border: 1px solid var(--folk-border) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 18px 42px var(--folk-shadow), inset 0 0 0 1px rgba(244, 223, 189, 0.035) !important;
+  min-height: calc(100vh - 44px) !important;
+  min-width: 0 !important;
+  padding: 18px 14px !important;
+}
+
+.hud-frame .desktop-brand-panel {
+  border-bottom: 1px solid var(--folk-border) !important;
+  gap: 13px !important;
+  padding-bottom: 18px !important;
+}
+
+.hud-frame .desktop-brand-panel p,
+.sidebar-login,
+.hud-frame .sidebar-login {
+  display: none !important;
+}
+
+.hud-frame button.desktop-brand-panel .folk-logo-mark {
+  background:
+    radial-gradient(circle at 50% 40%, var(--folk-mustard) 0 8%, transparent 9%),
+    radial-gradient(ellipse at 50% 18%, var(--folk-rust) 0 11%, transparent 12%),
+    radial-gradient(ellipse at 28% 33%, var(--folk-rust) 0 11%, transparent 12%),
+    radial-gradient(ellipse at 72% 33%, var(--folk-coral) 0 11%, transparent 12%),
+    radial-gradient(ellipse at 36% 66%, var(--folk-moss) 0 13%, transparent 14%),
+    radial-gradient(ellipse at 64% 66%, var(--folk-sage) 0 13%, transparent 14%),
+    linear-gradient(180deg, rgba(216, 169, 62, 0.14), rgba(47, 109, 100, 0.12)) !important;
+  border: 1px solid rgba(216, 169, 62, 0.5) !important;
+  border-radius: 5px !important;
+  box-shadow: inset 0 0 18px rgba(0, 0, 0, 0.45) !important;
+  height: 84px !important;
+  width: 84px !important;
+}
+
+.brand-logo,
+.brand-logo-survivor,
+.brand-logo-systems {
+  font-family: var(--font-editorial) !important;
+  text-shadow: none !important;
+}
+
+.hud-frame button.desktop-brand-panel .brand-logo-survivor,
+.hud-frame button.desktop-brand-panel .brand-logo-systems {
+  color: var(--folk-cream) !important;
+  display: block;
+  font-style: normal !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+}
+
+.hud-frame button.desktop-brand-panel .brand-logo-survivor {
+  font-size: 1.28rem !important;
+  letter-spacing: 0.16em !important;
+}
+
+.hud-frame button.desktop-brand-panel .brand-logo-systems {
+  font-size: 1rem !important;
+  letter-spacing: 0.24em !important;
+  margin-left: 0 !important;
+  text-align: center !important;
+}
+
+.hud-frame .desktop-icon-grid {
+  border-top: 0 !important;
+  gap: 11px !important;
+  padding-top: 2px !important;
+}
+
+.hud-frame .desktop-icon,
+.hud-frame .desktop-icon:hover,
+.hud-frame .desktop-icon:focus-visible,
+.hud-frame .desktop-icon.active {
+  border-radius: 8px !important;
+  grid-template-columns: 38px minmax(0, 1fr) !important;
+  min-height: 54px !important;
+  padding: 9px 10px !important;
+}
+
+.hud-frame .desktop-icon {
+  background:
+    linear-gradient(180deg, rgba(24, 38, 27, 0.94), rgba(13, 21, 15, 0.96)) !important;
+  border: 1px solid rgba(216, 169, 62, 0.18) !important;
+  box-shadow: inset 0 1px 0 rgba(244, 223, 189, 0.035) !important;
+  color: var(--folk-parchment) !important;
+}
+
+.hud-frame .desktop-icon:hover,
+.hud-frame .desktop-icon:focus-visible,
+.hud-frame .desktop-icon.active {
+  background: linear-gradient(180deg, var(--folk-rust), var(--folk-rust-dark)) !important;
+  border-color: rgba(244, 223, 189, 0.24) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 12px 28px rgba(0, 0, 0, 0.24) !important;
+  color: var(--folk-cream) !important;
+  transform: translateX(2px) !important;
+}
+
+.hud-frame .desktop-icon-code {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  height: 38px !important;
+  overflow: visible !important;
+  position: relative !important;
+  width: 38px !important;
+}
+
+.desktop-icon-code::before,
+.desktop-icon-code::after {
+  content: "" !important;
+  position: absolute;
+}
+
+.desktop-icon-flower .desktop-icon-code::before,
+.desktop-icon-sprig .desktop-icon-code::before,
+.desktop-icon-fern .desktop-icon-code::before,
+.desktop-icon-arch .desktop-icon-code::before,
+.desktop-icon-book .desktop-icon-code::before,
+.desktop-icon-sprout .desktop-icon-code::before,
+.desktop-icon-exit .desktop-icon-code::before {
+  color: transparent !important;
+  text-shadow: none !important;
+}
+
+.desktop-icon-flower .desktop-icon-code::before {
+  background:
+    radial-gradient(circle at 50% 50%, var(--folk-mustard) 0 10%, transparent 11%),
+    radial-gradient(ellipse at 50% 12%, var(--folk-rust) 0 17%, transparent 18%),
+    radial-gradient(ellipse at 17% 43%, var(--folk-rust) 0 16%, transparent 17%),
+    radial-gradient(ellipse at 83% 43%, var(--folk-coral) 0 16%, transparent 17%),
+    radial-gradient(ellipse at 34% 78%, var(--folk-moss) 0 16%, transparent 17%),
+    radial-gradient(ellipse at 66% 78%, var(--folk-sage) 0 16%, transparent 17%);
+  inset: 3px;
+}
+
+.desktop-icon-sprig .desktop-icon-code::before,
+.desktop-icon-fern .desktop-icon-code::before,
+.desktop-icon-sprout .desktop-icon-code::before {
+  background:
+    linear-gradient(70deg, transparent 47%, var(--folk-mustard) 48% 52%, transparent 53%),
+    radial-gradient(ellipse at 38% 32%, var(--folk-moss) 0 10%, transparent 11%),
+    radial-gradient(ellipse at 58% 42%, var(--folk-sage) 0 11%, transparent 12%),
+    radial-gradient(ellipse at 35% 56%, var(--folk-teal) 0 10%, transparent 11%),
+    radial-gradient(ellipse at 64% 69%, var(--folk-moss) 0 11%, transparent 12%);
+  inset: 1px;
+  transform: rotate(-12deg);
+}
+
+.desktop-icon-fern .desktop-icon-code::before {
+  background:
+    linear-gradient(90deg, transparent 48%, var(--folk-ochre) 49% 52%, transparent 53%),
+    repeating-linear-gradient(29deg, transparent 0 6px, rgba(216, 169, 62, 0.92) 6px 8px, transparent 8px 13px),
+    repeating-linear-gradient(151deg, transparent 0 6px, rgba(132, 144, 111, 0.92) 6px 8px, transparent 8px 13px);
+  inset: 3px 7px 1px;
+  transform: rotate(-16deg);
+}
+
+.desktop-icon-arch .desktop-icon-code::before {
+  background:
+    radial-gradient(circle at 50% 61%, var(--folk-rust) 0 13%, transparent 14%),
+    radial-gradient(circle at 50% 61%, var(--folk-ink) 0 28%, transparent 29%),
+    linear-gradient(180deg, transparent 0 23%, var(--folk-mustard) 23% 100%);
+  border-radius: 15px 15px 3px 3px;
+  inset: 4px 5px;
+}
+
+.desktop-icon-book .desktop-icon-code::before {
+  background:
+    linear-gradient(90deg, transparent 48%, var(--folk-rust) 48% 52%, transparent 52%),
+    linear-gradient(180deg, transparent 18%, rgba(216, 169, 62, 0.8) 18% 23%, transparent 23% 36%, rgba(216, 169, 62, 0.8) 36% 41%, transparent 41%),
+    linear-gradient(90deg, var(--folk-parchment) 0 48%, var(--folk-cream) 52% 100%);
+  border: 1px solid var(--folk-ochre);
+  border-radius: 2px 2px 8px 8px;
+  inset: 7px 4px 8px;
+}
+
+.desktop-icon-exit .desktop-icon-code::before {
+  background:
+    linear-gradient(45deg, transparent 0 39%, var(--folk-coral) 40% 56%, transparent 57%),
+    linear-gradient(135deg, transparent 0 42%, var(--folk-coral) 43% 55%, transparent 56%);
+  inset: 6px;
+}
+
+.hud-frame .desktop-icon-title {
+  color: inherit !important;
+  font-family: var(--font-editorial) !important;
+  font-size: 1.02rem !important;
+  font-weight: 650 !important;
+}
+
+.hud-frame .sidebar-actions {
+  border-top: 1px solid var(--folk-border) !important;
+}
+
+.hud-frame button.sidebar-support {
+  background: linear-gradient(180deg, var(--folk-mustard), var(--folk-ochre)) !important;
+  border-color: rgba(244, 223, 189, 0.28) !important;
+  color: var(--folk-ink-deep) !important;
+  font-weight: 800 !important;
+}
+
+.hud-frame .folk-main-shell {
+  border-radius: 0 !important;
+  isolation: isolate;
+  overflow: visible !important;
+}
+
+.hud-frame .terminal-content {
+  padding: clamp(18px, 2.4vw, 34px) clamp(18px, 4vw, 58px) !important;
+}
+
+.home-terminal {
+  position: relative;
+  z-index: 1;
+}
+
+.home-grid,
+.refined-home-grid {
+  border-top: 0 !important;
+  grid-template-columns: 1fr !important;
+  padding-top: 0 !important;
+}
+
+.refined-home-message {
+  max-width: min(560px, 48vw) !important;
+  padding-top: clamp(6px, 1.4vw, 18px) !important;
+}
+
+.folk-kicker,
+.home-message::before {
+  color: var(--folk-rust) !important;
+  content: none !important;
+  display: block;
+  font-family: var(--font-clean) !important;
+  font-size: 0.78rem !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.24em !important;
+  margin: 0 0 16px !important;
+  text-transform: uppercase !important;
+}
+
+.hud-frame .terminal-content h1,
+.home-message h1 {
+  color: var(--folk-cream) !important;
+  font-family: var(--font-editorial) !important;
+  font-size: clamp(2.95rem, 5.1vw, 4.9rem) !important;
+  font-weight: 650 !important;
+  letter-spacing: -0.02em !important;
+  line-height: 0.96 !important;
+}
+
+.hud-frame .terminal-content h2,
+.home-category-card h2,
+.start-where-you-are h2,
+.home-privacy-panel h2 {
+  color: var(--folk-cream) !important;
+  font-family: var(--font-editorial) !important;
+  font-weight: 650 !important;
+  letter-spacing: -0.01em !important;
+  text-transform: none !important;
+}
+
+.hud-frame .terminal-content p,
+.hud-frame .terminal-content li,
+.home-message p,
+.home-category-card p {
+  color: var(--folk-parchment) !important;
+  font-family: var(--font-clean) !important;
+  line-height: 1.5 !important;
+}
+
+.home-message p {
+  font-size: clamp(0.94rem, 1.05vw, 1.02rem) !important;
+  margin-bottom: 0.85rem !important;
+}
+
+.mission-emphasis {
+  color: var(--folk-cream) !important;
+  font-family: var(--font-editorial) !important;
+  font-size: clamp(1.12rem, 1.45vw, 1.35rem) !important;
+}
+
+.home-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.hud-frame .terminal-content .home-hero-actions button,
+.hud-frame .terminal-content .home-category-card button,
+.hud-frame .terminal-content .home-choice-list button,
+.hud-frame .terminal-content .home-privacy-panel button {
+  align-items: center !important;
+  display: inline-flex !important;
+  font-size: 0.98rem !important;
+  justify-content: center !important;
+  min-height: 50px !important;
+  padding: 0 22px !important;
+}
+
+.home-category-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(5, minmax(150px, 1fr));
+  margin-top: clamp(24px, 3vw, 42px);
+  position: relative;
+  z-index: 2;
+}
+
+.home-category-card {
+  background:
+    linear-gradient(180deg, rgba(24, 38, 27, 0.96), rgba(12, 20, 15, 0.98)) !important;
+  border: 1px solid var(--folk-border) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.24), inset 0 1px 0 rgba(244, 223, 189, 0.04) !important;
+  min-height: 210px;
+  padding: 20px 18px;
+  position: relative;
+}
+
+.home-card-ornament {
+  display: block;
+  height: 76px;
+  margin-bottom: 12px;
+  position: relative;
+  width: 68px;
+}
+
+.home-card-ornament-flower {
+  background:
+    radial-gradient(circle at 49% 40%, var(--folk-mustard) 0 7%, transparent 8%),
+    radial-gradient(ellipse at 50% 12%, var(--folk-rust) 0 14%, transparent 15%),
+    radial-gradient(ellipse at 21% 40%, var(--folk-rust) 0 13%, transparent 14%),
+    radial-gradient(ellipse at 78% 40%, var(--folk-coral) 0 13%, transparent 14%),
+    radial-gradient(ellipse at 36% 70%, var(--folk-moss) 0 15%, transparent 16%),
+    radial-gradient(ellipse at 64% 70%, var(--folk-sage) 0 15%, transparent 16%);
+}
+
+.home-card-ornament-sprig,
+.home-card-ornament-fern {
+  background:
+    linear-gradient(70deg, transparent 48%, var(--folk-mustard) 49% 52%, transparent 53%),
+    radial-gradient(ellipse at 32% 24%, var(--folk-moss) 0 10%, transparent 11%),
+    radial-gradient(ellipse at 58% 34%, var(--folk-sage) 0 10%, transparent 11%),
+    radial-gradient(ellipse at 27% 50%, var(--folk-teal) 0 10%, transparent 11%),
+    radial-gradient(ellipse at 64% 63%, var(--folk-moss) 0 10%, transparent 11%);
+}
+
+.home-card-ornament-fern {
+  transform: rotate(-10deg);
+}
+
+.home-card-ornament-arch {
+  background:
+    radial-gradient(circle at 50% 54%, var(--folk-rust) 0 9%, transparent 10%),
+    radial-gradient(circle at 50% 54%, var(--folk-panel-deep) 0 24%, transparent 25%),
+    linear-gradient(180deg, transparent 0 18%, var(--folk-mustard) 18% 100%);
+  border-radius: 24px 24px 4px 4px;
+  box-shadow: inset 0 0 0 2px rgba(10, 16, 11, 0.54);
+}
+
+.home-card-ornament-book {
+  background:
+    linear-gradient(90deg, transparent 48%, var(--folk-rust) 48% 52%, transparent 52%),
+    linear-gradient(180deg, transparent 25%, rgba(216, 169, 62, 0.82) 25% 30%, transparent 30% 43%, rgba(216, 169, 62, 0.82) 43% 48%, transparent 48%),
+    linear-gradient(90deg, var(--folk-parchment) 0 49%, var(--folk-cream) 51% 100%);
+  border: 1px solid var(--folk-ochre);
+  border-radius: 4px 4px 14px 14px;
+}
+
+.home-category-card h2 {
+  font-size: clamp(1.35rem, 1.8vw, 1.8rem) !important;
+  margin: 0 0 8px;
+}
+
+.home-category-card p {
+  font-size: 0.94rem !important;
+  margin: 0 0 14px;
+}
+
+.home-support-grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+  margin-top: 18px;
+}
+
+.start-where-you-are,
+.home-privacy-panel {
+  background:
+    linear-gradient(180deg, rgba(24, 38, 27, 0.96), rgba(12, 20, 15, 0.98)) !important;
+  border: 1px solid var(--folk-border) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.24), inset 0 1px 0 rgba(244, 223, 189, 0.04) !important;
+}
+
+.start-where-you-are {
+  grid-template-columns: 86px minmax(0, 1fr) minmax(190px, 0.7fr) !important;
+}
+
+.home-choice-list {
+  display: grid;
+  gap: 8px;
+}
+
+.privacy-illustration {
+  background:
+    radial-gradient(circle at 50% 42%, var(--folk-mustard) 0 8%, transparent 9%),
+    radial-gradient(circle at 50% 42%, var(--folk-panel-deep) 0 22%, transparent 23%),
+    radial-gradient(ellipse at 50% 75%, var(--folk-moss) 0 26%, transparent 27%),
+    linear-gradient(180deg, var(--folk-rust) 0 100%);
+  border-radius: 30px 30px 8px 8px;
+  display: block;
+  height: 112px;
+  width: 82px;
+}
+
+.home-privacy-panel {
+  align-items: center;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 96px minmax(0, 1fr);
+  padding: 20px;
+}
+
+.hud-frame .terminal-content button:not(.desktop-icon):not(.resource-file-row),
+.hud-frame .terminal-content .primary-action,
+.hud-frame .terminal-content .secondary-action,
+.hud-frame .terminal-content .quick-exit,
+.hud-frame .terminal-content .text-link,
+.hud-frame .terminal-content .resource-back-button,
+.hud-frame .terminal-content a.button {
+  background: linear-gradient(180deg, var(--folk-rust), var(--folk-rust-dark)) !important;
+  border: 1px solid rgba(244, 223, 189, 0.24) !important;
+  border-radius: 7px !important;
+  color: var(--folk-cream) !important;
+  font-family: var(--font-clean) !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.01em !important;
+  text-transform: none !important;
+}
+
+.hud-frame .terminal-content button:not(.desktop-icon):not(.resource-file-row):hover,
+.hud-frame .terminal-content button:not(.desktop-icon):not(.resource-file-row):focus-visible,
+.hud-frame .terminal-content .text-link:hover,
+.hud-frame .terminal-content .text-link:focus-visible {
+  background: linear-gradient(180deg, #db6841, var(--folk-rust)) !important;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.18) !important;
+  color: var(--folk-cream) !important;
+}
+
+.folk-hero-art {
+  height: min(48vw, 520px) !important;
+  opacity: 0.98 !important;
+  right: -7vw !important;
+  top: -8px !important;
+  width: min(39vw, 620px) !important;
+}
+
+.folk-hero-art::before {
+  background:
+    radial-gradient(ellipse at 42% 18%, var(--folk-rust) 0 5.5%, transparent 6%),
+    radial-gradient(ellipse at 36% 24%, var(--folk-rust) 0 9%, transparent 9.5%),
+    radial-gradient(ellipse at 48% 24%, var(--folk-rust) 0 9%, transparent 9.5%),
+    radial-gradient(ellipse at 42% 34%, var(--folk-coral) 0 10%, transparent 10.5%),
+    radial-gradient(circle at 42% 27%, var(--folk-mustard) 0 3%, transparent 3.5%),
+    radial-gradient(ellipse at 17% 44%, var(--folk-cream) 0 7.5%, transparent 8%),
+    radial-gradient(ellipse at 8% 49%, var(--folk-parchment) 0 7.5%, transparent 8%),
+    radial-gradient(circle at 13% 47%, var(--folk-rust) 0 2.6%, transparent 3%),
+    radial-gradient(ellipse at 62% 46%, var(--folk-coral) 0 7%, transparent 7.5%),
+    radial-gradient(ellipse at 74% 34%, var(--folk-mustard) 0 6.5%, transparent 7%),
+    radial-gradient(ellipse at 32% 61%, rgba(88, 99, 59, 0.9) 0 17%, transparent 17.5%),
+    radial-gradient(ellipse at 58% 63%, rgba(47, 109, 100, 0.86) 0 16%, transparent 16.5%),
+    radial-gradient(ellipse at 81% 62%, rgba(88, 99, 59, 0.72) 0 13%, transparent 13.5%) !important;
+  filter: none !important;
+}
+
+.folk-hero-art::after {
+  background:
+    radial-gradient(circle at 86% 15%, rgba(216, 169, 62, 0.95) 0 2px, transparent 2.5px),
+    radial-gradient(circle at 91% 23%, rgba(244, 223, 189, 0.85) 0 2px, transparent 2.5px),
+    repeating-linear-gradient(67deg, transparent 0 12px, rgba(216, 169, 62, 0.72) 12px 15px, transparent 15px 25px),
+    linear-gradient(105deg, transparent 0 61%, rgba(201, 85, 45, 0.82) 61% 65%, rgba(244, 223, 189, 0.92) 65% 68%, rgba(47, 109, 100, 0.82) 68% 72%, rgba(216, 169, 62, 0.72) 72% 75%, transparent 75%) !important;
+  background-size: 30px 30px, 36px 36px, auto, auto !important;
+  mask-image: radial-gradient(ellipse at 88% 43%, #000 0 36%, transparent 37%) !important;
+}
+
+.desktop-icon-sprig .desktop-icon-code::before,
+.desktop-icon-sprout .desktop-icon-code::before {
+  background:
+    linear-gradient(68deg, transparent 48%, var(--folk-mustard) 49% 52%, transparent 53%),
+    radial-gradient(ellipse at 38% 25%, var(--folk-moss) 0 12%, transparent 13%),
+    radial-gradient(ellipse at 58% 35%, var(--folk-sage) 0 12%, transparent 13%),
+    radial-gradient(ellipse at 34% 49%, var(--folk-teal) 0 12%, transparent 13%),
+    radial-gradient(ellipse at 63% 65%, var(--folk-moss) 0 12%, transparent 13%) !important;
+  inset: 2px 4px 2px 4px !important;
+  transform: rotate(-14deg) !important;
+}
+
+.desktop-icon-fern .desktop-icon-code::before {
+  background:
+    radial-gradient(ellipse at 34% 20%, var(--folk-ochre) 0 9%, transparent 10%),
+    radial-gradient(ellipse at 64% 28%, var(--folk-mustard) 0 9%, transparent 10%),
+    radial-gradient(ellipse at 32% 41%, var(--folk-ochre) 0 9%, transparent 10%),
+    radial-gradient(ellipse at 67% 52%, var(--folk-sage) 0 9%, transparent 10%),
+    radial-gradient(ellipse at 36% 64%, var(--folk-ochre) 0 9%, transparent 10%),
+    radial-gradient(ellipse at 60% 76%, var(--folk-mustard) 0 9%, transparent 10%),
+    linear-gradient(100deg, transparent 47%, var(--folk-mustard) 48% 52%, transparent 53%) !important;
+  inset: 0 2px !important;
+  transform: rotate(-14deg) !important;
+}
+
+.hud-frame .terminal-content .category-file-card,
+.hud-frame .terminal-content .library-pass-card,
+.hud-frame .terminal-content .library-system-card,
+.hud-frame .terminal-content .resource-folder-card,
+.hud-frame .terminal-content .resource-document-card,
+.hud-frame .terminal-content .how-to-folder-card,
+.hud-frame .terminal-content .how-to-guide-card,
+.hud-frame .terminal-content .rebuilding-guide-card,
+.hud-frame .terminal-content .legal-card,
+.hud-frame .terminal-content .assessment-card,
+.hud-frame .terminal-content .support-card,
+.hud-frame .terminal-content .legal-motion-card,
+.hud-frame .terminal-content .legal-note,
+.hud-frame .terminal-content .snap-guide-card,
+.hud-frame .terminal-content .routine-card,
+.resource-directory {
+  background:
+    linear-gradient(180deg, rgba(24, 38, 27, 0.96), rgba(12, 20, 15, 0.98)) !important;
+  border: 1px solid var(--folk-border) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.24), inset 0 1px 0 rgba(244, 223, 189, 0.04) !important;
+}
+
+.folk-main-shell::before,
+.folk-main-shell::after,
+.hud-frame .folk-main-shell::before,
+.hud-frame .folk-main-shell::after {
+  display: none !important;
+}
+
+.resource-directory-icon,
+.resource-directory-icon::before {
+  background: var(--folk-mustard) !important;
+}
+
+@media (max-width: 1180px) {
+  .home-category-grid {
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+  }
+
+  .home-support-grid,
+  .start-where-you-are {
+    grid-template-columns: 1fr !important;
+  }
+
+  .refined-home-message {
+    max-width: min(720px, 72vw) !important;
+  }
+}
+
+@media (max-width: 980px) {
+  .hud-frame .win95-desktop {
+    grid-template-columns: 1fr !important;
+  }
+
+  .hud-frame .folk-sidebar {
+    min-height: auto !important;
+    position: relative !important;
+    top: 0 !important;
+  }
+
+  .hud-frame .desktop-icon-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .refined-home-message {
+    max-width: 100% !important;
+    padding-top: 0 !important;
+  }
+
+  .folk-hero-art {
+    display: none !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .hud-frame .win95-desktop {
+    padding: 10px !important;
+  }
+
+  .hud-frame .desktop-icon-grid,
+  .home-category-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .hud-frame .terminal-content {
+    padding: 22px 8px 34px !important;
+  }
+
+  .hud-frame .terminal-content h1,
+  .home-message h1 {
+    font-size: clamp(2.4rem, 15vw, 3.65rem) !important;
+  }
+
+  .home-privacy-panel {
+    grid-template-columns: 1fr;
+  }
+}
