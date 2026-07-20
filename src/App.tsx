@@ -2623,60 +2623,113 @@ function TerminalChrome({
   );
 }
 
-function HomeModule() {
+function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: string) => void }) {
   return (
     <section className="home-terminal" aria-labelledby="home-title">
       <div className="home-grid">
         <article className="home-message">
-          <h1 id="home-title">&lt;Rebuilding Starts Here&gt;</h1>
-          <p className="home-tagline">// Survivor Operating System is for the part after survival starts asking for structure</p>
+          <h1 id="home-title">&lt;Welcome to Survivor Systems&gt;</h1>
           <p>
-            Survivor Operating System is not an emergency service and it is not an escape-planning
-            command center. If you are in immediate danger, still being monitored, or actively trying
-            to get out, route to direct human support first: emergency services, the National Domestic
-            Violence Hotline, law enforcement, or the nearest crisis intervention option you trust.
+            You’re allowed to be curious about what’s happening to you, why everything feels so
+            confusing, what your options are, and what your life could look like when you’re no longer
+            organizing yourself around someone else’s control.
           </p>
           <p>
-            This system is being reorganized into six working directories: Assessments, Guides,
-            Planners & Trackers, Education & Awareness, Advocacy, and Government. Same mission,
-            cleaner map.
+            This space was built to help you get clear, get practical, and start choosing yourself
+            again—without judgment, pressure, or someone talking down to you like you haven’t already
+            survived enough bullshit.
           </p>
-          <div className="home-pull-quote">
+          <p>
+            Here, you’ll find assessments that help put language to what you’ve been living through,
+            guides that break complicated next steps into something your brain can actually work with,
+            and planners and trackers that help you navigate the broken, fragmented systems survivors
+            are expected to manage while exhausted and overwhelmed.
+          </p>
+          <p>
+            You’ll also find practical tools for court, housing, benefits, money, documentation,
+            safety, planning, and rebuilding—along with honest education about domestic violence,
+            coercive control, trauma, stalking, manipulation, and post-separation abuse.
+          </p>
+          <p>
+            Start wherever you can today.
+          </p>
+          <p>
+            Take an assessment. Read one guide. Use one planner. Download one toolkit. Learn one
+            thing that makes your situation feel less confusing.
+          </p>
+          <p className="mission-emphasis">You don’t have to solve your entire life before dinner.</p>
+
+          <section className="home-copy-section" aria-labelledby="home-assessments">
+            <h2 id="home-assessments">&lt;Assessments&gt;</h2>
+            <p>Sometimes you need help naming what’s happening before you can decide what to do about it.</p>
             <p>
-              No one here is asking you to prove you were hurt enough. No one here is collecting your
-              answers. No one here is making your next choice for you.
+              These assessments are designed to help you recognize patterns, validate your instincts,
+              and look at your situation with more clarity and less self-blame.
             </p>
-          </div>
-          <p>
-            The tools here are designed to be temporary, browser-only, and low-pressure wherever
-            possible. Use what helps. Close what does not. Screenshot only if storing images is safe
-            on your device.
-          </p>
-          <p>
-            If you came here asking whether you were crazy, start with Assessments. If you need
-            practical walkthroughs, open Guides. If the paperwork is multiplying, open Planners &
-            Trackers or Government.
-          </p>
-          <p className="mission-emphasis">
-            This is not about being perfect, obedient, healed, brave, grateful, or ready. This is
-            about getting oriented again.
-          </p>
-          <p>
-            Your autonomy, your right to choose when, how, and in what direction, belongs to you. It
-            always has. Someone else may have convinced you otherwise for a while. The system does
-            not agree with them.
-          </p>
-          <div className="founder-note">
-            <div className="terminal-label">&gt;&gt; A Note From The Founder</div>
+          </section>
+
+          <section className="home-copy-section" aria-labelledby="home-guides">
+            <h2 id="home-guides">&lt;Guides&gt;</h2>
+            <p>Knowing you need help and knowing what the hell to do next are two very different things.</p>
             <p>
-              Survivor Operating System was built by a researcher, advocate, somatic trauma
-              specialist, and survivor. After escaping a situation that led to trafficking and
-              homelessness, the founder found that the resources available to her were clinical,
-              complicated, and clearly not built by anyone who had actually needed them. So she
-              built something different. Something that talks to you like a person. Every tool in
-              this system exists because someone needed it and it was not there. It is here now.
+              These guides break down complicated systems, explain your options in plain language,
+              and help you understand the steps involved in court, housing, benefits, safety
+              planning, documentation, and rebuilding your life.
             </p>
-          </div>
+          </section>
+
+          <section className="home-copy-section" aria-labelledby="home-planners-trackers">
+            <h2 id="home-planners-trackers">&lt;Planners and Trackers&gt;</h2>
+            <p>
+              Broken systems love deadlines, paperwork, phone calls, conflicting instructions, and
+              making you repeat the same story seventeen times.
+            </p>
+            <p>
+              These planners and trackers help you organize what happened, what you’ve submitted,
+              who you spoke with, what they told you, what’s due next, and what still needs your
+              attention.
+            </p>
+            <p>
+              Use them to track court dates, evidence, applications, appointments, agencies, housing
+              leads, benefits, communications, expenses, and next steps without expecting your
+              traumatized brain to function like a filing cabinet.
+            </p>
+          </section>
+
+          <section className="home-copy-section" aria-labelledby="home-toolkits">
+            <h2 id="home-toolkits">&lt;Toolkits&gt;</h2>
+            <p>These editable resources are built to help you take action.</p>
+            <p>
+              You’ll find checklists, worksheets, templates, planners, trackers, and examples that
+              help you prepare, organize, document, and move forward one manageable step at a time.
+            </p>
+          </section>
+
+          <section className="home-copy-section" aria-labelledby="home-education">
+            <h2 id="home-education">&lt;Education&gt;</h2>
+            <p>
+              Abuse is often explained in ways that are vague, sanitized, or completely disconnected
+              from how it actually feels to live through it.
+            </p>
+            <p>
+              Here, we talk candidly about coercive control, trauma responses, financial abuse,
+              stalking, manipulation, legal-system abuse, post-separation abuse, and the quiet
+              patterns that can be difficult to explain but impossible to ignore once you see them.
+            </p>
+          </section>
+
+          <section className="home-copy-section safety-note" aria-labelledby="home-before-continue">
+            <h2 id="home-before-continue">&lt;Before You Continue&gt;</h2>
+            <p>A quick safety note, because I care what happens to you:</p>
+            <p>Your internet activity, downloads, accounts, and browsing history may be monitored.</p>
+            <p>
+              Use a safer device whenever possible, clear your browsing history when it’s safe to do
+              so, and be careful about saving documents or passwords on shared devices.
+            </p>
+            <button type="button" onClick={() => onNavigate("guides", "/guides")}>
+              Online Safety Tips
+            </button>
+          </section>
         </article>
       </div>
     </section>
@@ -4222,7 +4275,7 @@ export function App() {
 
   const loadingLabel = loadingModule ? moduleRoutes[loadingModule]?.label : null;
   const moduleContent = activeModule === "home" ? (
-    <HomeModule />
+    <HomeModule onNavigate={navigate} />
   ) : activeModule === "assessments" ||
     activeModule === "guides" ||
     activeModule === "planners" ||

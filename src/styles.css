@@ -2455,13 +2455,38 @@ button:disabled {
 }
 
 .home-message .mission-emphasis {
-  color: var(--hot-text);
+  color: var(--hud, var(--lime));
   font-size: clamp(1rem, 1.5vw, 1.16rem);
   font-weight: 900;
   letter-spacing: 0.04em;
   line-height: 1.65;
-  text-shadow: var(--shadow-pink);
+  text-shadow: 0 0 12px rgba(32, 255, 44, 0.26);
   text-transform: uppercase;
+}
+
+.home-copy-section {
+  border-top: 1px solid rgba(32, 255, 44, 0.2);
+  display: grid;
+  gap: 12px;
+  margin-top: 10px;
+  padding-top: 18px;
+}
+
+.home-copy-section h2 {
+  color: var(--hud, var(--lime));
+  font-size: clamp(1rem, 1.8vw, 1.35rem);
+  margin: 0;
+}
+
+.home-copy-section.safety-note {
+  border: 1px solid rgba(32, 255, 44, 0.26);
+  margin-top: 18px;
+  padding: clamp(16px, 2vw, 22px);
+}
+
+.home-copy-section.safety-note button {
+  justify-self: start;
+  margin-top: 4px;
 }
 
 .founder-note {
