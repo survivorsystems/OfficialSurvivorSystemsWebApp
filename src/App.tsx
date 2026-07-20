@@ -11,6 +11,12 @@ const denialImages = [denialSupportOne, denialSupportTwo];
 
 type ModuleKey =
   | "home"
+  | "assessments"
+  | "guides"
+  | "planners"
+  | "education"
+  | "advocacy"
+  | "government"
   | "am-i-crazy"
   | "go-bag-prep"
   | "planning"
@@ -1352,6 +1358,12 @@ const housingGuideSections: RebuildingGuideSection[] = [
 
 const moduleRoutes: Record<ModuleKey, { label: string; path: string }> = {
   home: { label: "Home", path: "/" },
+  assessments: { label: "Assessments", path: "/assessments" },
+  guides: { label: "Guides", path: "/guides" },
+  planners: { label: "Planners & Trackers", path: "/planners-trackers" },
+  education: { label: "Education & Awareness", path: "/education-awareness" },
+  advocacy: { label: "Advocacy", path: "/advocacy" },
+  government: { label: "Government", path: "/government" },
   "am-i-crazy": { label: "Was I Crazy?", path: "/am-i-crazy" },
   "go-bag-prep": { label: "Immediate Support", path: "/crisis-support" },
   planning: { label: "Immediate Support", path: "/crisis-support" },
@@ -1365,6 +1377,12 @@ const moduleRoutes: Record<ModuleKey, { label: string; path: string }> = {
 
 const allNavTargets: Array<{ key: ModuleKey; label: string; path: string }> = [
   { key: "home", ...moduleRoutes.home },
+  { key: "assessments", ...moduleRoutes.assessments },
+  { key: "guides", ...moduleRoutes.guides },
+  { key: "planners", ...moduleRoutes.planners },
+  { key: "education", ...moduleRoutes.education },
+  { key: "advocacy", ...moduleRoutes.advocacy },
+  { key: "government", ...moduleRoutes.government },
   { key: "am-i-crazy", label: "Was I Crazy", path: "/am-i-crazy" },
   { key: "planning", label: "Immediate Support", path: "/crisis-support" },
   { key: "local-help", ...moduleRoutes["local-help"] },
@@ -1375,9 +1393,12 @@ const allNavTargets: Array<{ key: ModuleKey; label: string; path: string }> = [
 ];
 
 const navItems: Array<{ key: ModuleKey; label: string; path: string; code: string }> = [
-  { key: "rebuilding", label: "Rebuild", path: "/rebuilding", code: "RBL" },
-  { key: "local-help", label: "Resources", path: "/resources", code: "RES" },
-  { key: "access", label: "Database", path: "/resources/access", code: "DBS" },
+  { key: "assessments", label: "Assessments", path: "/assessments", code: "ASM" },
+  { key: "guides", label: "Guides", path: "/guides", code: "GDE" },
+  { key: "planners", label: "Planners", path: "/planners-trackers", code: "PLN" },
+  { key: "education", label: "Education", path: "/education-awareness", code: "EDU" },
+  { key: "advocacy", label: "Advocacy", path: "/advocacy", code: "ADV" },
+  { key: "government", label: "Government", path: "/government", code: "GOV" },
 ];
 
 function navItemFor(key: ModuleKey) {
@@ -1386,6 +1407,18 @@ function navItemFor(key: ModuleKey) {
 }
 
 function isPrimaryNavActive(activeModule: ModuleKey, navKey: ModuleKey) {
+  if (navKey === "assessments") {
+    return activeModule === "assessments" || activeModule === "am-i-crazy";
+  }
+
+  if (navKey === "guides") {
+    return activeModule === "guides" || activeModule === "how-to";
+  }
+
+  if (navKey === "planners") {
+    return activeModule === "planners" || activeModule === "access" || activeModule === "library";
+  }
+
   if (navKey === "local-help") {
     return activeModule === "local-help" || activeModule === "how-to" || activeModule === "legal";
   }
@@ -1396,6 +1429,206 @@ function isPrimaryNavActive(activeModule: ModuleKey, navKey: ModuleKey) {
 
   return activeModule === navKey;
 }
+
+type CategoryFile = {
+  title: string;
+  description: string;
+  status: string;
+  target?: ModuleKey;
+  path?: string;
+};
+
+const categoryFiles: Record<
+  Extract<ModuleKey, "assessments" | "guides" | "planners" | "education" | "advocacy" | "government">,
+  {
+    title: string;
+    intro: string;
+    files: CategoryFile[];
+  }
+> = {
+  assessments: {
+    title: "Assessments",
+    intro:
+      "Interactive browser-only tools that help a user name patterns, reality-check old stories, and decide what kind of support file to open next.",
+    files: [
+      {
+        title: "Was I Crazy?",
+        description: "Reality-check assessment for gaslighting, blame shifting, fear, control, and memory fog.",
+        status: "LIVE",
+        target: "am-i-crazy",
+        path: "/am-i-crazy",
+      },
+      {
+        title: "Relationship Pattern Scan",
+        description: "Future assessment for recurring cycles, repair capacity, and control signals.",
+        status: "QUEUED",
+      },
+      {
+        title: "Rebuilding Readiness Check",
+        description: "Future assessment for housing, benefits, paperwork, emotional bandwidth, and next-step capacity.",
+        status: "QUEUED",
+      },
+    ],
+  },
+  guides: {
+    title: "Guides",
+    intro:
+      "Live walkthroughs for the practical parts of rebuilding: housing, benefits, routines, digital traces, pets, and temporary survival logistics.",
+    files: [
+      {
+        title: "How To Navigate Housing",
+        description: "Coordinated Entry, waitlists, documents, privacy, shelter systems, and follow-up.",
+        status: "LIVE",
+        target: "rebuilding",
+        path: "/rebuilding",
+      },
+      {
+        title: "How To Navigate SNAP & TANF",
+        description: "Food benefits, cash assistance, interviews, documents, expedited SNAP, and safe contact.",
+        status: "LIVE",
+        target: "how-to",
+        path: "/guides",
+      },
+      {
+        title: "How To Live In Your Car",
+        description: "Vehicle living basics, privacy, food, bathrooms, pets, kids, sleep, and movement.",
+        status: "LIVE",
+        target: "how-to",
+        path: "/guides",
+      },
+      {
+        title: "Digital Trace Cleanup",
+        description: "Browser history, private browsing limits, safer-device reminders, and screenshots.",
+        status: "LIVE",
+        target: "how-to",
+        path: "/guides",
+      },
+    ],
+  },
+  planners: {
+    title: "Planners & Trackers",
+    intro:
+      "Reusable systems for tracking the chaos: documents, calls, benefits, housing, court dates, appointments, deadlines, and resource contact logs.",
+    files: [
+      {
+        title: "Database Access Information",
+        description: "Access paths, library previews, permanent unlocks, and deeper planner/tracker rules.",
+        status: "LIVE",
+        target: "access",
+        path: "/resources/access",
+      },
+      {
+        title: "Housing Assistance Tracker",
+        description: "Applications, waitlists, caseworkers, document requests, and follow-up dates.",
+        status: "LIBRARY",
+        target: "access",
+        path: "/resources/access",
+      },
+      {
+        title: "Benefits Assistance Tracker",
+        description: "SNAP, TANF, Medicaid, interview notes, upload confirmations, and renewal deadlines.",
+        status: "LIBRARY",
+        target: "access",
+        path: "/resources/access",
+      },
+      {
+        title: "Court Date Tracker",
+        description: "Hearings, filing deadlines, evidence notes, requested protections, and follow-up tasks.",
+        status: "LIBRARY",
+        target: "access",
+        path: "/resources/access",
+      },
+    ],
+  },
+  education: {
+    title: "Education & Awareness",
+    intro:
+      "Pattern language, abuse dynamics, rebuilding concepts, and plain-English explanations that help the user stop arguing with the fog.",
+    files: [
+      {
+        title: "Gaslighting & Reality Rewriting",
+        description: "Why confusion can become evidence instead of a personal failure.",
+        status: "QUEUED",
+      },
+      {
+        title: "Gray Rocking For Survival",
+        description: "Not about being right. About getting out of the interaction with less fuel on the fire.",
+        status: "QUEUED",
+      },
+      {
+        title: "Be So For Real",
+        description: "A future statistics-and-reality section with the sassy system voice intact.",
+        status: "QUEUED",
+      },
+      {
+        title: "Was I Crazy?",
+        description: "The current live assessment also functions as pattern education.",
+        status: "LIVE",
+        target: "am-i-crazy",
+        path: "/am-i-crazy",
+      },
+    ],
+  },
+  advocacy: {
+    title: "Advocacy",
+    intro:
+      "Support-facing resources: what to ask for, who might help, how to explain the situation, and how to keep power dynamics visible.",
+    files: [
+      {
+        title: "Local Support Starting Points",
+        description: "Advocates, shelters, crisis centers, 211, legal aid, and community resource routing.",
+        status: "LIVE",
+        target: "local-help",
+        path: "/resources",
+      },
+      {
+        title: "How To Talk To An Advocate",
+        description: "Future script support for asking for help without over-explaining or apologizing.",
+        status: "QUEUED",
+      },
+      {
+        title: "Humiliation Is Part Of The System",
+        description: "Future rebuilding piece about intakes, approvals, gatekeeping, and surviving bureaucracy.",
+        status: "QUEUED",
+      },
+    ],
+  },
+  government: {
+    title: "Government",
+    intro:
+      "Public systems, benefits, courts, housing pathways, documentation, and government-adjacent processes in one place.",
+    files: [
+      {
+        title: "SNAP & TANF",
+        description: "Application basics, interviews, missing documents, expedited SNAP, and DV-related exemptions.",
+        status: "LIVE",
+        target: "how-to",
+        path: "/guides",
+      },
+      {
+        title: "Housing Navigation",
+        description: "Coordinated Entry, shelters, waitlists, VAWA, privacy, and follow-up.",
+        status: "LIVE",
+        target: "rebuilding",
+        path: "/rebuilding",
+      },
+      {
+        title: "Protective Orders",
+        description: "Civil protective order basics, what to expect, evidence, violations, and court overlap.",
+        status: "LIVE",
+        target: "legal",
+        path: "/resources",
+      },
+      {
+        title: "Family Court",
+        description: "Custody, support, exchanges, court prep, and safety-aware legal-system notes.",
+        status: "LIVE",
+        target: "legal",
+        path: "/resources",
+      },
+    ],
+  },
+};
 
 const assessmentQuestions: AssessmentQuestion[] = [
   {
@@ -1999,6 +2232,12 @@ function leaveSite() {
 
 function getInitialModule(): ModuleKey {
   const path = window.location.pathname;
+  if (path === "/assessments") return "assessments";
+  if (path === "/guides") return "guides";
+  if (path === "/planners-trackers") return "planners";
+  if (path === "/education-awareness") return "education";
+  if (path === "/advocacy") return "advocacy";
+  if (path === "/government") return "government";
   if (path === "/rebuilding") return "rebuilding";
   if (path === "/planning" || path === "/go-bag-prep" || path === "/crisis-support") return "planning";
   if (path === "/local-help") return "local-help";
@@ -2197,40 +2436,40 @@ function resolveCommand(query: string) {
     return { message: `QUERY ACCEPTED. ROUTING TO ${match.label.toUpperCase()}...`, target: match };
   }
 
+  if (/\b(assessments?|quiz|scan|was i crazy|crazy|abused|abuse|gaslight|gaslighting|reality)\b/.test(normalized)) {
+    return { message: "QUERY ACCEPTED. ROUTING TO ASSESSMENTS...", target: navItemFor("assessments") };
+  }
+
+  if (/\b(guides?|how to|housing|routine|pet|browser|car)\b/.test(normalized)) {
+    return { message: "QUERY ACCEPTED. ROUTING TO GUIDES...", target: navItemFor("guides") };
+  }
+
+  if (/\b(planners?|trackers?|database|access pass|access information|access info|passes|pass options|download|downloads|library|paid|stripe)\b/.test(normalized)) {
+    return { message: "QUERY ACCEPTED. ROUTING TO PLANNERS & TRACKERS...", target: navItemFor("planners") };
+  }
+
+  if (/\b(education|awareness|learn|dynamics|gray rock|statistics|be so for real)\b/.test(normalized)) {
+    return { message: "QUERY ACCEPTED. ROUTING TO EDUCATION & AWARENESS...", target: navItemFor("education") };
+  }
+
+  if (/\b(advocacy|advocate|hotline|shelter|support|near|local)\b/.test(normalized)) {
+    return { message: "QUERY ACCEPTED. ROUTING TO ADVOCACY...", target: navItemFor("advocacy") };
+  }
+
+  if (/\b(government|snap|tanf|benefits|court|legal|rights|order|documents|public assistance)\b/.test(normalized)) {
+    return { message: "QUERY ACCEPTED. ROUTING TO GOVERNMENT...", target: navItemFor("government") };
+  }
+
   if (/ctrl\s*\+\s*esc|\bfirst steps?\b|\bprep\b/.test(normalized)) {
-    return { message: "CRISIS QUERY DETECTED. ROUTING TO DIRECT SUPPORT OPTIONS...", target: navItemFor("planning") };
-  }
-
-  if (/ctrl\s*\+\s*shift/.test(normalized)) {
-    return { message: "QUERY ACCEPTED. REBUILDING FILES LIVE UNDER RESOURCES...", target: navItemFor("local-help") };
-  }
-
-  if (/ctrl\s*\+\s*fn|\bresources?\b/.test(normalized)) {
-    return { message: "QUERY ACCEPTED. ROUTING TO RESOURCES...", target: navItemFor("local-help") };
-  }
-
-  if (/ctrl\s*\+\s*c\b|\bhow to\b|\b(guides?|snap|tanf|benefits)\b/.test(normalized)) {
-    return { message: "QUERY ACCEPTED. ROUTING TO RESOURCES...", target: navItemFor("how-to") };
-  }
-
-  if (/ctrl\s*\+\s*a\b|\b(database|access pass|access information|access info|passes|pass options)\b/.test(normalized)) {
-    return { message: "QUERY ACCEPTED. ROUTING TO DATABASE...", target: navItemFor("access") };
-  }
-
-  if (/ctrl\s*\+\s*l\b|\b(library|download|downloads|subscription|subscribe|paid|stripe)\b/.test(normalized)) {
-    return { message: "QUERY ACCEPTED. ROUTING TO DATABASE...", target: navItemFor("access") };
-  }
-
-  if (/\b(crazy|abused|abuse|assessment|gaslight|gaslighting|reality)\b/.test(normalized)) {
-    return { message: "QUERY ACCEPTED. ROUTING TO WAS I CRAZY?...", target: navItemFor("am-i-crazy") };
+    return { message: "QUERY ACCEPTED. ROUTING TO ASSESSMENTS...", target: navItemFor("assessments") };
   }
 
   if (/\b(go.?bag|bag|simulator|arcade|prep|pack)\b/.test(normalized)) {
-    return { message: "CRISIS PREP QUERY DETECTED. ROUTING TO DIRECT SUPPORT OPTIONS...", target: navItemFor("planning") };
+    return { message: "QUERY ACCEPTED. ROUTING TO GUIDES...", target: navItemFor("guides") };
   }
 
   if (/\b(plan|safety|prepare|documents|checklist)\b/.test(normalized)) {
-    return { message: "CRISIS PLANNING QUERY DETECTED. ROUTING TO DIRECT SUPPORT OPTIONS...", target: navItemFor("planning") };
+    return { message: "QUERY ACCEPTED. ROUTING TO PLANNERS & TRACKERS...", target: navItemFor("planners") };
   }
 
   if (/\b(leave|leaving|go bag|escape|exit plan)\b/.test(normalized)) {
@@ -2238,20 +2477,12 @@ function resolveCommand(query: string) {
   }
 
   if (/\b(rebuild|money|housing|future|after)\b/.test(normalized)) {
-    return { message: "QUERY ACCEPTED. ROUTING TO RESOURCES...", target: navItemFor("local-help") };
-  }
-
-  if (/\b(local|hotline|shelter|support|near)\b/.test(normalized)) {
-    return { message: "QUERY ACCEPTED. ROUTING TO RESOURCES...", target: navItemFor("local-help") };
-  }
-
-  if (/\b(legal|rights|court|order|documents)\b/.test(normalized)) {
-    return { message: "QUERY ACCEPTED. ROUTING TO RESOURCES...", target: navItemFor("legal") };
+    return { message: "QUERY ACCEPTED. ROUTING TO GUIDES...", target: navItemFor("guides") };
   }
 
   return {
     message:
-      "QUERY NOT RECOGNIZED. TRY: WAS I CRAZY, CRISIS SUPPORT, REBUILDING, RESOURCES, DATABASE, LEGAL, OR QUICK EXIT.",
+      "QUERY NOT RECOGNIZED. TRY: ASSESSMENTS, GUIDES, PLANNERS, EDUCATION, ADVOCACY, GOVERNMENT, OR QUICK EXIT.",
     target: null,
   };
 }
@@ -2289,7 +2520,7 @@ function TerminalCommand({
           autoComplete="off"
           id="terminal-command"
           onChange={(event) => setQuery(event.target.value)}
-          placeholder="type: was i crazy, resources, database, rebuilding, quick exit..."
+          placeholder="type: assessments, guides, planners, education, advocacy, government..."
           spellCheck={false}
           type="search"
           value={query}
@@ -2411,9 +2642,9 @@ function HomeModule() {
             Violence Hotline, law enforcement, or the nearest crisis intervention option you trust.
           </p>
           <p>
-            This system is for rebuilding: understanding what happened, sorting paperwork, tracking
-            benefits, navigating housing systems, learning legal basics, rebuilding routines, and
-            getting your life back into a shape that belongs to you.
+            This system is being reorganized into six working directories: Assessments, Guides,
+            Planners & Trackers, Education & Awareness, Advocacy, and Government. Same mission,
+            cleaner map.
           </p>
           <div className="home-pull-quote">
             <p>
@@ -2427,9 +2658,9 @@ function HomeModule() {
             on your device.
           </p>
           <p>
-            If you came here asking whether you were crazy, start with Rebuilding and open the
-            reality-check file. If you are beginning the slow work after the emergency, open
-            Resources or Database.
+            If you came here asking whether you were crazy, start with Assessments. If you need
+            practical walkthroughs, open Guides. If the paperwork is multiplying, open Planners &
+            Trackers or Government.
           </p>
           <p className="mission-emphasis">
             This is not about being perfect, obedient, healed, brave, grateful, or ready. This is
@@ -2452,6 +2683,46 @@ function HomeModule() {
             </p>
           </div>
         </article>
+      </div>
+    </section>
+  );
+}
+
+function CategoryModule({
+  category,
+  onNavigate,
+}: {
+  category: Extract<ModuleKey, "assessments" | "guides" | "planners" | "education" | "advocacy" | "government">;
+  onNavigate: (module: ModuleKey, path: string) => void;
+}) {
+  const content = categoryFiles[category];
+
+  return (
+    <section className="page-shell category-module" aria-labelledby={`${category}-title`}>
+      <div className="terminal-label">OPEN DIRECTORY // {content.title.toUpperCase()}</div>
+      <h1 id={`${category}-title`}>&lt;{content.title}&gt;</h1>
+      <p className="category-intro">{content.intro}</p>
+
+      <div className="category-file-grid">
+        {content.files.map((file) => (
+          <article className="category-file-card" key={file.title}>
+            <div className="category-file-meta">
+              <span>{file.status}</span>
+              <small>{file.target ? "OPENABLE" : "PENDING BUILD"}</small>
+            </div>
+            <h2>&lt;{file.title}&gt;</h2>
+            <p>{file.description}</p>
+            {file.target && file.path ? (
+              <button type="button" onClick={() => onNavigate(file.target as ModuleKey, file.path as string)}>
+                Open File
+              </button>
+            ) : (
+              <button type="button" disabled>
+                Queued
+              </button>
+            )}
+          </article>
+        ))}
       </div>
     </section>
   );
@@ -3957,6 +4228,13 @@ export function App() {
   const loadingLabel = loadingModule ? moduleRoutes[loadingModule]?.label : null;
   const moduleContent = activeModule === "home" ? (
     <HomeModule />
+  ) : activeModule === "assessments" ||
+    activeModule === "guides" ||
+    activeModule === "planners" ||
+    activeModule === "education" ||
+    activeModule === "advocacy" ||
+    activeModule === "government" ? (
+    <CategoryModule category={activeModule} onNavigate={navigate} />
   ) : activeModule === "am-i-crazy" ? (
     <AmICrazyModule onControlPanelChange={updateControlPanel} onNavigate={navigate} />
   ) : activeModule === "go-bag-prep" ? (

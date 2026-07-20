@@ -7337,6 +7337,63 @@ button:not(.desktop-icon):not(.planning-document-key):not(.resource-document-key
   display: none;
 }
 
+.category-module {
+  max-width: 1040px;
+}
+
+.category-intro {
+  color: var(--hud-readable);
+  font-size: clamp(0.96rem, 1.4vw, 1.08rem);
+  line-height: 1.65;
+  max-width: 820px;
+}
+
+.category-file-grid {
+  display: grid;
+  gap: 12px;
+  margin-top: clamp(18px, 3vw, 34px);
+}
+
+.category-file-card {
+  background: rgba(1, 9, 1, 0.82);
+  border: 1px solid rgba(32, 255, 44, 0.24);
+  display: grid;
+  gap: 10px;
+  padding: clamp(14px, 2vw, 20px);
+}
+
+.category-file-meta {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.category-file-meta span,
+.category-file-meta small {
+  border: 1px solid rgba(32, 255, 44, 0.28);
+  color: var(--hud);
+  font-family: var(--font-pixel);
+  font-size: 0.62rem;
+  padding: 5px 7px;
+}
+
+.category-file-card h2 {
+  margin: 0;
+}
+
+.category-file-card p {
+  margin: 0;
+  max-width: 820px;
+}
+
+.hud-frame .terminal-content .category-file-card button:disabled {
+  background: transparent;
+  border-color: rgba(32, 255, 44, 0.24);
+  color: rgba(44, 207, 61, 0.72);
+  cursor: default;
+}
+
 @media (max-width: 860px) {
   .hud-frame .desktop-icon-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
