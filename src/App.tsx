@@ -2710,7 +2710,7 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
     <section className="home-terminal" aria-labelledby="home-title">
       <div className="home-grid">
         <article className="home-message">
-          <h1 id="home-title">&lt;Welcome to Survivor Systems&gt;</h1>
+          <h1 id="home-title">Welcome to Survivor Systems</h1>
           <p>
             You’re allowed to be curious about what’s happening to you, why everything feels so
             confusing, what your options are, and what your life could look like when you’re no longer

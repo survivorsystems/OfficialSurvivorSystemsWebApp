@@ -8008,3 +8008,567 @@ a,
     grid-template-columns: 1fr;
   }
 }
+
+/* Final folk-theme cleanup: retire the old matrix/HUD artifacts. */
+.hud-frame,
+.hud-frame.module-home,
+.hud-frame.module-assessments,
+.hud-frame.module-guides,
+.hud-frame.module-planners,
+.hud-frame.module-toolkits,
+.hud-frame.module-education,
+.hud-frame.module-about,
+.hud-frame.module-advocacy,
+.hud-frame.module-government,
+.hud-frame.module-access,
+.hud-frame.module-library,
+.hud-frame.module-am-i-crazy,
+.hud-frame.module-rebuilding,
+.hud-frame.module-local-help,
+.hud-frame.module-how-to,
+.hud-frame.module-legal,
+.hud-frame.module-planning,
+.hud-frame.module-go-bag-prep {
+  --hud: var(--folk-rust);
+  --hud-dim: rgba(216, 169, 62, 0.38);
+  --hud-hot: var(--folk-cream);
+  --hud-readable: var(--folk-parchment);
+  --hud-bg: transparent;
+  --hud-panel: transparent;
+  background:
+    radial-gradient(circle at 82% 13%, rgba(201, 85, 45, 0.18), transparent 24rem),
+    radial-gradient(circle at 15% 78%, rgba(47, 109, 100, 0.16), transparent 24rem),
+    linear-gradient(135deg, #101610, #070b08 58%, #0d150f);
+  color: var(--folk-parchment);
+  font-family: var(--font-clean);
+}
+
+.hud-frame .win95-desktop {
+  background:
+    radial-gradient(circle at 84% 14%, rgba(201, 85, 45, 0.12), transparent 20rem),
+    linear-gradient(90deg, transparent 0 96%, rgba(216, 169, 62, 0.05) 96% 100%),
+    repeating-linear-gradient(135deg, rgba(244, 223, 189, 0.018) 0 1px, transparent 1px 9px),
+    var(--folk-ink);
+  background-size: auto;
+  gap: clamp(22px, 3vw, 46px);
+  grid-template-columns: minmax(218px, 252px) minmax(0, 1fr);
+}
+
+.hud-frame .win95-window,
+.terminal-screen,
+.win95-window {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  grid-column: auto;
+  min-height: calc(100vh - 48px);
+}
+
+.hud-frame .win95-titlebar,
+.hud-frame .terminal-topbar,
+.hud-frame .command-terminal,
+.win95-titlebar,
+.terminal-topbar,
+.command-terminal,
+.win95-taskbar {
+  display: none;
+}
+
+.hud-frame .terminal-content,
+.hud-frame .win95-window .terminal-content {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  color: var(--folk-parchment);
+  min-height: auto;
+  padding: clamp(30px, 4vw, 64px) clamp(18px, 4vw, 58px);
+}
+
+.hud-frame .terminal-content::before,
+.hud-frame .terminal-content::after,
+.terminal-screen::before,
+.terminal-screen::after {
+  display: none;
+}
+
+.hud-frame .terminal-content h1,
+.hud-frame .terminal-content h2,
+.hud-frame .terminal-content h3,
+.hud-frame .terminal-content h4,
+.hud-frame .terminal-content strong,
+.hud-frame .win95-window .terminal-content h1,
+.hud-frame .win95-window .terminal-content h2,
+.hud-frame .win95-window .terminal-content h3,
+.hud-frame .terminal-content .terminal-label {
+  color: var(--folk-cream);
+  font-family: var(--font-editorial);
+  text-shadow: none;
+}
+
+.hud-frame .terminal-content h1 {
+  font-size: clamp(2.85rem, 6vw, 5.6rem);
+  line-height: 0.98;
+}
+
+.hud-frame .terminal-content h2 {
+  font-size: clamp(1.45rem, 2.5vw, 2.15rem);
+  line-height: 1.12;
+}
+
+.hud-frame .terminal-content p,
+.hud-frame .terminal-content li,
+.hud-frame .terminal-content small,
+.hud-frame .terminal-content span,
+.hud-frame .win95-window .terminal-content p,
+.hud-frame .win95-window .terminal-content li,
+.hud-frame .win95-window .terminal-content small,
+.hud-frame .win95-window .terminal-content span,
+.category-intro,
+.resource-directory-toggle small,
+.resource-file-row {
+  color: var(--folk-parchment);
+  font-family: var(--font-clean);
+  text-shadow: none;
+}
+
+.hud-frame .terminal-label,
+.hud-frame .win95-window .terminal-label,
+.terminal-label,
+.eyebrow,
+.page-kicker,
+.category-file-meta span,
+.category-file-meta small {
+  color: var(--folk-rust);
+  font-family: var(--font-clean);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-shadow: none;
+  text-transform: uppercase;
+}
+
+.hud-frame .desktop-brand-panel,
+.hud-frame .desktop-brand-panel:hover,
+.hud-frame .desktop-brand-panel:focus-visible {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  color: var(--folk-cream);
+  display: grid;
+  filter: none;
+  grid-column: auto;
+  margin: 0;
+  opacity: 1;
+  pointer-events: auto;
+  text-shadow: none;
+}
+
+.hud-frame .desktop-brand-panel p {
+  color: var(--folk-muted);
+}
+
+.hud-frame .desktop-icon-grid {
+  align-content: start;
+  background: transparent;
+  border-top: 1px solid var(--folk-border);
+  display: grid;
+  gap: 10px;
+  grid-column: 1 / -1 !important;
+  grid-row: auto !important;
+  grid-template-columns: 1fr;
+  padding: 22px 0 0;
+  position: static !important;
+}
+
+.hud-frame .desktop-icon,
+.hud-frame .desktop-icon:hover,
+.hud-frame .desktop-icon:focus-visible,
+.hud-frame .desktop-icon.active {
+  aspect-ratio: auto;
+  border-radius: 6px;
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  justify-content: stretch;
+  justify-items: start;
+  min-height: 50px;
+  padding: 8px 10px;
+  text-align: left;
+  text-shadow: none;
+}
+
+.hud-frame .desktop-icon {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  color: var(--folk-cream);
+}
+
+.hud-frame .desktop-icon:hover,
+.hud-frame .desktop-icon:focus-visible,
+.hud-frame .desktop-icon.active {
+  background: rgba(201, 85, 45, 0.16);
+  box-shadow: inset 3px 0 0 var(--folk-rust);
+  color: var(--folk-cream);
+  transform: translateX(2px);
+}
+
+.hud-frame .desktop-icon-code,
+.hud-frame .desktop-icon:hover .desktop-icon-code,
+.hud-frame .desktop-icon.active .desktop-icon-code {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  color: var(--folk-rust);
+  display: grid;
+  font-family: var(--font-editorial);
+  font-size: 1.7rem;
+  height: 34px;
+  line-height: 1;
+  place-items: center;
+  width: 34px;
+}
+
+.hud-frame .desktop-icon-title,
+.hud-frame .desktop-icon:hover .desktop-icon-title,
+.hud-frame .desktop-icon:focus-visible .desktop-icon-title,
+.hud-frame .desktop-icon.active .desktop-icon-title {
+  background: transparent;
+  color: inherit;
+  font-family: var(--font-editorial);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.2;
+  margin: 0;
+  max-width: 100%;
+  padding: 0;
+  text-transform: none;
+}
+
+.sidebar-actions .desktop-icon {
+  color: var(--folk-coral);
+}
+
+.sidebar-actions .desktop-icon:hover,
+.sidebar-actions .desktop-icon:focus-visible {
+  background: rgba(218, 125, 104, 0.12);
+  box-shadow: inset 3px 0 0 var(--folk-coral);
+}
+
+.hud-frame .sidebar-login,
+.hud-frame .sidebar-support {
+  font-family: var(--font-clean);
+  font-size: 0.9rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.hud-frame .sidebar-login span {
+  display: none;
+}
+
+.home-terminal,
+.home-message,
+.home-copy-section,
+.page-shell,
+.category-module,
+.category-file-card,
+.assessment-panel,
+.assessment-card,
+.support-card,
+.library-hero-panel,
+.library-section,
+.library-pass-card,
+.library-system-card,
+.resources-hero,
+.resource-folder-card,
+.resource-document-card,
+.how-to-folder-card,
+.how-to-guide-card,
+.rebuilding-hero,
+.rebuilding-status,
+.rebuilding-guide-card,
+.rebuilding-bottom-line,
+.legal-header,
+.legal-card,
+.legal-guide-shell,
+.legal-motion-card,
+.legal-note,
+.snap-guide-card,
+.routine-card,
+.planning-document-key,
+.resource-document-key {
+  color: var(--folk-parchment);
+  text-shadow: none;
+}
+
+.hud-frame .terminal-content .home-copy-section,
+.hud-frame .terminal-content .category-file-card,
+.hud-frame .terminal-content .library-pass-card,
+.hud-frame .terminal-content .library-system-card,
+.hud-frame .terminal-content .resource-folder-card,
+.hud-frame .terminal-content .resource-document-card,
+.hud-frame .terminal-content .how-to-folder-card,
+.hud-frame .terminal-content .how-to-guide-card,
+.hud-frame .terminal-content .rebuilding-guide-card,
+.hud-frame .terminal-content .legal-card,
+.hud-frame .terminal-content .assessment-card,
+.hud-frame .terminal-content .support-card,
+.hud-frame .terminal-content .legal-motion-card,
+.hud-frame .terminal-content .legal-note,
+.hud-frame .terminal-content .snap-guide-card,
+.hud-frame .terminal-content .routine-card {
+  background:
+    linear-gradient(180deg, rgba(24, 38, 27, 0.96), rgba(13, 21, 15, 0.98));
+  border: 1px solid var(--folk-border);
+  border-radius: 8px;
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.24), inset 0 1px 0 rgba(244, 223, 189, 0.04);
+}
+
+.hud-frame .terminal-content button:not(.desktop-icon):not(.resource-file-row),
+.hud-frame .terminal-content .primary-action,
+.hud-frame .terminal-content .secondary-action,
+.hud-frame .terminal-content .quick-exit,
+.hud-frame .terminal-content .text-link,
+.hud-frame .terminal-content .resource-back-button,
+.hud-frame .terminal-content a.button {
+  background: linear-gradient(180deg, var(--folk-rust), var(--folk-rust-dark));
+  border: 1px solid rgba(244, 223, 189, 0.22);
+  border-radius: 6px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  color: var(--folk-cream);
+  font-family: var(--font-clean);
+  text-shadow: none;
+}
+
+.hud-frame .terminal-content button:not(.desktop-icon):not(.resource-file-row):hover,
+.hud-frame .terminal-content button:not(.desktop-icon):not(.resource-file-row):focus-visible,
+.hud-frame .terminal-content .text-link:hover,
+.hud-frame .terminal-content .text-link:focus-visible {
+  background: linear-gradient(180deg, #db6841, var(--folk-rust));
+  color: var(--folk-cream);
+}
+
+.hud-frame .terminal-content a:not(.button),
+.hud-frame .terminal-content .resource-file-row,
+.hud-frame .terminal-content .resource-file-row span {
+  background: transparent;
+  border-color: transparent;
+  color: var(--folk-rust);
+  font-family: var(--font-clean);
+}
+
+.resource-directory {
+  border-bottom: 1px solid var(--folk-border);
+}
+
+.hud-frame .terminal-content .resource-directory-toggle {
+  color: var(--folk-cream);
+}
+
+.hud-frame .terminal-content .resource-directory-toggle:hover,
+.hud-frame .terminal-content .resource-directory-toggle:focus-visible {
+  background: rgba(201, 85, 45, 0.1);
+  color: var(--folk-cream);
+  outline: 1px solid rgba(216, 169, 62, 0.32);
+}
+
+.resource-directory-toggle strong {
+  color: var(--folk-cream);
+  font-family: var(--font-editorial);
+  font-size: clamp(1.1rem, 1.5vw, 1.35rem);
+  text-transform: none;
+}
+
+.resource-directory-icon,
+.resource-directory-icon::before {
+  background: var(--folk-mustard);
+  border-color: rgba(10, 16, 11, 0.84);
+  box-shadow: inset -5px -5px 0 rgba(141, 50, 28, 0.5), inset 3px 3px 0 rgba(244, 223, 189, 0.55);
+}
+
+.category-file-meta span,
+.category-file-meta small {
+  background: rgba(201, 85, 45, 0.08);
+  border: 1px solid rgba(216, 169, 62, 0.28);
+  border-radius: 999px;
+  color: var(--folk-rust);
+  font-family: var(--font-clean);
+}
+
+@media (max-width: 980px) {
+  .hud-frame .win95-desktop {
+    grid-template-columns: 1fr;
+  }
+
+  .hud-frame .desktop-icon-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .hud-frame .desktop-icon-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hud-frame .terminal-content {
+    padding: 22px 8px 34px;
+  }
+}
+
+/* Hard reset for older button/icon rules that were still leaking through. */
+.folk-sidebar,
+.folk-sidebar *,
+.folk-main-shell,
+.folk-main-shell * {
+  box-sizing: border-box;
+}
+
+.hud-frame .folk-sidebar {
+  background:
+    linear-gradient(180deg, rgba(20, 31, 22, 0.98), rgba(10, 16, 11, 0.98)),
+    repeating-linear-gradient(0deg, rgba(244, 223, 189, 0.025) 0 1px, transparent 1px 5px) !important;
+  border: 1px solid var(--folk-border) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 18px 36px var(--folk-shadow), inset 0 0 0 1px rgba(244, 223, 189, 0.03) !important;
+  min-width: 230px;
+  padding: 20px 16px !important;
+}
+
+.hud-frame button.desktop-brand-panel,
+.hud-frame button.desktop-brand-panel:hover,
+.hud-frame button.desktop-brand-panel:focus-visible,
+.hud-frame button.desktop-brand-panel:active {
+  background: transparent !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--folk-border) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: var(--folk-cream) !important;
+  display: grid !important;
+  filter: none !important;
+  gap: 14px !important;
+  grid-column: 1 / -1 !important;
+  grid-row: auto !important;
+  justify-items: center !important;
+  justify-self: stretch !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+  padding: 0 0 18px !important;
+  position: static !important;
+  text-align: center !important;
+  text-shadow: none !important;
+  transform: none !important;
+  width: 100% !important;
+}
+
+.hud-frame button.desktop-brand-panel .folk-logo-mark {
+  background:
+    radial-gradient(circle at 50% 42%, var(--folk-mustard) 0 9%, transparent 10%),
+    radial-gradient(ellipse at 50% 16%, var(--folk-rust) 0 10%, transparent 11%),
+    radial-gradient(ellipse at 28% 35%, var(--folk-rust) 0 11%, transparent 12%),
+    radial-gradient(ellipse at 72% 35%, var(--folk-coral) 0 11%, transparent 12%),
+    radial-gradient(ellipse at 38% 66%, var(--folk-moss) 0 12%, transparent 13%),
+    radial-gradient(ellipse at 62% 66%, var(--folk-sage) 0 12%, transparent 13%),
+    linear-gradient(180deg, rgba(216, 169, 62, 0.15), rgba(47, 109, 100, 0.12)) !important;
+  border: 1px solid rgba(216, 169, 62, 0.42) !important;
+  height: 82px !important;
+  width: 82px !important;
+}
+
+.hud-frame button.desktop-brand-panel .brand-logo {
+  max-width: 170px !important;
+  width: 170px !important;
+}
+
+.hud-frame button.desktop-brand-panel .brand-logo-survivor,
+.hud-frame button.desktop-brand-panel .brand-logo-systems {
+  color: var(--folk-cream) !important;
+  font-family: var(--font-editorial) !important;
+  text-shadow: none !important;
+}
+
+.hud-frame button.desktop-brand-panel .brand-logo-survivor {
+  font-size: 1.26rem !important;
+  letter-spacing: 0.16em !important;
+}
+
+.hud-frame button.desktop-brand-panel .brand-logo-systems {
+  font-size: 1rem !important;
+  letter-spacing: 0.2em !important;
+}
+
+.hud-frame .desktop-icon-grid {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  width: 100% !important;
+}
+
+.hud-frame .desktop-icon,
+.hud-frame .desktop-icon:hover,
+.hud-frame .desktop-icon:focus-visible,
+.hud-frame .desktop-icon.active {
+  align-items: center !important;
+  grid-template-columns: 34px minmax(0, 1fr) !important;
+  min-width: 0 !important;
+  overflow: visible !important;
+  width: 100% !important;
+}
+
+.hud-frame .desktop-icon-title,
+.hud-frame .desktop-icon:hover .desktop-icon-title,
+.hud-frame .desktop-icon:focus-visible .desktop-icon-title,
+.hud-frame .desktop-icon.active .desktop-icon-title {
+  display: block !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  overflow-wrap: normal !important;
+  text-wrap: balance;
+  white-space: normal !important;
+  width: auto !important;
+  word-break: normal !important;
+}
+
+.hud-frame .sidebar-actions {
+  border-top: 1px solid var(--folk-border) !important;
+  display: grid !important;
+  gap: 10px !important;
+  grid-auto-flow: row !important;
+  grid-template-columns: 1fr !important;
+  grid-template-rows: auto auto auto !important;
+  padding-top: 18px !important;
+}
+
+.hud-frame button.sidebar-login,
+.hud-frame button.sidebar-login:hover,
+.hud-frame button.sidebar-login:focus-visible {
+  background: transparent !important;
+  border: 1px solid var(--folk-border) !important;
+  border-radius: 6px !important;
+  box-shadow: none !important;
+  color: var(--folk-parchment) !important;
+  display: inline-flex !important;
+  height: auto !important;
+  justify-content: center !important;
+  min-height: 42px !important;
+  padding: 10px 12px !important;
+  text-shadow: none !important;
+  width: 100% !important;
+}
+
+.hud-frame button.sidebar-support,
+.hud-frame button.sidebar-support:hover,
+.hud-frame button.sidebar-support:focus-visible {
+  background: linear-gradient(180deg, var(--folk-rust), var(--folk-rust-dark)) !important;
+  border: 1px solid rgba(244, 223, 189, 0.2) !important;
+  border-radius: 6px !important;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.18) !important;
+  color: var(--folk-cream) !important;
+  display: inline-flex !important;
+  height: auto !important;
+  justify-content: center !important;
+  min-height: 42px !important;
+  padding: 10px 12px !important;
+  text-shadow: none !important;
+  width: 100% !important;
+}
