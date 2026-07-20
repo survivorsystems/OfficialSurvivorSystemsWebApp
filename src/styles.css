@@ -2393,46 +2393,11 @@ button:disabled {
   max-width: 860px;
 }
 
-.home-terminal-command {
-  align-items: center;
-  background: rgba(0, 0, 0, 0.56);
-  border: 1px solid rgba(0, 234, 255, 0.28);
-  border-radius: 4px;
-  box-shadow:
-    inset 0 0 18px rgba(0, 234, 255, 0.06),
-    0 0 14px rgba(0, 234, 255, 0.1);
-  color: var(--cyan);
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 18px;
-  min-height: 42px;
-  padding: 0 12px;
-  text-shadow: var(--shadow-cyan);
-}
-
-.home-terminal-command span {
-  color: var(--lime);
-  font-size: clamp(0.72rem, 1.1vw, 0.88rem);
-  font-weight: 900;
-  text-shadow: 0 0 10px rgba(108, 255, 98, 0.45);
-}
-
-.home-terminal-command strong {
-  color: var(--pink);
-  font-size: clamp(0.74rem, 1.1vw, 0.9rem);
-  font-weight: 900;
-  letter-spacing: 0.16em;
-  text-shadow: var(--shadow-pink);
-}
-
 .home-message {
-  border-top: 1px solid rgba(0, 234, 255, 0.2);
   display: grid;
   gap: 18px;
   margin-top: 0;
   max-width: 980px;
-  padding-top: 22px;
 }
 
 .home-grid {
@@ -2460,15 +2425,6 @@ button:disabled {
   line-height: 1.8;
   margin: 0;
   max-width: 900px;
-}
-
-.mission-prompt {
-  color: var(--cyan);
-  font-size: 0.78rem;
-  font-weight: 900;
-  letter-spacing: 0.12em;
-  text-shadow: var(--shadow-cyan);
-  text-transform: uppercase;
 }
 
 .home-message .home-tagline {

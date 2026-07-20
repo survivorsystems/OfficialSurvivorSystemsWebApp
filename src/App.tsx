@@ -2626,13 +2626,8 @@ function TerminalChrome({
 function HomeModule() {
   return (
     <section className="home-terminal" aria-labelledby="home-title">
-      <div className="home-terminal-command">
-        <span aria-hidden="true">user@survivor-os:~$</span>
-        <strong>USER TERMINAL</strong>
-      </div>
       <div className="home-grid">
         <article className="home-message">
-          <div className="mission-prompt">user@survivor-os:~$ LOAD MODULE // MISSION</div>
           <h1 id="home-title">&lt;Rebuilding Starts Here&gt;</h1>
           <p className="home-tagline">// Survivor Operating System is for the part after survival starts asking for structure</p>
           <p>
