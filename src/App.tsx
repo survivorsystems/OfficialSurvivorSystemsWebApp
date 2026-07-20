@@ -14,7 +14,9 @@ type ModuleKey =
   | "assessments"
   | "guides"
   | "planners"
+  | "toolkits"
   | "education"
+  | "about"
   | "advocacy"
   | "government"
   | "am-i-crazy"
@@ -1361,7 +1363,9 @@ const moduleRoutes: Record<ModuleKey, { label: string; path: string }> = {
   assessments: { label: "Assessments", path: "/assessments" },
   guides: { label: "Guides", path: "/guides" },
   planners: { label: "Planners & Trackers", path: "/planners-trackers" },
+  toolkits: { label: "Toolkits", path: "/toolkits" },
   education: { label: "Education & Awareness", path: "/education-awareness" },
+  about: { label: "About", path: "/about" },
   advocacy: { label: "Advocacy", path: "/advocacy" },
   government: { label: "Government", path: "/government" },
   "am-i-crazy": { label: "Was I Crazy?", path: "/am-i-crazy" },
@@ -1380,7 +1384,9 @@ const allNavTargets: Array<{ key: ModuleKey; label: string; path: string }> = [
   { key: "assessments", ...moduleRoutes.assessments },
   { key: "guides", ...moduleRoutes.guides },
   { key: "planners", ...moduleRoutes.planners },
+  { key: "toolkits", ...moduleRoutes.toolkits },
   { key: "education", ...moduleRoutes.education },
+  { key: "about", ...moduleRoutes.about },
   { key: "advocacy", ...moduleRoutes.advocacy },
   { key: "government", ...moduleRoutes.government },
   { key: "am-i-crazy", label: "Was I Crazy", path: "/am-i-crazy" },
@@ -1393,12 +1399,12 @@ const allNavTargets: Array<{ key: ModuleKey; label: string; path: string }> = [
 ];
 
 const navItems: Array<{ key: ModuleKey; label: string; path: string; code: string }> = [
-  { key: "assessments", label: "Assessments", path: "/assessments", code: "ASM" },
-  { key: "guides", label: "Guides", path: "/guides", code: "GDE" },
-  { key: "planners", label: "Planners", path: "/planners-trackers", code: "PLN" },
-  { key: "education", label: "Education", path: "/education-awareness", code: "EDU" },
-  { key: "advocacy", label: "Advocacy", path: "/advocacy", code: "ADV" },
-  { key: "government", label: "Government", path: "/government", code: "GOV" },
+  { key: "assessments", label: "Assessments", path: "/assessments", code: "flower" },
+  { key: "guides", label: "Guides", path: "/guides", code: "sprig" },
+  { key: "planners", label: "Planners & Trackers", path: "/planners-trackers", code: "fern" },
+  { key: "toolkits", label: "Toolkits", path: "/toolkits", code: "arch" },
+  { key: "education", label: "Education", path: "/education-awareness", code: "book" },
+  { key: "about", label: "About", path: "/about", code: "sprout" },
 ];
 
 function navItemFor(key: ModuleKey) {
@@ -1417,6 +1423,10 @@ function isPrimaryNavActive(activeModule: ModuleKey, navKey: ModuleKey) {
 
   if (navKey === "planners") {
     return activeModule === "planners" || activeModule === "access" || activeModule === "library";
+  }
+
+  if (navKey === "toolkits") {
+    return activeModule === "toolkits" || activeModule === "access" || activeModule === "library";
   }
 
   if (navKey === "local-help") {
@@ -1439,7 +1449,7 @@ type CategoryFile = {
 };
 
 const categoryFiles: Record<
-  Extract<ModuleKey, "assessments" | "guides" | "planners" | "education" | "advocacy" | "government">,
+  Extract<ModuleKey, "assessments" | "guides" | "planners" | "toolkits" | "education" | "about" | "advocacy" | "government">,
   {
     title: string;
     intro: string;
@@ -1540,6 +1550,34 @@ const categoryFiles: Record<
       },
     ],
   },
+  toolkits: {
+    title: "Toolkits",
+    intro:
+      "Editable resources for taking action: checklists, worksheets, templates, examples, planners, trackers, and practical support files.",
+    files: [
+      {
+        title: "Cheat Code Library",
+        description: "The deeper toolkit library with previews, access paths, and permanent unlocks.",
+        status: "LIVE",
+        target: "access",
+        path: "/resources/access",
+      },
+      {
+        title: "Court Toolkit",
+        description: "Protective order, family court, evidence, hearing prep, and follow-up support.",
+        status: "LIBRARY",
+        target: "access",
+        path: "/resources/access",
+      },
+      {
+        title: "Housing Toolkit",
+        description: "Housing applications, contacts, documents, coordinated entry, and follow-up.",
+        status: "LIBRARY",
+        target: "access",
+        path: "/resources/access",
+      },
+    ],
+  },
   education: {
     title: "Education & Awareness",
     intro:
@@ -1566,6 +1604,28 @@ const categoryFiles: Record<
         status: "LIVE",
         target: "am-i-crazy",
         path: "/am-i-crazy",
+      },
+    ],
+  },
+  about: {
+    title: "About",
+    intro:
+      "Survivor Systems is a survivor-built resource platform for clarity, documentation, practical support, and rebuilding after control.",
+    files: [
+      {
+        title: "Mission",
+        description: "Tools that treat survivors as capable people, not fragile paperwork problems.",
+        status: "LIVE",
+      },
+      {
+        title: "Privacy Position",
+        description: "No accounts for free tools, no answer storage for assessments, and no unnecessary data collection.",
+        status: "LIVE",
+      },
+      {
+        title: "What This Is Not",
+        description: "Not emergency services, not legal advice, not therapy, and not another place that takes control away.",
+        status: "LIVE",
       },
     ],
   },
@@ -2235,7 +2295,9 @@ function getInitialModule(): ModuleKey {
   if (path === "/assessments") return "assessments";
   if (path === "/guides") return "guides";
   if (path === "/planners-trackers") return "planners";
+  if (path === "/toolkits") return "toolkits";
   if (path === "/education-awareness") return "education";
+  if (path === "/about") return "about";
   if (path === "/advocacy") return "advocacy";
   if (path === "/government") return "government";
   if (path === "/rebuilding") return "rebuilding";
@@ -2422,7 +2484,7 @@ function resolveCommand(query: string) {
   if (/\b(help|menu|options|commands|where)\b/.test(normalized)) {
     return {
       message:
-        "AVAILABLE COMMANDS: WAS I CRAZY, CRISIS SUPPORT, REBUILDING, RESOURCES, DATABASE, QUICK EXIT.",
+        "AVAILABLE COMMANDS: ASSESSMENTS, GUIDES, PLANNERS, TOOLKITS, EDUCATION, ABOUT, QUICK EXIT.",
       target: null,
     };
   }
@@ -2444,12 +2506,20 @@ function resolveCommand(query: string) {
     return { message: "QUERY ACCEPTED. ROUTING TO GUIDES...", target: navItemFor("guides") };
   }
 
-  if (/\b(planners?|trackers?|database|access pass|access information|access info|passes|pass options|download|downloads|library|paid|stripe)\b/.test(normalized)) {
+  if (/\b(planners?|trackers?)\b/.test(normalized)) {
     return { message: "QUERY ACCEPTED. ROUTING TO PLANNERS & TRACKERS...", target: navItemFor("planners") };
+  }
+
+  if (/\b(toolkits?|database|access pass|access information|access info|passes|pass options|download|downloads|library|paid|stripe)\b/.test(normalized)) {
+    return { message: "QUERY ACCEPTED. ROUTING TO TOOLKITS...", target: navItemFor("toolkits") };
   }
 
   if (/\b(education|awareness|learn|dynamics|gray rock|statistics|be so for real)\b/.test(normalized)) {
     return { message: "QUERY ACCEPTED. ROUTING TO EDUCATION & AWARENESS...", target: navItemFor("education") };
+  }
+
+  if (/\b(about|mission|privacy|founder|who built)\b/.test(normalized)) {
+    return { message: "QUERY ACCEPTED. ROUTING TO ABOUT...", target: navItemFor("about") };
   }
 
   if (/\b(advocacy|advocate|hotline|shelter|support|near|local)\b/.test(normalized)) {
@@ -2482,7 +2552,7 @@ function resolveCommand(query: string) {
 
   return {
     message:
-      "QUERY NOT RECOGNIZED. TRY: ASSESSMENTS, GUIDES, PLANNERS, EDUCATION, ADVOCACY, GOVERNMENT, OR QUICK EXIT.",
+      "QUERY NOT RECOGNIZED. TRY: ASSESSMENTS, GUIDES, PLANNERS, TOOLKITS, EDUCATION, ABOUT, OR QUICK EXIT.",
     target: null,
   };
 }
@@ -2545,32 +2615,43 @@ function TerminalChrome({
 
   return (
     <main className={`terminal-frame app-frame win95-frame hud-frame module-${activeModule}`}>
-      <section className="win95-desktop" aria-label="Survivor Operating System desktop">
-        {isDesktopHome ? (
-          <div className="desktop-brand-panel" aria-hidden="true">
+      <section className="win95-desktop" aria-label="Survivor Systems">
+        <aside className="folk-sidebar">
+          <button className="desktop-brand-panel" type="button" onClick={() => onNavigate("home", "/")}>
+            <span className="folk-logo-mark" aria-hidden="true" />
             <BrandLogo />
-            <p>User terminal online. Stabilize. Rebuild. Return to self.</p>
-          </div>
-        ) : null}
-        <nav className="desktop-icon-grid" aria-label="Desktop navigation">
-          {navItems.map((item) => (
-            <button
-              className={`desktop-icon${isPrimaryNavActive(activeModule, item.key) ? " active" : ""}`}
-              key={item.key}
-              type="button"
-              onClick={() => onNavigate(item.key, item.path)}
-            >
-              <span className="desktop-icon-code" aria-hidden="true">{item.code}</span>
-              <span className="desktop-icon-title">{item.label}</span>
-            </button>
-          ))}
-          <button className="desktop-icon desktop-icon-exit" type="button" onClick={leaveSite}>
-            <span className="desktop-icon-code" aria-hidden="true">EXT</span>
-            <span className="desktop-icon-title">Quick Exit</span>
           </button>
-        </nav>
+          <nav className="desktop-icon-grid" aria-label="Site navigation">
+            {navItems.map((item) => (
+              <button
+                className={`desktop-icon desktop-icon-${item.code}${isPrimaryNavActive(activeModule, item.key) ? " active" : ""}`}
+                key={item.key}
+                type="button"
+                onClick={() => onNavigate(item.key, item.path)}
+              >
+                <span className="desktop-icon-code" aria-hidden="true" />
+                <span className="desktop-icon-title">{item.label}</span>
+              </button>
+            ))}
+          </nav>
+          <div className="sidebar-actions">
+            <button className="sidebar-login" type="button" onClick={() => onNavigate("about", "/about")}>
+              <span aria-hidden="true">□</span>
+              Log in
+            </button>
+            <button className="sidebar-support" type="button" onClick={() => onNavigate("advocacy", "/advocacy")}>
+              You're Not Alone
+            </button>
+            <button className="desktop-icon desktop-icon-exit" type="button" onClick={leaveSite}>
+              <span className="desktop-icon-code" aria-hidden="true" />
+              <span className="desktop-icon-title">Quick Exit</span>
+            </button>
+          </div>
+        </aside>
 
-        <section className={`terminal-screen win95-window hud-window hud-window-${activeModule}`} aria-label={`${activeLabel} window`}>
+        <section className="folk-main-shell">
+          {isDesktopHome ? <div className="folk-hero-art" aria-hidden="true" /> : null}
+          <section className={`terminal-screen win95-window hud-window hud-window-${activeModule}`} aria-label={`${activeLabel} window`}>
           <div className="win95-titlebar">
             <div className="win95-titlebar-label">
               <span className="win95-titlebar-icon" aria-hidden="true" />
@@ -2604,6 +2685,7 @@ function TerminalChrome({
             <TerminalCommand onNavigate={onNavigate} />
           </header>
           <div className="terminal-content">{children}</div>
+          </section>
         </section>
 
         <footer className="win95-taskbar">
@@ -2740,7 +2822,7 @@ function CategoryModule({
   category,
   onNavigate,
 }: {
-  category: Extract<ModuleKey, "assessments" | "guides" | "planners" | "education" | "advocacy" | "government">;
+  category: Extract<ModuleKey, "assessments" | "guides" | "planners" | "toolkits" | "education" | "about" | "advocacy" | "government">;
   onNavigate: (module: ModuleKey, path: string) => void;
 }) {
   const content = categoryFiles[category];
@@ -4279,7 +4361,9 @@ export function App() {
   ) : activeModule === "assessments" ||
     activeModule === "guides" ||
     activeModule === "planners" ||
+    activeModule === "toolkits" ||
     activeModule === "education" ||
+    activeModule === "about" ||
     activeModule === "advocacy" ||
     activeModule === "government" ? (
     <CategoryModule category={activeModule} onNavigate={navigate} />
