@@ -2,7 +2,6 @@ import { type FormEvent, type ReactNode, useCallback, useEffect, useRef, useStat
 import {
   BookOpenCheck,
   Scale,
-  Sprout,
 } from "lucide-react";
 import denialSupportOne from "./assets/support/denial-support-1.png";
 import denialSupportTwo from "./assets/support/denial-support-2.png";
@@ -1448,6 +1447,47 @@ type CategoryFile = {
   path?: string;
 };
 
+type PageFlourishVariant =
+  | "assessments"
+  | "guides"
+  | "planners"
+  | "toolkits"
+  | "education"
+  | "about"
+  | "advocacy"
+  | "government"
+  | "resources"
+  | "database"
+  | "legal"
+  | "rebuilding";
+
+function PageFlourishHeader({
+  children,
+  eyebrow,
+  title,
+  titleId,
+  variant,
+}: {
+  children: ReactNode;
+  eyebrow: string;
+  title: string;
+  titleId: string;
+  variant: PageFlourishVariant;
+}) {
+  return (
+    <header className={`page-flourish-header page-flourish-${variant}`}>
+      <div className="page-flourish-copy">
+        <p className="folk-kicker">{eyebrow}</p>
+        <h1 id={titleId}>{title}</h1>
+        <div className="page-flourish-intro">{children}</div>
+      </div>
+      <div className="page-flourish-art" aria-hidden="true">
+        <span />
+      </div>
+    </header>
+  );
+}
+
 const categoryFiles: Record<
   Extract<ModuleKey, "assessments" | "guides" | "planners" | "toolkits" | "education" | "about" | "advocacy" | "government">,
   {
@@ -2844,9 +2884,14 @@ function CategoryModule({
 
   return (
     <section className="page-shell category-module" aria-labelledby={`${category}-title`}>
-      <div className="terminal-label">OPEN DIRECTORY // {content.title.toUpperCase()}</div>
-      <h1 id={`${category}-title`}>{content.title}</h1>
-      <p className="category-intro">{content.intro}</p>
+      <PageFlourishHeader
+        eyebrow={`Open directory // ${content.title}`}
+        title={content.title}
+        titleId={`${category}-title`}
+        variant={category}
+      >
+        <p>{content.intro}</p>
+      </PageFlourishHeader>
 
       <div className="category-file-grid">
         {content.files.map((file) => (
@@ -3498,27 +3543,17 @@ function HowToModule({
 
   return (
     <section className="page-shell how-to-module" aria-labelledby="how-to-title">
-      <div className="page-kicker">
-        <BookOpenCheck aria-hidden="true" />
-        <p className="eyebrow">Resources // How To Guides</p>
-      </div>
-
-      <div className="how-to-hero">
-        <div>
-          <p className="terminal-label">LOAD RESOURCES // HOW TO GUIDES</p>
-          <h1 id="how-to-title">Resource Priorities</h1>
-          <p className="how-to-subtitle">HOW TO GUIDES</p>
-          <p>
-            Practical guides are sorted by priority so the screen does not throw the whole system at
-            the user at once. Open a folder first, then choose the guide that matches the next move.
-          </p>
-        </div>
-        <aside className="how-to-status-panel" aria-label="How to guide status">
-          <span>{activePriority ? activePriority.label : "GUIDE INDEX"}</span>
-          <strong>ONLINE</strong>
-          <small>{activePriority ? "FOLDER OPEN // LIVE GUIDES" : "PRIORITY FOLDERS // NO STATIC PDF EMBEDS"}</small>
-        </aside>
-      </div>
+      <PageFlourishHeader
+        eyebrow={activePriority ? `Folder open // ${activePriority.label}` : "Resources // How To Guides"}
+        title="Resource Priorities"
+        titleId="how-to-title"
+        variant="resources"
+      >
+        <p>
+          Practical guides are sorted by priority so the screen does not throw the whole system at
+          the user at once. Open a folder first, then choose the guide that matches the next move.
+        </p>
+      </PageFlourishHeader>
 
       {!activePriority ? (
         <div className="how-to-priority-grid">
@@ -3610,26 +3645,12 @@ function AccessInformationModule() {
 
   return (
     <section className="page-shell library-module access-module" aria-labelledby="access-title">
-      <div className="page-kicker">
-        <BookOpenCheck aria-hidden="true" />
-        <p className="eyebrow">DATABASE // ACCESS</p>
-      </div>
-
-      <div className="library-hero-panel">
-        <div>
-          <p className="terminal-label">LOAD MODULE // DATABASE</p>
-          <h1 id="access-title">Database</h1>
-          <p>
-            The Database holds indexed previews, Cheat Code Library access paths, and download
-            unlock rules for deeper planners, trackers, and long-form guides.
-          </p>
-        </div>
-        <aside className="library-status-panel" aria-label="Access pass status">
-          <span>DATABASE</span>
-          <strong>DATABASE</strong>
-          <small>VIEWING + UNLOCK RULES</small>
-        </aside>
-      </div>
+      <PageFlourishHeader eyebrow="Database // Access" title="Database" titleId="access-title" variant="database">
+        <p>
+          The Database holds indexed previews, Cheat Code Library access paths, and download
+          unlock rules for deeper planners, trackers, and long-form guides.
+        </p>
+      </PageFlourishHeader>
 
       <section className="library-section" aria-labelledby="access-options-title">
         <div className="terminal-label">DATABASE ACCESS OPTIONS</div>
@@ -3811,8 +3832,12 @@ function ResourceModule({
 
   return (
     <section className="page-shell resources-module" aria-labelledby="resources-title">
-      <div className="terminal-label">LOAD MODULE // RESOURCE FOLDERS</div>
-      <h1 id="resources-title">Resources</h1>
+      <PageFlourishHeader eyebrow="Load module // Resource folders" title="Resources" titleId="resources-title" variant="resources">
+        <p>
+          Browse the live resource folders by need: housing, benefits, legal orientation, digital
+          safety, stabilization, and the deeper Database.
+        </p>
+      </PageFlourishHeader>
 
       <div className="resource-directory-tree" aria-label="Resource directories">
         {resourceDirectories.map((directory) => {
@@ -3853,27 +3878,18 @@ function ResourceModule({
 function LibraryModule() {
   return (
     <section className="page-shell library-module" aria-labelledby="library-title">
-      <div className="page-kicker">
-        <BookOpenCheck aria-hidden="true" />
-        <p className="eyebrow">Resources // Library</p>
-      </div>
-
-      <div className="library-hero-panel">
-        <div>
-          <p className="terminal-label">LOAD MODULE // CHEAT CODE LIBRARY</p>
-          <h1 id="library-title">Cheat Code Library</h1>
-          <p>
-            Free crisis tools stay live in the app. The Cheat Code Library holds deeper templates,
-            trackers, guides, and long-form systems for people who want more structure without a
-            forced subscription or a forced category choice.
-          </p>
-        </div>
-        <aside className="library-status-panel" aria-label="Library access status">
-          <span>DATABASE INDEX</span>
-          <strong>CHEAT CODES</strong>
-          <small>VIEW FIRST // UNLOCK WHAT MATTERS</small>
-        </aside>
-      </div>
+      <PageFlourishHeader
+        eyebrow="Resources // Library"
+        title="Cheat Code Library"
+        titleId="library-title"
+        variant="database"
+      >
+        <p>
+          Free crisis tools stay live in the app. The Cheat Code Library holds deeper templates,
+          trackers, guides, and long-form systems for people who want more structure without a
+          forced subscription or a forced category choice.
+        </p>
+      </PageFlourishHeader>
 
       <div className="library-rule-strip" aria-label="Library rules">
         <span>Unlimited Viewing During Active Pass</span>
@@ -3973,27 +3989,18 @@ function RebuildingModule({
 }) {
   return (
     <section className="page-shell rebuilding-module" aria-labelledby="rebuilding-title">
-      <div className="page-kicker">
-        <Sprout aria-hidden="true" />
-        <p className="eyebrow">Resources // stabilize.exe</p>
-      </div>
-
-      <div className="rebuilding-hero">
-        <div>
-          <p className="terminal-label">LOAD MODULE // HOUSING NAVIGATION</p>
-          <h1 id="rebuilding-title">How To Navigate Housing</h1>
-          <p>
-            Housing can feel like one giant locked door. It is usually a set of smaller doors:
-            first night, waitlists, documents, transportation, privacy, benefits, advocates, and
-            follow-up. This page helps name the system so it gets less impossible to approach.
-          </p>
-        </div>
-        <aside className="rebuilding-status" aria-label="Housing navigation status">
-          <span>SYSTEMS ONLINE</span>
-          <strong>REBUILDING MODE</strong>
-          <small>LIVE PAGE // NO PDF EMBED</small>
-        </aside>
-      </div>
+      <PageFlourishHeader
+        eyebrow="Resources // Stabilize"
+        title="How To Navigate Housing"
+        titleId="rebuilding-title"
+        variant="rebuilding"
+      >
+        <p>
+          Housing can feel like one giant locked door. It is usually a set of smaller doors:
+          first night, waitlists, documents, transportation, privacy, benefits, advocates, and
+          follow-up. This page helps name the system so it gets less impossible to approach.
+        </p>
+      </PageFlourishHeader>
 
       <div className="housing-command-strip" aria-label="Housing quick signals">
         <span>211</span>
@@ -4286,28 +4293,13 @@ function LegalModule() {
 
   return (
     <section className="page-shell legal-module" aria-labelledby="legal-title">
-      <div className="page-kicker">
-        <Scale aria-hidden="true" />
-        <p className="eyebrow">Legal</p>
-      </div>
-
-      <div className="legal-header">
-        <div>
-          <p className="terminal-label">SURVIVOR OPERATING SYSTEM // LEGAL</p>
-          <h1 id="legal-title">Legal Resources</h1>
-          <p className="legal-command-subtitle">LEGAL RESOURCES</p>
-          <p>
-            Legal systems can be intimidating because they are systems with rules, deadlines,
-            vocabulary, and power. This section is for orientation, language, and preparation before
-            you ask a court, agency, advocate, or attorney for the next step.
-          </p>
-        </div>
-        <aside className="legal-status" aria-label="Legal module status">
-          <span>SYSTEM STATUS</span>
-          <strong>LEGAL MODE ONLINE</strong>
-          <small>GENERAL INFO // NOT LEGAL ADVICE</small>
-        </aside>
-      </div>
+      <PageFlourishHeader eyebrow="Survivor Operating System // Legal" title="Legal Resources" titleId="legal-title" variant="legal">
+        <p>
+          Legal systems can be intimidating because they are systems with rules, deadlines,
+          vocabulary, and power. This section is for orientation, language, and preparation before
+          you ask a court, agency, advocate, or attorney for the next step.
+        </p>
+      </PageFlourishHeader>
 
       <div className="legal-category-grid">
         {legalCategories
