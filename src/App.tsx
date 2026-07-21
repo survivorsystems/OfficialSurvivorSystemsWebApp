@@ -2611,7 +2611,6 @@ function TerminalChrome({
   onNavigate: (module: ModuleKey, path: string) => void;
 }) {
   const activeLabel = moduleRoutes[activeModule]?.label ?? "Home";
-  const isDesktopHome = activeModule === "home";
 
   return (
     <main className={`terminal-frame app-frame win95-frame hud-frame module-${activeModule}`}>
@@ -2646,7 +2645,6 @@ function TerminalChrome({
         </aside>
 
         <section className="folk-main-shell">
-          {isDesktopHome ? <div className="folk-hero-art" aria-hidden="true" /> : null}
           <section className={`terminal-screen win95-window hud-window hud-window-${activeModule}`} aria-label={`${activeLabel} window`}>
           <div className="win95-titlebar">
             <div className="win95-titlebar-label">
@@ -2754,7 +2752,7 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
 
   return (
     <section className="home-terminal" aria-labelledby="home-title">
-      <div className="home-grid refined-home-grid">
+      <div className="home-hero-composition">
         <article className="home-message refined-home-message">
           <p className="folk-kicker">Clarity. Protection. Power.</p>
           <h1 id="home-title">Welcome to Survivor Systems</h1>
@@ -2782,6 +2780,9 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
             </button>
           </div>
         </article>
+        <aside className="home-hero-visual" aria-label="Folk floral artwork">
+          <span className="folk-hero-art" aria-hidden="true" />
+        </aside>
       </div>
 
       <div className="home-category-grid" aria-label="Resource categories">

@@ -9458,3 +9458,106 @@ body::after {
     display: none !important;
   }
 }
+
+/* Hero composition pass: the floral is part of the homepage hero, not pasted onto the shell. */
+.home-hero-composition {
+  align-items: center;
+  display: grid;
+  gap: clamp(28px, 4vw, 72px);
+  grid-template-columns: minmax(390px, 0.9fr) minmax(360px, 1fr);
+  min-height: clamp(520px, 68vh, 690px);
+  position: relative;
+}
+
+.home-hero-composition .refined-home-message {
+  max-width: 620px !important;
+  padding-top: clamp(6px, 1.4vw, 18px) !important;
+  position: relative;
+  z-index: 2;
+}
+
+.home-hero-composition .home-message h1 {
+  font-size: clamp(3rem, 5.15vw, 5.2rem) !important;
+}
+
+.home-hero-visual {
+  align-self: stretch;
+  display: grid;
+  min-height: 420px;
+  overflow: visible;
+  place-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.home-hero-visual::before {
+  background:
+    radial-gradient(circle at 38% 40%, rgba(216, 169, 62, 0.14), transparent 0.2rem),
+    radial-gradient(circle at 62% 62%, rgba(244, 223, 189, 0.1), transparent 0.18rem),
+    repeating-linear-gradient(115deg, transparent 0 18px, rgba(216, 169, 62, 0.2) 18px 20px, transparent 20px 34px);
+  border-radius: 999px 0 0 999px;
+  content: "";
+  inset: 4% -9% 5% 12%;
+  mask-image: linear-gradient(90deg, transparent 0, #000 18%, #000 100%);
+  opacity: 0.52;
+  position: absolute;
+}
+
+.home-hero-visual .folk-hero-art {
+  background:
+    linear-gradient(90deg, rgba(10, 22, 16, 0.34), rgba(10, 22, 16, 0)),
+    url("./assets/folk/hero-floral.png") center / contain no-repeat !important;
+  border: 1px solid rgba(216, 169, 62, 0.26);
+  border-radius: 44px 10px 44px 10px;
+  box-shadow:
+    inset 0 0 0 1px rgba(244, 223, 189, 0.08),
+    0 28px 60px rgba(0, 0, 0, 0.32);
+  display: block !important;
+  filter: saturate(1.04) contrast(1.03);
+  height: min(40vw, 520px) !important;
+  margin-right: clamp(-42px, -3vw, -12px);
+  mix-blend-mode: normal;
+  opacity: 0.96 !important;
+  position: relative !important;
+  right: auto !important;
+  top: auto !important;
+  width: min(52vw, 820px) !important;
+}
+
+.home-hero-visual .folk-hero-art::before,
+.home-hero-visual .folk-hero-art::after {
+  display: none !important;
+}
+
+.home-hero-composition + .home-category-grid {
+  margin-top: clamp(18px, 2.5vw, 34px);
+}
+
+@media (max-width: 1180px) {
+  .home-hero-composition {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .home-hero-visual {
+    grid-row: 1;
+    min-height: 260px;
+    opacity: 0.9;
+  }
+
+  .home-hero-visual .folk-hero-art {
+    height: min(44vw, 360px) !important;
+    margin: 0 auto;
+    width: min(78vw, 680px) !important;
+  }
+
+  .home-hero-composition .refined-home-message {
+    max-width: min(720px, 86vw) !important;
+  }
+}
+
+@media (max-width: 980px) {
+  .home-hero-visual {
+    display: none !important;
+  }
+}
