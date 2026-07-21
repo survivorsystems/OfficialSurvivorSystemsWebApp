@@ -9279,3 +9279,140 @@ body::after {
     grid-template-columns: 1fr;
   }
 }
+
+/* Uploaded folk artwork integration. */
+.hud-frame button.desktop-brand-panel .folk-logo-mark {
+  background:
+    linear-gradient(rgba(7, 16, 12, 0.12), rgba(7, 16, 12, 0.12)),
+    url("./assets/folk/flower-orange.png") center / 76% auto no-repeat,
+    linear-gradient(180deg, rgba(216, 169, 62, 0.12), rgba(47, 109, 100, 0.12)) !important;
+}
+
+.hud-frame button.desktop-brand-panel::after {
+  background: url("./assets/folk/floral-flourish.png") center / contain no-repeat;
+  content: "";
+  display: block;
+  height: 28px;
+  margin-top: -4px;
+  opacity: 0.72;
+  width: min(174px, 86%);
+}
+
+.folk-hero-art {
+  background:
+    linear-gradient(90deg, rgba(7, 16, 12, 0.08), rgba(7, 16, 12, 0)),
+    url("./assets/folk/hero-floral.png") center / contain no-repeat !important;
+  height: min(35vw, 430px) !important;
+  opacity: 0.98 !important;
+  right: -1vw !important;
+  top: 16px !important;
+  width: min(48vw, 720px) !important;
+}
+
+.folk-hero-art::before,
+.folk-hero-art::after {
+  display: none !important;
+}
+
+.desktop-icon-flower .desktop-icon-code::before,
+.desktop-icon-sprig .desktop-icon-code::before,
+.desktop-icon-fern .desktop-icon-code::before,
+.desktop-icon-arch .desktop-icon-code::before,
+.desktop-icon-book .desktop-icon-code::before,
+.desktop-icon-sprout .desktop-icon-code::before {
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: contain !important;
+  inset: 2px !important;
+  transform: none !important;
+}
+
+.desktop-icon-flower .desktop-icon-code::before {
+  background-image: url("./assets/folk/flower-coral.png") !important;
+}
+
+.desktop-icon-sprig .desktop-icon-code::before,
+.desktop-icon-sprout .desktop-icon-code::before {
+  background-image: url("./assets/folk/floral-flourish.png") !important;
+  inset: 4px -2px !important;
+}
+
+.desktop-icon-fern .desktop-icon-code::before {
+  background-image: url("./assets/folk/flower-cream.png") !important;
+}
+
+.desktop-icon-arch .desktop-icon-code::before {
+  background-image: url("./assets/folk/flower-mustard.png") !important;
+}
+
+.desktop-icon-book .desktop-icon-code::before {
+  background-image: url("./assets/folk/flower-orange.png") !important;
+  border: 0 !important;
+}
+
+.home-card-ornament {
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: contain !important;
+}
+
+.home-card-ornament-flower {
+  background-image: url("./assets/folk/flower-coral.png") !important;
+}
+
+.home-card-ornament-sprig {
+  background-image: url("./assets/folk/floral-flourish.png") !important;
+  width: 96px;
+}
+
+.home-card-ornament-fern {
+  background-image: url("./assets/folk/flower-cream.png") !important;
+  transform: none !important;
+}
+
+.home-card-ornament-arch {
+  background-image: url("./assets/folk/flower-mustard.png") !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.home-card-ornament-book {
+  background-image: url("./assets/folk/flower-orange.png") !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+}
+
+.sprout-illustration {
+  background: url("./assets/folk/flower-coral.png") center / contain no-repeat !important;
+}
+
+.sprout-illustration::after {
+  display: none !important;
+}
+
+.privacy-illustration {
+  background:
+    url("./assets/folk/floral-flourish.png") center / contain no-repeat,
+    linear-gradient(180deg, rgba(24, 38, 27, 0.1), rgba(12, 20, 15, 0.1)) !important;
+  border-radius: 0 !important;
+  width: 132px !important;
+}
+
+.home-terminal::after,
+.page-shell::after {
+  background: url("./assets/folk/floral-flourish.png") right center / contain no-repeat;
+  bottom: -18px;
+  content: "";
+  height: 48px;
+  opacity: 0.35;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  width: min(360px, 42vw);
+}
+
+@media (max-width: 980px) {
+  .folk-hero-art {
+    display: none !important;
+  }
+}
