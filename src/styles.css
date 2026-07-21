@@ -9749,3 +9749,165 @@ body::after {
     display: none;
   }
 }
+
+/* Sidebar nav ornament pass: botanical marks are built into the buttons, not image thumbnails. */
+.hud-frame .desktop-icon-grid {
+  gap: 12px !important;
+}
+
+.hud-frame .desktop-icon {
+  background:
+    linear-gradient(180deg, rgba(27, 45, 31, 0.94), rgba(12, 22, 15, 0.98)),
+    radial-gradient(circle at 20px 50%, rgba(201, 85, 45, 0.26), transparent 38px) !important;
+  border: 1px solid rgba(216, 169, 62, 0.24) !important;
+  border-radius: 9px !important;
+  box-shadow:
+    inset 0 1px 0 rgba(244, 223, 189, 0.06),
+    0 8px 18px rgba(0, 0, 0, 0.14) !important;
+  grid-template-columns: 42px minmax(0, 1fr) !important;
+  min-height: 58px !important;
+  overflow: hidden;
+  padding: 9px 12px 9px 10px !important;
+  position: relative;
+}
+
+.hud-frame .desktop-icon::before {
+  background:
+    linear-gradient(180deg, rgba(244, 223, 189, 0.14), rgba(216, 169, 62, 0.02)),
+    radial-gradient(circle at 50% 50%, rgba(7, 16, 12, 0.64), rgba(7, 16, 12, 0.12) 64%, transparent 65%);
+  border-right: 1px solid rgba(216, 169, 62, 0.22);
+  content: "";
+  inset: 0 auto 0 0;
+  opacity: 0.86;
+  pointer-events: none;
+  position: absolute;
+  width: 52px;
+}
+
+.hud-frame .desktop-icon::after {
+  background:
+    radial-gradient(circle at center, rgba(216, 169, 62, 0.8) 0 1.5px, transparent 2px);
+  background-size: 8px 8px;
+  content: "";
+  inset: 9px 9px 9px auto;
+  opacity: 0.12;
+  pointer-events: none;
+  position: absolute;
+  width: 34px;
+}
+
+.hud-frame .desktop-icon:hover,
+.hud-frame .desktop-icon:focus-visible,
+.hud-frame .desktop-icon.active {
+  background:
+    linear-gradient(180deg, rgba(201, 85, 45, 0.98), rgba(143, 61, 35, 0.98)),
+    radial-gradient(circle at 22px 50%, rgba(244, 223, 189, 0.22), transparent 42px) !important;
+  border-color: rgba(244, 223, 189, 0.32) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(244, 223, 189, 0.16),
+    inset 4px 0 0 rgba(216, 169, 62, 0.86),
+    0 10px 22px rgba(0, 0, 0, 0.2) !important;
+}
+
+.hud-frame .desktop-icon-code {
+  align-self: center;
+  background: transparent !important;
+  border: 0 !important;
+  display: block !important;
+  height: 34px !important;
+  justify-self: center;
+  opacity: 0.96;
+  position: relative;
+  width: 34px !important;
+  z-index: 1;
+}
+
+.desktop-icon-code::before,
+.desktop-icon-code::after,
+.desktop-icon-flower .desktop-icon-code::before,
+.desktop-icon-sprig .desktop-icon-code::before,
+.desktop-icon-fern .desktop-icon-code::before,
+.desktop-icon-arch .desktop-icon-code::before,
+.desktop-icon-book .desktop-icon-code::before,
+.desktop-icon-sprout .desktop-icon-code::before,
+.desktop-icon-exit .desktop-icon-code::before {
+  background-image: none !important;
+  content: "" !important;
+  display: block !important;
+  position: absolute;
+}
+
+.desktop-icon-flower .desktop-icon-code::before {
+  background:
+    radial-gradient(circle at 50% 50%, var(--folk-mustard) 0 9%, transparent 10%),
+    radial-gradient(ellipse at 50% 18%, var(--folk-coral) 0 15%, transparent 16%),
+    radial-gradient(ellipse at 50% 82%, var(--folk-rust) 0 15%, transparent 16%),
+    radial-gradient(ellipse at 18% 50%, var(--folk-rust) 0 15%, transparent 16%),
+    radial-gradient(ellipse at 82% 50%, var(--folk-coral) 0 15%, transparent 16%) !important;
+  inset: 3px !important;
+}
+
+.desktop-icon-flower .desktop-icon-code::after {
+  background:
+    linear-gradient(90deg, transparent 48%, rgba(7, 16, 12, 0.62) 49% 51%, transparent 52%),
+    linear-gradient(0deg, transparent 48%, rgba(7, 16, 12, 0.62) 49% 51%, transparent 52%) !important;
+  inset: 9px !important;
+  opacity: 0.55;
+}
+
+.desktop-icon-sprig .desktop-icon-code::before,
+.desktop-icon-sprout .desktop-icon-code::before {
+  background:
+    linear-gradient(68deg, transparent 46%, var(--folk-mustard) 47% 52%, transparent 53%),
+    radial-gradient(ellipse at 36% 24%, var(--folk-sage) 0 11%, transparent 12%),
+    radial-gradient(ellipse at 63% 34%, var(--folk-moss) 0 11%, transparent 12%),
+    radial-gradient(ellipse at 34% 52%, var(--folk-teal) 0 11%, transparent 12%),
+    radial-gradient(ellipse at 66% 68%, var(--folk-sage) 0 11%, transparent 12%) !important;
+  inset: 1px 5px !important;
+  transform: rotate(-10deg) !important;
+}
+
+.desktop-icon-fern .desktop-icon-code::before {
+  background:
+    linear-gradient(90deg, transparent 48%, var(--folk-ochre) 49% 52%, transparent 53%),
+    radial-gradient(ellipse at 34% 18%, var(--folk-ochre) 0 9%, transparent 10%),
+    radial-gradient(ellipse at 67% 27%, var(--folk-mustard) 0 9%, transparent 10%),
+    radial-gradient(ellipse at 33% 39%, var(--folk-ochre) 0 9%, transparent 10%),
+    radial-gradient(ellipse at 68% 52%, var(--folk-sage) 0 9%, transparent 10%),
+    radial-gradient(ellipse at 36% 65%, var(--folk-ochre) 0 9%, transparent 10%),
+    radial-gradient(ellipse at 62% 78%, var(--folk-mustard) 0 9%, transparent 10%) !important;
+  inset: 0 4px !important;
+  transform: rotate(-14deg) !important;
+}
+
+.desktop-icon-arch .desktop-icon-code::before {
+  background:
+    radial-gradient(circle at 50% 58%, var(--folk-rust) 0 10%, transparent 11%),
+    radial-gradient(circle at 50% 58%, rgba(7, 16, 12, 0.82) 0 24%, transparent 25%),
+    linear-gradient(180deg, transparent 0 20%, var(--folk-ochre) 20% 100%) !important;
+  border-radius: 17px 17px 4px 4px;
+  box-shadow: inset 0 0 0 2px rgba(7, 16, 12, 0.72);
+  inset: 4px 5px !important;
+}
+
+.desktop-icon-book .desktop-icon-code::before {
+  background:
+    linear-gradient(90deg, transparent 48%, var(--folk-rust) 48% 52%, transparent 52%),
+    linear-gradient(180deg, transparent 22%, rgba(143, 61, 35, 0.5) 22% 27%, transparent 27% 40%, rgba(143, 61, 35, 0.5) 40% 45%, transparent 45%),
+    linear-gradient(90deg, var(--folk-parchment) 0 49%, var(--folk-cream) 51% 100%) !important;
+  border: 1px solid rgba(216, 169, 62, 0.68);
+  border-radius: 3px 3px 9px 9px;
+  inset: 7px 4px 8px !important;
+}
+
+.desktop-icon-exit .desktop-icon-code::before {
+  background:
+    linear-gradient(45deg, transparent 0 40%, var(--folk-coral) 41% 57%, transparent 58%),
+    linear-gradient(135deg, transparent 0 42%, var(--folk-coral) 43% 56%, transparent 57%) !important;
+  inset: 5px !important;
+}
+
+.hud-frame .desktop-icon-title {
+  position: relative;
+  z-index: 1;
+}
