@@ -9284,7 +9284,7 @@ body::after {
 .hud-frame button.desktop-brand-panel .folk-logo-mark {
   background:
     linear-gradient(rgba(7, 16, 12, 0.12), rgba(7, 16, 12, 0.12)),
-    url("./assets/folk/flower-orange.png") center / 76% auto no-repeat,
+    url("./assets/folk/arch-floral.png") center / 86% auto no-repeat,
     linear-gradient(180deg, rgba(216, 169, 62, 0.12), rgba(47, 109, 100, 0.12)) !important;
 }
 
@@ -9333,20 +9333,20 @@ body::after {
 
 .desktop-icon-sprig .desktop-icon-code::before,
 .desktop-icon-sprout .desktop-icon-code::before {
-  background-image: url("./assets/folk/floral-flourish.png") !important;
-  inset: 4px -2px !important;
+  background-image: url("./assets/folk/small-coral-sprig.png") !important;
+  inset: 1px 5px !important;
 }
 
 .desktop-icon-fern .desktop-icon-code::before {
-  background-image: url("./assets/folk/flower-cream.png") !important;
+  background-image: url("./assets/folk/fern-ochre.png") !important;
 }
 
 .desktop-icon-arch .desktop-icon-code::before {
-  background-image: url("./assets/folk/flower-mustard.png") !important;
+  background-image: url("./assets/folk/arch-floral.png") !important;
 }
 
 .desktop-icon-book .desktop-icon-code::before {
-  background-image: url("./assets/folk/flower-orange.png") !important;
+  background-image: url("./assets/folk/single-mustard-flower.png") !important;
   border: 0 !important;
 }
 
@@ -9361,29 +9361,29 @@ body::after {
 }
 
 .home-card-ornament-sprig {
-  background-image: url("./assets/folk/floral-flourish.png") !important;
-  width: 96px;
+  background-image: url("./assets/folk/small-coral-sprig.png") !important;
+  width: 68px;
 }
 
 .home-card-ornament-fern {
-  background-image: url("./assets/folk/flower-cream.png") !important;
+  background-image: url("./assets/folk/fern-ochre.png") !important;
   transform: none !important;
 }
 
 .home-card-ornament-arch {
-  background-image: url("./assets/folk/flower-mustard.png") !important;
+  background-image: url("./assets/folk/arch-floral.png") !important;
   border-radius: 0 !important;
   box-shadow: none !important;
 }
 
 .home-card-ornament-book {
-  background-image: url("./assets/folk/flower-orange.png") !important;
+  background-image: url("./assets/folk/single-mustard-flower-sprig.png") !important;
   border: 0 !important;
   border-radius: 0 !important;
 }
 
 .sprout-illustration {
-  background: url("./assets/folk/flower-coral.png") center / contain no-repeat !important;
+  background: url("./assets/folk/single-coral-flower-sprig.png") center / contain no-repeat !important;
 }
 
 .sprout-illustration::after {
@@ -9392,7 +9392,7 @@ body::after {
 
 .privacy-illustration {
   background:
-    url("./assets/folk/floral-flourish.png") center / contain no-repeat,
+    url("./assets/folk/arch-floral.png") center / contain no-repeat,
     linear-gradient(180deg, rgba(24, 38, 27, 0.1), rgba(12, 20, 15, 0.1)) !important;
   border-radius: 0 !important;
   width: 132px !important;
@@ -9400,15 +9400,57 @@ body::after {
 
 .home-terminal::after,
 .page-shell::after {
-  background: url("./assets/folk/floral-flourish.png") right center / contain no-repeat;
+  background: url("./assets/folk/corner-floral-frame.png") right bottom / contain no-repeat;
   bottom: -18px;
   content: "";
-  height: 48px;
-  opacity: 0.35;
+  height: 180px;
+  opacity: 0.18;
   pointer-events: none;
   position: absolute;
   right: 0;
-  width: min(360px, 42vw);
+  width: min(240px, 28vw);
+}
+
+.home-category-card::before,
+.category-file-card::before,
+.resource-directory::before {
+  background: url("./assets/folk/leaf-sprig-green.png") center / contain no-repeat;
+  content: "";
+  height: 86px;
+  opacity: 0.11;
+  pointer-events: none;
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  width: 58px;
+}
+
+.home-category-card,
+.category-file-card,
+.resource-directory {
+  overflow: hidden;
+}
+
+.home-category-card:nth-child(2)::before,
+.category-file-card:nth-child(2n)::before {
+  background-image: url("./assets/folk/orange-berry-sprig.png");
+}
+
+.home-category-card:nth-child(3)::before,
+.category-file-card:nth-child(3n)::before {
+  background-image: url("./assets/folk/wheat-ochre.png");
+}
+
+.folk-sidebar::after {
+  background: url("./assets/folk/scrolling-vine.png") center bottom / contain no-repeat;
+  bottom: 20px;
+  content: "";
+  height: 220px;
+  left: 18px;
+  opacity: 0.11;
+  pointer-events: none;
+  position: absolute;
+  right: 18px;
 }
 
 @media (max-width: 980px) {
