@@ -3,6 +3,7 @@ import {
   BookOpenCheck,
   Scale,
 } from "lucide-react";
+import { FolkHero } from "./components/FolkHero";
 import denialSupportOne from "./assets/support/denial-support-1.png";
 import denialSupportTwo from "./assets/support/denial-support-2.png";
 
@@ -2930,24 +2931,7 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
           </div>
         </article>
         <aside className="home-hero-visual" aria-label="Folk floral artwork">
-          <span className="folk-hero-art css-folk-hero" aria-hidden="true">
-            <span className="hero-stem hero-stem-main" />
-            <span className="hero-stem hero-stem-left" />
-            <span className="hero-stem hero-stem-right" />
-            <span className="hero-flower hero-flower-rust hero-flower-large" />
-            <span className="hero-flower hero-flower-cream" />
-            <span className="hero-flower hero-flower-mustard" />
-            <span className="hero-flower hero-flower-coral" />
-            <span className="hero-flower hero-flower-small" />
-            <span className="hero-leaf hero-leaf-1" />
-            <span className="hero-leaf hero-leaf-2" />
-            <span className="hero-leaf hero-leaf-3" />
-            <span className="hero-leaf hero-leaf-4" />
-            <span className="hero-leaf hero-leaf-5" />
-            <span className="hero-leaf hero-leaf-6" />
-            <span className="hero-dotfield hero-dotfield-left" />
-            <span className="hero-dotfield hero-dotfield-right" />
-          </span>
+          <FolkHero className="folk-hero-art" />
         </aside>
       </div>
 
