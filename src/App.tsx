@@ -2787,12 +2787,12 @@ function TerminalChrome({
             <button className="sidebar-support" type="button" onClick={() => onNavigate("advocacy", "/advocacy")}>
               You're Not Alone
             </button>
-            <button className="desktop-icon desktop-icon-exit" type="button" onClick={leaveSite}>
-              <span className="desktop-icon-code" aria-hidden="true" />
-              <span className="desktop-icon-title">Quick Exit</span>
-            </button>
           </div>
         </aside>
+
+        <button className="floating-quick-escape" type="button" onClick={leaveSite}>
+          Quick Escape
+        </button>
 
         <section className="folk-main-shell">
           <section className={`terminal-screen win95-window hud-window hud-window-${activeModule}`} aria-label={`${activeLabel} window`}>
@@ -2840,9 +2840,6 @@ function TerminalChrome({
             <span aria-hidden="true" />
             {activeLabel}
           </div>
-          <button className="win95-taskbar-exit" type="button" onClick={leaveSite}>
-            Quick Exit
-          </button>
         </footer>
       </section>
     </main>
@@ -2903,9 +2900,12 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
   return (
     <section className="home-terminal" aria-labelledby="home-title">
       <div className="home-hero-composition">
+        <aside className="home-hero-visual" aria-label="Folk floral artwork">
+          <FolkHero className="folk-hero-art" />
+        </aside>
         <article className="home-message refined-home-message">
           <p className="folk-kicker">Clarity. Protection. Power.</p>
-          <h1 id="home-title">Welcome to Survivor Systems</h1>
+          <h1 id="home-title">Welcome To Survivor Systems</h1>
           <p>
             You are allowed to be curious about what is happening to you, why everything feels so
             confusing, what your options are, and what your life could look like when you are no
@@ -2930,9 +2930,6 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
             </button>
           </div>
         </article>
-        <aside className="home-hero-visual" aria-label="Folk floral artwork">
-          <FolkHero className="folk-hero-art" />
-        </aside>
       </div>
 
       <div className="home-category-grid" aria-label="Resource categories">
