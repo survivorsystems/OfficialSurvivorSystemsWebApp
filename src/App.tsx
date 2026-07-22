@@ -1397,14 +1397,121 @@ const allNavTargets: Array<{ key: ModuleKey; label: string; path: string }> = [
   { key: "access", ...moduleRoutes.access },
 ];
 
-const navItems: Array<{ key: ModuleKey; label: string; path: string; code: string }> = [
-  { key: "assessments", label: "Assessments", path: "/assessments", code: "flower" },
-  { key: "guides", label: "Guides", path: "/guides", code: "sprig" },
-  { key: "planners", label: "Planners & Trackers", path: "/planners-trackers", code: "fern" },
-  { key: "toolkits", label: "Toolkits", path: "/toolkits", code: "arch" },
-  { key: "education", label: "Education", path: "/education-awareness", code: "book" },
-  { key: "about", label: "About", path: "/about", code: "sprout" },
+type SidebarIconKey =
+  | "about"
+  | "advocacy"
+  | "assessments"
+  | "education"
+  | "government"
+  | "guides"
+  | "planners"
+  | "toolkits";
+
+const navItems: Array<{ key: ModuleKey; label: string; path: string; code: SidebarIconKey }> = [
+  { key: "assessments", label: "Assessments", path: "/assessments", code: "assessments" },
+  { key: "guides", label: "Guides", path: "/guides", code: "guides" },
+  { key: "planners", label: "Planners & Trackers", path: "/planners-trackers", code: "planners" },
+  { key: "toolkits", label: "Toolkits", path: "/toolkits", code: "toolkits" },
+  { key: "education", label: "Education", path: "/education-awareness", code: "education" },
+  { key: "advocacy", label: "Advocacy", path: "/advocacy", code: "advocacy" },
+  { key: "government", label: "Government", path: "/government", code: "government" },
+  { key: "about", label: "About", path: "/about", code: "about" },
 ];
+
+function SidebarIcon({ icon }: { icon: SidebarIconKey }) {
+  const commonProps = {
+    "aria-hidden": true,
+    className: "sidebar-svg-icon",
+    focusable: "false",
+    viewBox: "0 0 64 64",
+  } as const;
+
+  switch (icon) {
+    case "about":
+      return (
+        <svg {...commonProps}>
+          <circle cx="32" cy="21" r="11" fill="var(--folk-coral, #D9785F)" stroke="var(--folk-ink, #26302C)" strokeWidth="3" />
+          <path d="M12 55c1-13 9-21 20-21s19 8 20 21H12Z" fill="var(--folk-sage, #A8B89A)" stroke="var(--folk-ink, #26302C)" strokeWidth="3" strokeLinejoin="round" />
+          <path d="M32 38v10" fill="none" stroke="var(--folk-cream, #F6E8D0)" strokeWidth="3" strokeLinecap="round" />
+          <circle cx="32" cy="53" r="2.3" fill="var(--folk-mustard, #D6A536)" />
+          <path d="M27 19c2-3 4-3 5 0 1-3 3-3 5 0 0 4-5 7-5 7s-5-3-5-7Z" fill="var(--folk-cream, #F6E8D0)" stroke="var(--folk-ink, #26302C)" strokeWidth="2" strokeLinejoin="round" />
+        </svg>
+      );
+    case "advocacy":
+      return (
+        <svg {...commonProps}>
+          <path d="M11 27h11l23-12v34L22 37H11a5 5 0 0 1 0-10Z" fill="var(--folk-coral, #D9785F)" stroke="var(--folk-ink, #26302C)" strokeWidth="3" strokeLinejoin="round" />
+          <path d="M22 37v10a6 6 0 0 0 6 6h4l-4-16" fill="var(--folk-mustard, #D6A536)" stroke="var(--folk-ink, #26302C)" strokeWidth="3" strokeLinejoin="round" />
+          <path d="M45 24c4 1 7 4 7 8s-3 7-7 8M51 18c7 3 10 8 10 14s-3 11-10 14" fill="none" stroke="var(--folk-teal, #347D7B)" strokeWidth="3" strokeLinecap="round" />
+          <path d="M15 31h6" fill="none" stroke="var(--folk-cream, #F6E8D0)" strokeWidth="3" strokeLinecap="round" />
+        </svg>
+      );
+    case "assessments":
+      return (
+        <svg {...commonProps}>
+          <rect x="14" y="12" width="36" height="42" rx="6" fill="var(--folk-cream, #F6E8D0)" stroke="var(--folk-ink, #26302C)" strokeWidth="3" />
+          <path d="M25 12v-2a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v2" fill="var(--folk-mustard, #D6A536)" stroke="var(--folk-ink, #26302C)" strokeWidth="3" strokeLinecap="round" />
+          <circle cx="23" cy="25" r="4" fill="var(--folk-coral, #D9785F)" />
+          <path d="m20.5 25 1.7 1.8 3.4-4" fill="none" stroke="var(--folk-ink, #26302C)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+          <circle cx="23" cy="38" r="4" fill="var(--folk-sage, #A8B89A)" />
+          <path d="m20.5 38 1.7 1.8 3.4-4" fill="none" stroke="var(--folk-ink, #26302C)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M32 24h11M32 29h8M32 37h11M32 42h8" fill="none" stroke="var(--folk-ink, #26302C)" strokeWidth="3" strokeLinecap="round" />
+        </svg>
+      );
+    case "education":
+      return (
+        <svg {...commonProps}>
+          <path d="m7 22 25-12 25 12-25 12L7 22Z" fill="var(--folk-mustard, #D6A536)" stroke="var(--folk-ink, #26302C)" strokeWidth="3" strokeLinejoin="round" />
+          <path d="M18 28v12c0 6 7 10 14 10s14-4 14-10V28" fill="var(--folk-sage, #A8B89A)" stroke="var(--folk-ink, #26302C)" strokeWidth="3" strokeLinejoin="round" />
+          <path d="M57 22v18" fill="none" stroke="var(--folk-ink, #26302C)" strokeWidth="3" strokeLinecap="round" />
+          <circle cx="57" cy="44" r="3" fill="var(--folk-coral, #D9785F)" stroke="var(--folk-ink, #26302C)" strokeWidth="2" />
+          <path d="M25 39c4 2 10 2 14 0" fill="none" stroke="var(--folk-cream, #F6E8D0)" strokeWidth="3" strokeLinecap="round" />
+        </svg>
+      );
+    case "government":
+      return (
+        <svg {...commonProps}>
+          <path d="m32 7 25 12H7L32 7Z" fill="var(--folk-mustard, #D6A536)" stroke="var(--folk-ink, #26302C)" strokeWidth="3" strokeLinejoin="round" />
+          <path d="M10 19h44v7H10z" fill="var(--folk-cream, #F6E8D0)" stroke="var(--folk-ink, #26302C)" strokeWidth="3" />
+          <path d="M14 26v22M26 26v22M38 26v22M50 26v22" fill="none" stroke="var(--folk-ink, #26302C)" strokeWidth="4" />
+          <path d="M8 48h48v7H8z" fill="var(--folk-sage, #A8B89A)" stroke="var(--folk-ink, #26302C)" strokeWidth="3" />
+          <circle cx="32" cy="15" r="3" fill="var(--folk-rust, #A8523B)" />
+        </svg>
+      );
+    case "guides":
+      return (
+        <svg {...commonProps}>
+          <path d="M8 15c8-3 16-1 24 4v36c-8-5-16-7-24-4V15Z" fill="var(--folk-cream, #F6E8D0)" stroke="var(--folk-ink, #26302C)" strokeWidth="3" strokeLinejoin="round" />
+          <path d="M56 15c-8-3-16-1-24 4v36c8-5 16-7 24-4V15Z" fill="var(--folk-sage, #A8B89A)" stroke="var(--folk-ink, #26302C)" strokeWidth="3" strokeLinejoin="round" />
+          <path d="M32 19v36" fill="none" stroke="var(--folk-ink, #26302C)" strokeWidth="3" strokeLinecap="round" />
+          <path d="M16 25h9M16 32h11M39 25h9M39 32h7" fill="none" stroke="var(--folk-ink, #26302C)" strokeWidth="2.5" strokeLinecap="round" />
+          <path d="M43 40c3-4 8-2 8 2 0 4-4 7-4 7s-4-3-4-7c0-1 .2-1.4 0-2Z" fill="var(--folk-coral, #D9785F)" stroke="var(--folk-ink, #26302C)" strokeWidth="2" />
+        </svg>
+      );
+    case "planners":
+      return (
+        <svg {...commonProps}>
+          <rect x="8" y="12" width="48" height="44" rx="7" fill="var(--folk-cream, #F6E8D0)" stroke="var(--folk-ink, #26302C)" strokeWidth="3" />
+          <path d="M8 24h48M20 8v9M44 8v9" fill="none" stroke="var(--folk-ink, #26302C)" strokeWidth="3" strokeLinecap="round" />
+          <path d="M16 35h8M16 44h8M39 35h9M39 44h9" fill="none" stroke="var(--folk-ink, #26302C)" strokeWidth="2.5" strokeLinecap="round" />
+          <circle cx="31" cy="34" r="3.5" fill="var(--folk-rust, #A8523B)" />
+          <circle cx="31" cy="44" r="3.5" fill="var(--folk-teal, #347D7B)" />
+          <path d="m28.7 44 1.5 1.5 3-3.3" fill="none" stroke="var(--folk-cream, #F6E8D0)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      );
+    case "toolkits":
+      return (
+        <svg {...commonProps}>
+          <path d="M10 24h44a4 4 0 0 1 4 4v24a4 4 0 0 1-4 4H10a4 4 0 0 1-4-4V28a4 4 0 0 1 4-4Z" fill="var(--folk-rust, #A8523B)" stroke="var(--folk-ink, #26302C)" strokeWidth="3" />
+          <path d="M23 24v-6a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v6M6 35h52" fill="none" stroke="var(--folk-ink, #26302C)" strokeWidth="3" strokeLinecap="round" />
+          <rect x="26" y="31" width="12" height="9" rx="2" fill="var(--folk-mustard, #D6A536)" stroke="var(--folk-ink, #26302C)" strokeWidth="2.5" />
+          <path d="M18 47h10M36 47h10" fill="none" stroke="var(--folk-cream, #F6E8D0)" strokeWidth="3" strokeLinecap="round" />
+          <circle cx="18" cy="47" r="3" fill="var(--folk-sage, #A8B89A)" stroke="var(--folk-ink, #26302C)" strokeWidth="2" />
+          <circle cx="46" cy="47" r="3" fill="var(--folk-coral, #D9785F)" stroke="var(--folk-ink, #26302C)" strokeWidth="2" />
+        </svg>
+      );
+  }
+}
 
 function navItemFor(key: ModuleKey) {
   const route = moduleRoutes[key] ?? moduleRoutes.home;
@@ -2668,7 +2775,9 @@ function TerminalChrome({
                 type="button"
                 onClick={() => onNavigate(item.key, item.path)}
               >
-                <span className="desktop-icon-code" aria-hidden="true" />
+                <span className="desktop-icon-code" aria-hidden="true">
+                  <SidebarIcon icon={item.code} />
+                </span>
                 <span className="desktop-icon-title">{item.label}</span>
               </button>
             ))}

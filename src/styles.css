@@ -10039,6 +10039,34 @@ body::after {
   z-index: 1;
 }
 
+/* Inline SVG sidebar icon pass: user-provided vectors live in React, not as image files. */
+.hud-frame .desktop-icon-code:has(.sidebar-svg-icon) {
+  align-items: center !important;
+  display: grid !important;
+  height: 38px !important;
+  justify-items: center !important;
+  width: 38px !important;
+}
+
+.hud-frame .desktop-icon-code:has(.sidebar-svg-icon)::before,
+.hud-frame .desktop-icon-code:has(.sidebar-svg-icon)::after {
+  display: none !important;
+}
+
+.sidebar-svg-icon {
+  display: block;
+  height: 36px;
+  overflow: visible;
+  width: 36px;
+}
+
+.hud-frame .desktop-icon:hover .sidebar-svg-icon,
+.hud-frame .desktop-icon:focus-visible .sidebar-svg-icon,
+.hud-frame .desktop-icon.active .sidebar-svg-icon {
+  filter: drop-shadow(0 3px 0 rgba(7, 16, 12, 0.22));
+  transform: translateY(-1px);
+}
+
 /* Code-native folk graphics pass: these decorative UI graphics are drawn in CSS, not raster assets. */
 .home-hero-visual {
   align-items: center !important;
