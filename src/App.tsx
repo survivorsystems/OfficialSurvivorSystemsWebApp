@@ -1553,7 +1553,277 @@ type CategoryFile = {
   status: string;
   target?: ModuleKey;
   path?: string;
+  modal?: "love-or-fear";
 };
+
+type LoveFearScoredItem = {
+  id: number;
+  part: number;
+  title: string;
+  left: string;
+  right: string;
+};
+
+type LoveFearFlagItem = {
+  id: number;
+  text: string;
+};
+
+type LoveFearFlagAnswer = "yes" | "no" | "unsure";
+
+const loveFearParts = [
+  "Speak, disagree and tell the truth",
+  "Autonomy and boundaries",
+  "Trust, reality and equal voice",
+  "Support, resources and isolation",
+  "Repair, accountability and equality",
+  "What your body already knows",
+];
+
+const loveFearScoredItems: LoveFearScoredItem[] = [
+  {
+    id: 1,
+    part: 1,
+    title: "Bringing up a problem",
+    left: "I can speak plainly and expect a real conversation.",
+    right: "I plan every word, wait for the right mood or stay quiet to avoid fallout.",
+  },
+  {
+    id: 2,
+    part: 1,
+    title: "Saying no",
+    left: "My no is accepted even when they are disappointed.",
+    right: "My no triggers pressure, guilt, anger, punishment or repeated demands.",
+  },
+  {
+    id: 3,
+    part: 1,
+    title: "Making a mistake",
+    left: "Mistakes are handled without humiliation or threats.",
+    right: "Mistakes become evidence that I am stupid, selfish, unstable or cannot be trusted.",
+  },
+  {
+    id: 4,
+    part: 1,
+    title: "Their emotions",
+    left: "They manage their feelings without making me responsible for restoring peace.",
+    right: "I have to soothe, agree, apologize or perform closeness so things do not get worse.",
+  },
+  {
+    id: 5,
+    part: 2,
+    title: "Time and relationships",
+    left: "I can spend time alone or with other people without proving my loyalty.",
+    right: "My friendships, family contact or time away causes jealousy, interrogation or consequences.",
+  },
+  {
+    id: 6,
+    part: 2,
+    title: "Body and appearance",
+    left: "My clothes, food, body, hair and presentation remain my decisions.",
+    right: "They criticize, pressure, monitor or dictate how I look and care for my body.",
+  },
+  {
+    id: 7,
+    part: 2,
+    title: "Work, money and movement",
+    left: "I can pursue work, school, money, transportation and practical independence.",
+    right: "My access to money, work, school, transportation or documents is restricted or sabotaged.",
+  },
+  {
+    id: 8,
+    part: 2,
+    title: "Privacy and technology",
+    left: "Privacy is normal; passwords, devices and location access are voluntary.",
+    right: "I am expected to surrender passwords, location, devices or constant proof of where I am.",
+  },
+  {
+    id: 9,
+    part: 3,
+    title: "My memory and perception",
+    left: "My account of events can be discussed without attacking my sanity or character.",
+    right: "They deny obvious events, rewrite agreements or insist my perception cannot be trusted.",
+  },
+  {
+    id: 10,
+    part: 3,
+    title: "Trust and accusations",
+    left: "Trust does not require constant proof of innocence.",
+    right: "I am accused, tested, monitored or made to prove I am not cheating, lying or disloyal.",
+  },
+  {
+    id: 11,
+    part: 3,
+    title: "Decision-making",
+    left: "Major decisions include my informed and meaningful agreement.",
+    right: "They decide first, announce later or punish me until I agree.",
+  },
+  {
+    id: 12,
+    part: 3,
+    title: "Standards and rules",
+    left: "The same basic standards and freedoms apply to both of us.",
+    right: "They claim freedoms for themselves that are forbidden, dangerous or punishable for me.",
+  },
+  {
+    id: 13,
+    part: 4,
+    title: "Support network",
+    left: "My relationships with safe people are respected and encouraged.",
+    right: "They discredit, compete with, monitor or distance me from people who support me.",
+  },
+  {
+    id: 14,
+    part: 4,
+    title: "Growth and independence",
+    left: "My success and confidence are welcomed.",
+    right: "My work, healing, education, friendships or independence are mocked, interrupted or sabotaged.",
+  },
+  {
+    id: 15,
+    part: 4,
+    title: "Help, gifts and resources",
+    left: "Help is offered without creating ownership or permanent debt.",
+    right: "Money, housing, rides, gifts or favors are later used to demand access, obedience or gratitude.",
+  },
+  {
+    id: 16,
+    part: 4,
+    title: "People and animals I love",
+    left: "Children, pets, family and friends are never used as leverage.",
+    right: "They threaten access, custody, safety, affection or contact to control what I do.",
+  },
+  {
+    id: 17,
+    part: 5,
+    title: "Apologies",
+    left: "Apologies name the behavior, center the harm and lead to sustained change.",
+    right: "Apologies become excuses, self-pity, gifts, tears or pressure to forgive without change.",
+  },
+  {
+    id: 18,
+    part: 5,
+    title: "Boundaries after conflict",
+    left: "My boundaries remain valid even when they dislike them.",
+    right: "They bargain, punish, threaten, stalk, overwhelm or wait me out until the boundary disappears.",
+  },
+  {
+    id: 19,
+    part: 5,
+    title: "How conflict ends",
+    left: "Conflict ends through resolution, accountability or respectful pause.",
+    right: "Conflict ends because I submit, shut down, apologize or become too exhausted to continue.",
+  },
+  {
+    id: 20,
+    part: 5,
+    title: "The good periods",
+    left: "Affection and safety are reasonably steady.",
+    right: "Intense closeness follows harm, restores hope, and then the same pattern returns.",
+  },
+  {
+    id: 21,
+    part: 6,
+    title: "My body around them",
+    left: "I can usually breathe, rest, think and move naturally around them.",
+    right: "My body braces, freezes, fawns, goes numb or stays alert to their mood and movements.",
+  },
+  {
+    id: 22,
+    part: 6,
+    title: "Sounds and signals",
+    left: "Calls, footsteps, facial expressions and changes in tone are ordinary information.",
+    right: "A notification, car door, footstep, silence or tone change can make my body drop or race.",
+  },
+  {
+    id: 23,
+    part: 6,
+    title: "Preventing reactions",
+    left: "I choose my behavior from my values and preferences.",
+    right: "I change ordinary behavior mainly to prevent their anger, suspicion, withdrawal or retaliation.",
+  },
+  {
+    id: 24,
+    part: 6,
+    title: "Imagining separation or a firm boundary",
+    left: "I may feel grief, but I do not fear punishment for choosing myself.",
+    right: "I fear what they might do to me, themselves, children, pets, money, housing or my reputation.",
+  },
+];
+
+const loveFearFlagItems: LoveFearFlagItem[] = [
+  { id: 1, text: "Physical violence, restraint, blocking exits or preventing me from leaving." },
+  { id: 2, text: "Choking, strangulation, pressure to my neck or interference with breathing." },
+  { id: 3, text: "Weapons displayed, handled, mentioned or used to frighten or control me." },
+  {
+    id: 4,
+    text: "Sex, sexual acts or sexual contact obtained through force, pressure, fear, intoxication or exhaustion.",
+  },
+  {
+    id: 5,
+    text: "Birth control sabotage, forced pregnancy, pressure about pregnancy outcomes or control of reproductive care.",
+  },
+  { id: 6, text: "Threats to kill or seriously harm me, themselves, another person or an animal." },
+  { id: 7, text: "Harming, threatening, taking or withholding children, pets or people I love." },
+  { id: 8, text: "Stalking, hidden surveillance, repeated unwanted contact, tracking or appearing where I am." },
+  {
+    id: 9,
+    text: "Withholding or controlling money, identification, medication, medical care, food, housing or transportation.",
+  },
+  {
+    id: 10,
+    text: "Threatening police, immigration, CPS/DFPS, courts, employers, family or public humiliation to force compliance.",
+  },
+  {
+    id: 11,
+    text: "Destroying property, punching walls, reckless driving or violent acts meant to show what could happen to me.",
+  },
+  {
+    id: 12,
+    text: "Escalation when I become more independent, disclose the abuse, set boundaries or try to leave.",
+  },
+];
+
+const loveFearHighPartText = [
+  "High Part 1: Voice - You may be silencing, editing or overexplaining yourself to manage their reactions.",
+  "High Part 2: Autonomy - Your choices, body, privacy, resources or movement may be treated as something they are entitled to manage.",
+  "High Part 3: Reality - Accusations, double standards or reality distortion may be weakening your confidence in your own judgment.",
+  "High Part 4: Isolation - Your support, practical options and independence may be shrinking, increasing their leverage.",
+  "High Part 5: Repair - Apologies or good periods may be resetting hope without changing the underlying behavior.",
+  "High Part 6: Body - Your nervous system may be tracking danger, instability or retaliation even when your mind is still debating the label.",
+];
+
+function getLoveFearBand(total: number) {
+  if (total <= 18) {
+    return {
+      label: "0-18 MOSTLY FREEDOM",
+      text:
+        "Your answers mostly reflect room for honesty, boundaries, privacy and independent choice. Review any isolated 3 or 4, any red-flag behavior and any part of the relationship where you feel smaller or less free.",
+    };
+  }
+
+  if (total <= 38) {
+    return {
+      label: "19-38 MIXED SIGNALS / ERODING FREEDOM",
+      text:
+        "The relationship may contain meaningful connection alongside pressure, double standards, punishment or instability. Pay attention to repeated patterns and whether your freedom shrinks when the other person is upset.",
+    };
+  }
+
+  if (total <= 62) {
+    return {
+      label: "39-62 FEAR IS SHAPING THE RELATIONSHIP",
+      text:
+        "A substantial amount of your behavior appears organized around preventing reactions, maintaining peace or avoiding consequences. This suggests a serious power imbalance and warrants support, documentation and closer pattern review.",
+    };
+  }
+
+  return {
+    label: "63-96 CONTROL IS ORGANIZING THE RELATIONSHIP",
+    text:
+      "Fear and control appear to affect multiple parts of your life and decision-making. This pattern is consistent with significant coercive control concerns. Consider confidential support and individualized safety planning from a safer device.",
+  };
+}
 
 type PageFlourishVariant =
   | "assessments"
@@ -1617,9 +1887,10 @@ const categoryFiles: Record<
         path: "/am-i-crazy",
       },
       {
-        title: "Relationship Pattern Scan",
-        description: "Future assessment for recurring cycles, repair capacity, and control signals.",
-        status: "QUEUED",
+        title: "Is It Love or Fear?",
+        description: "A 24-item relationship reality assessment with a separate priority pattern check.",
+        status: "LIVE",
+        modal: "love-or-fear",
       },
       {
         title: "Rebuilding Readiness Check",
@@ -2988,6 +3259,7 @@ function CategoryModule({
   onNavigate: (module: ModuleKey, path: string) => void;
 }) {
   const content = categoryFiles[category];
+  const [activeModal, setActiveModal] = useState<CategoryFile["modal"] | null>(null);
 
   return (
     <section className="page-shell category-module" aria-labelledby={`${category}-title`}>
@@ -3009,7 +3281,11 @@ function CategoryModule({
             </div>
             <h2>{file.title}</h2>
             <p>{file.description}</p>
-            {file.target && file.path ? (
+            {file.modal ? (
+              <button type="button" onClick={() => setActiveModal(file.modal ?? null)}>
+                Open Assessment
+              </button>
+            ) : file.target && file.path ? (
               <button type="button" onClick={() => onNavigate(file.target as ModuleKey, file.path as string)}>
                 Open File
               </button>
@@ -3021,7 +3297,312 @@ function CategoryModule({
           </article>
         ))}
       </div>
+
+      {activeModal === "love-or-fear" ? <LoveFearAssessmentModal onClose={() => setActiveModal(null)} /> : null}
     </section>
+  );
+}
+
+function LoveFearAssessmentModal({ onClose }: { onClose: () => void }) {
+  const [phase, setPhase] = useState<"intro" | "scored" | "flags" | "results">("intro");
+  const [scoredIndex, setScoredIndex] = useState(0);
+  const [flagIndex, setFlagIndex] = useState(0);
+  const [scores, setScores] = useState<Record<number, number>>({});
+  const [flags, setFlags] = useState<Record<number, LoveFearFlagAnswer>>({});
+
+  const currentScoredItem = loveFearScoredItems[scoredIndex];
+  const currentFlagItem = loveFearFlagItems[flagIndex];
+  const hasCurrentScore = currentScoredItem ? scores[currentScoredItem.id] !== undefined : false;
+  const hasCurrentFlag = currentFlagItem ? flags[currentFlagItem.id] !== undefined : false;
+  const partTotals = loveFearParts.map((_, partIndex) =>
+    loveFearScoredItems
+      .filter((item) => item.part === partIndex + 1)
+      .reduce((sum, item) => sum + (scores[item.id] ?? 0), 0),
+  );
+  const total = partTotals.reduce((sum, value) => sum + value, 0);
+  const highestPartTotal = Math.max(...partTotals);
+  const highestPartIndexes = partTotals
+    .map((value, index) => (value === highestPartTotal ? index : -1))
+    .filter((index) => index >= 0);
+  const highPartIndexes = partTotals
+    .map((value, index) => (value >= 12 ? index : -1))
+    .filter((index) => index >= 0);
+  const flaggedItems = loveFearFlagItems.filter((item) => {
+    const answer = flags[item.id];
+    return answer === "yes" || answer === "unsure";
+  });
+  const highScoredItems = loveFearScoredItems.filter((item) => (scores[item.id] ?? 0) >= 3);
+  const band = getLoveFearBand(total);
+
+  useEffect(() => {
+    function closeOnEscape(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    }
+
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [onClose]);
+
+  function closeAndExit() {
+    onClose();
+    leaveSite();
+  }
+
+  function chooseScore(value: number) {
+    if (!currentScoredItem) return;
+    setScores((current) => ({ ...current, [currentScoredItem.id]: value }));
+  }
+
+  function chooseFlag(value: LoveFearFlagAnswer) {
+    if (!currentFlagItem) return;
+    setFlags((current) => ({ ...current, [currentFlagItem.id]: value }));
+  }
+
+  function goToNextScore() {
+    if (scoredIndex >= loveFearScoredItems.length - 1) {
+      setPhase("flags");
+      return;
+    }
+    setScoredIndex((current) => current + 1);
+  }
+
+  function goToNextFlag() {
+    if (flagIndex >= loveFearFlagItems.length - 1) {
+      setPhase("results");
+      return;
+    }
+    setFlagIndex((current) => current + 1);
+  }
+
+  return (
+    <div className="assessment-modal-backdrop" role="presentation" onMouseDown={onClose}>
+      <section
+        aria-labelledby="love-fear-modal-title"
+        aria-modal="true"
+        className="assessment-modal love-fear-modal"
+        onMouseDown={(event) => event.stopPropagation()}
+        role="dialog"
+      >
+        <header className="assessment-modal-header">
+          <div>
+            <span className="terminal-label">TEMP MEMORY ONLY</span>
+            <h1 id="love-fear-modal-title">Is It Love Or Fear?</h1>
+          </div>
+          <div className="assessment-modal-actions">
+            <button type="button" onClick={closeAndExit}>
+              Quick Exit
+            </button>
+            <button aria-label="Close assessment" type="button" onClick={onClose}>
+              X
+            </button>
+          </div>
+        </header>
+
+        {phase === "intro" ? (
+          <div className="assessment-modal-body love-fear-intro">
+            <p>
+              An educational tool for noticing whether your relationship is organized around freedom,
+              equality and safety - or around fear, appeasement and control.
+            </p>
+            <p>
+              This assessment is not a diagnosis, a legal finding, a lethality assessment or a guarantee that a
+              relationship is safe. It is an educational pattern-recognition tool. A low total score never cancels one
+              serious behavior.
+            </p>
+            <p>
+              All answers stay in this browser tab only while this modal is open. Closing this window starts it over next time.
+            </p>
+            <div className="terminal-actions compact-actions">
+              <button type="button" onClick={() => setPhase("scored")}>
+                Begin
+              </button>
+              <button type="button" onClick={onClose}>
+                Close
+              </button>
+            </div>
+          </div>
+        ) : null}
+
+        {phase === "scored" && currentScoredItem ? (
+          <div className="assessment-modal-body">
+            <div className="question-status">
+              <span>Question {scoredIndex + 1} of {loveFearScoredItems.length}</span>
+              <span>No saved answers</span>
+            </div>
+            <h2>{currentScoredItem.title}</h2>
+            <div className="love-fear-pair">
+              <article>
+                <span>0 = LOVE / FREEDOM</span>
+                <p>{currentScoredItem.left}</p>
+              </article>
+              <article>
+                <span>4 = FEAR / CONTROL</span>
+                <p>{currentScoredItem.right}</p>
+              </article>
+            </div>
+            <fieldset className="love-fear-scale">
+              <legend>Which is closer?</legend>
+              {[0, 1, 2, 3, 4].map((value) => (
+                <label className={scores[currentScoredItem.id] === value ? "selected" : ""} key={value}>
+                  <input
+                    checked={scores[currentScoredItem.id] === value}
+                    name={`score-${currentScoredItem.id}`}
+                    onChange={() => chooseScore(value)}
+                    type="radio"
+                    value={value}
+                  />
+                  <span>{value}</span>
+                  <small>{value === 0 ? "Fully left" : value === 2 ? "Mixed / unsure" : value === 4 ? "Fully right" : value === 1 ? "Mostly left" : "Mostly right"}</small>
+                </label>
+              ))}
+            </fieldset>
+            <div className="assessment-modal-nav">
+              <button disabled={scoredIndex === 0} type="button" onClick={() => setScoredIndex((current) => Math.max(0, current - 1))}>
+                Back
+              </button>
+              <button disabled={!hasCurrentScore} type="button" onClick={goToNextScore}>
+                {scoredIndex >= loveFearScoredItems.length - 1 ? "Priority Check" : "Next"}
+              </button>
+            </div>
+          </div>
+        ) : null}
+
+        {phase === "flags" && currentFlagItem ? (
+          <div className="assessment-modal-body">
+            <div className="question-status">
+              <span>Question {flagIndex + 1} of {loveFearFlagItems.length}</span>
+              <span>Priority pattern check</span>
+            </div>
+            <h2>{currentFlagItem.text}</h2>
+            <div className="love-fear-flag-grid">
+              {(["yes", "no", "unsure"] as LoveFearFlagAnswer[]).map((value) => (
+                <button
+                  className={flags[currentFlagItem.id] === value ? "selected" : ""}
+                  key={value}
+                  type="button"
+                  onClick={() => chooseFlag(value)}
+                >
+                  {value.toUpperCase()}
+                </button>
+              ))}
+            </div>
+            <div className="assessment-modal-nav">
+              <button
+                type="button"
+                onClick={() => {
+                  if (flagIndex === 0) {
+                    setPhase("scored");
+                    setScoredIndex(loveFearScoredItems.length - 1);
+                    return;
+                  }
+                  setFlagIndex((current) => Math.max(0, current - 1));
+                }}
+              >
+                Back
+              </button>
+              <button disabled={!hasCurrentFlag} type="button" onClick={goToNextFlag}>
+                {flagIndex >= loveFearFlagItems.length - 1 ? "Show Results" : "Next"}
+              </button>
+            </div>
+          </div>
+        ) : null}
+
+        {phase === "results" ? (
+          <div className="assessment-modal-body love-fear-results">
+            {flaggedItems.length > 0 ? (
+              <section className="love-fear-alert">
+                <h2>Priority Pattern Flags</h2>
+                <ul>
+                  {flaggedItems.map((item) => (
+                    <li key={item.id}>
+                      <strong>{flags[item.id]?.toUpperCase()}:</strong> {item.text}
+                    </li>
+                  ))}
+                </ul>
+                <p>
+                  A Yes or Unsure on the Priority Pattern Check, a score of 4 on any item, or fear of what may happen if you leave deserves attention regardless of your total.
+                </p>
+              </section>
+            ) : null}
+
+            <section>
+              <h2>Six Part Subtotals</h2>
+              <div className="love-fear-subtotals">
+                {loveFearParts.map((part, index) => (
+                  <article key={part}>
+                    <span>Part {index + 1}</span>
+                    <strong>{partTotals[index]} / 16</strong>
+                    <p>{part}</p>
+                  </article>
+                ))}
+              </div>
+              <p>
+                The highest section subtotal may be more useful than the grand total. It shows where your freedom is being narrowed most.
+              </p>
+              <p>
+                Highest part: {highestPartIndexes.map((index) => `Part ${index + 1} - ${loveFearParts[index]}`).join("; ")}.
+              </p>
+              {highPartIndexes.length > 0 ? (
+                <ul>
+                  {highPartIndexes.map((index) => (
+                    <li key={index}>{loveFearHighPartText[index]}</li>
+                  ))}
+                </ul>
+              ) : null}
+            </section>
+
+            <section>
+              <h2>Look Past The Total</h2>
+              <p>
+                Circle every individual item scored 3 or 4. These show where fear or control is concentrated. Review the Priority Pattern Check separately.
+              </p>
+              {highScoredItems.length > 0 ? (
+                <ul>
+                  {highScoredItems.map((item) => (
+                    <li key={item.id}>
+                      Item {item.id}: {item.title} - scored {scores[item.id]}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p>No individual items scored 3 or 4.</p>
+              )}
+            </section>
+
+            <section>
+              <h2>{band.label}</h2>
+              <p>Total score: {total} / 96</p>
+              <p>{band.text}</p>
+              <p>
+                A Yes or Unsure on the Priority Pattern Check, a score of 4 on any item, or fear of what may happen if you leave deserves attention regardless of your total.
+              </p>
+              <p>
+                The core distinction is not whether the relationship contains love. People can feel love inside harmful systems. The question is whether love is being used to protect your freedom - or invoked while your freedom is being taken.
+              </p>
+            </section>
+
+            <footer className="love-fear-support-footer">
+              <strong>U.S. SUPPORT</strong>
+              <p>
+                National Domestic Violence Hotline: 800-799-SAFE (7233) | Text START to 88788 | Call 911 for immediate danger.
+              </p>
+              <p>Internet and device activity can be monitored.</p>
+            </footer>
+
+            <div className="assessment-modal-nav">
+              <button type="button" onClick={onClose}>
+                Close
+              </button>
+              <button type="button" onClick={closeAndExit}>
+                Quick Exit
+              </button>
+            </div>
+          </div>
+        ) : null}
+      </section>
+    </div>
   );
 }
 
