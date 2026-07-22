@@ -9750,6 +9750,61 @@ body::after {
   }
 }
 
+/* Hero centering pass: make the uploaded floral the main centered hero artwork. */
+.home-hero-composition {
+  gap: clamp(22px, 3vw, 42px) !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  min-height: auto !important;
+}
+
+.home-hero-composition .refined-home-message {
+  max-width: min(760px, 92vw) !important;
+  padding-top: 0 !important;
+}
+
+.home-hero-visual {
+  grid-row: 1 !important;
+  min-height: clamp(260px, 36vw, 470px) !important;
+  place-items: center !important;
+  width: 100%;
+}
+
+.home-hero-visual::before {
+  border-radius: 999px !important;
+  inset: 2% 7% 4% 7% !important;
+  mask-image: radial-gradient(ellipse at center, #000 0 62%, transparent 74%) !important;
+  opacity: 0.42 !important;
+}
+
+.home-hero-visual .folk-hero-art {
+  aspect-ratio: 647 / 470 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  display: block !important;
+  height: auto !important;
+  margin: 0 auto !important;
+  max-width: 980px !important;
+  object-fit: contain !important;
+  opacity: 1 !important;
+  position: relative !important;
+  right: auto !important;
+  top: auto !important;
+  width: min(88vw, 980px) !important;
+}
+
+@media (max-width: 980px) {
+  .home-hero-visual {
+    display: grid !important;
+    min-height: clamp(220px, 48vw, 360px) !important;
+  }
+
+  .home-hero-visual .folk-hero-art {
+    height: auto !important;
+    width: min(92vw, 720px) !important;
+  }
+}
+
 /* Sidebar nav ornament pass: botanical marks are built into the buttons, not image thumbnails. */
 .hud-frame .desktop-icon-grid {
   gap: 12px !important;

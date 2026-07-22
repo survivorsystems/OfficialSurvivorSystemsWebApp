@@ -5,6 +5,7 @@ import {
 } from "lucide-react";
 import denialSupportOne from "./assets/support/denial-support-1.png";
 import denialSupportTwo from "./assets/support/denial-support-2.png";
+import heroFloral from "./assets/folk/hero-floral.png";
 
 const denialImages = [denialSupportOne, denialSupportTwo];
 
@@ -2821,7 +2822,7 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
           </div>
         </article>
         <aside className="home-hero-visual" aria-label="Folk floral artwork">
-          <span className="folk-hero-art" aria-hidden="true" />
+          <img className="folk-hero-art" src={heroFloral} alt="" aria-hidden="true" />
         </aside>
       </div>
 
