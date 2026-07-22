@@ -2790,8 +2790,8 @@ function TerminalChrome({
           </div>
         </aside>
 
-        <button className="floating-quick-escape" type="button" onClick={leaveSite}>
-          Quick Escape
+        <button className="floating-quick-escape" type="button" onClick={leaveSite} aria-label="Quick Escape">
+          ESC
         </button>
 
         <section className="folk-main-shell">

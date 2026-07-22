@@ -10570,41 +10570,39 @@ body::after {
 
 .floating-quick-escape {
   align-items: center;
-  background: linear-gradient(180deg, var(--folk-rust), var(--folk-rust-dark));
+  background: var(--folk-rust);
   border: 1px solid rgba(244, 223, 189, 0.42);
   border-radius: 999px;
   box-shadow:
     0 16px 32px rgba(0, 0, 0, 0.36),
     inset 0 1px 0 rgba(255, 246, 221, 0.22);
-  color: var(--folk-cream);
+  color: var(--folk-ink-deep);
   cursor: pointer;
   display: inline-flex;
   font-family: var(--font-clean);
-  font-size: 0.78rem;
+  font-size: 0.58rem;
   font-weight: 900;
-  gap: 8px;
-  left: 14px;
-  letter-spacing: 0.08em;
-  padding: 12px 14px;
+  height: 0.75in;
+  justify-content: center;
+  letter-spacing: 0.04em;
+  padding: 0;
   position: fixed;
+  right: 14px;
   text-transform: uppercase;
   top: 50%;
   transform: translateY(-50%);
+  width: 0.75in;
   z-index: 30;
 }
 
 .floating-quick-escape::before {
-  background: var(--folk-mustard);
-  border-radius: 999px;
-  box-shadow: 0 0 0 4px rgba(216, 169, 62, 0.12);
-  content: "";
-  height: 9px;
-  width: 9px;
+  content: none;
 }
 
 .floating-quick-escape:hover,
 .floating-quick-escape:focus-visible {
-  background: linear-gradient(180deg, #d96942, var(--folk-rust));
+  background: var(--folk-rust-dark);
+  color: var(--folk-cream);
   outline: 3px solid rgba(216, 169, 62, 0.24);
 }
 
@@ -10625,7 +10623,7 @@ body::after {
 
   .floating-quick-escape {
     bottom: 18px;
-    left: 14px;
+    right: 14px;
     top: auto;
     transform: none;
   }
