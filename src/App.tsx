@@ -1,4 +1,4 @@
-import { type FormEvent, type ReactNode, useCallback, useEffect, useRef, useState } from "react";
+import { type FormEvent, type KeyboardEvent as ReactKeyboardEvent, type ReactNode, useCallback, useEffect, useRef, useState } from "react";
 import {
   BookOpenCheck,
   Scale,
@@ -1553,7 +1553,7 @@ type CategoryFile = {
   status: string;
   target?: ModuleKey;
   path?: string;
-  modal?: "love-or-fear";
+  modal?: "love-or-fear" | "freedom-test";
 };
 
 type LoveFearScoredItem = {
@@ -1825,6 +1825,245 @@ function getLoveFearBand(total: number) {
   };
 }
 
+type FreedomScore = 0 | 1 | 2 | 3 | 4;
+type FreedomPriorityAnswer = "yes" | "no" | "unsure";
+type FreedomPhase = "intro" | "scored" | "priorityIntro" | "priority" | "results";
+
+type FreedomScoredItem = {
+  id: number;
+  partId: number;
+  resultLabel: string;
+  prompt: string;
+};
+
+type FreedomPriorityItem = {
+  id: number;
+  text: string;
+};
+
+const freedomScaleOptions: Array<{ value: FreedomScore; label: string; meaning: string }> = [
+  { value: 0, label: "Never", meaning: "I remain free; this does not occur." },
+  { value: 1, label: "Rarely", meaning: "It occurs occasionally but does not usually organize my choices." },
+  {
+    value: 2,
+    label: "Sometimes / depends / unsure",
+    meaning: "The answer changes, depends on their mood, or I do not trust my read yet.",
+  },
+  { value: 3, label: "Often", meaning: "This repeatedly narrows my choices or creates consequences." },
+  {
+    value: 4,
+    label: "Nearly always / not free safely",
+    meaning: "I am generally not free to do this without pressure, punishment, fear, or retaliation.",
+  },
+];
+
+const freedomPartLabels = [
+  "Voice and refusal",
+  "People, movement and space",
+  "Body, privacy and intimacy",
+  "Money, work and resources",
+  "Reality, rules and equal power",
+  "Fear, retaliation and separation",
+];
+
+const freedomPartInterpretations = [
+  "Your voice and your no may carry consequences. You may be editing, appeasing, overexplaining, or giving in to manage the other person's reactions.",
+  "Isolation, monitoring, or interference with movement may be narrowing your world and making ordinary independence feel dangerous.",
+  "Your body, privacy, devices, sexuality, or reproductive choices may be treated as access this person is entitled to rather than choices that remain yours.",
+  "Control of money, work, documents, health care, transportation, or practical help may be increasing dependence and reducing your options.",
+  "Reality distortion, double standards, or unilateral decisions may be undermining your confidence and meaningful power in the relationship.",
+  "Your choices and nervous system may be organized around anticipating punishment, escalation, or what could happen if you become more independent or leave.",
+];
+
+const freedomScoredItems: FreedomScoredItem[] = [
+  {
+    id: 1,
+    partId: 1,
+    resultLabel: "Managing their reaction",
+    prompt:
+      "When I disagree, raise a concern, or tell the truth, I have to carefully manage this person's mood or reaction.",
+  },
+  {
+    id: 2,
+    partId: 1,
+    resultLabel: "Saying no",
+    prompt: "When I say no, they pressure, guilt, argue, punish, or keep asking until my answer changes.",
+  },
+  {
+    id: 3,
+    partId: 1,
+    resultLabel: "Ordinary choices",
+    prompt: "Ordinary personal choices become arguments, tests of loyalty, or reasons for consequences.",
+  },
+  {
+    id: 4,
+    partId: 1,
+    resultLabel: "Mistakes",
+    prompt: "Mistakes are used to humiliate me, threaten me, or prove I cannot be trusted.",
+  },
+  {
+    id: 5,
+    partId: 2,
+    resultLabel: "Time with other people",
+    prompt: "Time alone or with other people leads to jealousy, interrogation, monitoring, or consequences.",
+  },
+  {
+    id: 6,
+    partId: 2,
+    resultLabel: "Where I go",
+    prompt: "I am expected to explain, prove, or get permission for where I go and when I return.",
+  },
+  {
+    id: 7,
+    partId: 2,
+    resultLabel: "Support network",
+    prompt: "This person interferes with, discredits, or limits contact with people who support me.",
+  },
+  {
+    id: 8,
+    partId: 2,
+    resultLabel: "Taking space",
+    prompt: "I cannot safely end a conversation, leave a room, take space, or change plans.",
+  },
+  {
+    id: 9,
+    partId: 3,
+    resultLabel: "Body choices",
+    prompt: "My clothes, appearance, food, sleep, health care, or body choices are criticized, monitored, or controlled.",
+  },
+  {
+    id: 10,
+    partId: 3,
+    resultLabel: "Devices and location",
+    prompt: "I am expected to surrender passwords, devices, messages, accounts, or location access.",
+  },
+  {
+    id: 11,
+    partId: 3,
+    resultLabel: "Sex and reproduction",
+    prompt:
+      "Sex, touch, affection, contraception, pregnancy, or reproductive decisions are pressured or treated as something I owe.",
+  },
+  {
+    id: 12,
+    partId: 3,
+    resultLabel: "Privacy",
+    prompt: "My privacy is treated as suspicious, disloyal, or proof that I am hiding something.",
+  },
+  {
+    id: 13,
+    partId: 4,
+    resultLabel: "Money access",
+    prompt: "My access to money, income, bank information, credit, or necessary spending is restricted or monitored.",
+  },
+  {
+    id: 14,
+    partId: 4,
+    resultLabel: "Work and goals",
+    prompt: "Work, school, training, healing, or goals are interrupted, mocked, or sabotaged.",
+  },
+  {
+    id: 15,
+    partId: 4,
+    resultLabel: "Essential resources",
+    prompt:
+      "Access to identification, medication, medical care, food, housing, transportation, or communication can be withheld.",
+  },
+  {
+    id: 16,
+    partId: 4,
+    resultLabel: "Help with strings",
+    prompt:
+      "Help, gifts, rides, housing, or money are later used to demand access, obedience, gratitude, or repayment I did not agree to.",
+  },
+  {
+    id: 17,
+    partId: 5,
+    resultLabel: "Reality distortion",
+    prompt: "This person denies events, rewrites agreements, or attacks my memory when my account threatens their version.",
+  },
+  {
+    id: 18,
+    partId: 5,
+    resultLabel: "Double standards",
+    prompt: "They claim freedoms for themselves that are forbidden, dangerous, or punishable for me.",
+  },
+  {
+    id: 19,
+    partId: 5,
+    resultLabel: "Major decisions",
+    prompt: "Major decisions are made without my meaningful agreement, or pressure continues until I give in.",
+  },
+  {
+    id: 20,
+    partId: 5,
+    resultLabel: "Seeking help",
+    prompt: "Seeking advice, telling someone what happened, or asking for help feels likely to trigger retaliation.",
+  },
+  {
+    id: 21,
+    partId: 6,
+    resultLabel: "Preventing reactions",
+    prompt:
+      "I change ordinary behavior mainly to prevent anger, suspicion, withdrawal, punishment, or escalation.",
+  },
+  {
+    id: 22,
+    partId: 6,
+    resultLabel: "Body alarm",
+    prompt:
+      "My body braces, freezes, fawns, goes numb, or tracks their tone, footsteps, calls, silence, or movements.",
+  },
+  {
+    id: 23,
+    partId: 6,
+    resultLabel: "Freedom under pressure",
+    prompt: "When this person is angry, jealous, challenged, or told no, my freedom becomes smaller.",
+  },
+  {
+    id: 24,
+    partId: 6,
+    resultLabel: "Boundary or separation fear",
+    prompt:
+      "Setting a firm boundary or leaving makes me fear what they might do to me, themselves, children, pets, money, housing, work, or my reputation.",
+  },
+];
+
+const freedomPriorityItems: FreedomPriorityItem[] = [
+  { id: 1, text: "Physical violence, restraint, blocking exits, or preventing me from leaving." },
+  { id: 2, text: "Choking, strangulation, pressure to my neck, or interference with breathing." },
+  { id: 3, text: "Weapons displayed, handled, mentioned, or used to frighten or control me." },
+  {
+    id: 4,
+    text: "Sex, sexual acts, or sexual contact obtained through force, pressure, fear, intoxication, or exhaustion.",
+  },
+  {
+    id: 5,
+    text: "Birth control sabotage, forced pregnancy, pressure about pregnancy outcomes, or control of reproductive care.",
+  },
+  { id: 6, text: "Threats to kill or seriously harm me, themselves, another person, or an animal." },
+  { id: 7, text: "Harming, threatening, taking, or withholding children, pets, or people I love." },
+  { id: 8, text: "Stalking, hidden surveillance, repeated unwanted contact, tracking, or appearing where I am." },
+  {
+    id: 9,
+    text: "Withholding or controlling money, identification, medication, medical care, food, housing, or transportation.",
+  },
+  {
+    id: 10,
+    text: "Threatening police, immigration, CPS/DFPS, courts, employers, family, or public humiliation to force compliance.",
+  },
+  {
+    id: 11,
+    text: "Destroying property, punching walls, reckless driving, or violent acts meant to show what could happen to me.",
+  },
+  {
+    id: 12,
+    text: "Escalation when I become more independent, disclose the abuse, set boundaries, or try to leave.",
+  },
+];
+
+const freedomBandText = getLoveFearBand;
+
 type PageFlourishVariant =
   | "assessments"
   | "guides"
@@ -1891,6 +2130,12 @@ const categoryFiles: Record<
         description: "A 24-item relationship reality assessment with a separate priority pattern check.",
         status: "LIVE",
         modal: "love-or-fear",
+      },
+      {
+        title: "The Freedom Test",
+        description: "How much freedom do you actually have without retaliation?",
+        status: "LIVE",
+        modal: "freedom-test",
       },
       {
         title: "Rebuilding Readiness Check",
@@ -3277,9 +3522,21 @@ function CategoryModule({
           <article className="category-file-card" key={file.title}>
             <div className="category-file-meta">
               <span>{file.status}</span>
-              <small>{file.target ? "OPENABLE" : "PENDING BUILD"}</small>
+              <small>{file.target || file.modal ? "OPENABLE" : "PENDING BUILD"}</small>
             </div>
-            <h2>{file.title}</h2>
+            {file.modal ? (
+              <h2>
+                <button
+                  className="category-file-title-button"
+                  type="button"
+                  onClick={() => setActiveModal(file.modal ?? null)}
+                >
+                  {file.title}
+                </button>
+              </h2>
+            ) : (
+              <h2>{file.title}</h2>
+            )}
             <p>{file.description}</p>
             {file.modal ? (
               <button type="button" onClick={() => setActiveModal(file.modal ?? null)}>
@@ -3299,7 +3556,416 @@ function CategoryModule({
       </div>
 
       {activeModal === "love-or-fear" ? <LoveFearAssessmentModal onClose={() => setActiveModal(null)} /> : null}
+      {activeModal === "freedom-test" ? <FreedomTestAssessmentModal onClose={() => setActiveModal(null)} /> : null}
     </section>
+  );
+}
+
+function FreedomTestAssessmentModal({ onClose }: { onClose: () => void }) {
+  const [phase, setPhase] = useState<FreedomPhase>("intro");
+  const [scoredIndex, setScoredIndex] = useState(0);
+  const [priorityIndex, setPriorityIndex] = useState(0);
+  const [scoredAnswers, setScoredAnswers] = useState<Record<number, FreedomScore>>({});
+  const [priorityAnswers, setPriorityAnswers] = useState<Record<number, FreedomPriorityAnswer>>({});
+  const headingRef = useRef<HTMLHeadingElement | null>(null);
+  const modalRef = useRef<HTMLElement | null>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
+
+  const currentScoredItem = freedomScoredItems[scoredIndex];
+  const currentPriorityItem = freedomPriorityItems[priorityIndex];
+  const hasCurrentScore = currentScoredItem ? scoredAnswers[currentScoredItem.id] !== undefined : false;
+  const hasCurrentPriority = currentPriorityItem ? priorityAnswers[currentPriorityItem.id] !== undefined : false;
+  const partTotals = freedomPartLabels.map((_, partIndex) =>
+    freedomScoredItems
+      .filter((item) => item.partId === partIndex + 1)
+      .reduce((sum, item) => sum + (scoredAnswers[item.id] ?? 0), 0),
+  );
+  const total = partTotals.reduce((sum, value) => sum + value, 0);
+  const priorityFlags = freedomPriorityItems.filter((item) => {
+    const answer = priorityAnswers[item.id];
+    return answer === "yes" || answer === "unsure";
+  });
+  const scoredFlags = freedomScoredItems.filter((item) => (scoredAnswers[item.id] ?? 0) >= 3);
+  const highPartIndexes = partTotals
+    .map((value, index) => (value >= 9 ? index : -1))
+    .filter((index) => index >= 0);
+  const band = freedomBandText(total);
+
+  function resetFreedomTestState() {
+    setPhase("intro");
+    setScoredIndex(0);
+    setPriorityIndex(0);
+    setScoredAnswers({});
+    setPriorityAnswers({});
+  }
+
+  function closeAssessment() {
+    resetFreedomTestState();
+    previousFocusRef.current?.focus();
+    onClose();
+  }
+
+  function quickExit() {
+    resetFreedomTestState();
+    onClose();
+    leaveSite();
+  }
+
+  useEffect(() => {
+    previousFocusRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    headingRef.current?.focus();
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = originalOverflow;
+    };
+  }, []);
+
+  useEffect(() => {
+    headingRef.current?.focus();
+  }, [phase, scoredIndex, priorityIndex]);
+
+  function handleModalKeyDown(event: ReactKeyboardEvent<HTMLElement>) {
+    if (event.key === "Escape") {
+      event.preventDefault();
+      closeAssessment();
+      return;
+    }
+
+    if (event.key !== "Tab" || !modalRef.current) return;
+
+    const focusable = Array.from(
+      modalRef.current.querySelectorAll<HTMLElement>(
+        'button:not(:disabled), [href], input:not(:disabled), select:not(:disabled), textarea:not(:disabled), [tabindex]:not([tabindex="-1"])',
+      ),
+    ).filter((element) => !element.hasAttribute("aria-hidden"));
+
+    if (focusable.length === 0) return;
+
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+      return;
+    }
+
+    if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  }
+
+  function chooseScore(value: FreedomScore) {
+    if (!currentScoredItem) return;
+    setScoredAnswers((current) => ({ ...current, [currentScoredItem.id]: value }));
+  }
+
+  function choosePriority(value: FreedomPriorityAnswer) {
+    if (!currentPriorityItem) return;
+    setPriorityAnswers((current) => ({ ...current, [currentPriorityItem.id]: value }));
+  }
+
+  function backFromScored() {
+    if (scoredIndex === 0) {
+      setPhase("intro");
+      return;
+    }
+    setScoredIndex((current) => current - 1);
+  }
+
+  function continueFromScored() {
+    if (scoredIndex >= freedomScoredItems.length - 1) {
+      setPhase("priorityIntro");
+      return;
+    }
+    setScoredIndex((current) => current + 1);
+  }
+
+  function backFromPriority() {
+    if (priorityIndex === 0) {
+      setPhase("priorityIntro");
+      return;
+    }
+    setPriorityIndex((current) => current - 1);
+  }
+
+  function continueFromPriority() {
+    if (priorityIndex >= freedomPriorityItems.length - 1) {
+      setPhase("results");
+      return;
+    }
+    setPriorityIndex((current) => current + 1);
+  }
+
+  return (
+    <div className="assessment-modal-backdrop" role="presentation">
+      <section
+        aria-describedby="freedom-test-description"
+        aria-labelledby="freedom-test-title"
+        aria-modal="true"
+        className="assessment-modal freedom-test-modal"
+        onKeyDown={handleModalKeyDown}
+        ref={modalRef}
+        role="dialog"
+      >
+        <header className="assessment-modal-header">
+          <div>
+            <span className="terminal-label">TEMP MEMORY ONLY</span>
+            <h1 id="freedom-test-title" ref={headingRef} tabIndex={-1}>
+              The Freedom Test
+            </h1>
+            <p className="sr-only" id="freedom-test-description">
+              The Freedom Test is an in-memory educational assessment. Answers are not saved.
+            </p>
+          </div>
+          <div className="assessment-modal-actions">
+            <button type="button" onClick={quickExit}>
+              Quick Exit
+            </button>
+            <button aria-label="Close assessment" type="button" onClick={closeAssessment}>
+              X
+            </button>
+          </div>
+        </header>
+
+        {phase === "intro" ? (
+          <div className="assessment-modal-body freedom-test-intro">
+            <h2>How much freedom do you actually have without retaliation?</h2>
+            <p>
+              This educational assessment looks at whether you remain free to speak, say no, move, connect, keep privacy, access resources, and make decisions when another person is upset or wants something. Think about the current or most recent relationship you are evaluating and what has happened over the last 6-12 months.
+            </p>
+            <section className="freedom-test-note">
+              <h3>Your answers are not saved</h3>
+              <p>
+                Your answers stay only in this open assessment. Closing it, refreshing the page, or using Quick Exit permanently clears the session. There is no resume-later, download, email, export, or share function.
+              </p>
+            </section>
+            <section className="freedom-scale-summary">
+              {freedomScaleOptions.map((option) => (
+                <article key={option.value}>
+                  <strong>{option.value}</strong>
+                  <span>{option.label}</span>
+                  <p>{option.meaning}</p>
+                </article>
+              ))}
+            </section>
+            <p>
+              This is an original Survivor Systems educational pattern-recognition tool. It is not a validated clinical screening instrument, legal finding, lethality assessment, or guarantee of safety.
+            </p>
+            <div className="assessment-modal-nav">
+              <button type="button" onClick={() => setPhase("scored")}>
+                Start Assessment
+              </button>
+              <button type="button" onClick={closeAssessment}>
+                Close
+              </button>
+              <button type="button" onClick={quickExit}>
+                Quick Exit
+              </button>
+            </div>
+          </div>
+        ) : null}
+
+        {phase === "scored" && currentScoredItem ? (
+          <div className="assessment-modal-body">
+            <div className="question-status" aria-live="polite">
+              <span>Question {scoredIndex + 1} of {freedomScoredItems.length}</span>
+              <span>No saved answers</span>
+            </div>
+            <h2>{currentScoredItem.prompt}</h2>
+            <div className="freedom-response-list" role="radiogroup" aria-label="Choose one answer">
+              {freedomScaleOptions.map((option) => (
+                <button
+                  aria-checked={scoredAnswers[currentScoredItem.id] === option.value}
+                  className={scoredAnswers[currentScoredItem.id] === option.value ? "selected" : ""}
+                  key={option.value}
+                  role="radio"
+                  type="button"
+                  onClick={() => chooseScore(option.value)}
+                >
+                  <strong>{option.value}</strong>
+                  <span>{option.label}</span>
+                  <small>{option.meaning}</small>
+                </button>
+              ))}
+            </div>
+            <div className="assessment-modal-nav">
+              <button type="button" onClick={backFromScored}>
+                Back
+              </button>
+              <button disabled={!hasCurrentScore} type="button" onClick={continueFromScored}>
+                Continue
+              </button>
+              <button type="button" onClick={closeAssessment}>
+                Close
+              </button>
+              <button type="button" onClick={quickExit}>
+                Quick Exit
+              </button>
+            </div>
+          </div>
+        ) : null}
+
+        {phase === "priorityIntro" ? (
+          <div className="assessment-modal-body">
+            <h2>Priority Pattern Check</h2>
+            <p>
+              The next 12 items describe behaviors that matter on their own. They are not added to your score. Choose Yes, No, or Unsure. One serious behavior can matter more than the overall number.
+            </p>
+            <p>
+              A Yes or Unsure on the Priority Pattern Check, a score of 4 on any item, or fear of what may happen if the user leaves deserves attention regardless of the total.
+            </p>
+            <div className="assessment-modal-nav">
+              <button
+                type="button"
+                onClick={() => {
+                  setPhase("scored");
+                  setScoredIndex(freedomScoredItems.length - 1);
+                }}
+              >
+                Back
+              </button>
+              <button type="button" onClick={() => setPhase("priority")}>
+                Continue
+              </button>
+              <button type="button" onClick={closeAssessment}>
+                Close
+              </button>
+              <button type="button" onClick={quickExit}>
+                Quick Exit
+              </button>
+            </div>
+          </div>
+        ) : null}
+
+        {phase === "priority" && currentPriorityItem ? (
+          <div className="assessment-modal-body">
+            <div className="question-status" aria-live="polite">
+              <span>Priority check {priorityIndex + 1} of {freedomPriorityItems.length}</span>
+              <span>Not scored</span>
+            </div>
+            <h2>{currentPriorityItem.text}</h2>
+            <div className="love-fear-flag-grid freedom-priority-grid">
+              {(["yes", "no", "unsure"] as FreedomPriorityAnswer[]).map((value) => (
+                <button
+                  aria-pressed={priorityAnswers[currentPriorityItem.id] === value}
+                  className={priorityAnswers[currentPriorityItem.id] === value ? "selected" : ""}
+                  key={value}
+                  type="button"
+                  onClick={() => choosePriority(value)}
+                >
+                  {value.toUpperCase()}
+                </button>
+              ))}
+            </div>
+            <div className="assessment-modal-nav">
+              <button type="button" onClick={backFromPriority}>
+                Back
+              </button>
+              <button disabled={!hasCurrentPriority} type="button" onClick={continueFromPriority}>
+                Continue
+              </button>
+              <button type="button" onClick={closeAssessment}>
+                Close
+              </button>
+              <button type="button" onClick={quickExit}>
+                Quick Exit
+              </button>
+            </div>
+          </div>
+        ) : null}
+
+        {phase === "results" ? (
+          <div className="assessment-modal-body love-fear-results freedom-test-results">
+            <h2>Results</h2>
+            {priorityFlags.length > 0 ? (
+              <section className="love-fear-alert">
+                <h3>Priority Pattern Flags</h3>
+                <p>
+                  These behaviors matter on their own. Your total score does not reduce their importance. Consider talking with a trained domestic violence advocate from a safer device.
+                </p>
+                <ul>
+                  {priorityFlags.map((item) => (
+                    <li key={item.id}>
+                      <strong>{priorityAnswers[item.id]?.toUpperCase()}:</strong> {item.text}
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            ) : null}
+
+            <section>
+              <h3>Six Part Subtotals</h3>
+              <div className="love-fear-subtotals">
+                {freedomPartLabels.map((part, index) => (
+                  <article key={part}>
+                    <span>Part {index + 1}</span>
+                    <strong>{partTotals[index]} / 16</strong>
+                    <p>{part}</p>
+                    {partTotals[index] >= 13 ? <em>Strong concentration.</em> : null}
+                  </article>
+                ))}
+              </div>
+              {highPartIndexes.length > 0 ? (
+                <ul>
+                  {highPartIndexes.map((index) => (
+                    <li key={index}>
+                      <strong>{freedomPartLabels[index]}:</strong> {freedomPartInterpretations[index]}
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+            </section>
+
+            <section>
+              <h3>Flagged Scored Items</h3>
+              {scoredFlags.length > 0 ? (
+                <ul>
+                  {scoredFlags.map((item) => (
+                    <li key={item.id}>
+                      <strong>
+                        {item.resultLabel} - {scoredAnswers[item.id]}
+                      </strong>
+                      : {item.prompt}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p>No scored items were answered 3 or 4.</p>
+              )}
+            </section>
+
+            <section>
+              <h3>{band.label}</h3>
+              <p>Total score: {total} / 96</p>
+              <p>{band.text}</p>
+              <p>
+                A Yes or Unsure on the Priority Pattern Check, a score of 4 on any item, or fear of what may happen if the user leaves deserves attention regardless of the total.
+              </p>
+            </section>
+
+            <footer className="love-fear-support-footer">
+              <strong>SUPPORT</strong>
+              <p>
+                Immediate danger: call 911. National Domestic Violence Hotline: 800-799-SAFE (7233) or text START to 88788. Use a safer device when possible. This assessment is educational and cannot determine whether a relationship is safe.
+              </p>
+            </footer>
+
+            <div className="assessment-modal-nav">
+              <button type="button" onClick={closeAssessment}>
+                Close
+              </button>
+              <button type="button" onClick={quickExit}>
+                Quick Exit
+              </button>
+            </div>
+          </div>
+        ) : null}
+      </section>
+    </div>
   );
 }
 
