@@ -1553,7 +1553,7 @@ type CategoryFile = {
   status: string;
   target?: ModuleKey;
   path?: string;
-  modal?: "love-or-fear" | "freedom-test" | "coercive-control-map";
+  modal?: "love-or-fear" | "freedom-test" | "coercive-control-map" | "financial-captivity";
 };
 
 type LoveFearScoredItem = {
@@ -2156,6 +2156,78 @@ function getPatternMapBand(total: number) {
   return { label: "PERVASIVE SYSTEM OF CONTROL", text: "Control appears to organize multiple parts of your life, access, and decision-making. This is consistent with serious coercive control concerns. Consider confidential support and individualized safety planning from a safer device." };
 }
 
+type FinancialScore = 0 | 1 | 2 | 3 | "not-sure";
+type FinancialDomainId = "access" | "permission" | "earning" | "debt" | "needs" | "resistance";
+type FinancialPhase = "intro" | "questions" | "results";
+type FinancialItem = { id: number; domainId: FinancialDomainId; prompt: string };
+
+const financialDomains: Array<{ id: FinancialDomainId; label: string }> = [
+  { id: "access", label: "Access to money and information" },
+  { id: "permission", label: "Permission, punishment, and surveillance" },
+  { id: "earning", label: "Work, education, and earning power" },
+  { id: "debt", label: "Debt, credit, taxes, and legal exposure" },
+  { id: "needs", label: "Basic needs, property, and forced dependence" },
+  { id: "resistance", label: "Leaving, resistance, and the larger pattern" },
+];
+
+const financialScale: Array<{ value: FinancialScore; label: string; meaning: string }> = [
+  { value: 0, label: "NO", meaning: "This has not happened." },
+  { value: 1, label: "OCCASIONALLY", meaning: "It happened once, rarely, or the situation is unclear." },
+  { value: 2, label: "REPEATEDLY", meaning: "It has happened more than once or affects my choices." },
+  { value: 3, label: "REGULARLY OR SEVERELY", meaning: "It is ongoing, threatening, or has caused serious harm." },
+  { value: "not-sure", label: "NOT SURE", meaning: "I do not know or cannot safely find out." },
+];
+
+const financialItems: FinancialItem[] = [
+  { id: 1, domainId: "access", prompt: "Someone controls household money without genuinely including me in decisions." },
+  { id: 2, domainId: "access", prompt: "I cannot freely view bank accounts, balances, bills, debts, tax records, insurance, benefits, or other financial information that affects me." },
+  { id: 3, domainId: "access", prompt: "My income, benefits, refunds, gifts, inheritance, or other money is taken, redirected, withheld, or deposited somewhere I cannot access." },
+  { id: 4, domainId: "access", prompt: "I am given an allowance or must ask for money while the other person can spend without the same limits." },
+  { id: 5, domainId: "access", prompt: "I must explain purchases, show receipts, or account for small amounts of money in a way the other person does not." },
+  { id: 6, domainId: "permission", prompt: "I am punished, shamed, interrogated, threatened, or frightened for spending money - even on agreed expenses or basic needs." },
+  { id: 7, domainId: "permission", prompt: "Financial rules change without my agreement, especially after I disagree, set a boundary, or try to gain independence." },
+  { id: 8, domainId: "permission", prompt: "Money, cards, account access, transportation, housing, phone service, or other resources are withdrawn to punish or control me." },
+  { id: 9, domainId: "permission", prompt: "Someone monitors my purchases, accounts, location, mail, pay, or financial communications beyond what I freely agreed to." },
+  { id: 10, domainId: "permission", prompt: "I avoid asking questions or making reasonable purchases because I am afraid of the reaction." },
+  { id: 11, domainId: "earning", prompt: "Someone discourages, forbids, or prevents me from working, studying, training, or applying for opportunities." },
+  { id: 12, domainId: "earning", prompt: "Someone interferes with my job or education - for example, causing scenes, hiding keys, withholding childcare or transportation, repeatedly interrupting me, making me late, or getting me fired." },
+  { id: 13, domainId: "earning", prompt: "I am pressured or forced to work where, when, or how someone else chooses." },
+  { id: 14, domainId: "earning", prompt: "I perform substantial work for a person, household, family business, or project without fair access to the income or any meaningful say in how it is used." },
+  { id: 15, domainId: "earning", prompt: "My skills, health, disability, immigration status, caregiving duties, or employment gaps are used to convince me I cannot survive without this person." },
+  { id: 16, domainId: "debt", prompt: "Accounts, loans, leases, utilities, contracts, or purchases have been opened or placed in my name without my fully informed and freely given consent." },
+  { id: 17, domainId: "debt", prompt: "I have been pressured, deceived, threatened, or forced into signing financial documents, borrowing money, transferring property, or taking on debt." },
+  { id: 18, domainId: "debt", prompt: "Someone uses my cards or accounts, runs up balances, misses payments, drains funds, or otherwise damages my credit or financial standing." },
+  { id: 19, domainId: "debt", prompt: "Someone hides debts, assets, income, taxes, legal obligations, or major purchases that affect me." },
+  { id: 20, domainId: "debt", prompt: "I have been pressured or forced to lie on financial, benefits, tax, insurance, court, employment, or government documents." },
+  { id: 21, domainId: "needs", prompt: "Money is withheld for food, medication, medical care, clothing, hygiene, housing, childcare, pet care, transportation, or other necessary expenses when resources exist." },
+  { id: 22, domainId: "needs", prompt: "Someone controls whether I can use a vehicle, phone, identification, bank card, medication, mobility aid, work equipment, or other resource I need to function independently." },
+  { id: 23, domainId: "needs", prompt: "My belongings, money, identification, records, devices, property, or sentimental items have been taken, hidden, sold, destroyed, or held hostage." },
+  { id: 24, domainId: "needs", prompt: "Someone refuses to contribute an agreed or reasonable share while demanding access to my labor, money, credit, home, or resources." },
+  { id: 25, domainId: "needs", prompt: "Financial emergencies are repeatedly created or allowed to worsen so that I must depend on, repay, obey, or remain with this person." },
+  { id: 26, domainId: "resistance", prompt: "I do not have access to enough money, transportation, identification, credit, housing options, or private communication to leave safely if I choose." },
+  { id: 27, domainId: "resistance", prompt: "Someone has threatened homelessness, poverty, loss of children or pets, deportation, exposure, arrest, ruined credit, or loss of support if I leave or disobey." },
+  { id: 28, domainId: "resistance", prompt: "Attempts to save money, open an account, secure documents, work, seek help, or plan for independence have been blocked, discovered, punished, or sabotaged." },
+  { id: 29, domainId: "resistance", prompt: "Financial control becomes worse when I set boundaries, question decisions, reconnect with support, or prepare to leave." },
+  { id: 30, domainId: "resistance", prompt: "Taken together, the financial arrangement makes the other person more powerful and leaves me with fewer realistic choices." },
+];
+
+const financialHighConcernIds = new Set([12, 16, 17, 18, 19, 20, 21, 22, 23, 27, 28, 29]);
+
+function getFinancialDomainState(score: number) {
+  if (score <= 2) return "FEW INDICATORS IN THIS DOMAIN";
+  if (score <= 6) return "EMERGING OR OCCASIONAL CONTROL";
+  if (score <= 10) return "REPEATED CONTROL WITH MEANINGFUL IMPACT";
+  return "SEVERE OR PERVASIVE CONTROL IN THIS DOMAIN";
+}
+
+function getFinancialBand(score: number) {
+  if (score <= 9) return { label: "FEW INDICATORS IDENTIFIED", text: "Your answers show few clear indicators of financial captivity. That does not automatically mean the arrangement is fair or safe. Pay attention to any item that made you hesitate, any information you are prevented from seeing, and what happens when you disagree.", reflection: "Can both people ask questions, access relevant information, make ordinary choices, and renegotiate the arrangement without fear or punishment?" };
+  if (score <= 24) return { label: "CONCERNING IMBALANCE", text: "There are signs that money or resources may be limiting your voice, access, or independence. Some arrangements begin as convenience, generosity, caretaking, or a response to hardship and gradually become one-sided.", reflection: "Which choices have become harder for you to make? Who benefits from the arrangement staying exactly as it is?" };
+  if (score <= 44) return { label: "SIGNIFICANT FINANCIAL CONTROL", text: "Your answers suggest a repeated pattern of financial control. The issue is bigger than budgeting conflict: your access, earning power, information, credit, basic needs, or ability to make decisions may be deliberately restricted.", reflection: "What happens when you question the rules or take a step toward independence? A retaliatory response is important evidence of the power structure." };
+  if (score <= 64) return { label: "SEVERE FINANCIAL CAPTIVITY", text: "Money and resources appear to be functioning as a system of dominance. The pattern may substantially restrict your ability to make choices, meet basic needs, work, seek help, or leave.", reflection: "Focus first on safe access to support and information. Sudden financial moves or confrontation may trigger retaliation." };
+  return { label: "ENTRAPMENT THROUGH FINANCIAL CONTROL", text: "Your answers indicate pervasive financial captivity with a high likelihood that multiple systems - money, work, debt, housing, transportation, documents, or basic needs - are being used together to keep you dependent or compliant.", reflection: "You do not have to solve the entire situation at once. The safest next step may be a confidential conversation with a survivor advocate using a device or account the controlling person cannot access." };
+}
+
 type PageFlourishVariant =
   | "assessments"
   | "guides"
@@ -2234,6 +2306,12 @@ const categoryFiles: Record<
         description: "Map where control is operating, how concentrated it is, and which behaviors matter on their own.",
         status: "LIVE",
         modal: "coercive-control-map",
+      },
+      {
+        title: "Financial Captivity Assessment",
+        description: "Is money being used to reduce your choices and establish control over you?",
+        status: "LIVE",
+        modal: "financial-captivity",
       },
       {
         title: "Rebuilding Readiness Check",
@@ -3656,7 +3734,220 @@ function CategoryModule({
       {activeModal === "love-or-fear" ? <LoveFearAssessmentModal onClose={() => setActiveModal(null)} /> : null}
       {activeModal === "freedom-test" ? <FreedomTestAssessmentModal onClose={() => setActiveModal(null)} /> : null}
       {activeModal === "coercive-control-map" ? <CoerciveControlPatternMapModal onClose={() => setActiveModal(null)} /> : null}
+      {activeModal === "financial-captivity" ? <FinancialCaptivityAssessmentModal onClose={() => setActiveModal(null)} /> : null}
     </section>
+  );
+}
+
+function FinancialCaptivityAssessmentModal({ onClose }: { onClose: () => void }) {
+  const [phase, setPhase] = useState<FinancialPhase>("intro");
+  const [questionIndex, setQuestionIndex] = useState(0);
+  const [answers, setAnswers] = useState<Record<number, FinancialScore>>({});
+  const modalRef = useRef<HTMLElement | null>(null);
+  const headingRef = useRef<HTMLHeadingElement | null>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
+  const currentItem = financialItems[questionIndex];
+  const hasCurrentAnswer = currentItem ? answers[currentItem.id] !== undefined : false;
+  const numericItems = financialItems.filter((item) => typeof answers[item.id] === "number");
+  const numericCount = numericItems.length;
+  const notSureCount = financialItems.length - numericCount;
+  const rawTotal = numericItems.reduce((sum, item) => sum + (answers[item.id] as number), 0);
+  const adjustedTotal = numericCount > 0 ? Math.round((rawTotal / numericCount) * 30) : 0;
+  const resultScore = numericCount === 30 ? rawTotal : adjustedTotal;
+  const hasOverallBand = numericCount >= 24;
+  const band = hasOverallBand ? getFinancialBand(resultScore) : null;
+  const domainResults = financialDomains.map((domain) => {
+    const items = financialItems.filter((item) => item.domainId === domain.id);
+    const numeric = items.filter((item) => typeof answers[item.id] === "number");
+    const score = numeric.reduce((sum, item) => sum + (answers[item.id] as number), 0);
+    return { ...domain, score, answered: numeric.length, notSure: items.length - numeric.length };
+  });
+  const strongestDomains = [...domainResults].sort((a, b) => b.score - a.score).slice(0, 3);
+  const highConcernItems = financialItems.filter((item) => financialHighConcernIds.has(item.id) && ((answers[item.id] === 2) || (answers[item.id] === 3)));
+
+  function resetState() {
+    setPhase("intro");
+    setQuestionIndex(0);
+    setAnswers({});
+  }
+
+  function closeAssessment() {
+    resetState();
+    previousFocusRef.current?.focus();
+    onClose();
+  }
+
+  function quickExit() {
+    resetState();
+    onClose();
+    leaveSite();
+  }
+
+  useEffect(() => {
+    previousFocusRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    headingRef.current?.focus();
+    return () => { document.body.style.overflow = originalOverflow; };
+  }, []);
+
+  useEffect(() => { headingRef.current?.focus(); }, [phase, questionIndex]);
+
+  function handleKeyDown(event: ReactKeyboardEvent<HTMLElement>) {
+    if (event.key === "Escape") {
+      event.preventDefault();
+      closeAssessment();
+      return;
+    }
+    if (event.key !== "Tab" || !modalRef.current) return;
+    const focusable = Array.from(modalRef.current.querySelectorAll<HTMLElement>('button:not(:disabled), [href], input:not(:disabled), [tabindex]:not([tabindex="-1"])')).filter((element) => !element.hasAttribute("aria-hidden"));
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+  }
+
+  function goBack() {
+    if (questionIndex === 0) setPhase("intro");
+    else setQuestionIndex((current) => current - 1);
+  }
+
+  function goNext() {
+    if (!hasCurrentAnswer) return;
+    if (questionIndex === financialItems.length - 1) setPhase("results");
+    else setQuestionIndex((current) => current + 1);
+  }
+
+  return (
+    <div className="assessment-modal-backdrop" role="presentation">
+      <section aria-describedby="financial-captivity-description" aria-labelledby="financial-captivity-title" aria-modal="true" className="assessment-modal freedom-test-modal financial-captivity-modal" onKeyDown={handleKeyDown} ref={modalRef} role="dialog">
+        <header className="assessment-modal-header">
+          <div>
+            <span className="terminal-label">TEMP MEMORY ONLY</span>
+            <h1 id="financial-captivity-title" ref={headingRef} tabIndex={-1}>Financial Captivity Assessment</h1>
+            <p className="sr-only" id="financial-captivity-description">An in-memory educational assessment. Answers are not saved.</p>
+          </div>
+          <div className="assessment-modal-actions">
+            <button type="button" onClick={quickExit}>Quick Exit</button>
+            <button aria-label="Close assessment" type="button" onClick={closeAssessment}>X</button>
+          </div>
+        </header>
+
+        {phase === "intro" ? (
+          <div className="assessment-modal-body freedom-test-intro">
+            <h2>Is money being used to reduce your choices and establish control over you?</h2>
+            <p>Financial control is not simply one person earning more, managing the budget, or a household going through hard times. The issue is power: whether someone uses money, work, debt, housing, transportation, benefits, or access to basic needs to make you dependent, punish resistance, prevent you from leaving, or establish the right to make decisions for you.</p>
+            <p>This assessment can help you identify a pattern. It is educational, not a diagnosis, legal opinion, or financial audit. You do not need a high score - or any score - to deserve support.</p>
+            <section className="freedom-test-note">
+              <h3>Before you begin</h3>
+              <p>If someone may monitor your phone, browser, email, bank activity, location, or downloads, use the safest device available to you. Do not save, print, change passwords, move money, or confront the person if doing so could put you at risk. Private action is not always safe action.</p>
+            </section>
+            <section className="freedom-scale-summary financial-scale-summary">
+              {financialScale.map((option) => <article key={String(option.value)}><strong>{option.value === "not-sure" ? "?" : option.value}</strong><span>{option.label}</span><p>{option.meaning}</p></article>)}
+            </section>
+            <div className="assessment-modal-nav">
+              <button type="button" onClick={() => setPhase("questions")}>Start Assessment</button>
+              <button type="button" onClick={closeAssessment}>Close</button>
+              <button type="button" onClick={quickExit}>Quick Exit</button>
+            </div>
+          </div>
+        ) : null}
+
+        {phase === "questions" && currentItem ? (
+          <div className="assessment-modal-body">
+            <div className="question-status" aria-live="polite"><span>Question {questionIndex + 1} of 30</span><span>{financialDomains.find((domain) => domain.id === currentItem.domainId)?.label}</span></div>
+            <h2>{currentItem.prompt}</h2>
+            <div className="freedom-response-list" role="radiogroup" aria-label="Choose one response">
+              {financialScale.map((option) => (
+                <button aria-checked={answers[currentItem.id] === option.value} className={answers[currentItem.id] === option.value ? "selected" : ""} key={String(option.value)} role="radio" type="button" onClick={() => setAnswers((current) => ({ ...current, [currentItem.id]: option.value }))}>
+                  <strong>{option.value === "not-sure" ? "?" : option.value}</strong><span>{option.label}</span><small>{option.meaning}</small>
+                </button>
+              ))}
+            </div>
+            <div className="assessment-modal-nav">
+              <button type="button" onClick={goBack}>Back</button>
+              <button disabled={!hasCurrentAnswer} type="button" onClick={goNext}>{questionIndex === 29 ? "Show Results" : "Next"}</button>
+              <button type="button" onClick={closeAssessment}>Close</button>
+              <button type="button" onClick={quickExit}>Quick Exit</button>
+            </div>
+          </div>
+        ) : null}
+
+        {phase === "results" ? (
+          <div className="assessment-modal-body love-fear-results freedom-test-results financial-results">
+            <h2>Your Financial Captivity Assessment</h2>
+            <p>Your answers stay only in this open session.</p>
+
+            {highConcernItems.length ? (
+              <section className="love-fear-alert">
+                <h3>High-concern indicators</h3>
+                <p>These behaviors can rapidly increase dependence, create legal or credit consequences, and make leaving more dangerous. They deserve attention regardless of the total score.</p>
+                <ul>{highConcernItems.map((item) => <li key={item.id}><strong>Question {item.id} - {answers[item.id]}</strong><br />{item.prompt}</li>)}</ul>
+              </section>
+            ) : null}
+
+            <section>
+              <h3>Financial control by domain</h3>
+              <p><strong>Highest domain scores:</strong> {strongestDomains.map((domain) => domain.label).join(", ")}.</p>
+              <div className="pattern-map-domain-grid">
+                {domainResults.map((domain) => (
+                  <article className={`pattern-map-domain state-${Math.min(3, Math.floor(domain.score / 4))}`} key={domain.id}>
+                    <div><h4>{domain.label}</h4><strong>{domain.score} / 15</strong></div>
+                    <div aria-hidden="true" className="pattern-map-bar"><span style={{ width: `${(domain.score / 15) * 100}%` }} /></div>
+                    <p><strong>{getFinancialDomainState(domain.score)}</strong></p>
+                    {domain.notSure ? <p>{domain.notSure} response{domain.notSure === 1 ? "" : "s"} marked Not sure in this domain.</p> : null}
+                  </article>
+                ))}
+              </div>
+            </section>
+
+            <section>
+              {hasOverallBand && band ? (
+                <>
+                  <h3>{numericCount === 30 ? rawTotal : resultScore} / 90 - {band.label}</h3>
+                  {numericCount < 30 ? <p><strong>Estimated score:</strong> ({rawTotal} raw points / {numericCount} numeric answers) x 30, rounded to {resultScore}. {notSureCount} response{notSureCount === 1 ? " was" : "s were"} marked Not sure.</p> : null}
+                  <p>{band.text}</p>
+                  <p><strong>Reflection:</strong> {band.reflection}</p>
+                </>
+              ) : (
+                <>
+                  <h3>Partial result - domain observations only</h3>
+                  <p>{numericCount} of 30 responses were numeric and {notSureCount} were marked Not sure. An overall result range is not assigned when fewer than 24 responses are numeric.</p>
+                </>
+              )}
+              {notSureCount ? <p className="freedom-test-note"><strong>Not having access to basic financial information may itself be relevant.</strong></p> : null}
+              <p>Your score is a pattern-recognition tool, not a verdict. Frequency matters, but severity and purpose matter too. A single act - such as coerced debt, withholding medication, stealing identity documents, or threatening homelessness - can create serious captivity even when the total score is low.</p>
+            </section>
+
+            <section>
+              <h3>What the pattern may be doing</h3>
+              <ol className="financial-pattern-steps">
+                <li><strong>Reduce access:</strong> Control money, documents, transportation, accounts, or information.</li>
+                <li><strong>Reduce capacity:</strong> Interfere with work, education, health care, credit, or outside support.</li>
+                <li><strong>Increase consequences:</strong> Create debt, dependence, housing insecurity, legal exposure, or fear of losing children or pets.</li>
+                <li><strong>Punish resistance:</strong> Withdraw resources, escalate monitoring, manufacture emergencies, or threaten ruin.</li>
+                <li><strong>Rewrite the story:</strong> Describe the control as help, responsibility, protection, generosity, or proof that you are incapable.</li>
+              </ol>
+              <p>The controlling person may point to your current dependence as justification for more control - even when their behavior helped create that dependence. That circular trap is the machinery of financial captivity.</p>
+            </section>
+
+            <footer className="love-fear-support-footer">
+              <strong>SUPPORT IS INFORMATION, NOT A COMMAND</strong>
+              <p>Needing financial help does not give another person ownership of your decisions. Earning less does not make your voice worth less. If money is being used to make "no" impossible, the problem is not that you are bad with money. The problem is control.</p>
+              <p>If you may be in immediate danger, call emergency services if that is safe and appropriate where you are. In the United States, call the National Domestic Violence Hotline at 800-799-SAFE (7233), text START to 88788, or visit TheHotline.org. Use a safer device when possible.</p>
+              <a href="/guides">Explore support resources</a>
+            </footer>
+            <div className="assessment-modal-nav">
+              <button type="button" onClick={() => { setPhase("questions"); setQuestionIndex(0); }}>Review answers</button>
+              <button type="button" onClick={resetState}>Start over</button>
+              <button type="button" onClick={closeAssessment}>Close</button>
+              <button type="button" onClick={quickExit}>Quick Exit</button>
+            </div>
+          </div>
+        ) : null}
+      </section>
+    </div>
   );
 }
 
