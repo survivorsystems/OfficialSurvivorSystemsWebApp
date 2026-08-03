@@ -10956,6 +10956,81 @@ body::after {
   margin-top: 8px;
 }
 
+.pattern-map-unsure {
+  background: rgba(216, 169, 62, 0.08);
+  border: 1px solid rgba(216, 169, 62, 0.48) !important;
+}
+
+.pattern-map-domain-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.pattern-map-domain {
+  background: rgba(7, 19, 18, 0.68);
+  border: 1px solid rgba(216, 169, 62, 0.24);
+  border-left: 5px solid var(--folk-teal);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.pattern-map-domain.state-1 {
+  border-left-color: var(--folk-mustard);
+}
+
+.pattern-map-domain.state-2 {
+  border-left-color: var(--folk-coral);
+}
+
+.pattern-map-domain.state-3 {
+  border-left-color: var(--folk-rust);
+}
+
+.pattern-map-domain > div:first-child {
+  align-items: baseline;
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+}
+
+.pattern-map-domain h4 {
+  color: var(--folk-cream);
+  font-family: var(--font-editorial);
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.pattern-map-domain > div:first-child > strong {
+  color: var(--folk-mustard);
+  white-space: nowrap;
+}
+
+.pattern-map-bar {
+  background: rgba(244, 223, 189, 0.1);
+  border: 1px solid rgba(244, 223, 189, 0.18);
+  height: 12px;
+  margin: 12px 0;
+  overflow: hidden;
+}
+
+.pattern-map-bar span {
+  background: var(--folk-rust);
+  display: block;
+  height: 100%;
+}
+
+.pattern-map-results > section > ul {
+  display: grid;
+  gap: 10px;
+  margin: 12px 0 0;
+  padding-left: 22px;
+}
+
+.pattern-map-results .love-fear-support-footer a {
+  color: var(--folk-coral);
+  font-weight: 900;
+}
+
 @media (max-width: 980px) {
   .home-hero-composition .home-hero-visual {
     display: grid !important;

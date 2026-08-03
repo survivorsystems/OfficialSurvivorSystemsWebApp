@@ -1553,7 +1553,7 @@ type CategoryFile = {
   status: string;
   target?: ModuleKey;
   path?: string;
-  modal?: "love-or-fear" | "freedom-test";
+  modal?: "love-or-fear" | "freedom-test" | "coercive-control-map";
 };
 
 type LoveFearScoredItem = {
@@ -2064,6 +2064,98 @@ const freedomPriorityItems: FreedomPriorityItem[] = [
 
 const freedomBandText = getLoveFearBand;
 
+type PatternMapScore = 0 | 1 | 2 | 3 | 4;
+type PatternMapPriorityAnswer = "yes" | "no" | "unsure";
+type PatternMapDomainId = "AUT" | "ISO" | "RES" | "TECH" | "INT" | "BODY" | "LEV" | "SYS";
+type PatternMapPhase = "intro" | "scored" | "priorityIntro" | "priority" | "results";
+
+type PatternMapScoredItem = { id: string; domainId: PatternMapDomainId; prompt: string };
+type PatternMapPriorityItem = { id: string; prompt: string };
+
+const patternMapDomainOrder: PatternMapDomainId[] = ["AUT", "ISO", "RES", "TECH", "INT", "BODY", "LEV", "SYS"];
+const patternMapDomains: Record<PatternMapDomainId, { label: string; highText: string }> = {
+  AUT: { label: "Autonomy and permission", highText: "Your ordinary choices may be treated as subject to permission, unequal rules, or consequences. You may be adapting before you act because independence itself creates fallout." },
+  ISO: { label: "Isolation and shrinking life", highText: "Your support, identity, community, or independent time may be getting harder to maintain. Isolation can be produced through punishment and exhaustion, not only direct bans." },
+  RES: { label: "Money, resources and practical access", highText: "Control of money, transportation, documents, housing, work, medication, or basic resources may be creating dependency and limiting your practical options." },
+  TECH: { label: "Privacy, surveillance and technology", highText: "Your devices, accounts, location, communication, or movements may be treated as available for monitoring. Changing normal behavior to avoid detection is part of the pattern." },
+  INT: { label: "Intimidation, punishment and unpredictability", highText: "Compliance may be produced through fear of consequences, mood tracking, chaos, humiliation, or demonstrations of what could happen - even when rules are never stated aloud." },
+  BODY: { label: "Body, sex, reproduction and health", highText: "Your consent, reproductive decisions, medical care, rest, food, medication, or bodily needs may be overridden, pressured, obstructed, or used as access points for control." },
+  LEV: { label: "Children, pets, relationships and identity as leverage", highText: "People, animals, caregiving roles, identity, immigration status, disability, reputation, or community ties may be used as pressure points to shape your behavior." },
+  SYS: { label: "Reality, institutions and post-separation control", highText: "Control may be continuing through reality distortion, threats involving institutions, legal or system abuse, unwanted contact, or fear of what they may do after access is reduced." },
+};
+
+const patternMapScale: Array<{ value: PatternMapScore; label: string; meaning: string }> = [
+  { value: 0, label: "NOT PRESENT", meaning: "This is not part of the relationship pattern I am assessing." },
+  { value: 1, label: "OCCASIONAL / LOW IMPACT", meaning: "It has happened or been implied, but it does not usually change my choices or access." },
+  { value: 2, label: "MIXED / UNSURE", meaning: "It happens sometimes, depends on circumstances, or I do not yet trust my read." },
+  { value: 3, label: "REPEATED / CHANGES WHAT I DO", meaning: "I regularly adapt, comply, hide, explain, or plan around it." },
+  { value: 4, label: "PERVASIVE / ORGANIZES MY CHOICES", meaning: "It strongly controls my behavior, access, safety, or ability to act freely." },
+];
+
+const patternMapScoredItems: PatternMapScoredItem[] = [
+  { id: "AUT-1", domainId: "AUT", prompt: "I change ordinary plans because I expect anger, interrogation, punishment, or fallout." },
+  { id: "ISO-1", domainId: "ISO", prompt: "Contact with family, friends, or other supportive people is criticized, monitored, interrupted, or made costly." },
+  { id: "RES-1", domainId: "RES", prompt: "They control or restrict access to money, accounts, credit, benefits, documents, or financial information." },
+  { id: "TECH-1", domainId: "TECH", prompt: "They demand passwords, location sharing, device access, photos, or immediate replies as proof." },
+  { id: "INT-1", domainId: "INT", prompt: "Their looks, tone, silence, gestures, driving, property damage, or physical presence are used to frighten or control me." },
+  { id: "BODY-1", domainId: "BODY", prompt: "Sexual contact or affection is pressured, demanded, bargained for, or treated as something I owe." },
+  { id: "LEV-1", domainId: "LEV", prompt: "Children, pets, family, or friends are threatened, harmed, withheld, interrogated, or used to influence what I do." },
+  { id: "SYS-1", domainId: "SYS", prompt: "They deny documented events, rewrite agreements, or attack my memory or sanity when I name what happened." },
+  { id: "AUT-2", domainId: "AUT", prompt: "They act entitled to approve where I go, what I wear, how I spend time, or how I manage my body." },
+  { id: "ISO-2", domainId: "ISO", prompt: "They create conflict before or after I spend time away, then make me pay for having gone." },
+  { id: "RES-2", domainId: "RES", prompt: "They interfere with work, school, appointments, transportation, or my ability to earn and support myself." },
+  { id: "TECH-2", domainId: "TECH", prompt: "I suspect or know they monitor devices, accounts, vehicles, cameras, cloud services, or people around me." },
+  { id: "INT-2", domainId: "INT", prompt: "They punish through withdrawal, sleep disruption, humiliation, destruction, abandonment, public scenes, or deliberate chaos." },
+  { id: "BODY-2", domainId: "BODY", prompt: "They interfere with contraception, pregnancy decisions, reproductive care, or my ability to consent freely." },
+  { id: "LEV-2", domainId: "LEV", prompt: "They undermine my parenting or caregiving and threaten custody, reports, abandonment, or loss of contact." },
+  { id: "SYS-2", domainId: "SYS", prompt: "They threaten or use police, courts, CPS/DFPS, immigration, employers, landlords, medical providers, or other institutions to force compliance." },
+  { id: "AUT-3", domainId: "AUT", prompt: "Saying no, disagreeing, or making an independent decision brings pressure, guilt, threats, withdrawal, or retaliation." },
+  { id: "ISO-3", domainId: "ISO", prompt: "They discredit people who support me and push me to rely on them instead." },
+  { id: "RES-3", domainId: "RES", prompt: "Help, housing, rides, gifts, or shared resources are used to create debt, ownership, access, or obedience." },
+  { id: "TECH-3", domainId: "TECH", prompt: "They impersonate me, access accounts, use private information, or threaten to expose messages, images, or records." },
+  { id: "INT-3", domainId: "INT", prompt: "Consequences intensify when I assert independence, ask questions, disclose behavior, or set a boundary." },
+  { id: "BODY-3", domainId: "BODY", prompt: "They control or obstruct food, sleep, medication, medical care, substance use, exercise, or other bodily choices." },
+  { id: "LEV-3", domainId: "LEV", prompt: "They use secrets, identity, immigration status, sexuality, disability, religion, reputation, or community standing as leverage." },
+  { id: "SYS-3", domainId: "SYS", prompt: "Contact, monitoring, harassment, or control continues after separation, blocking, a firm boundary, or a legal order." },
+  { id: "AUT-4", domainId: "AUT", prompt: "Rules and freedoms are unequal: behavior that is allowed for them is dangerous or punishable for me." },
+  { id: "ISO-4", domainId: "ISO", prompt: "My world has become smaller because relationships, work, school, community, faith, hobbies, or time alone feel unsafe or exhausting to maintain." },
+  { id: "RES-4", domainId: "RES", prompt: "They create or threaten instability around food, medication, housing, utilities, transportation, identification, or property to control me." },
+  { id: "TECH-4", domainId: "TECH", prompt: "I alter my device use, routes, contacts, searches, or communication because I expect monitoring or retaliation." },
+  { id: "INT-4", domainId: "INT", prompt: "I scan their mood and adjust myself because I cannot predict which version of them I will get." },
+  { id: "BODY-4", domainId: "BODY", prompt: "My pain, illness, injury, exhaustion, pregnancy, or disability is minimized, exploited, or used to gain access or control." },
+  { id: "LEV-4", domainId: "LEV", prompt: "They recruit relatives, friends, coworkers, professionals, or children to pressure, monitor, discredit, or isolate me." },
+  { id: "SYS-4", domainId: "SYS", prompt: "I spend significant energy anticipating what they might do next to my safety, finances, children, housing, work, reputation, or legal position." },
+];
+
+const patternMapPriorityItems: PatternMapPriorityItem[] = [
+  { id: "P-01", prompt: "Physical violence, restraint, blocking exits, confinement, kidnapping, forced movement, or preventing me from leaving." },
+  { id: "P-02", prompt: "Choking, strangulation, pressure to my neck, smothering, or any interference with breathing." },
+  { id: "P-03", prompt: "A weapon displayed, handled, mentioned, accessed, or used to frighten, threaten, or control me." },
+  { id: "P-04", prompt: "Threats to kill or seriously harm me, themselves, another person, or an animal." },
+  { id: "P-05", prompt: "Sex, sexual acts, images, or sexual contact obtained through force, pressure, fear, intoxication, sleep, or exhaustion." },
+  { id: "P-06", prompt: "Birth control sabotage, forced pregnancy, pressure about pregnancy outcomes, or control of reproductive care." },
+  { id: "P-07", prompt: "Stalking, hidden surveillance, repeated unwanted contact, tracking, impersonation, or appearing where I am." },
+  { id: "P-08", prompt: "Harming, threatening, taking, hiding, or withholding children, pets, or people I love." },
+  { id: "P-09", prompt: "Withholding or controlling food, sleep, identification, medication, medical care, housing, transportation, communication, or emergency help." },
+  { id: "P-10", prompt: "Reckless driving, property destruction, punching walls, fire-setting, dangerous abandonment, or violent acts meant to show what could happen to me." },
+  { id: "P-11", prompt: "Escalation when I become more independent, disclose the abuse, set boundaries, seek help, separate, or take legal action." },
+  { id: "P-12", prompt: "Threats or actions involving police, courts, CPS/DFPS, immigration, hospitalization, employers, landlords, schools, family, or public humiliation to force compliance." },
+];
+
+function getPatternMapDomainState(score: number) {
+  if (score <= 3) return "LITTLE OR NO PATTERN IDENTIFIED";
+  if (score <= 7) return "EMERGING OR CONCENTRATED RESTRICTION";
+  if (score <= 11) return "ESTABLISHED PATTERN OF CONTROL";
+  return "PERVASIVE CONTROL";
+}
+
+function getPatternMapBand(total: number) {
+  if (total <= 24) return { label: "FEW INDICATORS IDENTIFIED", text: "Your answers show few indicators of coercive control across the map. Review any item scored 3 or 4 and any Priority Pattern flag. A concentrated pattern in one area can matter even when the overall score is low." };
+  if (total <= 55) return { label: "CONCENTRATED OR EMERGING CONTROL", text: "Your answers suggest control may be emerging or concentrated in specific parts of your life. Notice whether your choices change when the other person is upset, jealous, challenged, or told no. Consider support if the pattern is repeated, escalating, or difficult to name alone." };
+  if (total <= 88) return { label: "ESTABLISHED COERCIVE CONTROL PATTERN", text: "Your answers suggest an established pattern in which pressure, surveillance, punishment, isolation, or resource control is narrowing your freedom. This warrants support, careful documentation, and closer review of escalation and separation-related risk." };
+  return { label: "PERVASIVE SYSTEM OF CONTROL", text: "Control appears to organize multiple parts of your life, access, and decision-making. This is consistent with serious coercive control concerns. Consider confidential support and individualized safety planning from a safer device." };
+}
+
 type PageFlourishVariant =
   | "assessments"
   | "guides"
@@ -2136,6 +2228,12 @@ const categoryFiles: Record<
         description: "How much freedom do you actually have without retaliation?",
         status: "LIVE",
         modal: "freedom-test",
+      },
+      {
+        title: "Coercive Control Pattern Map",
+        description: "Map where control is operating, how concentrated it is, and which behaviors matter on their own.",
+        status: "LIVE",
+        modal: "coercive-control-map",
       },
       {
         title: "Rebuilding Readiness Check",
@@ -3557,7 +3655,278 @@ function CategoryModule({
 
       {activeModal === "love-or-fear" ? <LoveFearAssessmentModal onClose={() => setActiveModal(null)} /> : null}
       {activeModal === "freedom-test" ? <FreedomTestAssessmentModal onClose={() => setActiveModal(null)} /> : null}
+      {activeModal === "coercive-control-map" ? <CoerciveControlPatternMapModal onClose={() => setActiveModal(null)} /> : null}
     </section>
+  );
+}
+
+function CoerciveControlPatternMapModal({ onClose }: { onClose: () => void }) {
+  const [phase, setPhase] = useState<PatternMapPhase>("intro");
+  const [scoredIndex, setScoredIndex] = useState(0);
+  const [priorityIndex, setPriorityIndex] = useState(0);
+  const [scoredAnswers, setScoredAnswers] = useState<Record<string, PatternMapScore>>({});
+  const [priorityAnswers, setPriorityAnswers] = useState<Record<string, PatternMapPriorityAnswer>>({});
+  const modalRef = useRef<HTMLElement | null>(null);
+  const headingRef = useRef<HTMLHeadingElement | null>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
+
+  const currentScoredItem = patternMapScoredItems[scoredIndex];
+  const currentPriorityItem = patternMapPriorityItems[priorityIndex];
+  const hasCurrentScore = currentScoredItem ? scoredAnswers[currentScoredItem.id] !== undefined : false;
+  const hasCurrentPriority = currentPriorityItem ? priorityAnswers[currentPriorityItem.id] !== undefined : false;
+  const subtotals = Object.fromEntries(
+    patternMapDomainOrder.map((domainId) => [
+      domainId,
+      patternMapScoredItems
+        .filter((item) => item.domainId === domainId)
+        .reduce((sum, item) => sum + (scoredAnswers[item.id] ?? 0), 0),
+    ]),
+  ) as Record<PatternMapDomainId, number>;
+  const total = patternMapScoredItems.reduce((sum, item) => sum + (scoredAnswers[item.id] ?? 0), 0);
+  const highDomains = patternMapDomainOrder.filter((domainId) => subtotals[domainId] >= 8);
+  const highestSubtotal = Math.max(...patternMapDomainOrder.map((domainId) => subtotals[domainId]));
+  const highestDomains = patternMapDomainOrder.filter((domainId) => subtotals[domainId] === highestSubtotal);
+  const flaggedScored = patternMapScoredItems
+    .filter((item) => (scoredAnswers[item.id] ?? 0) >= 3)
+    .sort((a, b) => (scoredAnswers[b.id] ?? 0) - (scoredAnswers[a.id] ?? 0));
+  const priorityYes = patternMapPriorityItems.filter((item) => priorityAnswers[item.id] === "yes");
+  const priorityUnsure = patternMapPriorityItems.filter((item) => priorityAnswers[item.id] === "unsure");
+  const band = getPatternMapBand(total);
+
+  function resetState() {
+    setPhase("intro");
+    setScoredIndex(0);
+    setPriorityIndex(0);
+    setScoredAnswers({});
+    setPriorityAnswers({});
+  }
+
+  function closeAssessment() {
+    resetState();
+    previousFocusRef.current?.focus();
+    onClose();
+  }
+
+  function quickExit() {
+    resetState();
+    onClose();
+    leaveSite();
+  }
+
+  useEffect(() => {
+    previousFocusRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    headingRef.current?.focus();
+    return () => {
+      document.body.style.overflow = originalOverflow;
+    };
+  }, []);
+
+  useEffect(() => {
+    headingRef.current?.focus();
+  }, [phase, scoredIndex, priorityIndex]);
+
+  function handleKeyDown(event: ReactKeyboardEvent<HTMLElement>) {
+    if (event.key === "Escape") {
+      event.preventDefault();
+      closeAssessment();
+      return;
+    }
+    if (event.key !== "Tab" || !modalRef.current) return;
+    const focusable = Array.from(
+      modalRef.current.querySelectorAll<HTMLElement>(
+        'button:not(:disabled), [href], input:not(:disabled), [tabindex]:not([tabindex="-1"])',
+      ),
+    ).filter((element) => !element.hasAttribute("aria-hidden"));
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  }
+
+  function goBackFromScored() {
+    if (scoredIndex === 0) setPhase("intro");
+    else setScoredIndex((current) => current - 1);
+  }
+
+  function goNextFromScored() {
+    if (!hasCurrentScore) return;
+    if (scoredIndex === patternMapScoredItems.length - 1) setPhase("priorityIntro");
+    else setScoredIndex((current) => current + 1);
+  }
+
+  function goBackFromPriority() {
+    if (priorityIndex === 0) setPhase("priorityIntro");
+    else setPriorityIndex((current) => current - 1);
+  }
+
+  function goNextFromPriority() {
+    if (!hasCurrentPriority) return;
+    if (priorityIndex === patternMapPriorityItems.length - 1) setPhase("results");
+    else setPriorityIndex((current) => current + 1);
+  }
+
+  const summaryDomains = highDomains.length > 0 ? highDomains : highestDomains;
+  const summaryPrefix = highestSubtotal <= 3
+    ? summaryDomains.length === 1 ? "Area to review" : "Areas to review"
+    : summaryDomains.length === 1 ? "Most restricted area" : "Most restricted areas";
+
+  return (
+    <div className="assessment-modal-backdrop" role="presentation">
+      <section
+        aria-describedby="pattern-map-description"
+        aria-labelledby="pattern-map-title"
+        aria-modal="true"
+        className="assessment-modal freedom-test-modal pattern-map-modal"
+        onKeyDown={handleKeyDown}
+        ref={modalRef}
+        role="dialog"
+      >
+        <header className="assessment-modal-header">
+          <div>
+            <span className="terminal-label">TEMP MEMORY ONLY</span>
+            <h1 id="pattern-map-title" ref={headingRef} tabIndex={-1}>Coercive Control Pattern Map</h1>
+            <p className="sr-only" id="pattern-map-description">An in-memory educational assessment. Answers are not saved.</p>
+          </div>
+          <div className="assessment-modal-actions">
+            <button type="button" onClick={quickExit}>Quick Exit</button>
+            <button aria-label="Close assessment" type="button" onClick={closeAssessment}>X</button>
+          </div>
+        </header>
+
+        {phase === "intro" ? (
+          <div className="assessment-modal-body freedom-test-intro">
+            <h2>Map where control may be operating</h2>
+            <p>Coercive control is not one argument or one bad habit. It is a pattern that narrows another person's freedom across daily life. This assessment maps where control may be operating and how concentrated it is. Answer for one current or former partner and think about the last 6-12 months, especially what happens when they are upset, jealous, challenged, told no, or losing access to you.</p>
+            <section className="freedom-test-note">
+              <h3>Use this only when it is safe</h3>
+              <p>Internet use and devices can be monitored. Closing this assessment or using Quick Exit permanently clears your answers from this session.</p>
+            </section>
+            <section className="freedom-scale-summary">
+              {patternMapScale.map((option) => (
+                <article key={option.value}><strong>{option.value}</strong><span>{option.label}</span><p>{option.meaning}</p></article>
+              ))}
+            </section>
+            <p>This is an educational pattern-recognition tool, not a diagnosis, legal finding, validated lethality instrument, or guarantee that a relationship is safe.</p>
+            <div className="assessment-modal-nav">
+              <button type="button" onClick={() => setPhase("scored")}>Start the pattern map</button>
+              <button type="button" onClick={closeAssessment}>Close</button>
+              <button type="button" onClick={quickExit}>Quick Exit</button>
+            </div>
+          </div>
+        ) : null}
+
+        {phase === "scored" && currentScoredItem ? (
+          <div className="assessment-modal-body">
+            <div className="question-status" aria-live="polite"><span>Question {scoredIndex + 1} of 32</span><span>No saved answers</span></div>
+            <h2>{currentScoredItem.prompt}</h2>
+            <div className="freedom-response-list" role="radiogroup" aria-label="Choose one response">
+              {patternMapScale.map((option) => (
+                <button aria-checked={scoredAnswers[currentScoredItem.id] === option.value} className={scoredAnswers[currentScoredItem.id] === option.value ? "selected" : ""} key={option.value} role="radio" type="button" onClick={() => setScoredAnswers((current) => ({ ...current, [currentScoredItem.id]: option.value }))}>
+                  <strong>{option.value}</strong><span>{option.label}</span><small>{option.meaning}</small>
+                </button>
+              ))}
+            </div>
+            <div className="assessment-modal-nav">
+              <button type="button" onClick={goBackFromScored}>Back</button>
+              <button disabled={!hasCurrentScore} type="button" onClick={goNextFromScored}>Next</button>
+              <button type="button" onClick={closeAssessment}>Close</button>
+              <button type="button" onClick={quickExit}>Quick Exit</button>
+            </div>
+          </div>
+        ) : null}
+
+        {phase === "priorityIntro" ? (
+          <div className="assessment-modal-body">
+            <h2>Priority Pattern Check</h2>
+            <p>You finished the pattern map. Next is a separate 12-item Priority Pattern Check. These answers do not change your score. They appear first on the results screen because some behaviors matter on their own, even when the total is low.</p>
+            <div className="assessment-modal-nav">
+              <button type="button" onClick={() => { setPhase("scored"); setScoredIndex(31); }}>Back</button>
+              <button type="button" onClick={() => setPhase("priority")}>Continue to priority check</button>
+              <button type="button" onClick={closeAssessment}>Close</button>
+              <button type="button" onClick={quickExit}>Quick Exit</button>
+            </div>
+          </div>
+        ) : null}
+
+        {phase === "priority" && currentPriorityItem ? (
+          <div className="assessment-modal-body">
+            <div className="question-status" aria-live="polite"><span>Priority check {priorityIndex + 1} of 12</span><span>Not scored</span></div>
+            <h2>{currentPriorityItem.prompt}</h2>
+            <div className="love-fear-flag-grid freedom-priority-grid" role="radiogroup" aria-label="Choose Yes, No, or Unsure">
+              {(["yes", "no", "unsure"] as PatternMapPriorityAnswer[]).map((value) => (
+                <button aria-checked={priorityAnswers[currentPriorityItem.id] === value} className={priorityAnswers[currentPriorityItem.id] === value ? "selected" : ""} key={value} role="radio" type="button" onClick={() => setPriorityAnswers((current) => ({ ...current, [currentPriorityItem.id]: value }))}>{value.toUpperCase()}</button>
+              ))}
+            </div>
+            <div className="assessment-modal-nav">
+              <button type="button" onClick={goBackFromPriority}>Back</button>
+              <button disabled={!hasCurrentPriority} type="button" onClick={goNextFromPriority}>{priorityIndex === 11 ? "Show Results" : "Next"}</button>
+              <button type="button" onClick={closeAssessment}>Close</button>
+              <button type="button" onClick={quickExit}>Quick Exit</button>
+            </div>
+          </div>
+        ) : null}
+
+        {phase === "results" ? (
+          <div className="assessment-modal-body love-fear-results freedom-test-results pattern-map-results">
+            <h2>Your Coercive Control Pattern Map</h2>
+            <p>Your answers stay only in this open session.</p>
+
+            {priorityYes.length ? <section className="love-fear-alert"><h3>Priority patterns you marked Yes</h3><ul>{priorityYes.map((item) => <li key={item.id}>{item.prompt}</li>)}</ul></section> : null}
+            {priorityUnsure.length ? <section className="pattern-map-unsure"><h3>Priority patterns you marked Unsure</h3><p>Uncertainty still deserves attention; you do not need proof before asking for information.</p><ul>{priorityUnsure.map((item) => <li key={item.id}>{item.prompt}</li>)}</ul></section> : null}
+            {!priorityYes.length && !priorityUnsure.length ? <p className="freedom-test-note">You did not mark any priority item Yes or Unsure. This does not certify safety or erase scored items that concern you.</p> : null}
+
+            <section>
+              <h3>Coercive Control Pattern Map</h3>
+              <p><strong>{summaryPrefix}:</strong> {summaryDomains.map((id) => patternMapDomains[id].label).join(", ")}.</p>
+              <p>The map matters more than the grand total.</p>
+              <div className="pattern-map-domain-grid">
+                {patternMapDomainOrder.map((domainId) => {
+                  const score = subtotals[domainId];
+                  return <article className={`pattern-map-domain state-${Math.min(3, Math.floor(score / 4))}`} key={domainId}>
+                    <div><h4>{patternMapDomains[domainId].label}</h4><strong>{score} / 16</strong></div>
+                    <div aria-hidden="true" className="pattern-map-bar"><span style={{ width: `${(score / 16) * 100}%` }} /></div>
+                    <p><strong>{getPatternMapDomainState(score)}</strong></p>
+                    {score >= 8 ? <p>{patternMapDomains[domainId].highText}</p> : null}
+                  </article>;
+                })}
+              </div>
+            </section>
+
+            <section>
+              <h3>Behaviors that are changing or organizing your choices</h3>
+              {flaggedScored.length ? <ul>{flaggedScored.map((item) => { const score = scoredAnswers[item.id]; const scale = patternMapScale.find((option) => option.value === score); return <li key={item.id}><strong>{score} - {scale?.label} | {patternMapDomains[item.domainId].label}</strong><br />{item.prompt}</li>; })}</ul> : <p>No scored item was answered 3 or 4.</p>}
+            </section>
+
+            <section>
+              <h3>{total} / 128 - {band.label}</h3>
+              <p>These are editorial routing bands, not clinically validated cutoffs.</p>
+              <p>{band.text}</p>
+              <p><strong>A Yes or Unsure on the Priority Pattern Check, a score of 4 on any item, or fear of what may happen if you reduce contact, set a boundary, disclose the pattern, or leave deserves attention regardless of the total.</strong></p>
+            </section>
+
+            <footer className="love-fear-support-footer">
+              <strong>SUPPORT IS INFORMATION, NOT A COMMAND</strong>
+              <p>You do not have to decide what to call the relationship before asking for information. If you are in immediate danger in the United States, call 911. National Domestic Violence Hotline: 800-799-SAFE (7233) or text START to 88788. Use a safer device when possible.</p>
+              <a href="/guides">Explore support resources</a>
+            </footer>
+            <div className="assessment-modal-nav">
+              <button type="button" onClick={() => { setPhase("scored"); setScoredIndex(0); }}>Review answers</button>
+              <button type="button" onClick={resetState}>Start over</button>
+              <button type="button" onClick={closeAssessment}>Close</button>
+              <button type="button" onClick={quickExit}>Quick Exit</button>
+            </div>
+          </div>
+        ) : null}
+      </section>
+    </div>
   );
 }
 
