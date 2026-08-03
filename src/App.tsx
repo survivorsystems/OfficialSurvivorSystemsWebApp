@@ -1362,8 +1362,8 @@ const moduleRoutes: Record<ModuleKey, { label: string; path: string }> = {
   home: { label: "Home", path: "/" },
   assessments: { label: "Assessments", path: "/assessments" },
   guides: { label: "Guides", path: "/guides" },
-  planners: { label: "Planners & Trackers", path: "/planners-trackers" },
-  toolkits: { label: "Toolkits", path: "/toolkits" },
+  planners: { label: "Resources", path: "/resources" },
+  toolkits: { label: "Resources", path: "/resources" },
   education: { label: "Education & Awareness", path: "/education-awareness" },
   about: { label: "About", path: "/about" },
   advocacy: { label: "Advocacy", path: "/advocacy" },
@@ -1411,8 +1411,7 @@ type SidebarIconKey =
 const navItems: Array<{ key: ModuleKey; label: string; path: string; code: SidebarIconKey }> = [
   { key: "assessments", label: "Assessments", path: "/assessments", code: "assessments" },
   { key: "guides", label: "Guides", path: "/guides", code: "guides" },
-  { key: "planners", label: "Planners & Trackers", path: "/planners-trackers", code: "planners" },
-  { key: "toolkits", label: "Toolkits", path: "/toolkits", code: "toolkits" },
+  { key: "local-help", label: "Resources", path: "/resources", code: "toolkits" },
   { key: "education", label: "Education", path: "/education-awareness", code: "education" },
   { key: "advocacy", label: "Advocacy", path: "/advocacy", code: "advocacy" },
   { key: "government", label: "Government", path: "/government", code: "government" },
@@ -1528,16 +1527,8 @@ function isPrimaryNavActive(activeModule: ModuleKey, navKey: ModuleKey) {
     return activeModule === "guides" || activeModule === "how-to";
   }
 
-  if (navKey === "planners") {
-    return activeModule === "planners" || activeModule === "access" || activeModule === "library";
-  }
-
-  if (navKey === "toolkits") {
-    return activeModule === "toolkits" || activeModule === "access" || activeModule === "library";
-  }
-
   if (navKey === "local-help") {
-    return activeModule === "local-help" || activeModule === "how-to" || activeModule === "legal";
+    return activeModule === "local-help" || activeModule === "how-to" || activeModule === "legal" || activeModule === "planners" || activeModule === "toolkits" || activeModule === "access" || activeModule === "library";
   }
 
   if (navKey === "access") {
@@ -1551,10 +1542,34 @@ type CategoryFile = {
   title: string;
   description: string;
   status: string;
+  categoryId?: ResourceCategoryId;
   target?: ModuleKey;
   path?: string;
   modal?: "love-or-fear" | "freedom-test" | "coercive-control-map" | "financial-captivity";
 };
+
+type ResourceCategoryId =
+  | "housing"
+  | "legal-family"
+  | "legal-civil"
+  | "legal-criminal"
+  | "food"
+  | "money"
+  | "homelessness"
+  | "digital-safety"
+  | "daily-stability";
+
+const resourceCategoryDefinitions: Array<{ id: ResourceCategoryId; label: string; description: string }> = [
+  { id: "housing", label: "Housing", description: "Housing systems, applications, Coordinated Entry, waitlists, utilities, and follow-up." },
+  { id: "legal-family", label: "Legal // Family", description: "Family court, custody, caregiving, hearings, deadlines, and documentation." },
+  { id: "legal-civil", label: "Legal // Civil", description: "Protective orders, civil filings, motions, evidence, and hearing preparation." },
+  { id: "legal-criminal", label: "Legal // Criminal", description: "Reporting, criminal-system contact, victim services, incidents, and follow-up." },
+  { id: "food", label: "Food", description: "SNAP, food access, interviews, documents, pantries, and benefit follow-up." },
+  { id: "money", label: "Money", description: "Financial control, benefits, debt, credit, budgeting, records, and economic rebuilding." },
+  { id: "homelessness", label: "Homelessness", description: "Shelter systems, temporary housing, vehicle living, daily logistics, and contact tracking." },
+  { id: "digital-safety", label: "Digital Safety", description: "Browser traces, account access, device monitoring, safer browsing, and documentation." },
+  { id: "daily-stability", label: "Daily Stability", description: "Routines, pets, appointments, caregiving, and practical systems for disrupted days." },
+];
 
 type LoveFearScoredItem = {
   id: number;
@@ -2329,6 +2344,7 @@ const categoryFiles: Record<
         title: "How To Navigate Housing",
         description: "Coordinated Entry, waitlists, documents, privacy, shelter systems, and follow-up.",
         status: "LIVE",
+        categoryId: "housing",
         target: "rebuilding",
         path: "/rebuilding",
       },
@@ -2336,6 +2352,7 @@ const categoryFiles: Record<
         title: "How To Navigate SNAP & TANF",
         description: "Food benefits, cash assistance, interviews, documents, expedited SNAP, and safe contact.",
         status: "LIVE",
+        categoryId: "food",
         target: "how-to",
         path: "/guides",
       },
@@ -2343,6 +2360,7 @@ const categoryFiles: Record<
         title: "How To Live In Your Car",
         description: "Vehicle living basics, privacy, food, bathrooms, pets, kids, sleep, and movement.",
         status: "LIVE",
+        categoryId: "homelessness",
         target: "how-to",
         path: "/guides",
       },
@@ -2350,6 +2368,59 @@ const categoryFiles: Record<
         title: "Digital Trace Cleanup",
         description: "Browser history, private browsing limits, safer-device reminders, and screenshots.",
         status: "LIVE",
+        categoryId: "digital-safety",
+        target: "how-to",
+        path: "/guides",
+      },
+      {
+        title: "Family Court Guide",
+        description: "Family court orientation, custody, hearings, evidence, deadlines, and practical preparation.",
+        status: "LIVE",
+        categoryId: "legal-family",
+        target: "legal",
+        path: "/resources/legal-family",
+      },
+      {
+        title: "Civil Protective Order Guide",
+        description: "What civil protective orders can involve, what to expect, and how to organize court information.",
+        status: "LIVE",
+        categoryId: "legal-civil",
+        target: "legal",
+        path: "/resources/legal-civil",
+      },
+      {
+        title: "Motion Drafting Basics",
+        description: "Plain-language orientation for organizing a request, facts, relief, and supporting information.",
+        status: "LIVE",
+        categoryId: "legal-civil",
+        target: "legal",
+        path: "/resources/legal-civil",
+      },
+      {
+        title: "Reporting & Criminal-System Navigation",
+        description: "A future guide to reports, incident numbers, victim services, follow-up, and criminal-system terminology.",
+        status: "QUEUED",
+        categoryId: "legal-criminal",
+      },
+      {
+        title: "Understanding Financial Captivity",
+        description: "A future guide to coerced debt, restricted access, financial surveillance, benefits, and economic control.",
+        status: "QUEUED",
+        categoryId: "money",
+      },
+      {
+        title: "How To Create Routine While Life Is Chaotic",
+        description: "Small anchors, rest, self-care, appointments, and routines that can survive disrupted days.",
+        status: "LIVE",
+        categoryId: "daily-stability",
+        target: "how-to",
+        path: "/guides",
+      },
+      {
+        title: "How To Make A Safety Plan For Your Pet",
+        description: "Records, emergency fostering, proof of care, supplies, and backup-care considerations.",
+        status: "LIVE",
+        categoryId: "daily-stability",
         target: "how-to",
         path: "/guides",
       },
@@ -3134,8 +3205,7 @@ function getInitialModule(): ModuleKey {
   const path = window.location.pathname;
   if (path === "/assessments") return "assessments";
   if (path === "/guides") return "guides";
-  if (path === "/planners-trackers") return "planners";
-  if (path === "/toolkits") return "toolkits";
+  if (path === "/planners-trackers" || path === "/toolkits") return "local-help";
   if (path === "/education-awareness") return "education";
   if (path === "/about") return "about";
   if (path === "/advocacy") return "advocacy";
@@ -3147,6 +3217,8 @@ function getInitialModule(): ModuleKey {
   if (path === "/legal") return "legal";
   if (path === "/library") return "access";
   if (path === "/resources/access") return "access";
+  if (path.startsWith("/resources/")) return "local-help";
+  if (path === "/resources") return "local-help";
 
   const match = allNavTargets.find((item) => item.path === path);
   return match?.key ?? "home";
@@ -3560,18 +3632,11 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
       path: "/guides",
     },
     {
-      title: "Planners & Trackers",
-      copy: "Organize applications, appointments, evidence, deadlines, agencies, and next steps.",
-      action: "Explore Planners",
-      module: "planners",
-      path: "/planners-trackers",
-    },
-    {
-      title: "Toolkits",
-      copy: "Editable resources for preparation, documentation, support, self-care, and daily resilience.",
-      action: "View Toolkits",
-      module: "toolkits",
-      path: "/toolkits",
+      title: "Resources",
+      copy: "Find planners, trackers, toolkits, and practical files organized by housing, legal, food, money, homelessness, and more.",
+      action: "Browse Resources",
+      module: "local-help",
+      path: "/resources",
     },
     {
       title: "Education",
@@ -3641,7 +3706,7 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
           </div>
           <div className="home-choice-list" aria-label="Common starting points">
             <button type="button" onClick={() => onNavigate("assessments", "/assessments")}>I need clarity</button>
-            <button type="button" onClick={() => onNavigate("planners", "/planners-trackers")}>I need a plan</button>
+            <button type="button" onClick={() => onNavigate("local-help", "/resources")}>I need a plan</button>
             <button type="button" onClick={() => onNavigate("advocacy", "/advocacy")}>I need support</button>
             <button type="button" onClick={() => onNavigate("education", "/education-awareness")}>I am here to learn</button>
           </div>
@@ -3671,6 +3736,31 @@ function CategoryModule({
 }) {
   const content = categoryFiles[category];
   const [activeModal, setActiveModal] = useState<CategoryFile["modal"] | null>(null);
+  const guideCategories = category === "guides"
+    ? resourceCategoryDefinitions
+        .map((definition) => ({ ...definition, files: content.files.filter((file) => file.categoryId === definition.id) }))
+        .filter((definition) => definition.files.length > 0)
+    : [];
+
+  function renderCategoryFile(file: CategoryFile) {
+    return (
+      <article className="category-file-card" key={file.title}>
+        <div className="category-file-meta">
+          <span>{file.status}</span>
+          <small>{file.target || file.modal ? "OPENABLE" : "PENDING BUILD"}</small>
+        </div>
+        {file.modal ? (
+          <h2><button className="category-file-title-button" type="button" onClick={() => setActiveModal(file.modal ?? null)}>{file.title}</button></h2>
+        ) : <h2>{file.title}</h2>}
+        <p>{file.description}</p>
+        {file.modal ? (
+          <button type="button" onClick={() => setActiveModal(file.modal ?? null)}>Open Assessment</button>
+        ) : file.target && file.path ? (
+          <button type="button" onClick={() => onNavigate(file.target as ModuleKey, file.path as string)}>{category === "guides" ? "Open Guide" : "Open File"}</button>
+        ) : <button type="button" disabled>Queued</button>}
+      </article>
+    );
+  }
 
   return (
     <section className="page-shell category-module" aria-labelledby={`${category}-title`}>
@@ -3683,43 +3773,19 @@ function CategoryModule({
         <p>{content.intro}</p>
       </PageFlourishHeader>
 
-      <div className="category-file-grid">
-        {content.files.map((file) => (
-          <article className="category-file-card" key={file.title}>
-            <div className="category-file-meta">
-              <span>{file.status}</span>
-              <small>{file.target || file.modal ? "OPENABLE" : "PENDING BUILD"}</small>
-            </div>
-            {file.modal ? (
-              <h2>
-                <button
-                  className="category-file-title-button"
-                  type="button"
-                  onClick={() => setActiveModal(file.modal ?? null)}
-                >
-                  {file.title}
-                </button>
-              </h2>
-            ) : (
-              <h2>{file.title}</h2>
-            )}
-            <p>{file.description}</p>
-            {file.modal ? (
-              <button type="button" onClick={() => setActiveModal(file.modal ?? null)}>
-                Open Assessment
-              </button>
-            ) : file.target && file.path ? (
-              <button type="button" onClick={() => onNavigate(file.target as ModuleKey, file.path as string)}>
-                Open File
-              </button>
-            ) : (
-              <button type="button" disabled>
-                Queued
-              </button>
-            )}
-          </article>
-        ))}
-      </div>
+      {category === "guides" ? (
+        <div className="guide-category-directory">
+          {guideCategories.map((guideCategory) => (
+            <section className="guide-category-section" key={guideCategory.id}>
+              <header>
+                <div><span className="terminal-label">CATEGORY</span><h2>{guideCategory.label}</h2><p>{guideCategory.description}</p></div>
+                <button type="button" onClick={() => onNavigate("local-help", `/resources/${guideCategory.id}`)}>Related Resources</button>
+              </header>
+              <div className="category-file-grid">{guideCategory.files.map(renderCategoryFile)}</div>
+            </section>
+          ))}
+        </div>
+      ) : <div className="category-file-grid">{content.files.map(renderCategoryFile)}</div>}
 
       {activeModal === "love-or-fear" ? <LoveFearAssessmentModal onClose={() => setActiveModal(null)} /> : null}
       {activeModal === "freedom-test" ? <FreedomTestAssessmentModal onClose={() => setActiveModal(null)} /> : null}
@@ -5702,12 +5768,16 @@ function ResourceModule({
 }) {
   const [activeFolder, setActiveFolder] = useState<ResourceFolder>(() => getInitialResourceFolder(moduleKey));
   const [guideLaunch, setGuideLaunch] = useState<GuideLaunch | null>(null);
-  const [activeDirectory, setActiveDirectory] = useState<string | null>("housing");
+  const requestedDirectory = window.location.pathname.startsWith("/resources/")
+    ? window.location.pathname.replace("/resources/", "")
+    : "housing";
+  const [activeDirectory, setActiveDirectory] = useState<string | null>(requestedDirectory || "housing");
 
   useEffect(() => {
     setActiveFolder(getInitialResourceFolder(moduleKey));
     setGuideLaunch(null);
-  }, [moduleKey]);
+    setActiveDirectory(requestedDirectory || "housing");
+  }, [moduleKey, requestedDirectory]);
 
   if (activeFolder === "legal") {
     return (
@@ -5748,8 +5818,8 @@ function ResourceModule({
   const resourceDirectories = [
     {
       id: "housing",
-      label: "housing.dir",
-      description: "Coordinated Entry, vehicle living, shelter logistics, documents, and housing navigation.",
+      label: "Housing",
+      description: "Housing systems, applications, Coordinated Entry, waitlists, utilities, and follow-up.",
       files: [
         {
           label: "How To Navigate Housing",
@@ -5758,19 +5828,50 @@ function ResourceModule({
             setActiveFolder("priority-2");
           },
         },
-        {
-          label: "How To Live In Your Car",
-          action: () => {
-            setGuideLaunch({ guideId: "live-in-your-car", priorityId: "priority-1" });
-            setActiveFolder("priority-1");
-          },
-        },
+        { label: "Housing Assistance Tracker", action: () => setActiveFolder("access") },
+        { label: "Housing Application Toolkit", action: () => setActiveFolder("access") },
+        { label: "Coordinated Entry Contact Log", action: () => setActiveFolder("access") },
+        { label: "Utility Assistance Tracker", action: () => setActiveFolder("access") },
       ],
     },
     {
-      id: "benefits",
-      label: "benefits.dir",
-      description: "SNAP, TANF, application tracking, interviews, deadlines, and recertification basics.",
+      id: "legal-family",
+      label: "Legal // Family",
+      description: "Family court, custody, caregiving, hearings, deadlines, and documentation.",
+      files: [
+        { label: "Family Court Guide", action: () => setActiveFolder("legal") },
+        { label: "Family Court Planner", action: () => setActiveFolder("access") },
+        { label: "Court Date Tracker", action: () => setActiveFolder("access") },
+        { label: "Custody Documentation Log", action: () => setActiveFolder("access") },
+      ],
+    },
+    {
+      id: "legal-civil",
+      label: "Legal // Civil",
+      description: "Protective orders, civil filings, motions, evidence, and hearing preparation.",
+      files: [
+        { label: "Civil Protective Order Guide", action: () => setActiveFolder("legal") },
+        { label: "Motion Drafting Basics", action: () => setActiveFolder("legal") },
+        { label: "Protective Order Hearing Planner", action: () => setActiveFolder("access") },
+        { label: "Evidence Organizer", action: () => setActiveFolder("access") },
+        { label: "Civil Filing Tracker", action: () => setActiveFolder("access") },
+      ],
+    },
+    {
+      id: "legal-criminal",
+      label: "Legal // Criminal",
+      description: "Reporting, criminal-system contact, victim services, incidents, and follow-up.",
+      files: [
+        { label: "Reporting & Criminal-System Guide - In Development", action: () => setActiveFolder("legal") },
+        { label: "Incident Documentation Log", action: () => setActiveFolder("access") },
+        { label: "Police Report Follow-Up Tracker", action: () => setActiveFolder("access") },
+        { label: "Victim Services Contact Log", action: () => setActiveFolder("access") },
+      ],
+    },
+    {
+      id: "food",
+      label: "Food",
+      description: "SNAP, food access, interviews, documents, pantries, and benefit follow-up.",
       files: [
         {
           label: "How To Navigate SNAP & TANF",
@@ -5779,22 +5880,43 @@ function ResourceModule({
             setActiveFolder("priority-2");
           },
         },
+        { label: "SNAP & Benefits Contact Log", action: () => setActiveFolder("access") },
+        { label: "Food Assistance Application Tracker", action: () => setActiveFolder("access") },
+        { label: "Food Resource Contact List", action: () => setActiveFolder("access") },
       ],
     },
     {
-      id: "legal",
-      label: "legal.dir",
-      description: "Protective order, family court, civil court, and legal-system orientation files.",
+      id: "money",
+      label: "Money",
+      description: "Financial control, benefits, debt, credit, budgeting, records, and economic rebuilding.",
       files: [
-        { label: "Legal Resource Folder", action: () => setActiveFolder("legal") },
-        { label: "Protective Order Guide", action: () => setActiveFolder("legal") },
-        { label: "Family Court Guide", action: () => setActiveFolder("legal") },
+        { label: "Benefits Assistance Tracker", action: () => setActiveFolder("access") },
+        { label: "Budget Recovery Planner", action: () => setActiveFolder("access") },
+        { label: "Debt & Credit Issue Tracker", action: () => setActiveFolder("access") },
+        { label: "Financial Documents Inventory", action: () => setActiveFolder("access") },
       ],
     },
     {
-      id: "digital",
-      label: "digital-safety.dir",
-      description: "Browser history, private browsing limits, screenshots, and local trace cleanup.",
+      id: "homelessness",
+      label: "Homelessness",
+      description: "Shelter systems, temporary housing, vehicle living, daily logistics, and contact tracking.",
+      files: [
+        {
+          label: "How To Live In Your Car",
+          action: () => {
+            setGuideLaunch({ guideId: "live-in-your-car", priorityId: "priority-1" });
+            setActiveFolder("priority-1");
+          },
+        },
+        { label: "Shelter Contact Tracker", action: () => setActiveFolder("access") },
+        { label: "Temporary Housing Planner", action: () => setActiveFolder("access") },
+        { label: "Vehicle Living Checklist", action: () => setActiveFolder("access") },
+      ],
+    },
+    {
+      id: "digital-safety",
+      label: "Digital Safety",
+      description: "Browser traces, account access, device monitoring, safer browsing, and documentation.",
       files: [
         {
           label: "How To Clear Your Browser History",
@@ -5803,34 +5925,21 @@ function ResourceModule({
             setActiveFolder("priority-1");
           },
         },
+        { label: "Online Safety Checklist", action: () => setActiveFolder("access") },
+        { label: "Account & Device Inventory", action: () => setActiveFolder("access") },
       ],
     },
     {
-      id: "stabilize",
-      label: "stabilize.dir",
-      description: "Pets, routines, first systems, and the pieces that make life feel less impossible.",
+      id: "daily-stability",
+      label: "Daily Stability",
+      description: "Routines, pets, appointments, caregiving, and practical systems for disrupted days.",
       files: [
-        {
-          label: "How To Make A Safety Plan For Your Pet",
-          action: () => {
-            setGuideLaunch({ guideId: "pet-safety-plan", priorityId: "priority-1" });
-            setActiveFolder("priority-1");
-          },
-        },
-        {
-          label: "How To Create Routine While Life Is Chaotic",
-          action: () => {
-            setGuideLaunch({ guideId: "routine-chaos", priorityId: "priority-3" });
-            setActiveFolder("priority-3");
-          },
-        },
+        { label: "How To Create Routine While Life Is Chaotic", action: () => { setGuideLaunch({ guideId: "routine-chaos", priorityId: "priority-3" }); setActiveFolder("priority-3"); } },
+        { label: "How To Make A Safety Plan For Your Pet", action: () => { setGuideLaunch({ guideId: "pet-safety-plan", priorityId: "priority-1" }); setActiveFolder("priority-1"); } },
+        { label: "Routine Builder", action: () => setActiveFolder("access") },
+        { label: "Appointment & Follow-Up Tracker", action: () => setActiveFolder("access") },
+        { label: "Pet Planning Checklist", action: () => setActiveFolder("access") },
       ],
-    },
-    {
-      id: "database",
-      label: "database.dir",
-      description: "Access paths, preview rules, paid resource viewing, and permanent unlock information.",
-      files: [{ label: "Database Access Information", action: () => setActiveFolder("access") }],
     },
   ];
 
@@ -5838,8 +5947,7 @@ function ResourceModule({
     <section className="page-shell resources-module" aria-labelledby="resources-title">
       <PageFlourishHeader eyebrow="Load module // Resource folders" title="Resources" titleId="resources-title" variant="resources">
         <p>
-          Browse the live resource folders by need: housing, benefits, legal orientation, digital
-          safety, stabilization, and the deeper Database.
+          Browse planners, trackers, toolkits, guides, and practical files by the part of life they support.
         </p>
       </PageFlourishHeader>
 
@@ -6371,8 +6479,6 @@ export function App() {
     <HomeModule onNavigate={navigate} />
   ) : activeModule === "assessments" ||
     activeModule === "guides" ||
-    activeModule === "planners" ||
-    activeModule === "toolkits" ||
     activeModule === "education" ||
     activeModule === "about" ||
     activeModule === "advocacy" ||
