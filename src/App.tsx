@@ -2396,7 +2396,7 @@ const categoryFiles: Record<
       "Editable resources for taking action: checklists, worksheets, templates, examples, planners, trackers, and practical support files.",
     files: [
       {
-        title: "Cheat Code Library",
+        title: "Resource Library",
         description: "The deeper toolkit library with previews, access paths, and permanent unlocks.",
         status: "LIVE",
         target: "access",
@@ -3482,7 +3482,7 @@ function TerminalChrome({
         </aside>
 
         <button className="floating-quick-escape" type="button" onClick={leaveSite} aria-label="Quick Escape">
-          ESC
+          Quick Escape
         </button>
 
         <section className="folk-main-shell">
@@ -3631,7 +3631,6 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
 
       <div className="home-support-grid">
         <section className="start-where-you-are" aria-labelledby="home-start-where">
-          <span className="sprout-illustration" aria-hidden="true" />
           <div>
             <p className="folk-kicker">Small steps. Real support.</p>
             <h2 id="home-start-where">Start where you are.</h2>
@@ -3649,7 +3648,6 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
         </section>
 
         <section className="home-privacy-panel" aria-labelledby="home-privacy">
-          <span className="privacy-illustration" aria-hidden="true" />
           <div>
             <h2 id="home-privacy">Your privacy. Your power.</h2>
             <p>
@@ -5653,7 +5651,7 @@ function AccessInformationModule() {
     <section className="page-shell library-module access-module" aria-labelledby="access-title">
       <PageFlourishHeader eyebrow="Database // Access" title="Database" titleId="access-title" variant="database">
         <p>
-          The Database holds indexed previews, Cheat Code Library access paths, and download
+          The Database holds indexed previews, Resource Library access paths, and download
           unlock rules for deeper planners, trackers, and long-form guides.
         </p>
       </PageFlourishHeader>
@@ -5681,14 +5679,14 @@ function AccessInformationModule() {
       </section>
 
       <section className="library-section" aria-labelledby="paid-library-entry-title">
-        <div className="terminal-label">CHEAT CODE LIBRARY</div>
-        <h2 id="paid-library-entry-title">Open Cheat Code Library</h2>
+        <div className="terminal-label">RESOURCE LIBRARY</div>
+        <h2 id="paid-library-entry-title">Open Resource Library</h2>
         <p>
           Preview the deeper planners, trackers, and guide systems from here. The index is organized
           by resource category so the user can scan before unlocking.
         </p>
         <button className="resource-back-button" type="button" onClick={() => setShowLibrary(true)}>
-          Open Cheat Code Library
+          Open Resource Library
         </button>
       </section>
     </section>
@@ -5886,12 +5884,12 @@ function LibraryModule() {
     <section className="page-shell library-module" aria-labelledby="library-title">
       <PageFlourishHeader
         eyebrow="Resources // Library"
-        title="Cheat Code Library"
+        title="Resource Library"
         titleId="library-title"
         variant="database"
       >
         <p>
-          Free crisis tools stay live in the app. The Cheat Code Library holds deeper templates,
+          Free crisis tools stay live in the app. The Resource Library holds deeper templates,
           trackers, guides, and long-form systems for people who want more structure without a
           forced subscription or a forced category choice.
         </p>
