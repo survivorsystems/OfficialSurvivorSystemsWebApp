@@ -3216,7 +3216,7 @@ function assessmentGaugeValues(gauges: AssessmentGauges): GaugeValue[] {
 
 function BrandLogo({ className = "" }: { className?: string }) {
   return (
-    <span className={`brand-logo ${className}`} aria-label="Survivor Operating System">
+    <span className={`brand-logo ${className}`} aria-label="Survivor Systems">
       <span className="brand-logo-survivor">Survivor</span>
       <span className="brand-logo-systems">Systems</span>
     </span>
@@ -3457,7 +3457,6 @@ function TerminalChrome({
       <section className="win95-desktop" aria-label="Survivor Systems">
         <aside className="folk-sidebar">
           <button className="desktop-brand-panel" type="button" onClick={() => onNavigate("home", "/")}>
-            <span className="folk-logo-mark" aria-hidden="true" />
             <BrandLogo />
           </button>
           <nav className="desktop-icon-grid" aria-label="Site navigation">
@@ -3545,7 +3544,6 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
     action: string;
     module: ModuleKey;
     path: string;
-    icon: string;
   }> = [
     {
       title: "Assessments",
@@ -3553,7 +3551,6 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
       action: "Take an Assessment",
       module: "assessments",
       path: "/assessments",
-      icon: "flower",
     },
     {
       title: "Guides",
@@ -3561,7 +3558,6 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
       action: "Browse Guides",
       module: "guides",
       path: "/guides",
-      icon: "sprig",
     },
     {
       title: "Planners & Trackers",
@@ -3569,7 +3565,6 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
       action: "Explore Planners",
       module: "planners",
       path: "/planners-trackers",
-      icon: "fern",
     },
     {
       title: "Toolkits",
@@ -3577,7 +3572,6 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
       action: "View Toolkits",
       module: "toolkits",
       path: "/toolkits",
-      icon: "arch",
     },
     {
       title: "Education",
@@ -3585,7 +3579,6 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
       action: "Start Learning",
       module: "education",
       path: "/education-awareness",
-      icon: "book",
     },
   ];
 
@@ -3626,8 +3619,7 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
 
       <div className="home-category-grid" aria-label="Resource categories">
         {homeCards.map((card) => (
-          <article className={`home-category-card home-category-card-${card.icon}`} key={card.title}>
-            <span className={`home-card-ornament home-card-ornament-${card.icon}`} aria-hidden="true" />
+          <article className="home-category-card" key={card.title}>
             <h2>{card.title}</h2>
             <p>{card.copy}</p>
             <button type="button" onClick={() => onNavigate(card.module, card.path)}>

@@ -11031,6 +11031,50 @@ body::after {
   font-weight: 900;
 }
 
+/* Keep homepage links and sidebar branding free of generated CSS artwork. */
+.home-card-ornament,
+.home-category-card::before,
+.hud-frame button.desktop-brand-panel .folk-logo-mark,
+.hud-frame button.desktop-brand-panel::after,
+.folk-sidebar::after {
+  display: none !important;
+}
+
+.hud-frame .desktop-brand-panel {
+  align-items: center !important;
+  background: transparent !important;
+  display: flex !important;
+  justify-content: center !important;
+  min-height: 104px !important;
+  padding: 12px 8px 20px !important;
+  width: 100% !important;
+}
+
+.hud-frame button.desktop-brand-panel .brand-logo {
+  align-items: center !important;
+  display: grid !important;
+  justify-items: center !important;
+  max-width: 100% !important;
+  width: auto !important;
+}
+
+.hud-frame button.desktop-brand-panel .brand-logo-survivor {
+  font-size: 1.45rem !important;
+  letter-spacing: 0.13em !important;
+  line-height: 1.1 !important;
+}
+
+.hud-frame button.desktop-brand-panel .brand-logo-systems {
+  font-size: 0.98rem !important;
+  letter-spacing: 0.32em !important;
+  line-height: 1.2 !important;
+  transform: translateX(0.16em) !important;
+}
+
+.home-category-card {
+  min-height: 0 !important;
+}
+
 @media (max-width: 980px) {
   .home-hero-composition .home-hero-visual {
     display: grid !important;
