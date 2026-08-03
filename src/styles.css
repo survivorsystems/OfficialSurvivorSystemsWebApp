@@ -9135,6 +9135,33 @@ body::after {
   white-space: normal;
 }
 
+.compensation-coverage-grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 22px 0;
+}
+
+.compensation-coverage-grid .how-to-system-note {
+  margin: 0;
+}
+
+.compensation-guide ol,
+.compensation-guide ul,
+.housing-options-guide ul {
+  color: var(--folk-parchment);
+  line-height: 1.7;
+}
+
+.compensation-guide li + li,
+.housing-options-guide li + li {
+  margin-top: 8px;
+}
+
+.compensation-distinction {
+  border-left-color: var(--folk-mustard);
+}
+
 .home-category-card {
   background:
     linear-gradient(180deg, rgba(24, 38, 27, 0.96), rgba(12, 20, 15, 0.98)) !important;
@@ -9439,6 +9466,14 @@ body::after {
   .guide-category-section > header {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .compensation-coverage-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .housing-option-pathway > div {
+    padding-left: 20px;
   }
 }
 

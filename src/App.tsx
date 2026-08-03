@@ -363,6 +363,16 @@ const previewResources: LibraryResource[] = [
 
 const howToGuides: HowToGuide[] = [
   {
+    id: "crime-victim-compensation",
+    title: "Understanding Crime Victim Compensation",
+    subtitle: "What it may pay, what controls a claim, and why it is rarely immediate cash.",
+    status: "LEGAL & MONEY GUIDE",
+    description:
+      "A nationwide guide to reimbursement, eligibility clauses, covered losses, documentation, delays, denials, and appeals.",
+    action: "open",
+    priority: "priority-2",
+  },
+  {
     id: "housing-options",
     title: "Housing Options",
     subtitle: "Less-obvious housing resources for survivors rebuilding after domestic violence.",
@@ -2423,6 +2433,13 @@ const categoryFiles: Record<
         description: "A future guide to reports, incident numbers, victim services, follow-up, and criminal-system terminology.",
         status: "QUEUED",
         categoryId: "legal-criminal",
+      },
+      {
+        title: "Understanding Crime Victim Compensation",
+        description: "Reimbursement, eligibility clauses, covered expenses, documentation, caps, delays, denials, and appeals.",
+        status: "LIVE",
+        categoryId: "legal-criminal",
+        guideId: "crime-victim-compensation",
       },
       {
         title: "Understanding Financial Captivity",
@@ -5590,6 +5607,159 @@ function PracticalHowToGuide({
   );
 }
 
+const compensationClauses = [
+  ["Qualifying Crime", "The state decides which crimes qualify. Domestic or family violence, assault, sexual violence, child abuse, homicide, stalking under qualifying rules, trafficking, robbery involving injury, impaired driving, kidnapping, and other violent crimes may be covered.", "What exact compensable-crime category applies to this claim?"],
+  ["Injury Or Death", "Programs may require physical injury, psychological injury, death, or another state-defined harm, plus documentation connecting treatment or loss to the crime.", "Does this state recognize psychological injury without physical injury, and what documentation establishes it?"],
+  ["Crime Location & Residency", "The state where the crime occurred usually handles the claim, even when the victim lives elsewhere. Other provisions may cover out-of-state or overseas crimes.", "Which state has jurisdiction, and is there a nonresident or out-of-state-victim provision?"],
+  ["Reporting", "A report may be required within a set period, but qualifying reports and good-cause exceptions vary. An arrest or prosecution is not always required.", "What counts as a qualifying report, what is the deadline, and what safety or good-cause exceptions apply?"],
+  ["Filing Deadline", "The filing period may run from the crime, discovery, death, report, or another event. Extensions can exist. Filing early may preserve the claim while documents remain pending.", "What starts the deadline, and how can I request an extension or preserve the claim?"],
+  ["Cooperation", "Programs commonly require reasonable cooperation, but that does not necessarily mean causing an arrest, agreeing with every prosecution decision, or ignoring safety concerns.", "How is reasonable cooperation defined, who decides it, and what safety exceptions apply?"],
+  ["Causation", "The expense must be connected to the crime through dates, bills, records, provider statements, wage verification, reports, court records, or relocation documentation.", "What documentation is required to connect this expense to the crime?"],
+  ["Payer Of Last Resort", "Insurance, public benefits, workers' compensation, paid leave, restitution, settlements, or other sources may be considered before compensation pays the remaining eligible loss.", "Which other payment sources must I pursue, which can be waived, and how will each affect this claim?"],
+  ["Out-Of-Pocket Loss", "Programs generally pay actual documented losses, not the general value of suffering. Some can pay an approved provider directly when a bill is unpaid.", "Can the provider be paid directly, and what should the provider submit?"],
+  ["Caps & Rate Limits", "A total claim cap and separate limits for counseling, relocation, wages, funeral costs, transportation, treatment, or provider rates may apply.", "What are the total cap, category limits, rates, and remaining balance?"],
+  ["Contributory Conduct", "Some states may reduce an award based on alleged conduct. A relationship with the offender, returning, delayed reporting, substance use, or cohabitation should not automatically be treated as causing violence.", "What specific conduct is alleged, what evidence supports that finding, and what domestic-violence exceptions apply?"],
+  ["Unjust Enrichment", "Payment may be structured when an award could benefit the offender through shared property, debts, accounts, insurance, or household expenses.", "Can payment go directly to the provider or be structured so the offender does not benefit?"],
+  ["Documentation & Verification", "Claims can require identity documents, reports, bills, records, insurance statements, wage verification, leases, receipts, dependency records, releases, and safe contact information.", "What will be collected, who can receive it, and may I use a safe address?"],
+  ["Restitution, Subrogation & Repayment", "If compensation pays first and another source later pays the same loss, the program may seek reimbursement. Changes and later recoveries may need to be reported.", "What later payments must I report, and what portion could the program recover?"],
+  ["Appeal & Reconsideration", "A denial or reduction may be reviewable, but deadlines can be short. The written notice should identify the reason and procedure.", "What is the appeal deadline, where must it be filed, can I add evidence, and can an advocate or attorney help?"],
+] as const;
+
+const compensationApplicationQuestions = [
+  "Is this reimbursement-only, or can the program pay providers directly?",
+  "Is emergency, advance, or expedited assistance available?",
+  "Which crime, injury, report, cooperation, and filing rules control the claim?",
+  "Which exceptions apply to domestic violence, trauma, children, disability, threats, or good cause?",
+  "What are the total cap and the limits for each expense category?",
+  "Which insurance, benefits, restitution, or other sources must be used first?",
+  "May the claim be filed now and supplemented with bills later?",
+  "How long can the claim remain open, and who receives payment?",
+  "How will the claimant's address and records be protected?",
+  "What is the appeal deadline and required filing method?",
+];
+
+function CrimeVictimCompensationGuide({ onBack }: { onBack: () => void }) {
+  return (
+    <section className="page-shell how-to-guide-page compensation-guide" aria-labelledby="compensation-guide-title">
+      <PageFlourishHeader
+        eyebrow="Legal // Criminal // Know the clauses"
+        title="Understanding Crime Victim Compensation"
+        titleId="compensation-guide-title"
+        variant="legal"
+      >
+        <p>What it may pay, what controls a claim, and why it is rarely immediate cash.</p>
+      </PageFlourishHeader>
+
+      <section className="how-to-system-note">
+        <h2>The Most Important Truth First</h2>
+        <p><strong>Compensation is usually reimbursement, not immediate escape money.</strong></p>
+        <p>
+          State programs may reimburse an eligible claimant, pay an approved provider directly, or cover
+          continuing documented expenses after insurance and other payment sources are considered. They
+          generally do not provide instant unrestricted cash or pay every loss caused by a crime.
+        </p>
+        <p>
+          Each state controls its deadlines, eligible crimes, covered expenses, caps, documentation, and
+          exceptions. This guide is educational, not legal advice or a promise of eligibility or payment.
+        </p>
+      </section>
+
+      <section className="housing-options-master-script compensation-distinction">
+        <p className="terminal-label">COMPENSATION IS NOT VICTIM ASSISTANCE</p>
+        <h2>If money is needed now, ask separately.</h2>
+        <p>
+          A victim advocate may know about emergency lodging, flexible survivor funds, VOCA-funded direct
+          assistance, relocation support, TANF emergency assistance, Community Action funds, rapid rehousing,
+          food, transportation, phones, locks, storage, or document replacement.
+        </p>
+      </section>
+
+      <section className="how-to-system-note">
+        <h2>How The System Generally Works</h2>
+        <ol>
+          <li>A state-defined qualifying crime occurs and is reported or otherwise documented.</li>
+          <li>An eligible claimant applies before the deadline.</li>
+          <li>The program investigates eligibility and requests supporting records.</li>
+          <li>Insurance and other payment sources are calculated.</li>
+          <li>Covered losses are approved within total and category limits.</li>
+          <li>Payment goes to the claimant or provider; later eligible bills may be added while the claim remains open.</li>
+        </ol>
+      </section>
+
+      <div className="housing-options-pathways" aria-label="Clauses that may control a compensation claim">
+        {compensationClauses.map(([title, summary, question], index) => (
+          <details className="housing-option-pathway" key={title}>
+            <summary><span>{String(index + 1).padStart(2, "0")}</span>{title}</summary>
+            <div>
+              <p>{summary}</p>
+              <div className="phrase-bank"><div className="terminal-label">ASK SPECIFICALLY</div><code>{question}</code></div>
+            </div>
+          </details>
+        ))}
+      </div>
+
+      <section className="compensation-coverage-grid" aria-label="Typical compensation coverage">
+        <article className="how-to-system-note">
+          <h2>Commonly Covered</h2>
+          <ul>
+            <li>Crime-related medical, hospital, dental, counseling, rehabilitation, or equipment costs</li>
+            <li>Lost wages, funeral and burial costs, or qualifying loss of support</li>
+            <li>In some states: relocation, lodging, locks, transportation, childcare, cleanup, or disability modifications</li>
+          </ul>
+        </article>
+        <article className="how-to-system-note">
+          <h2>Usually Not Covered</h2>
+          <ul>
+            <li>Pain and suffering, punitive damages, or unrestricted hardship payments</li>
+            <li>Most stolen property, property damage, or ordinary living expenses</li>
+            <li>Expenses already fully paid elsewhere, undocumented losses, or costs above program limits</li>
+          </ul>
+        </article>
+      </section>
+
+      <section className="how-to-system-note">
+        <h2>Build The Claim Before The Paperwork Builds A Graveyard</h2>
+        <p>File early when safely possible, even if the investigation, treatment, insurance process, or legal case is incomplete. Ask how to supplement the claim later.</p>
+        <p>Keep the application, confirmation, claim number, bills, receipts, estimates, insurance statements, wage records, relocation costs, reports, court records, information requests, decisions, and appeal notices. Track what was sent, when, how, and to whom. Never send the only copy of an irreplaceable document.</p>
+      </section>
+
+      <section className="housing-options-master-script">
+        <p className="terminal-label">WHEN A CLAIM IS DELAYED</p>
+        <blockquote>
+          Please identify every item still needed, who must provide it, when it was requested, whether the
+          program can request it directly, and whether any undisputed part of the claim can be decided or paid
+          while the remainder is pending.
+        </blockquote>
+        <h2>Questions That Prevent Ugly Surprises</h2>
+        <ul>{compensationApplicationQuestions.map((question) => <li key={question}>{question}</li>)}</ul>
+      </section>
+
+      <section className="how-to-system-note">
+        <h2>If The Claim Is Denied Or Reduced</h2>
+        <ol>
+          <li>Get the written decision and the law or policy it relies on.</li>
+          <li>Calendar the appeal deadline immediately and request the claim file when permitted.</li>
+          <li>Identify the exact issue: eligibility, documentation, causation, caps, other payment sources, alleged conduct, or lateness.</li>
+          <li>Gather evidence addressing that reason and ask a victim advocate or civil legal-aid program for help.</li>
+          <li>File using the required method and keep proof of delivery.</li>
+        </ol>
+      </section>
+
+      <section className="housing-options-master-script">
+        <p className="terminal-label">FIND THE CORRECT STATE PROGRAM</p>
+        <p>Start with the U.S. Department of Justice Office for Victims of Crime state directory at OVC.OJP.gov/Help-for-Victims/Help-in-Your-State. The state where the crime occurred is usually the first program to contact.</p>
+        <p>VictimConnect Resource Center: call or text 855-484-2846 or visit VictimConnect.org.</p>
+        <p><strong>The useful question is not only “Do I qualify?”</strong> Ask which expenses qualify, under which clause, after which other payment sources, with what documentation, under what cap, paid to whom, and when. That question makes the machinery show its gears.</p>
+      </section>
+
+      <div className="terminal-actions denial-actions">
+        <button type="button" onClick={onBack}>Back To Legal Resources</button>
+        <button type="button" onClick={leaveSite}>Quick Exit</button>
+      </div>
+    </section>
+  );
+}
+
 const housingOptionPathways = [
   {
     title: "Coordinated Entry & Continuum of Care",
@@ -5799,6 +5969,10 @@ function HowToModule({
 
   if (activeGuideId === "housing-options") {
     return <HousingOptionsGuide onBack={() => setActiveGuideId(null)} />;
+  }
+
+  if (activeGuideId === "crime-victim-compensation") {
+    return <CrimeVictimCompensationGuide onBack={() => setActiveGuideId(null)} />;
   }
 
   if (activeGuideId && practicalGuides[activeGuideId]) {
@@ -6079,6 +6253,13 @@ function ResourceModule({
       label: "Legal // Criminal",
       description: "Reporting, criminal-system contact, victim services, incidents, and follow-up.",
       files: [
+        {
+          label: "Understanding Crime Victim Compensation",
+          action: () => {
+            setGuideLaunch({ guideId: "crime-victim-compensation", priorityId: "priority-2" });
+            setActiveFolder("priority-2");
+          },
+        },
         { label: "Reporting & Criminal-System Guide - In Development", action: () => setActiveFolder("legal") },
         { label: "Incident Documentation Log", action: () => setActiveFolder("access") },
         { label: "Police Report Follow-Up Tracker", action: () => setActiveFolder("access") },
