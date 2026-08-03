@@ -9046,6 +9046,95 @@ body::after {
   margin-top: 0;
 }
 
+.housing-options-guide {
+  max-width: 1120px;
+}
+
+.housing-options-master-script {
+  background: rgba(13, 28, 20, 0.82);
+  border: 1px solid var(--folk-border);
+  border-left: 5px solid var(--folk-rust);
+  border-radius: 6px;
+  margin-top: 20px;
+  padding: clamp(20px, 3vw, 34px);
+}
+
+.housing-options-master-script h2 {
+  color: var(--folk-cream) !important;
+  font-family: var(--font-editorial) !important;
+}
+
+.housing-options-master-script blockquote {
+  background: rgba(244, 223, 189, 0.07);
+  border-left: 2px solid var(--folk-mustard);
+  color: var(--folk-cream);
+  font-size: 1.04rem;
+  line-height: 1.75;
+  margin: 20px 0;
+  padding: 16px 18px;
+}
+
+.housing-options-pathways {
+  display: grid;
+  gap: 10px;
+  margin: 24px 0;
+}
+
+.housing-option-pathway {
+  background: rgba(15, 31, 22, 0.74);
+  border: 1px solid rgba(189, 137, 63, 0.42);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.housing-option-pathway summary {
+  align-items: center;
+  color: var(--folk-cream);
+  cursor: pointer;
+  display: flex;
+  font-family: var(--font-editorial);
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  gap: 14px;
+  list-style: none;
+  padding: 17px 20px;
+}
+
+.housing-option-pathway summary::-webkit-details-marker {
+  display: none;
+}
+
+.housing-option-pathway summary::after {
+  color: var(--folk-rust);
+  content: "+";
+  font-family: var(--font-interface);
+  margin-left: auto;
+}
+
+.housing-option-pathway[open] summary::after {
+  content: "-";
+}
+
+.housing-option-pathway summary span {
+  color: var(--folk-rust);
+  font-family: var(--font-interface);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.housing-option-pathway > div {
+  border-top: 1px solid rgba(189, 137, 63, 0.25);
+  padding: 4px 20px 20px 48px;
+}
+
+.housing-option-pathway .phrase-bank {
+  margin-top: 15px;
+}
+
+.housing-option-pathway .phrase-bank code {
+  color: var(--folk-cream) !important;
+  white-space: normal;
+}
+
 .home-category-card {
   background:
     linear-gradient(180deg, rgba(24, 38, 27, 0.96), rgba(12, 20, 15, 0.98)) !important;

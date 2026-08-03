@@ -363,6 +363,16 @@ const previewResources: LibraryResource[] = [
 
 const howToGuides: HowToGuide[] = [
   {
+    id: "housing-options",
+    title: "Housing Options",
+    subtitle: "Less-obvious housing resources for survivors rebuilding after domestic violence.",
+    status: "HOUSING RESOURCE",
+    description:
+      "A nationwide map of housing pathways beyond emergency shelter, with practical questions and call scripts for finding the door that is actually open.",
+    action: "open",
+    priority: "priority-2",
+  },
+  {
     id: "snap-tanf",
     title: "How To Navigate SNAP & TANF",
     subtitle: "Food, cash assistance, interviews, documents, denials, and safe-contact planning.",
@@ -1543,6 +1553,7 @@ type CategoryFile = {
   description: string;
   status: string;
   categoryId?: ResourceCategoryId;
+  guideId?: string;
   target?: ModuleKey;
   path?: string;
   modal?: "love-or-fear" | "freedom-test" | "coercive-control-map" | "financial-captivity";
@@ -2341,10 +2352,18 @@ const categoryFiles: Record<
       "Live walkthroughs for the practical parts of rebuilding: housing, benefits, routines, digital traces, pets, and temporary survival logistics.",
     files: [
       {
+        title: "Housing Options",
+        description: "Fifteen housing pathways beyond emergency shelter, plus call scripts, privacy questions, and national starting points.",
+        status: "LIVE",
+        categoryId: "housing",
+        guideId: "housing-options",
+      },
+      {
         title: "How To Navigate Housing",
         description: "Coordinated Entry, waitlists, documents, privacy, shelter systems, and follow-up.",
         status: "LIVE",
         categoryId: "housing",
+        guideId: "housing-navigation",
         target: "rebuilding",
         path: "/rebuilding",
       },
@@ -2353,6 +2372,7 @@ const categoryFiles: Record<
         description: "Food benefits, cash assistance, interviews, documents, expedited SNAP, and safe contact.",
         status: "LIVE",
         categoryId: "food",
+        guideId: "snap-tanf",
         target: "how-to",
         path: "/guides",
       },
@@ -2361,6 +2381,7 @@ const categoryFiles: Record<
         description: "Vehicle living basics, privacy, food, bathrooms, pets, kids, sleep, and movement.",
         status: "LIVE",
         categoryId: "homelessness",
+        guideId: "live-in-your-car",
         target: "how-to",
         path: "/guides",
       },
@@ -2369,6 +2390,7 @@ const categoryFiles: Record<
         description: "Browser history, private browsing limits, safer-device reminders, and screenshots.",
         status: "LIVE",
         categoryId: "digital-safety",
+        guideId: "browser-trace-cleanup",
         target: "how-to",
         path: "/guides",
       },
@@ -2413,6 +2435,7 @@ const categoryFiles: Record<
         description: "Small anchors, rest, self-care, appointments, and routines that can survive disrupted days.",
         status: "LIVE",
         categoryId: "daily-stability",
+        guideId: "routine-chaos",
         target: "how-to",
         path: "/guides",
       },
@@ -2421,6 +2444,7 @@ const categoryFiles: Record<
         description: "Records, emergency fostering, proof of care, supplies, and backup-care considerations.",
         status: "LIVE",
         categoryId: "daily-stability",
+        guideId: "pet-safety-plan",
         target: "how-to",
         path: "/guides",
       },
@@ -3205,6 +3229,7 @@ function getInitialModule(): ModuleKey {
   const path = window.location.pathname;
   if (path === "/assessments") return "assessments";
   if (path === "/guides") return "guides";
+  if (path.startsWith("/guides/")) return "how-to";
   if (path === "/planners-trackers" || path === "/toolkits") return "local-help";
   if (path === "/education-awareness") return "education";
   if (path === "/about") return "about";
@@ -3755,6 +3780,8 @@ function CategoryModule({
         <p>{file.description}</p>
         {file.modal ? (
           <button type="button" onClick={() => setActiveModal(file.modal ?? null)}>Open Assessment</button>
+        ) : file.guideId ? (
+          <button type="button" onClick={() => onNavigate("how-to", `/guides/${file.guideId}`)}>Open Guide</button>
         ) : file.target && file.path ? (
           <button type="button" onClick={() => onNavigate(file.target as ModuleKey, file.path as string)}>{category === "guides" ? "Open Guide" : "Open File"}</button>
         ) : <button type="button" disabled>Queued</button>}
@@ -5563,6 +5590,179 @@ function PracticalHowToGuide({
   );
 }
 
+const housingOptionPathways = [
+  {
+    title: "Coordinated Entry & Continuum of Care",
+    summary: "A local assessment and referral system that may connect survivors to rapid rehousing, transitional housing, permanent supportive housing, deposits, rent, utilities, moving costs, and housing navigation.",
+    ask: "I am fleeing domestic violence and need a Coordinated Entry assessment for every available housing intervention, not only emergency shelter. Who is the access point?",
+  },
+  {
+    title: "Rapid Rehousing & Survivor-Specific Projects",
+    summary: "Programs may help locate an ordinary rental and cover deposits, short- or medium-term rent, landlord outreach, and voluntary support. These are separate from Section 8 waitlists.",
+    ask: "Does the Continuum of Care have a DV Bonus, survivor rapid-rehousing, joint transitional-housing/rapid-rehousing, or landlord-incentive project?",
+  },
+  {
+    title: "VAWA Housing Rights & Emergency Transfers",
+    summary: "Some federally assisted housing programs must provide survivor protections involving emergency transfers, confidentiality, abuse-related lease problems, and certain voucher moves.",
+    ask: "Is my housing covered by VAWA? I need the rights notice, emergency-transfer plan, and confidential request procedure.",
+  },
+  {
+    title: "Housing Choice Voucher Portability",
+    summary: "A current Housing Choice Voucher may sometimes move to another housing authority, including another county or state. Get accurate instructions before ending existing assistance.",
+    ask: "How do I port my voucher, can the process be expedited for safety, and how will my address and contact information be protected?",
+  },
+  {
+    title: "Crime-Victim Compensation",
+    summary: "State programs may cover eligible relocation, lodging, locks, transportation, lost wages, counseling, or other crime-related expenses. Rules and deadlines vary by state.",
+    ask: "Does this state's program cover relocation, temporary lodging, security, transportation, or lost wages, and what reporting or documentation rules apply?",
+  },
+  {
+    title: "VOCA & Flexible Survivor Assistance",
+    summary: "Local victim-service organizations may have flexible funds for rent, deposits, hotels, moving, storage, utilities, phones, transportation, locks, or household essentials.",
+    ask: "Do you have VOCA assistance, flexible survivor funds, emergency relocation funds, or donated funds for housing-related expenses?",
+  },
+  {
+    title: "Emergency Solutions Grant Programs",
+    summary: "Locally administered ESG programs can include homelessness prevention, shelter, rapid rehousing, rent arrears, deposits, moving expenses, and housing stabilization.",
+    ask: "Who administers ESG prevention and rapid-rehousing funds here, and can a survivor be screened before becoming literally homeless?",
+  },
+  {
+    title: "TANF Diversion & Emergency Assistance",
+    summary: "Households with children may be eligible for one-time diversion, crisis assistance, rent, deposits, utilities, transportation, childcare, or family-violence waivers.",
+    ask: "Does this state offer TANF diversion, crisis assistance, relocation help, or a family-violence option in addition to ongoing benefits?",
+  },
+  {
+    title: "Community Action Agencies",
+    summary: "Regional agencies may administer rent, deposits, utilities, motel vouchers, transportation, homelessness prevention, housing counseling, and local charitable funds.",
+    ask: "Which Community Action Agency covers this county, what is open today, and what funding reopens later?",
+  },
+  {
+    title: "Civil Legal Aid For Housing",
+    summary: "Legal advocacy may help enforce VAWA rights, prevent eviction, address a lease, protect rental assistance, challenge denials, or resolve abuse-related debt and utility problems.",
+    ask: "I need civil legal help with the housing consequences of domestic violence, including my lease, eviction risk, rental assistance, and VAWA rights.",
+  },
+  {
+    title: "McKinney-Vento School Support",
+    summary: "Children staying in shelters, motels, vehicles, transitional programs, or temporarily with others may qualify for enrollment, school-of-origin transportation, meals, and referrals.",
+    ask: "Who is the district's McKinney-Vento liaison? We need an eligibility determination, school-stability help, transportation, and housing referrals.",
+  },
+  {
+    title: "Veteran Housing Programs",
+    summary: "Veterans facing homelessness may qualify for SSVF prevention or rapid rehousing, HUD-VASH, temporary housing, case management, or benefit navigation.",
+    ask: "Screen me for SSVF, HUD-VASH, temporary housing, and other VA homeless programs. The Homeless Veterans line is 877-424-3838.",
+  },
+  {
+    title: "USDA Rural Development Housing",
+    summary: "Rural Development multifamily properties may have rental assistance or waitlists that differ from local public housing. These are generally longer-term options.",
+    ask: "Where are the USDA Rural Development multifamily and rental-assistance properties in this region, and which accept applications?",
+  },
+  {
+    title: "Permanent Supportive Housing",
+    summary: "A person with a qualifying disability and history of homelessness may be assessed for long-term rental assistance with voluntary services. Eligibility and availability are limited.",
+    ask: "Can Coordinated Entry assess me for permanent supportive housing, and what homelessness and disability documentation is required?",
+  },
+  {
+    title: "Transitional Apartments",
+    summary: "Some survivor organizations operate confidential apartments or scattered-site housing away from an emergency shelter, sometimes without requiring a shelter stay first.",
+    ask: "Do you offer transitional or scattered-site apartments, can I apply without entering shelter, and which nearby programs offer the same model?",
+  },
+];
+
+const housingProgramQuestions = [
+  "What exact program am I being screened for?",
+  "Does fleeing domestic violence meet its homelessness or priority definition?",
+  "Must I stay in a shelter before applying, and can I apply from another county or state?",
+  "Is there a waitlist, lottery, prioritization process, or next funding date?",
+  "Which costs can be paid: deposits, rent, arrears, utilities, moving, storage, lodging, transportation, fees, or furnishings?",
+  "What documents are required, and can survivor self-certification be accepted?",
+  "How will you contact me, protect my location, and store or share my information?",
+  "What happens if the abusive person is on the lease, account, title, voucher, or application?",
+  "If this program cannot help, who performs the full housing assessment for this area?",
+];
+
+function HousingOptionsGuide({ onBack }: { onBack: () => void }) {
+  return (
+    <section className="page-shell how-to-guide-page housing-options-guide" aria-labelledby="housing-options-title">
+      <PageFlourishHeader
+        eyebrow="Housing // Find the door that is actually open"
+        title="Housing Options"
+        titleId="housing-options-title"
+        variant="resources"
+      >
+        <p>Less-obvious housing resources for survivors rebuilding after domestic violence.</p>
+      </PageFlourishHeader>
+
+      <section className="how-to-system-note">
+        <h2>Emergency shelter is one option, not the entire housing system.</h2>
+        <p>
+          Housing may also involve homelessness-response programs, rental assistance, emergency transfers,
+          relocation funding, legal protections, veteran services, rural housing, or school-based support.
+          Programs, openings, funding, and eligibility vary by location; inclusion here is not a guarantee of placement.
+        </p>
+        <p>
+          Applications can create calls, texts, mail, account alerts, and document requests. Ask each agency to use
+          a safe name, number, email address, or mailing address when needed.
+        </p>
+      </section>
+
+      <section className="housing-options-master-script" aria-labelledby="housing-start-title">
+        <p className="terminal-label">START HERE // ASK FOR THE WHOLE SYSTEM</p>
+        <h2 id="housing-start-title">Do not stop at “Do you have shelter beds?”</h2>
+        <blockquote>
+          I am fleeing domestic violence and do not have safe housing available to me. I need a Coordinated
+          Entry assessment and information about every available housing intervention, not only emergency
+          shelter. Please check rapid rehousing, survivor-specific projects, transitional housing, homelessness
+          prevention, emergency lodging, deposits, rental assistance, and housing navigation. If your agency
+          does not perform that assessment, who is the access point that does?
+        </blockquote>
+        <p>Dial 211, use HUD Find Shelter, contact a local domestic-violence program, or ask which regional Continuum of Care covers the county.</p>
+      </section>
+
+      <div className="housing-options-pathways" aria-label="Housing pathways">
+        {housingOptionPathways.map((pathway, index) => (
+          <details className="housing-option-pathway" key={pathway.title}>
+            <summary><span>{String(index + 1).padStart(2, "0")}</span>{pathway.title}</summary>
+            <div>
+              <p>{pathway.summary}</p>
+              <div className="phrase-bank"><div className="terminal-label">ASK SPECIFICALLY</div><code>{pathway.ask}</code></div>
+            </div>
+          </details>
+        ))}
+      </div>
+
+      <section className="how-to-system-note">
+        <h2>Questions To Ask Every Program</h2>
+        <ul>{housingProgramQuestions.map((question) => <li key={question}>{question}</li>)}</ul>
+      </section>
+
+      <section className="housing-options-master-script">
+        <p className="terminal-label">ONE-CALL MASTER SCRIPT</p>
+        <blockquote>
+          I cannot safely remain in or return to my housing. Screen me for every available housing intervention,
+          not only emergency shelter: Coordinated Entry, rapid rehousing, survivor projects, transitional housing,
+          prevention funds, relocation assistance, victim compensation, lodging, housing preferences, voucher
+          portability, and VAWA transfer rights. How will my location and contact information be protected?
+        </blockquote>
+        <h2>National Starting Points</h2>
+        <ul>
+          <li>Emergency danger: call 911 if doing so is safe.</li>
+          <li>National Domestic Violence Hotline: 800-799-SAFE (7233), text START to 88788, or TheHotline.org.</li>
+          <li>Local referrals: dial 211 and ask for Coordinated Entry.</li>
+          <li>HUD shelter and provider search: HUD.gov/FindShelter.</li>
+          <li>Civil legal aid: LSC.gov and select Get Legal Help.</li>
+          <li>Homeless Veterans: 877-424-3838.</li>
+        </ul>
+        <p><strong>“No shelter beds” does not mean “no housing resources.”</strong> Ask for the program name, eligibility decision, next access point, and full assessment. Bureaucracies love vague dead ends. Make them use nouns.</p>
+      </section>
+
+      <div className="terminal-actions denial-actions">
+        <button type="button" onClick={onBack}>Back To Housing Resources</button>
+        <button type="button" onClick={leaveSite}>Quick Exit</button>
+      </div>
+    </section>
+  );
+}
+
 function HowToModule({
   initialGuideId = null,
   initialPriority = null,
@@ -5595,6 +5795,10 @@ function HowToModule({
 
   if (activeGuideId === "housing-navigation") {
     return <RebuildingModule onBack={() => setActiveGuideId(null)} onNavigate={onNavigate} />;
+  }
+
+  if (activeGuideId === "housing-options") {
+    return <HousingOptionsGuide onBack={() => setActiveGuideId(null)} />;
   }
 
   if (activeGuideId && practicalGuides[activeGuideId]) {
@@ -5766,18 +5970,24 @@ function ResourceModule({
   moduleKey: Exclude<ModuleKey, "home" | "am-i-crazy" | "go-bag-prep">;
   onNavigate: (module: ModuleKey, path: string) => void;
 }) {
-  const [activeFolder, setActiveFolder] = useState<ResourceFolder>(() => getInitialResourceFolder(moduleKey));
-  const [guideLaunch, setGuideLaunch] = useState<GuideLaunch | null>(null);
+  const requestedGuideId = window.location.pathname.startsWith("/guides/")
+    ? window.location.pathname.replace("/guides/", "")
+    : null;
+  const requestedGuide = requestedGuideId ? howToGuides.find((guide) => guide.id === requestedGuideId) : null;
+  const [activeFolder, setActiveFolder] = useState<ResourceFolder>(() => requestedGuide?.priority ?? getInitialResourceFolder(moduleKey));
+  const [guideLaunch, setGuideLaunch] = useState<GuideLaunch | null>(() =>
+    requestedGuide ? { guideId: requestedGuide.id, priorityId: requestedGuide.priority } : null
+  );
   const requestedDirectory = window.location.pathname.startsWith("/resources/")
     ? window.location.pathname.replace("/resources/", "")
     : "housing";
   const [activeDirectory, setActiveDirectory] = useState<string | null>(requestedDirectory || "housing");
 
   useEffect(() => {
-    setActiveFolder(getInitialResourceFolder(moduleKey));
-    setGuideLaunch(null);
+    setActiveFolder(requestedGuide?.priority ?? getInitialResourceFolder(moduleKey));
+    setGuideLaunch(requestedGuide ? { guideId: requestedGuide.id, priorityId: requestedGuide.priority } : null);
     setActiveDirectory(requestedDirectory || "housing");
-  }, [moduleKey, requestedDirectory]);
+  }, [moduleKey, requestedDirectory, requestedGuide]);
 
   if (activeFolder === "legal") {
     return (
@@ -5821,6 +6031,13 @@ function ResourceModule({
       label: "Housing",
       description: "Housing systems, applications, Coordinated Entry, waitlists, utilities, and follow-up.",
       files: [
+        {
+          label: "Housing Options",
+          action: () => {
+            setGuideLaunch({ guideId: "housing-options", priorityId: "priority-2" });
+            setActiveFolder("priority-2");
+          },
+        },
         {
           label: "How To Navigate Housing",
           action: () => {
