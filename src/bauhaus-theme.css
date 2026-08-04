@@ -22,8 +22,8 @@
   --ss-space-5: 36px;
   --ss-space-6: 54px;
   --ss-sidebar-width: 248px;
-  --ss-font-display: "Aptos Display", "Arial Black", "Inter", sans-serif;
-  --ss-font-body: "Aptos", "Inter", "Segoe UI", Arial, sans-serif;
+  --ss-font-display: "Space Grotesk", sans-serif;
+  --ss-font-body: "Inter", sans-serif;
   --ss-route-accent: var(--ss-blue);
 }
 
@@ -1037,11 +1037,428 @@ body {
   }
 }
 
+/* Legacy route headers and resource accordions */
+.hud-frame:not(.module-home) .terminal-content .page-flourish-header {
+  background: var(--ss-ink) !important;
+  background-image: none !important;
+  border: 2px solid var(--ss-ink) !important;
+  border-radius: 0 !important;
+  border-left: 12px solid var(--ss-route-accent) !important;
+  box-shadow: none !important;
+  color: var(--ss-white) !important;
+  filter: none !important;
+  min-height: 0 !important;
+  padding: 34px 38px !important;
+  text-shadow: none !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .page-flourish-header::before,
+.hud-frame:not(.module-home) .terminal-content .page-flourish-header::after,
+.hud-frame:not(.module-home) .terminal-content .page-flourish-header [class*="flourish"] {
+  display: none !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .page-flourish-header :is(h1, h2, h3, p) {
+  color: var(--ss-white) !important;
+  text-shadow: none !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .page-flourish-header .folk-kicker {
+  color: var(--ss-yellow) !important;
+  font-family: var(--ss-font-body) !important;
+  font-size: 0.75rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .resource-directory-tree {
+  display: grid !important;
+  gap: 12px !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .resource-directory {
+  background: var(--ss-white) !important;
+  background-image: none !important;
+  border: 2px solid var(--ss-ink) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  filter: none !important;
+  overflow: hidden !important;
+  text-shadow: none !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .resource-directory::before,
+.hud-frame:not(.module-home) .terminal-content .resource-directory::after {
+  display: none !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .resource-directory-toggle {
+  background: var(--ss-paper) !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-left: 10px solid var(--ss-route-accent) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  font-family: var(--ss-font-body) !important;
+  padding: 18px 22px !important;
+  text-shadow: none !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .resource-directory-toggle :is(h2, h3, strong, span, p) {
+  color: var(--ss-ink) !important;
+  text-shadow: none !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .resource-directory.open .resource-directory-toggle,
+.hud-frame:not(.module-home) .terminal-content .resource-directory-toggle:hover,
+.hud-frame:not(.module-home) .terminal-content .resource-directory-toggle:focus-visible {
+  background: var(--ss-yellow) !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .resource-directory .resource-file-list {
+  background: var(--ss-white) !important;
+  border: 0 !important;
+  padding: 10px 20px 20px !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .resource-support-callout {
+  background: var(--ss-blue) !important;
+  background-image: none !important;
+  border: 2px solid var(--ss-ink) !important;
+  border-radius: 0 !important;
+  box-shadow: 6px 6px 0 var(--ss-ink) !important;
+  color: var(--ss-white) !important;
+  padding: 26px 30px !important;
+  text-shadow: none !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .resource-support-callout :is(h2, h3, p, span) {
+  color: var(--ss-white) !important;
+  text-shadow: none !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .resource-support-callout::before,
+.hud-frame:not(.module-home) .terminal-content .resource-support-callout::after {
+  display: none !important;
+}
+
+@media (max-width: 680px) {
+  .hud-frame:not(.module-home) .terminal-content .page-flourish-header {
+    padding: 26px 20px !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hud-frame *,
   .hud-frame *::before,
   .hud-frame *::after {
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+/* Typography lock
+   Space Grotesk carries hierarchy; Inter carries every reading and control
+   surface. Legacy editorial, terminal, and system font declarations end here. */
+.hud-frame,
+.hud-frame button,
+.hud-frame input,
+.hud-frame select,
+.hud-frame textarea,
+.hud-frame code,
+.hud-frame pre,
+.hud-frame kbd,
+.hud-frame samp {
+  font-family: var(--ss-font-body) !important;
+  font-style: normal !important;
+  letter-spacing: 0 !important;
+}
+
+.hud-frame :is(h1, h2, h3, h4, h5, h6),
+.hud-frame .brand-logo-survivor,
+.hud-frame .brand-logo-systems,
+.hud-frame .desktop-icon-title,
+.hud-frame .terminal-topbar-title,
+.hud-frame .ss-template-title,
+.hud-frame .ss-section-heading h2,
+.hud-frame .ss-assessment-question h2 {
+  font-family: var(--ss-font-display) !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
+  letter-spacing: 0 !important;
+  text-shadow: none !important;
+}
+
+.hud-frame :is(p, li, dd, dt, label, small, span, a) {
+  letter-spacing: 0 !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content {
+  font-size: 1rem !important;
+  line-height: 1.65 !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content h1 {
+  font-size: 3rem !important;
+  line-height: 1.02 !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content h2 {
+  font-size: 1.75rem !important;
+  line-height: 1.12 !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content h3 {
+  font-size: 1.25rem !important;
+  line-height: 1.2 !important;
+}
+
+.hud-frame .terminal-label,
+.hud-frame .support-panel-label,
+.hud-frame .ss-template-kicker,
+.hud-frame .ss-section-index {
+  color: var(--ss-route-accent) !important;
+  font-family: var(--ss-font-body) !important;
+  font-size: 0.75rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0 !important;
+  text-shadow: none !important;
+  text-transform: uppercase !important;
+}
+
+/* Flat geometric content surfaces
+   Replaces accumulated folk, CRT, Windows, archive, and neon card treatments. */
+.hud-frame:not(.module-home) .terminal-content :is(
+  .category-file-card,
+  .assessment-panel,
+  .denial-panel,
+  .pattern-panel,
+  .screenshot-plan-card,
+  .safety-detail-card,
+  .snap-guide-card,
+  .how-to-status-panel,
+  .how-to-priority-card,
+  .how-to-guide-card,
+  .library-pass-card,
+  .library-category-card,
+  .library-preview-card,
+  .library-system-card,
+  .resource-directory-card,
+  .resource-folder-card,
+  .support-donation-panel,
+  .rebuilding-guide-card,
+  .legal-motion-card,
+  .legal-step-card,
+  .legal-category-card,
+  .phrase-bank
+) {
+  background: var(--ss-white) !important;
+  background-image: none !important;
+  border: 2px solid var(--ss-ink) !important;
+  border-radius: 0 !important;
+  border-top: 8px solid var(--ss-route-accent) !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  filter: none !important;
+  margin: 0 !important;
+  padding: 24px !important;
+  text-shadow: none !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content :is(
+  .category-file-card,
+  .assessment-panel,
+  .denial-panel,
+  .pattern-panel,
+  .screenshot-plan-card,
+  .safety-detail-card,
+  .snap-guide-card,
+  .how-to-status-panel,
+  .how-to-priority-card,
+  .how-to-guide-card,
+  .library-pass-card,
+  .library-category-card,
+  .library-preview-card,
+  .library-system-card,
+  .resource-directory-card,
+  .resource-folder-card,
+  .support-donation-panel,
+  .rebuilding-guide-card,
+  .legal-motion-card,
+  .legal-step-card,
+  .legal-category-card,
+  .phrase-bank
+)::before,
+.hud-frame:not(.module-home) .terminal-content :is(
+  .category-file-card,
+  .assessment-panel,
+  .denial-panel,
+  .pattern-panel,
+  .screenshot-plan-card,
+  .safety-detail-card,
+  .snap-guide-card,
+  .how-to-status-panel,
+  .how-to-priority-card,
+  .how-to-guide-card,
+  .library-pass-card,
+  .library-category-card,
+  .library-preview-card,
+  .library-system-card,
+  .resource-directory-card,
+  .resource-folder-card,
+  .support-donation-panel,
+  .rebuilding-guide-card,
+  .legal-motion-card,
+  .legal-step-card,
+  .legal-category-card,
+  .phrase-bank
+)::after {
+  display: none !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content :is(
+  .category-file-card,
+  .snap-guide-card,
+  .how-to-priority-card,
+  .how-to-guide-card,
+  .library-pass-card,
+  .library-category-card,
+  .library-preview-card,
+  .resource-folder-card,
+  .rebuilding-guide-card,
+  .legal-motion-card,
+  .legal-step-card,
+  .legal-category-card
+) :is(h2, h3, h4) {
+  color: var(--ss-ink) !important;
+  margin: 0 0 10px !important;
+  text-shadow: none !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content :is(
+  .category-file-card,
+  .snap-guide-card,
+  .how-to-priority-card,
+  .how-to-guide-card,
+  .library-pass-card,
+  .library-category-card,
+  .library-preview-card,
+  .resource-folder-card,
+  .rebuilding-guide-card,
+  .legal-motion-card,
+  .legal-step-card,
+  .legal-category-card
+) :is(p, li, small) {
+  color: var(--ss-ink-soft) !important;
+  text-shadow: none !important;
+}
+
+/* Indexed rows read as navigable records rather than cards inside cards. */
+.hud-frame:not(.module-home) .terminal-content :is(
+  .resource-file-list,
+  .category-file-grid,
+  .library-pass-grid,
+  .library-category-grid,
+  .library-preview-grid
+) {
+  gap: 16px !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .resource-file-row {
+  align-items: center !important;
+  background: var(--ss-paper) !important;
+  border: 0 !important;
+  border-bottom: 2px solid var(--ss-ink) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  display: flex !important;
+  min-height: 54px !important;
+  padding: 12px 16px !important;
+  text-align: left !important;
+  text-shadow: none !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .resource-file-row:hover,
+.hud-frame:not(.module-home) .terminal-content .resource-file-row:focus-visible {
+  background: var(--ss-yellow) !important;
+  color: var(--ss-ink) !important;
+  transform: none !important;
+}
+
+/* One button language for ordinary content actions. */
+.hud-frame:not(.module-home) .terminal-content :is(
+  .terminal-actions,
+  .ss-template-actions,
+  .how-to-guide-actions,
+  .library-card-actions
+) button,
+.hud-frame:not(.module-home) .terminal-content .category-file-title-button {
+  background: var(--ss-ink) !important;
+  border: 2px solid var(--ss-ink) !important;
+  border-radius: 0 !important;
+  box-shadow: 4px 4px 0 var(--ss-route-accent) !important;
+  color: var(--ss-white) !important;
+  font-family: var(--ss-font-body) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0 !important;
+  text-shadow: none !important;
+  text-transform: none !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content :is(
+  .terminal-actions,
+  .ss-template-actions,
+  .how-to-guide-actions,
+  .library-card-actions
+) button:hover,
+.hud-frame:not(.module-home) .terminal-content :is(
+  .terminal-actions,
+  .ss-template-actions,
+  .how-to-guide-actions,
+  .library-card-actions
+) button:focus-visible,
+.hud-frame:not(.module-home) .terminal-content .category-file-title-button:hover,
+.hud-frame:not(.module-home) .terminal-content .category-file-title-button:focus-visible {
+  box-shadow: 2px 2px 0 var(--ss-route-accent) !important;
+  transform: translate(2px, 2px) !important;
+}
+
+@media (max-width: 680px) {
+  .hud-frame:not(.module-home) .terminal-content h1 {
+    font-size: 2.25rem !important;
+  }
+
+  .hud-frame:not(.module-home) .terminal-content h2 {
+    font-size: 1.5rem !important;
+  }
+
+  .hud-frame:not(.module-home) .terminal-content :is(
+    .category-file-card,
+    .assessment-panel,
+    .denial-panel,
+    .pattern-panel,
+    .screenshot-plan-card,
+    .safety-detail-card,
+    .snap-guide-card,
+    .how-to-status-panel,
+    .how-to-priority-card,
+    .how-to-guide-card,
+    .library-pass-card,
+    .library-category-card,
+    .library-preview-card,
+    .library-system-card,
+    .resource-directory-card,
+    .resource-folder-card,
+    .support-donation-panel,
+    .rebuilding-guide-card,
+    .legal-motion-card,
+    .legal-step-card,
+    .legal-category-card,
+    .phrase-bank
+  ) {
+    padding: 18px !important;
   }
 }
