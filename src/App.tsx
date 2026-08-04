@@ -3714,18 +3714,16 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
           <p className="folk-kicker">Private reference file for the life that belongs to you.</p>
           <h1 id="home-title">Welcome to<br /><em>Survivor Systems.</em></h1>
           <p>
-            You are allowed to be curious about what is happening to you, why everything feels so
-            confusing, what your options are, and what your life could look like when you are no
-            longer organizing yourself around someone else's control.
+            Domestic violence is deadly. About 1 in 5 homicide victims in the United States is
+            killed by an intimate partner. More than half of female homicide victims are killed by
+            a current or former male partner. Leaving can be one of the most dangerous points in an
+            abusive relationship, but the systems survivors are told to rely on are fragmented,
+            difficult to navigate, and often unprepared for the realities of coercive control.
           </p>
           <p>
-            This space was built to help you get clear, get practical, and start choosing yourself
-            again without judgment, pressure, or someone talking down to you like you have not
-            already survived enough bullshit.
-          </p>
-          <p>
-            Start wherever you can today. Take an assessment. Read one guide. Use one planner.
-            Download one toolkit. Learn one thing that makes your situation feel less confusing.
+            Survivor Systems exists because the systems currently in place aren't enough. No one
+            should have to become an expert in safety planning, housing, public benefits, financial
+            recovery, family court, documentation, and trauma just to get free.
           </p>
           <p className="mission-emphasis">You do not have to solve your entire life before dinner.</p>
           <div className="home-hero-actions" aria-label="Start options">
