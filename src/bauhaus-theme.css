@@ -1037,6 +1037,133 @@ body {
   }
 }
 
+/* Assessments are documents inside the shared page window, never overlays. */
+.hud-frame .assessment-workspace {
+  margin: 0 !important;
+  max-width: none !important;
+  width: 100% !important;
+}
+
+.hud-frame .assessment-workspace .assessment-modal-backdrop {
+  align-items: stretch !important;
+  background: transparent !important;
+  display: block !important;
+  inset: auto !important;
+  padding: 0 !important;
+  position: static !important;
+  width: 100% !important;
+  z-index: auto !important;
+}
+
+.hud-frame .assessment-workspace .assessment-modal {
+  background: var(--ss-white) !important;
+  background-image: none !important;
+  border: 2px solid var(--ss-ink) !important;
+  border-radius: 0 !important;
+  box-shadow: 8px 8px 0 var(--ss-route-accent) !important;
+  color: var(--ss-ink) !important;
+  display: block !important;
+  max-height: none !important;
+  max-width: none !important;
+  overflow: visible !important;
+  width: 100% !important;
+}
+
+.hud-frame .assessment-workspace .assessment-modal-header {
+  align-items: flex-start !important;
+  background: var(--ss-ink) !important;
+  border: 0 !important;
+  border-bottom: 8px solid var(--ss-route-accent) !important;
+  border-radius: 0 !important;
+  color: var(--ss-white) !important;
+  padding: 24px !important;
+}
+
+.hud-frame .assessment-workspace .assessment-modal-header :is(h1, p, span) {
+  color: var(--ss-white) !important;
+  text-shadow: none !important;
+}
+
+.hud-frame .assessment-workspace .assessment-modal-header h1 {
+  font-size: 2.4rem !important;
+  line-height: 1.05 !important;
+}
+
+.hud-frame .assessment-workspace .assessment-modal-body {
+  background: var(--ss-white) !important;
+  color: var(--ss-ink) !important;
+  gap: 22px !important;
+  overflow: visible !important;
+  padding: 30px !important;
+}
+
+.hud-frame .assessment-workspace .assessment-modal-body :is(h2, h3, h4, p, li, label, span, strong) {
+  color: var(--ss-ink) !important;
+  text-shadow: none !important;
+}
+
+.hud-frame .assessment-workspace .assessment-modal :is(
+  .love-fear-pair article,
+  .love-fear-results section,
+  .freedom-test-results section,
+  .pattern-map-results section,
+  .financial-results section
+) {
+  background: var(--ss-paper) !important;
+  background-image: none !important;
+  border: 2px solid var(--ss-ink) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  text-shadow: none !important;
+}
+
+.hud-frame .assessment-workspace .assessment-modal button {
+  background: var(--ss-ink) !important;
+  background-image: none !important;
+  border: 2px solid var(--ss-ink) !important;
+  border-radius: 0 !important;
+  box-shadow: 4px 4px 0 var(--ss-route-accent) !important;
+  color: var(--ss-white) !important;
+  font-family: var(--ss-font-body) !important;
+  font-weight: 700 !important;
+  text-shadow: none !important;
+}
+
+.hud-frame .assessment-workspace .assessment-modal button:hover,
+.hud-frame .assessment-workspace .assessment-modal button:focus-visible {
+  background: var(--ss-yellow) !important;
+  box-shadow: 2px 2px 0 var(--ss-route-accent) !important;
+  color: var(--ss-ink) !important;
+  outline: 2px solid var(--ss-ink) !important;
+  transform: translate(2px, 2px) !important;
+}
+
+.hud-frame .assessment-workspace .assessment-modal button:disabled {
+  box-shadow: none !important;
+  filter: none !important;
+  opacity: 0.45 !important;
+}
+
+@media (max-width: 680px) {
+  .hud-frame .assessment-workspace .assessment-modal-header {
+    flex-direction: column !important;
+    padding: 20px !important;
+  }
+
+  .hud-frame .assessment-workspace .assessment-modal-header h1 {
+    font-size: 1.8rem !important;
+  }
+
+  .hud-frame .assessment-workspace .assessment-modal-body {
+    padding: 20px !important;
+  }
+
+  .hud-frame .assessment-workspace .love-fear-pair {
+    grid-template-columns: 1fr !important;
+  }
+}
+
 /* Legacy route headers and resource accordions */
 .hud-frame:not(.module-home) .terminal-content .page-flourish-header {
   background: var(--ss-ink) !important;

@@ -1387,7 +1387,7 @@ const moduleRoutes: Record<ModuleKey, { label: string; path: string }> = {
   toolkits: { label: "Resources", path: "/resources" },
   education: { label: "Education & Awareness", path: "/education-awareness" },
   about: { label: "About", path: "/about" },
-  advocacy: { label: "Advocacy", path: "/advocacy" },
+  advocacy: { label: "Strategy", path: "/strategy" },
   government: { label: "Government", path: "/government" },
   support: { label: "Support", path: "/support" },
   "am-i-crazy": { label: "Was I Crazy?", path: "/am-i-crazy" },
@@ -1436,7 +1436,7 @@ const navItems: Array<{ key: ModuleKey; label: string; path: string; code: Sideb
   { key: "guides", label: "Guides", path: "/guides", code: "guides" },
   { key: "local-help", label: "Resources", path: "/resources", code: "toolkits" },
   { key: "education", label: "Education", path: "/education-awareness", code: "education" },
-  { key: "advocacy", label: "Advocacy", path: "/advocacy", code: "advocacy" },
+  { key: "advocacy", label: "Strategy", path: "/strategy", code: "advocacy" },
   { key: "government", label: "Government", path: "/government", code: "government" },
   { key: "about", label: "About", path: "/about", code: "about" },
 ];
@@ -2582,7 +2582,7 @@ const categoryFiles: Record<
     ],
   },
   advocacy: {
-    title: "Advocacy",
+    title: "Strategy",
     intro:
       "Support-facing resources: what to ask for, who might help, how to explain the situation, and how to keep power dynamics visible.",
     files: [
@@ -3250,7 +3250,7 @@ function getInitialModule(): ModuleKey {
   if (path === "/planners-trackers" || path === "/toolkits") return "local-help";
   if (path === "/education-awareness") return "education";
   if (path === "/about") return "about";
-  if (path === "/advocacy") return "advocacy";
+  if (path === "/strategy" || path === "/advocacy") return "advocacy";
   if (path === "/government") return "government";
   if (path === "/support") return "support";
   if (path === "/rebuilding") return "rebuilding";
@@ -3478,7 +3478,7 @@ function resolveCommand(query: string) {
   }
 
   if (/\b(advocacy|advocate|hotline|shelter|support|near|local)\b/.test(normalized)) {
-    return { message: "QUERY ACCEPTED. ROUTING TO ADVOCACY...", target: navItemFor("advocacy") };
+    return { message: "QUERY ACCEPTED. ROUTING TO STRATEGY...", target: navItemFor("advocacy") };
   }
 
   if (/\b(government|snap|tanf|benefits|court|legal|rights|order|documents|public assistance)\b/.test(normalized)) {
@@ -3545,7 +3545,7 @@ function TerminalCommand({
           autoComplete="off"
           id="terminal-command"
           onChange={(event) => setQuery(event.target.value)}
-          placeholder="type: assessments, guides, planners, education, advocacy, government..."
+          placeholder="type: assessments, guides, resources, education, strategy, government..."
           spellCheck={false}
           type="search"
           value={query}
@@ -3590,7 +3590,7 @@ function TerminalChrome({
             ))}
           </nav>
           <div className="sidebar-actions">
-            <button className="sidebar-support" type="button" onClick={() => onNavigate("advocacy", "/advocacy")}>
+            <button className="sidebar-support" type="button" onClick={() => onNavigate("advocacy", "/strategy")}>
               You're Not Alone
             </button>
           </div>
@@ -3622,11 +3622,6 @@ function TerminalChrome({
               <div className="terminal-topbar-title">
                 <span className="terminal-label">SURVIVOR SYSTEMS</span>
                 <h1>{activeLabel}</h1>
-              </div>
-              <div className="system-status">
-                <span>DATE {new Date().toLocaleDateString([], { month: "2-digit", day: "2-digit", year: "numeric" })}</span>
-                <span>TIME {new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</span>
-                <strong>SYSTEM ONLINE</strong>
               </div>
             </div>
             <TerminalCommand onNavigate={onNavigate} />
@@ -3777,7 +3772,7 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
           <div className="home-choice-list" aria-label="Common starting points">
             <button type="button" onClick={() => onNavigate("assessments", "/assessments")}>I need clarity</button>
             <button type="button" onClick={() => onNavigate("local-help", "/resources")}>I need a plan</button>
-            <button type="button" onClick={() => onNavigate("advocacy", "/advocacy")}>I need support</button>
+            <button type="button" onClick={() => onNavigate("advocacy", "/strategy")}>I need support</button>
             <button type="button" onClick={() => onNavigate("education", "/education-awareness")}>I am here to learn</button>
           </div>
         </section>
@@ -3835,16 +3830,33 @@ function CategoryModule({
     );
   }
 
+  if (activeModal) {
+    return (
+      <section className="page-shell category-module assessment-workspace" aria-label="Assessment workspace">
+        {activeModal === "love-or-fear" ? <LoveFearAssessmentModal onClose={() => setActiveModal(null)} /> : null}
+        {activeModal === "freedom-test" ? <FreedomTestAssessmentModal onClose={() => setActiveModal(null)} /> : null}
+        {activeModal === "coercive-control-map" ? <CoerciveControlPatternMapModal onClose={() => setActiveModal(null)} /> : null}
+        {activeModal === "financial-captivity" ? <FinancialCaptivityAssessmentModal onClose={() => setActiveModal(null)} /> : null}
+      </section>
+    );
+  }
+
   return (
-    <section className="page-shell category-module" aria-labelledby={`${category}-title`}>
-      <PageFlourishHeader
-        eyebrow={`Open directory // ${content.title}`}
-        title={content.title}
-        titleId={`${category}-title`}
-        variant={category}
-      >
-        <p>{content.intro}</p>
-      </PageFlourishHeader>
+    <section
+      className="page-shell category-module"
+      aria-label={category === "government" ? "Government" : undefined}
+      aria-labelledby={category === "government" ? undefined : `${category}-title`}
+    >
+      {category !== "government" ? (
+        <PageFlourishHeader
+          eyebrow={`Open directory // ${content.title}`}
+          title={content.title}
+          titleId={`${category}-title`}
+          variant={category}
+        >
+          <p>{content.intro}</p>
+        </PageFlourishHeader>
+      ) : null}
 
       {category === "guides" ? (
         <div className="guide-category-directory">
@@ -3859,11 +3871,6 @@ function CategoryModule({
           ))}
         </div>
       ) : <div className="category-file-grid">{content.files.map(renderCategoryFile)}</div>}
-
-      {activeModal === "love-or-fear" ? <LoveFearAssessmentModal onClose={() => setActiveModal(null)} /> : null}
-      {activeModal === "freedom-test" ? <FreedomTestAssessmentModal onClose={() => setActiveModal(null)} /> : null}
-      {activeModal === "coercive-control-map" ? <CoerciveControlPatternMapModal onClose={() => setActiveModal(null)} /> : null}
-      {activeModal === "financial-captivity" ? <FinancialCaptivityAssessmentModal onClose={() => setActiveModal(null)} /> : null}
     </section>
   );
 }
@@ -3949,8 +3956,8 @@ function FinancialCaptivityAssessmentModal({ onClose }: { onClose: () => void })
   }
 
   return (
-    <div className="assessment-modal-backdrop" role="presentation">
-      <section aria-describedby="financial-captivity-description" aria-labelledby="financial-captivity-title" aria-modal="true" className="assessment-modal freedom-test-modal financial-captivity-modal" onKeyDown={handleKeyDown} ref={modalRef} role="dialog">
+    <div className="assessment-modal-backdrop">
+      <section aria-describedby="financial-captivity-description" aria-labelledby="financial-captivity-title" className="assessment-modal freedom-test-modal financial-captivity-modal" onKeyDown={handleKeyDown} ref={modalRef} role="region">
         <header className="assessment-modal-header">
           <div>
             <span className="terminal-label">TEMP MEMORY ONLY</span>
@@ -4199,15 +4206,14 @@ function CoerciveControlPatternMapModal({ onClose }: { onClose: () => void }) {
     : summaryDomains.length === 1 ? "Most restricted area" : "Most restricted areas";
 
   return (
-    <div className="assessment-modal-backdrop" role="presentation">
+    <div className="assessment-modal-backdrop">
       <section
         aria-describedby="pattern-map-description"
         aria-labelledby="pattern-map-title"
-        aria-modal="true"
         className="assessment-modal freedom-test-modal pattern-map-modal"
         onKeyDown={handleKeyDown}
         ref={modalRef}
-        role="dialog"
+        role="region"
       >
         <header className="assessment-modal-header">
           <div>
@@ -4490,15 +4496,14 @@ function FreedomTestAssessmentModal({ onClose }: { onClose: () => void }) {
   }
 
   return (
-    <div className="assessment-modal-backdrop" role="presentation">
+    <div className="assessment-modal-backdrop">
       <section
         aria-describedby="freedom-test-description"
         aria-labelledby="freedom-test-title"
-        aria-modal="true"
         className="assessment-modal freedom-test-modal"
         onKeyDown={handleModalKeyDown}
         ref={modalRef}
-        role="dialog"
+        role="region"
       >
         <header className="assessment-modal-header">
           <div>
@@ -4832,13 +4837,11 @@ function LoveFearAssessmentModal({ onClose }: { onClose: () => void }) {
   }
 
   return (
-    <div className="assessment-modal-backdrop" role="presentation" onMouseDown={onClose}>
+    <div className="assessment-modal-backdrop">
       <section
         aria-labelledby="love-fear-modal-title"
-        aria-modal="true"
         className="assessment-modal love-fear-modal"
-        onMouseDown={(event) => event.stopPropagation()}
-        role="dialog"
+        role="region"
       >
         <header className="assessment-modal-header">
           <div>
@@ -4867,7 +4870,7 @@ function LoveFearAssessmentModal({ onClose }: { onClose: () => void }) {
               serious behavior.
             </p>
             <p>
-              All answers stay in this browser tab only while this modal is open. Closing this window starts it over next time.
+              All answers stay in this browser tab only while this assessment is open. Leaving this assessment starts it over next time.
             </p>
             <div className="terminal-actions compact-actions">
               <button type="button" onClick={() => setPhase("scored")}>
