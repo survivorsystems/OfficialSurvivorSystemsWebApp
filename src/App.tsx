@@ -334,7 +334,7 @@ const previewResources: LibraryResource[] = [
     category: "Court & Systems Navigation",
     format: "Bundle",
     preview: "Case numbers, court contacts, evidence logs, statement practice, logistics, and after-court notes.",
-    access: "Included in Court Focus Pass or All-Access Pass. Permanent Unlock available.",
+    access: "Preview with any active access pass. A Permanent Unlock keeps the download.",
   },
   {
     id: "housing-tracker",
@@ -342,7 +342,7 @@ const previewResources: LibraryResource[] = [
     category: "Life Rebuilding",
     format: "Tracker",
     preview: "Applications, deadlines, caseworkers, follow-ups, waitlists, document requests, and next actions.",
-    access: "Included in Life Rebuilding Focus Pass or All-Access Pass. Permanent Unlock available.",
+    access: "Preview with any active access pass. A Permanent Unlock keeps the download.",
   },
   {
     id: "snap-benefits-log",
@@ -350,7 +350,7 @@ const previewResources: LibraryResource[] = [
     category: "Life Rebuilding",
     format: "Worksheet",
     preview: "Interview dates, office contacts, upload confirmations, missing documents, renewal deadlines, and notes.",
-    access: "Included in Life Rebuilding Focus Pass or All-Access Pass. Permanent Unlock available.",
+    access: "Preview with any active access pass. A Permanent Unlock keeps the download.",
   },
   {
     id: "survivor-university-income-map",
@@ -358,7 +358,7 @@ const previewResources: LibraryResource[] = [
     category: "Survivor University / Economic Independence",
     format: "Guide",
     preview: "Business ideas, equipment needs, startup costs, skill ladders, scam filters, and first-offer planning.",
-    access: "Included in Survivor University Focus Pass or All-Access Pass. Permanent Unlock available.",
+    access: "Preview with any active access pass. A Permanent Unlock keeps the download.",
   },
 ];
 
@@ -6106,16 +6106,32 @@ function AccessInformationModule() {
       className="page-shell library-module access-module"
       eyebrow="Database / Access"
       intro={<p>
-          The Database holds indexed previews, Resource Library access paths, and download
-          unlock rules for deeper planners, trackers, and long-form guides.
+          This is the paid side of Survivor Systems. Browse indexed previews before choosing
+          access to deeper planners, trackers, templates, and downloadable guides.
         </p>}
       title="Database"
       titleId="access-title"
     >
 
+      <section className="library-section library-preview-entry" aria-labelledby="paid-library-entry-title">
+        <div className="terminal-label">PREVIEW BEFORE PURCHASE</div>
+        <h2 id="paid-library-entry-title">Look Inside The Resource Library</h2>
+        <p>
+          Browse the deeper planners, trackers, and guide systems before choosing an access path.
+          The index is organized by resource category so you can decide whether anything here is useful first.
+        </p>
+        <button className="resource-back-button" type="button" onClick={() => setShowLibrary(true)}>
+          Preview Resource Library
+        </button>
+      </section>
+
       <section className="library-section" aria-labelledby="access-options-title">
-        <div className="terminal-label">DATABASE ACCESS OPTIONS</div>
-        <h2 id="access-options-title">Access Paths</h2>
+        <div className="terminal-label">PAID RESOURCE LIBRARY</div>
+        <h2 id="access-options-title">Choose Only The Access You Need</h2>
+        <p className="library-section-intro">
+          Free live guides and assessments never require a pass. These one-time options apply
+          only to the downloadable Resource Library and do not renew automatically.
+        </p>
         <div className="library-pass-grid">
           {libraryPasses.map((pass) => (
             <article className="library-pass-card" key={pass.id}>
@@ -6135,17 +6151,6 @@ function AccessInformationModule() {
         </div>
       </section>
 
-      <section className="library-section" aria-labelledby="paid-library-entry-title">
-        <div className="terminal-label">RESOURCE LIBRARY</div>
-        <h2 id="paid-library-entry-title">Open Resource Library</h2>
-        <p>
-          Preview the deeper planners, trackers, and guide systems from here. The index is organized
-          by resource category so the user can scan before unlocking.
-        </p>
-        <button className="resource-back-button" type="button" onClick={() => setShowLibrary(true)}>
-          Open Resource Library
-        </button>
-      </section>
     </CommercePageTemplate>
   );
 }
@@ -6169,6 +6174,19 @@ function ResourceModule({
     ? window.location.pathname.replace("/resources/", "")
     : "housing";
   const [activeDirectory, setActiveDirectory] = useState<string | null>(requestedDirectory || "housing");
+  const freeResourceLabels = new Set([
+    "Housing Options",
+    "How To Navigate Housing",
+    "Family Court Guide",
+    "Civil Protective Order Guide",
+    "Motion Drafting Basics",
+    "Understanding Crime Victim Compensation",
+    "How To Navigate SNAP & TANF",
+    "How To Live In Your Car",
+    "How To Clear Your Browser History",
+    "How To Create Routine While Life Is Chaotic",
+    "How To Make A Safety Plan For Your Pet",
+  ]);
 
   useEffect(() => {
     setActiveFolder(requestedGuide?.priority ?? getInitialResourceFolder(moduleKey));
@@ -6358,11 +6376,44 @@ function ResourceModule({
     <section className="page-shell resources-module" aria-labelledby="resources-title">
       <PageFlourishHeader eyebrow="Load module // Resource folders" title="Resources" titleId="resources-title" variant="resources">
         <p>
-          Browse planners, trackers, toolkits, guides, and practical files by the part of life they support.
+          Start with free live tools and guides, or preview the paid library of downloadable
+          planners, trackers, templates, and deeper resources. Every item is labeled before you open it.
         </p>
       </PageFlourishHeader>
 
-      <div className="resource-directory-tree" aria-label="Resource directories">
+      <section className="resource-access-choice" aria-labelledby="resource-access-choice-title">
+        <h2 id="resource-access-choice-title">Choose Your Resource Path</h2>
+        <div className="resource-access-choice-grid">
+          <article className="resource-access-panel resource-access-panel-free">
+            <span className="resource-access-kicker">FREE / OPEN NOW</span>
+            <h3>Use What Is Live On The Site</h3>
+            <p>
+              Assessments, educational pages, and live guides open immediately. No purchase,
+              account, or download is required.
+            </p>
+            <button
+              type="button"
+              onClick={() => {
+                setActiveDirectory("housing");
+                window.requestAnimationFrame(() => document.getElementById("resource-directory")?.scrollIntoView({ behavior: "smooth" }));
+              }}
+            >
+              Browse Free Resources
+            </button>
+          </article>
+          <article className="resource-access-panel resource-access-panel-paid">
+            <span className="resource-access-kicker">PAID / PREVIEW FIRST</span>
+            <h3>Open The Resource Library</h3>
+            <p>
+              Preview downloadable planners, trackers, templates, and long-form tools. Choose a
+              one-time access pass only when something is useful.
+            </p>
+            <button type="button" onClick={() => setActiveFolder("access")}>Preview Paid Library</button>
+          </article>
+        </div>
+      </section>
+
+      <div className="resource-directory-tree" id="resource-directory" aria-label="Resource directories">
         {resourceDirectories.map((directory) => {
           const isOpen = activeDirectory === directory.id;
 
@@ -6383,7 +6434,20 @@ function ResourceModule({
                 <div className="resource-file-list">
                   {directory.files.map((file) => (
                     <button className="resource-file-row" key={file.label} type="button" onClick={file.action}>
-                      {file.label}
+                      <span>{file.label}</span>
+                      <small className={`resource-access-badge ${
+                        file.label.includes("In Development")
+                          ? "resource-access-badge-pending"
+                          : freeResourceLabels.has(file.label)
+                            ? "resource-access-badge-free"
+                            : "resource-access-badge-paid"
+                      }`}>
+                        {file.label.includes("In Development")
+                          ? "COMING SOON"
+                          : freeResourceLabels.has(file.label)
+                            ? "FREE / OPEN NOW"
+                            : "PAID / PREVIEW"}
+                      </small>
                     </button>
                   ))}
                 </div>
@@ -6395,7 +6459,7 @@ function ResourceModule({
 
       <section className="resource-support-callout" aria-labelledby="resource-support-title">
         <div>
-          <span>KEEP THE ARCHIVE AVAILABLE</span>
+          <span>KEEP FREE RESOURCES AVAILABLE</span>
           <h2 id="resource-support-title">Support Survivor Systems</h2>
           <p>
             Donations help maintain free educational tools, practical resources, hosting, and the
@@ -6431,7 +6495,7 @@ function SupportModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: s
       >
         <p>
           Survivor Systems is built to make clear, practical information easier to reach. Your
-          support helps keep essential tools available while this archive continues to grow.
+          support helps keep essential tools available while Survivor Systems continues to grow.
         </p>
       </PageFlourishHeader>
 
@@ -6472,7 +6536,7 @@ function LibraryModule() {
         className="page-shell library-module"
         eyebrow="Resources / Library"
         intro={<p>
-          Free crisis tools stay live in the app. The Resource Library holds deeper templates,
+          Free live tools stay available on the site. The paid Resource Library holds deeper templates,
           trackers, guides, and long-form systems for people who want more structure without a
           forced subscription or a forced category choice.
         </p>}
@@ -6488,8 +6552,8 @@ function LibraryModule() {
       </div>
 
       <section className="library-section" aria-labelledby="library-options-title">
-        <div className="terminal-label">DATABASE ACCESS PATHS</div>
-        <h2 id="library-options-title">Access Paths</h2>
+        <div className="terminal-label">PAID RESOURCE LIBRARY</div>
+        <h2 id="library-options-title">One-Time Access Paths</h2>
         <div className="library-pass-grid">
           {libraryPasses.map((pass) => (
             <article className="library-pass-card" key={pass.id}>

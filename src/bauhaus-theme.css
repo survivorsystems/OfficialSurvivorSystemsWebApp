@@ -1438,6 +1438,235 @@ body {
   text-shadow: none !important;
 }
 
+.hud-frame:not(.module-home) .terminal-content .library-section {
+  margin: 0 0 22px !important;
+  padding: 24px !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .library-section-intro {
+  color: var(--ss-ink) !important;
+  margin: 0 0 18px !important;
+  max-width: 72ch !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .ss-commerce-notice {
+  background: var(--ss-yellow) !important;
+  border: 2px solid var(--ss-ink) !important;
+  color: var(--ss-ink) !important;
+  font-weight: 800 !important;
+  padding: 14px 18px !important;
+  text-shadow: none !important;
+}
+
+/* Resource access split: free live pages and paid downloads are visibly different. */
+.hud-frame:not(.module-home) .terminal-content .page-flourish-header {
+  background: var(--ss-white) !important;
+  background-image: none !important;
+  border: 2px solid var(--ss-ink) !important;
+  border-left: 12px solid var(--ss-route-accent) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  min-height: 0 !important;
+  padding: 22px 26px !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .page-flourish-header::before,
+.hud-frame:not(.module-home) .terminal-content .page-flourish-header::after,
+.hud-frame:not(.module-home) .terminal-content .page-flourish-header .page-flourish-art {
+  display: none !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .page-flourish-header :is(.page-flourish-copy, .page-flourish-intro) {
+  color: var(--ss-ink) !important;
+  display: block !important;
+  max-width: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .page-flourish-header :is(.folk-kicker, h1) {
+  display: none !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .page-flourish-header :is(p, span, strong) {
+  color: var(--ss-ink) !important;
+  margin: 0 !important;
+  text-shadow: none !important;
+}
+
+.hud-frame .floating-quick-escape {
+  font-size: 0.7rem !important;
+  height: 84px !important;
+  width: 84px !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .resource-access-choice {
+  background: var(--ss-paper) !important;
+  border: 2px solid var(--ss-ink) !important;
+  color: var(--ss-ink) !important;
+  margin: 24px 0 !important;
+  padding: 24px !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .resource-access-choice > h2 {
+  color: var(--ss-ink) !important;
+  margin: 0 0 18px !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .resource-access-choice-grid {
+  display: grid !important;
+  gap: 16px !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .resource-access-panel {
+  background: var(--ss-white) !important;
+  background-image: none !important;
+  border: 2px solid var(--ss-ink) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  min-width: 0 !important;
+  padding: 22px !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .resource-access-panel::before,
+.hud-frame:not(.module-home) .terminal-content .resource-access-panel::after {
+  display: none !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .resource-access-panel-free {
+  border-top: 12px solid var(--ss-green) !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .resource-access-panel-paid {
+  border-top: 12px solid var(--ss-blue) !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .resource-access-panel :is(h3, p) {
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .resource-access-kicker {
+  color: var(--ss-ink) !important;
+  display: block !important;
+  font-size: 0.75rem !important;
+  font-weight: 800 !important;
+  margin-bottom: 10px !important;
+  text-transform: uppercase !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .resource-file-row {
+  gap: 14px !important;
+  justify-content: space-between !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .resource-file-row > span {
+  color: var(--ss-ink) !important;
+  font-weight: 700 !important;
+  min-width: 0 !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .resource-access-badge {
+  border: 2px solid var(--ss-ink) !important;
+  color: var(--ss-ink) !important;
+  flex: 0 0 auto !important;
+  font-size: 0.68rem !important;
+  font-weight: 800 !important;
+  line-height: 1 !important;
+  padding: 7px 9px !important;
+  text-transform: uppercase !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .resource-access-badge-free {
+  background: var(--ss-green) !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .resource-access-badge-paid {
+  background: var(--ss-blue) !important;
+  color: var(--ss-white) !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .resource-access-badge-pending {
+  background: var(--ss-yellow) !important;
+}
+
+/* Final removal of archive-era cards and ornamental surfaces. */
+.hud-frame:not(.module-home) .terminal-content :is(
+  .library-section,
+  .library-rule-strip,
+  .support-principles,
+  .pause-panel,
+  .legal-motion-section,
+  .legal-step-section,
+  .go-bag-checklist-section,
+  .ss-template-section
+) {
+  background: var(--ss-white) !important;
+  background-image: none !important;
+  border: 2px solid var(--ss-ink) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  filter: none !important;
+  text-shadow: none !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content :is(
+  .library-section,
+  .library-rule-strip,
+  .support-principles,
+  .pause-panel,
+  .legal-motion-section,
+  .legal-step-section,
+  .go-bag-checklist-section,
+  .ss-template-section
+)::before,
+.hud-frame:not(.module-home) .terminal-content :is(
+  .library-section,
+  .library-rule-strip,
+  .support-principles,
+  .pause-panel,
+  .legal-motion-section,
+  .legal-step-section,
+  .go-bag-checklist-section,
+  .ss-template-section
+)::after {
+  display: none !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content :is(
+  .library-section,
+  .library-rule-strip,
+  .support-principles,
+  .pause-panel,
+  .legal-motion-section,
+  .legal-step-section,
+  .go-bag-checklist-section,
+  .ss-template-section
+) :is(h1, h2, h3, h4, p, li, span, small, strong) {
+  color: var(--ss-ink) !important;
+  text-shadow: none !important;
+}
+
+@media (max-width: 760px) {
+  .hud-frame .floating-quick-escape {
+    font-size: 0.66rem !important;
+    height: 72px !important;
+    width: 72px !important;
+  }
+
+  .hud-frame:not(.module-home) .terminal-content .resource-access-choice-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .hud-frame:not(.module-home) .terminal-content .resource-file-row {
+    align-items: flex-start !important;
+    flex-direction: column !important;
+  }
+}
+
 .hud-frame:is(.module-guides, .module-how-to) .terminal-content .terminal-label,
 .hud-frame:is(.module-guides, .module-how-to) .terminal-content .ss-template-kicker,
 .hud-frame:is(.module-guides, .module-how-to) .terminal-content .ss-section-index {
