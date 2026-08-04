@@ -5,6 +5,7 @@ import {
 } from "lucide-react";
 import denialSupportOne from "./assets/support/denial-support-1.png";
 import denialSupportTwo from "./assets/support/denial-support-2.png";
+import { CommercePageTemplate, EditorialPageTemplate } from "./components/PageTemplates";
 
 const denialImages = [denialSupportOne, denialSupportTwo];
 
@@ -5543,31 +5544,14 @@ function PracticalHowToGuide({
   onNavigate: (module: ModuleKey, path: string) => void;
 }) {
   return (
-    <section className="page-shell how-to-guide-page" aria-labelledby={`${guide.id}-title`}>
-      <div className="page-kicker">
-        <BookOpenCheck aria-hidden="true" />
-        <p className="eyebrow">Resources // How To Guides</p>
-      </div>
-
-      <div className="how-to-hero">
-        <div>
-          <p className="terminal-label">{guide.terminalLabel}</p>
-          <h1 id={`${guide.id}-title`}>{guide.title}</h1>
-          <p>{guide.intro}</p>
-        </div>
-        <aside className="how-to-status-panel" aria-label={`${guide.title} status`}>
-          <span>GUIDE STATUS</span>
-          <strong>LIVE PAGE</strong>
-          <small>NO PDF EMBED // SCREENSHOT-FRIENDLY</small>
-        </aside>
-      </div>
-
-      <div className="how-to-command-strip" aria-label="Guide quick map">
-        {guide.quickMap.map((item) => (
-          <span key={item}>{item}</span>
-        ))}
-      </div>
-
+    <EditorialPageTemplate
+      className="page-shell how-to-guide-page"
+      eyebrow={`Resources / Guides / ${guide.terminalLabel}`}
+      intro={<p>{guide.intro}</p>}
+      quickMap={guide.quickMap}
+      title={guide.title}
+      titleId={`${guide.id}-title`}
+    >
       <div className="snap-guide-grid">
         {guide.sections.map((section, index) => (
           <article className="snap-guide-card" key={section.id}>
@@ -5626,7 +5610,7 @@ function PracticalHowToGuide({
           </div>
         </section>
       ) : null}
-    </section>
+    </EditorialPageTemplate>
   );
 }
 
@@ -6115,13 +6099,16 @@ function AccessInformationModule() {
   }
 
   return (
-    <section className="page-shell library-module access-module" aria-labelledby="access-title">
-      <PageFlourishHeader eyebrow="Database // Access" title="Database" titleId="access-title" variant="database">
-        <p>
+    <CommercePageTemplate
+      className="page-shell library-module access-module"
+      eyebrow="Database / Access"
+      intro={<p>
           The Database holds indexed previews, Resource Library access paths, and download
           unlock rules for deeper planners, trackers, and long-form guides.
-        </p>
-      </PageFlourishHeader>
+        </p>}
+      title="Database"
+      titleId="access-title"
+    >
 
       <section className="library-section" aria-labelledby="access-options-title">
         <div className="terminal-label">DATABASE ACCESS OPTIONS</div>
@@ -6156,7 +6143,7 @@ function AccessInformationModule() {
           Open Resource Library
         </button>
       </section>
-    </section>
+    </CommercePageTemplate>
   );
 }
 
@@ -6478,19 +6465,17 @@ function SupportModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: s
 
 function LibraryModule() {
   return (
-    <section className="page-shell library-module" aria-labelledby="library-title">
-      <PageFlourishHeader
-        eyebrow="Resources // Library"
-        title="Resource Library"
-        titleId="library-title"
-        variant="database"
-      >
-        <p>
+    <CommercePageTemplate
+        className="page-shell library-module"
+        eyebrow="Resources / Library"
+        intro={<p>
           Free crisis tools stay live in the app. The Resource Library holds deeper templates,
           trackers, guides, and long-form systems for people who want more structure without a
           forced subscription or a forced category choice.
-        </p>
-      </PageFlourishHeader>
+        </p>}
+        title="Resource Library"
+        titleId="library-title"
+      >
 
       <div className="library-rule-strip" aria-label="Library rules">
         <span>Unlimited Viewing During Active Pass</span>
@@ -6577,7 +6562,7 @@ function LibraryModule() {
           </p>
         </article>
       </section>
-    </section>
+    </CommercePageTemplate>
   );
 }
 
