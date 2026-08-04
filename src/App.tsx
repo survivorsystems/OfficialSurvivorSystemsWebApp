@@ -19,6 +19,7 @@ type ModuleKey =
   | "about"
   | "advocacy"
   | "government"
+  | "support"
   | "am-i-crazy"
   | "go-bag-prep"
   | "planning"
@@ -1388,6 +1389,7 @@ const moduleRoutes: Record<ModuleKey, { label: string; path: string }> = {
   about: { label: "About", path: "/about" },
   advocacy: { label: "Advocacy", path: "/advocacy" },
   government: { label: "Government", path: "/government" },
+  support: { label: "Support", path: "/support" },
   "am-i-crazy": { label: "Was I Crazy?", path: "/am-i-crazy" },
   "go-bag-prep": { label: "Immediate Support", path: "/crisis-support" },
   planning: { label: "Immediate Support", path: "/crisis-support" },
@@ -1409,6 +1411,7 @@ const allNavTargets: Array<{ key: ModuleKey; label: string; path: string }> = [
   { key: "about", ...moduleRoutes.about },
   { key: "advocacy", ...moduleRoutes.advocacy },
   { key: "government", ...moduleRoutes.government },
+  { key: "support", ...moduleRoutes.support },
   { key: "am-i-crazy", label: "Was I Crazy", path: "/am-i-crazy" },
   { key: "planning", label: "Immediate Support", path: "/crisis-support" },
   { key: "local-help", ...moduleRoutes["local-help"] },
@@ -2297,9 +2300,6 @@ function PageFlourishHeader({
         <p className="folk-kicker">{eyebrow}</p>
         <h1 id={titleId}>{title}</h1>
         <div className="page-flourish-intro">{children}</div>
-      </div>
-      <div className="page-flourish-art" aria-hidden="true">
-        <span />
       </div>
     </header>
   );
@@ -3252,6 +3252,7 @@ function getInitialModule(): ModuleKey {
   if (path === "/about") return "about";
   if (path === "/advocacy") return "advocacy";
   if (path === "/government") return "government";
+  if (path === "/support") return "support";
   if (path === "/rebuilding") return "rebuilding";
   if (path === "/planning" || path === "/go-bag-prep" || path === "/crisis-support") return "planning";
   if (path === "/local-help") return "local-help";
@@ -3603,7 +3604,6 @@ function TerminalChrome({
           <section className={`terminal-screen win95-window hud-window hud-window-${activeModule}`} aria-label={`${activeLabel} window`}>
           <div className="win95-titlebar">
             <div className="win95-titlebar-label">
-              <span className="win95-titlebar-icon" aria-hidden="true" />
               <span>{activeLabel}</span>
             </div>
             <div className="win95-window-controls">
@@ -3653,6 +3653,8 @@ function TerminalChrome({
 
 function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: string) => void }) {
   const homeCards: Array<{
+    code: string;
+    classification: string;
     title: string;
     copy: string;
     action: string;
@@ -3660,6 +3662,8 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
     path: string;
   }> = [
     {
+      code: "01",
+      classification: "PRIVATE EVALUATION",
       title: "Assessments",
       copy: "Understand your experiences, identify patterns, and create a clearer path forward.",
       action: "Take an Assessment",
@@ -3667,6 +3671,8 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
       path: "/assessments",
     },
     {
+      code: "02",
+      classification: "FIELD MANUALS",
       title: "Guides",
       copy: "Plain-language support for court, housing, benefits, safety planning, and rebuilding.",
       action: "Browse Guides",
@@ -3674,6 +3680,8 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
       path: "/guides",
     },
     {
+      code: "03",
+      classification: "WORKING FILES",
       title: "Resources",
       copy: "Find planners, trackers, toolkits, and practical files organized by housing, legal, food, money, homelessness, and more.",
       action: "Browse Resources",
@@ -3681,6 +3689,8 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
       path: "/resources",
     },
     {
+      code: "04",
+      classification: "INTELLIGENCE LIBRARY",
       title: "Education",
       copy: "Learn about coercive control, trauma, stalking, manipulation, and post-separation abuse.",
       action: "Start Learning",
@@ -3691,13 +3701,18 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
 
   return (
     <section className="home-terminal" aria-labelledby="home-title">
+      <header className="home-briefing-bar">
+        <div>
+          <span>THE SURVIVOR SYSTEMS ARCHIVE</span>
+          <strong>REFERENCE DESK // COLLECTION 001</strong>
+        </div>
+        <p>CLARITY&nbsp;&nbsp;&middot;&nbsp;&nbsp;PROTECTION&nbsp;&nbsp;&middot;&nbsp;&nbsp;POWER</p>
+      </header>
+
       <div className="home-hero-composition">
-        <aside className="home-hero-visual" aria-label="Folk floral artwork">
-          <FolkHero className="folk-hero-art" />
-        </aside>
         <article className="home-message refined-home-message">
-          <p className="folk-kicker">Clarity. Protection. Power.</p>
-          <h1 id="home-title">Welcome To Survivor Systems</h1>
+          <p className="folk-kicker">Private reference file for the life that belongs to you.</p>
+          <h1 id="home-title">Welcome to<br /><em>Survivor Systems.</em></h1>
           <p>
             You are allowed to be curious about what is happening to you, why everything feels so
             confusing, what your options are, and what your life could look like when you are no
@@ -3722,11 +3737,22 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
             </button>
           </div>
         </article>
+        <aside className="home-hero-visual" aria-label="Botanical field-system artwork">
+          <div className="home-dossier-art">
+            <FolkHero className="folk-hero-art" />
+            <p>CASE STATUS <strong>OPEN</strong></p>
+          </div>
+        </aside>
       </div>
 
+      <div className="home-index-heading">
+        <div><span>READING ROOM INDEX</span><h2>Choose a starting file.</h2></div>
+        <p>Consult in any order. Return whenever you need.</p>
+      </div>
       <div className="home-category-grid" aria-label="Resource categories">
         {homeCards.map((card) => (
-          <article className="home-category-card" key={card.title}>
+          <article className={`home-category-card home-category-card-${card.code}`} key={card.title}>
+            <div className="home-file-tab"><span>{card.code}</span><small>{card.classification}</small></div>
             <h2>{card.title}</h2>
             <p>{card.copy}</p>
             <button type="button" onClick={() => onNavigate(card.module, card.path)}>
@@ -3739,7 +3765,7 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
       <div className="home-support-grid">
         <section className="start-where-you-are" aria-labelledby="home-start-where">
           <div>
-            <p className="folk-kicker">Small steps. Real support.</p>
+            <p className="folk-kicker">FIELD NOTE // PERMISSION GRANTED</p>
             <h2 id="home-start-where">Start where you are.</h2>
             <p>
               You do not have to have it all figured out. Whether you need information, a plan, or
@@ -3756,6 +3782,7 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
 
         <section className="home-privacy-panel" aria-labelledby="home-privacy">
           <div>
+            <p className="folk-kicker">SECURITY BRIEFING</p>
             <h2 id="home-privacy">Your privacy. Your power.</h2>
             <p>
               Your internet activity, downloads, accounts, and browsing history may be monitored.
@@ -5327,27 +5354,22 @@ function PlanningLanding({
 
         <div className="planning-document-grid" aria-label="Crisis support options">
           <a className="planning-document-key" href="https://www.thehotline.org/" rel="noreferrer" target="_blank">
-            <span className="planning-document-icon hotline-icon" aria-hidden="true" />
             <strong>NHDV Hotline</strong>
             <small>thehotline.org</small>
           </a>
           <a className="planning-document-key" href="sms:88788?body=START">
-            <span className="planning-document-icon message-icon" aria-hidden="true" />
             <strong>Text START</strong>
             <small>88788</small>
           </a>
           <a className="planning-document-key" href="tel:18007997233">
-            <span className="planning-document-icon phone-icon" aria-hidden="true" />
             <strong>Call Hotline</strong>
             <small>1.800.799.7233</small>
           </a>
           <button className="planning-document-key" type="button" onClick={() => onNavigate("legal", "/resources")}>
-            <span className="planning-document-icon caution-icon" aria-hidden="true" />
             <strong>Legal / Local Resources</strong>
             <small>resource folder</small>
           </button>
           <button className="planning-document-key" type="button" onClick={() => onNavigate("rebuilding", "/rebuilding")}>
-            <span className="planning-document-icon route-icon" aria-hidden="true" />
             <strong>Rebuilding Tools</strong>
             <small>when safe enough</small>
           </button>
@@ -6361,7 +6383,6 @@ function ResourceModule({
                 onClick={() => setActiveDirectory(isOpen ? null : directory.id)}
                 aria-expanded={isOpen}
               >
-                <span className="resource-directory-icon" aria-hidden="true" />
                 <span>
                   <strong>{directory.label}</strong>
                   <small>{directory.description}</small>
@@ -6371,7 +6392,6 @@ function ResourceModule({
                 <div className="resource-file-list">
                   {directory.files.map((file) => (
                     <button className="resource-file-row" key={file.label} type="button" onClick={file.action}>
-                      <span aria-hidden="true"></span>
                       {file.label}
                     </button>
                   ))}
@@ -6380,6 +6400,76 @@ function ResourceModule({
             </section>
           );
         })}
+      </div>
+
+      <section className="resource-support-callout" aria-labelledby="resource-support-title">
+        <div>
+          <span>KEEP THE ARCHIVE AVAILABLE</span>
+          <h2 id="resource-support-title">Support Survivor Systems</h2>
+          <p>
+            Donations help maintain free educational tools, practical resources, hosting, and the
+            continued development of Survivor Systems.
+          </p>
+        </div>
+        <button type="button" onClick={() => onNavigate("support", "/support")}>Donate</button>
+      </section>
+    </section>
+  );
+}
+
+function SupportModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: string) => void }) {
+  const donationUrl = String(import.meta.env.VITE_STRIPE_DONATION_URL ?? "").trim();
+  const [checkoutNotice, setCheckoutNotice] = useState("");
+
+  function openDonationCheckout() {
+    if (donationUrl) {
+      window.location.assign(donationUrl);
+      return;
+    }
+
+    setCheckoutNotice("Secure donation checkout is being connected. Please check back soon.");
+  }
+
+  return (
+    <section className="page-shell support-module" aria-labelledby="support-title">
+      <PageFlourishHeader
+        eyebrow="Survivor Systems // Community support"
+        title="Support"
+        titleId="support-title"
+        variant="resources"
+      >
+        <p>
+          Survivor Systems is built to make clear, practical information easier to reach. Your
+          support helps keep essential tools available while this archive continues to grow.
+        </p>
+      </PageFlourishHeader>
+
+      <div className="support-page-grid">
+        <article className="support-donation-panel">
+          <span className="support-panel-label">ONE-TIME DONATION</span>
+          <h2>Help sustain the system.</h2>
+          <p>
+            Donations support hosting, maintenance, research, accessibility work, and the creation
+            of new free resources for survivors rebuilding their lives.
+          </p>
+          <button type="button" onClick={openDonationCheckout}>Donate Securely</button>
+          {checkoutNotice ? <p className="support-checkout-notice" role="status">{checkoutNotice}</p> : null}
+        </article>
+
+        <aside className="support-principles" aria-label="Donation principles">
+          <h2>What support protects</h2>
+          <ul>
+            <li>Free access to essential educational and crisis-reference tools</li>
+            <li>Privacy-minded, account-optional experiences wherever possible</li>
+            <li>New guides, assessments, planners, and survivor-centered resources</li>
+            <li>Independent maintenance of the Survivor Systems platform</li>
+          </ul>
+        </aside>
+      </div>
+
+      <div className="support-page-actions">
+        <button type="button" onClick={() => onNavigate("local-help", "/resources")}>Back to Resources</button>
+        <button type="button" onClick={() => onNavigate("home", "/")}>Back to Home</button>
       </div>
     </section>
   );
@@ -6890,6 +6980,8 @@ export function App() {
     <PlanningModule onControlPanelChange={updateControlPanel} onNavigate={navigate} />
   ) : activeModule === "rebuilding" ? (
     <RebuildingModule onNavigate={navigate} />
+  ) : activeModule === "support" ? (
+    <SupportModule onNavigate={navigate} />
   ) : activeModule === "local-help" || activeModule === "how-to" || activeModule === "legal" || activeModule === "library" ? (
     <ResourceModule moduleKey={activeModule} onNavigate={navigate} />
   ) : (
