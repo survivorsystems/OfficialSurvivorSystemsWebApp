@@ -3,7 +3,6 @@ import {
   BookOpenCheck,
   Scale,
 } from "lucide-react";
-import { FolkHero } from "./components/FolkHero";
 import denialSupportOne from "./assets/support/denial-support-1.png";
 import denialSupportTwo from "./assets/support/denial-support-2.png";
 
@@ -3700,18 +3699,18 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
   ];
 
   return (
-    <section className="home-terminal" aria-labelledby="home-title">
+    <section className="home-terminal bauhaus-home" aria-labelledby="home-title">
       <header className="home-briefing-bar">
         <div>
-          <span>THE SURVIVOR SYSTEMS ARCHIVE</span>
-          <strong>REFERENCE DESK // COLLECTION 001</strong>
+          <span>SURVIVOR SYSTEMS</span>
+          <strong>TOOLS FOR CLARITY + AUTONOMY</strong>
         </div>
-        <p>CLARITY&nbsp;&nbsp;&middot;&nbsp;&nbsp;PROTECTION&nbsp;&nbsp;&middot;&nbsp;&nbsp;POWER</p>
+        <p>EST. 2026&nbsp;&nbsp;/&nbsp;&nbsp;START ANYWHERE</p>
       </header>
 
       <div className="home-hero-composition">
         <article className="home-message refined-home-message">
-          <p className="folk-kicker">Private reference file for the life that belongs to you.</p>
+          <p className="folk-kicker">INFORMATION IS A FORM OF POWER.</p>
           <h1 id="home-title">Welcome to<br /><em>Survivor Systems.</em></h1>
           <p>
             Domestic violence is deadly. About 1 in 5 homicide victims in the United States is
@@ -3735,17 +3734,23 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
             </button>
           </div>
         </article>
-        <aside className="home-hero-visual" aria-label="Botanical field-system artwork">
-          <div className="home-dossier-art">
-            <FolkHero className="folk-hero-art" />
-            <p>CASE STATUS <strong>OPEN</strong></p>
+        <aside className="home-hero-visual bauhaus-stage" aria-label="Abstract Bauhaus composition">
+          <div className="bauhaus-art" aria-hidden="true">
+            <span className="bauhaus-shape bauhaus-circle-blue" />
+            <span className="bauhaus-shape bauhaus-circle-yellow" />
+            <span className="bauhaus-shape bauhaus-half-red" />
+            <span className="bauhaus-shape bauhaus-square-green" />
+            <span className="bauhaus-shape bauhaus-bar-black" />
+            <span className="bauhaus-shape bauhaus-dot" />
+            <span className="bauhaus-shape bauhaus-line" />
+            <span className="bauhaus-art-label">SS<br /><b>01</b></span>
           </div>
         </aside>
       </div>
 
       <div className="home-index-heading">
-        <div><span>READING ROOM INDEX</span><h2>Choose a starting file.</h2></div>
-        <p>Consult in any order. Return whenever you need.</p>
+        <div><span>01—04 / EXPLORE</span><h2>Choose a starting point.</h2></div>
+        <p>No prescribed order. No wrong door.</p>
       </div>
       <div className="home-category-grid" aria-label="Resource categories">
         {homeCards.map((card) => (
@@ -3763,7 +3768,7 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
       <div className="home-support-grid">
         <section className="start-where-you-are" aria-labelledby="home-start-where">
           <div>
-            <p className="folk-kicker">FIELD NOTE // PERMISSION GRANTED</p>
+            <p className="folk-kicker">A PLACE TO BEGIN</p>
             <h2 id="home-start-where">Start where you are.</h2>
             <p>
               You do not have to have it all figured out. Whether you need information, a plan, or
@@ -3780,7 +3785,7 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
 
         <section className="home-privacy-panel" aria-labelledby="home-privacy">
           <div>
-            <p className="folk-kicker">SECURITY BRIEFING</p>
+            <p className="folk-kicker">BEFORE YOU CONTINUE</p>
             <h2 id="home-privacy">Your privacy. Your power.</h2>
             <p>
               Your internet activity, downloads, accounts, and browsing history may be monitored.
