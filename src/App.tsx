@@ -3606,8 +3606,6 @@ function TerminalChrome({
               <span>{activeLabel}</span>
             </div>
             <div className="win95-window-controls">
-              <span aria-hidden="true">SYS</span>
-              <span aria-hidden="true">MAP</span>
               <button
                 aria-label="Close window and return to desktop"
                 type="button"
@@ -3621,7 +3619,7 @@ function TerminalChrome({
           <header className="terminal-topbar">
             <div className="terminal-heading-row">
               <div className="terminal-topbar-title">
-                <span className="terminal-label">USER TERMINAL</span>
+                <span className="terminal-label">SURVIVOR SYSTEMS</span>
                 <h1>{activeLabel}</h1>
               </div>
               <div className="system-status">

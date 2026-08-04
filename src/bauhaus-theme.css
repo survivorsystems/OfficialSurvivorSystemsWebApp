@@ -1,0 +1,617 @@
+/* Survivor Systems Bauhaus design system
+   This file is intentionally imported after legacy styles. New shared UI work
+   should use these tokens and primitives instead of adding route-specific themes. */
+
+:root {
+  --ss-paper: #eee5d5;
+  --ss-paper-deep: #dfd2bb;
+  --ss-ink: #1f2227;
+  --ss-ink-soft: #34373d;
+  --ss-green: #0b9d4a;
+  --ss-blue: #3f6bb4;
+  --ss-red: #eb4e1b;
+  --ss-yellow: #eec626;
+  --ss-white: #fffdf7;
+  --ss-border: 3px solid var(--ss-ink);
+  --ss-shadow-blue: 5px 5px 0 var(--ss-blue);
+  --ss-shadow-red: 5px 5px 0 var(--ss-red);
+  --ss-space-1: 6px;
+  --ss-space-2: 10px;
+  --ss-space-3: 16px;
+  --ss-space-4: 24px;
+  --ss-space-5: 36px;
+  --ss-space-6: 54px;
+  --ss-sidebar-width: 248px;
+  --ss-font-display: "Aptos Display", "Arial Black", "Inter", sans-serif;
+  --ss-font-body: "Aptos", "Inter", "Segoe UI", Arial, sans-serif;
+  --ss-route-accent: var(--ss-blue);
+}
+
+.module-assessments,
+.module-am-i-crazy { --ss-route-accent: var(--ss-red); }
+.module-guides,
+.module-how-to { --ss-route-accent: var(--ss-blue); }
+.module-local-help,
+.module-library,
+.module-support { --ss-route-accent: var(--ss-green); }
+.module-education,
+.module-rebuilding { --ss-route-accent: var(--ss-yellow); }
+.module-advocacy { --ss-route-accent: var(--ss-red); }
+.module-government,
+.module-legal { --ss-route-accent: var(--ss-blue); }
+.module-about { --ss-route-accent: var(--ss-green); }
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  background: var(--ss-ink) !important;
+  color: var(--ss-ink) !important;
+  font-family: var(--ss-font-body) !important;
+}
+
+/* Shared application architecture */
+.hud-frame.terminal-frame {
+  background: var(--ss-ink) !important;
+  color: var(--ss-ink) !important;
+  min-height: 100vh !important;
+}
+
+.hud-frame .win95-desktop {
+  background: var(--ss-ink) !important;
+  display: grid !important;
+  grid-template-columns: var(--ss-sidebar-width) minmax(0, 1fr) !important;
+  grid-template-rows: minmax(100vh, auto) !important;
+  min-height: 100vh !important;
+  padding: 0 !important;
+}
+
+.hud-frame .win95-taskbar {
+  display: none !important;
+}
+
+/* Sidebar */
+.hud-frame .folk-sidebar {
+  align-self: stretch !important;
+  background: var(--ss-paper) !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  border-right: var(--ss-border) !important;
+  box-shadow: none !important;
+  display: flex !important;
+  flex-direction: column !important;
+  grid-column: 1 !important;
+  grid-row: 1 !important;
+  min-height: 100vh !important;
+  overflow: visible !important;
+  padding: 0 !important;
+  position: sticky !important;
+  top: 0 !important;
+  width: var(--ss-sidebar-width) !important;
+  z-index: 20 !important;
+}
+
+.hud-frame .folk-sidebar::before,
+.hud-frame .folk-sidebar::after {
+  display: none !important;
+}
+
+.hud-frame .desktop-brand-panel,
+.hud-frame button.desktop-brand-panel {
+  align-items: center !important;
+  background: var(--ss-ink) !important;
+  border: 0 !important;
+  border-bottom: var(--ss-border) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: var(--ss-paper) !important;
+  display: flex !important;
+  justify-content: center !important;
+  min-height: 132px !important;
+  padding: 22px 14px !important;
+  width: 100% !important;
+}
+
+.hud-frame .desktop-brand-panel .brand-logo-survivor,
+.hud-frame .desktop-brand-panel .brand-logo-systems {
+  color: var(--ss-paper) !important;
+  font-family: var(--ss-font-display) !important;
+  font-style: normal !important;
+  font-weight: 900 !important;
+  text-shadow: none !important;
+}
+
+.hud-frame .desktop-brand-panel .brand-logo-survivor {
+  font-size: 1.3rem !important;
+  letter-spacing: 0.13em !important;
+}
+
+.hud-frame .desktop-brand-panel .brand-logo-systems {
+  font-size: 0.8rem !important;
+  letter-spacing: 0.32em !important;
+}
+
+.hud-frame .folk-sidebar .desktop-icon-grid {
+  background: var(--ss-paper) !important;
+  display: grid !important;
+  gap: 0 !important;
+  grid-auto-flow: row !important;
+  grid-template-columns: 1fr !important;
+  overflow: visible !important;
+  padding: 0 !important;
+  width: 100% !important;
+}
+
+.hud-frame .folk-sidebar .desktop-icon-grid > .desktop-icon {
+  align-items: center !important;
+  background: var(--ss-paper) !important;
+  border: 0 !important;
+  border-bottom: 2px solid var(--ss-ink) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  display: grid !important;
+  gap: 12px !important;
+  grid-template-columns: 42px minmax(0, 1fr) !important;
+  min-height: 66px !important;
+  padding: 10px 14px !important;
+  position: relative !important;
+  text-align: left !important;
+  transform: none !important;
+  width: 100% !important;
+}
+
+.hud-frame .folk-sidebar .desktop-icon-grid > .desktop-icon:nth-child(4n+1) { border-left: 9px solid var(--ss-red) !important; }
+.hud-frame .folk-sidebar .desktop-icon-grid > .desktop-icon:nth-child(4n+2) { border-left: 9px solid var(--ss-blue) !important; }
+.hud-frame .folk-sidebar .desktop-icon-grid > .desktop-icon:nth-child(4n+3) { border-left: 9px solid var(--ss-green) !important; }
+.hud-frame .folk-sidebar .desktop-icon-grid > .desktop-icon:nth-child(4n+4) { border-left: 9px solid var(--ss-yellow) !important; }
+
+.hud-frame .folk-sidebar .desktop-icon-grid > .desktop-icon::before,
+.hud-frame .folk-sidebar .desktop-icon-grid > .desktop-icon::after {
+  display: none !important;
+}
+
+.hud-frame .folk-sidebar .desktop-icon-grid > .desktop-icon:hover,
+.hud-frame .folk-sidebar .desktop-icon-grid > .desktop-icon:focus-visible,
+.hud-frame .folk-sidebar .desktop-icon-grid > .desktop-icon.active {
+  background: var(--ss-yellow) !important;
+  color: var(--ss-ink) !important;
+  outline: 0 !important;
+  transform: none !important;
+}
+
+.hud-frame .folk-sidebar .desktop-icon-code {
+  align-items: center !important;
+  background: var(--ss-white) !important;
+  border: 2px solid var(--ss-ink) !important;
+  border-radius: 50% !important;
+  box-shadow: 3px 3px 0 var(--ss-paper-deep) !important;
+  display: flex !important;
+  height: 38px !important;
+  justify-content: center !important;
+  padding: 6px !important;
+  width: 38px !important;
+}
+
+.hud-frame .folk-sidebar .desktop-icon-code svg {
+  filter: grayscale(1) contrast(1.35) !important;
+  height: 24px !important;
+  width: 24px !important;
+}
+
+.hud-frame .folk-sidebar .desktop-icon-title {
+  color: var(--ss-ink) !important;
+  font-family: var(--ss-font-body) !important;
+  font-size: 0.9rem !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.01em !important;
+  line-height: 1.15 !important;
+  text-shadow: none !important;
+}
+
+.hud-frame .sidebar-actions {
+  background: var(--ss-paper) !important;
+  border: 0 !important;
+  margin-top: auto !important;
+  padding: 18px !important;
+}
+
+.hud-frame .sidebar-actions .sidebar-support {
+  background: var(--ss-yellow) !important;
+  border: 2px solid var(--ss-ink) !important;
+  border-radius: 0 !important;
+  box-shadow: var(--ss-shadow-red) !important;
+  color: var(--ss-ink) !important;
+  font-family: var(--ss-font-body) !important;
+  font-size: 0.78rem !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.03em !important;
+  min-height: 46px !important;
+  text-transform: uppercase !important;
+  width: 100% !important;
+}
+
+/* Main content shell */
+.hud-frame .folk-main-shell {
+  background: var(--ss-ink) !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  grid-column: 2 !important;
+  grid-row: 1 !important;
+  margin: 0 !important;
+  min-width: 0 !important;
+  padding: clamp(18px, 2.8vw, 42px) !important;
+  position: relative !important;
+}
+
+.hud-frame .folk-main-shell::before,
+.hud-frame .folk-main-shell::after {
+  display: none !important;
+}
+
+.hud-frame:not(.module-home) .terminal-screen {
+  background: var(--ss-paper) !important;
+  border: var(--ss-border) !important;
+  border-radius: 0 !important;
+  box-shadow: 10px 10px 0 var(--ss-route-accent) !important;
+  color: var(--ss-ink) !important;
+  margin: 0 auto !important;
+  max-width: 1500px !important;
+  min-height: calc(100vh - 84px) !important;
+  overflow: hidden !important;
+  width: 100% !important;
+}
+
+.hud-frame:not(.module-home) .terminal-screen::before,
+.hud-frame:not(.module-home) .terminal-screen::after {
+  display: none !important;
+}
+
+.hud-frame:not(.module-home) .win95-titlebar {
+  align-items: center !important;
+  background: var(--ss-route-accent) !important;
+  border: 0 !important;
+  border-bottom: var(--ss-border) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  min-height: 42px !important;
+  padding: 6px 8px 6px 16px !important;
+}
+
+.hud-frame:not(.module-home) .win95-titlebar::after {
+  content: none !important;
+  display: none !important;
+}
+
+.hud-frame:not(.module-home) .win95-titlebar-label,
+.hud-frame:not(.module-home) .win95-titlebar-label span {
+  color: var(--ss-ink) !important;
+  font-family: var(--ss-font-body) !important;
+  font-size: 0.75rem !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+}
+
+.hud-frame:not(.module-home) .win95-window-controls {
+  align-items: center !important;
+  display: flex !important;
+  gap: 6px !important;
+  inset: auto !important;
+  margin-left: auto !important;
+  position: static !important;
+  transform: none !important;
+}
+
+.hud-frame:not(.module-home) .win95-window-controls > span {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  font-family: var(--ss-font-body) !important;
+  font-size: 0.62rem !important;
+  font-weight: 900 !important;
+  min-width: 0 !important;
+  padding: 0 4px !important;
+}
+
+.hud-frame:not(.module-home) .win95-window-controls button {
+  align-items: center !important;
+  background: var(--ss-ink) !important;
+  border: 2px solid var(--ss-ink) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: var(--ss-paper) !important;
+  display: flex !important;
+  font-family: var(--ss-font-body) !important;
+  font-weight: 900 !important;
+  height: 28px !important;
+  justify-content: center !important;
+  min-height: 28px !important;
+  padding: 0 !important;
+  width: 30px !important;
+}
+
+.hud-frame:not(.module-home) .terminal-topbar,
+.hud-frame:not(.module-home) .win95-window .terminal-topbar {
+  background: var(--ss-white) !important;
+  border: 0 !important;
+  border-bottom: var(--ss-border) !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  display: block !important;
+  padding: clamp(18px, 2.4vw, 32px) !important;
+}
+
+.hud-frame:not(.module-home) .terminal-heading-row {
+  align-items: end !important;
+  display: flex !important;
+  gap: 24px !important;
+  justify-content: space-between !important;
+}
+
+.hud-frame:not(.module-home) .terminal-topbar-title .terminal-label {
+  color: var(--ss-route-accent) !important;
+  font-family: var(--ss-font-body) !important;
+  font-size: 0.67rem !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.15em !important;
+  text-transform: uppercase !important;
+}
+
+.hud-frame:not(.module-home) .terminal-topbar h1,
+.hud-frame:not(.module-home) .win95-window .terminal-topbar h1 {
+  color: var(--ss-ink) !important;
+  font-family: var(--ss-font-display) !important;
+  font-size: clamp(2rem, 4vw, 4.5rem) !important;
+  font-weight: 900 !important;
+  letter-spacing: -0.045em !important;
+  line-height: 0.9 !important;
+  margin: 6px 0 0 !important;
+  text-shadow: none !important;
+  text-transform: uppercase !important;
+}
+
+.hud-frame:not(.module-home) .system-status {
+  align-items: center !important;
+  background: var(--ss-ink) !important;
+  border: 0 !important;
+  color: var(--ss-paper) !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px 14px !important;
+  padding: 10px 14px !important;
+}
+
+.hud-frame:not(.module-home) .system-status span,
+.hud-frame:not(.module-home) .system-status strong {
+  color: var(--ss-paper) !important;
+  font-family: var(--ss-font-body) !important;
+  font-size: 0.63rem !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.06em !important;
+}
+
+.hud-frame:not(.module-home) .system-status strong {
+  color: var(--ss-yellow) !important;
+}
+
+.hud-frame:not(.module-home) .terminal-command {
+  background: transparent !important;
+  border: 0 !important;
+  display: flex !important;
+  gap: 8px !important;
+  margin-top: 18px !important;
+  padding: 0 !important;
+}
+
+.hud-frame:not(.module-home) .terminal-command label,
+.hud-frame:not(.module-home) .terminal-command p {
+  color: var(--ss-ink) !important;
+  font-family: var(--ss-font-body) !important;
+}
+
+.hud-frame:not(.module-home) .terminal-command input {
+  background: var(--ss-paper) !important;
+  border: 2px solid var(--ss-ink) !important;
+  border-radius: 0 !important;
+  box-shadow: inset 6px 0 0 var(--ss-route-accent) !important;
+  color: var(--ss-ink) !important;
+  font-family: var(--ss-font-body) !important;
+  min-height: 42px !important;
+  padding: 8px 12px 8px 18px !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content {
+  background: var(--ss-paper) !important;
+  color: var(--ss-ink) !important;
+  min-height: 520px !important;
+  padding: clamp(24px, 4vw, 60px) !important;
+}
+
+/* Shared content primitives */
+.hud-frame:not(.module-home) .terminal-content :is(h1, h2, h3, h4) {
+  color: var(--ss-ink);
+  font-family: var(--ss-font-display) !important;
+  letter-spacing: -0.025em;
+}
+
+.hud-frame:not(.module-home) .terminal-content :is(p, li, label, input, textarea, select) {
+  font-family: var(--ss-font-body) !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content :is(button, .terminal-button) {
+  background: var(--ss-ink);
+  border: 2px solid var(--ss-ink);
+  border-radius: 0;
+  box-shadow: 4px 4px 0 var(--ss-route-accent);
+  color: var(--ss-paper);
+  font-family: var(--ss-font-body) !important;
+  font-weight: 900;
+}
+
+.hud-frame:not(.module-home) .terminal-content :is(button, .terminal-button):hover,
+.hud-frame:not(.module-home) .terminal-content :is(button, .terminal-button):focus-visible {
+  box-shadow: 2px 2px 0 var(--ss-route-accent);
+  transform: translate(2px, 2px);
+}
+
+.hud-frame:not(.module-home) .terminal-content :is(input, textarea, select) {
+  background: var(--ss-white);
+  border: 2px solid var(--ss-ink);
+  border-radius: 0;
+  color: var(--ss-ink);
+}
+
+/* Persistent safety action */
+.hud-frame .floating-quick-escape {
+  align-items: center !important;
+  background: var(--ss-red) !important;
+  border: 3px solid var(--ss-ink) !important;
+  border-radius: 50% !important;
+  box-shadow: 4px 4px 0 var(--ss-yellow) !important;
+  color: var(--ss-white) !important;
+  display: flex !important;
+  font-family: var(--ss-font-body) !important;
+  font-size: 0.62rem !important;
+  font-weight: 900 !important;
+  height: 58px !important;
+  justify-content: center !important;
+  letter-spacing: 0.03em !important;
+  line-height: 1 !important;
+  padding: 8px !important;
+  position: fixed !important;
+  right: 18px !important;
+  text-align: center !important;
+  text-transform: uppercase !important;
+  top: 18px !important;
+  transform: none !important;
+  width: 58px !important;
+  z-index: 100 !important;
+}
+
+.hud-frame .floating-quick-escape:hover,
+.hud-frame .floating-quick-escape:focus-visible {
+  background: var(--ss-yellow) !important;
+  color: var(--ss-ink) !important;
+  transform: translate(2px, 2px) !important;
+}
+
+@media (max-width: 980px) {
+  .hud-frame .win95-desktop {
+    display: block !important;
+  }
+
+  .hud-frame .folk-sidebar {
+    border-bottom: var(--ss-border) !important;
+    border-right: 0 !important;
+    min-height: 0 !important;
+    position: relative !important;
+    width: 100% !important;
+  }
+
+  .hud-frame .desktop-brand-panel,
+  .hud-frame button.desktop-brand-panel {
+    min-height: 78px !important;
+    padding: 10px 80px 10px 16px !important;
+  }
+
+  .hud-frame .folk-sidebar .desktop-icon-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+
+  .hud-frame .folk-sidebar .desktop-icon-grid > .desktop-icon {
+    border-bottom: 0 !important;
+    border-left: 0 !important;
+    border-right: 2px solid var(--ss-ink) !important;
+    border-top: 7px solid var(--ss-route-accent) !important;
+    gap: 7px !important;
+    grid-template-columns: 30px minmax(0, 1fr) !important;
+    min-height: 54px !important;
+    padding: 7px !important;
+  }
+
+  .hud-frame .folk-sidebar .desktop-icon-code {
+    border-width: 1px !important;
+    box-shadow: none !important;
+    height: 29px !important;
+    padding: 4px !important;
+    width: 29px !important;
+  }
+
+  .hud-frame .folk-sidebar .desktop-icon-code svg {
+    height: 20px !important;
+    width: 20px !important;
+  }
+
+  .hud-frame .folk-sidebar .desktop-icon-title {
+    font-size: 0.7rem !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  .hud-frame .sidebar-actions {
+    display: none !important;
+  }
+
+  .hud-frame .folk-main-shell {
+    padding: 18px !important;
+  }
+
+  .hud-frame:not(.module-home) .terminal-screen {
+    min-height: 70vh !important;
+  }
+}
+
+@media (max-width: 680px) {
+  .hud-frame:not(.module-home) .page-flourish-header h1,
+  .hud-frame:not(.module-home) .page-flourish-copy h1 {
+    font-size: clamp(1.75rem, 8vw, 2.25rem) !important;
+    line-height: 0.94 !important;
+    overflow-wrap: anywhere !important;
+    word-break: normal !important;
+  }
+
+  .hud-frame .folk-sidebar .desktop-icon-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .hud-frame:not(.module-home) .terminal-heading-row {
+    align-items: flex-start !important;
+    flex-direction: column !important;
+  }
+
+  .hud-frame:not(.module-home) .system-status {
+    width: 100% !important;
+  }
+
+  .hud-frame:not(.module-home) .terminal-content {
+    padding: 22px 16px !important;
+  }
+
+  .hud-frame .floating-quick-escape {
+    bottom: 14px !important;
+    height: 54px !important;
+    right: 14px !important;
+    top: auto !important;
+    width: 54px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hud-frame *,
+  .hud-frame *::before,
+  .hud-frame *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
