@@ -677,6 +677,101 @@ body {
   }
 }
 
+/* Category introductions are supporting copy, not a second page hero. */
+.hud-frame:not(.module-home) .terminal-content .category-module > .page-flourish-header {
+  background: var(--ss-white) !important;
+  border: 2px solid var(--ss-ink) !important;
+  border-left: 12px solid var(--ss-route-accent) !important;
+  color: var(--ss-ink) !important;
+  padding: 22px 26px !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .category-module > .page-flourish-header :is(.folk-kicker, h1) {
+  display: none !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .category-module > .page-flourish-header :is(p, span, strong) {
+  color: var(--ss-ink) !important;
+  margin: 0 !important;
+}
+
+.hud-frame:is(.module-guides, .module-how-to) .terminal-content .guide-category-section {
+  background: var(--ss-white) !important;
+  background-image: none !important;
+  border: 2px solid var(--ss-ink) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  padding: 26px !important;
+}
+
+.hud-frame:is(.module-guides, .module-how-to) .terminal-content .guide-category-section::before,
+.hud-frame:is(.module-guides, .module-how-to) .terminal-content .guide-category-section::after {
+  display: none !important;
+}
+
+.hud-frame:is(.module-guides, .module-how-to) .terminal-content .guide-category-section > header {
+  border-bottom: 2px solid var(--ss-ink) !important;
+  margin-bottom: 20px !important;
+  padding-bottom: 20px !important;
+}
+
+/* Answer controls override the general action-button treatment. */
+.hud-frame:not(.module-home) .terminal-content .assessment-workspace .freedom-response-list button {
+  background: var(--ss-white) !important;
+  border: 2px solid var(--ss-ink) !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  transform: none !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .assessment-workspace .freedom-response-list button :is(strong, span, small) {
+  text-shadow: none !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .assessment-workspace .freedom-response-list button strong {
+  background: var(--ss-ink) !important;
+  color: var(--ss-white) !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .assessment-workspace .freedom-response-list button :is(span, small) {
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .assessment-workspace .freedom-response-list button:hover,
+.hud-frame:not(.module-home) .terminal-content .assessment-workspace .freedom-response-list button:focus-visible {
+  background: var(--ss-paper-deep) !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  transform: none !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .assessment-workspace .freedom-response-list button[aria-checked="true"],
+.hud-frame:not(.module-home) .terminal-content .assessment-workspace .freedom-response-list button.selected {
+  background: var(--ss-yellow) !important;
+  box-shadow: inset 8px 0 0 var(--ss-route-accent) !important;
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .assessment-workspace :is(
+  .love-fear-flag-grid button,
+  .freedom-priority-grid button
+) {
+  background: var(--ss-white) !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  transform: none !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .assessment-workspace :is(
+  .love-fear-flag-grid button.selected,
+  .freedom-priority-grid button[aria-pressed="true"]
+) {
+  background: var(--ss-yellow) !important;
+  box-shadow: inset 8px 0 0 var(--ss-route-accent) !important;
+  color: var(--ss-ink) !important;
+}
+
 /* Homepage composition: one content gutter, deliberate rhythm, reliable contrast. */
 .hud-frame.module-home .terminal-screen,
 .hud-frame.module-home .terminal-content {
@@ -1277,6 +1372,313 @@ body {
   }
 }
 
+/* Step 6: one control language across the current site. */
+.hud-frame:not(.module-home) .terminal-content button:not(.floating-quick-escape),
+.hud-frame:not(.module-home) .terminal-content a.button {
+  align-items: center !important;
+  background: var(--ss-ink) !important;
+  background-image: none !important;
+  border: 2px solid var(--ss-ink) !important;
+  border-radius: 0 !important;
+  box-shadow: 4px 4px 0 var(--ss-route-accent) !important;
+  color: var(--ss-white) !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+  font-family: var(--ss-font-body) !important;
+  font-size: 0.9rem !important;
+  font-weight: 700 !important;
+  justify-content: center !important;
+  letter-spacing: 0 !important;
+  line-height: 1.2 !important;
+  min-height: 46px !important;
+  padding: 11px 17px !important;
+  text-decoration: none !important;
+  text-shadow: none !important;
+  text-transform: none !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content button:not(.floating-quick-escape):hover,
+.hud-frame:not(.module-home) .terminal-content button:not(.floating-quick-escape):focus-visible,
+.hud-frame:not(.module-home) .terminal-content a.button:hover,
+.hud-frame:not(.module-home) .terminal-content a.button:focus-visible {
+  background: var(--ss-yellow) !important;
+  box-shadow: 2px 2px 0 var(--ss-route-accent) !important;
+  color: var(--ss-ink) !important;
+  outline: 2px solid var(--ss-ink) !important;
+  outline-offset: 3px !important;
+  transform: translate(2px, 2px) !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content :is(
+  button.secondary-action,
+  button.text-button,
+  button.resource-back-button
+) {
+  background: var(--ss-paper) !important;
+  box-shadow: 4px 4px 0 var(--ss-ink) !important;
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content button:disabled {
+  background: #c9c2b5 !important;
+  border-color: #6f6d69 !important;
+  box-shadow: none !important;
+  color: #555452 !important;
+  cursor: not-allowed !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Guide copy must remain ink-on-paper regardless of older route themes. */
+.hud-frame:is(.module-guides, .module-how-to) .terminal-content,
+.hud-frame:is(.module-guides, .module-how-to) .terminal-content :is(
+  h1, h2, h3, h4, h5, h6, p, li, label, span, small, strong, em, code, a
+) {
+  color: var(--ss-ink) !important;
+  text-shadow: none !important;
+}
+
+.hud-frame:is(.module-guides, .module-how-to) .terminal-content .terminal-label,
+.hud-frame:is(.module-guides, .module-how-to) .terminal-content .ss-template-kicker,
+.hud-frame:is(.module-guides, .module-how-to) .terminal-content .ss-section-index {
+  color: var(--ss-blue) !important;
+}
+
+/* Assessment workspace: structured, readable, and unmistakably interactive. */
+.hud-frame .assessment-workspace .assessment-modal-body {
+  line-height: 1.6 !important;
+}
+
+.hud-frame .assessment-workspace .assessment-modal-body > h2 {
+  border-left: 10px solid var(--ss-route-accent) !important;
+  font-size: 1.8rem !important;
+  margin: 0 !important;
+  padding-left: 16px !important;
+}
+
+.hud-frame .assessment-workspace :is(
+  .love-fear-pair article,
+  .love-fear-results section,
+  .love-fear-support-footer,
+  .love-fear-subtotals article,
+  .freedom-test-note,
+  .freedom-scale-summary article,
+  .pattern-map-domain
+) {
+  background: var(--ss-paper) !important;
+  background-image: none !important;
+  border: 2px solid var(--ss-ink) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  padding: 18px !important;
+  text-shadow: none !important;
+}
+
+.hud-frame .assessment-workspace :is(
+  .love-fear-pair,
+  .love-fear-results,
+  .love-fear-subtotals,
+  .freedom-scale-summary,
+  .pattern-map-domain-grid
+) {
+  gap: 14px !important;
+}
+
+.hud-frame .assessment-workspace :is(
+  .love-fear-pair span,
+  .love-fear-subtotals span,
+  .love-fear-support-footer strong,
+  .freedom-scale-summary span
+) {
+  color: var(--ss-red) !important;
+  font-family: var(--ss-font-body) !important;
+  font-size: 0.74rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0 !important;
+  text-transform: uppercase !important;
+}
+
+.hud-frame .assessment-workspace .love-fear-scale {
+  border: 0 !important;
+  display: grid !important;
+  gap: 10px !important;
+  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.hud-frame .assessment-workspace .love-fear-scale legend {
+  color: var(--ss-ink) !important;
+  font-family: var(--ss-font-display) !important;
+  font-size: 1rem !important;
+  font-weight: 700 !important;
+  grid-column: 1 / -1 !important;
+  letter-spacing: 0 !important;
+  margin-bottom: 4px !important;
+  text-transform: none !important;
+}
+
+.hud-frame .assessment-workspace .love-fear-scale label {
+  align-content: center !important;
+  background: var(--ss-white) !important;
+  border: 2px solid var(--ss-ink) !important;
+  border-radius: 0 !important;
+  color: var(--ss-ink) !important;
+  cursor: pointer !important;
+  display: grid !important;
+  gap: 8px !important;
+  justify-items: center !important;
+  min-height: 104px !important;
+  padding: 12px 8px !important;
+  text-align: center !important;
+}
+
+.hud-frame .assessment-workspace .love-fear-scale label:hover,
+.hud-frame .assessment-workspace .love-fear-scale label:focus-within {
+  background: var(--ss-paper-deep) !important;
+  outline: 2px solid var(--ss-blue) !important;
+  outline-offset: 2px !important;
+}
+
+.hud-frame .assessment-workspace .love-fear-scale label.selected {
+  background: var(--ss-yellow) !important;
+  border-color: var(--ss-ink) !important;
+  box-shadow: inset 0 -8px 0 var(--ss-route-accent) !important;
+}
+
+.hud-frame .assessment-workspace .love-fear-scale label > span {
+  color: var(--ss-ink) !important;
+  font-family: var(--ss-font-display) !important;
+  font-size: 1.8rem !important;
+  font-weight: 700 !important;
+}
+
+.hud-frame .assessment-workspace .love-fear-scale small {
+  color: var(--ss-ink-soft) !important;
+  font-size: 0.72rem !important;
+}
+
+.hud-frame .assessment-workspace :is(.love-fear-flag-grid, .freedom-priority-grid) {
+  display: grid !important;
+  gap: 10px !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+}
+
+.hud-frame .assessment-workspace :is(
+  .love-fear-flag-grid button,
+  .freedom-priority-grid button
+) {
+  background: var(--ss-white) !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  justify-content: flex-start !important;
+  min-height: 64px !important;
+  text-align: left !important;
+}
+
+.hud-frame .assessment-workspace :is(
+  .love-fear-flag-grid button.selected,
+  .freedom-priority-grid button[aria-pressed="true"]
+) {
+  background: var(--ss-yellow) !important;
+  box-shadow: inset 8px 0 0 var(--ss-route-accent) !important;
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame .assessment-workspace .freedom-response-list {
+  display: grid !important;
+  gap: 10px !important;
+}
+
+.hud-frame .assessment-workspace .freedom-response-list button {
+  align-items: center !important;
+  background: var(--ss-white) !important;
+  border: 2px solid var(--ss-ink) !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  display: grid !important;
+  gap: 5px 14px !important;
+  grid-template-columns: 48px minmax(0, 1fr) !important;
+  justify-items: start !important;
+  min-height: 76px !important;
+  padding: 12px 16px !important;
+  text-align: left !important;
+  transform: none !important;
+}
+
+.hud-frame .assessment-workspace .freedom-response-list button strong {
+  align-items: center !important;
+  background: var(--ss-ink) !important;
+  border-radius: 0 !important;
+  color: var(--ss-white) !important;
+  display: inline-flex !important;
+  font-family: var(--ss-font-display) !important;
+  font-size: 1.2rem !important;
+  height: 42px !important;
+  justify-content: center !important;
+  width: 42px !important;
+}
+
+.hud-frame .assessment-workspace .freedom-response-list button :is(span, small) {
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame .assessment-workspace .freedom-response-list button small {
+  grid-column: 2 !important;
+}
+
+.hud-frame .assessment-workspace .freedom-response-list button:hover,
+.hud-frame .assessment-workspace .freedom-response-list button:focus-visible {
+  background: var(--ss-paper-deep) !important;
+  outline: 2px solid var(--ss-blue) !important;
+  outline-offset: 2px !important;
+}
+
+.hud-frame .assessment-workspace .freedom-response-list button[aria-checked="true"],
+.hud-frame .assessment-workspace .freedom-response-list button.selected {
+  background: var(--ss-yellow) !important;
+  box-shadow: inset 8px 0 0 var(--ss-route-accent) !important;
+}
+
+.hud-frame .assessment-workspace .pattern-map-domain {
+  border-left-width: 10px !important;
+}
+
+.hud-frame .assessment-workspace .pattern-map-domain.state-1 { border-left-color: var(--ss-yellow) !important; }
+.hud-frame .assessment-workspace .pattern-map-domain.state-2 { border-left-color: var(--ss-red) !important; }
+.hud-frame .assessment-workspace .pattern-map-domain.state-3 { border-left-color: var(--ss-ink) !important; }
+
+.hud-frame .assessment-workspace .pattern-map-bar {
+  background: var(--ss-paper-deep) !important;
+  border: 2px solid var(--ss-ink) !important;
+  height: 16px !important;
+}
+
+.hud-frame .assessment-workspace .pattern-map-bar span {
+  background: var(--ss-route-accent) !important;
+}
+
+.hud-frame .assessment-workspace .pattern-map-results .love-fear-support-footer a {
+  color: var(--ss-blue) !important;
+  font-weight: 700 !important;
+}
+
+@media (max-width: 760px) {
+  .hud-frame .assessment-workspace .love-fear-scale {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .hud-frame .assessment-workspace :is(.love-fear-flag-grid, .freedom-priority-grid) {
+    grid-template-columns: 1fr !important;
+  }
+
+  .hud-frame .assessment-workspace .love-fear-subtotals,
+  .hud-frame .assessment-workspace .freedom-scale-summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hud-frame *,
   .hud-frame *::before,
@@ -1588,4 +1990,33 @@ body {
   ) {
     padding: 18px !important;
   }
+}
+
+/* Final cascade lock: current Bauhaus category and assessment surfaces. */
+.hud-frame:not(.module-home) .terminal-content .category-module > .page-flourish-header {
+  background: var(--ss-white) !important;
+  background-image: none !important;
+  border: 2px solid var(--ss-ink) !important;
+  border-left: 12px solid var(--ss-route-accent) !important;
+  color: var(--ss-ink) !important;
+  min-height: 0 !important;
+  padding: 22px 26px !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .category-module > .page-flourish-header .page-flourish-copy,
+.hud-frame:not(.module-home) .terminal-content .category-module > .page-flourish-header .page-flourish-intro {
+  color: var(--ss-ink) !important;
+  display: block !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .category-module > .page-flourish-header :is(.folk-kicker, h1) {
+  display: none !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .category-module > .page-flourish-header :is(p, span, strong),
+.hud-frame:is(.module-guides, .module-how-to) .terminal-content :is(
+  h1, h2, h3, h4, h5, h6, p, li, label, span, small, strong, em, code, a
+) {
+  color: var(--ss-ink) !important;
+  text-shadow: none !important;
 }
