@@ -9367,6 +9367,148 @@ a,
   }
 }
 
+/* Color-balance refinement: each primary is structural, not ornamental. */
+.module-home .home-briefing-bar {
+  border-image: linear-gradient(
+    90deg,
+    var(--bh-red) 0 25%,
+    var(--bh-blue) 25% 50%,
+    var(--bh-green) 50% 75%,
+    var(--bh-yellow) 75% 100%
+  ) 1 !important;
+}
+
+.module-home .home-hero-composition .home-hero-visual.bauhaus-stage {
+  background: var(--bh-paper) !important;
+  border-left: 3px solid var(--bh-ink) !important;
+}
+
+.module-home .bauhaus-art {
+  background:
+    linear-gradient(90deg, transparent 49.6%, rgba(31, 34, 39, 0.18) 49.6% 50.4%, transparent 50.4%),
+    linear-gradient(transparent 49.6%, rgba(31, 34, 39, 0.18) 49.6% 50.4%, transparent 50.4%);
+}
+
+.module-home .bauhaus-circle-blue {
+  height: 56%;
+  left: 2%;
+  top: 3%;
+  width: 56%;
+}
+
+.module-home .bauhaus-circle-yellow {
+  border-width: 9px;
+  height: 35%;
+  left: 33%;
+  top: 32%;
+  width: 35%;
+  z-index: 3;
+}
+
+.module-home .bauhaus-half-red {
+  bottom: 4%;
+  height: 37%;
+  right: 0;
+  width: 68%;
+}
+
+.module-home .bauhaus-square-green {
+  bottom: 1%;
+  height: 36%;
+  left: 1%;
+  width: 36%;
+}
+
+.module-home .bauhaus-bar-black {
+  height: 11%;
+  right: 0;
+  top: 0;
+  width: 38%;
+}
+
+.module-home .home-category-card:nth-child(1) {
+  background: var(--bh-yellow) !important;
+}
+
+.module-home .home-category-card:nth-child(1) .home-file-tab {
+  background: var(--bh-red) !important;
+}
+
+.module-home .home-category-card:nth-child(1) .home-file-tab span,
+.module-home .home-category-card:nth-child(1) .home-file-tab small {
+  color: white !important;
+}
+
+.module-home .home-category-card:nth-child(2) .home-file-tab {
+  background: var(--bh-yellow) !important;
+}
+
+.module-home .home-category-card:nth-child(3) .home-file-tab {
+  background: var(--bh-blue) !important;
+}
+
+.module-home .home-category-card:nth-child(3) .home-file-tab span,
+.module-home .home-category-card:nth-child(3) .home-file-tab small {
+  color: white !important;
+}
+
+.module-home .home-category-card:nth-child(4) .home-file-tab {
+  background: var(--bh-green) !important;
+}
+
+.module-home .home-category-card:nth-child(4) .home-file-tab span,
+.module-home .home-category-card:nth-child(4) .home-file-tab small {
+  color: white !important;
+}
+
+.module-home .start-where-you-are {
+  background: var(--bh-green) !important;
+  color: white !important;
+}
+
+.module-home .home-privacy-panel {
+  background: var(--bh-blue) !important;
+  color: white !important;
+}
+
+.module-home .start-where-you-are h2,
+.module-home .start-where-you-are p,
+.module-home .home-privacy-panel h2,
+.module-home .home-privacy-panel p {
+  color: white !important;
+}
+
+.module-home .start-where-you-are .folk-kicker {
+  color: var(--bh-yellow) !important;
+}
+
+.module-home .home-privacy-panel .folk-kicker {
+  color: var(--bh-yellow) !important;
+}
+
+.module-home .home-choice-list button:nth-child(1) {
+  box-shadow: inset 8px 0 0 var(--bh-red) !important;
+}
+
+.module-home .home-choice-list button:nth-child(2) {
+  box-shadow: inset 8px 0 0 var(--bh-yellow) !important;
+}
+
+.module-home .home-choice-list button:nth-child(3) {
+  box-shadow: inset 8px 0 0 var(--bh-blue) !important;
+}
+
+.module-home .home-choice-list button:nth-child(4) {
+  box-shadow: inset 8px 0 0 var(--bh-paper) !important;
+}
+
+@media (max-width: 1180px) {
+  .module-home .home-hero-composition .home-hero-visual.bauhaus-stage {
+    border-left: 0 !important;
+    border-top: 3px solid var(--bh-ink) !important;
+  }
+}
+
 /* Timeless archive palette: ink, midnight, parchment, pewter, and oxblood. */
 .module-home {
   --classic-ink: #0f1116;
@@ -13946,5 +14088,109 @@ body::after {
 @media (max-width: 600px) {
   .module-home .folk-sidebar .desktop-icon-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+/* Final palette balance lock. */
+.module-home .home-briefing-bar {
+  border-image: linear-gradient(90deg, var(--bh-red) 0 25%, var(--bh-blue) 25% 50%, var(--bh-green) 50% 75%, var(--bh-yellow) 75% 100%) 1 !important;
+}
+
+.module-home .home-hero-composition .refined-home-message {
+  padding-bottom: clamp(44px, 5vw, 72px) !important;
+  padding-top: clamp(44px, 5vw, 72px) !important;
+}
+
+.module-home .home-hero-composition .home-message h1 {
+  font-size: clamp(3rem, 5vw, 5.8rem) !important;
+  line-height: 0.87 !important;
+}
+
+.module-home .home-hero-composition .home-hero-visual.bauhaus-stage {
+  background: var(--bh-paper) !important;
+  border-left: 3px solid var(--bh-ink) !important;
+}
+
+.module-home .bauhaus-art {
+  background:
+    linear-gradient(90deg, transparent 49.6%, rgba(31, 34, 39, 0.18) 49.6% 50.4%, transparent 50.4%),
+    linear-gradient(transparent 49.6%, rgba(31, 34, 39, 0.18) 49.6% 50.4%, transparent 50.4%);
+}
+
+.module-home .bauhaus-circle-blue {
+  height: 56% !important;
+  left: 2% !important;
+  top: 3% !important;
+  width: 56% !important;
+}
+
+.module-home .bauhaus-circle-yellow {
+  border-width: 9px !important;
+  height: 35% !important;
+  left: 33% !important;
+  top: 32% !important;
+  width: 35% !important;
+  z-index: 3 !important;
+}
+
+.module-home .bauhaus-half-red {
+  bottom: 4% !important;
+  height: 37% !important;
+  right: 0 !important;
+  width: 68% !important;
+}
+
+.module-home .bauhaus-square-green {
+  bottom: 1% !important;
+  height: 36% !important;
+  left: 1% !important;
+  width: 36% !important;
+}
+
+.module-home .home-category-card:nth-child(1) { background: var(--bh-yellow) !important; }
+.module-home .home-category-card:nth-child(2) { background: var(--bh-blue) !important; }
+.module-home .home-category-card:nth-child(3) { background: var(--bh-green) !important; }
+.module-home .home-category-card:nth-child(4) { background: var(--bh-red) !important; }
+
+.module-home .home-category-card:nth-child(1) .home-file-tab { background: var(--bh-red) !important; }
+.module-home .home-category-card:nth-child(2) .home-file-tab { background: var(--bh-yellow) !important; }
+.module-home .home-category-card:nth-child(3) .home-file-tab { background: var(--bh-blue) !important; }
+.module-home .home-category-card:nth-child(4) .home-file-tab { background: var(--bh-green) !important; }
+
+.module-home .home-category-card:nth-child(1) .home-file-tab span,
+.module-home .home-category-card:nth-child(1) .home-file-tab small,
+.module-home .home-category-card:nth-child(3) .home-file-tab span,
+.module-home .home-category-card:nth-child(3) .home-file-tab small,
+.module-home .home-category-card:nth-child(4) .home-file-tab span,
+.module-home .home-category-card:nth-child(4) .home-file-tab small {
+  color: white !important;
+}
+
+.module-home .start-where-you-are {
+  background: var(--bh-green) !important;
+  color: white !important;
+}
+
+.module-home .home-privacy-panel {
+  background: var(--bh-blue) !important;
+  color: white !important;
+}
+
+.module-home .start-where-you-are h2,
+.module-home .start-where-you-are p,
+.module-home .home-privacy-panel h2,
+.module-home .home-privacy-panel p {
+  color: white !important;
+}
+
+.module-home .start-where-you-are .folk-kicker,
+.module-home .home-privacy-panel .folk-kicker {
+  color: var(--bh-yellow) !important;
+}
+
+@media (max-width: 1180px) {
+  .module-home .home-hero-composition .home-hero-visual.bauhaus-stage {
+    border-left: 0 !important;
+    border-top: 3px solid var(--bh-ink) !important;
   }
 }
