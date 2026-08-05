@@ -1,7 +1,6 @@
 import { type FormEvent, type KeyboardEvent as ReactKeyboardEvent, type ReactNode, useCallback, useEffect, useRef, useState } from "react";
 import {
   BookOpenCheck,
-  Scale,
 } from "lucide-react";
 import denialSupportOne from "./assets/support/denial-support-1.png";
 import denialSupportTwo from "./assets/support/denial-support-2.png";
@@ -926,7 +925,7 @@ const civilProtectiveOrderGuideSections: LegalGuideSection[] = [
         ],
       },
       {
-        title: "System Note",
+        title: "Important",
         items: [
           { text: "Ask for each protection directly. A general no-contact order may not automatically cover every location, device, child, pet, account, workplace, or communication method." },
         ],
@@ -1340,7 +1339,7 @@ const moduleRoutes: Record<ModuleKey, { label: string; path: string }> = {
   guides: { label: "Resources", path: "/resources" },
   planners: { label: "Resources", path: "/resources" },
   toolkits: { label: "Resources", path: "/resources" },
-  education: { label: "Education & Awareness", path: "/education-awareness" },
+  education: { label: "Learn More", path: "/education-awareness" },
   about: { label: "About", path: "/about" },
   advocacy: { label: "Strategy", path: "/strategy" },
   government: { label: "Government", path: "/government" },
@@ -1386,7 +1385,7 @@ type SidebarIconKey =
 
 const navItems: Array<{ key: ModuleKey; label: string; path: string; code: SidebarIconKey }> = [
   { key: "local-help", label: "Resources", path: "/resources", code: "toolkits" },
-  { key: "education", label: "Education", path: "/education-awareness", code: "education" },
+  { key: "education", label: "Learn More", path: "/education-awareness", code: "education" },
   { key: "advocacy", label: "Strategy", path: "/strategy", code: "advocacy" },
   { key: "government", label: "Government", path: "/government", code: "government" },
   { key: "about", label: "About", path: "/about", code: "about" },
@@ -2476,7 +2475,7 @@ const categoryFiles: Record<
     ],
   },
   education: {
-    title: "Education & Awareness",
+    title: "Learn More",
     intro:
       "Pattern language, abuse dynamics, rebuilding concepts, and plain-English explanations that help the user stop arguing with the fog.",
     files: [
@@ -3415,7 +3414,7 @@ function resolveCommand(query: string) {
   }
 
   if (/\b(education|awareness|learn|dynamics|gray rock|statistics|be so for real)\b/.test(normalized)) {
-    return { message: "QUERY ACCEPTED. ROUTING TO EDUCATION & AWARENESS...", target: navItemFor("education") };
+    return { message: "OPENING LEARN MORE...", target: navItemFor("education") };
   }
 
   if (/\b(about|mission|privacy|founder|who built)\b/.test(normalized)) {
@@ -6629,18 +6628,14 @@ function LegalGuidePage({
   onBack: () => void;
 }) {
   return (
-    <section className="page-shell legal-module" aria-labelledby={`${guide.title.replaceAll(" ", "-").toLowerCase()}-title`}>
-      <div className="page-kicker">
-        <Scale aria-hidden="true" />
-        <p className="eyebrow">{guide.eyebrow}</p>
-      </div>
-
-      <div className="legal-guide-shell">
-        <div className="terminal-label">{guide.terminalLabel}</div>
-        <h1 id={`${guide.title.replaceAll(" ", "-").toLowerCase()}-title`}>{guide.title}</h1>
-        <p className="legal-tagline">// Legal orientation. No shame. No blindfold.</p>
-
-        <div className="legal-intro">{guide.intro}</div>
+    <EditorialPageTemplate
+      className="page-shell legal-module legal-guide-shell"
+      eyebrow={guide.eyebrow.replaceAll("//", "/")}
+      intro={<p>{guide.intro}</p>}
+      title={guide.title}
+      titleId={`${guide.title.replaceAll(" ", "-").toLowerCase()}-title`}
+      tone="blue"
+    >
 
         <div className="legal-warning">
           <strong> Not Legal Advice</strong>
@@ -6699,8 +6694,7 @@ function LegalGuidePage({
             Quick Exit
           </button>
         </div>
-      </div>
-    </section>
+    </EditorialPageTemplate>
   );
 }
 
@@ -6711,23 +6705,19 @@ function LegalModule() {
 
   if (activeView === "motion-drafting") {
     return (
-      <section className="page-shell legal-module" aria-labelledby="motion-drafting-title">
-        <div className="page-kicker">
-          <Scale aria-hidden="true" />
-          <p className="eyebrow">Legal // Family Court</p>
-        </div>
-
-        <div className="legal-guide-shell">
-          <div className="terminal-label">Motion Drafting Basics</div>
-          <h1 id="motion-drafting-title">Motion Drafting Basics</h1>
-          <p className="legal-tagline">// Tools for clarity. Power for your future.</p>
-
-          <div className="legal-intro">
+      <EditorialPageTemplate
+        className="page-shell legal-module legal-guide-shell"
+        eyebrow="Resources / Legal / Family Court"
+        intro={<p>
             A motion is just a written request asking the court to do something. Before you write
             one word, you need to know which one you are actually filing. The wrong motion can get
             you a denial or delay instead of a hearing. This module starts where every filing
             should: research.
-          </div>
+          </p>}
+        title="Motion Drafting Basics"
+        titleId="motion-drafting-title"
+        tone="blue"
+      >
 
           <div className="legal-warning">
             <strong> Read This First</strong>
@@ -6817,8 +6807,7 @@ function LegalModule() {
               Quick Exit
             </button>
           </div>
-        </div>
-      </section>
+      </EditorialPageTemplate>
     );
   }
 
@@ -6832,7 +6821,7 @@ function LegalModule() {
 
   return (
     <section className="page-shell legal-module" aria-labelledby="legal-title">
-      <PageFlourishHeader eyebrow="Survivor Operating System // Legal" title="Legal Resources" titleId="legal-title" variant="legal">
+      <PageFlourishHeader eyebrow="Resources / Legal" title="Legal Resources" titleId="legal-title" variant="legal">
         <p>
           Legal systems can be intimidating because they are systems with rules, deadlines,
           vocabulary, and power. This section is for orientation, language, and preparation before

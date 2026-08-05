@@ -24,11 +24,10 @@ export function EditorialPageTemplate({
   eyebrow,
   intro,
   quickMap = [],
-  status = "LIVE PAGE",
   title,
   titleId,
   tone = "blue",
-}: BaseTemplateProps & { quickMap?: string[]; status?: string }) {
+}: BaseTemplateProps & { quickMap?: string[] }) {
   return (
     <article className={templateClass("editorial", tone, className)} aria-labelledby={titleId}>
       <header className="ss-template-header">
@@ -37,11 +36,6 @@ export function EditorialPageTemplate({
           <h1 id={titleId}>{title}</h1>
           <div className="ss-template-intro">{intro}</div>
         </div>
-        <aside className="ss-template-status" aria-label={`${title} page status`}>
-          <span>DOCUMENT STATUS</span>
-          <strong>{status}</strong>
-          <small>LIVE TEXT / SCREENSHOT-FRIENDLY</small>
-        </aside>
       </header>
       {quickMap.length ? (
         <nav className="ss-template-index" aria-label={`${title} section index`}>
