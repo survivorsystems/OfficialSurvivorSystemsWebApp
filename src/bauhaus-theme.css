@@ -2395,3 +2395,35 @@ body {
     width: 74px !important;
   }
 }
+
+/* Assessments are long documents. Never trap their content inside legacy app-frame overflow. */
+.hud-frame.module-assessments,
+.hud-frame.module-assessments .win95-desktop {
+  height: auto !important;
+  max-height: none !important;
+  overflow-x: clip !important;
+  overflow-y: visible !important;
+}
+
+.hud-frame.module-assessments .folk-main-shell,
+.hud-frame.module-assessments .terminal-screen,
+.hud-frame.module-assessments .terminal-content,
+.hud-frame.module-assessments .assessment-workspace,
+.hud-frame.module-assessments .assessment-modal-backdrop,
+.hud-frame.module-assessments .assessment-modal,
+.hud-frame.module-assessments .assessment-modal-body {
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+.hud-frame.module-assessments .terminal-screen,
+.hud-frame.module-assessments .terminal-content {
+  min-height: 0 !important;
+}
+
+@media (max-width: 980px) {
+  .hud-frame.module-assessments .folk-sidebar {
+    position: relative !important;
+  }
+}
