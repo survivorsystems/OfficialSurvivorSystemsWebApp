@@ -2431,3 +2431,26 @@ body {
 .library-pass-grid {
   grid-template-columns: minmax(0, 720px) !important;
 }
+
+/* Guide pages use light paper surfaces even when opened from the Resources route. */
+.hud-frame:not(.module-home) .terminal-content :is(
+  .how-to-guide-page,
+  .rebuilding-module,
+  .legal-guide-shell
+) :is(h1, h2, h3, h4) {
+  color: var(--ss-ink) !important;
+  text-shadow: none !important;
+}
+
+/* Resource records are black controls; every label inside them must remain light. */
+.hud-frame:not(.module-home) .terminal-content .resource-file-row,
+.hud-frame:not(.module-home) .terminal-content .resource-file-row :is(span, small, strong) {
+  color: var(--ss-white) !important;
+  text-shadow: none !important;
+}
+
+/* Folder controls use yellow paper, so both title and supporting copy use dark ink. */
+.hud-frame:not(.module-home) .terminal-content .resource-directory-toggle :is(strong, small) {
+  color: var(--ss-ink) !important;
+  text-shadow: none !important;
+}
