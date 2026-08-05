@@ -2249,3 +2249,35 @@ body {
   color: var(--ss-ink) !important;
   text-shadow: none !important;
 }
+
+/* Assessment copy is literal black on every light assessment surface. */
+.hud-frame.module-assessments .terminal-content :is(
+  h1, h2, h3, h4, h5, h6, p, li, label, legend, span, small, strong, em, code
+) {
+  color: #000 !important;
+  text-shadow: none !important;
+}
+
+.hud-frame.module-assessments .terminal-content button:not(.category-file-title-button),
+.hud-frame.module-assessments .terminal-content button:not(.category-file-title-button) :is(span, small, strong) {
+  color: var(--ss-white) !important;
+}
+
+.hud-frame.module-assessments .terminal-content :is(
+  button:hover,
+  button:focus-visible,
+  button.selected,
+  button[aria-checked="true"],
+  button[aria-pressed="true"]
+),
+.hud-frame.module-assessments .terminal-content :is(
+  button:hover,
+  button:focus-visible,
+  button.selected,
+  button[aria-checked="true"],
+  button[aria-pressed="true"]
+) :is(span, small, strong),
+.hud-frame.module-assessments .terminal-content .category-file-title-button,
+.hud-frame.module-assessments .terminal-content .category-file-title-button :is(h2, h3, span) {
+  color: #000 !important;
+}
