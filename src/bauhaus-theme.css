@@ -2251,34 +2251,34 @@ body {
 }
 
 /* Assessment copy is literal black on every light assessment surface. */
-.hud-frame.module-assessments .terminal-content :is(
+.hud-frame:is(.module-assessments, .module-advocacy) .terminal-content :is(
   h1, h2, h3, h4, h5, h6, p, li, label, legend, span, small, strong, em, code
 ) {
   color: #000 !important;
   text-shadow: none !important;
 }
 
-.hud-frame.module-assessments .terminal-content button:not(.category-file-title-button),
-.hud-frame.module-assessments .terminal-content button:not(.category-file-title-button) :is(span, small, strong) {
+.hud-frame:is(.module-assessments, .module-advocacy) .terminal-content button:not(.category-file-title-button),
+.hud-frame:is(.module-assessments, .module-advocacy) .terminal-content button:not(.category-file-title-button) :is(span, small, strong) {
   color: var(--ss-white) !important;
 }
 
-.hud-frame.module-assessments .terminal-content :is(
+.hud-frame:is(.module-assessments, .module-advocacy) .terminal-content :is(
   button:hover,
   button:focus-visible,
   button.selected,
   button[aria-checked="true"],
   button[aria-pressed="true"]
 ),
-.hud-frame.module-assessments .terminal-content :is(
+.hud-frame:is(.module-assessments, .module-advocacy) .terminal-content :is(
   button:hover,
   button:focus-visible,
   button.selected,
   button[aria-checked="true"],
   button[aria-pressed="true"]
 ) :is(span, small, strong),
-.hud-frame.module-assessments .terminal-content .category-file-title-button,
-.hud-frame.module-assessments .terminal-content .category-file-title-button :is(h2, h3, span) {
+.hud-frame:is(.module-assessments, .module-advocacy) .terminal-content .category-file-title-button,
+.hud-frame:is(.module-assessments, .module-advocacy) .terminal-content .category-file-title-button :is(h2, h3, span) {
   color: #000 !important;
 }
 
@@ -2397,33 +2397,37 @@ body {
 }
 
 /* Assessments are long documents. Never trap their content inside legacy app-frame overflow. */
-.hud-frame.module-assessments,
-.hud-frame.module-assessments .win95-desktop {
+.hud-frame:is(.module-assessments, .module-advocacy),
+.hud-frame:is(.module-assessments, .module-advocacy) .win95-desktop {
   height: auto !important;
   max-height: none !important;
   overflow-x: clip !important;
   overflow-y: visible !important;
 }
 
-.hud-frame.module-assessments .folk-main-shell,
-.hud-frame.module-assessments .terminal-screen,
-.hud-frame.module-assessments .terminal-content,
-.hud-frame.module-assessments .assessment-workspace,
-.hud-frame.module-assessments .assessment-modal-backdrop,
-.hud-frame.module-assessments .assessment-modal,
-.hud-frame.module-assessments .assessment-modal-body {
+.hud-frame:is(.module-assessments, .module-advocacy) .folk-main-shell,
+.hud-frame:is(.module-assessments, .module-advocacy) .terminal-screen,
+.hud-frame:is(.module-assessments, .module-advocacy) .terminal-content,
+.hud-frame:is(.module-assessments, .module-advocacy) .assessment-workspace,
+.hud-frame:is(.module-assessments, .module-advocacy) .assessment-modal-backdrop,
+.hud-frame:is(.module-assessments, .module-advocacy) .assessment-modal,
+.hud-frame:is(.module-assessments, .module-advocacy) .assessment-modal-body {
   height: auto !important;
   max-height: none !important;
   overflow: visible !important;
 }
 
-.hud-frame.module-assessments .terminal-screen,
-.hud-frame.module-assessments .terminal-content {
+.hud-frame:is(.module-assessments, .module-advocacy) .terminal-screen,
+.hud-frame:is(.module-assessments, .module-advocacy) .terminal-content {
   min-height: 0 !important;
 }
 
 @media (max-width: 980px) {
-  .hud-frame.module-assessments .folk-sidebar {
+  .hud-frame:is(.module-assessments, .module-advocacy) .folk-sidebar {
     position: relative !important;
   }
+}
+
+.library-pass-grid {
+  grid-template-columns: minmax(0, 720px) !important;
 }

@@ -272,58 +272,13 @@ const libraryCategories: LibraryCategory[] = [
 
 const libraryPasses: LibraryPass[] = [
   {
-    id: "just-looking",
-    title: "I'm Just Looking",
-    price: "$1.99",
-    scope: "One week of view-only access to the paid library.",
-    viewing: "View the library for 7 days.",
-    unlocks: "No permanent file unlocks included.",
-    renewal: "One-time access pass. No subscription or auto-renewal.",
-  },
-  {
-    id: "unlock-resource",
-    title: "Unlock A Resource",
-    price: "$2.99",
-    scope: "Two weeks of library viewing plus one permanent file unlock.",
-    viewing: "View the library for 14 days.",
-    unlocks: "Includes 1 Permanent Unlock.",
-    renewal: "One-time access pass. No subscription or auto-renewal.",
-  },
-  {
-    id: "two-week-access",
-    title: "Two Week Access Pass",
-    price: "$3.99",
-    scope: "Two weeks of library viewing plus two permanent file unlocks.",
-    viewing: "View the library for 14 days.",
-    unlocks: "Includes 2 Permanent Unlocks.",
-    renewal: "One-time access pass. No subscription or auto-renewal.",
-  },
-  {
-    id: "all-access",
-    title: "30 Days All Access Pass",
-    price: "$4.99",
-    scope: "Thirty days of library viewing plus three permanent file unlocks.",
-    viewing: "View the library for 30 days.",
-    unlocks: "Includes 3 Permanent Unlocks.",
-    renewal: "One-time access pass. No subscription or auto-renewal.",
-  },
-  {
-    id: "one-more-resource",
-    title: "I Need One More Resource",
-    price: "$1.99",
-    scope: "Add one more permanent file unlock.",
-    viewing: "Does not change pass viewing access.",
-    unlocks: "Adds 1 Permanent Unlock.",
-    renewal: "One-time add-on. No subscription or auto-renewal.",
-  },
-  {
-    id: "two-more-resources",
-    title: "I Need Two More Resources",
-    price: "$2.99",
-    scope: "Add two more permanent file unlocks.",
-    viewing: "Does not change pass viewing access.",
-    unlocks: "Adds 2 Permanent Unlocks.",
-    renewal: "One-time add-on. No subscription or auto-renewal.",
+    id: "subscriber-library",
+    title: "Subscriber Library",
+    price: "MONTHLY",
+    scope: "One subscription for the complete library of planners, trackers, templates, and deeper guides.",
+    viewing: "Unlimited library viewing while subscribed.",
+    unlocks: "Download any subscriber resource included in the library.",
+    renewal: "Renews monthly until canceled.",
   },
 ];
 
@@ -334,7 +289,7 @@ const previewResources: LibraryResource[] = [
     category: "Court & Systems Navigation",
     format: "Bundle",
     preview: "Case numbers, court contacts, evidence logs, statement practice, logistics, and after-court notes.",
-    access: "Preview with any active access pass. A Permanent Unlock keeps the download.",
+    access: "Included with an active Subscriber Library subscription.",
   },
   {
     id: "housing-tracker",
@@ -342,7 +297,7 @@ const previewResources: LibraryResource[] = [
     category: "Life Rebuilding",
     format: "Tracker",
     preview: "Applications, deadlines, caseworkers, follow-ups, waitlists, document requests, and next actions.",
-    access: "Preview with any active access pass. A Permanent Unlock keeps the download.",
+    access: "Included with an active Subscriber Library subscription.",
   },
   {
     id: "snap-benefits-log",
@@ -350,7 +305,7 @@ const previewResources: LibraryResource[] = [
     category: "Life Rebuilding",
     format: "Worksheet",
     preview: "Interview dates, office contacts, upload confirmations, missing documents, renewal deadlines, and notes.",
-    access: "Preview with any active access pass. A Permanent Unlock keeps the download.",
+    access: "Included with an active Subscriber Library subscription.",
   },
   {
     id: "survivor-university-income-map",
@@ -358,7 +313,7 @@ const previewResources: LibraryResource[] = [
     category: "Survivor University / Economic Independence",
     format: "Guide",
     preview: "Business ideas, equipment needs, startup costs, skill ladders, scam filters, and first-offer planning.",
-    access: "Preview with any active access pass. A Permanent Unlock keeps the download.",
+    access: "Included with an active Subscriber Library subscription.",
   },
 ];
 
@@ -387,7 +342,7 @@ const howToGuides: HowToGuide[] = [
     id: "snap-tanf",
     title: "How To Navigate SNAP & TANF",
     subtitle: "Food, cash assistance, interviews, documents, denials, and safe-contact planning.",
-    status: "LIVE GUIDE",
+    status: "BENEFITS GUIDE",
     description:
       "A practical benefits-navigation guide for starting the application, asking for expedited SNAP, handling missing documents, and understanding TANF domestic violence protections.",
     action: "open",
@@ -397,7 +352,7 @@ const howToGuides: HowToGuide[] = [
     id: "routine-chaos",
     title: "How To Create Routine While Life Is Chaotic",
     subtitle: "Small anchors, rest, self-care, space, creativity, and future-building when life keeps moving.",
-    status: "LIVE GUIDE",
+    status: "ROUTINE GUIDE",
     description:
       "A stabilizing guide for creating routines that can survive disrupted days, low energy, temporary housing, grief, and rebuilding.",
     action: "open",
@@ -407,7 +362,7 @@ const howToGuides: HowToGuide[] = [
     id: "live-in-your-car",
     title: "How To Live In Your Car",
     subtitle: "Vehicle readiness, storage, sleep, privacy, bathrooms, food, parking, pets, kids, and safety basics.",
-    status: "LIVE GUIDE",
+    status: "HOUSING GUIDE",
     description:
       "A practical harm-reduction guide for making vehicle living safer, calmer, more organized, and easier to manage.",
     action: "open",
@@ -439,7 +394,7 @@ const howToGuides: HowToGuide[] = [
     subtitle: "Coordinated Entry, shelters, waitlists, privacy, documents, and follow-up.",
     status: "REBUILDING GUIDE",
     description:
-      "A live guide to housing systems and the many smaller doors that can sit inside the word housing.",
+      "A guide to housing systems and the many smaller doors that can sit inside the word housing.",
     action: "open",
     priority: "priority-2",
   },
@@ -799,7 +754,7 @@ const practicalGuides: Record<string, PracticalGuide> = {
   "routine-chaos": {
     id: "routine-chaos",
     title: "How To Create Routine While Life Is Chaotic",
-    terminalLabel: "LOAD GUIDE // ROUTINE WHILE LIFE IS CHAOTIC",
+    terminalLabel: "Routine While Life Is Chaotic",
     intro:
       "When everything keeps changing, routine can be small enough to survive the chaos. This guide focuses on anchors, low-energy defaults, self-care, space, creativity, and future-building.",
     quickMap: ["Daily Anchors", "Rest Counts", "Low Energy", "One Corner", "Begin Again"],
@@ -816,7 +771,7 @@ const practicalGuides: Record<string, PracticalGuide> = {
   "live-in-your-car": {
     id: "live-in-your-car",
     title: "How To Live In Your Car",
-    terminalLabel: "LOAD GUIDE // VEHICLE LIVING",
+    terminalLabel: "Vehicle Living",
     intro:
       "Living in a car takes planning, but the space can become safer, calmer, and easier to manage. Start with movement, sleep, privacy, water, food, and a bathroom plan.",
     quickMap: ["Ready To Move", "Privacy", "Bathroom Plan", "Safe Parking", "211"],
@@ -1228,7 +1183,7 @@ const familyCourtGuideSections: LegalGuideSection[] = [
 const civilProtectiveOrderGuide: LegalGuidePageData = {
   title: "Civil Protective Order Guide",
   eyebrow: "Legal // Protective Orders",
-  terminalLabel: "user@survivor-os:~$ LOAD GUIDE // CIVIL PROTECTIVE ORDER",
+  terminalLabel: "Civil Protective Order Guide",
   intro:
     "A civil protective order is a court order that can place restrictions on someone who has abused, threatened, stalked, harassed, or sexually assaulted another person. The exact name, eligibility rules, forms, evidence rules, and available protections depend on state law.",
   warning:
@@ -1256,7 +1211,7 @@ const civilProtectiveOrderGuide: LegalGuidePageData = {
 const familyCourtGuide: LegalGuidePageData = {
   title: "Family Court Guide",
   eyebrow: "Legal // Family Court",
-  terminalLabel: "user@survivor-os:~$ LOAD GUIDE // FAMILY COURT",
+  terminalLabel: "Family Court Guide",
   intro:
     "Family court is a system with rules, deadlines, forms, vocabulary, power, and paperwork. This guide is a general map of what family court may handle, how cases usually move, what filings and motions mean, and how to prepare before asking the court for something.",
   warning:
@@ -1275,7 +1230,7 @@ const familyCourtGuide: LegalGuidePageData = {
     },
   ],
   reminder: {
-    title: "System Rule",
+    title: "What The Signed Order Controls",
     body:
       "The signed order is the operating rule until the court changes it. If the order is not being followed, think enforcement. If the order needs to change, think modification.",
   },
@@ -1381,8 +1336,8 @@ const housingGuideSections: RebuildingGuideSection[] = [
 
 const moduleRoutes: Record<ModuleKey, { label: string; path: string }> = {
   home: { label: "Home", path: "/" },
-  assessments: { label: "Assessments", path: "/assessments" },
-  guides: { label: "Guides", path: "/guides" },
+  assessments: { label: "Strategy", path: "/strategy" },
+  guides: { label: "Resources", path: "/resources" },
   planners: { label: "Resources", path: "/resources" },
   toolkits: { label: "Resources", path: "/resources" },
   education: { label: "Education & Awareness", path: "/education-awareness" },
@@ -1403,8 +1358,6 @@ const moduleRoutes: Record<ModuleKey, { label: string; path: string }> = {
 
 const allNavTargets: Array<{ key: ModuleKey; label: string; path: string }> = [
   { key: "home", ...moduleRoutes.home },
-  { key: "assessments", ...moduleRoutes.assessments },
-  { key: "guides", ...moduleRoutes.guides },
   { key: "planners", ...moduleRoutes.planners },
   { key: "toolkits", ...moduleRoutes.toolkits },
   { key: "education", ...moduleRoutes.education },
@@ -1432,8 +1385,6 @@ type SidebarIconKey =
   | "toolkits";
 
 const navItems: Array<{ key: ModuleKey; label: string; path: string; code: SidebarIconKey }> = [
-  { key: "assessments", label: "Assessments", path: "/assessments", code: "assessments" },
-  { key: "guides", label: "Guides", path: "/guides", code: "guides" },
   { key: "local-help", label: "Resources", path: "/resources", code: "toolkits" },
   { key: "education", label: "Education", path: "/education-awareness", code: "education" },
   { key: "advocacy", label: "Strategy", path: "/strategy", code: "advocacy" },
@@ -1542,17 +1493,11 @@ function navItemFor(key: ModuleKey) {
 }
 
 function isPrimaryNavActive(activeModule: ModuleKey, navKey: ModuleKey) {
-  if (navKey === "assessments") {
-    return activeModule === "assessments" || activeModule === "am-i-crazy";
-  }
-
-  if (navKey === "guides") {
-    return activeModule === "guides" || activeModule === "how-to";
-  }
-
   if (navKey === "local-help") {
-    return activeModule === "local-help" || activeModule === "how-to" || activeModule === "legal" || activeModule === "planners" || activeModule === "toolkits" || activeModule === "access" || activeModule === "library";
+    return activeModule === "local-help" || activeModule === "guides" || activeModule === "how-to" || activeModule === "legal" || activeModule === "planners" || activeModule === "toolkits" || activeModule === "access" || activeModule === "library";
   }
+
+  if (navKey === "advocacy") return activeModule === "advocacy" || activeModule === "assessments" || activeModule === "am-i-crazy";
 
   if (navKey === "access") {
     return activeModule === "access" || activeModule === "library";
@@ -2474,7 +2419,7 @@ const categoryFiles: Record<
     files: [
       {
         title: "Database Access Information",
-        description: "Access paths, library previews, permanent unlocks, and deeper planner/tracker rules.",
+        description: "Subscriber access, library previews, and deeper planner and tracker resources.",
         status: "LIVE",
         target: "access",
         path: "/resources/access",
@@ -2509,7 +2454,7 @@ const categoryFiles: Record<
     files: [
       {
         title: "Resource Library",
-        description: "The deeper toolkit library with previews, access paths, and permanent unlocks.",
+        description: "The subscriber toolkit library with previews, planners, trackers, and downloads.",
         status: "LIVE",
         target: "access",
         path: "/resources/access",
@@ -3244,8 +3189,8 @@ function leaveSite() {
 
 function getInitialModule(): ModuleKey {
   const path = window.location.pathname;
-  if (path === "/assessments") return "assessments";
-  if (path === "/guides") return "guides";
+  if (path === "/assessments") return "advocacy";
+  if (path === "/guides") return "local-help";
   if (path.startsWith("/guides/")) return "how-to";
   if (path === "/planners-trackers" || path === "/toolkits") return "local-help";
   if (path === "/education-awareness") return "education";
@@ -3439,7 +3384,7 @@ function resolveCommand(query: string) {
   if (/\b(help|menu|options|commands|where)\b/.test(normalized)) {
     return {
       message:
-        "AVAILABLE COMMANDS: ASSESSMENTS, GUIDES, PLANNERS, TOOLKITS, EDUCATION, ABOUT, QUICK EXIT.",
+        "AVAILABLE: STRATEGY, RESOURCES, EDUCATION, GOVERNMENT, ABOUT, SUPPORT, QUICK EXIT.",
       target: null,
     };
   }
@@ -3454,11 +3399,11 @@ function resolveCommand(query: string) {
   }
 
   if (/\b(assessments?|quiz|scan|was i crazy|crazy|abused|abuse|gaslight|gaslighting|reality)\b/.test(normalized)) {
-    return { message: "QUERY ACCEPTED. ROUTING TO ASSESSMENTS...", target: navItemFor("assessments") };
+    return { message: "OPENING STRATEGY...", target: navItemFor("advocacy") };
   }
 
   if (/\b(guides?|how to|housing|routine|pet|browser|car)\b/.test(normalized)) {
-    return { message: "QUERY ACCEPTED. ROUTING TO GUIDES...", target: navItemFor("guides") };
+    return { message: "OPENING RESOURCES...", target: navItemFor("local-help") };
   }
 
   if (/\b(planners?|trackers?)\b/.test(normalized)) {
@@ -3486,11 +3431,11 @@ function resolveCommand(query: string) {
   }
 
   if (/ctrl\s*\+\s*esc|\bfirst steps?\b|\bprep\b/.test(normalized)) {
-    return { message: "QUERY ACCEPTED. ROUTING TO ASSESSMENTS...", target: navItemFor("assessments") };
+    return { message: "OPENING STRATEGY...", target: navItemFor("advocacy") };
   }
 
   if (/\b(go.?bag|bag|simulator|arcade|prep|pack)\b/.test(normalized)) {
-    return { message: "QUERY ACCEPTED. ROUTING TO GUIDES...", target: navItemFor("guides") };
+    return { message: "OPENING RESOURCES...", target: navItemFor("local-help") };
   }
 
   if (/\b(plan|safety|prepare|documents|checklist)\b/.test(normalized)) {
@@ -3502,12 +3447,12 @@ function resolveCommand(query: string) {
   }
 
   if (/\b(rebuild|money|housing|future|after)\b/.test(normalized)) {
-    return { message: "QUERY ACCEPTED. ROUTING TO GUIDES...", target: navItemFor("guides") };
+    return { message: "OPENING RESOURCES...", target: navItemFor("local-help") };
   }
 
   return {
     message:
-      "QUERY NOT RECOGNIZED. TRY: ASSESSMENTS, GUIDES, PLANNERS, TOOLKITS, EDUCATION, ABOUT, OR QUICK EXIT.",
+      "TRY: STRATEGY, RESOURCES, EDUCATION, GOVERNMENT, ABOUT, SUPPORT, OR QUICK EXIT.",
     target: null,
   };
 }
@@ -3518,7 +3463,7 @@ function TerminalCommand({
   onNavigate: (module: ModuleKey, path: string) => void;
 }) {
   const [query, setQuery] = useState("");
-  const [systemReply, setSystemReply] = useState("SYSTEM READY. TYPE A MODULE NAME OR WHAT YOU NEED.");
+  const [systemReply, setSystemReply] = useState("Type a section name or what you need.");
 
   function submitCommand(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -3540,12 +3485,11 @@ function TerminalCommand({
     <form className="command-terminal" onSubmit={submitCommand}>
       <label htmlFor="terminal-command">NAV QUERY</label>
       <div className="command-input-row">
-        <span aria-hidden="true">user@survivor-os:~$</span>
         <input
           autoComplete="off"
           id="terminal-command"
           onChange={(event) => setQuery(event.target.value)}
-          placeholder="type: assessments, guides, resources, education, strategy, government..."
+          placeholder="Try: strategy, resources, education, government..."
           spellCheck={false}
           type="search"
           value={query}
@@ -3672,10 +3616,10 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
             recovery, family court, documentation, and trauma just to get free.
           </p>
           <div className="home-hero-actions" aria-label="Start options">
-            <button type="button" onClick={() => onNavigate("guides", "/guides")}>
+            <button type="button" onClick={() => onNavigate("local-help", "/resources")}>
               Explore Tools & Guides
             </button>
-            <button type="button" onClick={() => onNavigate("assessments", "/assessments")}>
+            <button type="button" onClick={() => onNavigate("advocacy", "/strategy")}>
               Start with an Assessment
             </button>
           </div>
@@ -3704,7 +3648,7 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
             identify which information, tools, and next steps may be most useful to you right now.
           </p>
         </div>
-        <button type="button" onClick={() => onNavigate("assessments", "/assessments")}>Begin Assessment</button>
+        <button type="button" onClick={() => onNavigate("advocacy", "/strategy")}>Begin Assessment</button>
       </section>
 
       <div className="home-support-grid">
@@ -3718,7 +3662,7 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
             </p>
           </div>
           <div className="home-choice-list" aria-label="Common starting points">
-            <button type="button" onClick={() => onNavigate("assessments", "/assessments")}>I need clarity</button>
+            <button type="button" onClick={() => onNavigate("advocacy", "/strategy")}>I need clarity</button>
             <button type="button" onClick={() => onNavigate("local-help", "/resources")}>I need a plan</button>
             <button type="button" onClick={() => onNavigate("advocacy", "/strategy")}>I need support</button>
             <button type="button" onClick={() => onNavigate("education", "/education-awareness")}>I am here to learn</button>
@@ -3734,7 +3678,7 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
               Use a safer device whenever possible, clear history only when it is safe, and be careful
               about saving documents or passwords on shared devices.
             </p>
-            <button type="button" onClick={() => onNavigate("guides", "/guides")}>Online Safety Tips</button>
+            <button type="button" onClick={() => onNavigate("local-help", "/resources")}>Online Safety Tips</button>
           </div>
         </section>
       </div>
@@ -3748,7 +3692,14 @@ function CategoryModule({
   category: Extract<ModuleKey, "assessments" | "guides" | "planners" | "toolkits" | "education" | "about" | "advocacy" | "government">;
   onNavigate: (module: ModuleKey, path: string) => void;
 }) {
-  const content = categoryFiles[category];
+  const baseContent = categoryFiles[category];
+  const content = category === "advocacy"
+    ? {
+        title: "Strategy",
+        intro: "Use an assessment to name patterns, understand what is affecting your choices, and find a practical place to begin.",
+        files: [...categoryFiles.assessments.files, ...baseContent.files],
+      }
+    : baseContent;
   const [activeModal, setActiveModal] = useState<CategoryFile["modal"] | null>(null);
   const guideCategories = category === "guides"
     ? resourceCategoryDefinitions
@@ -3759,10 +3710,6 @@ function CategoryModule({
   function renderCategoryFile(file: CategoryFile) {
     return (
       <article className="category-file-card" key={file.title}>
-        <div className="category-file-meta">
-          <span>{file.status}</span>
-          <small>{file.target || file.modal ? "OPENABLE" : "PENDING BUILD"}</small>
-        </div>
         {file.modal ? (
           <h2><button className="category-file-title-button" type="button" onClick={() => setActiveModal(file.modal ?? null)}>{file.title}</button></h2>
         ) : <h2>{file.title}</h2>}
@@ -3797,7 +3744,7 @@ function CategoryModule({
     >
       {category !== "government" ? (
         <PageFlourishHeader
-          eyebrow={`Open directory // ${content.title}`}
+          eyebrow={content.title}
           title={content.title}
           titleId={`${category}-title`}
           variant={category}
@@ -5297,7 +5244,7 @@ function PlanningLanding({
   return (
     <section className="assessment-shell planning-landing" aria-labelledby="planning-landing-title">
       <div className="assessment-panel planning-landing-panel">
-        <div className="terminal-label">LOAD MODULE // CRISIS SUPPORT</div>
+        <div className="terminal-label">Crisis Support</div>
         <h1 id="planning-landing-title">Crisis Support</h1>
         <p>
           Survivor Operating System is not an emergency service and does not guide active escape
@@ -5348,10 +5295,7 @@ function PlanningResourcePage({
       <div className="assessment-panel safety-plan-panel">
         <div className="terminal-label">PLANNING RESOURCE</div>
         <article className="screenshot-plan-card" aria-labelledby="planning-resource-title">
-          <div className="screenshot-card-header">
-            <span>{resource.status}</span>
-            <span>LIVE PAGE // NO PDF EMBED</span>
-          </div>
+          <div className="screenshot-card-header"><span>{resource.status}</span></div>
           <h1 id="planning-resource-title">{resource.title}</h1>
           <p>{resource.subtitle}</p>
           <ul>
@@ -5404,7 +5348,7 @@ function SnapTanfGuide({ onBack, onNavigate }: { onBack: () => void; onNavigate:
 
       <div className="how-to-hero">
         <div>
-          <p className="terminal-label">LOAD GUIDE // SNAP + TANF</p>
+          <p className="terminal-label">Benefits Guide</p>
           <h1 id="snap-tanf-title">How To Navigate SNAP &amp; TANF</h1>
           <p>
             Applying for benefits can feel overwhelming, especially when housing, money, safety,
@@ -5412,11 +5356,6 @@ function SnapTanfGuide({ onBack, onNavigate }: { onBack: () => void; onNavigate:
             steps: apply, document, interview, protect contact information, and follow up.
           </p>
         </div>
-        <aside className="how-to-status-panel" aria-label="SNAP and TANF guide status">
-          <span>GUIDE STATUS</span>
-          <strong>LIVE PAGE</strong>
-          <small>NO PDF EMBED // SCREENSHOT-FRIENDLY</small>
-        </aside>
       </div>
 
       <div className="how-to-command-strip" aria-label="Guide quick map">
@@ -5997,7 +5936,6 @@ function HowToModule({
               <article className="how-to-guide-card" key={guide.id}>
                 <div className="how-to-guide-card-header">
                   <span>{String(index + 1).padStart(2, "0")}</span>
-                  <small>{guide.status}</small>
                 </div>
                 <h2>{guide.title}</h2>
                 <p className="how-to-guide-subtitle">{guide.subtitle}</p>
@@ -6054,38 +5992,39 @@ function AccessInformationModule() {
       className="page-shell library-module access-module"
       eyebrow="Database / Access"
       intro={<p>
-          This is the paid side of Survivor Systems. Browse indexed previews before choosing
-          access to deeper planners, trackers, templates, and downloadable guides.
+          The Subscriber Library holds deeper planners, trackers, templates, and downloadable
+          guides. Browse the index before deciding whether a subscription is useful to you.
         </p>}
       title="Database"
       titleId="access-title"
     >
 
       <section className="library-section library-preview-entry" aria-labelledby="paid-library-entry-title">
-        <div className="terminal-label">PREVIEW BEFORE PURCHASE</div>
-        <h2 id="paid-library-entry-title">Look Inside The Resource Library</h2>
+        <div className="terminal-label">SUBSCRIBER LIBRARY PREVIEW</div>
+        <h2 id="paid-library-entry-title">Look Inside Before Subscribing</h2>
         <p>
-          Browse the deeper planners, trackers, and guide systems before choosing an access path.
+          Browse the deeper planners, trackers, and guide systems before choosing a subscription.
           The index is organized by resource category so you can decide whether anything here is useful first.
         </p>
         <button className="resource-back-button" type="button" onClick={() => setShowLibrary(true)}>
-          Preview Resource Library
+          Preview Subscriber Library
         </button>
       </section>
 
       <section className="library-section" aria-labelledby="access-options-title">
-        <div className="terminal-label">PAID RESOURCE LIBRARY</div>
-        <h2 id="access-options-title">Choose Only The Access You Need</h2>
+        <div className="terminal-label">SUBSCRIBER ACCESS</div>
+        <h2 id="access-options-title">One Library Subscription</h2>
         <p className="library-section-intro">
-          Free live guides and assessments never require a pass. These one-time options apply
-          only to the downloadable Resource Library and do not renew automatically.
+          Free guides remain available under Resources and assessments remain available under
+          Strategy. The Subscriber Library is a separate, recurring offering with unlimited
+          viewing and downloads while the subscription is active.
         </p>
         <div className="library-pass-grid">
           {libraryPasses.map((pass) => (
             <article className="library-pass-card" key={pass.id}>
               <div className="library-card-header">
                 <span>{pass.price}</span>
-                <small>ACCESS PATH</small>
+                <small>SUBSCRIPTION</small>
               </div>
               <h3>{pass.title}</h3>
               <p>{pass.scope}</p>
@@ -6322,10 +6261,10 @@ function ResourceModule({
 
   return (
     <section className="page-shell resources-module" aria-labelledby="resources-title">
-      <PageFlourishHeader eyebrow="Load module // Resource folders" title="Resources" titleId="resources-title" variant="resources">
+      <PageFlourishHeader eyebrow="Guides and practical resources" title="Resources" titleId="resources-title" variant="resources">
         <p>
-          Start with free live tools and guides, or preview the paid library of downloadable
-          planners, trackers, templates, and deeper resources. Every item is labeled before you open it.
+          Browse free guides and practical information here. Subscriber planners, trackers,
+          templates, and deeper downloads are kept in a clearly separate library.
         </p>
       </PageFlourishHeader>
 
@@ -6333,11 +6272,11 @@ function ResourceModule({
         <h2 id="resource-access-choice-title">Choose Your Resource Path</h2>
         <div className="resource-access-choice-grid">
           <article className="resource-access-panel resource-access-panel-free">
-            <span className="resource-access-kicker">FREE / OPEN NOW</span>
-            <h3>Use What Is Live On The Site</h3>
+            <span className="resource-access-kicker">FREE RESOURCES</span>
+            <h3>Browse Free Guides</h3>
             <p>
-              Assessments, educational pages, and live guides open immediately. No purchase,
-              account, or download is required.
+              Guides and educational resources open without a purchase or subscription.
+              Assessments are organized separately under Strategy.
             </p>
             <button
               type="button"
@@ -6350,13 +6289,13 @@ function ResourceModule({
             </button>
           </article>
           <article className="resource-access-panel resource-access-panel-paid">
-            <span className="resource-access-kicker">PAID / PREVIEW FIRST</span>
-            <h3>Open The Resource Library</h3>
+            <span className="resource-access-kicker">SUBSCRIBER LIBRARY</span>
+            <h3>Preview Subscriber Resources</h3>
             <p>
-              Preview downloadable planners, trackers, templates, and long-form tools. Choose a
-              one-time access pass only when something is useful.
+              Preview downloadable planners, trackers, templates, and long-form tools before
+              deciding whether to subscribe.
             </p>
-            <button type="button" onClick={() => setActiveFolder("access")}>Preview Paid Library</button>
+            <button type="button" onClick={() => setActiveFolder("access")}>Preview Subscriber Library</button>
           </article>
         </div>
       </section>
@@ -6393,8 +6332,8 @@ function ResourceModule({
                         {file.label.includes("In Development")
                           ? "COMING SOON"
                           : freeResourceLabels.has(file.label)
-                            ? "FREE / OPEN NOW"
-                            : "PAID / PREVIEW"}
+                            ? "FREE RESOURCE"
+                            : "SUBSCRIBER LIBRARY"}
                       </small>
                     </button>
                   ))}
@@ -6484,30 +6423,29 @@ function LibraryModule() {
         className="page-shell library-module"
         eyebrow="Resources / Library"
         intro={<p>
-          Free live tools stay available on the site. The paid Resource Library holds deeper templates,
-          trackers, guides, and long-form systems for people who want more structure without a
-          forced subscription or a forced category choice.
+          Free guides stay available under Resources. The Subscriber Library holds deeper templates,
+          trackers, guides, and long-form systems in one recurring subscription.
         </p>}
         title="Resource Library"
         titleId="library-title"
       >
 
       <div className="library-rule-strip" aria-label="Library rules">
-        <span>Unlimited Viewing During Active Pass</span>
-        <span>Permanent Unlocks Stay Available</span>
-        <span>Signed Download Links</span>
-        <span>No Forced Renewal</span>
+        <span>Unlimited Viewing</span>
+        <span>Subscriber Downloads</span>
+        <span>New Resources Added</span>
+        <span>Cancel Anytime</span>
       </div>
 
       <section className="library-section" aria-labelledby="library-options-title">
-        <div className="terminal-label">PAID RESOURCE LIBRARY</div>
-        <h2 id="library-options-title">One-Time Access Paths</h2>
+        <div className="terminal-label">SUBSCRIBER LIBRARY</div>
+        <h2 id="library-options-title">Subscriber Access</h2>
         <div className="library-pass-grid">
           {libraryPasses.map((pass) => (
             <article className="library-pass-card" key={pass.id}>
               <div className="library-card-header">
                 <span>{pass.price}</span>
-                <small>ACCESS PATH</small>
+                <small>MONTHLY SUBSCRIPTION</small>
               </div>
               <h3>{pass.title}</h3>
               <p>{pass.scope}</p>
@@ -6517,7 +6455,7 @@ function LibraryModule() {
                 <li>{pass.renewal}</li>
               </ul>
               <button type="button" disabled>
-                Checkout Coming Soon
+                Subscription Checkout Coming Soon
               </button>
             </article>
           ))}
@@ -6540,7 +6478,7 @@ function LibraryModule() {
 
       <section className="library-section" aria-labelledby="library-preview-title">
         <div className="terminal-label">RESOURCE PREVIEWS</div>
-        <h2 id="library-preview-title">Look Inside Before Unlocking</h2>
+        <h2 id="library-preview-title">Look Inside Before Subscribing</h2>
         <div className="library-preview-grid">
           {previewResources.map((resource) => (
             <article className="library-preview-card" key={resource.id}>
@@ -6563,17 +6501,17 @@ function LibraryModule() {
 
       <section className="library-system-grid" aria-label="Library access notes">
         <article className="library-system-card">
-          <h2>Founder Access Bonus</h2>
+          <h2>One Simple Subscription</h2>
           <p>
-            The first 100 paying library users receive one extra Permanent Unlock as a quiet thank-you
-            for helping the system come online.
+            One recurring subscription opens the complete Subscriber Library. No download counters,
+            category passes, or individual unlock rules are required.
           </p>
         </article>
         <article className="library-system-card">
           <h2>Download Access</h2>
           <p>
-            Library files can be previewed during an active access window. Permanent Unlocks are for
-            the downloads the user wants to keep.
+            Subscribers can view and download included library files while their subscription is active.
+            Free guides remain available separately under Resources.
           </p>
         </article>
       </section>
@@ -6780,7 +6718,7 @@ function LegalModule() {
         </div>
 
         <div className="legal-guide-shell">
-          <div className="terminal-label">user@survivor-os:~$ LOAD MODULE // MOTION DRAFTING</div>
+          <div className="terminal-label">Motion Drafting Basics</div>
           <h1 id="motion-drafting-title">Motion Drafting Basics</h1>
           <p className="legal-tagline">// Tools for clarity. Power for your future.</p>
 
@@ -6909,7 +6847,6 @@ function LegalModule() {
             <article className="legal-category-card ready" key={category.id}>
               <div className="legal-category-card-header">
                 <span>{category.label}</span>
-                <small>LIVE GUIDE</small>
               </div>
               <h2>{category.title}</h2>
               <p>{category.description}</p>
