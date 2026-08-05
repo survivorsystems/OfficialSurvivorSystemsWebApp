@@ -3645,53 +3645,6 @@ function TerminalChrome({
 }
 
 function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: string) => void }) {
-  const homeCards: Array<{
-    code: string;
-    classification: string;
-    title: string;
-    copy: string;
-    action: string;
-    module: ModuleKey;
-    path: string;
-  }> = [
-    {
-      code: "01",
-      classification: "PRIVATE EVALUATION",
-      title: "Assessments",
-      copy: "Understand your experiences, identify patterns, and create a clearer path forward.",
-      action: "Take an Assessment",
-      module: "assessments",
-      path: "/assessments",
-    },
-    {
-      code: "02",
-      classification: "FIELD MANUALS",
-      title: "Guides",
-      copy: "Plain-language support for court, housing, benefits, safety planning, and rebuilding.",
-      action: "Browse Guides",
-      module: "guides",
-      path: "/guides",
-    },
-    {
-      code: "03",
-      classification: "WORKING FILES",
-      title: "Resources",
-      copy: "Find planners, trackers, toolkits, and practical files organized by housing, legal, food, money, homelessness, and more.",
-      action: "Browse Resources",
-      module: "local-help",
-      path: "/resources",
-    },
-    {
-      code: "04",
-      classification: "INTELLIGENCE LIBRARY",
-      title: "Education",
-      copy: "Learn about coercive control, trauma, stalking, manipulation, and post-separation abuse.",
-      action: "Start Learning",
-      module: "education",
-      path: "/education-awareness",
-    },
-  ];
-
   return (
     <section className="home-terminal bauhaus-home" aria-labelledby="home-title">
       <header className="home-briefing-bar">
@@ -3718,7 +3671,6 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
             should have to become an expert in safety planning, housing, public benefits, financial
             recovery, family court, documentation, and trauma just to get free.
           </p>
-          <p className="mission-emphasis">You do not have to solve your entire life before dinner.</p>
           <div className="home-hero-actions" aria-label="Start options">
             <button type="button" onClick={() => onNavigate("guides", "/guides")}>
               Explore Tools & Guides
@@ -3742,22 +3694,18 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
         </aside>
       </div>
 
-      <div className="home-index-heading">
-        <div><span>01—04 / EXPLORE</span><h2>Choose a starting point.</h2></div>
-        <p>No prescribed order. No wrong door.</p>
-      </div>
-      <div className="home-category-grid" aria-label="Resource categories">
-        {homeCards.map((card) => (
-          <article className={`home-category-card home-category-card-${card.code}`} key={card.title}>
-            <div className="home-file-tab"><span>{card.code}</span><small>{card.classification}</small></div>
-            <h2>{card.title}</h2>
-            <p>{card.copy}</p>
-            <button type="button" onClick={() => onNavigate(card.module, card.path)}>
-              {card.action}
-            </button>
-          </article>
-        ))}
-      </div>
+      <section className="home-strategy-assessment" aria-labelledby="home-strategy-title">
+        <div className="home-strategy-number" aria-hidden="true">01</div>
+        <div className="home-strategy-copy">
+          <p className="folk-kicker">A CLEAR PLACE TO START</p>
+          <h2 id="home-strategy-title">Strategy Assessment</h2>
+          <p>
+            Take the Strategy Assessment to understand where to start on Survivor Systems and
+            identify which information, tools, and next steps may be most useful to you right now.
+          </p>
+        </div>
+        <button type="button" onClick={() => onNavigate("assessments", "/assessments")}>Begin Assessment</button>
+      </section>
 
       <div className="home-support-grid">
         <section className="start-where-you-are" aria-labelledby="home-start-where">

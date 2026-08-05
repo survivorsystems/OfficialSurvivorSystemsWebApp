@@ -2281,3 +2281,117 @@ body {
 .hud-frame.module-assessments .terminal-content .category-file-title-button :is(h2, h3, span) {
   color: #000 !important;
 }
+
+/* Homepage assessment feature and balanced support pair. */
+.hud-frame.module-home .home-strategy-assessment {
+  align-items: center !important;
+  background: var(--ss-yellow) !important;
+  border-bottom: 3px solid var(--ss-ink) !important;
+  border-top: 3px solid var(--ss-ink) !important;
+  color: var(--ss-ink) !important;
+  display: grid !important;
+  gap: clamp(22px, 4vw, 56px) !important;
+  grid-template-columns: auto minmax(0, 1fr) auto !important;
+  margin: 0 !important;
+  padding: clamp(28px, 4vw, 54px) clamp(22px, 4vw, 58px) !important;
+}
+
+.hud-frame.module-home .home-strategy-number {
+  align-items: center !important;
+  background: var(--ss-red) !important;
+  border: 3px solid var(--ss-ink) !important;
+  color: var(--ss-white) !important;
+  display: flex !important;
+  font-family: var(--ss-font-display) !important;
+  font-size: clamp(2.1rem, 4vw, 4.25rem) !important;
+  font-weight: 900 !important;
+  height: clamp(86px, 10vw, 132px) !important;
+  justify-content: center !important;
+  line-height: 1 !important;
+  width: clamp(86px, 10vw, 132px) !important;
+}
+
+.hud-frame.module-home .home-strategy-copy {
+  max-width: 760px !important;
+}
+
+.hud-frame.module-home .home-strategy-copy :is(h2, p) {
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.module-home .home-strategy-copy h2 {
+  font-size: clamp(2rem, 4vw, 4.5rem) !important;
+  line-height: 0.95 !important;
+  margin: 4px 0 12px !important;
+}
+
+.hud-frame.module-home .home-strategy-copy p:last-child {
+  line-height: 1.55 !important;
+  margin: 0 !important;
+  max-width: 65ch !important;
+}
+
+.hud-frame.module-home .home-strategy-assessment > button {
+  background: var(--ss-ink) !important;
+  border: 3px solid var(--ss-ink) !important;
+  box-shadow: 6px 6px 0 var(--ss-blue) !important;
+  color: var(--ss-white) !important;
+  min-height: 56px !important;
+  padding: 12px 20px !important;
+  white-space: nowrap !important;
+}
+
+.hud-frame.module-home .home-strategy-assessment > button:hover,
+.hud-frame.module-home .home-strategy-assessment > button:focus-visible {
+  box-shadow: 2px 2px 0 var(--ss-blue) !important;
+  transform: translate(4px, 4px) !important;
+}
+
+.hud-frame.module-home .home-support-grid {
+  align-items: stretch !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+.hud-frame.module-home .home-support-grid > section {
+  box-sizing: border-box !important;
+  display: flex !important;
+  height: 100% !important;
+  min-height: 390px !important;
+}
+
+.hud-frame.module-home .home-support-grid > section > div:first-child {
+  display: flex !important;
+  flex: 1 !important;
+  flex-direction: column !important;
+}
+
+.hud-frame.module-home .home-privacy-panel button {
+  margin-top: auto !important;
+}
+
+@media (max-width: 820px) {
+  .hud-frame.module-home .home-strategy-assessment {
+    align-items: start !important;
+    grid-template-columns: auto minmax(0, 1fr) !important;
+  }
+
+  .hud-frame.module-home .home-strategy-assessment > button {
+    grid-column: 1 / -1 !important;
+    width: 100% !important;
+  }
+
+  .hud-frame.module-home .home-support-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 520px) {
+  .hud-frame.module-home .home-strategy-assessment {
+    grid-template-columns: 1fr !important;
+  }
+
+  .hud-frame.module-home .home-strategy-number {
+    height: 74px !important;
+    width: 74px !important;
+  }
+}
