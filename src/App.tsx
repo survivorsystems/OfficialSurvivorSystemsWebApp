@@ -1335,13 +1335,13 @@ const housingGuideSections: RebuildingGuideSection[] = [
 
 const moduleRoutes: Record<ModuleKey, { label: string; path: string }> = {
   home: { label: "Home", path: "/" },
-  assessments: { label: "Strategy", path: "/strategy" },
+  assessments: { label: "Clarity", path: "/strategy" },
   guides: { label: "Resources", path: "/resources" },
   planners: { label: "Resources", path: "/resources" },
   toolkits: { label: "Resources", path: "/resources" },
   education: { label: "Learn More", path: "/education-awareness" },
   about: { label: "About", path: "/about" },
-  advocacy: { label: "Strategy", path: "/strategy" },
+  advocacy: { label: "Clarity", path: "/strategy" },
   government: { label: "Government", path: "/government" },
   support: { label: "Support", path: "/support" },
   "am-i-crazy": { label: "Was I Crazy?", path: "/am-i-crazy" },
@@ -1386,7 +1386,7 @@ type SidebarIconKey =
 const navItems: Array<{ key: ModuleKey; label: string; path: string; code: SidebarIconKey }> = [
   { key: "local-help", label: "Resources", path: "/resources", code: "toolkits" },
   { key: "education", label: "Learn More", path: "/education-awareness", code: "education" },
-  { key: "advocacy", label: "Strategy", path: "/strategy", code: "advocacy" },
+  { key: "advocacy", label: "Clarity", path: "/strategy", code: "advocacy" },
   { key: "government", label: "Government", path: "/government", code: "government" },
   { key: "about", label: "About", path: "/about", code: "about" },
 ];
@@ -2526,7 +2526,7 @@ const categoryFiles: Record<
     ],
   },
   advocacy: {
-    title: "Strategy",
+    title: "Clarity",
     intro:
       "Support-facing resources: what to ask for, who might help, how to explain the situation, and how to keep power dynamics visible.",
     files: [
@@ -3383,7 +3383,7 @@ function resolveCommand(query: string) {
   if (/\b(help|menu|options|commands|where)\b/.test(normalized)) {
     return {
       message:
-        "AVAILABLE: STRATEGY, RESOURCES, EDUCATION, GOVERNMENT, ABOUT, SUPPORT, QUICK EXIT.",
+        "AVAILABLE: CLARITY, RESOURCES, LEARN MORE, GOVERNMENT, ABOUT, SUPPORT, QUICK EXIT.",
       target: null,
     };
   }
@@ -3398,7 +3398,7 @@ function resolveCommand(query: string) {
   }
 
   if (/\b(assessments?|quiz|scan|was i crazy|crazy|abused|abuse|gaslight|gaslighting|reality)\b/.test(normalized)) {
-    return { message: "OPENING STRATEGY...", target: navItemFor("advocacy") };
+    return { message: "OPENING CLARITY...", target: navItemFor("advocacy") };
   }
 
   if (/\b(guides?|how to|housing|routine|pet|browser|car)\b/.test(normalized)) {
@@ -3422,7 +3422,7 @@ function resolveCommand(query: string) {
   }
 
   if (/\b(advocacy|advocate|hotline|shelter|support|near|local)\b/.test(normalized)) {
-    return { message: "QUERY ACCEPTED. ROUTING TO STRATEGY...", target: navItemFor("advocacy") };
+    return { message: "QUERY ACCEPTED. ROUTING TO CLARITY...", target: navItemFor("advocacy") };
   }
 
   if (/\b(government|snap|tanf|benefits|court|legal|rights|order|documents|public assistance)\b/.test(normalized)) {
@@ -3430,7 +3430,7 @@ function resolveCommand(query: string) {
   }
 
   if (/ctrl\s*\+\s*esc|\bfirst steps?\b|\bprep\b/.test(normalized)) {
-    return { message: "OPENING STRATEGY...", target: navItemFor("advocacy") };
+    return { message: "OPENING CLARITY...", target: navItemFor("advocacy") };
   }
 
   if (/\b(go.?bag|bag|simulator|arcade|prep|pack)\b/.test(normalized)) {
@@ -3451,7 +3451,7 @@ function resolveCommand(query: string) {
 
   return {
     message:
-      "TRY: STRATEGY, RESOURCES, EDUCATION, GOVERNMENT, ABOUT, SUPPORT, OR QUICK EXIT.",
+      "TRY: CLARITY, RESOURCES, LEARN MORE, GOVERNMENT, ABOUT, SUPPORT, OR QUICK EXIT.",
     target: null,
   };
 }
@@ -3488,7 +3488,7 @@ function TerminalCommand({
           autoComplete="off"
           id="terminal-command"
           onChange={(event) => setQuery(event.target.value)}
-          placeholder="Try: strategy, resources, education, government..."
+          placeholder="Try: clarity, resources, learn more, government..."
           spellCheck={false}
           type="search"
           value={query}
@@ -3641,9 +3641,9 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
         <div className="home-strategy-number" aria-hidden="true">01</div>
         <div className="home-strategy-copy">
           <p className="folk-kicker">A CLEAR PLACE TO START</p>
-          <h2 id="home-strategy-title">Strategy Assessment</h2>
+          <h2 id="home-strategy-title">Clarity Assessment</h2>
           <p>
-            Take the Strategy Assessment to understand where to start on Survivor Systems and
+            Take the Clarity Assessment to understand where to start on Survivor Systems and
             identify which information, tools, and next steps may be most useful to you right now.
           </p>
         </div>
@@ -3677,7 +3677,7 @@ function CategoryModule({
   const baseContent = categoryFiles[category];
   const content = category === "advocacy"
     ? {
-        title: "Strategy",
+        title: "Clarity",
         intro: "Use an assessment to name patterns, understand what is affecting your choices, and find a practical place to begin.",
         files: [...categoryFiles.assessments.files, ...baseContent.files],
       }
@@ -4769,16 +4769,16 @@ function LoveFearAssessmentModal({ onClose }: { onClose: () => void }) {
             <h2>{currentScoredItem.title}</h2>
             <div className="love-fear-pair">
               <article>
-                <span>0 = LOVE / FREEDOM</span>
+                <span>A FREER PATTERN CAN LOOK LIKE</span>
                 <p>{currentScoredItem.left}</p>
               </article>
               <article>
-                <span>4 = FEAR / CONTROL</span>
+                <span>THE PATTERN BEING ASSESSED</span>
                 <p>{currentScoredItem.right}</p>
               </article>
             </div>
             <fieldset className="love-fear-scale">
-              <legend>Which is closer?</legend>
+              <legend>How closely does the pattern being assessed reflect your experience?</legend>
               {[0, 1, 2, 3, 4].map((value) => (
                 <label className={scores[currentScoredItem.id] === value ? "selected" : ""} key={value}>
                   <input
@@ -4789,7 +4789,7 @@ function LoveFearAssessmentModal({ onClose }: { onClose: () => void }) {
                     value={value}
                   />
                   <span>{value}</span>
-                  <small>{value === 0 ? "Fully left" : value === 2 ? "Mixed / unsure" : value === 4 ? "Fully right" : value === 1 ? "Mostly left" : "Mostly right"}</small>
+                  <small>{value === 0 ? "Completely disagree" : value === 1 ? "Mostly disagree" : value === 2 ? "Somewhat agree" : value === 3 ? "Mostly agree" : "Completely agree"}</small>
                 </label>
               ))}
             </fieldset>
@@ -5998,7 +5998,7 @@ function AccessInformationModule() {
         <h2 id="access-options-title">One Library Subscription</h2>
         <p className="library-section-intro">
           Free guides remain available under Resources and assessments remain available under
-          Strategy. The Subscriber Library is a separate, recurring offering with unlimited
+          Clarity. The Subscriber Library is a separate, recurring offering with unlimited
           viewing and downloads while the subscription is active.
         </p>
         <div className="library-pass-grid">
@@ -6242,14 +6242,7 @@ function ResourceModule({
   ];
 
   return (
-    <section className="page-shell resources-module" aria-labelledby="resources-title">
-      <PageFlourishHeader eyebrow="Guides and practical resources" title="Resources" titleId="resources-title" variant="resources">
-        <p>
-          Browse free guides and practical information here. Subscriber planners, trackers,
-          templates, and deeper downloads are kept in a clearly separate library.
-        </p>
-      </PageFlourishHeader>
-
+    <section className="page-shell resources-module" aria-label="Resources">
       <section className="resource-access-choice" aria-label="Resource access options">
         <div className="resource-access-choice-grid">
           <article className="resource-access-panel resource-access-panel-free">
@@ -6257,7 +6250,7 @@ function ResourceModule({
             <h3>Browse Free Guides</h3>
             <p>
               Guides and educational resources open without a purchase or subscription.
-              Assessments are organized separately under Strategy.
+              Assessments are organized separately under Clarity.
             </p>
             <button
               type="button"
