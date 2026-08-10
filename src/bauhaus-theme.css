@@ -2519,3 +2519,60 @@ body {
 .hud-frame .terminal-content .resources-module .resource-directory:nth-child(4n + 3) .resource-directory-toggle :is(strong, small) {
   color: var(--ss-white) !important;
 }
+
+/* Layered Bauhaus linework sits behind the homepage's primary geometry. */
+.hud-frame.module-home .bauhaus-art {
+  isolation: isolate !important;
+}
+
+.hud-frame.module-home .bauhaus-art::before,
+.hud-frame.module-home .bauhaus-art::after {
+  content: "" !important;
+  display: block !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  z-index: 0 !important;
+}
+
+.hud-frame.module-home .bauhaus-art::before {
+  background:
+    linear-gradient(var(--ss-ink), var(--ss-ink)) 0 12% / 88% 4px no-repeat,
+    linear-gradient(var(--ss-ink), var(--ss-ink)) 16% 25% / 84% 3px no-repeat,
+    linear-gradient(var(--ss-ink), var(--ss-ink)) 91% 0 / 4px 78% no-repeat,
+    linear-gradient(var(--ss-ink), var(--ss-ink)) 77% 7% / 3px 93% no-repeat,
+    repeating-linear-gradient(90deg, var(--ss-ink) 0 3px, transparent 3px 17px) 4% 86% / 70% 11% no-repeat;
+  inset: -3% -5% -2% -3% !important;
+}
+
+.hud-frame.module-home .bauhaus-art::after {
+  background:
+    repeating-linear-gradient(
+      0deg,
+      var(--ss-white) 0 3px,
+      transparent 3px 13px
+    );
+  border: 4px solid var(--ss-ink) !important;
+  height: 28% !important;
+  right: -2% !important;
+  top: 38% !important;
+  width: 42% !important;
+}
+
+.hud-frame.module-home .bauhaus-art > .bauhaus-shape {
+  z-index: 2 !important;
+}
+
+.hud-frame.module-home .bauhaus-art > .bauhaus-art-label {
+  z-index: 4 !important;
+}
+
+@media (max-width: 680px) {
+  .hud-frame.module-home .bauhaus-art::before {
+    inset: 0 !important;
+  }
+
+  .hud-frame.module-home .bauhaus-art::after {
+    right: 1% !important;
+    width: 38% !important;
+  }
+}
