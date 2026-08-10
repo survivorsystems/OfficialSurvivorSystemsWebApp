@@ -2349,7 +2349,7 @@ body {
 
 .hud-frame.module-home .home-support-grid {
   align-items: stretch !important;
-  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  grid-template-columns: 1fr !important;
 }
 
 .hud-frame.module-home .home-support-grid > section {
@@ -2453,4 +2453,69 @@ body {
 .hud-frame:not(.module-home) .terminal-content .resource-directory-toggle :is(strong, small) {
   color: var(--ss-ink) !important;
   text-shadow: none !important;
+}
+
+/* Resource folders use the full Bauhaus palette with fixed, non-hover-dependent contrast. */
+.hud-frame:not(.module-home) .terminal-content .resources-module .resource-directory-toggle,
+.hud-frame .terminal-content .resources-module .resource-access-panel,
+.hud-frame .terminal-content .resources-module .resource-file-row {
+  box-shadow: 7px 7px 0 #000 !important;
+  transition: box-shadow 120ms ease, transform 120ms ease !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .resources-module .resource-directory-toggle:hover,
+.hud-frame:not(.module-home) .terminal-content .resources-module .resource-directory-toggle:focus-visible,
+.hud-frame .terminal-content .resources-module .resource-file-row:hover,
+.hud-frame .terminal-content .resources-module .resource-file-row:focus-visible,
+.hud-frame .terminal-content .resources-module .resource-access-panel:focus-within {
+  box-shadow: 3px 3px 0 #000 !important;
+  transform: translate(4px, 4px) !important;
+}
+
+.hud-frame .terminal-content .resources-module .resource-access-panel button {
+  box-shadow: 5px 5px 0 #000 !important;
+}
+
+.hud-frame .terminal-content .resources-module .resource-access-panel button:hover,
+.hud-frame .terminal-content .resources-module .resource-access-panel button:focus-visible {
+  box-shadow: 2px 2px 0 #000 !important;
+  transform: translate(3px, 3px) !important;
+}
+
+.hud-frame .terminal-content .resources-module .resource-directory:nth-child(4n + 1) .resource-directory-toggle,
+.hud-frame .terminal-content .resources-module .resource-directory:nth-child(4n + 1) .resource-directory-toggle:hover,
+.hud-frame .terminal-content .resources-module .resource-directory:nth-child(4n + 1) .resource-directory-toggle:focus-visible {
+  background: var(--ss-yellow) !important;
+  color: #000 !important;
+}
+
+.hud-frame .terminal-content .resources-module .resource-directory:nth-child(4n + 2) .resource-directory-toggle,
+.hud-frame .terminal-content .resources-module .resource-directory:nth-child(4n + 2) .resource-directory-toggle:hover,
+.hud-frame .terminal-content .resources-module .resource-directory:nth-child(4n + 2) .resource-directory-toggle:focus-visible {
+  background: var(--ss-red) !important;
+  color: var(--ss-white) !important;
+}
+
+.hud-frame .terminal-content .resources-module .resource-directory:nth-child(4n + 3) .resource-directory-toggle,
+.hud-frame .terminal-content .resources-module .resource-directory:nth-child(4n + 3) .resource-directory-toggle:hover,
+.hud-frame .terminal-content .resources-module .resource-directory:nth-child(4n + 3) .resource-directory-toggle:focus-visible {
+  background: var(--ss-blue) !important;
+  color: var(--ss-white) !important;
+}
+
+.hud-frame .terminal-content .resources-module .resource-directory:nth-child(4n) .resource-directory-toggle,
+.hud-frame .terminal-content .resources-module .resource-directory:nth-child(4n) .resource-directory-toggle:hover,
+.hud-frame .terminal-content .resources-module .resource-directory:nth-child(4n) .resource-directory-toggle:focus-visible {
+  background: var(--ss-green) !important;
+  color: #000 !important;
+}
+
+.hud-frame .terminal-content .resources-module .resource-directory:nth-child(4n + 1) .resource-directory-toggle :is(strong, small),
+.hud-frame .terminal-content .resources-module .resource-directory:nth-child(4n) .resource-directory-toggle :is(strong, small) {
+  color: #000 !important;
+}
+
+.hud-frame .terminal-content .resources-module .resource-directory:nth-child(4n + 2) .resource-directory-toggle :is(strong, small),
+.hud-frame .terminal-content .resources-module .resource-directory:nth-child(4n + 3) .resource-directory-toggle :is(strong, small) {
+  color: var(--ss-white) !important;
 }

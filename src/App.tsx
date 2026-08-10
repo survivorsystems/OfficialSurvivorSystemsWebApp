@@ -3651,23 +3651,6 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
       </section>
 
       <div className="home-support-grid">
-        <section className="start-where-you-are" aria-labelledby="home-start-where">
-          <div>
-            <p className="folk-kicker">A PLACE TO BEGIN</p>
-            <h2 id="home-start-where">Start where you are.</h2>
-            <p>
-              You do not have to have it all figured out. Whether you need information, a plan, or
-              just a place to breathe, you can begin with one manageable next step.
-            </p>
-          </div>
-          <div className="home-choice-list" aria-label="Common starting points">
-            <button type="button" onClick={() => onNavigate("advocacy", "/strategy")}>I need clarity</button>
-            <button type="button" onClick={() => onNavigate("local-help", "/resources")}>I need a plan</button>
-            <button type="button" onClick={() => onNavigate("advocacy", "/strategy")}>I need support</button>
-            <button type="button" onClick={() => onNavigate("education", "/education-awareness")}>I am here to learn</button>
-          </div>
-        </section>
-
         <section className="home-privacy-panel" aria-labelledby="home-privacy">
           <div>
             <p className="folk-kicker">BEFORE YOU CONTINUE</p>
@@ -6267,8 +6250,7 @@ function ResourceModule({
         </p>
       </PageFlourishHeader>
 
-      <section className="resource-access-choice" aria-labelledby="resource-access-choice-title">
-        <h2 id="resource-access-choice-title">Choose Your Resource Path</h2>
+      <section className="resource-access-choice" aria-label="Resource access options">
         <div className="resource-access-choice-grid">
           <article className="resource-access-panel resource-access-panel-free">
             <span className="resource-access-kicker">FREE RESOURCES</span>
