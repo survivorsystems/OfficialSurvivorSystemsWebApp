@@ -1339,7 +1339,7 @@ const moduleRoutes: Record<ModuleKey, { label: string; path: string }> = {
   guides: { label: "Resources", path: "/resources" },
   planners: { label: "Resources", path: "/resources" },
   toolkits: { label: "Resources", path: "/resources" },
-  education: { label: "Learn More", path: "/education-awareness" },
+  education: { label: "Surviving", path: "/surviving" },
   about: { label: "About", path: "/about" },
   advocacy: { label: "Clarity", path: "/strategy" },
   government: { label: "Government", path: "/government" },
@@ -1385,7 +1385,7 @@ type SidebarIconKey =
 
 const navItems: Array<{ key: ModuleKey; label: string; path: string; code: SidebarIconKey }> = [
   { key: "local-help", label: "Resources", path: "/resources", code: "toolkits" },
-  { key: "education", label: "Learn More", path: "/education-awareness", code: "education" },
+  { key: "education", label: "Surviving", path: "/surviving", code: "education" },
   { key: "advocacy", label: "Clarity", path: "/strategy", code: "advocacy" },
   { key: "government", label: "Government", path: "/government", code: "government" },
   { key: "about", label: "About", path: "/about", code: "about" },
@@ -2475,9 +2475,9 @@ const categoryFiles: Record<
     ],
   },
   education: {
-    title: "Learn More",
+    title: "Surviving",
     intro:
-      "Pattern language, abuse dynamics, rebuilding concepts, and plain-English explanations that help the user stop arguing with the fog.",
+      "Information for staying safer during the planning phase, documenting abuse, understanding risk, and preparing for an exit. More resources are being built for this section.",
     files: [
       {
         title: "Gaslighting & Reality Rewriting",
@@ -3192,7 +3192,7 @@ function getInitialModule(): ModuleKey {
   if (path === "/guides") return "local-help";
   if (path.startsWith("/guides/")) return "how-to";
   if (path === "/planners-trackers" || path === "/toolkits") return "local-help";
-  if (path === "/education-awareness") return "education";
+  if (path === "/surviving" || path === "/education-awareness") return "education";
   if (path === "/about") return "about";
   if (path === "/strategy" || path === "/advocacy") return "advocacy";
   if (path === "/government") return "government";
@@ -3383,7 +3383,7 @@ function resolveCommand(query: string) {
   if (/\b(help|menu|options|commands|where)\b/.test(normalized)) {
     return {
       message:
-        "AVAILABLE: CLARITY, RESOURCES, LEARN MORE, GOVERNMENT, ABOUT, SUPPORT, QUICK EXIT.",
+        "AVAILABLE: CLARITY, RESOURCES, SURVIVING, GOVERNMENT, ABOUT, SUPPORT, QUICK EXIT.",
       target: null,
     };
   }
@@ -3413,8 +3413,8 @@ function resolveCommand(query: string) {
     return { message: "QUERY ACCEPTED. ROUTING TO TOOLKITS...", target: navItemFor("toolkits") };
   }
 
-  if (/\b(education|awareness|learn|dynamics|gray rock|statistics|be so for real)\b/.test(normalized)) {
-    return { message: "OPENING LEARN MORE...", target: navItemFor("education") };
+  if (/\b(surviving|education|awareness|learn|dynamics|gray rock|statistics|be so for real)\b/.test(normalized)) {
+    return { message: "OPENING SURVIVING...", target: navItemFor("education") };
   }
 
   if (/\b(about|mission|privacy|founder|who built)\b/.test(normalized)) {
@@ -3451,7 +3451,7 @@ function resolveCommand(query: string) {
 
   return {
     message:
-      "TRY: CLARITY, RESOURCES, LEARN MORE, GOVERNMENT, ABOUT, SUPPORT, OR QUICK EXIT.",
+      "TRY: CLARITY, RESOURCES, SURVIVING, GOVERNMENT, ABOUT, SUPPORT, OR QUICK EXIT.",
     target: null,
   };
 }
@@ -3488,7 +3488,7 @@ function TerminalCommand({
           autoComplete="off"
           id="terminal-command"
           onChange={(event) => setQuery(event.target.value)}
-          placeholder="Try: clarity, resources, learn more, government..."
+          placeholder="Try: clarity, resources, surviving, government..."
           spellCheck={false}
           type="search"
           value={query}
@@ -3641,13 +3641,13 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
         <div className="home-strategy-number" aria-hidden="true">01</div>
         <div className="home-strategy-copy">
           <p className="folk-kicker">A CLEAR PLACE TO START</p>
-          <h2 id="home-strategy-title">Clarity Assessment</h2>
+          <h2 id="home-strategy-title">Needs Assessment</h2>
           <p>
-            Take the Clarity Assessment to understand where to start on Survivor Systems and
-            identify which information, tools, and next steps may be most useful to you right now.
+            Take the Needs Assessment to identify which information, tools, and next steps may be
+            most useful to you right now.
           </p>
         </div>
-        <button type="button" onClick={() => onNavigate("advocacy", "/strategy")}>Begin Assessment</button>
+        <button type="button" onClick={() => onNavigate("advocacy", "/strategy")}>Begin Needs Assessment</button>
       </section>
 
       <div className="home-support-grid">
@@ -6269,7 +6269,7 @@ function ResourceModule({
               Preview downloadable planners, trackers, templates, and long-form tools before
               deciding whether to subscribe.
             </p>
-            <button type="button" onClick={() => setActiveFolder("access")}>Preview Subscriber Library</button>
+            <button type="button" onClick={() => onNavigate("access", "/resources/access")}>Open Subscriber Library</button>
           </article>
         </div>
       </section>

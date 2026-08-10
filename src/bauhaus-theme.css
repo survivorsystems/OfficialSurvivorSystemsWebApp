@@ -1496,9 +1496,10 @@ body {
 }
 
 .hud-frame .floating-quick-escape {
-  font-size: 0.7rem !important;
-  height: 84px !important;
-  width: 84px !important;
+  font-size: 0.88rem !important;
+  height: 144px !important;
+  padding: 18px !important;
+  width: 144px !important;
 }
 
 .hud-frame:not(.module-home) .terminal-content .resource-access-choice {
@@ -1652,9 +1653,13 @@ body {
 
 @media (max-width: 760px) {
   .hud-frame .floating-quick-escape {
-    font-size: 0.66rem !important;
-    height: 72px !important;
-    width: 72px !important;
+    bottom: 16px !important;
+    font-size: 0.72rem !important;
+    height: 108px !important;
+    padding: 12px !important;
+    right: 12px !important;
+    top: auto !important;
+    width: 108px !important;
   }
 
   .hud-frame:not(.module-home) .terminal-content .resource-access-choice-grid {
