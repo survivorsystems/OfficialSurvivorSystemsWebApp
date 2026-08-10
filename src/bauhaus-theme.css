@@ -2563,7 +2563,62 @@ body {
 }
 
 .hud-frame.module-home .bauhaus-art > .bauhaus-art-label {
+  bottom: 11% !important;
+  left: auto !important;
+  right: 9% !important;
+  text-align: right !important;
   z-index: 4 !important;
+}
+
+/* Balance the primary forms so each color carries comparable visual weight. */
+.hud-frame.module-home .bauhaus-art > .bauhaus-circle-blue {
+  height: 48% !important;
+  left: 5% !important;
+  top: 10% !important;
+  width: 48% !important;
+}
+
+.hud-frame.module-home .bauhaus-art > .bauhaus-circle-yellow {
+  border-width: clamp(7px, 1.7vw, 10px) !important;
+  height: 30% !important;
+  left: 36% !important;
+  top: 37% !important;
+  width: 30% !important;
+  z-index: 3 !important;
+}
+
+.hud-frame.module-home .bauhaus-art > .bauhaus-square-green {
+  bottom: 5% !important;
+  height: 29% !important;
+  left: 7% !important;
+  width: 29% !important;
+}
+
+.hud-frame.module-home .bauhaus-art > .bauhaus-half-red {
+  bottom: 8% !important;
+  height: 31% !important;
+  right: 4% !important;
+  width: 57% !important;
+}
+
+.hud-frame.module-home .bauhaus-art > .bauhaus-bar-black {
+  height: 10% !important;
+  right: 4% !important;
+  top: 5% !important;
+  width: 34% !important;
+}
+
+.hud-frame.module-home .bauhaus-art > .bauhaus-dot {
+  height: 7% !important;
+  right: 8% !important;
+  top: 34% !important;
+  width: 7% !important;
+}
+
+.hud-frame.module-home .bauhaus-art > .bauhaus-line {
+  left: 14% !important;
+  top: 23% !important;
+  width: 68% !important;
 }
 
 @media (max-width: 680px) {
