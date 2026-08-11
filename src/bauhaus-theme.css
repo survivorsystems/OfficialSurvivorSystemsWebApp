@@ -25,6 +25,7 @@
   --ss-font-display: "Space Grotesk", sans-serif;
   --ss-font-body: "Inter", sans-serif;
   --ss-route-accent: var(--ss-blue);
+  --ss-route-action-text: var(--ss-white);
 }
 
 .module-assessments,
@@ -35,7 +36,10 @@
 .module-library,
 .module-support { --ss-route-accent: var(--ss-green); }
 .module-education,
-.module-rebuilding { --ss-route-accent: var(--ss-yellow); }
+.module-rebuilding {
+  --ss-route-accent: var(--ss-yellow);
+  --ss-route-action-text: var(--ss-ink);
+}
 .module-advocacy { --ss-route-accent: var(--ss-red); }
 .module-government,
 .module-legal { --ss-route-accent: var(--ss-blue); }
@@ -448,11 +452,11 @@ body {
 }
 
 .hud-frame:not(.module-home) .terminal-content :is(button, .terminal-button) {
-  background: var(--ss-ink);
+  background: var(--ss-route-accent);
   border: 2px solid var(--ss-ink);
   border-radius: 0;
-  box-shadow: 4px 4px 0 var(--ss-route-accent);
-  color: var(--ss-paper);
+  box-shadow: 4px 4px 0 var(--ss-ink);
+  color: var(--ss-route-action-text);
   font-family: var(--ss-font-body) !important;
   font-weight: 900;
 }
@@ -1376,12 +1380,12 @@ body {
 .hud-frame:not(.module-home) .terminal-content button:not(.floating-quick-escape),
 .hud-frame:not(.module-home) .terminal-content a.button {
   align-items: center !important;
-  background: var(--ss-ink) !important;
+  background: var(--ss-route-accent) !important;
   background-image: none !important;
   border: 2px solid var(--ss-ink) !important;
   border-radius: 0 !important;
-  box-shadow: 4px 4px 0 var(--ss-route-accent) !important;
-  color: var(--ss-white) !important;
+  box-shadow: 4px 4px 0 var(--ss-ink) !important;
+  color: var(--ss-route-action-text) !important;
   cursor: pointer !important;
   display: inline-flex !important;
   font-family: var(--ss-font-body) !important;
@@ -2159,11 +2163,11 @@ body {
   .library-card-actions
 ) button,
 .hud-frame:not(.module-home) .terminal-content .category-file-title-button {
-  background: var(--ss-ink) !important;
+  background: var(--ss-route-accent) !important;
   border: 2px solid var(--ss-ink) !important;
   border-radius: 0 !important;
-  box-shadow: 4px 4px 0 var(--ss-route-accent) !important;
-  color: var(--ss-white) !important;
+  box-shadow: 4px 4px 0 var(--ss-ink) !important;
+  color: var(--ss-route-action-text) !important;
   font-family: var(--ss-font-body) !important;
   font-weight: 700 !important;
   letter-spacing: 0 !important;

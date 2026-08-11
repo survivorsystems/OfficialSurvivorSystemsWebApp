@@ -5988,7 +5988,7 @@ function AccessInformationModule() {
           Browse the deeper planners, trackers, and guide systems before choosing a subscription.
           The index is organized by resource category so you can decide whether anything here is useful first.
         </p>
-        <button className="resource-back-button" type="button" onClick={() => setShowLibrary(true)}>
+        <button type="button" onClick={() => setShowLibrary(true)}>
           Preview Subscriber Library
         </button>
       </section>
