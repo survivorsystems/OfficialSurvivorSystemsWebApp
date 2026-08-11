@@ -3798,10 +3798,7 @@ function FinancialCaptivityAssessmentModal({ onClose }: { onClose: () => void })
 
   useEffect(() => {
     previousFocusRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-    const originalOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
     headingRef.current?.focus();
-    return () => { document.body.style.overflow = originalOverflow; };
   }, []);
 
   useEffect(() => { headingRef.current?.focus(); }, [phase, questionIndex]);
@@ -3812,13 +3809,6 @@ function FinancialCaptivityAssessmentModal({ onClose }: { onClose: () => void })
       closeAssessment();
       return;
     }
-    if (event.key !== "Tab" || !modalRef.current) return;
-    const focusable = Array.from(modalRef.current.querySelectorAll<HTMLElement>('button:not(:disabled), [href], input:not(:disabled), [tabindex]:not([tabindex="-1"])')).filter((element) => !element.hasAttribute("aria-hidden"));
-    if (!focusable.length) return;
-    const first = focusable[0];
-    const last = focusable[focusable.length - 1];
-    if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
-    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
   }
 
   function goBack() {
@@ -4019,12 +4009,7 @@ function CoerciveControlPatternMapModal({ onClose }: { onClose: () => void }) {
 
   useEffect(() => {
     previousFocusRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-    const originalOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
     headingRef.current?.focus();
-    return () => {
-      document.body.style.overflow = originalOverflow;
-    };
   }, []);
 
   useEffect(() => {
@@ -4036,22 +4021,6 @@ function CoerciveControlPatternMapModal({ onClose }: { onClose: () => void }) {
       event.preventDefault();
       closeAssessment();
       return;
-    }
-    if (event.key !== "Tab" || !modalRef.current) return;
-    const focusable = Array.from(
-      modalRef.current.querySelectorAll<HTMLElement>(
-        'button:not(:disabled), [href], input:not(:disabled), [tabindex]:not([tabindex="-1"])',
-      ),
-    ).filter((element) => !element.hasAttribute("aria-hidden"));
-    if (!focusable.length) return;
-    const first = focusable[0];
-    const last = focusable[focusable.length - 1];
-    if (event.shiftKey && document.activeElement === first) {
-      event.preventDefault();
-      last.focus();
-    } else if (!event.shiftKey && document.activeElement === last) {
-      event.preventDefault();
-      first.focus();
     }
   }
 
@@ -4286,12 +4255,6 @@ function FreedomTestAssessmentModal({ onClose }: { onClose: () => void }) {
   useEffect(() => {
     previousFocusRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     headingRef.current?.focus();
-    const originalOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-
-    return () => {
-      document.body.style.overflow = originalOverflow;
-    };
   }, []);
 
   useEffect(() => {
@@ -4305,29 +4268,6 @@ function FreedomTestAssessmentModal({ onClose }: { onClose: () => void }) {
       return;
     }
 
-    if (event.key !== "Tab" || !modalRef.current) return;
-
-    const focusable = Array.from(
-      modalRef.current.querySelectorAll<HTMLElement>(
-        'button:not(:disabled), [href], input:not(:disabled), select:not(:disabled), textarea:not(:disabled), [tabindex]:not([tabindex="-1"])',
-      ),
-    ).filter((element) => !element.hasAttribute("aria-hidden"));
-
-    if (focusable.length === 0) return;
-
-    const first = focusable[0];
-    const last = focusable[focusable.length - 1];
-
-    if (event.shiftKey && document.activeElement === first) {
-      event.preventDefault();
-      last.focus();
-      return;
-    }
-
-    if (!event.shiftKey && document.activeElement === last) {
-      event.preventDefault();
-      first.focus();
-    }
   }
 
   function chooseScore(value: FreedomScore) {
