@@ -10,6 +10,7 @@ import "../node_modules/@react95/core/dist/esm/GlobalStyle/GlobalStyle.css.ts.va
 import "../node_modules/@react95/core/dist/esm/themes/win95.css.ts.vanilla.css";
 import "./styles.css";
 import "./bauhaus-theme.css";
+import "./housing-strategy.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

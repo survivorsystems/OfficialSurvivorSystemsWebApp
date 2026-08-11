@@ -5,6 +5,7 @@ import {
 import denialSupportOne from "./assets/support/denial-support-1.png";
 import denialSupportTwo from "./assets/support/denial-support-2.png";
 import { CommercePageTemplate, EditorialPageTemplate } from "./components/PageTemplates";
+import { HousingStrategySystem } from "./components/HousingStrategySystem";
 
 const denialImages = [denialSupportOne, denialSupportTwo];
 
@@ -5984,6 +5985,7 @@ function ResourceModule({
     : "housing";
   const [activeDirectory, setActiveDirectory] = useState<string | null>(requestedDirectory || "housing");
   const freeResourceLabels = new Set([
+    "Housing Strategy System",
     "Housing Options",
     "How To Navigate Housing",
     "Family Court Guide",
@@ -6025,6 +6027,17 @@ function ResourceModule({
     );
   }
 
+  if (activeDirectory === "housing-strategy") {
+    return (
+      <HousingStrategySystem
+        onBack={() => {
+          window.history.pushState({}, "", "/resources");
+          setActiveDirectory("housing");
+        }}
+      />
+    );
+  }
+
   if (activeFolder === "priority-1" || activeFolder === "priority-2" || activeFolder === "priority-3") {
     return (
       <HowToModule
@@ -6045,6 +6058,13 @@ function ResourceModule({
       label: "Housing",
       description: "Housing systems, applications, Coordinated Entry, waitlists, utilities, and follow-up.",
       files: [
+        {
+          label: "Housing Strategy System",
+          action: () => {
+            window.history.pushState({}, "", "/resources/housing-strategy");
+            setActiveDirectory("housing-strategy");
+          },
+        },
         {
           label: "Housing Options",
           action: () => {
