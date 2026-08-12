@@ -4242,6 +4242,57 @@ button:disabled {
   color: var(--cyan);
 }
 
+.library-catalog-tools {
+  align-items: end;
+  display: grid;
+  gap: 14px;
+  grid-template-columns: minmax(0, 1.5fr) minmax(220px, 0.8fr) auto;
+  margin: 8px 0 18px;
+}
+
+.library-catalog-tools label {
+  display: grid;
+  font-weight: 700;
+  gap: 6px;
+}
+
+.library-catalog-tools input,
+.library-catalog-tools select {
+  min-height: 46px;
+  width: 100%;
+}
+
+.library-catalog-tools p {
+  margin: 0 0 9px;
+  white-space: nowrap;
+}
+
+.library-catalog-status {
+  border: 2px solid var(--ss-ink, #111318);
+  padding: 18px;
+}
+
+.library-catalog-error {
+  border-left: 10px solid var(--ss-red, #eb4e1b);
+}
+
+.library-preview-frame strong,
+.library-preview-frame small {
+  color: var(--ss-white, #fffdf7);
+  text-align: center;
+}
+
+@media (max-width: 760px) {
+  .library-catalog-tools {
+    align-items: stretch;
+    grid-template-columns: 1fr;
+  }
+
+  .library-catalog-tools p {
+    margin: 0;
+  }
+}
+
 .library-access-note {
   border-top: 1px solid rgba(0, 234, 255, 0.16);
   font-size: 0.9rem;

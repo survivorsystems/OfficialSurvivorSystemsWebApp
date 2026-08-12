@@ -6,6 +6,7 @@ import denialSupportOne from "./assets/support/denial-support-1.png";
 import denialSupportTwo from "./assets/support/denial-support-2.png";
 import { CommercePageTemplate, EditorialPageTemplate } from "./components/PageTemplates";
 import { HousingStrategySystem } from "./components/HousingStrategySystem";
+import { fetchSubscriberCatalog, formatCatalogFileSize, type SubscriberCatalogItem } from "./lib/subscriberCatalog";
 
 const denialImages = [denialSupportOne, denialSupportTwo];
 
@@ -139,13 +140,6 @@ type LegalGuidePageData = {
   };
 };
 
-type LibraryCategory = {
-  id: string;
-  title: string;
-  description: string;
-  resourceCount: number;
-};
-
 type LibraryPass = {
   id: string;
   title: string;
@@ -154,15 +148,6 @@ type LibraryPass = {
   viewing: string;
   unlocks: string;
   renewal: string;
-};
-
-type LibraryResource = {
-  id: string;
-  title: string;
-  category: string;
-  format: string;
-  preview: string;
-  access: string;
 };
 
 type HowToGuide = {
@@ -243,33 +228,6 @@ const legalCategories: LegalCategory[] = [
   },
 ];
 
-const libraryCategories: LibraryCategory[] = [
-  {
-    id: "court-systems",
-    title: "Court & Systems Navigation",
-    description: "Court planners, filing trackers, protective-order prep, benefits, agencies, and appointment logs.",
-    resourceCount: 8,
-  },
-  {
-    id: "recovery",
-    title: "Recovery",
-    description: "Nervous-system repair, reflection tools, trauma recovery maps, relationship pattern guides, and support scripts.",
-    resourceCount: 7,
-  },
-  {
-    id: "survivor-university",
-    title: "Survivor University / Economic Independence",
-    description: "Work-from-home ideas, income maps, budget templates, equipment lists, digital skills, and system-building guides.",
-    resourceCount: 9,
-  },
-  {
-    id: "life-rebuilding",
-    title: "Life Rebuilding",
-    description: "Housing trackers, transportation logs, SNAP/contact trackers, routines, future planning, and practical rebuild tools.",
-    resourceCount: 10,
-  },
-];
-
 const libraryPasses: LibraryPass[] = [
   {
     id: "subscriber-library",
@@ -279,41 +237,6 @@ const libraryPasses: LibraryPass[] = [
     viewing: "Unlimited library viewing while subscribed.",
     unlocks: "Download any subscriber resource included in the library.",
     renewal: "Renews monthly until canceled.",
-  },
-];
-
-const previewResources: LibraryResource[] = [
-  {
-    id: "court-planner",
-    title: "Court Planner",
-    category: "Court & Systems Navigation",
-    format: "Bundle",
-    preview: "Case numbers, court contacts, evidence logs, statement practice, logistics, and after-court notes.",
-    access: "Included with an active Subscriber Library subscription.",
-  },
-  {
-    id: "housing-tracker",
-    title: "Housing Assistance Tracker",
-    category: "Life Rebuilding",
-    format: "Tracker",
-    preview: "Applications, deadlines, caseworkers, follow-ups, waitlists, document requests, and next actions.",
-    access: "Included with an active Subscriber Library subscription.",
-  },
-  {
-    id: "snap-benefits-log",
-    title: "SNAP & Benefits Contact Log",
-    category: "Life Rebuilding",
-    format: "Worksheet",
-    preview: "Interview dates, office contacts, upload confirmations, missing documents, renewal deadlines, and notes.",
-    access: "Included with an active Subscriber Library subscription.",
-  },
-  {
-    id: "survivor-university-income-map",
-    title: "Work-From-Home Income Map",
-    category: "Survivor University / Economic Independence",
-    format: "Guide",
-    preview: "Business ideas, equipment needs, startup costs, skill ladders, scam filters, and first-offer planning.",
-    access: "Included with an active Subscriber Library subscription.",
   },
 ];
 
@@ -6343,6 +6266,37 @@ function SupportModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: s
 }
 
 function LibraryModule() {
+  const [catalog, setCatalog] = useState<SubscriberCatalogItem[]>([]);
+  const [catalogStatus, setCatalogStatus] = useState<"loading" | "ready" | "error">("loading");
+  const [catalogSearch, setCatalogSearch] = useState("");
+  const [catalogCategory, setCatalogCategory] = useState("all");
+
+  useEffect(() => {
+    const controller = new AbortController();
+    setCatalogStatus("loading");
+    fetchSubscriberCatalog(controller.signal)
+      .then((items) => {
+        setCatalog(items);
+        setCatalogStatus("ready");
+      })
+      .catch((error: unknown) => {
+        if (error instanceof DOMException && error.name === "AbortError") return;
+        setCatalogStatus("error");
+      });
+    return () => controller.abort();
+  }, []);
+
+  const catalogCategories = [...new Set(catalog.map((resource) => resource.category))].sort();
+  const catalogCategoryCounts = catalogCategories.map((category) => ({
+    category,
+    count: catalog.filter((resource) => resource.category === category).length,
+  }));
+  const visibleCatalog = catalog.filter((resource) => {
+    const query = catalogSearch.trim().toLowerCase();
+    return (catalogCategory === "all" || resource.category === catalogCategory) &&
+      (!query || `${resource.title} ${resource.category} ${resource.format}`.toLowerCase().includes(query));
+  });
+
   return (
     <CommercePageTemplate
         className="page-shell library-module"
@@ -6391,11 +6345,11 @@ function LibraryModule() {
         <div className="terminal-label">DATABASE INDEX</div>
         <h2 id="library-categories-title">Indexed Categories</h2>
         <div className="library-category-grid">
-          {libraryCategories.map((category) => (
-            <article className="library-category-card" key={category.id}>
-              <span>{String(category.resourceCount).padStart(2, "0")} RESOURCES</span>
-              <h3>{category.title}</h3>
-              <p>{category.description}</p>
+          {catalogCategoryCounts.map(({ category, count }) => (
+            <article className="library-category-card" key={category}>
+              <span>{String(count).padStart(2, "0")} RESOURCES</span>
+              <h3>{category}</h3>
+              <p>Live preview listings from the {category} Supabase collection.</p>
             </article>
           ))}
         </div>
@@ -6404,13 +6358,32 @@ function LibraryModule() {
       <section className="library-section" aria-labelledby="library-preview-title">
         <div className="terminal-label">RESOURCE PREVIEWS</div>
         <h2 id="library-preview-title">Look Inside Before Subscribing</h2>
-        <div className="library-preview-grid">
-          {previewResources.map((resource) => (
+        <p>Browse the real files currently indexed in the Survivor Systems Supabase library. These listings are public; opening or downloading protected files still requires the appropriate library access.</p>
+        {catalogStatus === "loading" ? <p className="library-catalog-status" role="status">Loading the Subscriber Library catalog...</p> : null}
+        {catalogStatus === "error" ? <p className="library-catalog-status library-catalog-error" role="alert">The live library catalog could not be reached. No private files were exposed.</p> : null}
+        {catalogStatus === "ready" ? (
+          <>
+            <div className="library-catalog-tools">
+              <label>
+                Search catalog
+                <input type="search" value={catalogSearch} onChange={(event) => setCatalogSearch(event.target.value)} placeholder="Search titles, categories, or formats" />
+              </label>
+              <label>
+                Category
+                <select value={catalogCategory} onChange={(event) => setCatalogCategory(event.target.value)}>
+                  <option value="all">All categories</option>
+                  {catalogCategories.map((category) => <option key={category} value={category}>{category}</option>)}
+                </select>
+              </label>
+              <p><strong>{visibleCatalog.length}</strong> of {catalog.length} previews</p>
+            </div>
+            <div className="library-preview-grid">
+          {visibleCatalog.map((resource) => (
             <article className="library-preview-card" key={resource.id}>
               <div className="library-preview-frame" aria-hidden="true">
-                <span />
-                <span />
-                <span />
+                <strong>{resource.format}</strong>
+                <span>PREVIEW</span>
+                <small>{formatCatalogFileSize(resource.fileSizeBytes)}</small>
               </div>
               <div>
                 <span className="library-resource-format">{resource.format}</span>
@@ -6421,7 +6394,10 @@ function LibraryModule() {
               </div>
             </article>
           ))}
-        </div>
+            </div>
+            {visibleCatalog.length === 0 ? <p className="library-catalog-status">No previews match those filters.</p> : null}
+          </>
+        ) : null}
       </section>
 
       <section className="library-system-grid" aria-label="Library access notes">

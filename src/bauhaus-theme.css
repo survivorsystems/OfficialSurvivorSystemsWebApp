@@ -2321,6 +2321,26 @@ body {
   color: #000 !important;
 }
 
+.hud-frame:not(.module-home) .terminal-content .library-preview-frame {
+  background: var(--ss-ink) !important;
+  border: 2px solid var(--ss-blue) !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .library-preview-frame :is(strong, small) {
+  color: var(--ss-white) !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .library-preview-frame > span {
+  background: var(--ss-yellow) !important;
+  color: var(--ss-ink) !important;
+  font-size: 0.7rem !important;
+  font-weight: 800 !important;
+  height: auto !important;
+  padding: 5px !important;
+  text-align: center !important;
+  width: 100% !important;
+}
+
 /* Clarity uses red as its anchor while carrying the full Survivor Systems palette. */
 .hud-frame.module-advocacy .terminal-content .category-module > .page-flourish-header {
   background: var(--ss-red) !important;
