@@ -1806,7 +1806,25 @@ body {
 
 .hud-frame .assessment-workspace .love-fear-scale small {
   color: var(--ss-ink-soft) !important;
-  font-size: 0.72rem !important;
+  font-size: 0.82rem !important;
+  font-weight: 700 !important;
+}
+
+.hud-frame .assessment-workspace .love-fear-instruction {
+  margin: 0 !important;
+}
+
+.hud-frame .assessment-workspace .love-fear-statement {
+  background: var(--ss-yellow) !important;
+  border: 3px solid var(--ss-ink) !important;
+  border-left: 14px solid var(--ss-blue) !important;
+  color: var(--ss-ink) !important;
+  font-family: var(--ss-font-display) !important;
+  font-size: clamp(1.45rem, 3vw, 2.35rem) !important;
+  font-weight: 700 !important;
+  line-height: 1.22 !important;
+  margin: 0 !important;
+  padding: clamp(22px, 4vw, 38px) !important;
 }
 
 .hud-frame .assessment-workspace :is(.love-fear-flag-grid, .freedom-priority-grid) {
@@ -2301,6 +2319,97 @@ body {
 .hud-frame:is(.module-assessments, .module-advocacy) .terminal-content .category-file-title-button,
 .hud-frame:is(.module-assessments, .module-advocacy) .terminal-content .category-file-title-button :is(h2, h3, span) {
   color: #000 !important;
+}
+
+/* Clarity uses red as its anchor while carrying the full Survivor Systems palette. */
+.hud-frame.module-advocacy .terminal-content .category-module > .page-flourish-header {
+  background: var(--ss-red) !important;
+  border: 3px solid var(--ss-ink) !important;
+  border-left: 18px solid var(--ss-blue) !important;
+  box-shadow: 10px 10px 0 var(--ss-yellow) !important;
+  display: block !important;
+  margin-bottom: 38px !important;
+  padding: clamp(30px, 5vw, 62px) !important;
+}
+
+.hud-frame.module-advocacy .terminal-content .category-module > .page-flourish-header :is(.folk-kicker, h1) {
+  display: block !important;
+}
+
+.hud-frame.module-advocacy .terminal-content .category-module > .page-flourish-header .folk-kicker {
+  color: var(--ss-yellow) !important;
+}
+
+.hud-frame.module-advocacy .terminal-content .category-module > .page-flourish-header h1 {
+  color: var(--ss-white) !important;
+  font-size: clamp(3rem, 7vw, 6.5rem) !important;
+  margin: 4px 0 18px !important;
+}
+
+.hud-frame.module-advocacy .terminal-content .category-module > .page-flourish-header :is(p, span, strong) {
+  color: var(--ss-white) !important;
+}
+
+.hud-frame.module-advocacy .terminal-content .category-file-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+.hud-frame.module-advocacy .terminal-content .category-file-card {
+  border-top-color: var(--ss-blue) !important;
+  box-shadow: 6px 6px 0 var(--ss-blue) !important;
+}
+
+.hud-frame.module-advocacy .terminal-content .category-file-card:nth-child(4n + 2) {
+  background: #fff5bd !important;
+  border-top-color: var(--ss-yellow) !important;
+  box-shadow: 6px 6px 0 var(--ss-yellow) !important;
+}
+
+.hud-frame.module-advocacy .terminal-content .category-file-card:nth-child(4n + 3) {
+  background: #e3f5e8 !important;
+  border-top-color: var(--ss-green) !important;
+  box-shadow: 6px 6px 0 var(--ss-green) !important;
+}
+
+.hud-frame.module-advocacy .terminal-content .category-file-card:nth-child(4n) {
+  background: #ffe5df !important;
+  border-top-color: var(--ss-red) !important;
+  box-shadow: 6px 6px 0 var(--ss-red) !important;
+}
+
+.hud-frame.module-advocacy .assessment-workspace .assessment-modal {
+  box-shadow: 10px 10px 0 var(--ss-blue) !important;
+}
+
+.hud-frame.module-advocacy .assessment-workspace .assessment-modal-header {
+  background: var(--ss-red) !important;
+  border-bottom-color: var(--ss-yellow) !important;
+}
+
+.hud-frame.module-advocacy .assessment-workspace .question-status {
+  background: var(--ss-blue) !important;
+  border: 2px solid var(--ss-ink) !important;
+  padding: 9px 12px !important;
+}
+
+.hud-frame.module-advocacy .assessment-workspace .question-status :is(span, strong) {
+  color: var(--ss-white) !important;
+}
+
+.hud-frame.module-advocacy .assessment-workspace .assessment-modal-body > h2 {
+  border-left-color: var(--ss-green) !important;
+}
+
+.hud-frame.module-advocacy .assessment-workspace .love-fear-scale label:nth-of-type(1) { border-top: 8px solid var(--ss-red) !important; }
+.hud-frame.module-advocacy .assessment-workspace .love-fear-scale label:nth-of-type(2) { border-top: 8px solid var(--ss-yellow) !important; }
+.hud-frame.module-advocacy .assessment-workspace .love-fear-scale label:nth-of-type(3) { border-top: 8px solid var(--ss-green) !important; }
+.hud-frame.module-advocacy .assessment-workspace .love-fear-scale label:nth-of-type(4) { border-top: 8px solid var(--ss-blue) !important; }
+.hud-frame.module-advocacy .assessment-workspace .love-fear-scale label:nth-of-type(5) { border-top: 8px solid var(--ss-ink) !important; }
+
+@media (max-width: 760px) {
+  .hud-frame.module-advocacy .terminal-content .category-file-grid {
+    grid-template-columns: 1fr !important;
+  }
 }
 
 /* Homepage assessment feature and balanced support pair. */

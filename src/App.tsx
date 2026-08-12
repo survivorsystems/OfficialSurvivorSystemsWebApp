@@ -4708,29 +4708,20 @@ function LoveFearAssessmentModal({ onClose }: { onClose: () => void }) {
               <span>No saved answers</span>
             </div>
             <h2>{currentScoredItem.title}</h2>
-            <div className="love-fear-pair">
-              <article>
-                <span>A FREER PATTERN CAN LOOK LIKE</span>
-                <p>{currentScoredItem.left}</p>
-              </article>
-              <article>
-                <span>THE PATTERN BEING ASSESSED</span>
-                <p>{currentScoredItem.right}</p>
-              </article>
-            </div>
+            <p className="love-fear-instruction">Choose the response that comes closest to your experience right now.</p>
+            <blockquote className="love-fear-statement">{currentScoredItem.left}</blockquote>
             <fieldset className="love-fear-scale">
-              <legend>How closely does the pattern being assessed reflect your experience?</legend>
+              <legend>How much do you agree or disagree with this statement?</legend>
               {[0, 1, 2, 3, 4].map((value) => (
-                <label className={scores[currentScoredItem.id] === value ? "selected" : ""} key={value}>
+                <label className={scores[currentScoredItem.id] === 4 - value ? "selected" : ""} key={value}>
                   <input
-                    checked={scores[currentScoredItem.id] === value}
+                    checked={scores[currentScoredItem.id] === 4 - value}
                     name={`score-${currentScoredItem.id}`}
-                    onChange={() => chooseScore(value)}
+                    onChange={() => chooseScore(4 - value)}
                     type="radio"
                     value={value}
                   />
-                  <span>{value}</span>
-                  <small>{value === 0 ? "Completely disagree" : value === 1 ? "Mostly disagree" : value === 2 ? "Somewhat agree" : value === 3 ? "Mostly agree" : "Completely agree"}</small>
+                  <small>{value === 0 ? "Completely disagree" : value === 1 ? "Somewhat disagree" : value === 2 ? "Neither agree nor disagree" : value === 3 ? "Somewhat agree" : "Completely agree"}</small>
                 </label>
               ))}
             </fieldset>
