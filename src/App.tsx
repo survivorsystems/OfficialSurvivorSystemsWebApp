@@ -3547,16 +3547,12 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
             </button>
           </div>
         </article>
-        <aside className="home-hero-visual bauhaus-stage" aria-label="Abstract Bauhaus composition">
+        <aside className="home-hero-visual bauhaus-stage" aria-label="Balanced Bauhaus composition">
           <div className="bauhaus-art" aria-hidden="true">
             <span className="bauhaus-shape bauhaus-circle-blue" />
-            <span className="bauhaus-shape bauhaus-circle-yellow" />
             <span className="bauhaus-shape bauhaus-half-red" />
             <span className="bauhaus-shape bauhaus-square-green" />
-            <span className="bauhaus-shape bauhaus-bar-black" />
-            <span className="bauhaus-shape bauhaus-dot" />
-            <span className="bauhaus-shape bauhaus-line" />
-            <span className="bauhaus-art-label">SS<br /><b>01</b></span>
+            <span className="bauhaus-shape bauhaus-block-yellow" />
           </div>
         </aside>
       </div>

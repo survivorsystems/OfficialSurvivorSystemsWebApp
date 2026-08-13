@@ -2798,3 +2798,86 @@ body:has(.assessment-workspace),
     width: 38% !important;
   }
 }
+
+/* Homepage hero cleanup: a quiet, balanced four-form composition. */
+.hud-frame.module-home .home-hero-composition .home-hero-visual.bauhaus-stage {
+  min-height: clamp(500px, 48vw, 680px) !important;
+  padding: clamp(32px, 5vw, 72px) !important;
+}
+
+.hud-frame.module-home .bauhaus-stage::before,
+.hud-frame.module-home .bauhaus-art::before,
+.hud-frame.module-home .bauhaus-art::after {
+  content: none !important;
+  display: none !important;
+}
+
+.hud-frame.module-home .bauhaus-art {
+  aspect-ratio: 1 !important;
+  background: transparent !important;
+  display: grid !important;
+  gap: clamp(14px, 2vw, 24px) !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  grid-template-rows: repeat(2, minmax(0, 1fr)) !important;
+  height: auto !important;
+  max-height: 520px !important;
+  max-width: 520px !important;
+  position: relative !important;
+  width: min(100%, 520px) !important;
+}
+
+.hud-frame.module-home .bauhaus-art > .bauhaus-shape {
+  border: 0 !important;
+  bottom: auto !important;
+  height: 100% !important;
+  left: auto !important;
+  position: relative !important;
+  right: auto !important;
+  top: auto !important;
+  transform: none !important;
+  width: 100% !important;
+}
+
+.hud-frame.module-home .bauhaus-art > .bauhaus-circle-blue {
+  background: var(--bh-blue) !important;
+  border-radius: 50% !important;
+  grid-column: 1 !important;
+  grid-row: 1 !important;
+}
+
+.hud-frame.module-home .bauhaus-art > .bauhaus-block-yellow {
+  background: var(--bh-yellow) !important;
+  grid-column: 2 !important;
+  grid-row: 1 !important;
+}
+
+.hud-frame.module-home .bauhaus-art > .bauhaus-half-red {
+  background: var(--bh-red) !important;
+  border-radius: 999px 999px 0 0 !important;
+  grid-column: 1 !important;
+  grid-row: 2 !important;
+}
+
+.hud-frame.module-home .bauhaus-art > .bauhaus-square-green {
+  background: var(--bh-green) !important;
+  grid-column: 2 !important;
+  grid-row: 2 !important;
+}
+
+@media (max-width: 1180px) {
+  .hud-frame.module-home .home-hero-composition .home-hero-visual.bauhaus-stage {
+    min-height: 460px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .hud-frame.module-home .home-hero-composition .home-hero-visual.bauhaus-stage {
+    min-height: 0 !important;
+    padding: 28px !important;
+  }
+
+  .hud-frame.module-home .bauhaus-art {
+    gap: 12px !important;
+    max-width: 360px !important;
+  }
+}
