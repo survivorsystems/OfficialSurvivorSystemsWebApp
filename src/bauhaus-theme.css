@@ -3759,3 +3759,69 @@ body:has(.assessment-workspace),
     padding-right: 0;
   }
 }
+
+/* Homepage Start Here palette must remain after all homepage theme layers. */
+.hud-frame.module-home .home-hero-composition {
+  background: var(--ss-blue) !important;
+  border-bottom-color: var(--ss-yellow) !important;
+  border-left-color: var(--ss-red) !important;
+}
+
+.hud-frame.module-home .home-hero-composition .home-message h1 {
+  color: var(--ss-white) !important;
+}
+
+.hud-frame.module-home .home-hero-composition .home-message h1 em {
+  color: var(--ss-yellow) !important;
+}
+
+.hud-frame.module-home .home-hero-composition .home-message > :is(.folk-kicker, p) {
+  color: var(--ss-white) !important;
+}
+
+.hud-frame.module-home .home-hero-actions .home-primary-action {
+  background: #f46b3a !important;
+  border-color: var(--ss-ink) !important;
+  box-shadow: 6px 6px 0 var(--ss-ink) !important;
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.module-home .home-hero-actions button:not(.home-primary-action) {
+  background: var(--ss-yellow) !important;
+  border-color: var(--ss-ink) !important;
+  box-shadow: 6px 6px 0 var(--ss-ink) !important;
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.module-home .home-hero-actions .home-primary-action:hover,
+.hud-frame.module-home .home-hero-actions .home-primary-action:focus-visible {
+  background: #ff855c !important;
+  box-shadow: 2px 2px 0 var(--ss-ink) !important;
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.module-home .home-hero-actions button:not(.home-primary-action):hover,
+.hud-frame.module-home .home-hero-actions button:not(.home-primary-action):focus-visible {
+  background: #ffe36b !important;
+  box-shadow: 2px 2px 0 var(--ss-ink) !important;
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.module-home .terminal-content .home-hero-composition .home-message > p:not(.folk-kicker):not(.mission-emphasis),
+.hud-frame.module-home .terminal-content .home-hero-composition .home-message > .folk-kicker {
+  color: var(--ss-white) !important;
+}
+
+.hud-frame.module-home .terminal-content .home-hero-actions button.home-primary-action {
+  background: #f46b3a !important;
+  border-color: var(--ss-ink) !important;
+  box-shadow: 6px 6px 0 var(--ss-ink) !important;
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.module-home .terminal-content .home-hero-actions button.home-primary-action:hover,
+.hud-frame.module-home .terminal-content .home-hero-actions button.home-primary-action:focus-visible {
+  background: #ff855c !important;
+  box-shadow: 2px 2px 0 var(--ss-ink) !important;
+  color: var(--ss-ink) !important;
+}
