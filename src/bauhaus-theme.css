@@ -3393,3 +3393,55 @@ body:has(.assessment-workspace),
     top: 26px !important;
   }
 }
+
+/* Contrast lock for light Bauhaus surfaces. */
+.hud-frame .terminal-content .housing-page-summary {
+  background: var(--ss-white) !important;
+  border: 3px solid var(--ss-ink) !important;
+  box-shadow: 9px 9px 0 var(--ss-blue) !important;
+}
+
+.hud-frame .terminal-content .housing-page-summary :is(h2, p) {
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame .terminal-content .housing-page-summary .housing-summary-label {
+  color: #087a3b !important;
+}
+
+.hud-frame.module-support .terminal-content .support-donation-panel {
+  background: var(--ss-white) !important;
+  border: 3px solid var(--ss-ink) !important;
+  border-left: 14px solid var(--ss-green) !important;
+  box-shadow: 9px 9px 0 var(--ss-yellow) !important;
+}
+
+.hud-frame.module-support .terminal-content .support-donation-panel :is(h2, p) {
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.module-support .terminal-content .support-donation-panel .support-panel-label {
+  color: #087a3b !important;
+}
+
+.hud-frame.module-planning .terminal-content .planning-landing-panel {
+  background: var(--ss-white) !important;
+  border: 3px solid var(--ss-ink) !important;
+  border-left: 14px solid var(--ss-blue) !important;
+  box-shadow: 9px 9px 0 var(--ss-yellow) !important;
+}
+
+.hud-frame.module-planning .terminal-content .planning-landing-panel :is(h1, h2, h3, p) {
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.module-am-i-crazy .terminal-content .assessment-panel {
+  background: var(--ss-white) !important;
+  border: 3px solid var(--ss-ink) !important;
+  border-left: 14px solid var(--ss-red) !important;
+  box-shadow: 9px 9px 0 var(--ss-yellow) !important;
+}
+
+.hud-frame.module-am-i-crazy .terminal-content .assessment-panel :is(h1, h2, h3, p, li) {
+  color: var(--ss-ink) !important;
+}
