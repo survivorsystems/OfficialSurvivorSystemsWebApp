@@ -2412,21 +2412,30 @@ body {
   color: var(--ss-white) !important;
 }
 
-.hud-frame.module-advocacy .terminal-content .category-file-card:nth-child(4n + 2) {
-  background: var(--ss-red) !important;
+.hud-frame.module-advocacy .terminal-content .category-file-card:nth-child(2) {
+  background: var(--ss-blue) !important;
 }
 
 .hud-frame.module-advocacy .terminal-content .category-file-card:nth-child(4n + 3) {
   background: var(--ss-green) !important;
 }
 
-.hud-frame.module-advocacy .terminal-content .category-file-card:nth-child(4n) {
-  background: #d92f2f !important;
+.hud-frame.module-advocacy .terminal-content .category-file-card:nth-child(4) {
+  background: var(--ss-yellow) !important;
+}
+
+.hud-frame.module-advocacy .terminal-content .category-file-card:nth-child(6) {
+  background: var(--ss-green) !important;
 }
 
 .hud-frame.module-advocacy .terminal-content .category-file-card :is(h2, p),
 .hud-frame.module-advocacy .terminal-content .category-file-title-button {
   color: var(--ss-white) !important;
+}
+
+.hud-frame.module-advocacy .terminal-content .category-file-card:nth-child(4) :is(h2, p),
+.hud-frame.module-advocacy .terminal-content .category-file-card:nth-child(4) .category-file-title-button {
+  color: var(--ss-ink) !important;
 }
 
 .hud-frame.module-advocacy .assessment-workspace .assessment-modal {
