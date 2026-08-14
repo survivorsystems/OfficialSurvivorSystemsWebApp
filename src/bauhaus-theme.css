@@ -3254,3 +3254,40 @@ body:has(.assessment-workspace),
     min-height: 280px !important;
   }
 }
+
+/* Additional stripe rhythm across the yellow homepage field. */
+.hud-frame.module-home .folk-main-shell {
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      var(--ss-white) 0 12px,
+      var(--ss-white) 12px 18px,
+      var(--ss-ink) 18px 30px,
+      var(--ss-ink) 30px 36px
+    ) left 0 top 48% / clamp(46px, 6vw, 86px) 216px no-repeat,
+    repeating-linear-gradient(
+      to bottom,
+      var(--ss-ink) 0 10px,
+      var(--ss-ink) 10px 16px,
+      var(--ss-white) 16px 26px,
+      var(--ss-white) 26px 32px
+    ) right 0 bottom 11% / clamp(52px, 7vw, 96px) 224px no-repeat,
+    var(--ss-yellow) !important;
+}
+
+@media (max-width: 980px) {
+  .hud-frame.module-home .folk-main-shell {
+    background:
+      repeating-linear-gradient(
+        to right,
+        var(--ss-white) 0 18px,
+        var(--ss-ink) 18px 36px
+      ) left 0 top 0 / 58% 18px no-repeat,
+      repeating-linear-gradient(
+        to right,
+        var(--ss-ink) 0 14px,
+        var(--ss-white) 14px 28px
+      ) right 0 bottom 4% / 42% 16px no-repeat,
+      var(--ss-yellow) !important;
+  }
+}
