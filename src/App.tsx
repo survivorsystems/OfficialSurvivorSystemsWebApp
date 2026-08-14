@@ -1309,9 +1309,7 @@ type SidebarIconKey =
 
 const navItems: Array<{ key: ModuleKey; label: string; path: string; code: SidebarIconKey }> = [
   { key: "local-help", label: "Resources", path: "/resources", code: "toolkits" },
-  { key: "education", label: "Surviving", path: "/surviving", code: "education" },
   { key: "advocacy", label: "Clarity", path: "/strategy", code: "advocacy" },
-  { key: "government", label: "Government", path: "/government", code: "government" },
   { key: "about", label: "About", path: "/about", code: "about" },
 ];
 
@@ -3116,10 +3114,10 @@ function getInitialModule(): ModuleKey {
   if (path === "/guides") return "local-help";
   if (path.startsWith("/guides/")) return "how-to";
   if (path === "/planners-trackers" || path === "/toolkits") return "local-help";
-  if (path === "/surviving" || path === "/education-awareness") return "education";
+  if (path === "/surviving" || path === "/education-awareness") return "advocacy";
   if (path === "/about") return "about";
   if (path === "/strategy" || path === "/advocacy") return "advocacy";
-  if (path === "/government") return "government";
+  if (path === "/government") return "local-help";
   if (path === "/support") return "support";
   if (path === "/rebuilding") return "rebuilding";
   if (path === "/planning" || path === "/go-bag-prep" || path === "/crisis-support") return "planning";
@@ -3576,25 +3574,13 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
             <button type="button" onClick={() => onNavigate("local-help", "/resources")}>Explore Resources</button>
           </article>
           <article className="home-category-card">
-            <p className="home-section-number">02 / SURVIVING</p>
-            <h2>Surviving</h2>
-            <p>Information for staying safer while planning, documenting what is happening, preparing an exit, and managing daily realities.</p>
-            <button type="button" onClick={() => onNavigate("education", "/surviving")}>Explore Surviving</button>
-          </article>
-          <article className="home-category-card">
-            <p className="home-section-number">03 / CLARITY</p>
+            <p className="home-section-number">02 / CLARITY</p>
             <h2>Clarity</h2>
             <p>Private, in-browser assessments that help name patterns, organize concerns, and find a practical place to begin.</p>
             <button type="button" onClick={() => onNavigate("advocacy", "/strategy")}>Explore Clarity</button>
           </article>
           <article className="home-category-card">
-            <p className="home-section-number">04 / GOVERNMENT</p>
-            <h2>Government</h2>
-            <p>Plain-language help for navigating public systems, programs, agencies, rights, applications, and official processes.</p>
-            <button type="button" onClick={() => onNavigate("government", "/government")}>Explore Government</button>
-          </article>
-          <article className="home-category-card">
-            <p className="home-section-number">05 / ABOUT</p>
+            <p className="home-section-number">03 / ABOUT</p>
             <h2>About</h2>
             <p>The purpose, safety approach, privacy commitments, and values behind Survivor Systems.</p>
             <button type="button" onClick={() => onNavigate("about", "/about")}>About Survivor Systems</button>
@@ -3616,7 +3602,7 @@ function CategoryModule({
     ? {
         title: "Clarity",
         intro: "Use an assessment to name patterns, understand what is affecting your choices, and find a practical place to begin.",
-        files: [...categoryFiles.assessments.files, ...baseContent.files],
+        files: categoryFiles.assessments.files,
       }
     : baseContent;
   const [activeModal, setActiveModal] = useState<CategoryFile["modal"] | null>(null);
@@ -3663,7 +3649,7 @@ function CategoryModule({
     >
       {category !== "government" ? (
         <PageFlourishHeader
-          eyebrow={content.title}
+          eyebrow={category === "advocacy" ? "PRIVATE, IN-BROWSER ASSESSMENTS" : content.title}
           title={content.title}
           titleId={`${category}-title`}
           variant={category}
@@ -6137,37 +6123,6 @@ function ResourceModule({
 
   return (
     <section className="page-shell resources-module" aria-label="Resources">
-      <section className="resource-access-choice" aria-label="Resource access options">
-        <div className="resource-access-choice-grid">
-          <article className="resource-access-panel resource-access-panel-free">
-            <span className="resource-access-kicker">FREE RESOURCES</span>
-            <h3>Browse Free Guides</h3>
-            <p>
-              Guides and educational resources open without a purchase or subscription.
-              Assessments are organized separately under Clarity.
-            </p>
-            <button
-              type="button"
-              onClick={() => {
-                setActiveDirectory("housing");
-                window.requestAnimationFrame(() => document.getElementById("resource-directory")?.scrollIntoView({ behavior: "smooth" }));
-              }}
-            >
-              Browse Free Resources
-            </button>
-          </article>
-          <article className="resource-access-panel resource-access-panel-paid">
-            <span className="resource-access-kicker">SUBSCRIBER LIBRARY</span>
-            <h3>Preview Subscriber Resources</h3>
-            <p>
-              Preview downloadable planners, trackers, templates, and long-form tools before
-              deciding whether to subscribe.
-            </p>
-            <button type="button" onClick={() => onNavigate("access", "/resources/access")}>Open Subscriber Library</button>
-          </article>
-        </div>
-      </section>
-
       <section className="housing-assessment-entry" aria-labelledby="housing-assessment-entry-title">
         <div>
           <span>FREE HOUSING STRATEGY</span>

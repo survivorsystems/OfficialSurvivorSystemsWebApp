@@ -355,8 +355,8 @@ body {
   width: 30px !important;
 }
 
-.hud-frame:not(.module-home) .terminal-topbar,
-.hud-frame:not(.module-home) .win95-window .terminal-topbar {
+.hud-frame:not(.module-home):not(.module-advocacy) .terminal-topbar,
+.hud-frame:not(.module-home):not(.module-advocacy) .win95-window .terminal-topbar {
   background: var(--ss-white) !important;
   border: 0 !important;
   border-bottom: var(--ss-border) !important;
@@ -450,6 +450,13 @@ body {
   color: var(--ss-ink) !important;
   min-height: 520px !important;
   padding: clamp(24px, 4vw, 60px) !important;
+}
+
+.hud-frame:is(.module-advocacy, .module-local-help) .terminal-content {
+  background:
+    repeating-linear-gradient(90deg, var(--ss-ink) 0 10px, var(--ss-white) 10px 20px) right top / 52px 100% no-repeat,
+    var(--ss-paper) !important;
+  padding-right: clamp(72px, 8vw, 104px) !important;
 }
 
 /* Shared content primitives */
@@ -2375,26 +2382,27 @@ body {
 }
 
 .hud-frame.module-advocacy .terminal-content .category-file-card {
-  border-top-color: var(--ss-blue) !important;
-  box-shadow: 6px 6px 0 var(--ss-blue) !important;
+  background: var(--ss-blue) !important;
+  border: 3px solid var(--ss-ink) !important;
+  box-shadow: 9px 9px 0 var(--ss-yellow) !important;
+  color: var(--ss-white) !important;
 }
 
 .hud-frame.module-advocacy .terminal-content .category-file-card:nth-child(4n + 2) {
-  background: #fff5bd !important;
-  border-top-color: var(--ss-yellow) !important;
-  box-shadow: 6px 6px 0 var(--ss-yellow) !important;
+  background: var(--ss-red) !important;
 }
 
 .hud-frame.module-advocacy .terminal-content .category-file-card:nth-child(4n + 3) {
-  background: #e3f5e8 !important;
-  border-top-color: var(--ss-green) !important;
-  box-shadow: 6px 6px 0 var(--ss-green) !important;
+  background: var(--ss-green) !important;
 }
 
 .hud-frame.module-advocacy .terminal-content .category-file-card:nth-child(4n) {
-  background: #ffe5df !important;
-  border-top-color: var(--ss-red) !important;
-  box-shadow: 6px 6px 0 var(--ss-red) !important;
+  background: #d92f2f !important;
+}
+
+.hud-frame.module-advocacy .terminal-content .category-file-card :is(h2, p),
+.hud-frame.module-advocacy .terminal-content .category-file-title-button {
+  color: var(--ss-white) !important;
 }
 
 .hud-frame.module-advocacy .assessment-workspace .assessment-modal {
