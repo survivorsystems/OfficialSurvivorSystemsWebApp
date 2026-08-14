@@ -2980,6 +2980,130 @@ body:has(.assessment-workspace),
   }
 }
 
+/* Clarity gets the same architectural depth as the homepage and Systems page. */
+.hud-frame.module-advocacy .terminal-content .category-module > .page-flourish-header {
+  background: var(--ss-blue) !important;
+  border-color: var(--ss-red) !important;
+  border-left-color: var(--ss-red) !important;
+  box-shadow: 10px 10px 0 var(--ss-yellow) !important;
+  overflow: hidden !important;
+  padding-top: clamp(46px, 6vw, 76px) !important;
+  position: relative !important;
+}
+
+.hud-frame.module-advocacy .terminal-content .category-module > .page-flourish-header::before {
+  background: linear-gradient(
+    90deg,
+    var(--ss-yellow) 0 28%,
+    var(--ss-white) 28% 43%,
+    var(--ss-red) 43% 70%,
+    var(--ss-ink) 70% 86%,
+    var(--ss-green) 86% 100%
+  ) !important;
+  content: "" !important;
+  display: block !important;
+  height: 14px !important;
+  inset: 0 0 auto !important;
+  position: absolute !important;
+  width: 100% !important;
+}
+
+.hud-frame.module-advocacy .terminal-content .category-file-card {
+  background: var(--ss-blue) !important;
+  border-color: var(--ss-red) !important;
+  box-shadow: 9px 9px 0 var(--ss-yellow) !important;
+}
+
+.hud-frame.module-advocacy .terminal-content .category-file-card:nth-child(2),
+.hud-frame.module-advocacy .terminal-content .category-file-card:nth-child(6) {
+  background: var(--ss-ink) !important;
+  color: var(--ss-white) !important;
+}
+
+.hud-frame.module-advocacy .terminal-content .category-file-card:nth-child(2) {
+  border-color: var(--ss-yellow) !important;
+  box-shadow: 9px 9px 0 var(--ss-red) !important;
+}
+
+.hud-frame.module-advocacy .terminal-content .category-file-card:nth-child(6) {
+  border-color: var(--ss-blue) !important;
+  box-shadow: 9px 9px 0 var(--ss-yellow) !important;
+}
+
+.hud-frame.module-advocacy .terminal-content .category-file-card:nth-child(3),
+.hud-frame.module-advocacy .terminal-content .category-file-card:nth-child(5) {
+  background: var(--ss-blue) !important;
+}
+
+.hud-frame.module-advocacy .terminal-content .category-file-card:nth-child(4) {
+  background: var(--ss-yellow) !important;
+  border-color: var(--ss-blue) !important;
+  box-shadow: 9px 9px 0 var(--ss-red) !important;
+}
+
+.hud-frame.module-advocacy .terminal-content .category-file-card:nth-child(4) :is(h2, p),
+.hud-frame.module-advocacy .terminal-content .category-file-card:nth-child(4) .category-file-title-button {
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.module-advocacy .terminal-content .category-file-card:not(:nth-child(4)) :is(h2, p),
+.hud-frame.module-advocacy .terminal-content .category-file-card:not(:nth-child(4)) .category-file-title-button {
+  color: var(--ss-white) !important;
+}
+
+.hud-frame.module-advocacy .terminal-content .category-file-card:nth-child(odd) > button:not(.category-file-title-button) {
+  background: var(--ss-red) !important;
+  border-color: var(--ss-ink) !important;
+  box-shadow: 5px 5px 0 var(--ss-yellow) !important;
+  color: var(--ss-white) !important;
+}
+
+.hud-frame.module-advocacy .terminal-content .category-file-card:nth-child(2) > button:not(.category-file-title-button),
+.hud-frame.module-advocacy .terminal-content .category-file-card:nth-child(6) > button:not(.category-file-title-button) {
+  background: var(--ss-yellow) !important;
+  box-shadow: 5px 5px 0 var(--ss-red) !important;
+  color: var(--ss-ink) !important;
+}
+
+/* About offerings: black parent field with saturated, high-contrast service panels. */
+.hud-frame.module-about .about-story .about-offerings {
+  background: var(--ss-ink) !important;
+  border-color: var(--ss-blue) !important;
+  box-shadow: 9px 9px 0 var(--ss-yellow) !important;
+}
+
+.hud-frame.module-about .about-story .about-offerings > header :is(span, h2) {
+  color: var(--ss-white) !important;
+}
+
+.hud-frame.module-about .about-offerings-grid {
+  gap: 14px !important;
+}
+
+.hud-frame.module-about .about-offerings-grid article:nth-child(1) {
+  background: var(--ss-blue) !important;
+  border-color: var(--ss-red) !important;
+  box-shadow: 6px 6px 0 var(--ss-yellow) !important;
+}
+
+.hud-frame.module-about .about-offerings-grid article:nth-child(2) {
+  background: var(--ss-red) !important;
+  border-color: var(--ss-yellow) !important;
+  box-shadow: 6px 6px 0 var(--ss-blue) !important;
+}
+
+.hud-frame.module-about .about-offerings-grid article:nth-child(3) {
+  background: var(--ss-blue) !important;
+  border-color: var(--ss-yellow) !important;
+  box-shadow: 6px 6px 0 var(--ss-red) !important;
+}
+
+.hud-frame.module-about .about-offerings-grid article :is(h3, p, span),
+.hud-frame.module-about .about-offerings-grid article:nth-child(2) :is(h3, p, span),
+.hud-frame.module-about .about-offerings-grid article:nth-child(3) :is(h3, p, span) {
+  color: var(--ss-white) !important;
+}
+
 /* Homepage composition: assessment hero, patterned field, and shaped site map. */
 .hud-frame.module-home .folk-main-shell {
   isolation: isolate !important;
@@ -3677,6 +3801,16 @@ body:has(.assessment-workspace),
   color: var(--ss-white) !important;
 }
 
+.hud-frame.module-about .about-story .about-offerings .about-offerings-grid article:nth-child(2) :is(h3, p, span),
+.hud-frame.module-about .about-story .about-offerings .about-offerings-grid article:nth-child(3) :is(h3, p, span) {
+  color: var(--ss-white) !important;
+}
+
+.hud-frame.module-about .about-story .about-offerings .about-offerings-grid article:nth-child(2) :is(h3, p, span),
+.hud-frame.module-about .about-story .about-offerings .about-offerings-grid article:nth-child(3) :is(h3, p, span) {
+  color: var(--ss-white) !important;
+}
+
 .hud-frame.module-about .about-offerings-grid article > span {
   color: var(--ss-white) !important;
 }
@@ -4008,7 +4142,7 @@ body:has(.assessment-workspace),
 }
 
 .hud-frame.module-about .about-offerings-grid article:nth-child(2) :is(h3, p, span) {
-  color: var(--ss-ink) !important;
+  color: var(--ss-white) !important;
 }
 
 .hud-frame.module-about .about-story .about-start {
@@ -4133,4 +4267,64 @@ body:has(.assessment-workspace),
   .hud-frame.module-home .home-hero-composition .home-message h1 {
     font-size: clamp(3.5rem, 18vw, 5rem) !important;
   }
+}
+
+/* Final Clarity and About palette lock. */
+.hud-frame.module-advocacy .terminal-content .category-module > .page-flourish-header {
+  background: var(--ss-blue) !important;
+  border-color: var(--ss-red) !important;
+  border-left-color: var(--ss-red) !important;
+  box-shadow: 10px 10px 0 var(--ss-yellow) !important;
+  overflow: hidden !important;
+  padding-top: clamp(46px, 6vw, 76px) !important;
+  position: relative !important;
+}
+
+.hud-frame.module-advocacy .terminal-content .category-module > .page-flourish-header::before {
+  background: linear-gradient(90deg, var(--ss-yellow) 0 28%, var(--ss-white) 28% 43%, var(--ss-red) 43% 70%, var(--ss-ink) 70% 86%, var(--ss-green) 86% 100%) !important;
+  content: "" !important;
+  display: block !important;
+  height: 14px !important;
+  inset: 0 0 auto !important;
+  position: absolute !important;
+  width: 100% !important;
+}
+
+.hud-frame.module-advocacy .terminal-content .category-file-card:nth-child(3),
+.hud-frame.module-advocacy .terminal-content .category-file-card:nth-child(5) {
+  background: var(--ss-blue) !important;
+  border-color: var(--ss-red) !important;
+  box-shadow: 9px 9px 0 var(--ss-yellow) !important;
+}
+
+.hud-frame.module-about .about-story .about-offerings {
+  background: var(--ss-ink) !important;
+  border-color: var(--ss-blue) !important;
+  box-shadow: 9px 9px 0 var(--ss-yellow) !important;
+}
+
+.hud-frame.module-about .about-story .about-offerings > header :is(span, h2) {
+  color: var(--ss-white) !important;
+}
+
+.hud-frame.module-about .about-offerings-grid article:nth-child(1) {
+  background: var(--ss-blue) !important;
+  border-color: var(--ss-red) !important;
+  box-shadow: 6px 6px 0 var(--ss-yellow) !important;
+}
+
+.hud-frame.module-about .about-offerings-grid article:nth-child(2) {
+  background: var(--ss-red) !important;
+  border-color: var(--ss-yellow) !important;
+  box-shadow: 6px 6px 0 var(--ss-blue) !important;
+}
+
+.hud-frame.module-about .about-offerings-grid article:nth-child(3) {
+  background: var(--ss-blue) !important;
+  border-color: var(--ss-yellow) !important;
+  box-shadow: 6px 6px 0 var(--ss-red) !important;
+}
+
+.hud-frame.module-about .about-offerings-grid article :is(h3, p, span) {
+  color: var(--ss-white) !important;
 }
