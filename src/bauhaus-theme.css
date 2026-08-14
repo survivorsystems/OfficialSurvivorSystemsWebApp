@@ -3931,3 +3931,113 @@ body:has(.assessment-workspace),
 .hud-frame.module-local-help .resource-support-callout :is(span, h2, p) {
   color: var(--ss-white) !important;
 }
+
+/* Interior pages sit directly beside navigation instead of inside a black moat. */
+.hud-frame:not(.module-home) .win95-desktop {
+  column-gap: 0 !important;
+  gap: 0 !important;
+}
+
+.hud-frame:not(.module-home) .folk-main-shell {
+  background: var(--ss-paper) !important;
+  padding: 0 !important;
+}
+
+.hud-frame:not(.module-home) .terminal-screen {
+  border: 0 !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+  max-width: none !important;
+}
+
+.hud-frame:not(.module-home) .win95-titlebar {
+  display: none !important;
+}
+
+/* Blue leads; vermillion and yellow trade border and shadow roles. */
+.hud-frame.module-local-help .terminal-content .resources-module > .page-flourish-header {
+  background: var(--ss-yellow) !important;
+  border: 3px solid var(--ss-blue) !important;
+  border-left: 18px solid var(--ss-blue) !important;
+  box-shadow: 10px 10px 0 var(--ss-red) !important;
+}
+
+.hud-frame.module-local-help .terminal-content .resources-module > .page-flourish-header .folk-kicker {
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.module-government .systems-page-header {
+  background: var(--ss-blue) !important;
+  border-color: var(--ss-red) !important;
+  border-left-color: var(--ss-red) !important;
+  box-shadow: 10px 10px 0 var(--ss-yellow) !important;
+}
+
+.hud-frame.module-government .systems-page-header :is(span, h1) {
+  color: var(--ss-white) !important;
+}
+
+.hud-frame.module-about .about-story .about-overlap-section {
+  background: var(--ss-yellow) !important;
+  border-color: var(--ss-blue) !important;
+  box-shadow: 9px 9px 0 var(--ss-red) !important;
+}
+
+.hud-frame.module-about .about-story .about-overlap-section :is(h2, h3, p, li, span, strong) {
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.module-about .terminal-content .about-story .about-overlap-section :is(h2, h3, p, li, span, strong) {
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.module-about .about-story .about-overlap-section > div:first-child {
+  border-color: var(--ss-blue) !important;
+}
+
+.hud-frame.module-about .about-story .about-difference-section {
+  background: #c9471a !important;
+  border-color: var(--ss-yellow) !important;
+  box-shadow: 9px 9px 0 var(--ss-blue) !important;
+}
+
+.hud-frame.module-about .about-offerings-grid article:nth-child(2) {
+  background: var(--ss-yellow) !important;
+  border-color: var(--ss-blue) !important;
+  box-shadow: 6px 6px 0 var(--ss-red) !important;
+}
+
+.hud-frame.module-about .about-offerings-grid article:nth-child(2) :is(h3, p, span) {
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.module-about .about-story .about-start {
+  background: var(--ss-blue) !important;
+  border-color: var(--ss-red) !important;
+  box-shadow: 9px 9px 0 var(--ss-yellow) !important;
+}
+
+.hud-frame.module-about .about-story .about-story-intro,
+.hud-frame.module-about .about-story .about-offerings {
+  border-color: var(--ss-red) !important;
+}
+
+.hud-frame.module-about .about-story .about-founder-section {
+  border-color: var(--ss-red) !important;
+}
+
+.hud-frame.module-about .about-story .about-strategy-callout {
+  border-color: var(--ss-yellow) !important;
+}
+
+.hud-frame.module-about .about-story .about-principles {
+  border-color: var(--ss-blue) !important;
+}
+
+.hud-frame.module-advocacy .terminal-content .category-file-card:nth-child(3) {
+  background: #c9471a !important;
+}
+
+.hud-frame.module-home .home-hero-actions button:not(.home-primary-action) {
+  box-shadow: 6px 6px 0 var(--ss-blue) !important;
+}
