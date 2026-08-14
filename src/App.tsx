@@ -3636,7 +3636,6 @@ function AboutModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: str
       </section>
 
       <section className="about-founder-section" aria-labelledby="about-founder-title">
-        <div className="about-section-number">01</div>
         <div>
           <span>WHY I BUILT IT</span>
           <h2 id="about-founder-title">Leaving isn't the finish line.</h2>
@@ -3683,7 +3682,6 @@ function AboutModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: str
       </section>
 
       <section className="about-difference-section" aria-labelledby="about-difference-title">
-        <div className="about-section-number">02</div>
         <div>
           <span>WHAT SURVIVOR SYSTEMS DOES DIFFERENTLY</span>
           <h2 id="about-difference-title">Better information. Clearer strategy. Your decisions.</h2>
@@ -3715,7 +3713,7 @@ function AboutModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: str
         </header>
         <div className="about-offerings-grid">
           <article>
-            <span>01 / TOOLS</span>
+            <span>TOOLS</span>
             <h3>Resources and assessments</h3>
             <p>
               Educational resources, assessments, planners, guides, and strategy tools for people
@@ -3724,7 +3722,7 @@ function AboutModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: str
             </p>
           </article>
           <article>
-            <span>02 / STRATEGY</span>
+            <span>STRATEGY</span>
             <h3>One-on-one support</h3>
             <p>
               Strategy services are available for people who need help organizing a complicated
@@ -3732,7 +3730,7 @@ function AboutModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: str
             </p>
           </article>
           <article>
-            <span>03 / TRAINING</span>
+            <span>TRAINING</span>
             <h3>Professional education</h3>
             <p>
               Training and consulting are available for organizations, advocates, service providers,

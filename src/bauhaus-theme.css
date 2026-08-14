@@ -3825,3 +3825,109 @@ body:has(.assessment-workspace),
   box-shadow: 2px 2px 0 var(--ss-ink) !important;
   color: var(--ss-ink) !important;
 }
+
+/* Saturated About panels and stronger black-card rhythm. */
+.hud-frame.module-about .about-story :is(.about-story-intro, .about-founder-section, .about-difference-section) {
+  color: var(--ss-white) !important;
+}
+
+.hud-frame.module-about .about-story .about-story-intro {
+  background: var(--ss-blue) !important;
+  box-shadow: 9px 9px 0 var(--ss-yellow) !important;
+}
+
+.hud-frame.module-about .about-story .about-founder-section {
+  background: var(--ss-ink) !important;
+  box-shadow: 9px 9px 0 var(--ss-red) !important;
+  grid-template-columns: 1fr !important;
+}
+
+.hud-frame.module-about .about-story .about-difference-section {
+  background: #c9471a !important;
+  box-shadow: 9px 9px 0 var(--ss-yellow) !important;
+  grid-template-columns: 1fr !important;
+}
+
+.hud-frame.module-about .about-overlap-section {
+  background: #087a3b !important;
+  box-shadow: 9px 9px 0 var(--ss-blue) !important;
+}
+
+.hud-frame.module-about .about-strategy-callout {
+  background: var(--ss-ink) !important;
+  box-shadow: 9px 9px 0 var(--ss-red) !important;
+}
+
+.hud-frame.module-about .about-offerings {
+  background: var(--ss-blue) !important;
+  box-shadow: 9px 9px 0 var(--ss-yellow) !important;
+}
+
+.hud-frame.module-about .about-offerings-grid article:nth-child(1) {
+  background: var(--ss-ink) !important;
+  box-shadow: 6px 6px 0 var(--ss-yellow) !important;
+}
+
+.hud-frame.module-about .about-offerings-grid article:nth-child(2) {
+  background: #087a3b !important;
+  box-shadow: 6px 6px 0 var(--ss-blue) !important;
+}
+
+.hud-frame.module-about .about-offerings-grid article:nth-child(3) {
+  background: #c9471a !important;
+  box-shadow: 6px 6px 0 var(--ss-yellow) !important;
+}
+
+.hud-frame.module-about .about-start {
+  background: var(--ss-ink) !important;
+  box-shadow: 9px 9px 0 var(--ss-green) !important;
+}
+
+.hud-frame.module-about .about-story :is(
+  .about-story-intro,
+  .about-founder-section,
+  .about-difference-section,
+  .about-overlap-section,
+  .about-strategy-callout,
+  .about-offerings,
+  .about-offerings-grid article,
+  .about-principles,
+  .about-start
+) :is(h2, h3, p, li, span, strong) {
+  color: var(--ss-white) !important;
+}
+
+.hud-frame.module-about .about-overlap-section > div:first-child {
+  border-color: var(--ss-white) !important;
+}
+
+.hud-frame.module-about .about-start-actions button {
+  background: var(--ss-yellow) !important;
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.module-home .home-hero-composition {
+  background: var(--ss-ink) !important;
+  border-bottom-color: var(--ss-yellow) !important;
+  border-left-color: var(--ss-red) !important;
+  box-shadow: 10px 10px 0 var(--ss-blue) !important;
+  margin: 0 10px 10px 0 !important;
+}
+
+.hud-frame.module-home .terminal-content .home-hero-actions button.home-primary-action {
+  box-shadow: 6px 6px 0 var(--ss-yellow) !important;
+}
+
+.hud-frame.module-home .home-hero-actions button:not(.home-primary-action) {
+  box-shadow: 6px 6px 0 var(--ss-green) !important;
+}
+
+.hud-frame.module-local-help .resource-support-callout {
+  background: var(--ss-ink) !important;
+  border: 3px solid var(--ss-ink) !important;
+  box-shadow: 9px 9px 0 var(--ss-blue) !important;
+}
+
+.hud-frame.module-local-help .resource-support-callout :is(span, h2, p) {
+  color: var(--ss-white) !important;
+}
