@@ -130,7 +130,8 @@ function MatchCard({ match }: { match: HousingMatch }) {
 }
 
 export function HousingStrategySystem({ onBack }: { onBack: () => void }) {
-  const [view, setView] = useState<View>("landing");
+  const requestedView = new URLSearchParams(window.location.search).get("view");
+  const [view, setView] = useState<View>(requestedView === "assessment" ? "assessment" : "landing");
   const [answers, setAnswers] = useState<HousingAssessmentAnswers>({ ...emptyHousingAnswers });
   const [step, setStep] = useState(0);
   const [search, setSearch] = useState("");

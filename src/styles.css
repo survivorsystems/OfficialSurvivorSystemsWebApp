@@ -7151,11 +7151,98 @@ button:not(.desktop-icon):not(.planning-document-key):not(.resource-document-key
   color: #000000;
 }
 
+.housing-page-summary {
+  align-items: center;
+  background: #ffffff;
+  border: 2px solid #111111;
+  box-shadow: 8px 8px 0 #1264c0;
+  display: grid;
+  gap: 24px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  margin: 22px 8px 30px 0;
+  padding: clamp(20px, 3vw, 32px);
+}
+
+.housing-page-summary h2,
+.housing-page-summary p {
+  color: #111111;
+}
+
+.housing-page-summary h2 {
+  margin: 6px 0 10px;
+}
+
+.housing-page-summary p {
+  margin-bottom: 0;
+}
+
+.housing-summary-label {
+  color: #0b9d4a !important;
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.housing-page-summary button {
+  max-width: 240px;
+}
+
+.housing-assessment-entry {
+  align-items: center;
+  background: #ffffff;
+  border: 2px solid #111111;
+  border-left: 14px solid #0b9d4a;
+  box-shadow: 8px 8px 0 #f2c230;
+  display: grid;
+  gap: 24px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  margin: 0 8px 34px 0;
+  padding: clamp(20px, 3vw, 32px);
+}
+
+.housing-assessment-entry span {
+  color: #0b9d4a;
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.housing-assessment-entry h2 {
+  color: #111111;
+  margin: 6px 0 10px;
+}
+
+.housing-assessment-entry p {
+  color: #111111;
+  margin: 0;
+  max-width: 68ch;
+}
+
+.housing-assessment-entry-actions {
+  display: grid;
+  gap: 10px;
+  min-width: min(100%, 250px);
+}
+
 .win95-taskbar {
   display: none;
 }
 
 @media (max-width: 860px) {
+  .housing-page-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .housing-assessment-entry {
+    grid-template-columns: 1fr;
+  }
+
+  .housing-page-summary button {
+    max-width: none;
+    width: 100%;
+  }
+
   .hud-frame .win95-desktop {
     grid-template-columns: 1fr;
   }

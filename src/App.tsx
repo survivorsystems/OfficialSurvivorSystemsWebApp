@@ -1271,12 +1271,12 @@ const moduleRoutes: Record<ModuleKey, { label: string; path: string }> = {
   "am-i-crazy": { label: "Was I Crazy?", path: "/am-i-crazy" },
   "go-bag-prep": { label: "Immediate Support", path: "/crisis-support" },
   planning: { label: "Immediate Support", path: "/crisis-support" },
-  rebuilding: { label: "Rebuilding", path: "/rebuilding" },
+  rebuilding: { label: "Resources", path: "/rebuilding" },
   "local-help": { label: "Resources", path: "/resources" },
   "how-to": { label: "Resources", path: "/resources" },
   legal: { label: "Resources", path: "/resources" },
-  library: { label: "Database", path: "/resources/access" },
-  access: { label: "Database", path: "/resources/access" },
+  library: { label: "Subscriber Library", path: "/resources/access" },
+  access: { label: "Subscriber Library", path: "/resources/access" },
 };
 
 const allNavTargets: Array<{ key: ModuleKey; label: string; path: string }> = [
@@ -2341,7 +2341,7 @@ const categoryFiles: Record<
       "Reusable systems for tracking the chaos: documents, calls, benefits, housing, court dates, appointments, deadlines, and resource contact logs.",
     files: [
       {
-        title: "Database Access Information",
+        title: "Subscriber Library Access",
         description: "Subscriber access, library previews, and deeper planner and tracker resources.",
         status: "LIVE",
         target: "access",
@@ -5254,13 +5254,13 @@ function SnapTanfGuide({ onBack, onNavigate }: { onBack: () => void; onNavigate:
           forms, deadlines, calls, and document requests.
         </p>
         <p>
-          The Database holds the deeper Resource Navigation System: trackers for
+          The Subscriber Library holds the deeper Resource Navigation System: trackers for
           applications, case numbers, worker information, documents, deadlines, phone-call notes,
           local resources, and what to work on next.
         </p>
         <div className="terminal-actions denial-actions">
           <button type="button" onClick={() => onNavigate("library", "/resources")}>
-            View Database
+            View Subscriber Library
           </button>
           <button type="button" onClick={onBack}>
             Back To How To Guides
@@ -5824,15 +5824,16 @@ function getInitialResourceFolder(moduleKey: Exclude<ModuleKey, "home" | "am-i-c
 }
 
 function AccessInformationModule() {
-  const [showLibrary, setShowLibrary] = useState(false);
+  const requestedPreview = new URLSearchParams(window.location.search).get("preview") ?? "";
+  const [showLibrary, setShowLibrary] = useState(Boolean(requestedPreview));
 
   if (showLibrary) {
     return (
       <section className="resources-nested-shell">
         <button className="resource-back-button" type="button" onClick={() => setShowLibrary(false)}>
-          Back To Database
+          Back to Subscriber Library
         </button>
-        <LibraryModule />
+        <LibraryModule initialSearch={requestedPreview} />
       </section>
     );
   }
@@ -5840,12 +5841,12 @@ function AccessInformationModule() {
   return (
     <CommercePageTemplate
       className="page-shell library-module access-module"
-      eyebrow="Database / Access"
+      eyebrow="Resources / Subscriber Library"
       intro={<p>
           The Subscriber Library holds deeper planners, trackers, templates, and downloadable
           guides. Browse the index before deciding whether a subscription is useful to you.
         </p>}
-      title="Database"
+      title="Subscriber Library"
       titleId="access-title"
     >
 
@@ -6006,7 +6007,13 @@ function ResourceModule({
             setActiveFolder("priority-2");
           },
         },
-        { label: "Housing Assistance Tracker", action: () => setActiveFolder("access") },
+        {
+          label: "Housing Assistance Tracker",
+          action: () => {
+            window.history.pushState({}, "", "/resources/access?preview=housing");
+            setActiveFolder("access");
+          },
+        },
         { label: "Housing Application Toolkit", action: () => setActiveFolder("access") },
         { label: "Coordinated Entry Contact Log", action: () => setActiveFolder("access") },
         { label: "Utility Assistance Tracker", action: () => setActiveFolder("access") },
@@ -6161,6 +6168,38 @@ function ResourceModule({
         </div>
       </section>
 
+      <section className="housing-assessment-entry" aria-labelledby="housing-assessment-entry-title">
+        <div>
+          <span>FREE HOUSING STRATEGY</span>
+          <h2 id="housing-assessment-entry-title">Not sure which housing options fit?</h2>
+          <p>
+            The Housing Strategy Assessment asks about your current situation, timing, barriers,
+            and priorities, then builds a private in-browser list of housing pathways to investigate.
+          </p>
+        </div>
+        <div className="housing-assessment-entry-actions">
+          <button
+            type="button"
+            onClick={() => {
+              window.history.pushState({}, "", "/resources/housing-strategy?view=assessment");
+              setActiveDirectory("housing-strategy");
+            }}
+          >
+            Start Housing Assessment
+          </button>
+          <button
+            className="resource-back-button"
+            type="button"
+            onClick={() => {
+              window.history.pushState({}, "", "/resources/housing-strategy");
+              setActiveDirectory("housing-strategy");
+            }}
+          >
+            Browse Housing Options
+          </button>
+        </div>
+      </section>
+
       <div className="resource-directory-tree" id="resource-directory" aria-label="Resource directories">
         {resourceDirectories.map((directory) => {
           const isOpen = activeDirectory === directory.id;
@@ -6278,10 +6317,10 @@ function SupportModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: s
   );
 }
 
-function LibraryModule() {
+function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
   const [catalog, setCatalog] = useState<SubscriberCatalogItem[]>([]);
   const [catalogStatus, setCatalogStatus] = useState<"loading" | "ready" | "error">("loading");
-  const [catalogSearch, setCatalogSearch] = useState("");
+  const [catalogSearch, setCatalogSearch] = useState(initialSearch);
   const [catalogCategory, setCatalogCategory] = useState("all");
 
   useEffect(() => {
@@ -6355,7 +6394,7 @@ function LibraryModule() {
       </section>
 
       <section className="library-section" aria-labelledby="library-categories-title">
-        <div className="terminal-label">DATABASE INDEX</div>
+        <div className="terminal-label">LIBRARY INDEX</div>
         <h2 id="library-categories-title">Indexed Categories</h2>
         <div className="library-category-grid">
           {catalogCategoryCounts.map(({ category, count }) => (
@@ -6443,7 +6482,7 @@ function RebuildingModule({
   return (
     <section className="page-shell rebuilding-module" aria-labelledby="rebuilding-title">
       <PageFlourishHeader
-        eyebrow="Resources // Stabilize"
+        eyebrow="Resources / Housing Guide"
         title="How To Navigate Housing"
         titleId="rebuilding-title"
         variant="rebuilding"
@@ -6464,19 +6503,20 @@ function RebuildingModule({
         <span>Track Everything</span>
       </div>
 
-      <section className="rebuilding-mission-files" aria-labelledby="rebuilding-mission-files-title">
+      <section className="housing-page-summary" aria-labelledby="housing-page-summary-title">
         <div>
-          <p className="terminal-label">MISSION FILE</p>
-          <h2 id="rebuilding-mission-files-title">Reality Check Tools</h2>
+          <p className="housing-summary-label">WHAT'S ON THIS PAGE</p>
+          <h2 id="housing-page-summary-title">A practical guide to navigating housing systems</h2>
           <p>
-            For the part where the brain keeps replaying the old argument and asking whether the
-            harm was real. Spoiler: the system can run diagnostics without giving them admin access.
+            Learn where to begin, what to ask, which records to keep, and how to follow up across
+            housing programs. The Housing Assistance Tracker is a separate tool in the Subscriber Library.
           </p>
         </div>
-        <button type="button" onClick={() => onNavigate("am-i-crazy", "/am-i-crazy")}>
-          <span aria-hidden="true">RUN</span>
-          <strong>Was I Crazy?</strong>
-          <small>Open assessment</small>
+        <button
+          type="button"
+          onClick={() => onNavigate("access", "/resources/access?preview=housing")}
+        >
+          Preview Subscriber Housing Tools
         </button>
       </section>
 
@@ -6503,7 +6543,7 @@ function RebuildingModule({
       </div>
 
       <section className="rebuilding-bottom-line" aria-labelledby="housing-bottom-line">
-        <p className="terminal-label">BOTTOM LINE</p>
+        <p className="housing-summary-label">KEY TAKEAWAY</p>
         <h2 id="housing-bottom-line">One Mountain, Smaller Steps</h2>
         <p>
           Housing feels like one mountain, but it is actually a series of smaller steps, each one
@@ -6514,7 +6554,7 @@ function RebuildingModule({
         <div className="terminal-actions denial-actions">
           {onBack ? (
             <button type="button" onClick={onBack}>
-              Back To stabilize.exe
+              Back to Housing Resources
             </button>
           ) : null}
           <button type="button" onClick={() => onNavigate("planning", "/crisis-support")}>
