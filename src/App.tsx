@@ -3524,8 +3524,8 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
 
       <div className="home-hero-composition">
         <article className="home-message refined-home-message">
-          <p className="folk-kicker">YOU DON'T HAVE TO SORT THROUGH EVERYTHING ALONE.</p>
-          <h1 id="home-title">Start with what<br /><em>you need now.</em></h1>
+          <p className="folk-kicker">A GUIDED PLACE TO BEGIN</p>
+          <h1 id="home-title">Needs<br /><em>Assessment</em></h1>
           <p>
             There is a lot here: assessments, safety information, practical guides, housing,
             benefits, legal-system help, planning tools, and rebuilding resources. You can explore
@@ -3542,14 +3542,6 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
             <button type="button" onClick={() => onNavigate("local-help", "/resources")}>Browse Everything</button>
           </div>
         </article>
-        <aside className="home-hero-visual bauhaus-stage" aria-label="Balanced Bauhaus composition">
-          <div className="bauhaus-art" aria-hidden="true">
-            <span className="bauhaus-shape bauhaus-circle-blue" />
-            <span className="bauhaus-shape bauhaus-half-red" />
-            <span className="bauhaus-shape bauhaus-square-green" />
-            <span className="bauhaus-shape bauhaus-block-yellow" />
-          </div>
-        </aside>
       </div>
 
       <div className="home-support-grid">
@@ -3573,7 +3565,7 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
       <section className="home-site-guide" aria-labelledby="home-site-guide-title">
         <header className="home-index-heading">
           <span>EXPLORE THE SITE</span>
-          <h2 id="home-site-guide-title">What's here</h2>
+          <h2 id="home-site-guide-title">Site Map</h2>
           <p>Each section has a different job. Start wherever fits your situation.</p>
         </header>
         <div className="home-category-grid">
