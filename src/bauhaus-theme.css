@@ -3291,3 +3291,73 @@ body:has(.assessment-workspace),
       var(--ss-yellow) !important;
   }
 }
+
+/* Start Here hero and a cleanly terminated two-layer page shadow. */
+.hud-frame.module-home .home-terminal.bauhaus-home {
+  box-shadow:
+    7px 7px 0 var(--ss-ink),
+    16px 16px 0 var(--ss-blue) !important;
+  margin-bottom: 16px !important;
+}
+
+.hud-frame.module-home .folk-main-shell {
+  padding-bottom: clamp(38px, 5vw, 68px) !important;
+}
+
+.hud-frame.module-home .home-hero-composition {
+  background: var(--ss-paper-deep) !important;
+  border-bottom: 14px solid var(--ss-yellow) !important;
+  border-left: 14px solid var(--ss-green) !important;
+  border-top: 3px solid var(--ss-ink) !important;
+}
+
+.hud-frame.module-home .home-hero-composition .refined-home-message {
+  position: relative !important;
+}
+
+.hud-frame.module-home .home-hero-composition .refined-home-message::before {
+  background:
+    linear-gradient(to right, var(--ss-green) 0 42%, var(--ss-blue) 42% 70%, var(--ss-red) 70% 100%) !important;
+  content: "" !important;
+  display: block !important;
+  height: 8px !important;
+  left: clamp(28px, 7vw, 104px) !important;
+  position: absolute !important;
+  top: clamp(28px, 4vw, 54px) !important;
+  width: clamp(120px, 18vw, 240px) !important;
+}
+
+.hud-frame.module-home .home-hero-composition .home-message h1,
+.hud-frame.module-home .home-hero-composition .home-message h1 em {
+  color: var(--ss-green) !important;
+}
+
+.hud-frame.module-home .home-hero-actions .home-primary-action {
+  background: var(--ss-green) !important;
+  box-shadow: 6px 6px 0 var(--ss-yellow) !important;
+  color: var(--ss-white) !important;
+}
+
+.hud-frame.module-home .home-hero-actions .home-primary-action:hover,
+.hud-frame.module-home .home-hero-actions .home-primary-action:focus-visible {
+  box-shadow: 2px 2px 0 var(--ss-yellow) !important;
+}
+
+@media (max-width: 600px) {
+  .hud-frame.module-home .home-terminal.bauhaus-home {
+    box-shadow:
+      4px 4px 0 var(--ss-ink),
+      10px 10px 0 var(--ss-blue) !important;
+    margin-bottom: 10px !important;
+  }
+
+  .hud-frame.module-home .home-hero-composition {
+    border-bottom-width: 10px !important;
+    border-left-width: 8px !important;
+  }
+
+  .hud-frame.module-home .home-hero-composition .refined-home-message::before {
+    left: 0 !important;
+    top: 26px !important;
+  }
+}

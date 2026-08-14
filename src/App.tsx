@@ -3524,20 +3524,20 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
 
       <div className="home-hero-composition">
         <article className="home-message refined-home-message">
-          <p className="folk-kicker">A GUIDED PLACE TO BEGIN</p>
-          <h1 id="home-title">Needs<br /><em>Assessment</em></h1>
+          <p className="folk-kicker">01 / A GUIDED PLACE TO BEGIN</p>
+          <h1 id="home-title">Start<br /><em>Here</em></h1>
           <p>
             There is a lot here: assessments, safety information, practical guides, housing,
             benefits, legal-system help, planning tools, and rebuilding resources. You can explore
             any part of the site at any time.
           </p>
           <p>
-            If you aren't sure where to begin, the Needs Assessment points you toward the sections
-            most relevant to you. Your answers aren't saved or transmitted.
+            If you aren't sure where to begin, Start Here asks a few questions and points you toward
+            the sections most relevant to you. Your answers aren't saved or transmitted.
           </p>
           <div className="home-hero-actions" aria-label="Start options">
             <button className="home-primary-action" type="button" onClick={() => onNavigate("advocacy", "/strategy")}>
-              Start the Needs Assessment
+              Start Here
             </button>
             <button type="button" onClick={() => onNavigate("local-help", "/resources")}>Browse Everything</button>
           </div>
