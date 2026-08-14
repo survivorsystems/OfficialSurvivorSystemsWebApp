@@ -2882,6 +2882,49 @@ body:has(.assessment-workspace),
   }
 }
 
+/* Homepage depth: palette-colored separation instead of a flat black field. */
+.hud-frame.module-home .win95-desktop,
+.hud-frame.module-home .folk-main-shell,
+.hud-frame.module-home .terminal-screen,
+.hud-frame.module-home .terminal-content {
+  background: var(--ss-yellow) !important;
+}
+
+.hud-frame.module-home .folk-main-shell {
+  padding: clamp(22px, 3vw, 46px) !important;
+}
+
+.hud-frame.module-home .home-terminal.bauhaus-home {
+  border: 3px solid var(--ss-ink) !important;
+  box-shadow: 14px 14px 0 var(--ss-blue) !important;
+}
+
+.hud-frame.module-home .folk-sidebar {
+  box-shadow: 10px 0 0 var(--ss-red) !important;
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+@media (max-width: 980px) {
+  .hud-frame.module-home .folk-sidebar {
+    box-shadow: 0 10px 0 var(--ss-red) !important;
+  }
+
+  .hud-frame.module-home .folk-main-shell {
+    padding-top: 32px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .hud-frame.module-home .folk-main-shell {
+    padding: 26px 16px 36px !important;
+  }
+
+  .hud-frame.module-home .home-terminal.bauhaus-home {
+    box-shadow: 8px 8px 0 var(--ss-blue) !important;
+  }
+}
+
 /* Homepage information hierarchy: start, stay safer, then explore. */
 .hud-frame.module-home .home-hero-actions .home-primary-action {
   background: var(--ss-yellow) !important;
