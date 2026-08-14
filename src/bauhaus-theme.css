@@ -355,8 +355,8 @@ body {
   width: 30px !important;
 }
 
-.hud-frame:not(.module-home):not(.module-advocacy) .terminal-topbar,
-.hud-frame:not(.module-home):not(.module-advocacy) .win95-window .terminal-topbar {
+.hud-frame:not(.module-home):not(.module-advocacy):not(.module-local-help) .terminal-topbar,
+.hud-frame:not(.module-home):not(.module-advocacy):not(.module-local-help) .win95-window .terminal-topbar {
   background: var(--ss-white) !important;
   border: 0 !important;
   border-bottom: var(--ss-border) !important;
@@ -2375,6 +2375,30 @@ body {
 
 .hud-frame.module-advocacy .terminal-content .category-module > .page-flourish-header :is(p, span, strong) {
   color: var(--ss-white) !important;
+}
+
+.hud-frame.module-local-help .terminal-content .resources-module > .page-flourish-header {
+  background: var(--ss-yellow) !important;
+  border: 3px solid var(--ss-ink) !important;
+  border-left: 18px solid var(--ss-green) !important;
+  box-shadow: 10px 10px 0 var(--ss-green) !important;
+  display: block !important;
+  margin-bottom: 42px !important;
+  padding: clamp(30px, 5vw, 62px) !important;
+}
+
+.hud-frame.module-local-help .terminal-content .resources-module > .page-flourish-header :is(.folk-kicker, h1, p) {
+  color: var(--ss-ink) !important;
+  display: block !important;
+}
+
+.hud-frame.module-local-help .terminal-content .resources-module > .page-flourish-header .folk-kicker {
+  color: #087a3b !important;
+}
+
+.hud-frame.module-local-help .terminal-content .resources-module > .page-flourish-header h1 {
+  font-size: clamp(3rem, 7vw, 6.5rem) !important;
+  margin: 4px 0 18px !important;
 }
 
 .hud-frame.module-advocacy .terminal-content .category-file-grid {

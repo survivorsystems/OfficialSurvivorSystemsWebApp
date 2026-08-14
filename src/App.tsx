@@ -1298,6 +1298,7 @@ const allNavTargets: Array<{ key: ModuleKey; label: string; path: string }> = [
 ];
 
 type SidebarIconKey =
+  | "home"
   | "about"
   | "advocacy"
   | "assessments"
@@ -1308,6 +1309,7 @@ type SidebarIconKey =
   | "toolkits";
 
 const navItems: Array<{ key: ModuleKey; label: string; path: string; code: SidebarIconKey }> = [
+  { key: "home", label: "Home", path: "/", code: "home" },
   { key: "local-help", label: "Resources", path: "/resources", code: "toolkits" },
   { key: "advocacy", label: "Clarity", path: "/strategy", code: "advocacy" },
   { key: "about", label: "About", path: "/about", code: "about" },
@@ -1322,6 +1324,14 @@ function SidebarIcon({ icon }: { icon: SidebarIconKey }) {
   } as const;
 
   switch (icon) {
+    case "home":
+      return (
+        <svg {...commonProps}>
+          <path d="M8 30 32 9l24 21" fill="var(--folk-mustard, #D6A536)" stroke="var(--folk-ink, #26302C)" strokeWidth="4" strokeLinejoin="round" />
+          <path d="M14 27v28h36V27L32 14 14 27Z" fill="var(--folk-cream, #F6E8D0)" stroke="var(--folk-ink, #26302C)" strokeWidth="4" strokeLinejoin="round" />
+          <rect x="26" y="37" width="12" height="18" fill="var(--folk-teal, #347D7B)" stroke="var(--folk-ink, #26302C)" strokeWidth="3" />
+        </svg>
+      );
     case "about":
       return (
         <svg {...commonProps}>
@@ -6123,37 +6133,17 @@ function ResourceModule({
 
   return (
     <section className="page-shell resources-module" aria-label="Resources">
-      <section className="housing-assessment-entry" aria-labelledby="housing-assessment-entry-title">
-        <div>
-          <span>FREE HOUSING STRATEGY</span>
-          <h2 id="housing-assessment-entry-title">Not sure which housing options fit?</h2>
-          <p>
-            The Housing Strategy Assessment asks about your current situation, timing, barriers,
-            and priorities, then builds a private in-browser list of housing pathways to investigate.
-          </p>
-        </div>
-        <div className="housing-assessment-entry-actions">
-          <button
-            type="button"
-            onClick={() => {
-              window.history.pushState({}, "", "/resources/housing-strategy?view=assessment");
-              setActiveDirectory("housing-strategy");
-            }}
-          >
-            Start Housing Assessment
-          </button>
-          <button
-            className="resource-back-button"
-            type="button"
-            onClick={() => {
-              window.history.pushState({}, "", "/resources/housing-strategy");
-              setActiveDirectory("housing-strategy");
-            }}
-          >
-            Browse Housing Options
-          </button>
-        </div>
-      </section>
+      <PageFlourishHeader
+        eyebrow="FREE GUIDES + SUBSCRIBER TOOLS"
+        title="Resources"
+        titleId="resources-title"
+        variant="resources"
+      >
+        <p>
+          Browse practical guides, housing and benefits information, legal tools, planning systems,
+          and previews from the separate Subscriber Library.
+        </p>
+      </PageFlourishHeader>
 
       <div className="resource-directory-tree" id="resource-directory" aria-label="Resource directories">
         {resourceDirectories.map((directory) => {
