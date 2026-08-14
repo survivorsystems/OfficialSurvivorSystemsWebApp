@@ -3524,27 +3524,22 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
 
       <div className="home-hero-composition">
         <article className="home-message refined-home-message">
-          <p className="folk-kicker">INFORMATION IS A FORM OF POWER.</p>
-          <h1 id="home-title">Welcome to<br /><em>Survivor Systems.</em></h1>
+          <p className="folk-kicker">YOU DON'T HAVE TO SORT THROUGH EVERYTHING ALONE.</p>
+          <h1 id="home-title">Start with what<br /><em>you need now.</em></h1>
           <p>
-            Domestic violence is deadly. About 1 in 5 homicide victims in the United States is
-            killed by an intimate partner. More than half of female homicide victims are killed by
-            a current or former male partner. Leaving can be one of the most dangerous points in an
-            abusive relationship, but the systems survivors are told to rely on are fragmented,
-            difficult to navigate, and often unprepared for the realities of coercive control.
+            There is a lot here: assessments, safety information, practical guides, housing,
+            benefits, legal-system help, planning tools, and rebuilding resources. You can explore
+            any part of the site at any time.
           </p>
           <p>
-            Survivor Systems exists because the systems currently in place aren't enough. No one
-            should have to become an expert in safety planning, housing, public benefits, financial
-            recovery, family court, documentation, and trauma just to get free.
+            If you aren't sure where to begin, the Needs Assessment points you toward the sections
+            most relevant to you. Your answers aren't saved or transmitted.
           </p>
           <div className="home-hero-actions" aria-label="Start options">
-            <button type="button" onClick={() => onNavigate("local-help", "/resources")}>
-              Explore Tools & Guides
+            <button className="home-primary-action" type="button" onClick={() => onNavigate("advocacy", "/strategy")}>
+              Start the Needs Assessment
             </button>
-            <button type="button" onClick={() => onNavigate("advocacy", "/strategy")}>
-              Start with an Assessment
-            </button>
+            <button type="button" onClick={() => onNavigate("local-help", "/resources")}>Browse Everything</button>
           </div>
         </article>
         <aside className="home-hero-visual bauhaus-stage" aria-label="Balanced Bauhaus composition">
@@ -3557,33 +3552,63 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
         </aside>
       </div>
 
-      <section className="home-strategy-assessment" aria-labelledby="home-strategy-title">
-        <div className="home-strategy-number" aria-hidden="true">01</div>
-        <div className="home-strategy-copy">
-          <p className="folk-kicker">A CLEAR PLACE TO START</p>
-          <h2 id="home-strategy-title">Needs Assessment</h2>
-          <p>
-            Take the Needs Assessment to identify which information, tools, and next steps may be
-            most useful to you right now.
-          </p>
-        </div>
-        <button type="button" onClick={() => onNavigate("advocacy", "/strategy")}>Begin Needs Assessment</button>
-      </section>
-
       <div className="home-support-grid">
         <section className="home-privacy-panel" aria-labelledby="home-privacy">
           <div>
-            <p className="folk-kicker">BEFORE YOU CONTINUE</p>
-            <h2 id="home-privacy">Your privacy. Your power.</h2>
+            <p className="folk-kicker">A NOTE ABOUT DEVICE SAFETY</p>
+            <h2 id="home-privacy">Abusers often monitor devices and online activity.</h2>
             <p>
-              Your internet activity, downloads, accounts, and browsing history may be monitored.
-              Use a safer device whenever possible, clear history only when it is safe, and be careful
-              about saving documents or passwords on shared devices.
+              Cyberstalking can include checking browser history, accessing accounts, tracking a
+              phone's location, reading messages, monitoring shared plans, or installing surveillance
+              software. Changing settings or clearing history can sometimes alert the person monitoring
+              you. Use a safer device when possible and make changes only when they feel safe for you.
             </p>
-            <button type="button" onClick={() => onNavigate("local-help", "/resources")}>Online Safety Tips</button>
+            <button type="button" onClick={() => onNavigate("local-help", "/resources/digital-safety")}>
+              Open Digital Safety Resources
+            </button>
           </div>
         </section>
       </div>
+
+      <section className="home-site-guide" aria-labelledby="home-site-guide-title">
+        <header className="home-index-heading">
+          <span>EXPLORE THE SITE</span>
+          <h2 id="home-site-guide-title">What's here</h2>
+          <p>Each section has a different job. Start wherever fits your situation.</p>
+        </header>
+        <div className="home-category-grid">
+          <article className="home-category-card">
+            <p className="home-section-number">01 / RESOURCES</p>
+            <h2>Resources</h2>
+            <p>Free guides, housing and benefits information, legal tools, practical how-tos, and the separate Subscriber Library.</p>
+            <button type="button" onClick={() => onNavigate("local-help", "/resources")}>Explore Resources</button>
+          </article>
+          <article className="home-category-card">
+            <p className="home-section-number">02 / SURVIVING</p>
+            <h2>Surviving</h2>
+            <p>Information for staying safer while planning, documenting what is happening, preparing an exit, and managing daily realities.</p>
+            <button type="button" onClick={() => onNavigate("education", "/surviving")}>Explore Surviving</button>
+          </article>
+          <article className="home-category-card">
+            <p className="home-section-number">03 / CLARITY</p>
+            <h2>Clarity</h2>
+            <p>Private, in-browser assessments that help name patterns, organize concerns, and find a practical place to begin.</p>
+            <button type="button" onClick={() => onNavigate("advocacy", "/strategy")}>Explore Clarity</button>
+          </article>
+          <article className="home-category-card">
+            <p className="home-section-number">04 / GOVERNMENT</p>
+            <h2>Government</h2>
+            <p>Plain-language help for navigating public systems, programs, agencies, rights, applications, and official processes.</p>
+            <button type="button" onClick={() => onNavigate("government", "/government")}>Explore Government</button>
+          </article>
+          <article className="home-category-card">
+            <p className="home-section-number">05 / ABOUT</p>
+            <h2>About</h2>
+            <p>The purpose, safety approach, privacy commitments, and values behind Survivor Systems.</p>
+            <button type="button" onClick={() => onNavigate("about", "/about")}>About Survivor Systems</button>
+          </article>
+        </div>
+      </section>
     </section>
   );
 }
