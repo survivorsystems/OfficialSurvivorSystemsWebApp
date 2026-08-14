@@ -3600,6 +3600,182 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
     </section>
   );
 }
+
+function AboutModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: string) => void }) {
+  return (
+    <section className="page-shell about-story" aria-labelledby="about-story-title">
+      <PageFlourishHeader
+        eyebrow="BUILT FOR THE PART NOBODY PREPARES YOU FOR"
+        title="About Survivor Systems"
+        titleId="about-story-title"
+        variant="about"
+      >
+        <p>Surviving abuse is only one part of getting free.</p>
+      </PageFlourishHeader>
+
+      <section className="about-story-intro" aria-labelledby="about-whole-picture-title">
+        <div>
+          <span>THE WHOLE PICTURE</span>
+          <h2 id="about-whole-picture-title">Rebuilding doesn't happen one system at a time.</h2>
+        </div>
+        <div>
+          <p>
+            Leaving can mean suddenly having to figure out housing, money, transportation, benefits,
+            court, safety, documentation, work, childcare, technology, healthcare, and a dozen other
+            systems while your nervous system is already running on fumes.
+          </p>
+          <p>Most resources treat those problems separately. Survivor Systems looks at the whole picture.</p>
+          <p>
+            It's a practical resource and strategy platform designed to help survivors understand what's
+            happening, identify where control is still being applied, and make informed decisions about
+            what comes next.
+          </p>
+          <p><strong>And it exists because I needed something like it myself.</strong></p>
+        </div>
+      </section>
+
+      <section className="about-founder-section" aria-labelledby="about-founder-title">
+        <div className="about-section-number">01</div>
+        <div>
+          <span>WHY I BUILT IT</span>
+          <h2 id="about-founder-title">Leaving isn't the finish line.</h2>
+          <p>
+            I'm a survivor of trafficking, coercive control, domestic violence, homelessness, stalking,
+            and post-separation abuse.
+          </p>
+          <p>
+            I know what it's like to have your access to money, housing, transportation, information,
+            relationships, and basic stability controlled by another person. I also know what happens
+            after you get away.
+          </p>
+          <p>
+            People tell survivors to leave abusive situations as if leaving is the finish line. It isn't.
+            Sometimes it's the beginning of an entirely new fight.
+          </p>
+          <p>
+            You may be safe from the immediate relationship and still be dealing with destroyed finances,
+            housing instability, court cases, damaged credit, missing documents, employment gaps, trauma,
+            isolation, custody issues, stalking, or an abuser who has simply moved their control into
+            another system.
+          </p>
+          <p>I spent a lot of time trying to navigate those systems while also rebuilding my own life.</p>
+        </div>
+      </section>
+
+      <blockquote className="about-strategy-callout">
+        <span>THE PROBLEM I KEPT FINDING</span>
+        <p>There was information everywhere, but very little strategy.</p>
+      </blockquote>
+
+      <section className="about-overlap-section" aria-labelledby="about-overlap-title">
+        <div>
+          <p>A hotline might understand domestic violence.</p>
+          <p>A housing program might understand homelessness.</p>
+          <p>A court resource might explain a legal process.</p>
+          <p>A benefits office might explain eligibility.</p>
+        </div>
+        <div>
+          <span>REAL LIFE OVERLAPS</span>
+          <h2 id="about-overlap-title">Survivors don't live inside one category at a time.</h2>
+          <p>Real life is messier than that. Everything overlaps.</p>
+        </div>
+      </section>
+
+      <section className="about-difference-section" aria-labelledby="about-difference-title">
+        <div className="about-section-number">02</div>
+        <div>
+          <span>WHAT SURVIVOR SYSTEMS DOES DIFFERENTLY</span>
+          <h2 id="about-difference-title">Better information. Clearer strategy. Your decisions.</h2>
+          <p>
+            Survivor Systems is designed around that overlap. We're not here to patronize you or
+            sugarcoat anything. We are here to prepare you for your new life, free from abuse, with
+            information we wish we had. Information that could make what feels impossible very possible,
+            step by step.
+          </p>
+          <p>
+            Think of Survivor Systems like a friend guiding you through rebuilding your new life with
+            wisdom and experience. The goal isn't to tell survivors what to do. It's to help people see
+            the board more clearly so they can make their own decisions.
+          </p>
+          <p>
+            That might mean taking an assessment to identify financial captivity or post-separation
+            control. It might mean learning how a particular system works before walking into it, finding
+            a free resource, building a practical plan, documenting what's happening, or getting help
+            thinking through a complicated situation.
+          </p>
+          <p><strong>Sometimes the most powerful thing a survivor can have is better information and a clearer strategy.</strong></p>
+        </div>
+      </section>
+
+      <section className="about-offerings" aria-labelledby="about-offerings-title">
+        <header>
+          <span>RESOURCES, ASSESSMENTS, SERVICES + TRAINING</span>
+          <h2 id="about-offerings-title">Practical support for survivors and the people serving them.</h2>
+        </header>
+        <div className="about-offerings-grid">
+          <article>
+            <span>01 / TOOLS</span>
+            <h3>Resources and assessments</h3>
+            <p>
+              Educational resources, assessments, planners, guides, and strategy tools for people
+              rebuilding after abuse. Some resources are completely free. Others are low-cost tools
+              designed to help fund the project while keeping information accessible.
+            </p>
+          </article>
+          <article>
+            <span>02 / STRATEGY</span>
+            <h3>One-on-one support</h3>
+            <p>
+              Strategy services are available for people who need help organizing a complicated
+              situation, identifying options, or figuring out which questions to ask next.
+            </p>
+          </article>
+          <article>
+            <span>03 / TRAINING</span>
+            <h3>Professional education</h3>
+            <p>
+              Training and consulting are available for organizations, advocates, service providers,
+              and professionals seeking a deeper understanding of coercive control, survivor barriers,
+              post-separation abuse, and the ways systems can create additional obstacles.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section className="about-principles" aria-labelledby="about-principles-title">
+        <div>
+          <span>THIS ISN'T ABOUT TELLING SURVIVORS HOW TO SURVIVE</span>
+          <h2 id="about-principles-title">Survivors are already doing that.</h2>
+          <p>This is about giving them better tools.</p>
+        </div>
+        <ul>
+          <li>People navigating abuse and its aftermath deserve more than encouragement.</li>
+          <li>They deserve useful information.</li>
+          <li>They deserve options.</li>
+          <li>They deserve practical tools.</li>
+          <li>They deserve to understand the systems affecting their lives.</li>
+          <li>They deserve resources that recognize escaping control and rebuilding autonomy aren't the same thing.</li>
+        </ul>
+        <p>
+          The goal of Survivor Systems is to make rebuilding a little less confusing, a little more
+          strategic, and a hell of a lot less lonely.
+        </p>
+      </section>
+
+      <section className="about-start" aria-labelledby="about-start-title">
+        <span>START WHEREVER YOU ARE</span>
+        <h2 id="about-start-title">You don't have to solve everything at once.</h2>
+        <p>You don't need to know exactly what kind of help you need before you begin.</p>
+        <div className="about-start-actions">
+          <button type="button" onClick={() => onNavigate("advocacy", "/strategy")}>Explore Clarity</button>
+          <button type="button" onClick={() => onNavigate("local-help", "/resources")}>Browse Resources</button>
+        </div>
+        <p><strong>You just need a place to start.</strong></p>
+      </section>
+    </section>
+  );
+}
+
 function CategoryModule({
   category,
   onNavigate,
@@ -6792,10 +6968,11 @@ export function App() {
   const loadingLabel = loadingModule ? moduleRoutes[loadingModule]?.label : null;
   const moduleContent = activeModule === "home" ? (
     <HomeModule onNavigate={navigate} />
+  ) : activeModule === "about" ? (
+    <AboutModule onNavigate={navigate} />
   ) : activeModule === "assessments" ||
     activeModule === "guides" ||
     activeModule === "education" ||
-    activeModule === "about" ||
     activeModule === "advocacy" ||
     activeModule === "government" ? (
     <CategoryModule category={activeModule} onNavigate={navigate} />
