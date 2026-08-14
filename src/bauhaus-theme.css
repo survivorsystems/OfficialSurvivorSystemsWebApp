@@ -355,8 +355,8 @@ body {
   width: 30px !important;
 }
 
-.hud-frame:not(.module-home):not(.module-advocacy):not(.module-local-help):not(.module-about) .terminal-topbar,
-.hud-frame:not(.module-home):not(.module-advocacy):not(.module-local-help):not(.module-about) .win95-window .terminal-topbar {
+.hud-frame:not(.module-home):not(.module-advocacy):not(.module-local-help):not(.module-about):not(.module-government) .terminal-topbar,
+.hud-frame:not(.module-home):not(.module-advocacy):not(.module-local-help):not(.module-about):not(.module-government) .win95-window .terminal-topbar {
   background: var(--ss-white) !important;
   border: 0 !important;
   border-bottom: var(--ss-border) !important;
@@ -2573,6 +2573,63 @@ body {
 
   .hud-frame.module-home .home-support-grid {
     grid-template-columns: 1fr !important;
+  }
+}
+
+/* Systems visual shell. Content intentionally remains blank. */
+.hud-frame.module-government .terminal-content {
+  background:
+    repeating-linear-gradient(90deg, var(--ss-ink) 0 10px, var(--ss-white) 10px 20px) right top / 52px 100% no-repeat,
+    var(--ss-paper) !important;
+  padding-right: clamp(72px, 8vw, 104px) !important;
+}
+
+.hud-frame.module-government .systems-page {
+  display: grid;
+  gap: clamp(34px, 6vw, 70px);
+}
+
+.hud-frame.module-government .systems-page-header {
+  background: var(--ss-green) !important;
+  border: 3px solid var(--ss-ink) !important;
+  border-left: 18px solid var(--ss-blue) !important;
+  box-shadow: 10px 10px 0 var(--ss-yellow) !important;
+  padding: clamp(34px, 6vw, 72px) !important;
+}
+
+.hud-frame.module-government .systems-page-header span {
+  color: var(--ss-ink) !important;
+  font-size: 0.74rem;
+  font-weight: 900;
+}
+
+.hud-frame.module-government .systems-page-header h1 {
+  color: var(--ss-ink) !important;
+  font-size: clamp(3rem, 7vw, 6.5rem) !important;
+  margin: 8px 0 0 !important;
+}
+
+.hud-frame.module-government .systems-page-canvas {
+  min-height: clamp(360px, 52vh, 680px);
+  position: relative;
+}
+
+.hud-frame.module-government .systems-page-canvas::before {
+  background: linear-gradient(90deg, var(--ss-blue) 0 34%, var(--ss-red) 34% 67%, var(--ss-yellow) 67% 100%);
+  content: "";
+  height: 10px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: min(360px, 72%);
+}
+
+@media (max-width: 760px) {
+  .hud-frame.module-government .terminal-content {
+    background:
+      repeating-linear-gradient(90deg, var(--ss-ink) 0 7px, var(--ss-white) 7px 14px) right top / 28px 100% no-repeat,
+      var(--ss-paper) !important;
+    padding-right: 40px !important;
   }
 }
 

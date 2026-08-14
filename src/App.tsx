@@ -1266,7 +1266,7 @@ const moduleRoutes: Record<ModuleKey, { label: string; path: string }> = {
   education: { label: "Surviving", path: "/surviving" },
   about: { label: "About", path: "/about" },
   advocacy: { label: "Clarity", path: "/strategy" },
-  government: { label: "Government", path: "/government" },
+  government: { label: "Systems", path: "/systems" },
   support: { label: "Support", path: "/support" },
   "am-i-crazy": { label: "Was I Crazy?", path: "/am-i-crazy" },
   "go-bag-prep": { label: "Immediate Support", path: "/crisis-support" },
@@ -1312,6 +1312,7 @@ const navItems: Array<{ key: ModuleKey; label: string; path: string; code: Sideb
   { key: "home", label: "Home", path: "/", code: "home" },
   { key: "local-help", label: "Resources", path: "/resources", code: "toolkits" },
   { key: "advocacy", label: "Clarity", path: "/strategy", code: "advocacy" },
+  { key: "government", label: "Systems", path: "/systems", code: "government" },
   { key: "about", label: "About", path: "/about", code: "about" },
 ];
 
@@ -3127,7 +3128,7 @@ function getInitialModule(): ModuleKey {
   if (path === "/surviving" || path === "/education-awareness") return "advocacy";
   if (path === "/about") return "about";
   if (path === "/strategy" || path === "/advocacy") return "advocacy";
-  if (path === "/government") return "local-help";
+  if (path === "/government" || path === "/systems") return "government";
   if (path === "/support") return "support";
   if (path === "/rebuilding") return "rebuilding";
   if (path === "/planning" || path === "/go-bag-prep" || path === "/crisis-support") return "planning";
@@ -3772,6 +3773,18 @@ function AboutModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: str
         </div>
         <p><strong>You just need a place to start.</strong></p>
       </section>
+    </section>
+  );
+}
+
+function SystemsModule() {
+  return (
+    <section className="page-shell systems-page" aria-labelledby="systems-page-title">
+      <header className="systems-page-header">
+        <span>SURVIVOR SYSTEMS</span>
+        <h1 id="systems-page-title">Systems</h1>
+      </header>
+      <div className="systems-page-canvas" aria-hidden="true" />
     </section>
   );
 }
@@ -6970,11 +6983,12 @@ export function App() {
     <HomeModule onNavigate={navigate} />
   ) : activeModule === "about" ? (
     <AboutModule onNavigate={navigate} />
+  ) : activeModule === "government" ? (
+    <SystemsModule />
   ) : activeModule === "assessments" ||
     activeModule === "guides" ||
     activeModule === "education" ||
-    activeModule === "advocacy" ||
-    activeModule === "government" ? (
+    activeModule === "advocacy" ? (
     <CategoryModule category={activeModule} onNavigate={navigate} />
   ) : activeModule === "am-i-crazy" ? (
     <AmICrazyModule onControlPanelChange={updateControlPanel} onNavigate={navigate} />
