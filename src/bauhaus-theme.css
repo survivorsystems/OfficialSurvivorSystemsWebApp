@@ -4041,3 +4041,96 @@ body:has(.assessment-workspace),
 .hud-frame.module-home .home-hero-actions button:not(.home-primary-action) {
   box-shadow: 6px 6px 0 var(--ss-blue) !important;
 }
+
+/* Homepage composition: striped navigation, compact black hero, and a five-color rail. */
+.hud-frame.module-home .folk-sidebar {
+  background:
+    repeating-linear-gradient(
+      90deg,
+      var(--ss-ink) 0 14px,
+      var(--ss-white) 14px 28px
+    ) !important;
+}
+
+.hud-frame.module-home .folk-sidebar .desktop-icon-grid {
+  border-bottom: var(--ss-border) !important;
+}
+
+.hud-frame.module-home .home-hero-composition {
+  align-items: start !important;
+  background: var(--ss-ink) !important;
+  min-height: 0 !important;
+  padding-top: 18px !important;
+  position: relative !important;
+}
+
+.hud-frame.module-home .home-hero-composition::before {
+  background: linear-gradient(
+    90deg,
+    var(--ss-blue) 0 22%,
+    var(--ss-red) 22% 42%,
+    var(--ss-yellow) 42% 62%,
+    var(--ss-green) 62% 78%,
+    var(--ss-white) 78% 100%
+  ) !important;
+  content: "" !important;
+  display: block !important;
+  height: 18px !important;
+  inset: 0 0 auto !important;
+  position: absolute !important;
+  width: 100% !important;
+}
+
+.hud-frame.module-home .home-hero-composition .refined-home-message {
+  min-height: 0 !important;
+  padding-bottom: clamp(36px, 4vw, 58px) !important;
+  padding-top: clamp(38px, 4vw, 58px) !important;
+}
+
+.hud-frame.module-home .home-hero-composition .refined-home-message::before {
+  display: none !important;
+}
+
+.hud-frame.module-home .home-hero-composition .home-message h1 {
+  font-size: clamp(3.75rem, 7vw, 6.7rem) !important;
+  line-height: 0.82 !important;
+  margin-bottom: clamp(24px, 3vw, 38px) !important;
+}
+
+.hud-frame .floating-quick-escape {
+  font-size: 0.58rem !important;
+  height: 65px !important;
+  padding: 7px !important;
+  right: 16px !important;
+  top: 16px !important;
+  width: 65px !important;
+}
+
+@media (max-width: 980px) {
+  .hud-frame.module-home .folk-sidebar {
+    background: var(--ss-paper) !important;
+  }
+
+  .hud-frame.module-home .folk-sidebar .desktop-icon-grid {
+    border-bottom: 0 !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .hud-frame.module-home .home-hero-composition {
+    padding-top: 12px !important;
+  }
+
+  .hud-frame.module-home .home-hero-composition::before {
+    height: 12px !important;
+  }
+
+  .hud-frame.module-home .home-hero-composition .refined-home-message {
+    padding-bottom: 34px !important;
+    padding-top: 34px !important;
+  }
+
+  .hud-frame.module-home .home-hero-composition .home-message h1 {
+    font-size: clamp(3.5rem, 18vw, 5rem) !important;
+  }
+}

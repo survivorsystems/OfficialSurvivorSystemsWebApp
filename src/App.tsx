@@ -3465,11 +3465,6 @@ function TerminalChrome({
               </button>
             ))}
           </nav>
-          <div className="sidebar-actions">
-            <button className="sidebar-support" type="button" onClick={() => onNavigate("advocacy", "/strategy")}>
-              You're Not Alone
-            </button>
-          </div>
         </aside>
 
         <button className="floating-quick-escape" type="button" onClick={leaveSite} aria-label="Quick Escape">
