@@ -7181,7 +7181,7 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
             <article className="library-category-card" key={category}>
               <span>{String(count).padStart(2, "0")} RESOURCES</span>
               <h3>{category}</h3>
-              <p>Live preview listings from the {category} Supabase collection.</p>
+              <p>Browse previews and access details for {category} resources.</p>
             </article>
           ))}
         </div>
@@ -7195,20 +7195,20 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
           {librarySession ? (
             <div>
               <strong>Library access sign-in active</strong>
-              <p>{librarySession.email ?? "Authenticated Supabase account"}</p>
+              <p>{librarySession.email ?? "Authenticated library account"}</p>
               <button type="button" onClick={() => { clearLibrarySession(); setLibrarySession(null); setLibraryAccessMessage(""); }}>Sign Out</button>
             </div>
           ) : (
             <form onSubmit={requestLibrarySignIn}>
               <label>
-                Email for your Supabase account
+                Email for your library account
                 <input type="email" autoComplete="email" required value={libraryEmail} onChange={(event) => setLibraryEmail(event.target.value)} />
               </label>
               <button type="submit" disabled={libraryAuthStatus === "sending"}>
                 {libraryAuthStatus === "sending" ? "Sending Link..." : "Email Me a Sign-In Link"}
               </button>
               {libraryAuthStatus === "sent" ? <p role="status">Check your email, then use the link to return to the library.</p> : null}
-              {libraryAuthStatus === "error" ? <p role="alert">The sign-in link could not be sent. Confirm this email already belongs to your Supabase account.</p> : null}
+              {libraryAuthStatus === "error" ? <p role="alert">The sign-in link could not be sent. Confirm this email is connected to an existing Premium Survivor Library account.</p> : null}
             </form>
           )}
           {libraryAccessMessage ? <p className="library-catalog-status library-catalog-error" role="alert">{libraryAccessMessage}</p> : null}

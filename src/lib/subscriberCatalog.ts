@@ -113,7 +113,7 @@ export async function sendLibraryMagicLink(email: string) {
     body: JSON.stringify({ email, create_user: false }),
   });
 
-  if (!response.ok) throw new Error("Supabase could not send the sign-in link.");
+  if (!response.ok) throw new Error("The sign-in service could not send the link.");
 }
 
 export async function createLibraryFileUrl(itemId: string, accessToken: string) {
@@ -151,7 +151,7 @@ export async function createLibraryFileUrl(itemId: string, accessToken: string) 
   if (!signResponse.ok) throw new Error("The protected file could not be opened.");
   const result = await signResponse.json() as { signedURL?: string; signedUrl?: string };
   const signedPath = result.signedURL ?? result.signedUrl;
-  if (!signedPath) throw new Error("Supabase did not return a signed file link.");
+  if (!signedPath) throw new Error("The file service did not return a secure link.");
   return signedPath.startsWith("http") ? signedPath : `${supabaseUrl}/storage/v1${signedPath}`;
 }
 

@@ -4853,6 +4853,72 @@ body:has(.assessment-workspace),
   color: var(--ss-white) !important;
 }
 
+/* Premium library categories echo the homepage's bold, dimensional cards. */
+.hud-frame.module-library .library-category-grid {
+  gap: clamp(20px, 2.5vw, 30px) !important;
+}
+
+.hud-frame.module-library .library-category-card {
+  background: var(--ss-ink) !important;
+  border: 3px solid var(--ss-red) !important;
+  border-radius: 0 !important;
+  box-shadow: 9px 9px 0 var(--ss-yellow) !important;
+  min-height: 210px !important;
+  padding: clamp(24px, 3vw, 36px) !important;
+}
+
+.hud-frame.module-library .library-category-card:nth-child(3n + 2) {
+  border-color: var(--ss-yellow) !important;
+  box-shadow: 9px 9px 0 var(--ss-blue) !important;
+}
+
+.hud-frame.module-library .library-category-card:nth-child(3n + 3) {
+  border-color: var(--ss-blue) !important;
+  box-shadow: 9px 9px 0 var(--ss-red) !important;
+}
+
+.hud-frame.module-library .library-category-card :is(h3, p) {
+  color: var(--ss-white) !important;
+}
+
+.hud-frame.module-library .library-category-card span {
+  color: var(--ss-yellow) !important;
+}
+
+/* One colorful return treatment across Systems, Resources, guides, and support pages. */
+.hud-frame:not(.module-home) .terminal-content :is(
+  .resource-back-button,
+  .systems-back-button,
+  .support-page-actions button,
+  .how-to-folder-bar > button
+) {
+  background: var(--ss-blue) !important;
+  border: 3px solid var(--ss-red) !important;
+  border-radius: 0 !important;
+  box-shadow: 6px 6px 0 var(--ss-yellow) !important;
+  color: var(--ss-white) !important;
+  font-weight: 900 !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content :is(
+  .resource-back-button,
+  .systems-back-button,
+  .support-page-actions button,
+  .how-to-folder-bar > button
+):is(:hover, :focus-visible) {
+  background: var(--ss-red) !important;
+  border-color: var(--ss-ink) !important;
+  box-shadow: 8px 8px 0 var(--ss-yellow) !important;
+  color: var(--ss-white) !important;
+  transform: translate(-2px, -2px) !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .support-page-actions button:nth-child(even) {
+  background: var(--ss-red) !important;
+  border-color: var(--ss-yellow) !important;
+  box-shadow: 6px 6px 0 var(--ss-blue) !important;
+}
+
 /* Final safety-control size lock. */
 .hud-frame .floating-quick-escape {
   font-size: 0.7rem !important;
