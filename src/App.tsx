@@ -3884,7 +3884,161 @@ function SystemsModule() {
         </article>
       ) : null}
 
-      {activeSystem === "state" || activeSystem === "local" ? (
+      {activeSystem === "state" ? (
+        <article className="state-systems-page" aria-labelledby="state-funding-title">
+          <button className="systems-back-button" type="button" onClick={() => setActiveSystem("directory")}>
+            Back to Systems
+          </button>
+
+          <figure className="state-funding-infographic">
+            <img
+              src={dvFundingInfographic}
+              alt="Follow the Money infographic showing the state administration and program allocation steps between federal domestic violence funding and services to survivors."
+            />
+            <figcaption>Follow the Money: Domestic Violence Funding. Updated May 2026.</figcaption>
+          </figure>
+
+          <section className="state-funding-summary" aria-labelledby="state-funding-title">
+            <header>
+              <span>STATE GOVERNMENT</span>
+              <h2 id="state-funding-title">How State Governments Administer Domestic Violence Funding</h2>
+              <p>
+                State governments play a major role in deciding how federal domestic violence funding
+                is administered after it leaves Washington.
+              </p>
+            </header>
+
+            <section>
+              <h3>The basic flow</h3>
+              <p className="state-funding-flow">
+                Congress appropriates the money <strong>to</strong> federal agencies <strong>to</strong> states
+                <strong> to</strong> courts, law enforcement, prosecutors, victim-service programs,
+                nonprofits, and other organizations <strong>to</strong> survivors receiving services.
+              </p>
+              <p>
+                States are therefore not just passive middlemen. They are a major administrative layer
+                between federal funding and the programs survivors eventually encounter.
+              </p>
+            </section>
+
+            <section>
+              <h3>States can keep part of the funding for administration</h3>
+              <p>
+                Using STOP VAWA formula funding as an example, states may use up to 10% of each funding
+                category for state administrative costs.
+              </p>
+              <p>
+                That money can support the state agencies and employees responsible for managing grants,
+                reviewing applications, monitoring programs, handling compliance, reporting, and distributing
+                funds to local recipients.
+              </p>
+              <p>
+                This means some of the money appropriated for domestic violence programs is spent at the
+                state-government level before it ever reaches a local organization or survivor.
+              </p>
+            </section>
+
+            <section>
+              <h3>Much of the budget is already assigned before states make local awards</h3>
+              <p>STOP VAWA funding is divided into required categories:</p>
+              <ul>
+                <li>25% for law enforcement</li>
+                <li>25% for prosecutors</li>
+                <li>5% for courts</li>
+                <li>30% for victim services</li>
+                <li>15% discretionary</li>
+              </ul>
+              <p>
+                That means 55% is reserved for police, prosecutors, and courts before the discretionary
+                portion is considered.
+              </p>
+              <strong className="state-funding-emphasis">
+                When the potential state administrative share is included, as much as 65% can be committed
+                to justice-system institutions and state administration, while only 30% is guaranteed to
+                the victim-services category.
+              </strong>
+            </section>
+
+            <section>
+              <h3>States decide which programs receive many of these funds</h3>
+              <p>
+                After receiving federal formula funding, state agencies distribute money through grants
+                and other allocations. Depending on the funding stream, recipients can include:
+              </p>
+              <ul>
+                <li>Local law enforcement agencies</li>
+                <li>Prosecutors</li>
+                <li>Courts</li>
+                <li>Domestic violence shelters</li>
+                <li>Victim-service organizations</li>
+                <li>Legal-service programs</li>
+                <li>Advocacy organizations</li>
+                <li>Coalitions</li>
+                <li>Other government or nonprofit programs</li>
+              </ul>
+              <p>
+                So while Congress determines much of the federal funding structure, state governments
+                play a major role in deciding which specific organizations and programs receive money
+                within their state.
+              </p>
+            </section>
+
+            <section>
+              <h3>"Victim services" does not mean money given directly to survivors</h3>
+              <p>
+                Even when money is allocated to victim services, it can still be used to operate organizations
+                and programs. Victim-service funding may pay for staff salaries, shelter operations, counseling,
+                legal services, utilities, equipment, training, and other program expenses.
+              </p>
+              <p>Those services may be important, but the category does not tell the public how much money is ultimately spent on:</p>
+              <ul>
+                <li>Rent or hotel stays</li>
+                <li>Transportation or relocation</li>
+                <li>Food or clothing</li>
+                <li>Direct financial assistance</li>
+              </ul>
+              <p>
+                Those expenses are often blended together with organizational operating costs under broad
+                categories such as "victim services."
+              </p>
+            </section>
+
+            <section>
+              <h3>The transparency problem</h3>
+              <p>
+                State reports can often tell the public how much money was awarded, which organizations
+                received grants, and how many people were served. What they do not consistently show is how
+                much of the domestic violence budget ultimately became direct material assistance to survivors.
+              </p>
+              <blockquote>
+                After state administration, justice-system spending, program operations, salaries, and other
+                institutional costs are paid, how much money actually reaches survivors in a form that directly
+                helps them become safer, obtain housing, relocate, travel, eat, or rebuild their lives?
+              </blockquote>
+            </section>
+
+            <section>
+              <h3>The bottom line</h3>
+              <p>
+                State governments sit in the middle of the domestic violence funding system. They receive
+                federal funding, administer portions of it, distribute grants, oversee programs, and help
+                determine which institutions and organizations receive funding.
+              </p>
+              <p>
+                But the amount a state reports as being spent "on domestic violence" should not automatically
+                be interpreted as money spent directly on survivors. A large portion supports the institutions
+                responsible for responding to domestic violence, and current public reporting does not consistently
+                separate those system costs from the concrete assistance survivors actually receive.
+              </p>
+              <strong className="state-funding-emphasis">
+                Funding a state domestic violence system and directly funding survivors are not the same thing.
+              </strong>
+            </section>
+          </section>
+        </article>
+      ) : null}
+
+      {activeSystem === "local" ? (
         <section className="systems-placeholder" aria-live="polite">
           <span>{activeSystem.toUpperCase()} GOVERNMENT</span>
           <h2>This category is ready for its next content set.</h2>

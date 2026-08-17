@@ -2831,6 +2831,12 @@ body {
   min-width: 0 !important;
 }
 
+.hud-frame.module-government .state-systems-page {
+  display: grid !important;
+  gap: clamp(32px, 5vw, 64px) !important;
+  min-width: 0 !important;
+}
+
 .hud-frame.module-government .systems-back-button {
   justify-self: start !important;
 }
@@ -2856,7 +2862,33 @@ body {
   padding: 14px 4px 2px !important;
 }
 
+.hud-frame.module-government .state-funding-infographic {
+  background: var(--ss-white) !important;
+  border: 3px solid var(--ss-red) !important;
+  box-shadow: 10px 10px 0 var(--ss-blue) !important;
+  margin: 0 10px 10px 0 !important;
+  padding: clamp(12px, 2vw, 24px) !important;
+}
+
+.hud-frame.module-government .state-funding-infographic img {
+  display: block !important;
+  height: auto !important;
+  width: 100% !important;
+}
+
+.hud-frame.module-government .state-funding-infographic figcaption {
+  color: var(--ss-ink) !important;
+  font-size: 0.78rem !important;
+  font-weight: 700 !important;
+  padding: 14px 4px 2px !important;
+}
+
 .hud-frame.module-government .federal-funding-summary {
+  display: grid !important;
+  gap: 0 !important;
+}
+
+.hud-frame.module-government .state-funding-summary {
   display: grid !important;
   gap: 0 !important;
 }
@@ -2869,11 +2901,29 @@ body {
   padding: clamp(34px, 6vw, 72px) !important;
 }
 
+.hud-frame.module-government .state-funding-summary > header {
+  background: var(--ss-blue) !important;
+  border: 3px solid var(--ss-red) !important;
+  box-shadow: 10px 10px 0 var(--ss-yellow) !important;
+  margin: 0 10px 38px 0 !important;
+  padding: clamp(34px, 6vw, 72px) !important;
+}
+
 .hud-frame.module-government .federal-funding-summary > header :is(span, h2, p) {
   color: var(--ss-white) !important;
 }
 
+.hud-frame.module-government .state-funding-summary > header :is(span, h2, p) {
+  color: var(--ss-white) !important;
+}
+
 .hud-frame.module-government .federal-funding-summary > header span {
+  color: var(--ss-yellow) !important;
+  font-size: 0.74rem !important;
+  font-weight: 900 !important;
+}
+
+.hud-frame.module-government .state-funding-summary > header span {
   color: var(--ss-yellow) !important;
   font-size: 0.74rem !important;
   font-weight: 900 !important;
@@ -2885,7 +2935,18 @@ body {
   margin: 12px 0 20px !important;
 }
 
+.hud-frame.module-government .state-funding-summary > header h2 {
+  font-size: clamp(2.5rem, 5vw, 5.2rem) !important;
+  line-height: 0.98 !important;
+  margin: 12px 0 20px !important;
+}
+
 .hud-frame.module-government .federal-funding-summary > section {
+  border-bottom: 3px solid var(--ss-ink) !important;
+  padding: clamp(30px, 5vw, 62px) !important;
+}
+
+.hud-frame.module-government .state-funding-summary > section {
   border-bottom: 3px solid var(--ss-ink) !important;
   padding: clamp(30px, 5vw, 62px) !important;
 }
@@ -2894,7 +2955,15 @@ body {
   background: var(--ss-blue) !important;
 }
 
+.hud-frame.module-government .state-funding-summary > section:nth-of-type(odd) {
+  background: var(--ss-ink) !important;
+}
+
 .hud-frame.module-government .federal-funding-summary > section:nth-of-type(even) {
+  background: var(--ss-white) !important;
+}
+
+.hud-frame.module-government .state-funding-summary > section:nth-of-type(even) {
   background: var(--ss-white) !important;
 }
 
@@ -2902,7 +2971,16 @@ body {
   color: var(--ss-white) !important;
 }
 
+.hud-frame.module-government .state-funding-summary > section:nth-of-type(odd) :is(h3, p, li, blockquote) {
+  color: var(--ss-white) !important;
+}
+
 .hud-frame.module-government .federal-funding-summary h3 {
+  font-size: clamp(1.75rem, 3vw, 3rem) !important;
+  margin: 0 0 18px !important;
+}
+
+.hud-frame.module-government .state-funding-summary h3 {
   font-size: clamp(1.75rem, 3vw, 3rem) !important;
   margin: 0 0 18px !important;
 }
@@ -2914,10 +2992,59 @@ body {
   max-width: 84ch !important;
 }
 
+.hud-frame.module-government .state-funding-summary :is(p, li, blockquote) {
+  font-size: clamp(1rem, 1.3vw, 1.14rem) !important;
+  line-height: 1.72 !important;
+}
+
+.hud-frame.module-government .state-funding-summary p {
+  margin: 0 0 18px !important;
+  max-width: 84ch !important;
+}
+
+.hud-frame.module-government .state-funding-summary ul {
+  display: grid !important;
+  gap: 9px !important;
+  margin: 18px 0 24px !important;
+  max-width: 76ch !important;
+  padding-left: 24px !important;
+}
+
+.hud-frame.module-government .state-funding-summary blockquote {
+  border-left: 10px solid var(--ss-yellow) !important;
+  font-family: var(--ss-font-display) !important;
+  font-size: clamp(1.2rem, 2vw, 1.7rem) !important;
+  font-weight: 700 !important;
+  margin: 28px 0 0 !important;
+  max-width: 76ch !important;
+  padding: 4px 0 4px 24px !important;
+}
+
+.hud-frame.module-government .state-funding-flow {
+  background: var(--ss-yellow) !important;
+  border: 3px solid var(--ss-red) !important;
+  box-shadow: 6px 6px 0 var(--ss-blue) !important;
+  color: var(--ss-ink) !important;
+  font-weight: 700 !important;
+  padding: 20px !important;
+}
+
 .hud-frame.module-government .federal-funding-emphasis {
   background: var(--ss-yellow) !important;
   border: 3px solid var(--ss-ink) !important;
   box-shadow: 6px 6px 0 var(--ss-red) !important;
+  color: var(--ss-ink) !important;
+  display: block !important;
+  line-height: 1.5 !important;
+  margin-top: 24px !important;
+  max-width: 84ch !important;
+  padding: 18px 20px !important;
+}
+
+.hud-frame.module-government .state-funding-emphasis {
+  background: var(--ss-yellow) !important;
+  border: 3px solid var(--ss-red) !important;
+  box-shadow: 6px 6px 0 var(--ss-blue) !important;
   color: var(--ss-ink) !important;
   display: block !important;
   line-height: 1.5 !important;
