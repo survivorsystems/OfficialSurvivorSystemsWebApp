@@ -28,16 +28,6 @@ function libraryPreviewImage(resource: SubscriberCatalogItem) {
     : null;
 }
 
-const proposedOrderPreviewResource: SubscriberCatalogItem = {
-  id: "Legal/Blank_Proposed_Order_In_Suit_Affecting_Parent_Child_Relationship.docx",
-  title: "Blank Proposed Order in Suit Affecting the Parent-Child Relationship",
-  category: "Legal",
-  format: "DOCX",
-  fileSizeBytes: 40413,
-  preview: "A fillable proposed-order template with space for the court caption, appearances and notice, information about the children, and the court's requested orders.",
-  access: "Complete editable template included with Premium Survivor Library access.",
-};
-
 type ModuleKey =
   | "home"
   | "assessments"
@@ -7089,21 +7079,19 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
   const [libraryAuthStatus, setLibraryAuthStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [openingResourceId, setOpeningResourceId] = useState<string | null>(null);
   const [libraryAccessMessage, setLibraryAccessMessage] = useState("");
-  const [previewResource, setPreviewResource] = useState<SubscriberCatalogItem | null>(proposedOrderPreviewResource);
+  const [previewResource, setPreviewResource] = useState<SubscriberCatalogItem | null>(null);
 
   useEffect(() => {
     const controller = new AbortController();
     setCatalogStatus("loading");
     fetchSubscriberCatalog(controller.signal)
       .then((items) => {
-        const hasProposedOrder = items.some((item) => libraryPreviewImage(item));
-        setCatalog(hasProposedOrder ? items : [proposedOrderPreviewResource, ...items]);
+        setCatalog(items);
         setCatalogStatus("ready");
       })
       .catch((error: unknown) => {
         if (error instanceof DOMException && error.name === "AbortError") return;
-        setCatalog([proposedOrderPreviewResource]);
-        setCatalogStatus("ready");
+        setCatalogStatus("error");
       });
     return () => controller.abort();
   }, []);
