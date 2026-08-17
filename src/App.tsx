@@ -6049,7 +6049,7 @@ function PracticalHowToGuide({
 }) {
   return (
     <EditorialPageTemplate
-      className="page-shell how-to-guide-page"
+      className={`page-shell how-to-guide-page guide-${guide.id}`}
       eyebrow={`Resources / Guides / ${guide.terminalLabel}`}
       intro={<p>{guide.intro}</p>}
       quickMap={guide.quickMap}

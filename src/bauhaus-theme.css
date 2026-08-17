@@ -3706,6 +3706,192 @@ body {
   grid-column: 1 !important;
 }
 
+/* Definitive long-form guide contract: one black page, continuous sections, white copy. */
+.hud-frame.module-how-to .terminal-content .how-to-guide-page,
+.hud-frame.module-legal .terminal-content .legal-guide-shell {
+  background: var(--ss-ink) !important;
+  border: 4px solid var(--ss-blue) !important;
+  box-shadow: 12px 12px 0 var(--ss-yellow) !important;
+  color: var(--ss-white) !important;
+  display: block !important;
+  margin: 0 12px 40px 0 !important;
+  overflow: hidden !important;
+  padding: clamp(28px, 5vw, 68px) !important;
+}
+
+.hud-frame.module-how-to .terminal-content .guide-live-in-your-car,
+.hud-frame.module-legal .terminal-content .legal-guide-shell:nth-of-type(even) {
+  border-color: var(--ss-red) !important;
+  box-shadow: 12px 12px 0 var(--ss-blue) !important;
+}
+
+.hud-frame.module-how-to .terminal-content .guide-routine-chaos,
+.hud-frame.module-how-to .terminal-content .compensation-guide {
+  border-color: var(--ss-yellow) !important;
+  box-shadow: 12px 12px 0 var(--ss-red) !important;
+}
+
+.hud-frame.module-how-to .terminal-content .how-to-guide-page :is(
+  h1, h2, h3, h4, h5, h6, p, li, label, span, small, strong, em, code, blockquote, summary
+),
+.hud-frame.module-legal .terminal-content .legal-guide-shell :is(
+  h1, h2, h3, h4, h5, h6, p, li, label, span, small, strong, em, code, blockquote
+) {
+  color: var(--ss-white) !important;
+  text-shadow: none !important;
+}
+
+.hud-frame.module-how-to .terminal-content .how-to-guide-page :is(
+  .ss-template-header,
+  .page-flourish-header,
+  .how-to-hero,
+  .ss-template-body,
+  .snap-guide-grid,
+  .compensation-coverage-grid,
+  .compensation-process-grid,
+  .compensation-clauses-grid,
+  .housing-options-pathways,
+  .how-to-system-note,
+  .housing-options-master-script
+),
+.hud-frame.module-legal .terminal-content .legal-guide-shell :is(
+  .ss-template-header,
+  .ss-template-body,
+  .legal-warning,
+  .legal-step-section,
+  .legal-motion-section,
+  .legal-note-grid,
+  .legal-reminder
+) {
+  background: transparent !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+}
+
+.hud-frame.module-how-to .terminal-content .how-to-guide-page :is(.ss-template-header, .page-flourish-header, .how-to-hero) {
+  border: 0 !important;
+  border-bottom: 14px solid var(--ss-red) !important;
+  padding: clamp(20px, 4vw, 48px) 0 clamp(34px, 5vw, 60px) !important;
+}
+
+.hud-frame.module-how-to .terminal-content .how-to-guide-page :is(.ss-template-header, .page-flourish-header, .how-to-hero)::before {
+  display: none !important;
+}
+
+.hud-frame.module-how-to .terminal-content .how-to-guide-page .ss-template-body {
+  padding: 0 !important;
+}
+
+.hud-frame.module-how-to .terminal-content .how-to-guide-page :is(
+  .snap-guide-card,
+  .how-to-system-note,
+  .housing-options-master-script,
+  .housing-option-pathway,
+  .compensation-coverage-grid > article
+),
+.hud-frame.module-legal .terminal-content .legal-guide-shell :is(
+  .legal-step-card,
+  .legal-motion-card,
+  .legal-note,
+  .legal-reminder,
+  .legal-warning
+) {
+  background: var(--ss-ink) !important;
+  border: 0 !important;
+  border-bottom: 4px solid var(--ss-blue) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: var(--ss-white) !important;
+  margin: 0 !important;
+  padding: clamp(30px, 5vw, 62px) 0 !important;
+}
+
+.hud-frame.module-how-to .terminal-content .how-to-guide-page :is(
+  .snap-guide-card,
+  .how-to-system-note,
+  .housing-options-master-script,
+  .housing-option-pathway,
+  .compensation-coverage-grid > article
+):nth-child(3n + 2),
+.hud-frame.module-legal .terminal-content .legal-guide-shell :is(
+  .legal-step-card,
+  .legal-motion-card,
+  .legal-note
+):nth-child(3n + 2) {
+  border-bottom-color: var(--ss-red) !important;
+}
+
+.hud-frame.module-how-to .terminal-content .how-to-guide-page :is(
+  .snap-guide-card,
+  .how-to-system-note,
+  .housing-options-master-script,
+  .housing-option-pathway,
+  .compensation-coverage-grid > article
+):nth-child(3n + 3),
+.hud-frame.module-legal .terminal-content .legal-guide-shell :is(
+  .legal-step-card,
+  .legal-motion-card,
+  .legal-note
+):nth-child(3n + 3) {
+  border-bottom-color: var(--ss-yellow) !important;
+}
+
+.hud-frame.module-how-to .terminal-content .how-to-guide-page :is(
+  .snap-guide-grid,
+  .housing-options-pathways,
+  .compensation-coverage-grid
+),
+.hud-frame.module-legal .terminal-content .legal-guide-shell :is(
+  .legal-step-grid,
+  .legal-motion-grid,
+  .legal-note-grid
+) {
+  display: block !important;
+  gap: 0 !important;
+}
+
+.hud-frame.module-how-to .terminal-content .how-to-guide-page .housing-option-pathway summary {
+  background: var(--ss-ink) !important;
+  border: 0 !important;
+  color: var(--ss-white) !important;
+  padding: 24px 0 !important;
+}
+
+.hud-frame.module-how-to .terminal-content .how-to-guide-page .housing-option-pathway > div {
+  background: var(--ss-ink) !important;
+  color: var(--ss-white) !important;
+  padding: 0 0 30px !important;
+}
+
+.hud-frame.module-how-to .terminal-content .how-to-guide-page :is(ul, ol) {
+  background: transparent !important;
+  border-left: 6px solid var(--ss-yellow) !important;
+  color: var(--ss-white) !important;
+  padding: 18px 20px 18px 36px !important;
+}
+
+.hud-frame.module-how-to .terminal-content .how-to-guide-page .phrase-bank,
+.hud-frame.module-legal .terminal-content .legal-guide-shell .legal-motion-block {
+  background: var(--ss-blue) !important;
+  border: 0 !important;
+  border-left: 8px solid var(--ss-yellow) !important;
+  box-shadow: none !important;
+  color: var(--ss-white) !important;
+  margin: 22px 0 !important;
+  padding: 22px !important;
+}
+
+/* Disabled controls cannot fall back to neutral-on-neutral styling. */
+.hud-frame:not(.module-home) .terminal-content button:disabled {
+  background: var(--ss-ink) !important;
+  border-color: var(--ss-red) !important;
+  color: var(--ss-white) !important;
+  opacity: 0.72 !important;
+}
+
 .hud-frame.module-government .audit-money-trail span,
 .hud-frame.module-government .audit-money-trail b {
   color: var(--ss-yellow) !important;
@@ -4927,6 +5113,117 @@ body:has(.assessment-workspace),
 .hud-frame.module-about .about-offerings-grid article:nth-child(3) { background: #f46b3a !important; }
 
 .hud-frame.module-about .about-offerings-grid article :is(h3, p, span) {
+  color: var(--ss-white) !important;
+}
+
+/* Final guide contract. Keep every guide on one continuous black reading surface. */
+.hud-frame:is(.module-how-to, .module-legal) .terminal-content :is(.how-to-guide-page, .legal-guide-shell),
+.hud-frame.module-government .terminal-content .nonprofit-audit-page {
+  background: var(--ss-ink) !important;
+  border: 4px solid var(--ss-blue) !important;
+  border-radius: 0 !important;
+  box-shadow: 12px 12px 0 var(--ss-yellow) !important;
+  color: var(--ss-white) !important;
+  display: block !important;
+  margin: 0 12px 40px 0 !important;
+  overflow: hidden !important;
+  padding: clamp(28px, 5vw, 68px) !important;
+}
+
+.hud-frame.module-how-to .terminal-content .guide-live-in-your-car {
+  border-color: var(--ss-red) !important;
+  box-shadow: 12px 12px 0 var(--ss-blue) !important;
+}
+
+.hud-frame.module-how-to .terminal-content :is(.guide-routine-chaos, .compensation-guide) {
+  border-color: var(--ss-yellow) !important;
+  box-shadow: 12px 12px 0 var(--ss-red) !important;
+}
+
+.hud-frame:is(.module-how-to, .module-legal) .terminal-content :is(.how-to-guide-page, .legal-guide-shell) :is(h1, h2, h3, h4, h5, h6, p, li, label, span, small, strong, em, code, blockquote, summary, a),
+.hud-frame.module-government .terminal-content .nonprofit-audit-page :is(h1, h2, h3, h4, h5, h6, p, li, label, span, small, strong, em, code, blockquote, a) {
+  color: var(--ss-white) !important;
+  text-shadow: none !important;
+}
+
+.hud-frame:is(.module-how-to, .module-legal) .terminal-content :is(.how-to-guide-page, .legal-guide-shell) :is(
+  .ss-template-header, .page-flourish-header, .how-to-hero, .ss-template-body,
+  .snap-guide-grid, .compensation-coverage-grid, .compensation-process-grid,
+  .compensation-clauses-grid, .housing-options-pathways, .how-to-system-note,
+  .housing-options-master-script, .legal-warning, .legal-step-section,
+  .legal-motion-section, .legal-note-grid, .legal-reminder
+),
+.hud-frame.module-government .terminal-content .nonprofit-audit-page :is(
+  .nonprofit-audit-header, .audit-intro, .audit-steps, .audit-money-trail
+) {
+  background: transparent !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+}
+
+.hud-frame:is(.module-how-to, .module-legal) .terminal-content :is(.how-to-guide-page, .legal-guide-shell) :is(
+  .snap-guide-card, .how-to-system-note, .housing-options-master-script,
+  .housing-option-pathway, .compensation-coverage-grid > article,
+  .legal-step-card, .legal-motion-card, .legal-note, .legal-reminder, .legal-warning
+),
+.hud-frame.module-government .terminal-content .nonprofit-audit-page .audit-steps > section {
+  background: transparent !important;
+  border: 0 !important;
+  border-bottom: 4px solid var(--ss-blue) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: var(--ss-white) !important;
+  margin: 0 !important;
+  padding: clamp(30px, 5vw, 62px) 0 !important;
+}
+
+.hud-frame:is(.module-how-to, .module-legal) .terminal-content :is(.how-to-guide-page, .legal-guide-shell) :is(
+  .snap-guide-card, .how-to-system-note, .housing-options-master-script,
+  .housing-option-pathway, .compensation-coverage-grid > article,
+  .legal-step-card, .legal-motion-card, .legal-note
+):nth-child(3n + 2),
+.hud-frame.module-government .terminal-content .nonprofit-audit-page .audit-steps > section:nth-child(3n + 2) {
+  border-bottom-color: var(--ss-red) !important;
+}
+
+.hud-frame:is(.module-how-to, .module-legal) .terminal-content :is(.how-to-guide-page, .legal-guide-shell) :is(
+  .snap-guide-card, .how-to-system-note, .housing-options-master-script,
+  .housing-option-pathway, .compensation-coverage-grid > article,
+  .legal-step-card, .legal-motion-card, .legal-note
+):nth-child(3n + 3),
+.hud-frame.module-government .terminal-content .nonprofit-audit-page .audit-steps > section:nth-child(3n + 3) {
+  border-bottom-color: var(--ss-yellow) !important;
+}
+
+.hud-frame:is(.module-how-to, .module-legal) .terminal-content :is(.how-to-guide-page, .legal-guide-shell) :is(
+  .snap-guide-grid, .housing-options-pathways, .compensation-coverage-grid,
+  .legal-step-grid, .legal-motion-grid, .legal-note-grid
+),
+.hud-frame.module-government .terminal-content .nonprofit-audit-page .audit-steps {
+  display: block !important;
+  gap: 0 !important;
+}
+
+.hud-frame.module-how-to .terminal-content .how-to-guide-page .housing-option-pathway :is(summary, div) {
+  background: transparent !important;
+  color: var(--ss-white) !important;
+}
+
+.hud-frame:is(.module-how-to, .module-legal) .terminal-content :is(.how-to-guide-page, .legal-guide-shell) :is(ul, ol),
+.hud-frame.module-government .terminal-content .nonprofit-audit-page :is(ul, ol) {
+  background: transparent !important;
+  border-left: 6px solid var(--ss-yellow) !important;
+  color: var(--ss-white) !important;
+}
+
+.hud-frame.module-government .terminal-content .nonprofit-audit-page .audit-steps blockquote {
+  background: var(--ss-blue) !important;
+  border: 0 !important;
+  border-left: 8px solid var(--ss-yellow) !important;
+  box-shadow: none !important;
   color: var(--ss-white) !important;
 }
 
