@@ -2825,6 +2825,63 @@ body {
   transform: none !important;
 }
 
+.hud-frame.module-government .systems-articles {
+  background: var(--ss-blue) !important;
+  border: 3px solid var(--ss-red) !important;
+  box-shadow: 10px 10px 0 var(--ss-yellow) !important;
+  display: grid !important;
+  gap: 28px !important;
+  margin: 0 10px 10px 0 !important;
+  padding: clamp(28px, 5vw, 58px) !important;
+}
+
+.hud-frame.module-government .systems-articles > header :is(span, h2) {
+  color: var(--ss-white) !important;
+}
+
+.hud-frame.module-government .systems-articles > header span {
+  color: var(--ss-yellow) !important;
+  font-size: 0.74rem !important;
+  font-weight: 900 !important;
+}
+
+.hud-frame.module-government .systems-articles > header h2 {
+  font-size: clamp(2rem, 4vw, 4rem) !important;
+  margin: 8px 0 0 !important;
+}
+
+.hud-frame.module-government .systems-articles > button {
+  background: var(--ss-ink) !important;
+  border: 3px solid var(--ss-yellow) !important;
+  box-shadow: 7px 7px 0 var(--ss-red) !important;
+  color: var(--ss-white) !important;
+  display: grid !important;
+  gap: 12px !important;
+  padding: clamp(24px, 4vw, 42px) !important;
+  text-align: left !important;
+  transform: none !important;
+}
+
+.hud-frame.module-government .systems-articles > button :is(span, strong, small) {
+  color: var(--ss-white) !important;
+}
+
+.hud-frame.module-government .systems-articles > button span {
+  color: var(--ss-yellow) !important;
+  font-size: 0.72rem !important;
+  font-weight: 900 !important;
+}
+
+.hud-frame.module-government .systems-articles > button strong {
+  font-family: var(--ss-font-display) !important;
+  font-size: clamp(1.8rem, 3vw, 3.2rem) !important;
+}
+
+.hud-frame.module-government .systems-articles > button small {
+  font-size: 1rem !important;
+  line-height: 1.55 !important;
+}
+
 .hud-frame.module-government .federal-systems-page {
   display: grid !important;
   gap: clamp(32px, 5vw, 64px) !important;
@@ -2832,6 +2889,12 @@ body {
 }
 
 .hud-frame.module-government .state-systems-page {
+  display: grid !important;
+  gap: clamp(32px, 5vw, 64px) !important;
+  min-width: 0 !important;
+}
+
+.hud-frame.module-government :is(.local-systems-page, .nonprofit-audit-page) {
   display: grid !important;
   gap: clamp(32px, 5vw, 64px) !important;
   min-width: 0 !important;
@@ -2883,12 +2946,38 @@ body {
   padding: 14px 4px 2px !important;
 }
 
+.hud-frame.module-government .local-funding-infographic {
+  background: var(--ss-white) !important;
+  border: 3px solid var(--ss-yellow) !important;
+  box-shadow: 10px 10px 0 var(--ss-red) !important;
+  margin: 0 10px 10px 0 !important;
+  padding: clamp(12px, 2vw, 24px) !important;
+}
+
+.hud-frame.module-government .local-funding-infographic img {
+  display: block !important;
+  height: auto !important;
+  width: 100% !important;
+}
+
+.hud-frame.module-government .local-funding-infographic figcaption {
+  color: var(--ss-ink) !important;
+  font-size: 0.78rem !important;
+  font-weight: 700 !important;
+  padding: 14px 4px 2px !important;
+}
+
 .hud-frame.module-government .federal-funding-summary {
   display: grid !important;
   gap: 0 !important;
 }
 
 .hud-frame.module-government .state-funding-summary {
+  display: grid !important;
+  gap: 0 !important;
+}
+
+.hud-frame.module-government .local-funding-summary {
   display: grid !important;
   gap: 0 !important;
 }
@@ -2907,6 +2996,30 @@ body {
   box-shadow: 10px 10px 0 var(--ss-yellow) !important;
   margin: 0 10px 38px 0 !important;
   padding: clamp(34px, 6vw, 72px) !important;
+}
+
+.hud-frame.module-government .local-funding-summary > header {
+  background: var(--ss-ink) !important;
+  border: 3px solid var(--ss-yellow) !important;
+  box-shadow: 10px 10px 0 var(--ss-red) !important;
+  margin: 0 10px 38px 0 !important;
+  padding: clamp(34px, 6vw, 72px) !important;
+}
+
+.hud-frame.module-government .local-funding-summary > header :is(span, h2, p) {
+  color: var(--ss-white) !important;
+}
+
+.hud-frame.module-government .local-funding-summary > header span {
+  color: var(--ss-yellow) !important;
+  font-size: 0.74rem !important;
+  font-weight: 900 !important;
+}
+
+.hud-frame.module-government .local-funding-summary > header h2 {
+  font-size: clamp(2.5rem, 5vw, 5.2rem) !important;
+  line-height: 0.98 !important;
+  margin: 12px 0 20px !important;
 }
 
 .hud-frame.module-government .federal-funding-summary > header :is(span, h2, p) {
@@ -2951,6 +3064,23 @@ body {
   padding: clamp(30px, 5vw, 62px) !important;
 }
 
+.hud-frame.module-government .local-funding-summary > section {
+  border-bottom: 3px solid var(--ss-ink) !important;
+  padding: clamp(30px, 5vw, 62px) !important;
+}
+
+.hud-frame.module-government .local-funding-summary > section:nth-of-type(odd) {
+  background: var(--ss-blue) !important;
+}
+
+.hud-frame.module-government .local-funding-summary > section:nth-of-type(even) {
+  background: var(--ss-white) !important;
+}
+
+.hud-frame.module-government .local-funding-summary > section:nth-of-type(odd) :is(h3, p, li) {
+  color: var(--ss-white) !important;
+}
+
 .hud-frame.module-government .federal-funding-summary > section:nth-of-type(odd) {
   background: var(--ss-blue) !important;
 }
@@ -2983,6 +3113,29 @@ body {
 .hud-frame.module-government .state-funding-summary h3 {
   font-size: clamp(1.75rem, 3vw, 3rem) !important;
   margin: 0 0 18px !important;
+}
+
+.hud-frame.module-government .local-funding-summary h3 {
+  font-size: clamp(1.75rem, 3vw, 3rem) !important;
+  margin: 0 0 18px !important;
+}
+
+.hud-frame.module-government .local-funding-summary :is(p, li) {
+  font-size: clamp(1rem, 1.3vw, 1.14rem) !important;
+  line-height: 1.72 !important;
+}
+
+.hud-frame.module-government .local-funding-summary p {
+  margin: 0 0 18px !important;
+  max-width: 84ch !important;
+}
+
+.hud-frame.module-government .local-funding-summary ul {
+  display: grid !important;
+  gap: 9px !important;
+  margin: 18px 0 24px !important;
+  max-width: 76ch !important;
+  padding-left: 24px !important;
 }
 
 .hud-frame.module-government .federal-funding-summary p {
@@ -3051,6 +3204,158 @@ body {
   margin-top: 24px !important;
   max-width: 84ch !important;
   padding: 18px 20px !important;
+}
+
+.hud-frame.module-government .local-funding-emphasis,
+.hud-frame.module-government .local-funding-question {
+  background: var(--ss-yellow) !important;
+  border: 3px solid var(--ss-red) !important;
+  box-shadow: 6px 6px 0 var(--ss-blue) !important;
+  color: var(--ss-ink) !important;
+  display: block !important;
+  line-height: 1.5 !important;
+  margin-top: 24px !important;
+  max-width: 84ch !important;
+  padding: 18px 20px !important;
+}
+
+.hud-frame.module-government .nonprofit-audit-header {
+  background: var(--ss-ink) !important;
+  border: 3px solid var(--ss-red) !important;
+  box-shadow: 10px 10px 0 var(--ss-yellow) !important;
+  margin: 0 10px 10px 0 !important;
+  padding: clamp(38px, 6vw, 78px) !important;
+}
+
+.hud-frame.module-government .nonprofit-audit-header :is(span, h2, p) {
+  color: var(--ss-white) !important;
+}
+
+.hud-frame.module-government .nonprofit-audit-header span {
+  color: var(--ss-yellow) !important;
+  font-size: 0.74rem !important;
+  font-weight: 900 !important;
+}
+
+.hud-frame.module-government .nonprofit-audit-header h2 {
+  font-size: clamp(3rem, 6vw, 6rem) !important;
+  line-height: 0.94 !important;
+  margin: 14px 0 24px !important;
+}
+
+.hud-frame.module-government .audit-intro {
+  background: var(--ss-blue) !important;
+  border: 3px solid var(--ss-red) !important;
+  box-shadow: 9px 9px 0 var(--ss-yellow) !important;
+  padding: clamp(28px, 5vw, 58px) !important;
+}
+
+.hud-frame.module-government .audit-intro p {
+  color: var(--ss-white) !important;
+  font-size: clamp(1.05rem, 1.5vw, 1.25rem) !important;
+  line-height: 1.72 !important;
+  margin: 0 !important;
+  max-width: 84ch !important;
+}
+
+.hud-frame.module-government .audit-steps {
+  display: grid !important;
+  gap: clamp(24px, 3vw, 38px) !important;
+}
+
+.hud-frame.module-government .audit-steps > section {
+  background: var(--ss-white) !important;
+  border: 3px solid var(--ss-ink) !important;
+  border-left: 18px solid var(--ss-blue) !important;
+  box-shadow: 9px 9px 0 var(--ss-yellow) !important;
+  padding: clamp(26px, 4vw, 52px) !important;
+}
+
+.hud-frame.module-government .audit-steps > section:nth-child(3n+2) {
+  border-left-color: var(--ss-red) !important;
+  box-shadow: 9px 9px 0 var(--ss-blue) !important;
+}
+
+.hud-frame.module-government .audit-steps > section:nth-child(3n+3) {
+  background: var(--ss-ink) !important;
+  border-left-color: var(--ss-yellow) !important;
+  box-shadow: 9px 9px 0 var(--ss-red) !important;
+}
+
+.hud-frame.module-government .audit-steps > section > span {
+  color: var(--ss-red) !important;
+  font-size: 0.78rem !important;
+  font-weight: 900 !important;
+}
+
+.hud-frame.module-government .audit-steps > section:nth-child(3n+3) :is(span, h3, p, li, strong, blockquote) {
+  color: var(--ss-white) !important;
+}
+
+.hud-frame.module-government .audit-steps h3 {
+  font-size: clamp(1.65rem, 3vw, 2.8rem) !important;
+  margin: 10px 0 18px !important;
+}
+
+.hud-frame.module-government .audit-steps :is(p, li, blockquote) {
+  font-size: clamp(1rem, 1.25vw, 1.12rem) !important;
+  line-height: 1.7 !important;
+}
+
+.hud-frame.module-government .audit-steps p {
+  margin: 0 !important;
+  max-width: 84ch !important;
+}
+
+.hud-frame.module-government .audit-steps ul {
+  display: grid !important;
+  gap: 9px !important;
+  margin: 18px 0 !important;
+  padding-left: 24px !important;
+}
+
+.hud-frame.module-government .audit-steps blockquote {
+  background: var(--ss-yellow) !important;
+  border: 3px solid var(--ss-red) !important;
+  box-shadow: 6px 6px 0 var(--ss-blue) !important;
+  color: var(--ss-ink) !important;
+  margin: 24px 0 0 !important;
+  max-width: 76ch !important;
+  padding: 20px !important;
+}
+
+.hud-frame.module-government .audit-money-trail {
+  background: var(--ss-blue) !important;
+  border: 3px solid var(--ss-red) !important;
+  box-shadow: 10px 10px 0 var(--ss-yellow) !important;
+  display: grid !important;
+  gap: 10px !important;
+  padding: clamp(30px, 5vw, 62px) !important;
+  text-align: center !important;
+}
+
+.hud-frame.module-government .audit-money-trail :is(span, p, b, strong) {
+  color: var(--ss-white) !important;
+}
+
+.hud-frame.module-government .audit-money-trail span,
+.hud-frame.module-government .audit-money-trail b {
+  color: var(--ss-yellow) !important;
+  font-weight: 900 !important;
+}
+
+.hud-frame.module-government .audit-money-trail p {
+  font-family: var(--ss-font-display) !important;
+  font-size: clamp(1.25rem, 2.5vw, 2.2rem) !important;
+  font-weight: 700 !important;
+  margin: 0 !important;
+}
+
+.hud-frame.module-government .audit-money-trail strong {
+  background: var(--ss-ink) !important;
+  border: 3px solid var(--ss-yellow) !important;
+  margin-top: 18px !important;
+  padding: 20px !important;
 }
 
 .hud-frame.module-government .systems-placeholder {

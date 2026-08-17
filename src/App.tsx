@@ -3772,35 +3772,50 @@ function AboutModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: str
 }
 
 function SystemsModule() {
-  const [activeSystem, setActiveSystem] = useState<"directory" | "federal" | "state" | "local">("directory");
+  const [activeSystem, setActiveSystem] = useState<"directory" | "federal" | "state" | "local" | "audit">("directory");
 
   return (
     <section className="page-shell systems-page" aria-labelledby="systems-page-title">
       <header className="systems-page-header">
         <span>SURVIVOR SYSTEMS</span>
         <h1 id="systems-page-title">
-          {activeSystem === "directory" ? "Systems" : `${activeSystem[0].toUpperCase()}${activeSystem.slice(1)} Government`}
+          {activeSystem === "directory" || activeSystem === "audit"
+            ? "Systems"
+            : `${activeSystem[0].toUpperCase()}${activeSystem.slice(1)} Government`}
         </h1>
       </header>
 
       {activeSystem === "directory" ? (
-        <div className="systems-directory" aria-label="Government system categories">
-          <button type="button" onClick={() => setActiveSystem("federal")}>
-            <span>01</span>
-            <strong>Federal Government</strong>
-            <small>Funding, agencies, federal programs, and national policy.</small>
-          </button>
-          <button type="button" onClick={() => setActiveSystem("state")}>
-            <span>02</span>
-            <strong>State Government</strong>
-            <small>State administration, programs, courts, benefits, and funding.</small>
-          </button>
-          <button type="button" onClick={() => setActiveSystem("local")}>
-            <span>03</span>
-            <strong>Local Government</strong>
-            <small>County and city systems, local services, and community implementation.</small>
-          </button>
-        </div>
+        <>
+          <div className="systems-directory" aria-label="Government system categories">
+            <button type="button" onClick={() => setActiveSystem("federal")}>
+              <span>01</span>
+              <strong>Federal Government</strong>
+              <small>Funding, agencies, federal programs, and national policy.</small>
+            </button>
+            <button type="button" onClick={() => setActiveSystem("state")}>
+              <span>02</span>
+              <strong>State Government</strong>
+              <small>State administration, programs, courts, benefits, and funding.</small>
+            </button>
+            <button type="button" onClick={() => setActiveSystem("local")}>
+              <span>03</span>
+              <strong>Local Government</strong>
+              <small>County and city systems, local services, and community implementation.</small>
+            </button>
+          </div>
+          <section className="systems-articles" aria-labelledby="systems-articles-title">
+            <header>
+              <span>FOLLOW THE RECORDS</span>
+              <h2 id="systems-articles-title">Systems Articles</h2>
+            </header>
+            <button type="button" onClick={() => setActiveSystem("audit")}>
+              <span>FINANCIAL RESEARCH GUIDE</span>
+              <strong>How to Audit a 501(c)(3)</strong>
+              <small>Trace public funding, Form 990s, compensation, program expenses, grants, and related organizations.</small>
+            </button>
+          </section>
+        </>
       ) : null}
 
       {activeSystem === "federal" ? (
@@ -4039,11 +4054,138 @@ function SystemsModule() {
       ) : null}
 
       {activeSystem === "local" ? (
-        <section className="systems-placeholder" aria-live="polite">
-          <span>{activeSystem.toUpperCase()} GOVERNMENT</span>
-          <h2>This category is ready for its next content set.</h2>
-          <button type="button" onClick={() => setActiveSystem("directory")}>Back to Systems</button>
-        </section>
+        <article className="local-systems-page" aria-labelledby="local-funding-title">
+          <button className="systems-back-button" type="button" onClick={() => setActiveSystem("directory")}>
+            Back to Systems
+          </button>
+
+          <figure className="local-funding-infographic">
+            <img
+              src={dvFundingInfographic}
+              alt="Follow the Money infographic showing local organizations as the final institutional layer before domestic violence services reach survivors."
+            />
+            <figcaption>Follow the Money: Domestic Violence Funding. Updated May 2026.</figcaption>
+          </figure>
+
+          <section className="local-funding-summary" aria-labelledby="local-funding-title">
+            <header>
+              <span>LOCAL GOVERNMENT</span>
+              <h2 id="local-funding-title">What Happens When Domestic Violence Funding Reaches the Local Level?</h2>
+              <p>
+                By the time domestic violence funding reaches a city, county, or community, much of its
+                purpose has already been determined by federal law and state-level allocation decisions.
+              </p>
+            </header>
+
+            <section>
+              <h3>The local level is where funding becomes the system survivors actually interact with</h3>
+              <p>
+                Local recipients may include police departments, prosecutors' offices, courts, shelters,
+                advocacy programs, legal-service organizations, and other community providers.
+              </p>
+            </section>
+
+            <section>
+              <h3>This is where the budget becomes services</h3>
+              <p>Local agencies and organizations decide how their individual awards are used within the rules of their grants. That can mean paying for:</p>
+              <ul>
+                <li>Staff and advocates</li>
+                <li>Shelter operations</li>
+                <li>Local law-enforcement programs</li>
+                <li>Prosecution and court programs</li>
+                <li>Attorneys and legal assistance</li>
+                <li>Counseling and case management</li>
+                <li>Transportation or emergency assistance</li>
+                <li>Other approved program expenses</li>
+              </ul>
+              <p>This is the point where a government budget becomes an actual local program.</p>
+            </section>
+
+            <section>
+              <h3>Local spending determines what survivors can actually access</h3>
+              <p>
+                Two communities can receive domestic violence funding and still offer survivors very different
+                experiences. One community may have significant shelter capacity, transportation assistance,
+                legal help, or flexible emergency funding. Another may spend more heavily on justice-system
+                programs, staffing, training, or services that do not address a survivor's immediate material needs.
+              </p>
+              <strong className="local-funding-emphasis">
+                The amount of domestic violence funding available in a community does not necessarily tell a
+                survivor what help will actually be available when they ask for it.
+              </strong>
+            </section>
+
+            <section>
+              <h3>Local governments and organizations are the last institutional layer</h3>
+              <p>For most survivors, the local level is where the entire funding system either works or doesn't. This is where a survivor finds out whether there is:</p>
+              <ul>
+                <li>A shelter bed</li>
+                <li>An advocate available</li>
+                <li>Transportation</li>
+                <li>Legal assistance</li>
+                <li>Relocation help</li>
+                <li>Emergency financial assistance</li>
+                <li>Someone who can actually help solve the problem in front of them</li>
+              </ul>
+            </section>
+
+            <section>
+              <h3>The useful question</h3>
+              <p className="local-funding-question">Not only: How much domestic violence funding did this community receive?</p>
+              <strong className="local-funding-emphasis">What did that funding actually make available to survivors in this community?</strong>
+            </section>
+          </section>
+        </article>
+      ) : null}
+
+      {activeSystem === "audit" ? (
+        <article className="nonprofit-audit-page" aria-labelledby="nonprofit-audit-title">
+          <button className="systems-back-button" type="button" onClick={() => setActiveSystem("directory")}>
+            Back to Systems
+          </button>
+          <header className="nonprofit-audit-header">
+            <span>FINANCIAL RESEARCH GUIDE</span>
+            <h2 id="nonprofit-audit-title">How to Audit a 501(c)(3)</h2>
+            <p>How to review a domestic violence nonprofit, coalition, or service organization using public records.</p>
+          </header>
+
+          <section className="audit-intro">
+            <p>
+              Domestic violence nonprofits, coalitions, and service organizations often receive money from
+              government grants, private foundations, donations, contracts, and other public funding streams.
+              Public financial records can show where money comes from, how much an organization receives,
+              how it reports spending, how much goes toward salaries and operations, and how much is distributed through programs.
+            </p>
+          </section>
+
+          <div className="audit-steps">
+            <section><span>01</span><h3>Start with the organization's legal name</h3><p>Find the full legal name, EIN, city and state, website, and any parent or affiliated organizations. The EIN is especially useful because a public-facing name may differ from the legal name in tax records.</p></section>
+            <section><span>02</span><h3>Find the Form 990</h3><p>Most tax-exempt nonprofits file a Form 990 with the IRS each year. Search the IRS Tax Exempt Organization Search, ProPublica Nonprofit Explorer, or Candid. Start with three to five years when available so changes are easier to compare.</p></section>
+            <section><span>03</span><h3>Record the main financial numbers</h3><ul><li><strong>Total revenue:</strong> money received that year.</li><li><strong>Total expenses:</strong> money spent that year.</li><li><strong>Total assets:</strong> cash, investments, property, and other reported assets.</li><li><strong>Total liabilities:</strong> debts and other obligations.</li><li><strong>Net assets:</strong> assets after liabilities.</li></ul><p>Write these numbers down for every year under review.</p></section>
+            <section><span>04</span><h3>Find out where the money comes from</h3><p>Track government grants, private grants, donations, fundraising, program-service revenue, investment income, and other revenue. For government funding, record the amount and the agency that provided it whenever available.</p></section>
+            <section><span>05</span><h3>Look at how expenses are reported</h3><p>Form 990 expenses are generally divided into program services, management and general, and fundraising. Program-service expenses can include salaries, advocates, counselors, attorneys, shelter operations, rent, utilities, transportation programs, software, contractors, training, administration, supplies, and direct assistance. Read schedules, notes, and financial statements for more detail.</p></section>
+            <section><span>06</span><h3>Check executive and staff compensation</h3><p>Record executive director or CEO compensation, other highly compensated employees, benefits and additional compensation, compensation through related organizations, and changes from year to year.</p></section>
+            <section><span>07</span><h3>Read the program descriptions</h3><p>Compare the organization's stated major programs and reported program spending with its website and annual reports. Look for emergency assistance, housing, shelter, transportation, relocation, legal help, counseling, advocacy, case management, and financial assistance.</p></section>
+            <section><span>08</span><h3>Check Schedule I</h3><p>Schedule I reports certain grants and assistance given to organizations, governments, and individuals in the United States. Look for recipient names, amounts, grant purposes, assistance reported to individuals, and grants made to other organizations. When money passes to another nonprofit, review that organization's records too.</p></section>
+            <section><span>09</span><h3>Look for related organizations</h3><p>Identify foundations, affiliated nonprofits, parent organizations, subsidiaries, related shelters, and other connected entities. Search each legal organization separately when tracing money through a larger network.</p></section>
+            <section><span>10</span><h3>Find audited financial statements</h3><p>Search the organization's website for audited financial statements, annual reports, financial reports, audits, transparency, and accountability pages. Review government grants, restricted funds, program expenses, leases, liabilities, cash reserves, major contracts, and related-party transactions. Read the accompanying notes.</p></section>
+            <section><span>11</span><h3>Compare several years</h3><p>Build a table with year, revenue, government grants, expenses, executive pay, program expenses, administration, and net assets. Add any categories relevant to the organization, then compare year by year.</p></section>
+            <section><span>12</span><h3>Trace government grants</h3><p>Search VAWA, VOCA, FVPSA, state domestic violence grants, victim-services grants, and city, county, or state contracts. For every grant, record the funding agency, amount awarded, grant period, purpose, recipient, and spending restrictions. Compare those records with the Form 990 and financial statements.</p></section>
+            <section><span>13</span><h3>Compare public claims with financial records</h3><p>Review the website, annual reports, fundraising campaigns, impact reports, press releases, and grant announcements. Write down specific services the organization says it provides, then look for those programs in its financial reporting. Preserve the original wording when documenting findings.</p></section>
+            <section><span>14</span><h3>Request public financial records</h3><p>If a Form 990 is not online, request the organization's publicly available tax records directly. You do not need to provide a reason.</p><blockquote>I'm requesting a copy of your most recent Form 990 and other publicly available financial records.</blockquote></section>
+            <section><span>15</span><h3>Keep a record of every source</h3><p>Save Form 990s, audited financial statements, grant awards, state funding records, annual reports, screenshots, public contracts, and organization webpages. Record the year and source for every number so it can be verified later.</p></section>
+          </div>
+
+          <section className="audit-money-trail">
+            <span>BUILD THE MONEY TRAIL</span>
+            <p>Where the money came from</p><b>to</b>
+            <p>How much the organization received</p><b>to</b>
+            <p>How the organization categorized its spending</p><b>to</b>
+            <p>Which programs received funding</p><b>to</b>
+            <p>Which expenses can be identified within those programs</p>
+            <strong>Public funding should be traceable.</strong>
+          </section>
+        </article>
       ) : null}
     </section>
   );
