@@ -3801,6 +3801,99 @@ body:has(.assessment-workspace),
   color: var(--ss-white) !important;
 }
 
+/* Navigation cards: black surfaces with stable Bauhaus depth. */
+.hud-frame .folk-sidebar,
+.hud-frame.module-home .folk-sidebar {
+  background: var(--ss-paper) !important;
+}
+
+.hud-frame .folk-sidebar .desktop-icon-grid,
+.hud-frame.module-home .folk-sidebar .desktop-icon-grid {
+  background: var(--ss-paper) !important;
+  border-bottom: 0 !important;
+  gap: 15px !important;
+  padding: 18px 16px 28px !important;
+}
+
+.hud-frame .folk-sidebar .desktop-icon-grid > .desktop-icon {
+  background: var(--ss-ink) !important;
+  border: 3px solid var(--ss-ink) !important;
+  color: var(--ss-white) !important;
+  min-height: 66px !important;
+  padding: 9px 12px !important;
+}
+
+.hud-frame .folk-sidebar .desktop-icon-grid > .desktop-icon:nth-child(4n+1) {
+  border-color: var(--ss-red) !important;
+  box-shadow: 7px 7px 0 var(--ss-yellow) !important;
+}
+
+.hud-frame .folk-sidebar .desktop-icon-grid > .desktop-icon:nth-child(4n+2) {
+  border-color: var(--ss-blue) !important;
+  box-shadow: 7px 7px 0 var(--ss-red) !important;
+}
+
+.hud-frame .folk-sidebar .desktop-icon-grid > .desktop-icon:nth-child(4n+3) {
+  border-color: var(--ss-yellow) !important;
+  box-shadow: 7px 7px 0 var(--ss-blue) !important;
+}
+
+.hud-frame .folk-sidebar .desktop-icon-grid > .desktop-icon:nth-child(4n+4) {
+  border-color: var(--ss-green) !important;
+  box-shadow: 7px 7px 0 var(--ss-yellow) !important;
+}
+
+.hud-frame .folk-sidebar .desktop-icon-grid > .desktop-icon .desktop-icon-title {
+  color: var(--ss-white) !important;
+}
+
+.hud-frame .folk-sidebar .desktop-icon-grid > .desktop-icon .desktop-icon-code {
+  border-color: var(--ss-white) !important;
+  box-shadow: 3px 3px 0 var(--ss-blue) !important;
+}
+
+.hud-frame .folk-sidebar .desktop-icon-grid > .desktop-icon:nth-child(2n) .desktop-icon-code {
+  box-shadow: 3px 3px 0 var(--ss-red) !important;
+}
+
+.hud-frame .folk-sidebar .desktop-icon-grid > .desktop-icon:hover,
+.hud-frame .folk-sidebar .desktop-icon-grid > .desktop-icon:focus-visible,
+.hud-frame .folk-sidebar .desktop-icon-grid > .desktop-icon.active {
+  background: #292d34 !important;
+  color: var(--ss-white) !important;
+  transform: none !important;
+}
+
+.hud-frame .folk-sidebar .desktop-icon-grid > .desktop-icon:hover,
+.hud-frame .folk-sidebar .desktop-icon-grid > .desktop-icon:focus-visible {
+  border-color: var(--ss-white) !important;
+}
+
+.hud-frame .folk-sidebar .desktop-icon-grid > .desktop-icon.active {
+  outline: 3px solid var(--ss-yellow) !important;
+  outline-offset: -7px !important;
+}
+
+@media (max-width: 980px) {
+  .hud-frame .folk-sidebar .desktop-icon-grid,
+  .hud-frame.module-home .folk-sidebar .desktop-icon-grid {
+    gap: 10px !important;
+    padding: 12px 14px 18px !important;
+  }
+
+  .hud-frame .folk-sidebar .desktop-icon-grid > .desktop-icon {
+    box-shadow: 5px 5px 0 var(--ss-yellow) !important;
+  }
+
+  .hud-frame .folk-sidebar .desktop-icon-grid > .desktop-icon:nth-child(4n+2) {
+    box-shadow: 5px 5px 0 var(--ss-red) !important;
+  }
+
+  .hud-frame .folk-sidebar .desktop-icon-grid > .desktop-icon:nth-child(4n+3) {
+    box-shadow: 5px 5px 0 var(--ss-blue) !important;
+  }
+}
+
 .hud-frame.module-about .about-story .about-offerings .about-offerings-grid article:nth-child(2) :is(h3, p, span),
 .hud-frame.module-about .about-story .about-offerings .about-offerings-grid article:nth-child(3) :is(h3, p, span) {
   color: var(--ss-white) !important;
