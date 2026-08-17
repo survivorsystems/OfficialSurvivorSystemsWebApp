@@ -4903,6 +4903,149 @@ body:has(.assessment-workspace),
   color: var(--ss-white) !important;
 }
 
+/* Carry the homepage's black-and-white navigation field through every route. */
+.hud-frame .folk-sidebar {
+  background: repeating-linear-gradient(90deg, var(--ss-ink) 0 14px, var(--ss-white) 14px 28px) !important;
+}
+
+.hud-frame .folk-sidebar .desktop-icon-grid {
+  border-bottom: var(--ss-border) !important;
+}
+
+/* Clarity cards rotate across the palette instead of repeating by column. */
+.hud-frame.module-advocacy .terminal-content .category-file-card:nth-child(1) {
+  background: var(--ss-blue) !important;
+  border-color: var(--ss-red) !important;
+  box-shadow: 9px 9px 0 var(--ss-yellow) !important;
+}
+
+.hud-frame.module-advocacy .terminal-content .category-file-card:nth-child(2) {
+  background: var(--ss-ink) !important;
+  border-color: var(--ss-yellow) !important;
+  box-shadow: 9px 9px 0 var(--ss-red) !important;
+}
+
+.hud-frame.module-advocacy .terminal-content .category-file-card:nth-child(3) {
+  background: var(--ss-red) !important;
+  border-color: var(--ss-yellow) !important;
+  box-shadow: 9px 9px 0 var(--ss-blue) !important;
+}
+
+.hud-frame.module-advocacy .terminal-content .category-file-card:nth-child(4) {
+  background: var(--ss-blue) !important;
+  border-color: var(--ss-yellow) !important;
+  box-shadow: 9px 9px 0 var(--ss-red) !important;
+}
+
+.hud-frame.module-advocacy .terminal-content .category-file-card:nth-child(5) {
+  background: var(--ss-yellow) !important;
+  border-color: var(--ss-blue) !important;
+  box-shadow: 9px 9px 0 var(--ss-red) !important;
+}
+
+.hud-frame.module-advocacy .terminal-content .category-file-card:nth-child(5) :is(h2, p, button) {
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.module-advocacy .terminal-content .category-file-card:nth-child(6) {
+  background: var(--ss-red) !important;
+  border-color: var(--ss-blue) !important;
+  box-shadow: 9px 9px 0 var(--ss-yellow) !important;
+}
+
+/* Guides read as one article; dividers carry rhythm without creating mini-cards. */
+.hud-frame .how-to-guide-page .snap-guide-grid {
+  background: var(--ss-white) !important;
+  border: 4px solid var(--ss-ink) !important;
+  box-shadow: 12px 12px 0 var(--ss-blue) !important;
+  display: block !important;
+  margin: clamp(26px, 4vw, 48px) 12px 0 0 !important;
+  overflow: hidden !important;
+}
+
+.hud-frame .how-to-guide-page .snap-guide-card {
+  background: transparent !important;
+  border: 0 !important;
+  border-bottom: 4px solid var(--ss-ink) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  display: grid !important;
+  gap: 12px !important;
+  margin: 0 !important;
+  padding: clamp(30px, 5vw, 64px) !important;
+}
+
+.hud-frame .how-to-guide-page .snap-guide-card:last-child {
+  border-bottom: 0 !important;
+}
+
+.hud-frame .how-to-guide-page .snap-guide-card:nth-child(4n + 1) { border-left: 18px solid var(--ss-blue) !important; }
+.hud-frame .how-to-guide-page .snap-guide-card:nth-child(4n + 2) { border-left: 18px solid var(--ss-red) !important; }
+.hud-frame .how-to-guide-page .snap-guide-card:nth-child(4n + 3) { border-left: 18px solid var(--ss-yellow) !important; }
+.hud-frame .how-to-guide-page .snap-guide-card:nth-child(4n + 4) { border-left: 18px solid var(--ss-ink) !important; }
+
+.hud-frame .how-to-guide-page .snap-guide-card :is(h2, p, li, small) {
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame .how-to-guide-page .snap-guide-card h2 {
+  font-size: clamp(1.8rem, 3.6vw, 3.2rem) !important;
+  max-width: 22ch !important;
+}
+
+.hud-frame .how-to-guide-page .snap-guide-card-header {
+  align-items: center !important;
+  display: flex !important;
+  gap: 14px !important;
+}
+
+.hud-frame .how-to-guide-page .snap-guide-card-header span {
+  align-items: center !important;
+  background: var(--ss-ink) !important;
+  color: var(--ss-white) !important;
+  display: inline-flex !important;
+  font-size: 1rem !important;
+  height: 46px !important;
+  justify-content: center !important;
+  width: 46px !important;
+}
+
+.hud-frame .how-to-guide-page .snap-guide-card:nth-child(4n + 2) .snap-guide-card-header span { background: var(--ss-red) !important; }
+.hud-frame .how-to-guide-page .snap-guide-card:nth-child(4n + 3) .snap-guide-card-header span { background: var(--ss-yellow) !important; color: var(--ss-ink) !important; }
+.hud-frame .how-to-guide-page .snap-guide-card:nth-child(4n + 4) .snap-guide-card-header span { background: var(--ss-blue) !important; }
+
+.hud-frame .how-to-guide-page .snap-guide-card ul {
+  background: var(--ss-paper) !important;
+  border-left: 6px solid var(--ss-yellow) !important;
+  margin: 8px 0 0 !important;
+  padding: 20px 24px 20px 42px !important;
+}
+
+.hud-frame .how-to-guide-page > .how-to-system-note,
+.hud-frame .how-to-guide-page .ss-template-body > .how-to-system-note {
+  background: var(--ss-ink) !important;
+  border: 4px solid var(--ss-ink) !important;
+  border-left: 18px solid var(--ss-red) !important;
+  box-shadow: 12px 12px 0 var(--ss-blue) !important;
+  margin: 0 12px clamp(42px, 6vw, 72px) 0 !important;
+  padding: clamp(34px, 5vw, 64px) !important;
+}
+
+.hud-frame .how-to-guide-page .how-to-system-note :is(h2, p) {
+  color: var(--ss-white) !important;
+}
+
+@media (max-width: 980px) {
+  .hud-frame .folk-sidebar {
+    background: var(--ss-paper) !important;
+  }
+
+  .hud-frame .folk-sidebar .desktop-icon-grid {
+    border-bottom: 0 !important;
+  }
+}
+
 /* Premium library categories echo the homepage's bold, dimensional cards. */
 .hud-frame.module-library .library-category-grid {
   gap: clamp(20px, 2.5vw, 30px) !important;
