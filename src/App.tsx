@@ -4,6 +4,7 @@ import {
 } from "lucide-react";
 import denialSupportOne from "./assets/support/denial-support-1.png";
 import denialSupportTwo from "./assets/support/denial-support-2.png";
+import dvFundingInfographic from "./assets/systems/dv-funding-infographic.png";
 import { CommercePageTemplate, EditorialPageTemplate } from "./components/PageTemplates";
 import { HousingStrategySystem } from "./components/HousingStrategySystem";
 import { fetchSubscriberCatalog, formatCatalogFileSize, type SubscriberCatalogItem } from "./lib/subscriberCatalog";
@@ -3771,13 +3772,125 @@ function AboutModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: str
 }
 
 function SystemsModule() {
+  const [activeSystem, setActiveSystem] = useState<"directory" | "federal" | "state" | "local">("directory");
+
   return (
     <section className="page-shell systems-page" aria-labelledby="systems-page-title">
       <header className="systems-page-header">
         <span>SURVIVOR SYSTEMS</span>
-        <h1 id="systems-page-title">Systems</h1>
+        <h1 id="systems-page-title">
+          {activeSystem === "directory" ? "Systems" : `${activeSystem[0].toUpperCase()}${activeSystem.slice(1)} Government`}
+        </h1>
       </header>
-      <div className="systems-page-canvas" aria-hidden="true" />
+
+      {activeSystem === "directory" ? (
+        <div className="systems-directory" aria-label="Government system categories">
+          <button type="button" onClick={() => setActiveSystem("federal")}>
+            <span>01</span>
+            <strong>Federal Government</strong>
+            <small>Funding, agencies, federal programs, and national policy.</small>
+          </button>
+          <button type="button" onClick={() => setActiveSystem("state")}>
+            <span>02</span>
+            <strong>State Government</strong>
+            <small>State administration, programs, courts, benefits, and funding.</small>
+          </button>
+          <button type="button" onClick={() => setActiveSystem("local")}>
+            <span>03</span>
+            <strong>Local Government</strong>
+            <small>County and city systems, local services, and community implementation.</small>
+          </button>
+        </div>
+      ) : null}
+
+      {activeSystem === "federal" ? (
+        <article className="federal-systems-page" aria-labelledby="federal-funding-title">
+          <button className="systems-back-button" type="button" onClick={() => setActiveSystem("directory")}>
+            Back to Systems
+          </button>
+
+          <figure className="federal-funding-infographic">
+            <img
+              src={dvFundingInfographic}
+              alt="Follow the Money infographic showing how federal domestic violence funding moves through agencies, state administration, program allocations, and local organizations before services reach survivors."
+            />
+            <figcaption>Follow the Money: Domestic Violence Funding. Updated May 2026.</figcaption>
+          </figure>
+
+          <section className="federal-funding-summary" aria-labelledby="federal-funding-title">
+            <header>
+              <span>PLAIN-LANGUAGE SUMMARY</span>
+              <h2 id="federal-funding-title">What Federal Domestic Violence Funding Actually Pays For</h2>
+              <p>A plain-language summary of Survivor Systems' Follow the Money infographic.</p>
+            </header>
+
+            <section>
+              <h3>The short version</h3>
+              <p>
+                Federal domestic violence funding does not move directly from Congress to survivors.
+                Congress appropriates the money, federal agencies distribute it, states administer it,
+                and the funds are divided among courts, law enforcement, prosecutors, victim-service
+                programs, nonprofits, coalitions, and other organizations. Survivors are at the end of that chain.
+              </p>
+            </section>
+
+            <section>
+              <h3>What the STOP VAWA example shows</h3>
+              <p>
+                Using Texas STOP VAWA formula funding as an example, federal rules reserve 25% for law
+                enforcement, 25% for prosecutors, 5% for courts, 30% for victim services, and 15% for
+                discretionary purposes. That means 55% is reserved for police, prosecutors, and courts.
+                States may also use up to 10% of each category for administration.
+              </p>
+              <strong className="federal-funding-emphasis">
+                As much as 65% can therefore be committed to justice-system institutions and state
+                administration, while only 30% is guaranteed to the victim-services category.
+              </strong>
+            </section>
+
+            <section>
+              <h3>Victim services are not the same as direct survivor aid</h3>
+              <p>
+                The "victim services" category can pay for staff salaries, shelter operations, counseling,
+                legal services, utilities, equipment, training, and other program costs. It does not tell the
+                public how much is spent on direct, tangible help such as rent, hotel stays, transportation,
+                relocation, food, clothing, or cash assistance.
+              </p>
+            </section>
+
+            <section>
+              <h3>The transparency problem</h3>
+              <p>
+                Public reports generally show how much money was awarded and how many people were served,
+                but they do not consistently show how much of that funding actually reached survivors as
+                direct material help. Those costs are often blended into broad categories such as "victim services."
+              </p>
+              <strong className="federal-funding-emphasis">
+                Funding domestic violence programs and funding survivors are not necessarily the same thing.
+              </strong>
+            </section>
+
+            <section>
+              <h3>Why this matters</h3>
+              <p>
+                Federal funding supports an entire response system: government agencies, courts, police,
+                prosecutors, nonprofits, shelters, advocates, and service providers. Some of that infrastructure
+                is essential. But if we want to know whether the money is helping survivors rebuild their lives,
+                public reporting needs to clearly separate system operating costs from the concrete assistance
+                survivors actually receive.
+              </p>
+            </section>
+          </section>
+        </article>
+      ) : null}
+
+      {activeSystem === "state" || activeSystem === "local" ? (
+        <section className="systems-placeholder" aria-live="polite">
+          <span>{activeSystem.toUpperCase()} GOVERNMENT</span>
+          <h2>This category is ready for its next content set.</h2>
+          <button type="button" onClick={() => setActiveSystem("directory")}>Back to Systems</button>
+        </section>
+      ) : null}
     </section>
   );
 }
