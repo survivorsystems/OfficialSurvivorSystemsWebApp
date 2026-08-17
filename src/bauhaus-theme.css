@@ -3383,7 +3383,9 @@ body {
 }
 
 .hud-frame.module-library .library-sign-in-panel button,
-.hud-frame.module-library .library-preview-card > div:last-child > button {
+.hud-frame.module-library .library-preview-card > div:last-child > button,
+.hud-frame.module-library .library-preview-actions button,
+.hud-frame.module-library .library-public-preview-actions button {
   background: var(--ss-red) !important;
   border: 3px solid var(--ss-ink) !important;
   box-shadow: 5px 5px 0 var(--ss-yellow) !important;
@@ -3398,6 +3400,97 @@ body {
   width: 100% !important;
 }
 
+.hud-frame.module-library .library-preview-actions,
+.hud-frame.module-library .library-public-preview-actions {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 12px !important;
+  margin-top: 18px !important;
+}
+
+.hud-frame.module-library .library-preview-actions > button,
+.hud-frame.module-library .library-public-preview-actions > button {
+  flex: 1 1 180px !important;
+  margin: 0 !important;
+}
+
+.hud-frame.module-library .library-public-preview {
+  align-items: stretch !important;
+  background: var(--ss-blue) !important;
+  border: 3px solid var(--ss-red) !important;
+  box-shadow: 9px 9px 0 var(--ss-yellow) !important;
+  display: grid !important;
+  gap: clamp(24px, 4vw, 42px) !important;
+  grid-template-columns: minmax(150px, 0.34fr) minmax(0, 1fr) !important;
+  margin: 26px 9px 38px 0 !important;
+  padding: clamp(24px, 4vw, 46px) !important;
+}
+
+.hud-frame.module-library .library-public-preview > div:last-child > :is(span, h3, p),
+.hud-frame.module-library .library-public-preview :is(dt, dd) {
+  color: var(--ss-white) !important;
+}
+
+.hud-frame.module-library .library-public-preview > div:last-child > span {
+  color: var(--ss-yellow) !important;
+  font-size: 0.74rem !important;
+  font-weight: 900 !important;
+}
+
+.hud-frame.module-library .library-public-preview h3 {
+  font-size: clamp(2rem, 4vw, 4rem) !important;
+  margin: 8px 0 18px !important;
+}
+
+.hud-frame.module-library .library-public-preview p {
+  line-height: 1.65 !important;
+  max-width: 70ch !important;
+}
+
+.hud-frame.module-library .library-public-preview-mark {
+  align-content: center !important;
+  background: var(--ss-ink) !important;
+  border: 3px solid var(--ss-yellow) !important;
+  display: grid !important;
+  gap: 10px !important;
+  min-height: 210px !important;
+  padding: 24px !important;
+  text-align: center !important;
+}
+
+.hud-frame.module-library .library-public-preview-mark :is(strong, span) {
+  color: var(--ss-white) !important;
+}
+
+.hud-frame.module-library .library-public-preview-mark strong {
+  font-family: var(--ss-font-display) !important;
+  font-size: clamp(2rem, 4vw, 4rem) !important;
+}
+
+.hud-frame.module-library .library-public-preview dl {
+  display: grid !important;
+  gap: 2px !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  margin: 22px 0 0 !important;
+}
+
+.hud-frame.module-library .library-public-preview dl > div {
+  background: var(--ss-ink) !important;
+  border: 2px solid var(--ss-white) !important;
+  padding: 12px !important;
+}
+
+.hud-frame.module-library .library-public-preview dt {
+  color: var(--ss-yellow) !important;
+  font-size: 0.7rem !important;
+  font-weight: 900 !important;
+  text-transform: uppercase !important;
+}
+
+.hud-frame.module-library .library-public-preview dd {
+  margin: 5px 0 0 !important;
+}
+
 .hud-frame.module-library .library-preview-card > div:last-child > button:disabled {
   background: #6f6d69 !important;
   box-shadow: none !important;
@@ -3408,6 +3501,11 @@ body {
   .hud-frame.module-library .library-sign-in-panel form,
   .hud-frame.module-library .library-sign-in-panel > div {
     align-items: stretch !important;
+    grid-template-columns: 1fr !important;
+  }
+
+  .hud-frame.module-library .library-public-preview,
+  .hud-frame.module-library .library-public-preview dl {
     grid-template-columns: 1fr !important;
   }
 }

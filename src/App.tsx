@@ -241,7 +241,7 @@ const legalCategories: LegalCategory[] = [
 const libraryPasses: LibraryPass[] = [
   {
     id: "subscriber-library",
-    title: "Subscriber Library",
+    title: "Premium Survivor Library",
     price: "MONTHLY",
     scope: "One subscription for the complete library of planners, trackers, templates, and deeper guides.",
     viewing: "Unlimited library viewing while subscribed.",
@@ -1285,8 +1285,8 @@ const moduleRoutes: Record<ModuleKey, { label: string; path: string }> = {
   "local-help": { label: "Resources", path: "/resources" },
   "how-to": { label: "Resources", path: "/resources" },
   legal: { label: "Resources", path: "/resources" },
-  library: { label: "Subscriber Library", path: "/resources/access" },
-  access: { label: "Subscriber Library", path: "/resources/access" },
+  library: { label: "Premium Survivor Library", path: "/resources/access" },
+  access: { label: "Premium Survivor Library", path: "/resources/access" },
 };
 
 const allNavTargets: Array<{ key: ModuleKey; label: string; path: string }> = [
@@ -2360,7 +2360,7 @@ const categoryFiles: Record<
       "Reusable systems for tracking the chaos: documents, calls, benefits, housing, court dates, appointments, deadlines, and resource contact logs.",
     files: [
       {
-        title: "Subscriber Library Access",
+        title: "Premium Survivor Library Access",
         description: "Subscriber access, library previews, and deeper planner and tracker resources.",
         status: "LIVE",
         target: "access",
@@ -3586,7 +3586,7 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
           <article className="home-category-card">
             <p className="home-section-number">01 / RESOURCES</p>
             <h2>Resources</h2>
-            <p>Free guides, housing and benefits information, legal tools, practical how-tos, and the separate Subscriber Library.</p>
+            <p>Free guides, housing and benefits information, legal tools, practical how-tos, and the separate Premium Survivor Library.</p>
             <button type="button" onClick={() => onNavigate("local-help", "/resources")}>Explore Resources</button>
           </article>
           <article className="home-category-card">
@@ -6049,13 +6049,13 @@ function SnapTanfGuide({ onBack, onNavigate }: { onBack: () => void; onNavigate:
           forms, deadlines, calls, and document requests.
         </p>
         <p>
-          The Subscriber Library holds the deeper Resource Navigation System: trackers for
+          The Premium Survivor Library holds the deeper Resource Navigation System: trackers for
           applications, case numbers, worker information, documents, deadlines, phone-call notes,
           local resources, and what to work on next.
         </p>
         <div className="terminal-actions denial-actions">
           <button type="button" onClick={() => onNavigate("library", "/resources")}>
-            View Subscriber Library
+            View Premium Survivor Library
           </button>
           <button type="button" onClick={onBack}>
             Back To How To Guides
@@ -6626,7 +6626,7 @@ function AccessInformationModule() {
     return (
       <section className="resources-nested-shell">
         <button className="resource-back-button" type="button" onClick={() => setShowLibrary(false)}>
-          Back to Subscriber Library
+          Back to Premium Survivor Library
         </button>
         <LibraryModule initialSearch={requestedPreview} />
       </section>
@@ -6636,24 +6636,24 @@ function AccessInformationModule() {
   return (
     <CommercePageTemplate
       className="page-shell library-module access-module"
-      eyebrow="Resources / Subscriber Library"
+      eyebrow="Resources / Premium Survivor Library"
       intro={<p>
-          The Subscriber Library holds deeper planners, trackers, templates, and downloadable
+          The Premium Survivor Library holds deeper planners, trackers, templates, and downloadable
           guides. Browse the index before deciding whether a subscription is useful to you.
         </p>}
-      title="Subscriber Library"
+      title="Premium Survivor Library"
       titleId="access-title"
     >
 
       <section className="library-section library-preview-entry" aria-labelledby="paid-library-entry-title">
-        <div className="terminal-label">SUBSCRIBER LIBRARY PREVIEW</div>
+        <div className="terminal-label">PREMIUM SURVIVOR LIBRARY PREVIEW</div>
         <h2 id="paid-library-entry-title">Look Inside Before Subscribing</h2>
         <p>
           Browse the deeper planners, trackers, and guide systems before choosing a subscription.
           The index is organized by resource category so you can decide whether anything here is useful first.
         </p>
         <button type="button" onClick={() => setShowLibrary(true)}>
-          Preview Subscriber Library
+          Preview Premium Survivor Library
         </button>
       </section>
 
@@ -6662,7 +6662,7 @@ function AccessInformationModule() {
         <h2 id="access-options-title">One Library Subscription</h2>
         <p className="library-section-intro">
           Free guides remain available under Resources and assessments remain available under
-          Clarity. The Subscriber Library is a separate, recurring offering with unlimited
+          Clarity. The Premium Survivor Library is a separate, recurring offering with unlimited
           viewing and downloads while the subscription is active.
         </p>
         <div className="library-pass-grid">
@@ -6940,7 +6940,7 @@ function ResourceModule({
       >
         <p>
           Browse practical guides, housing and benefits information, legal tools, planning systems,
-          and previews from the separate Subscriber Library.
+          and previews from the separate Premium Survivor Library.
         </p>
       </PageFlourishHeader>
 
@@ -6977,7 +6977,7 @@ function ResourceModule({
                           ? "COMING SOON"
                           : freeResourceLabels.has(file.label)
                             ? "FREE RESOURCE"
-                            : "SUBSCRIBER LIBRARY"}
+                            : "PREMIUM SURVIVOR LIBRARY"}
                       </small>
                     </button>
                   ))}
@@ -7071,6 +7071,7 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
   const [libraryAuthStatus, setLibraryAuthStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [openingResourceId, setOpeningResourceId] = useState<string | null>(null);
   const [libraryAccessMessage, setLibraryAccessMessage] = useState("");
+  const [previewResource, setPreviewResource] = useState<SubscriberCatalogItem | null>(null);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -7133,10 +7134,10 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
         className="page-shell library-module"
         eyebrow="Resources / Library"
         intro={<p>
-          Free guides stay available under Resources. The Subscriber Library holds deeper templates,
+          Free guides stay available under Resources. The Premium Survivor Library holds deeper templates,
           trackers, guides, and long-form systems in one recurring subscription.
         </p>}
-        title="Resource Library"
+        title="Premium Survivor Library"
         titleId="library-title"
       >
 
@@ -7148,8 +7149,8 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
       </div>
 
       <section className="library-section" aria-labelledby="library-options-title">
-        <div className="terminal-label">SUBSCRIBER LIBRARY</div>
-        <h2 id="library-options-title">Subscriber Access</h2>
+        <div className="terminal-label">PREMIUM SURVIVOR LIBRARY</div>
+        <h2 id="library-options-title">Premium Access</h2>
         <div className="library-pass-grid">
           {libraryPasses.map((pass) => (
             <article className="library-pass-card" key={pass.id}>
@@ -7189,7 +7190,7 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
       <section className="library-section" aria-labelledby="library-preview-title">
         <div className="terminal-label">RESOURCE PREVIEWS</div>
         <h2 id="library-preview-title">Look Inside Before Subscribing</h2>
-        <p>Browse the real files currently indexed in the Survivor Systems Supabase library. These listings are public; opening or downloading protected files still requires the appropriate library access.</p>
+        <p>Every visitor can preview every resource indexed in the Survivor Systems library. Opening or downloading a complete protected PDF still requires Premium Survivor Library access.</p>
         <div className="library-sign-in-panel">
           {librarySession ? (
             <div>
@@ -7212,7 +7213,7 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
           )}
           {libraryAccessMessage ? <p className="library-catalog-status library-catalog-error" role="alert">{libraryAccessMessage}</p> : null}
         </div>
-        {catalogStatus === "loading" ? <p className="library-catalog-status" role="status">Loading the Subscriber Library catalog...</p> : null}
+        {catalogStatus === "loading" ? <p className="library-catalog-status" role="status">Loading the Premium Survivor Library catalog...</p> : null}
         {catalogStatus === "error" ? <p className="library-catalog-status library-catalog-error" role="alert">The live library catalog could not be reached. No private files were exposed.</p> : null}
         {catalogStatus === "ready" ? (
           <>
@@ -7230,6 +7231,32 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
               </label>
               <p><strong>{visibleCatalog.length}</strong> of {catalog.length} previews</p>
             </div>
+            {previewResource ? (
+              <section className="library-public-preview" aria-labelledby="library-public-preview-title">
+                <div className="library-public-preview-mark" aria-hidden="true">
+                  <strong>{previewResource.format}</strong>
+                  <span>PUBLIC PREVIEW</span>
+                </div>
+                <div>
+                  <span>{previewResource.category}</span>
+                  <h3 id="library-public-preview-title">{previewResource.title}</h3>
+                  <p>{previewResource.preview}</p>
+                  <dl>
+                    <div><dt>Format</dt><dd>{previewResource.format}</dd></div>
+                    <div><dt>File size</dt><dd>{formatCatalogFileSize(previewResource.fileSizeBytes)}</dd></div>
+                    <div><dt>Full access</dt><dd>{previewResource.access}</dd></div>
+                  </dl>
+                  <div className="library-public-preview-actions">
+                    <button type="button" onClick={() => setPreviewResource(null)}>Close Preview</button>
+                    {librarySession ? (
+                      <button type="button" onClick={() => openLibraryResource(previewResource)} disabled={openingResourceId === previewResource.id}>
+                        {openingResourceId === previewResource.id ? "Opening..." : "Open Full PDF"}
+                      </button>
+                    ) : null}
+                  </div>
+                </div>
+              </section>
+            ) : null}
             <div className="library-preview-grid">
           {visibleCatalog.map((resource) => (
             <article className="library-preview-card" key={resource.id}>
@@ -7244,9 +7271,14 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
                 <p>{resource.preview}</p>
                 <small>{resource.category}</small>
                 <p className="library-access-note">{resource.access}</p>
-                <button type="button" onClick={() => openLibraryResource(resource)} disabled={openingResourceId === resource.id}>
-                  {openingResourceId === resource.id ? "Opening..." : librarySession ? "Open Full PDF" : "Sign In to Open"}
-                </button>
+                <div className="library-preview-actions">
+                  <button type="button" onClick={() => setPreviewResource(resource)}>Preview Resource</button>
+                  {librarySession ? (
+                    <button type="button" onClick={() => openLibraryResource(resource)} disabled={openingResourceId === resource.id}>
+                      {openingResourceId === resource.id ? "Opening..." : "Open Full PDF"}
+                    </button>
+                  ) : null}
+                </div>
               </div>
             </article>
           ))}
@@ -7256,22 +7288,6 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
         ) : null}
       </section>
 
-      <section className="library-system-grid" aria-label="Library access notes">
-        <article className="library-system-card">
-          <h2>One Simple Subscription</h2>
-          <p>
-            One recurring subscription opens the complete Subscriber Library. No download counters,
-            category passes, or individual unlock rules are required.
-          </p>
-        </article>
-        <article className="library-system-card">
-          <h2>Download Access</h2>
-          <p>
-            Subscribers can view and download included library files while their subscription is active.
-            Free guides remain available separately under Resources.
-          </p>
-        </article>
-      </section>
     </CommercePageTemplate>
   );
 }
@@ -7313,7 +7329,7 @@ function RebuildingModule({
           <h2 id="housing-page-summary-title">A practical guide to navigating housing systems</h2>
           <p>
             Learn where to begin, what to ask, which records to keep, and how to follow up across
-            housing programs. The Housing Assistance Tracker is a separate tool in the Subscriber Library.
+            housing programs. The Housing Assistance Tracker is a separate tool in the Premium Survivor Library.
           </p>
         </div>
         <button
@@ -7539,7 +7555,7 @@ function LegalModule() {
               </p>
             </div>
             <div className="legal-note">
-              <strong> Subscriber Library Connection</strong>
+              <strong> Premium Survivor Library Connection</strong>
               <p>
                 Subscribers have access to the Court Planner, which is built for everything that
                 happens around the filing, not the motion itself: case numbers, court contacts, local
