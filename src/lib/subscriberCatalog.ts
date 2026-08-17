@@ -24,6 +24,7 @@ type CatalogRow = {
 };
 
 const titleAliases: Record<string, string> = {
+  blankproposedorderinsuitaffectingparentchildrelationship: "Blank Proposed Order in Suit Affecting the Parent-Child Relationship",
   survivorspeckledweeklypages: "Survivor Speckled Weekly Pages",
   dismantlingthepatriarchyathomeguidedjournal2026: "Dismantling the Patriarchy at Home Guided Journal 2026",
   emotionalautonomyrestorationworkbook2026: "Emotional Autonomy Restoration Workbook 2026",

@@ -5,6 +5,7 @@ import {
 import denialSupportOne from "./assets/support/denial-support-1.png";
 import denialSupportTwo from "./assets/support/denial-support-2.png";
 import dvFundingInfographic from "./assets/systems/dv-funding-infographic.png";
+import blankProposedSapcrOrderPreview from "./assets/library/blank-proposed-sapcr-order-preview.png";
 import { CommercePageTemplate, EditorialPageTemplate } from "./components/PageTemplates";
 import { HousingStrategySystem } from "./components/HousingStrategySystem";
 import {
@@ -19,6 +20,13 @@ import {
 } from "./lib/subscriberCatalog";
 
 const denialImages = [denialSupportOne, denialSupportTwo];
+
+function libraryPreviewImage(resource: SubscriberCatalogItem) {
+  const resourceKey = `${resource.id} ${resource.title}`.toLowerCase().replace(/[^a-z0-9]/g, "");
+  return resourceKey.includes("blankproposedorderinsuitaffectingparentchildrelationship")
+    ? blankProposedSapcrOrderPreview
+    : null;
+}
 
 type ModuleKey =
   | "home"
@@ -7190,7 +7198,7 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
       <section className="library-section" aria-labelledby="library-preview-title">
         <div className="terminal-label">RESOURCE PREVIEWS</div>
         <h2 id="library-preview-title">Look Inside Before Subscribing</h2>
-        <p>Every visitor can preview every resource indexed in the Survivor Systems library. Opening or downloading a complete protected PDF still requires Premium Survivor Library access.</p>
+        <p>Every visitor can preview every resource indexed in the Survivor Systems library. Opening or downloading a complete protected file still requires Premium Survivor Library access.</p>
         <div className="library-sign-in-panel">
           {librarySession ? (
             <div>
@@ -7233,10 +7241,17 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
             </div>
             {previewResource ? (
               <section className="library-public-preview" aria-labelledby="library-public-preview-title">
-                <div className="library-public-preview-mark" aria-hidden="true">
-                  <strong>{previewResource.format}</strong>
-                  <span>PUBLIC PREVIEW</span>
-                </div>
+                {libraryPreviewImage(previewResource) ? (
+                  <figure className="library-document-preview">
+                    <img src={libraryPreviewImage(previewResource) ?? undefined} alt="First page preview of the blank proposed order" />
+                    <figcaption>First page preview</figcaption>
+                  </figure>
+                ) : (
+                  <div className="library-public-preview-mark" aria-hidden="true">
+                    <strong>{previewResource.format}</strong>
+                    <span>PUBLIC PREVIEW</span>
+                  </div>
+                )}
                 <div>
                   <span>{previewResource.category}</span>
                   <h3 id="library-public-preview-title">{previewResource.title}</h3>
@@ -7250,7 +7265,7 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
                     <button type="button" onClick={() => setPreviewResource(null)}>Close Preview</button>
                     {librarySession ? (
                       <button type="button" onClick={() => openLibraryResource(previewResource)} disabled={openingResourceId === previewResource.id}>
-                        {openingResourceId === previewResource.id ? "Opening..." : "Open Full PDF"}
+                        {openingResourceId === previewResource.id ? "Opening..." : "Open Full Resource"}
                       </button>
                     ) : null}
                   </div>
@@ -7260,11 +7275,18 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
             <div className="library-preview-grid">
           {visibleCatalog.map((resource) => (
             <article className="library-preview-card" key={resource.id}>
-              <div className="library-preview-frame" aria-hidden="true">
-                <strong>{resource.format}</strong>
-                <span>PREVIEW</span>
-                <small>{formatCatalogFileSize(resource.fileSizeBytes)}</small>
-              </div>
+              {libraryPreviewImage(resource) ? (
+                <div className="library-preview-frame library-preview-frame-document">
+                  <img src={libraryPreviewImage(resource) ?? undefined} alt="Preview of the blank proposed order" />
+                  <span>PREVIEW</span>
+                </div>
+              ) : (
+                <div className="library-preview-frame" aria-hidden="true">
+                  <strong>{resource.format}</strong>
+                  <span>PREVIEW</span>
+                  <small>{formatCatalogFileSize(resource.fileSizeBytes)}</small>
+                </div>
+              )}
               <div>
                 <span className="library-resource-format">{resource.format}</span>
                 <h3>{resource.title}</h3>
@@ -7275,7 +7297,7 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
                   <button type="button" onClick={() => setPreviewResource(resource)}>Preview Resource</button>
                   {librarySession ? (
                     <button type="button" onClick={() => openLibraryResource(resource)} disabled={openingResourceId === resource.id}>
-                      {openingResourceId === resource.id ? "Opening..." : "Open Full PDF"}
+                      {openingResourceId === resource.id ? "Opening..." : "Open Full Resource"}
                     </button>
                   ) : null}
                 </div>

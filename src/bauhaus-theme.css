@@ -3467,6 +3467,56 @@ body {
   font-size: clamp(2rem, 4vw, 4rem) !important;
 }
 
+.hud-frame.module-library .library-document-preview {
+  align-self: start !important;
+  background: var(--ss-white) !important;
+  border: 3px solid var(--ss-ink) !important;
+  box-shadow: 7px 7px 0 var(--ss-yellow) !important;
+  margin: 0 !important;
+  padding: 8px !important;
+}
+
+.hud-frame.module-library .library-document-preview img {
+  display: block !important;
+  height: auto !important;
+  width: 100% !important;
+}
+
+.hud-frame.module-library .library-document-preview figcaption {
+  background: var(--ss-ink) !important;
+  color: var(--ss-white) !important;
+  font-size: 0.72rem !important;
+  font-weight: 900 !important;
+  padding: 8px !important;
+  text-align: center !important;
+  text-transform: uppercase !important;
+}
+
+.hud-frame.module-library .library-preview-frame-document {
+  display: block !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: relative !important;
+}
+
+.hud-frame.module-library .library-preview-frame-document img {
+  aspect-ratio: 8.5 / 11 !important;
+  display: block !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: top center !important;
+  width: 100% !important;
+}
+
+.hud-frame.module-library .library-preview-frame-document > span {
+  background: var(--ss-red) !important;
+  bottom: 7px !important;
+  color: var(--ss-white) !important;
+  left: 7px !important;
+  position: absolute !important;
+  right: 7px !important;
+}
+
 .hud-frame.module-library .library-public-preview dl {
   display: grid !important;
   gap: 2px !important;
