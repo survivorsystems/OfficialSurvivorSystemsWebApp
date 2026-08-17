@@ -3679,6 +3679,33 @@ body {
   color: var(--ss-white) !important;
 }
 
+/* Decorative sequence numbers are intentionally omitted across the site. */
+.hud-frame :is(
+  .home-section-number,
+  .home-strategy-number,
+  .about-section-number,
+  .systems-directory > button > span,
+  .local-advocacy-sections > section > span,
+  .audit-steps > section > span,
+  .snap-guide-card-header > span,
+  .how-to-guide-grid .how-to-guide-card-header > span,
+  .housing-option-pathway summary > span,
+  .rebuilding-guide-card-header > span,
+  .legal-step-card > span,
+  .housing-entry-grid > article > span,
+  .ss-template-index b
+) {
+  display: none !important;
+}
+
+.hud-frame.module-government .systems-directory-consolidated > button {
+  grid-template-columns: minmax(0, 1fr) !important;
+}
+
+.hud-frame.module-government .systems-directory-consolidated > button > :is(strong, small) {
+  grid-column: 1 !important;
+}
+
 .hud-frame.module-government .audit-money-trail span,
 .hud-frame.module-government .audit-money-trail b {
   color: var(--ss-yellow) !important;

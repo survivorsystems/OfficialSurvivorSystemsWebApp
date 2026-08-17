@@ -3590,19 +3590,16 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
         </header>
         <div className="home-category-grid">
           <article className="home-category-card">
-            <p className="home-section-number">01 / RESOURCES</p>
             <h2>Resources</h2>
             <p>Free guides, housing and benefits information, legal tools, practical how-tos, and the separate Premium Survivor Library.</p>
             <button type="button" onClick={() => onNavigate("local-help", "/resources")}>Explore Resources</button>
           </article>
           <article className="home-category-card">
-            <p className="home-section-number">02 / CLARITY</p>
             <h2>Clarity</h2>
             <p>Private, in-browser assessments that help name patterns, organize concerns, and find a practical place to begin.</p>
             <button type="button" onClick={() => onNavigate("advocacy", "/strategy")}>Explore Clarity</button>
           </article>
           <article className="home-category-card">
-            <p className="home-section-number">03 / ABOUT</p>
             <h2>About</h2>
             <p>The purpose, safety approach, privacy commitments, and values behind Survivor Systems.</p>
             <button type="button" onClick={() => onNavigate("about", "/about")}>About Survivor Systems</button>
@@ -7491,7 +7488,7 @@ function LegalModule() {
           </div>
 
           <section className="legal-step-section" aria-labelledby="motion-step-title">
-            <h2 id="motion-step-title"> Step One: Research Before You Write</h2>
+            <h2 id="motion-step-title">Research Before You Write</h2>
             <div className="legal-step-grid">
               {motionDraftingSteps.map((step) => (
                 <article className="legal-step-card" key={step.number}>

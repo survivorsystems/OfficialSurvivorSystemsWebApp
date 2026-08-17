@@ -39,8 +39,8 @@ export function EditorialPageTemplate({
       </header>
       {quickMap.length ? (
         <nav className="ss-template-index" aria-label={`${title} section index`}>
-          {quickMap.map((item, index) => (
-            <span key={item}><b>{String(index + 1).padStart(2, "0")}</b>{item}</span>
+          {quickMap.map((item) => (
+            <span key={item}>{item}</span>
           ))}
         </nav>
       ) : null}
