@@ -7,7 +7,16 @@ import denialSupportTwo from "./assets/support/denial-support-2.png";
 import dvFundingInfographic from "./assets/systems/dv-funding-infographic.png";
 import { CommercePageTemplate, EditorialPageTemplate } from "./components/PageTemplates";
 import { HousingStrategySystem } from "./components/HousingStrategySystem";
-import { fetchSubscriberCatalog, formatCatalogFileSize, type SubscriberCatalogItem } from "./lib/subscriberCatalog";
+import {
+  clearLibrarySession,
+  createLibraryFileUrl,
+  fetchSubscriberCatalog,
+  formatCatalogFileSize,
+  readLibrarySession,
+  sendLibraryMagicLink,
+  type LibrarySession,
+  type SubscriberCatalogItem,
+} from "./lib/subscriberCatalog";
 
 const denialImages = [denialSupportOne, denialSupportTwo];
 
@@ -7057,6 +7066,11 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
   const [catalogStatus, setCatalogStatus] = useState<"loading" | "ready" | "error">("loading");
   const [catalogSearch, setCatalogSearch] = useState(initialSearch);
   const [catalogCategory, setCatalogCategory] = useState("all");
+  const [librarySession, setLibrarySession] = useState<LibrarySession | null>(() => readLibrarySession());
+  const [libraryEmail, setLibraryEmail] = useState("");
+  const [libraryAuthStatus, setLibraryAuthStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [openingResourceId, setOpeningResourceId] = useState<string | null>(null);
+  const [libraryAccessMessage, setLibraryAccessMessage] = useState("");
 
   useEffect(() => {
     const controller = new AbortController();
@@ -7083,6 +7097,36 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
     return (catalogCategory === "all" || resource.category === catalogCategory) &&
       (!query || `${resource.title} ${resource.category} ${resource.format}`.toLowerCase().includes(query));
   });
+
+  async function requestLibrarySignIn(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const email = libraryEmail.trim();
+    if (!email) return;
+    setLibraryAuthStatus("sending");
+    try {
+      await sendLibraryMagicLink(email);
+      setLibraryAuthStatus("sent");
+    } catch {
+      setLibraryAuthStatus("error");
+    }
+  }
+
+  async function openLibraryResource(resource: SubscriberCatalogItem) {
+    if (!librarySession) {
+      setLibraryAccessMessage("Sign in first, then use the open button again.");
+      return;
+    }
+    setOpeningResourceId(resource.id);
+    setLibraryAccessMessage("");
+    try {
+      const url = await createLibraryFileUrl(resource.id, librarySession.accessToken);
+      window.open(url, "_blank", "noopener,noreferrer");
+    } catch (error) {
+      setLibraryAccessMessage(error instanceof Error ? error.message : "The protected file could not be opened.");
+    } finally {
+      setOpeningResourceId(null);
+    }
+  }
 
   return (
     <CommercePageTemplate
@@ -7146,6 +7190,28 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
         <div className="terminal-label">RESOURCE PREVIEWS</div>
         <h2 id="library-preview-title">Look Inside Before Subscribing</h2>
         <p>Browse the real files currently indexed in the Survivor Systems Supabase library. These listings are public; opening or downloading protected files still requires the appropriate library access.</p>
+        <div className="library-sign-in-panel">
+          {librarySession ? (
+            <div>
+              <strong>Library access sign-in active</strong>
+              <p>{librarySession.email ?? "Authenticated Supabase account"}</p>
+              <button type="button" onClick={() => { clearLibrarySession(); setLibrarySession(null); setLibraryAccessMessage(""); }}>Sign Out</button>
+            </div>
+          ) : (
+            <form onSubmit={requestLibrarySignIn}>
+              <label>
+                Email for your Supabase account
+                <input type="email" autoComplete="email" required value={libraryEmail} onChange={(event) => setLibraryEmail(event.target.value)} />
+              </label>
+              <button type="submit" disabled={libraryAuthStatus === "sending"}>
+                {libraryAuthStatus === "sending" ? "Sending Link..." : "Email Me a Sign-In Link"}
+              </button>
+              {libraryAuthStatus === "sent" ? <p role="status">Check your email, then use the link to return to the library.</p> : null}
+              {libraryAuthStatus === "error" ? <p role="alert">The sign-in link could not be sent. Confirm this email already belongs to your Supabase account.</p> : null}
+            </form>
+          )}
+          {libraryAccessMessage ? <p className="library-catalog-status library-catalog-error" role="alert">{libraryAccessMessage}</p> : null}
+        </div>
         {catalogStatus === "loading" ? <p className="library-catalog-status" role="status">Loading the Subscriber Library catalog...</p> : null}
         {catalogStatus === "error" ? <p className="library-catalog-status library-catalog-error" role="alert">The live library catalog could not be reached. No private files were exposed.</p> : null}
         {catalogStatus === "ready" ? (
@@ -7178,6 +7244,9 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
                 <p>{resource.preview}</p>
                 <small>{resource.category}</small>
                 <p className="library-access-note">{resource.access}</p>
+                <button type="button" onClick={() => openLibraryResource(resource)} disabled={openingResourceId === resource.id}>
+                  {openingResourceId === resource.id ? "Opening..." : librarySession ? "Open Full PDF" : "Sign In to Open"}
+                </button>
               </div>
             </article>
           ))}

@@ -3345,6 +3345,73 @@ body {
   padding: 20px !important;
 }
 
+/* Subscriber library authentication and protected-file controls. */
+.hud-frame.module-library .library-sign-in-panel {
+  background: var(--ss-ink) !important;
+  border: 3px solid var(--ss-blue) !important;
+  box-shadow: 8px 8px 0 var(--ss-yellow) !important;
+  margin: 26px 8px 34px 0 !important;
+  padding: clamp(22px, 4vw, 38px) !important;
+}
+
+.hud-frame.module-library .library-sign-in-panel :is(strong, p, label) {
+  color: var(--ss-white) !important;
+}
+
+.hud-frame.module-library .library-sign-in-panel form,
+.hud-frame.module-library .library-sign-in-panel > div {
+  align-items: end !important;
+  display: grid !important;
+  gap: 16px !important;
+  grid-template-columns: minmax(220px, 1fr) auto !important;
+}
+
+.hud-frame.module-library .library-sign-in-panel label {
+  display: grid !important;
+  font-weight: 800 !important;
+  gap: 8px !important;
+}
+
+.hud-frame.module-library .library-sign-in-panel input {
+  background: var(--ss-white) !important;
+  border: 3px solid var(--ss-red) !important;
+  color: var(--ss-ink) !important;
+  font: inherit !important;
+  min-height: 48px !important;
+  padding: 10px 12px !important;
+  width: 100% !important;
+}
+
+.hud-frame.module-library .library-sign-in-panel button,
+.hud-frame.module-library .library-preview-card > div:last-child > button {
+  background: var(--ss-red) !important;
+  border: 3px solid var(--ss-ink) !important;
+  box-shadow: 5px 5px 0 var(--ss-yellow) !important;
+  color: var(--ss-white) !important;
+  font-weight: 800 !important;
+  min-height: 48px !important;
+  padding: 10px 16px !important;
+}
+
+.hud-frame.module-library .library-preview-card > div:last-child > button {
+  margin-top: 18px !important;
+  width: 100% !important;
+}
+
+.hud-frame.module-library .library-preview-card > div:last-child > button:disabled {
+  background: #6f6d69 !important;
+  box-shadow: none !important;
+  color: var(--ss-white) !important;
+}
+
+@media (max-width: 680px) {
+  .hud-frame.module-library .library-sign-in-panel form,
+  .hud-frame.module-library .library-sign-in-panel > div {
+    align-items: stretch !important;
+    grid-template-columns: 1fr !important;
+  }
+}
+
 .hud-frame.module-government .nonprofit-audit-header {
   background: var(--ss-ink) !important;
   border: 3px solid var(--ss-red) !important;

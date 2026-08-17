@@ -8,6 +8,11 @@ export type SubscriberCatalogItem = {
   access: string;
 };
 
+export type LibrarySession = {
+  accessToken: string;
+  email: string | null;
+};
+
 type CatalogRow = {
   id: string;
   title: string;
@@ -58,6 +63,97 @@ function titleFromCatalogRow(row: CatalogRow) {
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL ?? "https://nwpqdpfhburdeprbfkqi.supabase.co";
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY ??
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im53cHFkcGZoYnVyZGVwcmJma3FpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI0Mjk5MzUsImV4cCI6MjA5ODAwNTkzNX0.1hK1CB-1kbN_iuTKLg3R-OF2wQBXFludE3sOFLJJT_k";
+
+const librarySessionKey = "survivor-systems-library-session";
+
+function decodeJwtEmail(token: string) {
+  try {
+    const payload = token.split(".")[1];
+    if (!payload) return null;
+    const normalized = payload.replace(/-/g, "+").replace(/_/g, "/");
+    const decoded = JSON.parse(atob(normalized)) as { email?: string };
+    return decoded.email ?? null;
+  } catch {
+    return null;
+  }
+}
+
+export function readLibrarySession(): LibrarySession | null {
+  const hash = new URLSearchParams(window.location.hash.replace(/^#/, ""));
+  const returnedToken = hash.get("access_token");
+
+  if (returnedToken) {
+    const session = { accessToken: returnedToken, email: decodeJwtEmail(returnedToken) };
+    sessionStorage.setItem(librarySessionKey, JSON.stringify(session));
+    history.replaceState(null, "", `${window.location.pathname}${window.location.search}`);
+    return session;
+  }
+
+  try {
+    const saved = sessionStorage.getItem(librarySessionKey);
+    return saved ? JSON.parse(saved) as LibrarySession : null;
+  } catch {
+    sessionStorage.removeItem(librarySessionKey);
+    return null;
+  }
+}
+
+export function clearLibrarySession() {
+  sessionStorage.removeItem(librarySessionKey);
+}
+
+export async function sendLibraryMagicLink(email: string) {
+  const redirectUrl = `${window.location.origin}/resources/access`;
+  const response = await fetch(`${supabaseUrl}/auth/v1/otp?redirect_to=${encodeURIComponent(redirectUrl)}`, {
+    method: "POST",
+    headers: {
+      apikey: supabaseAnonKey,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email, create_user: false }),
+  });
+
+  if (!response.ok) throw new Error("Supabase could not send the sign-in link.");
+}
+
+export async function createLibraryFileUrl(itemId: string, accessToken: string) {
+  const accessResponse = await fetch(`${supabaseUrl}/rest/v1/rpc/has_library_access`, {
+    method: "POST",
+    headers: {
+      apikey: supabaseAnonKey,
+      Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "application/json",
+    },
+    body: "{}",
+  });
+
+  if (!accessResponse.ok || await accessResponse.json() !== true) {
+    throw new Error("This account does not currently have library access.");
+  }
+
+  const separator = itemId.indexOf("/");
+  if (separator < 1) throw new Error("This resource does not have a valid storage path.");
+  const bucket = itemId.slice(0, separator);
+  const objectPath = itemId.slice(separator + 1).split("/").map(encodeURIComponent).join("/");
+  const signResponse = await fetch(
+    `${supabaseUrl}/storage/v1/object/sign/${encodeURIComponent(bucket)}/${objectPath}`,
+    {
+      method: "POST",
+      headers: {
+        apikey: supabaseAnonKey,
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ expiresIn: 180 }),
+    },
+  );
+
+  if (!signResponse.ok) throw new Error("The protected file could not be opened.");
+  const result = await signResponse.json() as { signedURL?: string; signedUrl?: string };
+  const signedPath = result.signedURL ?? result.signedUrl;
+  if (!signedPath) throw new Error("Supabase did not return a signed file link.");
+  return signedPath.startsWith("http") ? signedPath : `${supabaseUrl}/storage/v1${signedPath}`;
+}
 
 export async function fetchSubscriberCatalog(signal?: AbortSignal): Promise<SubscriberCatalogItem[]> {
   const response = await fetch(
