@@ -3789,36 +3789,24 @@ function AboutModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: str
 }
 
 function SystemsModule() {
-  const [activeSystem, setActiveSystem] = useState<"directory" | "federal" | "state" | "local" | "audit">("directory");
+  const [activeSystem, setActiveSystem] = useState<"directory" | "funding" | "audit">("directory");
 
   return (
     <section className="page-shell systems-page" aria-labelledby="systems-page-title">
       <header className="systems-page-header">
         <span>SURVIVOR SYSTEMS</span>
         <h1 id="systems-page-title">
-          {activeSystem === "directory" || activeSystem === "audit"
-            ? "Systems"
-            : `${activeSystem[0].toUpperCase()}${activeSystem.slice(1)} Government`}
+          {activeSystem === "funding" ? "DV Funding Educational Guide" : "Systems"}
         </h1>
       </header>
 
       {activeSystem === "directory" ? (
         <>
-          <div className="systems-directory" aria-label="Government system categories">
-            <button type="button" onClick={() => setActiveSystem("federal")}>
+          <div className="systems-directory systems-directory-consolidated" aria-label="Systems educational guides">
+            <button type="button" onClick={() => setActiveSystem("funding")}>
               <span>01</span>
-              <strong>Federal Government</strong>
-              <small>Funding, agencies, federal programs, and national policy.</small>
-            </button>
-            <button type="button" onClick={() => setActiveSystem("state")}>
-              <span>02</span>
-              <strong>State Government</strong>
-              <small>State administration, programs, courts, benefits, and funding.</small>
-            </button>
-            <button type="button" onClick={() => setActiveSystem("local")}>
-              <span>03</span>
-              <strong>Local Government</strong>
-              <small>County and city systems, local services, and community implementation.</small>
+              <strong>DV Funding Educational Guide</strong>
+              <small>Follow funding from federal appropriations through state administration and local implementation.</small>
             </button>
           </div>
           <section className="systems-articles" aria-labelledby="systems-articles-title">
@@ -3835,7 +3823,7 @@ function SystemsModule() {
         </>
       ) : null}
 
-      {activeSystem === "federal" ? (
+      {activeSystem === "funding" ? (
         <article className="federal-systems-page" aria-labelledby="federal-funding-title">
           <button className="systems-back-button" type="button" onClick={() => setActiveSystem("directory")}>
             Back to Systems
@@ -3916,20 +3904,8 @@ function SystemsModule() {
         </article>
       ) : null}
 
-      {activeSystem === "state" ? (
+      {activeSystem === "funding" ? (
         <article className="state-systems-page" aria-labelledby="state-funding-title">
-          <button className="systems-back-button" type="button" onClick={() => setActiveSystem("directory")}>
-            Back to Systems
-          </button>
-
-          <figure className="state-funding-infographic">
-            <img
-              src={dvFundingInfographic}
-              alt="Follow the Money infographic showing the state administration and program allocation steps between federal domestic violence funding and services to survivors."
-            />
-            <figcaption>Follow the Money: Domestic Violence Funding. Updated May 2026.</figcaption>
-          </figure>
-
           <section className="state-funding-summary" aria-labelledby="state-funding-title">
             <header>
               <span>STATE GOVERNMENT</span>
@@ -4070,20 +4046,8 @@ function SystemsModule() {
         </article>
       ) : null}
 
-      {activeSystem === "local" ? (
+      {activeSystem === "funding" ? (
         <article className="local-systems-page" aria-labelledby="local-funding-title">
-          <button className="systems-back-button" type="button" onClick={() => setActiveSystem("directory")}>
-            Back to Systems
-          </button>
-
-          <figure className="local-funding-infographic">
-            <img
-              src={dvFundingInfographic}
-              alt="Follow the Money infographic showing local organizations as the final institutional layer before domestic violence services reach survivors."
-            />
-            <figcaption>Follow the Money: Domestic Violence Funding. Updated May 2026.</figcaption>
-          </figure>
-
           <section className="local-funding-summary" aria-labelledby="local-funding-title">
             <header>
               <span>LOCAL GOVERNMENT</span>

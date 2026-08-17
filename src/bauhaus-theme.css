@@ -5046,6 +5046,79 @@ body:has(.assessment-workspace),
   }
 }
 
+/* Systems now presents domestic-violence funding as one guide with three chapters. */
+.hud-frame.module-government .systems-directory-consolidated {
+  grid-template-columns: 1fr !important;
+}
+
+.hud-frame.module-government .systems-directory-consolidated > button {
+  align-items: center !important;
+  grid-template-columns: 72px minmax(0, 1fr) !important;
+  min-height: 190px !important;
+}
+
+.hud-frame.module-government .systems-directory-consolidated > button > span {
+  align-items: center !important;
+  background: var(--ss-yellow) !important;
+  color: var(--ss-ink) !important;
+  display: flex !important;
+  grid-row: 1 / 3 !important;
+  height: 72px !important;
+  justify-content: center !important;
+  width: 72px !important;
+}
+
+.hud-frame.module-government .systems-directory-consolidated > button > :is(strong, small) {
+  grid-column: 2 !important;
+}
+
+.hud-frame.module-government .systems-directory-consolidated > button strong {
+  font-size: clamp(1.8rem, 4vw, 4rem) !important;
+  overflow-wrap: anywhere !important;
+}
+
+.hud-frame.module-government :is(.federal-systems-page, .state-systems-page, .local-systems-page) {
+  gap: 0 !important;
+}
+
+.hud-frame.module-government :is(.federal-funding-summary, .state-funding-summary, .local-funding-summary) {
+  border-left: 4px solid var(--ss-ink) !important;
+  border-right: 4px solid var(--ss-ink) !important;
+}
+
+.hud-frame.module-government .local-funding-summary {
+  border-bottom: 4px solid var(--ss-ink) !important;
+}
+
+.hud-frame.module-government :is(
+  .federal-funding-summary,
+  .state-funding-summary,
+  .local-funding-summary
+) > section:nth-of-type(even) :is(h3, p, li, strong, blockquote),
+.hud-frame.module-government .local-advocacy-sections > section:not(:nth-child(3n + 3)) :is(span, h3, p, li, strong),
+.hud-frame.module-government .audit-steps > section:not(:nth-child(3n + 3)) :is(span, h3, p, li, strong, blockquote) {
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.module-government .state-systems-page,
+.hud-frame.module-government .local-systems-page {
+  margin-top: 0 !important;
+}
+
+@media (max-width: 620px) {
+  .hud-frame.module-government .systems-directory-consolidated > button {
+    grid-template-columns: 1fr !important;
+  }
+
+  .hud-frame.module-government .systems-directory-consolidated > button > span {
+    grid-row: auto !important;
+  }
+
+  .hud-frame.module-government .systems-directory-consolidated > button > :is(strong, small) {
+    grid-column: 1 !important;
+  }
+}
+
 /* Premium library categories echo the homepage's bold, dimensional cards. */
 .hud-frame.module-library .library-category-grid {
   gap: clamp(20px, 2.5vw, 30px) !important;
