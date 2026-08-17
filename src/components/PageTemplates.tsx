@@ -69,7 +69,7 @@ export function AssessmentPageTemplate({
           <div className="ss-template-intro">{intro}</div>
         </div>
         <aside className="ss-template-status">
-          <span>MEMORY</span><strong>TEMPORARY</strong><small>ANSWERS ARE NOT SAVED</small>
+          <span>PRIVACY</span><strong>IN BROWSER</strong><small>ANSWERS ARE NOT SAVED</small>
         </aside>
       </header>
       {progress ? (
@@ -101,7 +101,7 @@ export function InteractiveToolTemplate({
           <h1 id={titleId}>{title}</h1>
           <div className="ss-template-intro">{intro}</div>
         </div>
-        <aside className="ss-template-status"><span>TOOL STATE</span><strong>READY</strong><small>BROWSER ONLY</small></aside>
+        <aside className="ss-template-status"><span>PRIVACY</span><strong>IN BROWSER</strong><small>NOT SAVED</small></aside>
       </header>
       <div className="ss-tool-workspace">
         <div className="ss-tool-input">{children}</div>
@@ -130,7 +130,7 @@ export function CommercePageTemplate({
           <h1 id={titleId}>{title}</h1>
           <div className="ss-template-intro">{intro}</div>
         </div>
-        <aside className="ss-template-status"><span>ACCESS MODEL</span><strong>FLEXIBLE</strong><small>NO FORCED RENEWAL</small></aside>
+        <aside className="ss-template-status"><span>SUBSCRIPTION</span><strong>MONTHLY</strong><small>CANCEL ANYTIME</small></aside>
       </header>
       <p className="ss-commerce-notice">{notice}</p>
       <div className="ss-template-body">{children}</div>

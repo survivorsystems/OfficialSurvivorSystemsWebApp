@@ -212,7 +212,7 @@ const legalCategories: LegalCategory[] = [
     label: "01",
     title: "Protective Orders",
     description: "Emergency orders, civil protection orders, hearing types, filing help, and what courts may be able to grant.",
-    status: "MODULE READY",
+    status: "AVAILABLE",
     available: true,
   },
   {
@@ -220,7 +220,7 @@ const legalCategories: LegalCategory[] = [
     label: "02",
     title: "Family Court",
     description: "Custody, parenting time, support, temporary orders, motion drafting, and court prep.",
-    status: "MODULE READY",
+    status: "AVAILABLE",
     available: true,
   },
   {
@@ -228,21 +228,21 @@ const legalCategories: LegalCategory[] = [
     label: "03",
     title: "Civil Court",
     description: "Civil filings, claims, responses, deadlines, and paperwork that is not family-court specific.",
-    status: "QUEUE OPEN",
+    status: "COMING SOON",
   },
   {
     id: "reporting",
     label: "04",
     title: "Reporting",
     description: "Police reports, incident documentation, advocate support, and what to ask before reporting.",
-    status: "QUEUE OPEN",
+    status: "COMING SOON",
   },
   {
     id: "immigration",
     label: "05",
     title: "Immigration",
     description: "Immigration-related survivor protections, documentation, referrals, and legal-aid pathways.",
-    status: "QUEUE OPEN",
+    status: "COMING SOON",
   },
 ];
 
@@ -344,24 +344,24 @@ const howToGuides: HowToGuide[] = [
 const howToPriorities = [
   {
     id: "priority-1",
-    label: "triage.exe",
+    label: "Urgent needs",
     title: "Triage",
     description:
       "Start here when the task is urgent, private, or close to the body: device traces, pets, vehicle living, and immediate stabilization logistics.",
   },
   {
     id: "priority-2",
-    label: "stabilize.exe",
+    label: "Stabilizing",
     title: "Stabilize",
     description:
       "Use this folder for benefits, housing, coordinated entry, applications, follow-ups, and the bureaucracy that starts multiplying.",
   },
   {
     id: "priority-3",
-    label: "rebuild.exe",
+    label: "Rebuilding",
     title: "Rebuild",
     description:
-      "Use this folder when the fire is a little lower and the next task is rhythm, routine, recovery, and building a life that belongs to the user again.",
+      "Use this section when the fire is a little lower and the next task is rhythm, routine, recovery, and building a life that belongs to you again.",
   },
 ] satisfies Array<{
   id: HowToGuide["priority"];
@@ -1143,7 +1143,7 @@ const civilProtectiveOrderGuide: LegalGuidePageData = {
     },
   ],
   reminder: {
-    title: "Permission Protocol",
+    title: "Permission and Choice",
     body:
       "Wanting protection and feeling afraid of the process can both be true. Court can be intimidating. Preparation is not overreacting. It is the system choosing not to walk in blind.",
   },
@@ -2547,12 +2547,12 @@ const assessmentQuestions: AssessmentQuestion[] = [
         label: "They listen, take me seriously, and try to understand.",
         responseTitle: "ALL SYSTEMS CLEAR",
         response:
-          "Concern submitted. Concern acknowledged. No reality rewrite, punishment sequence, or personality trial detected. Healthy conflict protocol appears functional.",
+          "Your concern is heard without rewriting reality, punishing you, or putting your character on trial. That is a healthier conflict pattern.",
       },
       {
         id: "1b",
         label: "They say it never happened or that I misunderstood.",
-        responseTitle: "GASLIGHTING DETECTED",
+        responseTitle: "Gaslighting may be present",
         response:
           "Your lived experience has been submitted for unauthorized deletion. They do not receive administrator privileges over your memory simply because the facts are inconvenient.",
         pattern: "Gaslighting or reality rewriting",
@@ -2560,7 +2560,7 @@ const assessmentQuestions: AssessmentQuestion[] = [
       {
         id: "1c",
         label: "They say I am too sensitive, dramatic, or crazy.",
-        responseTitle: "REACTION DEFLECTION DETECTED",
+        responseTitle: "The focus may be shifting away from the harm",
         response:
           "Your response has been placed on trial while their behavior quietly exits through a side door. Too sensitive is not troubleshooting. It is avoidance wearing a cheap disguise.",
         pattern: "Reaction deflection",
@@ -2576,7 +2576,7 @@ const assessmentQuestions: AssessmentQuestion[] = [
       {
         id: "1e",
         label: "They become angry, threatening, or punish me later.",
-        responseTitle: "RETALIATION PROTOCOL DETECTED",
+        responseTitle: "Retaliation may be shaping what feels safe to say",
         response:
           "Humor suspended. When honesty triggers threats, punishment, or fear, safe communication conditions are unavailable.",
         pattern: "Retaliation or threat response",
@@ -2592,14 +2592,14 @@ const assessmentQuestions: AssessmentQuestion[] = [
         label: "Rarely. I generally feel free to make ordinary choices.",
         responseTitle: "AUTONOMY ONLINE",
         response:
-          "Ordinary decisions do not require permission, advance warning, or consultation with the Threat Forecasting Department. Personal choice appears operational.",
+          "Ordinary personal decisions do not require permission or advance warning. This answer reflects room for personal choice.",
       },
       {
         id: "2b",
         label: "Sometimes, mainly during specific disagreements.",
         responseTitle: "NORMAL CONFLICT LOAD",
         response:
-          "Some adjustment detected. Current level may be ordinary compromise, provided it does not begin consuming the rest of your operating system.",
+          "Some adjustment may be ordinary compromise, provided it does not begin taking over the rest of your life or choices.",
       },
       {
         id: "2c",
@@ -2626,29 +2626,29 @@ const assessmentQuestions: AssessmentQuestion[] = [
       {
         id: "3a",
         label: "We both take responsibility when appropriate.",
-        responseTitle: "ACCOUNTABILITY MODULE ONLINE",
+        responseTitle: "Accountability and repair may be possible",
         response:
-          "Both parties can acknowledge impact without crashing, retaliating, or launching counterclaims. Repair capacity detected.",
+          "Both people can acknowledge impact without retaliation or counterattack. That creates room for meaningful repair.",
       },
       {
         id: "3b",
         label: "Usually me, even when I raised the original concern.",
-        responseTitle: "BLAME REVERSAL DETECTED",
+        responseTitle: "Blame reversal may be present",
         response: "You reported the malfunction. You were assigned responsibility for causing the malfunction. Logic failure confirmed.",
         pattern: "Blame reversal",
       },
       {
         id: "3c",
         label: "They apologize, but the same behavior keeps happening.",
-        responseTitle: "APOLOGY RECEIVED - UPDATE NOT INSTALLED",
+        responseTitle: "The apology has not become lasting change",
         response:
-          "Correct words detected. Behavioral patch missing. System will not classify repeated apologies as change without performance updates.",
+          "The words may sound right, but repeated apologies are not the same as changed behavior.",
         pattern: "Repeated apology without change",
       },
       {
         id: "3d",
         label: "The conversation becomes so confusing that the original issue disappears.",
-        responseTitle: "CHAOS INJECTION DETECTED",
+        responseTitle: "Chaos may be replacing accountability",
         response:
           "Original concern entered. Conversation expanded, fragmented, looped, and expired without resolution. Accountability escaped through excessive confusion.",
         pattern: "Confusion blocking accountability",
@@ -2662,14 +2662,14 @@ const assessmentQuestions: AssessmentQuestion[] = [
         id: "4a",
         label: "Safe. They may disagree, but they respect my answer.",
         responseTitle: "BOUNDARY SYSTEM FUNCTIONING",
-        response: "Disagreement detected. Override attempt not detected. Your right to make a decision remains intact.",
+        response: "Disagreement does not remove your right to make your own decision.",
       },
       {
         id: "4b",
         label: "Uncomfortable, but not afraid.",
         responseTitle: "MINOR CONFLICT LOAD",
         response:
-          "Discomfort is not automatically danger. System recommends checking whether the tension comes from disagreement or anticipation of consequences.",
+          "Discomfort is not automatically danger. Notice whether the tension comes from disagreement itself or from anticipating consequences.",
       },
       {
         id: "4c",
@@ -2705,12 +2705,12 @@ const assessmentQuestions: AssessmentQuestion[] = [
         label: "No. I still have access to my people, interests, privacy, and choices.",
         responseTitle: "EXTERNAL CONNECTIONS ONLINE",
         response:
-          "Friends, interests, identity, and independent choices remain available. Relationship has not consumed the full operating system.",
+          "Friends, interests, identity, and independent choices remain available. The relationship has not consumed the rest of your life.",
       },
       {
         id: "5b",
         label: "Some parts of my life faded, but I am not sure how.",
-        responseTitle: "LIFE CONTRACTION DETECTED",
+        responseTitle: "Your life may be getting smaller",
         response:
           "No dramatic shutdown found. Loss appears gradual: one cancelled plan, abandoned interest, or exhausting argument at a time.",
         pattern: "Gradual life contraction",
@@ -2719,7 +2719,7 @@ const assessmentQuestions: AssessmentQuestion[] = [
         id: "5c",
         label: "They create conflict around friends, family, work, or hobbies.",
         responseTitle: "ISOLATION SEQUENCE RUNNING",
-        response: "Outside connection detected. Conflict automatically generated. Independence is being made expensive.",
+        response: "Outside connection repeatedly creates conflict, making independence costly.",
         pattern: "Isolation sequence",
       },
       {
@@ -2727,7 +2727,7 @@ const assessmentQuestions: AssessmentQuestion[] = [
         label: "I feel isolated and increasingly dependent on them.",
         responseTitle: "SUPPORT NETWORK SEVERELY RESTRICTED",
         response:
-          "Perspective, resources, and alternatives are increasingly offline. One person's version of reality now holds elevated permissions. Convenient for them. Catastrophic for user clarity.",
+          "Perspective, resources, and alternatives are increasingly unavailable. One person's version of reality is taking priority over your own. That can seriously erode clarity.",
         pattern: "Restricted support network",
       },
     ],
@@ -2751,7 +2751,7 @@ const assessmentQuestions: AssessmentQuestion[] = [
       {
         id: "6c",
         label: "They question, monitor, or criticize how I use resources.",
-        responseTitle: "RESOURCE SURVEILLANCE DETECTED",
+        responseTitle: "Resource surveillance may be present",
         response:
           "Routine action submitted. Budget hearing and character evaluation unexpectedly attached. Control may be masquerading as responsibility.",
         pattern: "Resource surveillance",
@@ -2768,7 +2768,7 @@ const assessmentQuestions: AssessmentQuestion[] = [
       {
         id: "6e",
         label: "They have used my identity, credit, accounts, or property without meaningful agreement.",
-        responseTitle: "IDENTITY MISUSE DETECTED",
+        responseTitle: "Identity may be used as leverage",
         response: "Your name, credit, accounts, and property are not complimentary system resources. Potential financial abuse flagged.",
         pattern: "Identity or financial misuse",
         safetyFocused: true,
@@ -2788,7 +2788,7 @@ const assessmentQuestions: AssessmentQuestion[] = [
         id: "7b",
         label: "They expect passwords or unrestricted access.",
         responseTitle: "UNAUTHORIZED ADMIN ACCESS REQUESTED",
-        response: "Surveillance request detected wearing an intimacy costume. Total access is not proof of trust.",
+        response: "A demand for total access can be surveillance even when it is described as intimacy. Total access is not proof of trust.",
         pattern: "Unauthorized access pressure",
       },
       {
@@ -2824,13 +2824,13 @@ const assessmentQuestions: AssessmentQuestion[] = [
         id: "8b",
         label: "Not always, but we can discuss and correct the mismatch.",
         responseTitle: "MINOR STANDARD MISMATCH",
-        response: "Uneven expectation detected. Correction remains possible if discussion produces an actual update.",
+        response: "The expectation is uneven. Repair remains possible if discussion leads to a real and lasting change.",
       },
       {
         id: "8c",
         label: "They can do things I would be punished for doing.",
-        responseTitle: "DOUBLE-STANDARD PROTOCOL RUNNING",
-        response: "One user receives unrestricted access. The other receives penalties for identical behavior. Hierarchy confirmed.",
+        responseTitle: "A double standard may be present",
+        response: "One person receives freedom while the other receives penalties for the same behavior. That creates a hierarchy.",
         pattern: "Double standards",
       },
       {
@@ -2848,35 +2848,35 @@ const assessmentQuestions: AssessmentQuestion[] = [
       {
         id: "9a",
         label: "Harm is acknowledged, responsibility is accepted, and behavior changes.",
-        responseTitle: "REPAIR PROTOCOL COMPLETE",
+        responseTitle: "Repair and accountability are present",
         response: "Harm acknowledged. Responsibility accepted. Behavior changed. No loophole or smoke machine required.",
       },
       {
         id: "9b",
         label: "They apologize and become intensely loving.",
         responseTitle: "LOVE-BOMBING LEVELS SUSPICIOUSLY HIGH",
-        response: "Post-incident affection spike detected. System requests long-term performance data before classifying this as repair.",
+        response: "Intense affection after an incident is not enough to establish repair. Lasting behavior over time matters more.",
         pattern: "Post-incident affection spike",
       },
       {
         id: "9c",
         label: "They blame stress, alcohol, trauma, work, or someone else.",
-        responseTitle: "EXCUSE DATABASE FULL",
+        responseTitle: "Explanations may be replacing responsibility",
         response: "Stress. Alcohol. Trauma. Work. Childhood. Weather. Mercury retrograde. Explanation capacity exceeded. Responsibility remains pending.",
         pattern: "Excuse shifting",
       },
       {
         id: "9d",
         label: "They act like nothing happened.",
-        responseTitle: "INCIDENT DELETED FROM THEIR SYSTEM ONLY",
-        response: "Event appears erased from their active memory. Event remains fully installed in your nervous system. Reality sync failed.",
+        responseTitle: "The incident may be dismissed or erased",
+        response: "They may act as though the event disappeared while your body and memory continue carrying it.",
         pattern: "Incident erasure",
       },
       {
         id: "9e",
         label: "The same cycle keeps repeating.",
-        responseTitle: "REPEATING LOOP DETECTED",
-        response: "Harm. Apology. Calm. Hope. Repeat. Same program. New loading screen.",
+        responseTitle: "The same harm cycle may be repeating",
+        response: "Harm, apology, calm, hope, and renewed harm can form a repeating cycle even when each apology feels sincere.",
         pattern: "Repeating harm cycle",
       },
     ],
@@ -2887,23 +2887,23 @@ const assessmentQuestions: AssessmentQuestion[] = [
       {
         id: "10a",
         label: "Generally okay. The problems feel workable.",
-        responseTitle: "FUTURE SYSTEM STATUS: WORKABLE",
+        responseTitle: "The future may feel workable",
         response:
-          "Repair may be possible when both users acknowledge harm, accept responsibility, and install lasting behavioral updates.",
+          "Repair may be possible when both people acknowledge harm, accept responsibility, and make lasting behavioral changes.",
       },
       {
         id: "10b",
         label: "Sad, depleted, or trapped.",
         responseTitle: "FUTURE PROJECTION: DEPLETION",
         response:
-          "Forecast returned exhaustion, sadness, and restricted movement. Future user may be reporting what present survival mode has not had capacity to process.",
+          "Imagining another year may reveal exhaustion, sadness, or restriction that present-day survival has left little room to process.",
         pattern: "Future depletion",
       },
       {
         id: "10c",
         label: "Afraid things would become worse.",
-        responseTitle: "ESCALATION FORECAST DETECTED",
-        response: "Fear of worsening conditions may be based on patterns already running. System recommends taking this forecast seriously.",
+        responseTitle: "Fear of escalation deserves attention",
+        response: "Fear that conditions will worsen may be based on patterns you already recognize. Take your own concern seriously.",
         pattern: "Escalation forecast",
         safetyFocused: true,
       },
@@ -3130,7 +3130,7 @@ const defaultControlPanel: ControlPanelState = {
       tone: "purple",
     },
   ],
-  notice: "COMMAND CENTER ONLINE. MODULE READINGS STANDBY.",
+  notice: "Choose a page or assessment whenever you are ready.",
 };
 
 function leaveSite() {
@@ -3308,9 +3308,7 @@ function TypedText({
 function ModuleLoading({ label }: { label: string }) {
   return (
     <div className="module-loading" role="status" aria-live="polite">
-      <p>ACCESSING MODULE...</p>
-      <p>LOADING {label.toUpperCase()}...</p>
-      <p>CONNECTION ESTABLISHED</p>
+      <p>OPENING {label.toUpperCase()}...</p>
     </div>
   );
 }
@@ -3319,7 +3317,7 @@ function resolveCommand(query: string) {
   const normalized = query.trim().toLowerCase();
 
   if (!normalized) {
-    return { message: "NO QUERY ENTERED. TYPE A MODULE NAME OR A NEED.", target: null };
+    return { message: "Type a page name or describe what you need.", target: null };
   }
 
   if (
@@ -3328,7 +3326,7 @@ function resolveCommand(query: string) {
     normalized.includes("quick exit") ||
     normalized.includes("iluvrocks")
   ) {
-    return { message: "QUICK EXIT COMMAND ACCEPTED.", target: "quick-exit" as const };
+    return { message: "Opening the Quick Exit page.", target: "quick-exit" as const };
   }
 
   if (/\b(help|menu|options|commands|where)\b/.test(normalized)) {
@@ -3345,7 +3343,7 @@ function resolveCommand(query: string) {
   });
 
   if (match) {
-    return { message: `QUERY ACCEPTED. ROUTING TO ${match.label.toUpperCase()}...`, target: match };
+    return { message: `Opening ${match.label}.`, target: match };
   }
 
   if (/\b(assessments?|quiz|scan|was i crazy|crazy|abused|abuse|gaslight|gaslighting|reality)\b/.test(normalized)) {
@@ -3357,11 +3355,11 @@ function resolveCommand(query: string) {
   }
 
   if (/\b(planners?|trackers?)\b/.test(normalized)) {
-    return { message: "QUERY ACCEPTED. ROUTING TO PLANNERS & TRACKERS...", target: navItemFor("planners") };
+    return { message: "Opening planners and trackers.", target: navItemFor("planners") };
   }
 
   if (/\b(toolkits?|database|access pass|access information|access info|passes|pass options|download|downloads|library|paid|stripe)\b/.test(normalized)) {
-    return { message: "QUERY ACCEPTED. ROUTING TO TOOLKITS...", target: navItemFor("toolkits") };
+    return { message: "Opening the Premium Survivor Library.", target: navItemFor("toolkits") };
   }
 
   if (/\b(surviving|education|awareness|learn|dynamics|gray rock|statistics|be so for real)\b/.test(normalized)) {
@@ -3369,15 +3367,15 @@ function resolveCommand(query: string) {
   }
 
   if (/\b(about|mission|privacy|founder|who built)\b/.test(normalized)) {
-    return { message: "QUERY ACCEPTED. ROUTING TO ABOUT...", target: navItemFor("about") };
+    return { message: "Opening About.", target: navItemFor("about") };
   }
 
   if (/\b(advocacy|advocate|hotline|shelter|support|near|local)\b/.test(normalized)) {
-    return { message: "QUERY ACCEPTED. ROUTING TO CLARITY...", target: navItemFor("advocacy") };
+    return { message: "Opening Clarity.", target: navItemFor("advocacy") };
   }
 
   if (/\b(government|snap|tanf|benefits|court|legal|rights|order|documents|public assistance)\b/.test(normalized)) {
-    return { message: "QUERY ACCEPTED. ROUTING TO GOVERNMENT...", target: navItemFor("government") };
+    return { message: "Opening Systems.", target: navItemFor("government") };
   }
 
   if (/ctrl\s*\+\s*esc|\bfirst steps?\b|\bprep\b/.test(normalized)) {
@@ -3389,11 +3387,11 @@ function resolveCommand(query: string) {
   }
 
   if (/\b(plan|safety|prepare|documents|checklist)\b/.test(normalized)) {
-    return { message: "QUERY ACCEPTED. ROUTING TO PLANNERS & TRACKERS...", target: navItemFor("planners") };
+    return { message: "Opening planners and trackers.", target: navItemFor("planners") };
   }
 
   if (/\b(leave|leaving|go bag|escape|exit plan)\b/.test(normalized)) {
-    return { message: "ESCAPE QUERY DETECTED. ROUTING TO DIRECT SUPPORT OPTIONS...", target: navItemFor("planning") };
+    return { message: "Opening direct support options.", target: navItemFor("planning") };
   }
 
   if (/\b(rebuild|money|housing|future|after)\b/.test(normalized)) {
@@ -3433,13 +3431,13 @@ function TerminalCommand({
 
   return (
     <form className="command-terminal" onSubmit={submitCommand}>
-      <label htmlFor="terminal-command">NAV QUERY</label>
+      <label htmlFor="terminal-command">Find a page</label>
       <div className="command-input-row">
         <input
           autoComplete="off"
           id="terminal-command"
           onChange={(event) => setQuery(event.target.value)}
-          placeholder="Try: clarity, resources, surviving, government..."
+          placeholder="Try: Clarity, Resources, Systems, About..."
           spellCheck={false}
           type="search"
           value={query}
@@ -4531,7 +4529,7 @@ function FinancialCaptivityAssessmentModal({ onClose }: { onClose: () => void })
       <section aria-describedby="financial-captivity-description" aria-labelledby="financial-captivity-title" className="assessment-modal freedom-test-modal financial-captivity-modal" onKeyDown={handleKeyDown} ref={modalRef} role="region">
         <header className="assessment-modal-header">
           <div>
-            <span className="terminal-label">TEMP MEMORY ONLY</span>
+            <span className="terminal-label">ANSWERS ARE NOT SAVED</span>
             <h1 id="financial-captivity-title" ref={headingRef} tabIndex={-1}>Financial Captivity Assessment</h1>
             <p className="sr-only" id="financial-captivity-description">An in-memory educational assessment. Answers are not saved.</p>
           </div>
@@ -4767,7 +4765,7 @@ function CoerciveControlPatternMapModal({ onClose }: { onClose: () => void }) {
       >
         <header className="assessment-modal-header">
           <div>
-            <span className="terminal-label">TEMP MEMORY ONLY</span>
+            <span className="terminal-label">ANSWERS ARE NOT SAVED</span>
             <h1 id="pattern-map-title" ref={headingRef} tabIndex={-1}>Coercive Control Pattern Map</h1>
             <p className="sr-only" id="pattern-map-description">An in-memory educational assessment. Answers are not saved.</p>
           </div>
@@ -5028,7 +5026,7 @@ function FreedomTestAssessmentModal({ onClose }: { onClose: () => void }) {
       >
         <header className="assessment-modal-header">
           <div>
-            <span className="terminal-label">TEMP MEMORY ONLY</span>
+            <span className="terminal-label">ANSWERS ARE NOT SAVED</span>
             <h1 id="freedom-test-title" ref={headingRef} tabIndex={-1}>
               The Freedom Test
             </h1>
@@ -5366,7 +5364,7 @@ function LoveFearAssessmentModal({ onClose }: { onClose: () => void }) {
       >
         <header className="assessment-modal-header">
           <div>
-            <span className="terminal-label">TEMP MEMORY ONLY</span>
+            <span className="terminal-label">ANSWERS ARE NOT SAVED</span>
             <h1 id="love-fear-modal-title">Is It Love Or Fear?</h1>
           </div>
           <div className="assessment-modal-actions">
@@ -5691,7 +5689,7 @@ function AmICrazyModule({
     <section className="assessment-shell" aria-labelledby="assessment-title">
       {mode === "intro" && (
         <div className="assessment-panel">
-          <div className="terminal-label">INITIALIZING REALITY CHECK...</div>
+          <div className="terminal-label">PRIVATE REALITY CHECK</div>
           <h1 id="assessment-title">WAS I CRAZY?</h1>
           <p>
             Confusion is one of the telltale signs of coercive control. People who want control
@@ -5716,7 +5714,7 @@ function AmICrazyModule({
         <div className="assessment-panel">
           <div className="question-status">
             <span>QUESTION {questionIndex + 1} OF {assessmentQuestions.length}</span>
-            <span>{started ? "TEMP MEMORY ONLY" : "OFFLINE"}</span>
+            <span>{started ? "ANSWERS ARE NOT SAVED" : "NOT STARTED"}</span>
           </div>
           <h2>{currentQuestion.prompt}</h2>
           <div className="answer-grid">
@@ -5732,13 +5730,15 @@ function AmICrazyModule({
 
       {mode === "response" && activeResponse && (
         <div className={activeResponse.safetyFocused ? "assessment-panel direct-panel" : "assessment-panel"}>
-          <div className="terminal-label">SYSTEM RESPONSE</div>
-          <h2>{activeResponse.responseTitle}</h2>
+          <div className="terminal-label">WHAT THIS MAY MEAN</div>
+          <h2>{activeResponse.pattern ?? "A healthier pattern may be present"}</h2>
           <TypedText
             className="system-typed-text"
             onDone={completeSystemTyping}
-            skipLabel="Skip Typing"
-            text={`SYSTEM:\n${activeResponse.response}`}
+            skipLabel="Show Full Response"
+            text={activeResponse.pattern
+              ? `This answer may reflect ${activeResponse.pattern.toLowerCase()}. Notice whether it happens repeatedly, narrows your choices, or makes you manage the other person's reactions to stay safe or keep the peace.`
+              : "This answer describes room for accountability, repair, and independent choice. What matters is whether that freedom and respect remain consistent over time."}
           />
           {responseDone && (
             <ProceedControls
@@ -5754,9 +5754,9 @@ function AmICrazyModule({
       {mode === "denial" && (
         <div className="denial-panel">
           <div className="denial-copy">
-            <div className="terminal-label">DENIAL MODE SELECTED.</div>
-            <h2>DEPLOYING EMOTIONAL SUPPORT</h2>
-            <p>PLEASE WAIT. CUTENESS.EXE LOADING...</p>
+            <div className="terminal-label">TAKE A BREATH</div>
+            <h2>A brief support break</h2>
+            <p>You can pause without losing your place.</p>
           </div>
           <img src={denialImage} alt="Bright support image for a denial break" />
           <div className="terminal-actions denial-actions">
@@ -5781,8 +5781,8 @@ function AmICrazyModule({
 
       {mode === "complete" && (
         <div className="assessment-panel">
-          <div className="terminal-label">ASSESSMENT COMPLETE.</div>
-          <h2>REALITY CHECKS PROCESSED. FINAL DECISION NOT REQUIRED.</h2>
+          <div className="terminal-label">ASSESSMENT COMPLETE</div>
+          <h2>You have more information. You do not need to make a final decision right now.</h2>
           <div className="pattern-panel">
             <h3>Patterns Identified</h3>
             {patterns.length > 0 ? (
@@ -5864,7 +5864,7 @@ function PlanningLanding({
         <div className="terminal-label">Crisis Support</div>
         <h1 id="planning-landing-title">Crisis Support</h1>
         <p>
-          Survivor Operating System is not an emergency service and does not guide active escape
+          Survivor Systems is not an emergency service and does not guide active escape
           planning. If someone is still in danger or currently trying to get out, this system should
           route them toward direct human support instead.
         </p>
@@ -6506,14 +6506,14 @@ function HowToModule({
   return (
     <section className="page-shell how-to-module" aria-labelledby="how-to-title">
       <PageFlourishHeader
-        eyebrow={activePriority ? `Folder open // ${activePriority.label}` : "Resources // How To Guides"}
-        title="Resource Priorities"
+        eyebrow={activePriority ? `Guide section / ${activePriority.label}` : "Resources / How To Guides"}
+        title="How To Guides"
         titleId="how-to-title"
         variant="resources"
       >
         <p>
-          Practical guides are sorted by priority so the screen does not throw the whole system at
-          the user at once. Open a folder first, then choose the guide that matches the next move.
+          Practical guides are grouped by what may be most useful right now. Choose a section, then
+          open the guide that matches your next step.
         </p>
       </PageFlourishHeader>
 
@@ -6530,7 +6530,7 @@ function HowToModule({
                 <h2>{priority.title}</h2>
                 <p>{priority.description}</p>
                 <button type="button" onClick={() => setActivePriorityId(priority.id)}>
-                  Open Folder
+                  View Guides
                 </button>
               </article>
             );
@@ -6540,11 +6540,11 @@ function HowToModule({
         <>
           <div className="how-to-folder-bar">
             <div>
-              <p className="terminal-label">FOLDER OPEN</p>
+              <p className="terminal-label">GUIDE SECTION</p>
               <h2>{activePriority.title}</h2>
             </div>
             <button type="button" onClick={onBackToResources ?? (() => setActivePriorityId(null))}>
-              {onBackToResources ? "Back To Resource Folders" : "Back To Priority Folders"}
+              {onBackToResources ? "Back To Resources" : "Back To Guide Sections"}
             </button>
           </div>
 
