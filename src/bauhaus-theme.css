@@ -3219,6 +3219,132 @@ body {
   padding: 18px 20px !important;
 }
 
+.hud-frame.module-government .change-starts-locally {
+  display: grid !important;
+  gap: clamp(28px, 4vw, 48px) !important;
+  margin-top: clamp(18px, 4vw, 42px) !important;
+}
+
+.hud-frame.module-government .change-starts-locally > header {
+  background: var(--ss-ink) !important;
+  border: 3px solid var(--ss-blue) !important;
+  box-shadow: 10px 10px 0 var(--ss-yellow) !important;
+  margin: 0 10px 10px 0 !important;
+  padding: clamp(38px, 6vw, 78px) !important;
+}
+
+.hud-frame.module-government .change-starts-locally > header :is(span, h2, p, strong) {
+  color: var(--ss-white) !important;
+}
+
+.hud-frame.module-government .change-starts-locally > header span {
+  color: var(--ss-yellow) !important;
+  font-size: 0.74rem !important;
+  font-weight: 900 !important;
+}
+
+.hud-frame.module-government .change-starts-locally > header h2 {
+  font-size: clamp(3rem, 6vw, 6rem) !important;
+  line-height: 0.94 !important;
+  margin: 14px 0 24px !important;
+}
+
+.hud-frame.module-government .change-starts-locally > header p {
+  font-size: clamp(1.05rem, 1.5vw, 1.25rem) !important;
+  line-height: 1.72 !important;
+  max-width: 82ch !important;
+}
+
+.hud-frame.module-government .change-starts-locally > header strong {
+  border-left: 10px solid var(--ss-red) !important;
+  display: block !important;
+  font-family: var(--ss-font-display) !important;
+  font-size: clamp(1.25rem, 2vw, 1.8rem) !important;
+  margin-top: 26px !important;
+  max-width: 76ch !important;
+  padding-left: 20px !important;
+}
+
+.hud-frame.module-government .local-advocacy-safety-note {
+  background: var(--ss-yellow) !important;
+  border: 3px solid var(--ss-red) !important;
+  box-shadow: 8px 8px 0 var(--ss-blue) !important;
+  padding: clamp(24px, 4vw, 42px) !important;
+}
+
+.hud-frame.module-government .local-advocacy-safety-note :is(strong, p) {
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.module-government .local-advocacy-safety-note strong {
+  font-family: var(--ss-font-display) !important;
+  font-size: clamp(1.45rem, 2.5vw, 2.2rem) !important;
+}
+
+.hud-frame.module-government .local-advocacy-safety-note p {
+  line-height: 1.65 !important;
+  margin: 10px 0 0 !important;
+  max-width: 82ch !important;
+}
+
+.hud-frame.module-government .local-advocacy-sections {
+  display: grid !important;
+  gap: clamp(24px, 3vw, 38px) !important;
+}
+
+.hud-frame.module-government .local-advocacy-sections > section {
+  background: var(--ss-white) !important;
+  border: 3px solid var(--ss-ink) !important;
+  border-left: 18px solid var(--ss-blue) !important;
+  box-shadow: 9px 9px 0 var(--ss-yellow) !important;
+  padding: clamp(26px, 4vw, 52px) !important;
+}
+
+.hud-frame.module-government .local-advocacy-sections > section:nth-child(3n+2) {
+  border-left-color: var(--ss-red) !important;
+  box-shadow: 9px 9px 0 var(--ss-blue) !important;
+}
+
+.hud-frame.module-government .local-advocacy-sections > section:nth-child(3n+3) {
+  background: var(--ss-blue) !important;
+  border-left-color: var(--ss-yellow) !important;
+  box-shadow: 9px 9px 0 var(--ss-red) !important;
+}
+
+.hud-frame.module-government .local-advocacy-sections > section > span {
+  color: var(--ss-red) !important;
+  font-size: 0.78rem !important;
+  font-weight: 900 !important;
+}
+
+.hud-frame.module-government .local-advocacy-sections > section:nth-child(3n+3) :is(span, h3, p) {
+  color: var(--ss-white) !important;
+}
+
+.hud-frame.module-government .local-advocacy-sections h3 {
+  font-size: clamp(1.7rem, 3vw, 2.9rem) !important;
+  margin: 10px 0 18px !important;
+}
+
+.hud-frame.module-government .local-advocacy-sections p {
+  font-size: clamp(1rem, 1.25vw, 1.12rem) !important;
+  line-height: 1.72 !important;
+  margin: 0 0 16px !important;
+  max-width: 84ch !important;
+}
+
+.hud-frame.module-government .local-advocacy-emphasis {
+  background: var(--ss-yellow) !important;
+  border: 3px solid var(--ss-red) !important;
+  box-shadow: 6px 6px 0 var(--ss-blue) !important;
+  color: var(--ss-ink) !important;
+  display: block !important;
+  line-height: 1.55 !important;
+  margin-top: 24px !important;
+  max-width: 84ch !important;
+  padding: 20px !important;
+}
+
 .hud-frame.module-government .nonprofit-audit-header {
   background: var(--ss-ink) !important;
   border: 3px solid var(--ss-red) !important;

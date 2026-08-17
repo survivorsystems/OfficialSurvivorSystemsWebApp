@@ -4135,6 +4135,205 @@ function SystemsModule() {
               <strong className="local-funding-emphasis">What did that funding actually make available to survivors in this community?</strong>
             </section>
           </section>
+
+          <article className="change-starts-locally" aria-labelledby="change-starts-locally-title">
+            <header>
+              <span>LOCAL ADVOCACY</span>
+              <h2 id="change-starts-locally-title">Change Starts Locally</h2>
+              <p>
+                Local government has enormous influence over how domestic violence is handled in real life.
+                City councils, county commissioners, sheriffs, police chiefs, prosecutors, judges, court
+                administrators, boards, and committees shape enforcement, funding, policy, reporting,
+                oversight, and the day-to-day response survivors actually receive.
+              </p>
+              <strong>That makes local advocacy one of the most direct ways to pressure the system to change.</strong>
+            </header>
+
+            <aside className="local-advocacy-safety-note">
+              <strong>Protect your safety and privacy.</strong>
+              <p>
+                Public advocacy can expose names, accounts, locations, or personal history. Participate only
+                in ways that feel safe, use safer contact information when needed, and do not publish details
+                that could help an abusive person locate or monitor you.
+              </p>
+            </aside>
+
+            <div className="local-advocacy-sections">
+              <section>
+                <span>01</span><h3>Find the decision-maker</h3>
+                <p>Start with the person or body that actually controls the issue.</p>
+                <p>
+                  For law-enforcement policy, look at the sheriff, police chief, city council, county commission,
+                  or whoever controls the department's budget and oversight. For prosecution, look at the district
+                  or county attorney and the policies inside that office. For court procedure, look at the judge,
+                  court administrator, or governing body with authority over that process.
+                </p>
+                <p>
+                  For funding, contracts, grants, or program oversight, identify the board, committee, council,
+                  or agency responsible for approving those decisions. The more specific you are about who has
+                  authority, the harder it becomes for officials to pass responsibility around.
+                </p>
+              </section>
+
+              <section>
+                <span>02</span><h3>Connect the money to the policy</h3>
+                <p>
+                  Once you have traced the funding, use that information in the conversation. Some local positions,
+                  training, programs, and operations are paid in whole or in part with federal dollars earmarked
+                  for domestic violence. That creates a direct accountability issue when the same institution
+                  accepts that funding while maintaining policies or practices that leave women unprotected.
+                </p>
+                <p>
+                  An agency cannot reasonably point to domestic violence grants as proof that it is addressing the
+                  problem while refusing to examine enforcement failures, weak policies, poor complaint handling,
+                  or repeated patterns that put survivors at risk.
+                </p>
+                <p>
+                  Officials who vote against stronger protections for women can still oversee institutions that
+                  benefit financially from domestic violence funding. When that happens, the money and the policy
+                  belong in the same public conversation.
+                </p>
+                <strong className="local-advocacy-emphasis">
+                  If an institution benefits from funding that exists because women are being abused, the people
+                  controlling that institution should be able to explain what that funding is producing.
+                </strong>
+              </section>
+
+              <section>
+                <span>03</span><h3>Ask questions that create a record</h3>
+                <p>
+                  Strong advocacy gets specific quickly. Ask who wrote the policy, when it was last reviewed, how
+                  complaints are handled, what performance requirements are attached to the funding, how many cases
+                  were declined, how many protection-order violations resulted in enforcement action, and who has
+                  the authority to change the current practice.
+                </p>
+                <p>
+                  These questions create answers that can be documented and compared with budgets, policies,
+                  promises, and outcomes. Once an official answers in writing or on the record, there is something
+                  concrete to return to.
+                </p>
+              </section>
+
+              <section>
+                <span>04</span><h3>Use public meetings strategically</h3>
+                <p>
+                  Public meetings matter because decisions are made there, budgets are approved there, contracts
+                  are discussed there, and officials make statements that become part of the public record.
+                </p>
+                <p>
+                  Watch agendas for public safety, victim services, police funding, court administration, grant
+                  awards, nonprofit contracts, committee appointments, or policy changes. When relevant, bring the
+                  issue into public comment or ask for it to be placed on the agenda.
+                </p>
+                <p>
+                  A focused statement usually carries more weight than trying to explain the entire history in three
+                  minutes. State the problem, connect it to the responsible agency or official, cite the record, and
+                  ask for a specific action.
+                </p>
+              </section>
+
+              <section>
+                <span>05</span><h3>Make a concrete demand</h3>
+                <p>
+                  Officials respond differently when a request is specific enough to be acted on, denied, delayed,
+                  or ignored. Ask for a policy review, an audit, publication of grant expenditures, an independent
+                  complaint process, stronger enforcement procedures, survivor representation on a committee, or
+                  changes in how an agency handles stalking, protection-order violations, or domestic violence reports.
+                </p>
+                <p>A clear demand gives you something measurable to follow up on later.</p>
+              </section>
+
+              <section>
+                <span>06</span><h3>Keep the paper trail</h3>
+                <p>
+                  Follow important conversations in writing. Record who was contacted, what was requested, what they
+                  said, what they agreed to do, and when they said they would do it. Save emails, meeting minutes,
+                  letters, public statements, and agency responses.
+                </p>
+                <p>
+                  A clean timeline becomes especially valuable when months pass, staff changes, or officials start
+                  describing earlier conversations differently.
+                </p>
+              </section>
+
+              <section>
+                <span>07</span><h3>Track what officials actually do</h3>
+                <p>
+                  Public statements matter less than decisions. Votes, budgets, policy changes, complaint responses,
+                  enforcement practices, and follow-through give you a clearer record of how an official or agency
+                  actually handles domestic violence issues.
+                </p>
+                <p>
+                  If someone publicly supports survivors while blocking oversight, voting against protections,
+                  ignoring documented failures, or refusing to change a harmful policy, those actions belong beside
+                  the public statement. The record speaks for itself.
+                </p>
+              </section>
+
+              <section>
+                <span>08</span><h3>Build pressure through consistency</h3>
+                <p>
+                  Local systems often count on public attention fading. A documented issue that keeps returning to
+                  meetings, records requests, public discussion, reporters, and community conversations becomes
+                  harder to bury over time.
+                </p>
+                <p>
+                  Sustained pressure does not require constant confrontation. It requires consistency,
+                  documentation, and a willingness to keep the same unresolved issue in front of the people
+                  responsible for fixing it.
+                </p>
+              </section>
+
+              <section>
+                <span>09</span><h3>Work with other people</h3>
+                <p>
+                  Advocacy becomes stronger when the work is shared. Talk about these issues in third spaces like
+                  Reddit, TikTok, Instagram, community groups, local meetings, and survivor networks. There are more
+                  engaged survivors connected to one another now than ever before, and that changes how quickly
+                  patterns can become visible.
+                </p>
+                <p>
+                  Sharing a story, public record, policy failure, grant document, or voting record can help other
+                  people understand what is happening in their communities. The more people who understand how the
+                  local system works, the harder it becomes for the same failures to stay isolated and invisible.
+                </p>
+              </section>
+
+              <section>
+                <span>10</span><h3>Make inaction visible</h3>
+                <p>
+                  Local officials hold public power, and their decisions can be examined publicly. If an agency
+                  receives domestic violence funding while protection orders go unenforced, stalking is minimized,
+                  survivors are turned away, or policies remain unchanged after repeated failures, that connection
+                  belongs in the public record.
+                </p>
+                <p>
+                  Once a pattern is documented and attached to specific decisions, budgets, policies, and officials,
+                  the issue becomes much harder to reduce to a private complaint. It becomes a question of public accountability.
+                </p>
+              </section>
+
+              <section>
+                <span>11</span><h3>Why local advocacy matters</h3>
+                <p>
+                  Local advocacy can change the conditions survivors encounter in real life. Policy reviews can lead
+                  to different enforcement procedures. Budget pressure can change where money goes. Public scrutiny
+                  can lead to audits, stronger reporting requirements, new oversight, leadership changes, and different
+                  priorities inside an agency. Voting records and public decisions can also follow officials into
+                  elections and future appointments.
+                </p>
+                <p>
+                  None of those changes happen automatically, and local institutions rarely volunteer for scrutiny.
+                  They change when enough pressure makes the current arrangement harder to defend.
+                </p>
+                <strong className="local-advocacy-emphasis">
+                  The people making these decisions are public officials. The money they manage is public money.
+                  The systems they control exist to serve the public. Survivors have every right to question them,
+                  challenge them, and demand better.
+                </strong>
+              </section>
+            </div>
+          </article>
         </article>
       ) : null}
 
