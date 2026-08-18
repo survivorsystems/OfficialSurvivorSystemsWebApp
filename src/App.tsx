@@ -47,7 +47,8 @@ type ModuleKey =
   | "how-to"
   | "legal"
   | "library"
-  | "access";
+  | "access"
+  | "subscribe";
 
 type AssessmentAnswer = {
   id: string;
@@ -1295,6 +1296,7 @@ const moduleRoutes: Record<ModuleKey, { label: string; path: string }> = {
   legal: { label: "Resources", path: "/resources" },
   library: { label: "Premium Survivor Library", path: "/resources/access" },
   access: { label: "Premium Survivor Library", path: "/resources/access" },
+  subscribe: { label: "Subscribe", path: "/subscribe" },
 };
 
 const allNavTargets: Array<{ key: ModuleKey; label: string; path: string }> = [
@@ -3155,6 +3157,7 @@ function getInitialModule(): ModuleKey {
   if (path === "/legal") return "legal";
   if (path === "/library") return "access";
   if (path === "/resources/access") return "access";
+  if (path === "/subscribe") return "subscribe";
   if (path.startsWith("/resources/")) return "local-help";
   if (path === "/resources") return "local-help";
 
@@ -6965,6 +6968,50 @@ function SupportModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: s
   );
 }
 
+function SubscribeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: string) => void }) {
+  const checkoutUrl = String(import.meta.env.VITE_STRIPE_SUBSCRIPTION_URL ?? "").trim();
+  const [checkoutNotice, setCheckoutNotice] = useState("");
+
+  function beginSubscription() {
+    if (checkoutUrl) {
+      window.location.assign(checkoutUrl);
+      return;
+    }
+    setCheckoutNotice("Secure subscription checkout is being connected. You can still browse every library summary and preview.");
+  }
+
+  return (
+    <CommercePageTemplate
+      className="page-shell subscribe-module"
+      eyebrow="Premium Survivor Library"
+      intro={<p>One recurring subscription opens the complete collection of private planners, templates, trackers, and downloadable guides.</p>}
+      title="Subscribe"
+      titleId="subscribe-title"
+    >
+      <section className="subscribe-offer" aria-labelledby="subscribe-offer-title">
+        <header>
+          <span>MONTHLY ACCESS</span>
+          <h2 id="subscribe-offer-title">The Complete Premium Survivor Library</h2>
+          <p>Browse public summaries before subscribing. Once your subscription is active, sign in with your subscriber email to open and download the protected files.</p>
+        </header>
+
+        <div className="subscribe-benefits" aria-label="Subscription includes">
+          <p><strong>Unlimited access</strong><span>View the full private library while your subscription is active.</span></p>
+          <p><strong>Downloads included</strong><span>Open and download every resource included with Premium access.</span></p>
+          <p><strong>Growing collection</strong><span>New planners, templates, trackers, and guides are included as they are published.</span></p>
+          <p><strong>Cancel anytime</strong><span>Your subscription renews monthly until you cancel it.</span></p>
+        </div>
+
+        <div className="subscribe-actions">
+          <button type="button" onClick={beginSubscription}>Continue to Secure Checkout</button>
+          <button type="button" onClick={() => onNavigate("access", "/resources/access")}>Back to Library Previews</button>
+        </div>
+        {checkoutNotice ? <p className="subscribe-checkout-notice" role="status">{checkoutNotice}</p> : null}
+      </section>
+    </CommercePageTemplate>
+  );
+}
+
 function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
   const [catalog, setCatalog] = useState<SubscriberCatalogItem[]>([]);
   const [catalogStatus, setCatalogStatus] = useState<"loading" | "ready" | "error">("loading");
@@ -7128,7 +7175,7 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
                 )}
                 <div>
                   <span>{previewResource.category}</span>
-                  <h3 id="library-public-preview-title">{previewResource.title}</h3>
+                  <h3 id="library-public-preview-title"><a href="/subscribe">{previewResource.title}</a></h3>
                   <p>{previewResource.preview}</p>
                   <dl>
                     <div><dt>Format</dt><dd>{previewResource.format}</dd></div>
@@ -7163,7 +7210,7 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
               )}
               <div>
                 <span className="library-resource-format">{resource.format}</span>
-                <h3>{resource.title}</h3>
+                <h3><a href="/subscribe">{resource.title}</a></h3>
                 <p>{resource.preview}</p>
                 <small>{resource.category}</small>
                 <p className="library-access-note">{resource.access}</p>
@@ -7607,6 +7654,8 @@ export function App() {
     <RebuildingModule onNavigate={navigate} />
   ) : activeModule === "support" ? (
     <SupportModule onNavigate={navigate} />
+  ) : activeModule === "subscribe" ? (
+    <SubscribeModule onNavigate={navigate} />
   ) : activeModule === "local-help" || activeModule === "how-to" || activeModule === "legal" || activeModule === "library" ? (
     <ResourceModule moduleKey={activeModule} onNavigate={navigate} />
   ) : (

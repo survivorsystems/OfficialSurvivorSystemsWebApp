@@ -5227,6 +5227,126 @@ body:has(.assessment-workspace),
   color: var(--ss-white) !important;
 }
 
+/* Subscription page: one direct offer, using the site's black-card vocabulary. */
+.hud-frame.module-subscribe .terminal-content {
+  background:
+    repeating-linear-gradient(90deg, var(--ss-ink) 0 10px, var(--ss-white) 10px 20px) right top / 38px 100% no-repeat,
+    var(--ss-yellow) !important;
+  padding-right: clamp(54px, 7vw, 88px) !important;
+}
+
+.hud-frame.module-subscribe .subscribe-module > .ss-template-header {
+  background: var(--ss-blue) !important;
+  border: 4px solid var(--ss-red) !important;
+  box-shadow: 12px 12px 0 var(--ss-yellow) !important;
+}
+
+.hud-frame.module-subscribe .subscribe-module > .ss-template-header :is(span, h1, p) {
+  color: var(--ss-white) !important;
+}
+
+.hud-frame.module-subscribe .subscribe-offer {
+  background: var(--ss-ink) !important;
+  border: 4px solid var(--ss-blue) !important;
+  box-shadow: 12px 12px 0 var(--ss-red) !important;
+  color: var(--ss-white) !important;
+  margin: 0 12px 42px 0 !important;
+  padding: clamp(30px, 6vw, 72px) !important;
+}
+
+.hud-frame.module-subscribe .subscribe-offer :is(h2, h3, p, span, strong) {
+  color: var(--ss-white) !important;
+}
+
+.hud-frame.module-subscribe .subscribe-offer > header {
+  border-bottom: 12px solid var(--ss-yellow) !important;
+  padding-bottom: clamp(28px, 4vw, 48px) !important;
+}
+
+.hud-frame.module-subscribe .subscribe-offer > header > span {
+  color: var(--ss-yellow) !important;
+  font-family: var(--ss-font-display) !important;
+  font-weight: 900 !important;
+}
+
+.hud-frame.module-subscribe .subscribe-benefits {
+  display: grid !important;
+  gap: 0 !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  margin: clamp(28px, 5vw, 56px) 0 !important;
+}
+
+.hud-frame.module-subscribe .subscribe-benefits p {
+  border-bottom: 4px solid var(--ss-blue) !important;
+  display: grid !important;
+  gap: 8px !important;
+  margin: 0 !important;
+  padding: 24px 20px !important;
+}
+
+.hud-frame.module-subscribe .subscribe-benefits p:nth-child(2) {
+  border-bottom-color: var(--ss-red) !important;
+}
+
+.hud-frame.module-subscribe .subscribe-benefits p:nth-child(3) {
+  border-bottom-color: var(--ss-yellow) !important;
+}
+
+.hud-frame.module-subscribe .subscribe-benefits p:nth-child(4) {
+  border-bottom-color: var(--ss-green) !important;
+}
+
+.hud-frame.module-subscribe .subscribe-benefits strong {
+  font-family: var(--ss-font-display) !important;
+  font-size: 1.15rem !important;
+}
+
+.hud-frame.module-subscribe .subscribe-actions {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 18px !important;
+}
+
+.hud-frame.module-subscribe .subscribe-actions button:first-child {
+  background: var(--ss-red) !important;
+  border-color: var(--ss-yellow) !important;
+  box-shadow: 7px 7px 0 var(--ss-blue) !important;
+  color: var(--ss-white) !important;
+}
+
+.hud-frame.module-subscribe .subscribe-actions button:last-child {
+  background: var(--ss-blue) !important;
+  border-color: var(--ss-red) !important;
+  box-shadow: 7px 7px 0 var(--ss-yellow) !important;
+  color: var(--ss-white) !important;
+}
+
+.hud-frame.module-subscribe .subscribe-checkout-notice {
+  border-left: 8px solid var(--ss-yellow) !important;
+  margin-top: 30px !important;
+  padding: 16px 20px !important;
+}
+
+.hud-frame.module-library .library-preview-card h3 a,
+.hud-frame.module-library .library-public-preview h3 a {
+  color: inherit !important;
+  text-decoration-color: var(--ss-yellow) !important;
+  text-decoration-thickness: 3px !important;
+  text-underline-offset: 5px !important;
+}
+
+.hud-frame.module-library .library-preview-card h3 a:hover,
+.hud-frame.module-library .library-public-preview h3 a:hover {
+  background: var(--ss-yellow) !important;
+  color: var(--ss-ink) !important;
+}
+
+@media (max-width: 720px) {
+  .hud-frame.module-subscribe .subscribe-benefits {
+    grid-template-columns: 1fr !important;
+  }
+}
+
 /* Carry the homepage's black-and-white navigation field through every route. */
 .hud-frame .folk-sidebar {
   background: repeating-linear-gradient(90deg, var(--ss-ink) 0 14px, var(--ss-white) 14px 28px) !important;
