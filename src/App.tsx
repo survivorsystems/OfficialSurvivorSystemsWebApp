@@ -6589,72 +6589,7 @@ function getInitialResourceFolder(moduleKey: Exclude<ModuleKey, "home" | "am-i-c
 
 function AccessInformationModule() {
   const requestedPreview = new URLSearchParams(window.location.search).get("preview") ?? "";
-  const [showLibrary, setShowLibrary] = useState(Boolean(requestedPreview));
-
-  if (showLibrary) {
-    return (
-      <section className="resources-nested-shell">
-        <button className="resource-back-button" type="button" onClick={() => setShowLibrary(false)}>
-          Back to Premium Survivor Library
-        </button>
-        <LibraryModule initialSearch={requestedPreview} />
-      </section>
-    );
-  }
-
-  return (
-    <CommercePageTemplate
-      className="page-shell library-module access-module"
-      eyebrow="Resources / Premium Survivor Library"
-      intro={<p>
-          The Premium Survivor Library holds deeper planners, trackers, templates, and downloadable
-          guides. Browse the index before deciding whether a subscription is useful to you.
-        </p>}
-      title="Premium Survivor Library"
-      titleId="access-title"
-    >
-
-      <section className="library-section library-preview-entry" aria-labelledby="paid-library-entry-title">
-        <div className="terminal-label">PREMIUM SURVIVOR LIBRARY PREVIEW</div>
-        <h2 id="paid-library-entry-title">Look Inside Before Subscribing</h2>
-        <p>
-          Browse the deeper planners, trackers, and guide systems before choosing a subscription.
-          The index is organized by resource category so you can decide whether anything here is useful first.
-        </p>
-        <button type="button" onClick={() => setShowLibrary(true)}>
-          Preview Premium Survivor Library
-        </button>
-      </section>
-
-      <section className="library-section" aria-labelledby="access-options-title">
-        <div className="terminal-label">SUBSCRIBER ACCESS</div>
-        <h2 id="access-options-title">One Library Subscription</h2>
-        <p className="library-section-intro">
-          Free guides remain available under Resources and assessments remain available under
-          Clarity. The Premium Survivor Library is a separate, recurring offering with unlimited
-          viewing and downloads while the subscription is active.
-        </p>
-        <div className="library-pass-grid">
-          {libraryPasses.map((pass) => (
-            <article className="library-pass-card" key={pass.id}>
-              <div className="library-card-header">
-                <span>{pass.price}</span>
-                <small>SUBSCRIPTION</small>
-              </div>
-              <h3>{pass.title}</h3>
-              <p>{pass.scope}</p>
-              <ul>
-                <li>{pass.viewing}</li>
-                <li>{pass.unlocks}</li>
-                <li>{pass.renewal}</li>
-              </ul>
-            </article>
-          ))}
-        </div>
-      </section>
-
-    </CommercePageTemplate>
-  );
+  return <LibraryModule initialSearch={requestedPreview} />;
 }
 
 function ResourceModule({
