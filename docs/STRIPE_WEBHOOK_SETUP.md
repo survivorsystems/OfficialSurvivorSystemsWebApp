@@ -16,6 +16,7 @@ STRIPE_SECRET_KEY=sk_...
 STRIPE_WEBHOOK_SECRET=whsec_...
 SUPABASE_URL=https://nwpqdpfhburdeprbfkqi.supabase.co
 SUPABASE_SECRET_KEY=sb_secret_...
+SITE_URL=https://survivorsystems.org
 ```
 
 Never prefix a secret with `VITE_`. Never commit secret values to the repository.
@@ -38,6 +39,16 @@ invoice.payment_failed
 ```
 
 After saving the endpoint in Stripe, copy its `whsec_...` signing secret into `STRIPE_WEBHOOK_SECRET` in Vercel and redeploy.
+
+## Automatic Access After Checkout
+
+Set the Stripe Payment Link's post-payment redirect to this exact URL:
+
+```text
+https://survivorsystems.org/api/checkout-complete?session_id={CHECKOUT_SESSION_ID}
+```
+
+Stripe replaces the bracketed value with the completed Checkout Session ID. The server verifies that session with Stripe, creates or updates the subscriber entitlement, and establishes the library session before returning the subscriber to `/resources/access`. This does not replace the webhook; the webhook continues to maintain renewals and cancellations.
 
 ## Access Rules
 

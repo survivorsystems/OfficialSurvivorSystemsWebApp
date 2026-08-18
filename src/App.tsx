@@ -7025,6 +7025,15 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
   const [previewResource, setPreviewResource] = useState<SubscriberCatalogItem | null>(null);
 
   useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (librarySession && params.get("checkout") === "success") {
+      setLibraryAccessMessage("Your Premium access is ready. You can open or download any full resource below.");
+    } else if (params.has("access_error")) {
+      setLibraryAccessMessage("Checkout was completed, but access could not be confirmed yet. Use Restore Premium Access below with the email used at checkout.");
+    }
+  }, [librarySession]);
+
+  useEffect(() => {
     const controller = new AbortController();
     setCatalogStatus("loading");
     fetchSubscriberCatalog(controller.signal)
@@ -7065,7 +7074,7 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
 
   async function openLibraryResource(resource: SubscriberCatalogItem) {
     if (!librarySession) {
-      setLibraryAccessMessage("Sign in first, then use the open button again.");
+      setLibraryAccessMessage("Subscribe or restore Premium access on this device before opening the full resource.");
       return;
     }
     setOpeningResourceId(resource.id);
@@ -7080,9 +7089,16 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
     }
   }
 
-  function promptLibrarySignIn() {
-    setLibraryAccessMessage("Sign in with the email connected to your Premium subscription to open or download complete resources.");
+  function promptLibraryAccess() {
+    setLibraryAccessMessage("Already subscribed? Restore access with the email used at checkout. New subscribers can start with the Subscribe button.");
     document.getElementById("library-subscriber-sign-in-title")?.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+
+  function showLibrarySummary(resource: SubscriberCatalogItem) {
+    setPreviewResource(resource);
+    window.requestAnimationFrame(() => {
+      document.getElementById("library-public-preview")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
   }
 
   return (
@@ -7166,7 +7182,7 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
               <p><strong>{visibleCatalog.length}</strong> of {catalog.length} previews</p>
             </div>
             {previewResource ? (
-              <section className="library-public-preview" aria-labelledby="library-public-preview-title">
+              <section id="library-public-preview" className="library-public-preview" aria-labelledby="library-public-preview-title">
                 {libraryPreviewImage(previewResource) ? (
                   <figure className="library-document-preview">
                     <img src={libraryPreviewImage(previewResource) ?? undefined} alt="First page preview of the blank proposed order" />
@@ -7194,7 +7210,7 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
                         {openingResourceId === previewResource.id ? "Opening..." : "Open or Download Full Resource"}
                       </button>
                     ) : (
-                      <button type="button" onClick={promptLibrarySignIn}>Sign In to Download</button>
+                      <button type="button" onClick={promptLibraryAccess}>Restore Premium Access</button>
                     )}
                   </div>
                 </div>
@@ -7222,13 +7238,13 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
                 <small>{resource.category}</small>
                 <p className="library-access-note">{resource.access}</p>
                 <div className="library-preview-actions">
-                  <button type="button" onClick={() => setPreviewResource(resource)}>View Summary</button>
+                  <button type="button" onClick={() => showLibrarySummary(resource)}>View Summary</button>
                   {librarySession ? (
                     <button type="button" onClick={() => openLibraryResource(resource)} disabled={openingResourceId === resource.id}>
                       {openingResourceId === resource.id ? "Opening..." : "Open or Download Full Resource"}
                     </button>
                   ) : (
-                    <button type="button" onClick={promptLibrarySignIn}>Sign In to Download</button>
+                    <button type="button" onClick={promptLibraryAccess}>Restore Premium Access</button>
                   )}
                 </div>
               </div>
@@ -7240,11 +7256,11 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
         ) : null}
 
         <section className="library-sign-in-panel" aria-labelledby="library-subscriber-sign-in-title">
-          <h3 id="library-subscriber-sign-in-title">Already Have Premium Access?</h3>
-          <p>Sign in only when you are ready to open or download a complete protected resource. Browsing previews above does not require an account.</p>
+          <h3 id="library-subscriber-sign-in-title">Restore Premium Access</h3>
+          <p>Checkout unlocks the library automatically. On a different browser or device, use the email from checkout to restore access. Public summaries above never require an account.</p>
           {librarySession ? (
             <div>
-              <strong>Premium access sign-in active</strong>
+              <strong>Premium access is active on this device</strong>
               <p>{librarySession.email ?? "Authenticated library account"}</p>
               <button type="button" onClick={() => { clearLibrarySession(); setLibrarySession(null); setLibraryAccessMessage(""); }}>Sign Out</button>
             </div>
@@ -7255,10 +7271,10 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
                 <input type="email" autoComplete="email" required value={libraryEmail} onChange={(event) => setLibraryEmail(event.target.value)} />
               </label>
               <button type="submit" disabled={libraryAuthStatus === "sending"}>
-                {libraryAuthStatus === "sending" ? "Sending Link..." : "Sign In for Full Access"}
+                {libraryAuthStatus === "sending" ? "Sending Link..." : "Email My Access Link"}
               </button>
-              {libraryAuthStatus === "sent" ? <p role="status">Check your email, then use the link to return to the library.</p> : null}
-              {libraryAuthStatus === "error" ? <p role="alert">The sign-in link could not be sent. Confirm this email is connected to an existing Premium Survivor Library account.</p> : null}
+              {libraryAuthStatus === "sent" ? <p role="status">Check your email, then use the link to restore the library on this device.</p> : null}
+              {libraryAuthStatus === "error" ? <p role="alert">The access link could not be sent. Confirm this is the email used at Premium checkout.</p> : null}
             </form>
           )}
           {libraryAccessMessage ? <p className="library-catalog-status library-catalog-error" role="alert">{libraryAccessMessage}</p> : null}
