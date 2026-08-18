@@ -7116,8 +7116,8 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
                 <li>{pass.unlocks}</li>
                 <li>{pass.renewal}</li>
               </ul>
-              <button type="button" disabled>
-                Subscription Checkout Coming Soon
+              <button type="button" onClick={() => window.location.assign("/subscribe")}>
+                Subscribe to Premium
               </button>
             </article>
           ))}
