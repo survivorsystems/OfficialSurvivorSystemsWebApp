@@ -134,7 +134,7 @@ export async function createLibraryFileUrl(itemId: string, accessToken: string) 
 
   const separator = itemId.indexOf("/");
   if (separator < 1) throw new Error("This resource does not have a valid storage path.");
-  const bucket = itemId.slice(0, separator);
+  const bucket = "Premium Subscription Bucket";
   const objectPath = itemId.slice(separator + 1).split("/").map(encodeURIComponent).join("/");
   const signResponse = await fetch(
     `${supabaseUrl}/storage/v1/object/sign/${encodeURIComponent(bucket)}/${objectPath}`,

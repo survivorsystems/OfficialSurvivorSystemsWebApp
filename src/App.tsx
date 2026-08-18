@@ -7080,6 +7080,11 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
     }
   }
 
+  function promptLibrarySignIn() {
+    setLibraryAccessMessage("Sign in with the email connected to your Premium subscription to open or download complete resources.");
+    document.getElementById("library-subscriber-sign-in-title")?.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+
   return (
     <CommercePageTemplate
         className="page-shell library-module"
@@ -7186,9 +7191,11 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
                     <button type="button" onClick={() => setPreviewResource(null)}>Close Preview</button>
                     {librarySession ? (
                       <button type="button" onClick={() => openLibraryResource(previewResource)} disabled={openingResourceId === previewResource.id}>
-                        {openingResourceId === previewResource.id ? "Opening..." : "Open Full Resource"}
+                        {openingResourceId === previewResource.id ? "Opening..." : "Open or Download Full Resource"}
                       </button>
-                    ) : null}
+                    ) : (
+                      <button type="button" onClick={promptLibrarySignIn}>Sign In to Download</button>
+                    )}
                   </div>
                 </div>
               </section>
@@ -7215,12 +7222,14 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
                 <small>{resource.category}</small>
                 <p className="library-access-note">{resource.access}</p>
                 <div className="library-preview-actions">
-                  <button type="button" onClick={() => setPreviewResource(resource)}>Preview Resource</button>
+                  <button type="button" onClick={() => setPreviewResource(resource)}>View Summary</button>
                   {librarySession ? (
                     <button type="button" onClick={() => openLibraryResource(resource)} disabled={openingResourceId === resource.id}>
-                      {openingResourceId === resource.id ? "Opening..." : "Open Full Resource"}
+                      {openingResourceId === resource.id ? "Opening..." : "Open or Download Full Resource"}
                     </button>
-                  ) : null}
+                  ) : (
+                    <button type="button" onClick={promptLibrarySignIn}>Sign In to Download</button>
+                  )}
                 </div>
               </div>
             </article>
