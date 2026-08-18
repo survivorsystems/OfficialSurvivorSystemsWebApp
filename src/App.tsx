@@ -7094,29 +7094,7 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
       <section className="library-section" aria-labelledby="library-preview-title">
         <div className="terminal-label">RESOURCE PREVIEWS</div>
         <h2 id="library-preview-title">Look Inside Before Subscribing</h2>
-        <p>Every visitor can preview every resource indexed in the Survivor Systems library. Opening or downloading a complete protected file still requires Premium Survivor Library access.</p>
-        <div className="library-sign-in-panel">
-          {librarySession ? (
-            <div>
-              <strong>Library access sign-in active</strong>
-              <p>{librarySession.email ?? "Authenticated library account"}</p>
-              <button type="button" onClick={() => { clearLibrarySession(); setLibrarySession(null); setLibraryAccessMessage(""); }}>Sign Out</button>
-            </div>
-          ) : (
-            <form onSubmit={requestLibrarySignIn}>
-              <label>
-                Email for your library account
-                <input type="email" autoComplete="email" required value={libraryEmail} onChange={(event) => setLibraryEmail(event.target.value)} />
-              </label>
-              <button type="submit" disabled={libraryAuthStatus === "sending"}>
-                {libraryAuthStatus === "sending" ? "Sending Link..." : "Email Me a Sign-In Link"}
-              </button>
-              {libraryAuthStatus === "sent" ? <p role="status">Check your email, then use the link to return to the library.</p> : null}
-              {libraryAuthStatus === "error" ? <p role="alert">The sign-in link could not be sent. Confirm this email is connected to an existing Premium Survivor Library account.</p> : null}
-            </form>
-          )}
-          {libraryAccessMessage ? <p className="library-catalog-status library-catalog-error" role="alert">{libraryAccessMessage}</p> : null}
-        </div>
+        <p>Every visitor can browse and preview every resource indexed in the Survivor Systems library. No sign-in is required for previews.</p>
         {catalogStatus === "loading" ? <p className="library-catalog-status" role="status">Loading the Premium Survivor Library catalog...</p> : null}
         {catalogStatus === "error" ? <p className="library-catalog-status library-catalog-error" role="alert">The live library catalog could not be reached. No private files were exposed.</p> : null}
         {catalogStatus === "ready" ? (
@@ -7204,6 +7182,31 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
             {visibleCatalog.length === 0 ? <p className="library-catalog-status">No previews match those filters.</p> : null}
           </>
         ) : null}
+
+        <section className="library-sign-in-panel" aria-labelledby="library-subscriber-sign-in-title">
+          <h3 id="library-subscriber-sign-in-title">Already Have Premium Access?</h3>
+          <p>Sign in only when you are ready to open or download a complete protected resource. Browsing previews above does not require an account.</p>
+          {librarySession ? (
+            <div>
+              <strong>Premium access sign-in active</strong>
+              <p>{librarySession.email ?? "Authenticated library account"}</p>
+              <button type="button" onClick={() => { clearLibrarySession(); setLibrarySession(null); setLibraryAccessMessage(""); }}>Sign Out</button>
+            </div>
+          ) : (
+            <form onSubmit={requestLibrarySignIn}>
+              <label>
+                Subscriber email
+                <input type="email" autoComplete="email" required value={libraryEmail} onChange={(event) => setLibraryEmail(event.target.value)} />
+              </label>
+              <button type="submit" disabled={libraryAuthStatus === "sending"}>
+                {libraryAuthStatus === "sending" ? "Sending Link..." : "Sign In for Full Access"}
+              </button>
+              {libraryAuthStatus === "sent" ? <p role="status">Check your email, then use the link to return to the library.</p> : null}
+              {libraryAuthStatus === "error" ? <p role="alert">The sign-in link could not be sent. Confirm this email is connected to an existing Premium Survivor Library account.</p> : null}
+            </form>
+          )}
+          {libraryAccessMessage ? <p className="library-catalog-status library-catalog-error" role="alert">{libraryAccessMessage}</p> : null}
+        </section>
       </section>
 
     </CommercePageTemplate>
