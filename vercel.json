@@ -37,6 +37,10 @@
       "destination": "/index.html"
     },
     {
+      "source": "/resources/access/view",
+      "destination": "/index.html"
+    },
+    {
       "source": "/subscribe",
       "destination": "/index.html"
     }

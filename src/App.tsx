@@ -9,7 +9,6 @@ import blankProposedSapcrOrderPreview from "./assets/library/blank-proposed-sapc
 import { CommercePageTemplate, EditorialPageTemplate } from "./components/PageTemplates";
 import { HousingStrategySystem } from "./components/HousingStrategySystem";
 import {
-  clearLibrarySession,
   createLibraryFileUrl,
   fetchSubscriberCatalog,
   formatCatalogFileSize,
@@ -3156,7 +3155,7 @@ function getInitialModule(): ModuleKey {
   if (path === "/how-to") return "how-to";
   if (path === "/legal") return "legal";
   if (path === "/library") return "access";
-  if (path === "/resources/access") return "access";
+  if (path === "/resources/access" || path === "/resources/access/view") return "access";
   if (path === "/subscribe") return "subscribe";
   if (path.startsWith("/resources/")) return "local-help";
   if (path === "/resources") return "local-help";
@@ -3461,9 +3460,10 @@ function TerminalChrome({
   onNavigate: (module: ModuleKey, path: string) => void;
 }) {
   const activeLabel = moduleRoutes[activeModule]?.label ?? "Home";
+  const visualModule = activeModule === "access" ? "library" : activeModule;
 
   return (
-    <main className={`terminal-frame app-frame win95-frame hud-frame module-${activeModule}`}>
+    <main className={`terminal-frame app-frame win95-frame hud-frame module-${visualModule}`}>
       <section className="win95-desktop" aria-label="Survivor Systems">
         <aside className="folk-sidebar">
           <button className="desktop-brand-panel" type="button" onClick={() => onNavigate("home", "/")}>
@@ -3491,7 +3491,7 @@ function TerminalChrome({
         </button>
 
         <section className="folk-main-shell">
-          <section className={`terminal-screen win95-window hud-window hud-window-${activeModule}`} aria-label={`${activeLabel} window`}>
+          <section className={`terminal-screen win95-window hud-window hud-window-${visualModule}`} aria-label={`${activeLabel} window`}>
           <div className="win95-titlebar">
             <div className="win95-titlebar-label">
               <span>{activeLabel}</span>
@@ -7017,12 +7017,15 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
   const [catalogStatus, setCatalogStatus] = useState<"loading" | "ready" | "error">("loading");
   const [catalogSearch, setCatalogSearch] = useState(initialSearch);
   const [catalogCategory, setCatalogCategory] = useState("all");
-  const [librarySession, setLibrarySession] = useState<LibrarySession | null>(() => readLibrarySession());
+  const [librarySession] = useState<LibrarySession | null>(() => readLibrarySession());
   const [libraryEmail, setLibraryEmail] = useState("");
   const [libraryAuthStatus, setLibraryAuthStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [openingResourceId, setOpeningResourceId] = useState<string | null>(null);
   const [libraryAccessMessage, setLibraryAccessMessage] = useState("");
   const [previewResource, setPreviewResource] = useState<SubscriberCatalogItem | null>(null);
+  const [viewerResourceId, setViewerResourceId] = useState(() => new URLSearchParams(window.location.search).get("resource"));
+  const [viewerUrl, setViewerUrl] = useState("");
+  const [viewerStatus, setViewerStatus] = useState<"idle" | "loading" | "ready" | "error">("idle");
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -7048,6 +7051,12 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
     return () => controller.abort();
   }, []);
 
+  useEffect(() => {
+    const syncViewerRoute = () => setViewerResourceId(new URLSearchParams(window.location.search).get("resource"));
+    window.addEventListener("popstate", syncViewerRoute);
+    return () => window.removeEventListener("popstate", syncViewerRoute);
+  }, []);
+
   const catalogCategories = [...new Set(catalog.map((resource) => resource.category))].sort();
   const catalogCategoryCounts = catalogCategories.map((category) => ({
     category,
@@ -7058,6 +7067,29 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
     return (catalogCategory === "all" || resource.category === catalogCategory) &&
       (!query || `${resource.title} ${resource.category} ${resource.format}`.toLowerCase().includes(query));
   });
+  const viewerResource = viewerResourceId ? catalog.find((resource) => resource.id === viewerResourceId) ?? null : null;
+
+  useEffect(() => {
+    if (!viewerResource || !librarySession) {
+      setViewerUrl("");
+      setViewerStatus("idle");
+      return;
+    }
+
+    let cancelled = false;
+    setViewerStatus("loading");
+    createLibraryFileUrl(viewerResource.id, librarySession.accessToken)
+      .then((url) => {
+        if (cancelled) return;
+        setViewerUrl(url);
+        setViewerStatus("ready");
+      })
+      .catch(() => {
+        if (cancelled) return;
+        setViewerStatus("error");
+      });
+    return () => { cancelled = true; };
+  }, [librarySession, viewerResource]);
 
   async function requestLibrarySignIn(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -7099,6 +7131,94 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
     window.requestAnimationFrame(() => {
       document.getElementById("library-public-preview")?.scrollIntoView({ behavior: "smooth", block: "start" });
     });
+  }
+
+  function viewFullResource(resource: SubscriberCatalogItem) {
+    const params = new URLSearchParams({ resource: resource.id });
+    window.history.pushState({}, "", `/resources/access/view?${params.toString()}`);
+    setViewerResourceId(resource.id);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function returnToPremiumIndex() {
+    window.history.pushState({}, "", "/resources/access");
+    setViewerResourceId(null);
+    setViewerUrl("");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function downloadUrl(url: string, resource: SubscriberCatalogItem) {
+    const separator = url.includes("?") ? "&" : "?";
+    const extension = resource.id.split(".").pop() || resource.format.toLowerCase();
+    const filename = `${resource.title.replace(/[^a-z0-9]+/gi, "-").replace(/^-|-$/g, "")}.${extension}`;
+    return `${url}${separator}download=${encodeURIComponent(filename)}`;
+  }
+
+  if (librarySession && viewerResourceId) {
+    return (
+      <CommercePageTemplate
+        className="page-shell library-module library-document-page"
+        eyebrow="Premium Survivor Library / Document"
+        intro={<p>{viewerResource?.preview ?? "Opening your protected library document."}</p>}
+        title={viewerResource?.title ?? "Premium Library Document"}
+        titleId="library-document-title"
+      >
+        <div className="library-document-toolbar">
+          <button type="button" onClick={returnToPremiumIndex}>Back to Premium Library</button>
+          {viewerStatus === "ready" && viewerUrl && viewerResource ? (
+            <a href={downloadUrl(viewerUrl, viewerResource)}>Download Document</a>
+          ) : null}
+        </div>
+        {catalogStatus === "loading" || viewerStatus === "loading" ? <p className="library-catalog-status" role="status">Opening the protected document...</p> : null}
+        {catalogStatus === "ready" && !viewerResource ? <p className="library-catalog-status library-catalog-error" role="alert">This document is not listed in the Premium Survivor Library.</p> : null}
+        {viewerStatus === "error" ? <p className="library-catalog-status library-catalog-error" role="alert">This document could not be opened. Return to the library and try again.</p> : null}
+        {viewerStatus === "ready" && viewerUrl && viewerResource ? (
+          <section className="library-document-reader" aria-label={`${viewerResource.title} document viewer`}>
+            <iframe src={viewerUrl} title={viewerResource.title} />
+          </section>
+        ) : null}
+      </CommercePageTemplate>
+    );
+  }
+
+  if (librarySession) {
+    return (
+      <CommercePageTemplate
+        className="page-shell library-module library-subscriber-index"
+        eyebrow="Resources / Premium Library"
+        intro={<p>Select any title to read the document in your browser or download a copy.</p>}
+        title="Premium Survivor Library"
+        titleId="library-title"
+      >
+        <div className="library-access-active">
+          <strong>Premium access is active</strong>
+          <span>{librarySession.email ?? "Subscriber access"}</span>
+        </div>
+        {libraryAccessMessage ? <p className="library-catalog-status" role="status">{libraryAccessMessage}</p> : null}
+        {catalogStatus === "loading" ? <p className="library-catalog-status" role="status">Loading your Premium library...</p> : null}
+        {catalogStatus === "error" ? <p className="library-catalog-status library-catalog-error" role="alert">The library could not be reached. Please refresh the page.</p> : null}
+        {catalogStatus === "ready" ? (
+          <div className="library-subscriber-list">
+            {catalog.map((resource) => (
+              <article key={resource.id}>
+                <div>
+                  <span>{resource.category} / {resource.format}</span>
+                  <h2>
+                    <a
+                      href={`/resources/access/view?${new URLSearchParams({ resource: resource.id }).toString()}`}
+                      onClick={(event) => { event.preventDefault(); viewFullResource(resource); }}
+                    >
+                      {resource.title}
+                    </a>
+                  </h2>
+                </div>
+                <p>{resource.preview}</p>
+              </article>
+            ))}
+          </div>
+        ) : null}
+      </CommercePageTemplate>
+    );
   }
 
   return (
@@ -7258,25 +7378,17 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
         <section className="library-sign-in-panel" aria-labelledby="library-subscriber-sign-in-title">
           <h3 id="library-subscriber-sign-in-title">Restore Premium Access</h3>
           <p>Checkout unlocks the library automatically. On a different browser or device, use the email from checkout to restore access. Public summaries above never require an account.</p>
-          {librarySession ? (
-            <div>
-              <strong>Premium access is active on this device</strong>
-              <p>{librarySession.email ?? "Authenticated library account"}</p>
-              <button type="button" onClick={() => { clearLibrarySession(); setLibrarySession(null); setLibraryAccessMessage(""); }}>Sign Out</button>
-            </div>
-          ) : (
-            <form onSubmit={requestLibrarySignIn}>
-              <label>
-                Subscriber email
-                <input type="email" autoComplete="email" required value={libraryEmail} onChange={(event) => setLibraryEmail(event.target.value)} />
-              </label>
-              <button type="submit" disabled={libraryAuthStatus === "sending"}>
-                {libraryAuthStatus === "sending" ? "Sending Link..." : "Email My Access Link"}
-              </button>
-              {libraryAuthStatus === "sent" ? <p role="status">Check your email, then use the link to restore the library on this device.</p> : null}
-              {libraryAuthStatus === "error" ? <p role="alert">The access link could not be sent. Confirm this is the email used at Premium checkout.</p> : null}
-            </form>
-          )}
+          <form onSubmit={requestLibrarySignIn}>
+            <label>
+              Subscriber email
+              <input type="email" autoComplete="email" required value={libraryEmail} onChange={(event) => setLibraryEmail(event.target.value)} />
+            </label>
+            <button type="submit" disabled={libraryAuthStatus === "sending"}>
+              {libraryAuthStatus === "sending" ? "Sending Link..." : "Email My Access Link"}
+            </button>
+            {libraryAuthStatus === "sent" ? <p role="status">Check your email, then use the link to restore the library on this device.</p> : null}
+            {libraryAuthStatus === "error" ? <p role="alert">The access link could not be sent. Confirm this is the email used at Premium checkout.</p> : null}
+          </form>
           {libraryAccessMessage ? <p className="library-catalog-status library-catalog-error" role="alert">{libraryAccessMessage}</p> : null}
         </section>
       </section>
