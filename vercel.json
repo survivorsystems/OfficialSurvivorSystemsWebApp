@@ -29,6 +29,14 @@
       "destination": "/index.html"
     },
     {
+      "source": "/resources",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/resources/access",
+      "destination": "/index.html"
+    },
+    {
       "source": "/subscribe",
       "destination": "/index.html"
     }
