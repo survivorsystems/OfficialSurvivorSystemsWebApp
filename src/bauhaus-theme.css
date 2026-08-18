@@ -5464,6 +5464,26 @@ body:has(.assessment-workspace),
   width: 100% !important;
 }
 
+.hud-frame.module-library .library-docx-viewer {
+  background: #d9d9d9 !important;
+  height: 100% !important;
+  overflow: auto !important;
+  padding: clamp(10px, 2vw, 28px) !important;
+}
+
+.hud-frame.module-library .library-docx-viewer > p {
+  background: var(--ss-ink) !important;
+  border-left: 8px solid var(--ss-yellow) !important;
+  color: var(--ss-white) !important;
+  margin: 0 0 18px !important;
+  padding: 14px 18px !important;
+}
+
+.hud-frame.module-library .library-docx-viewer .docx-wrapper {
+  background: transparent !important;
+  padding: 0 !important;
+}
+
 @media (max-width: 720px) {
   .hud-frame.module-library .library-subscriber-list article {
     grid-template-columns: 1fr !important;

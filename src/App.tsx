@@ -27,6 +27,54 @@ function libraryPreviewImage(resource: SubscriberCatalogItem) {
     : null;
 }
 
+function ProtectedDocumentViewer({ resource, url }: { resource: SubscriberCatalogItem; url: string }) {
+  const docxContainer = useRef<HTMLDivElement>(null);
+  const [docxStatus, setDocxStatus] = useState<"loading" | "ready" | "error">("loading");
+  const isDocx = resource.format.toLowerCase().includes("docx") || resource.id.toLowerCase().endsWith(".docx");
+
+  useEffect(() => {
+    if (!isDocx || !docxContainer.current) return;
+    const controller = new AbortController();
+    const container = docxContainer.current;
+    setDocxStatus("loading");
+    container.replaceChildren();
+
+    Promise.all([
+      fetch(url, { signal: controller.signal }),
+      import("docx-preview"),
+    ])
+      .then(([response, docxPreview]) => {
+        if (!response.ok) throw new Error("Document request failed.");
+        return Promise.all([response.blob(), Promise.resolve(docxPreview)]);
+      })
+      .then(([document, docxPreview]) => docxPreview.renderAsync(document, container, undefined, {
+        breakPages: true,
+        renderHeaders: true,
+        renderFooters: true,
+      }))
+      .then(() => setDocxStatus("ready"))
+      .catch((error: unknown) => {
+        if (error instanceof DOMException && error.name === "AbortError") return;
+        setDocxStatus("error");
+      });
+
+    return () => {
+      controller.abort();
+      container.replaceChildren();
+    };
+  }, [isDocx, url]);
+
+  if (!isDocx) return <iframe src={url} title={resource.title} />;
+
+  return (
+    <div className="library-docx-viewer">
+      {docxStatus === "loading" ? <p role="status">Rendering the document...</p> : null}
+      {docxStatus === "error" ? <p role="alert">This Word document could not be displayed. Use Download Document above to open it on your device.</p> : null}
+      <div ref={docxContainer} aria-label={resource.title} />
+    </div>
+  );
+}
+
 type ModuleKey =
   | "home"
   | "assessments"
@@ -7174,7 +7222,7 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
         {viewerStatus === "error" ? <p className="library-catalog-status library-catalog-error" role="alert">This document could not be opened. Return to the library and try again.</p> : null}
         {viewerStatus === "ready" && viewerUrl && viewerResource ? (
           <section className="library-document-reader" aria-label={`${viewerResource.title} document viewer`}>
-            <iframe src={viewerUrl} title={viewerResource.title} />
+            <ProtectedDocumentViewer resource={viewerResource} url={viewerUrl} />
           </section>
         ) : null}
       </CommercePageTemplate>
