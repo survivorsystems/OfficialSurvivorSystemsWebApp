@@ -12,6 +12,7 @@ import {
   findStateResourceLocation,
   stateResourceCategories,
   stateResourceLocations,
+  stateResourcePrograms,
   type StateResourceLocation,
 } from "./data/stateResources";
 import {
@@ -6695,6 +6696,9 @@ function StateResourcesDirectory({ onSelect }: { onSelect: (location: StateResou
 }
 
 function StateResourcePage({ location, onBack }: { location: StateResourceLocation; onBack: () => void }) {
+  const programsByCategory = stateResourcePrograms[location.slug] ?? {};
+  const hasPrograms = Object.values(programsByCategory).some((programs) => programs && programs.length > 0);
+
   return (
     <section className="page-shell state-resource-page" aria-labelledby="state-resource-title">
       <PageFlourishHeader
@@ -6704,8 +6708,8 @@ function StateResourcePage({ location, onBack }: { location: StateResourceLocati
         variant="resources"
       >
         <p>
-          State-specific assistance programs are organized here by need. Program details,
-          eligibility notes, application links, and contact information will appear as each listing is verified.
+          State-specific assistance programs organized by need, with practical access information,
+          eligibility notes, service areas, and direct contact details.
         </p>
       </PageFlourishHeader>
 
@@ -6713,13 +6717,51 @@ function StateResourcePage({ location, onBack }: { location: StateResourceLocati
         Back To All States
       </button>
 
-      <div className="state-resource-category-list" aria-label={`${location.name} resource categories`}>
+      {hasPrograms ? (
+        <aside className="state-resource-verification" aria-label="Resource verification note">
+          <strong>Information reviewed August 19, 2026</strong>
+          <p>Funding, capacity, eligibility, and waitlists can change. Confirm current availability directly with the provider before relying on a program.</p>
+        </aside>
+      ) : null}
+
+      <nav className="state-resource-category-nav" aria-label={`${location.name} resource categories`}>
         {stateResourceCategories.map((category) => (
-          <section key={category}>
-            <h2>{category}</h2>
-            <p>Verified {location.name} programs and application information will be added here.</p>
-          </section>
+          <a href={`#${category.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`} key={category}>{category}</a>
         ))}
+      </nav>
+
+      <div className="state-resource-category-list" aria-label={`${location.name} resource categories`}>
+        {stateResourceCategories.map((category) => {
+          const programs = programsByCategory[category] ?? [];
+          return (
+            <section key={category} id={category.toLowerCase().replace(/[^a-z0-9]+/g, "-")}>
+              <h2>{category}</h2>
+              {programs.length > 0 ? (
+                <div className="state-program-list">
+                  {programs.map((program) => (
+                    <article key={program.name}>
+                      <h3>{program.name}</h3>
+                      <p>{program.summary}</p>
+                      <dl>
+                        {program.fit ? <div><dt>Who it may fit</dt><dd>{program.fit}</dd></div> : null}
+                        {program.access ? <div><dt>How to access it</dt><dd>{program.access}</dd></div> : null}
+                        {program.coverage ? <div><dt>Service area</dt><dd>{program.coverage}</dd></div> : null}
+                      </dl>
+                      {program.note ? <p className="state-program-note"><strong>Important:</strong> {program.note}</p> : null}
+                      <div className="state-program-actions">
+                        {program.phone ? <a href={`tel:${program.phone.replace(/[^0-9+]/g, "")}`}>Call {program.phone}</a> : null}
+                        {program.secondaryPhone ? <a href={`tel:${program.secondaryPhone.replace(/[^0-9+]/g, "")}`}>Call {program.secondaryPhone}</a> : null}
+                        {program.url ? <a href={program.url} target="_blank" rel="noreferrer">Official Website</a> : null}
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              ) : (
+                <p>Verified {location.name} programs and application information will be added here.</p>
+              )}
+            </section>
+          );
+        })}
       </div>
     </section>
   );
