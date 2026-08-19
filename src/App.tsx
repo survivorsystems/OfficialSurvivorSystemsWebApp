@@ -102,7 +102,8 @@ type ModuleKey =
   | "legal"
   | "library"
   | "access"
-  | "subscribe";
+  | "subscribe"
+  | "store";
 
 type AssessmentAnswer = {
   id: string;
@@ -1333,7 +1334,7 @@ const housingGuideSections: RebuildingGuideSection[] = [
 const moduleRoutes: Record<ModuleKey, { label: string; path: string }> = {
   home: { label: "Home", path: "/" },
   assessments: { label: "Clarity", path: "/strategy" },
-  guides: { label: "Resources", path: "/resources" },
+  guides: { label: "Guides", path: "/guides" },
   planners: { label: "Resources", path: "/resources" },
   toolkits: { label: "Resources", path: "/resources" },
   education: { label: "Surviving", path: "/surviving" },
@@ -1344,13 +1345,14 @@ const moduleRoutes: Record<ModuleKey, { label: string; path: string }> = {
   "am-i-crazy": { label: "Was I Crazy?", path: "/am-i-crazy" },
   "go-bag-prep": { label: "Immediate Support", path: "/crisis-support" },
   planning: { label: "Immediate Support", path: "/crisis-support" },
-  rebuilding: { label: "Resources", path: "/rebuilding" },
+  rebuilding: { label: "Guides", path: "/rebuilding" },
   "local-help": { label: "Resources", path: "/resources" },
-  "how-to": { label: "Resources", path: "/resources" },
-  legal: { label: "Resources", path: "/resources" },
+  "how-to": { label: "Guides", path: "/guides" },
+  legal: { label: "Guides", path: "/guides" },
   library: { label: "Premium Survivor Library", path: "/resources/access" },
   access: { label: "Premium Survivor Library", path: "/resources/access" },
   subscribe: { label: "Subscribe", path: "/subscribe" },
+  store: { label: "Store", path: "/store" },
 };
 
 const allNavTargets: Array<{ key: ModuleKey; label: string; path: string }> = [
@@ -1369,6 +1371,7 @@ const allNavTargets: Array<{ key: ModuleKey; label: string; path: string }> = [
   { key: "legal", ...moduleRoutes.legal },
   { key: "library", ...moduleRoutes.library },
   { key: "access", ...moduleRoutes.access },
+  { key: "store", ...moduleRoutes.store },
 ];
 
 type SidebarIconKey =
@@ -1385,6 +1388,8 @@ type SidebarIconKey =
 const navItems: Array<{ key: ModuleKey; label: string; path: string; code: SidebarIconKey }> = [
   { key: "home", label: "Home", path: "/", code: "home" },
   { key: "local-help", label: "Resources", path: "/resources", code: "toolkits" },
+  { key: "guides", label: "Guides", path: "/guides", code: "guides" },
+  { key: "store", label: "Store", path: "/store", code: "planners" },
   { key: "advocacy", label: "Clarity", path: "/strategy", code: "advocacy" },
   { key: "government", label: "Systems", path: "/systems", code: "government" },
   { key: "about", label: "About", path: "/about", code: "about" },
@@ -1500,8 +1505,10 @@ function navItemFor(key: ModuleKey) {
 
 function isPrimaryNavActive(activeModule: ModuleKey, navKey: ModuleKey) {
   if (navKey === "local-help") {
-    return activeModule === "local-help" || activeModule === "guides" || activeModule === "how-to" || activeModule === "legal" || activeModule === "planners" || activeModule === "toolkits" || activeModule === "access" || activeModule === "library";
+    return activeModule === "local-help" || activeModule === "planners" || activeModule === "toolkits" || activeModule === "access" || activeModule === "library";
   }
+
+  if (navKey === "guides") return activeModule === "guides" || activeModule === "how-to" || activeModule === "legal" || activeModule === "rebuilding";
 
   if (navKey === "advocacy") return activeModule === "advocacy" || activeModule === "assessments" || activeModule === "am-i-crazy";
 
@@ -3196,7 +3203,7 @@ function leaveSite() {
 function getInitialModule(): ModuleKey {
   const path = window.location.pathname;
   if (path === "/assessments") return "advocacy";
-  if (path === "/guides") return "local-help";
+  if (path === "/guides") return "guides";
   if (path.startsWith("/guides/")) return "how-to";
   if (path === "/planners-trackers" || path === "/toolkits") return "local-help";
   if (path === "/surviving" || path === "/education-awareness") return "advocacy";
@@ -3212,6 +3219,7 @@ function getInitialModule(): ModuleKey {
   if (path === "/library") return "access";
   if (path === "/resources/access" || path === "/resources/access/view") return "access";
   if (path === "/subscribe") return "subscribe";
+  if (path === "/store") return "store";
   if (path.startsWith("/resources/")) return "local-help";
   if (path === "/resources") return "local-help";
 
@@ -3622,6 +3630,15 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
         </article>
       </div>
 
+      <aside className="home-education-disclaimer" aria-labelledby="home-education-disclaimer-title">
+        <strong id="home-education-disclaimer-title">Educational information, not individualized advice</strong>
+        <p>
+          Survivor Systems provides general educational information and practical planning tools.
+          Nothing on this site should be understood as legal, medical, financial, mental-health,
+          or other individualized professional advice unless a page explicitly states otherwise.
+        </p>
+      </aside>
+
       <div className="home-support-grid">
         <section className="home-privacy-panel" aria-labelledby="home-privacy">
           <div>
@@ -3633,8 +3650,8 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
               software. Changing settings or clearing history can sometimes alert the person monitoring
               you. Use a safer device when possible and make changes only when they feel safe for you.
             </p>
-            <button type="button" onClick={() => onNavigate("local-help", "/resources/digital-safety")}>
-              Open Digital Safety Resources
+            <button type="button" onClick={() => onNavigate("how-to", "/guides/browser-trace-cleanup")}>
+              Open Digital Safety Guide
             </button>
           </div>
         </section>
@@ -3649,8 +3666,18 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
         <div className="home-category-grid">
           <article className="home-category-card">
             <h2>Resources</h2>
-            <p>Free guides, housing and benefits information, legal tools, practical how-tos, and the separate Premium Survivor Library.</p>
+            <p>State-by-state housing, food, childcare, transportation, disability, immigration, trafficking, and assistance directories.</p>
             <button type="button" onClick={() => onNavigate("local-help", "/resources")}>Explore Resources</button>
+          </article>
+          <article className="home-category-card">
+            <h2>Guides</h2>
+            <p>Practical walkthroughs for housing, benefits, court preparation, digital safety, daily stability, and difficult transitions.</p>
+            <button type="button" onClick={() => onNavigate("guides", "/guides")}>Browse Guides</button>
+          </article>
+          <article className="home-category-card">
+            <h2>Store</h2>
+            <p>Focused Survivor Systems kits that organize related planners, logs, checklists, and preparation tools around a specific need.</p>
+            <button type="button" onClick={() => onNavigate("store", "/store")}>Visit the Store</button>
           </article>
           <article className="home-category-card">
             <h2>Clarity</h2>
@@ -3664,6 +3691,55 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
           </article>
         </div>
       </section>
+    </section>
+  );
+}
+
+function StoreModule() {
+  const plannedKits = [
+    {
+      title: "Family Court Kit",
+      description: "Court planning, incident documentation, custody records, evidence organization, deadlines, and hearing preparation in one coordinated collection.",
+    },
+    {
+      title: "Protective Order Kit",
+      description: "Incident chronology, evidence preparation, filing organization, hearing planning, order records, and enforcement documentation.",
+    },
+    {
+      title: "Housing Stability Kit",
+      description: "Housing strategy, applications, waitlists, documents, program contacts, follow-up, utilities, and relocation planning.",
+    },
+  ];
+
+  return (
+    <section className="page-shell store-module" aria-labelledby="store-title">
+      <PageFlourishHeader
+        eyebrow="SURVIVOR SYSTEMS / PRACTICAL KITS"
+        title="Survivor Systems Store"
+        titleId="store-title"
+        variant="resources"
+      >
+        <p>
+          Focused collections of related tools, grouped around the real task someone is trying to manage.
+          Each kit will clearly show what is included before purchase.
+        </p>
+      </PageFlourishHeader>
+
+      <section className="store-status" aria-labelledby="store-status-title">
+        <span>KITS ARE BEING ASSEMBLED</span>
+        <h2 id="store-status-title">Built around a need, not a pile of downloads.</h2>
+        <p>Details, previews, and pricing will appear as each collection is finalized.</p>
+      </section>
+
+      <div className="store-kit-grid" aria-label="Kits in preparation">
+        {plannedKits.map((kit) => (
+          <article key={kit.title}>
+            <span>IN PREPARATION</span>
+            <h2>{kit.title}</h2>
+            <p>{kit.description}</p>
+          </article>
+        ))}
+      </div>
     </section>
   );
 }
@@ -7043,14 +7119,14 @@ function ResourceModule({
   return (
     <section className="page-shell resources-module" aria-label="Resources">
       <PageFlourishHeader
-        eyebrow="FREE GUIDES + SUBSCRIBER TOOLS"
+        eyebrow="STATE-BY-STATE SUPPORT DIRECTORY"
         title="Resources"
         titleId="resources-title"
         variant="resources"
       >
         <p>
-          Browse practical guides, housing and benefits information, legal tools, planning systems,
-          and previews from the separate Premium Survivor Library.
+          Browse state-specific housing, food, childcare, transportation, disability, immigration,
+          trafficking, and other assistance programs, plus practical planning resources.
         </p>
       </PageFlourishHeader>
 
@@ -8004,6 +8080,8 @@ export function App() {
     <SupportModule onNavigate={navigate} />
   ) : activeModule === "subscribe" ? (
     <SubscribeModule onNavigate={navigate} />
+  ) : activeModule === "store" ? (
+    <StoreModule />
   ) : activeModule === "local-help" || activeModule === "how-to" || activeModule === "legal" || activeModule === "library" ? (
     <ResourceModule moduleKey={activeModule} onNavigate={navigate} />
   ) : (

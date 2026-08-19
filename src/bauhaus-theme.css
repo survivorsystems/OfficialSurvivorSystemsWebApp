@@ -6580,6 +6580,129 @@ body:has(.assessment-workspace),
   }
 }
 
+/* Homepage educational-information boundary. */
+.hud-frame.module-home .home-education-disclaimer {
+  background: var(--ss-ink) !important;
+  border: 4px solid var(--ss-red) !important;
+  box-shadow: 9px 9px 0 var(--ss-yellow) !important;
+  color: var(--ss-white) !important;
+  display: grid !important;
+  gap: 8px !important;
+  margin: 8px 9px 38px 0 !important;
+  padding: clamp(20px, 4vw, 34px) !important;
+}
+
+.hud-frame.module-home .home-education-disclaimer :is(strong, p) {
+  color: var(--ss-white) !important;
+}
+
+.hud-frame.module-home .home-education-disclaimer strong {
+  color: var(--ss-yellow) !important;
+  font-family: var(--ss-font-display) !important;
+  font-size: clamp(1.15rem, 2.5vw, 1.7rem) !important;
+}
+
+.hud-frame.module-home .home-education-disclaimer p {
+  line-height: 1.62 !important;
+  margin: 0 !important;
+  max-width: 88ch !important;
+}
+
+/* Store shell for the coming kit catalog. */
+.hud-frame.module-store .store-module > .page-flourish-header {
+  background: var(--ss-blue) !important;
+  border: 4px solid var(--ss-red) !important;
+  box-shadow: 10px 10px 0 var(--ss-yellow) !important;
+  margin: 0 10px 42px 0 !important;
+}
+
+.hud-frame.module-store .store-module > .page-flourish-header :is(.folk-kicker, h1, p) {
+  color: var(--ss-white) !important;
+}
+
+.hud-frame.module-store .store-status {
+  background: var(--ss-ink) !important;
+  border: 4px solid var(--ss-yellow) !important;
+  box-shadow: 9px 9px 0 var(--ss-red) !important;
+  color: var(--ss-white) !important;
+  margin: 0 9px 42px 0 !important;
+  padding: clamp(28px, 5vw, 56px) !important;
+}
+
+.hud-frame.module-store .store-status :is(span, h2, p) {
+  color: var(--ss-white) !important;
+}
+
+.hud-frame.module-store .store-status > span {
+  color: var(--ss-yellow) !important;
+  font-size: 0.78rem !important;
+  font-weight: 900 !important;
+}
+
+.hud-frame.module-store .store-status h2 {
+  font-size: clamp(2rem, 5vw, 4.4rem) !important;
+  margin: 10px 0 16px !important;
+  max-width: 18ch !important;
+}
+
+.hud-frame.module-store .store-status p {
+  line-height: 1.62 !important;
+  margin: 0 !important;
+}
+
+.hud-frame.module-store .store-kit-grid {
+  display: grid !important;
+  gap: 24px !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+}
+
+.hud-frame.module-store .store-kit-grid article {
+  background: var(--ss-blue) !important;
+  border: 4px solid var(--ss-red) !important;
+  box-shadow: 9px 9px 0 var(--ss-yellow) !important;
+  color: var(--ss-white) !important;
+  margin: 0 9px 9px 0 !important;
+  padding: clamp(24px, 4vw, 40px) !important;
+}
+
+.hud-frame.module-store .store-kit-grid article:nth-child(2) {
+  background: var(--ss-red) !important;
+  border-color: var(--ss-yellow) !important;
+  box-shadow-color: var(--ss-blue) !important;
+}
+
+.hud-frame.module-store .store-kit-grid article:nth-child(3) {
+  background: var(--ss-ink) !important;
+  border-color: var(--ss-blue) !important;
+  box-shadow-color: var(--ss-red) !important;
+}
+
+.hud-frame.module-store .store-kit-grid article :is(span, h2, p) {
+  color: var(--ss-white) !important;
+}
+
+.hud-frame.module-store .store-kit-grid article > span {
+  color: var(--ss-yellow) !important;
+  font-size: 0.74rem !important;
+  font-weight: 900 !important;
+}
+
+.hud-frame.module-store .store-kit-grid h2 {
+  font-size: clamp(1.55rem, 3vw, 2.6rem) !important;
+  margin: 12px 0 14px !important;
+}
+
+.hud-frame.module-store .store-kit-grid p {
+  line-height: 1.62 !important;
+  margin: 0 !important;
+}
+
+@media (max-width: 940px) {
+  .hud-frame.module-store .store-kit-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
 /* Interior pages sit directly beside navigation instead of inside a black moat. */
 .hud-frame:not(.module-home) .win95-desktop {
   column-gap: 0 !important;
