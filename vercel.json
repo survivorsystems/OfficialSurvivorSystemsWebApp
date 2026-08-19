@@ -41,6 +41,10 @@
       "destination": "/index.html"
     },
     {
+      "source": "/resources/states/:state",
+      "destination": "/index.html"
+    },
+    {
       "source": "/subscribe",
       "destination": "/index.html"
     }

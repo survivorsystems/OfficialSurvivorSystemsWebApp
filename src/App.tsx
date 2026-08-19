@@ -9,6 +9,12 @@ import blankProposedSapcrOrderPreview from "./assets/library/blank-proposed-sapc
 import { CommercePageTemplate, EditorialPageTemplate } from "./components/PageTemplates";
 import { HousingStrategySystem } from "./components/HousingStrategySystem";
 import {
+  findStateResourceLocation,
+  stateResourceCategories,
+  stateResourceLocations,
+  type StateResourceLocation,
+} from "./data/stateResources";
+import {
   createLibraryFileUrl,
   fetchSubscriberCatalog,
   formatCatalogFileSize,
@@ -6643,6 +6649,82 @@ function AccessInformationModule() {
   return <LibraryModule initialSearch={requestedPreview} />;
 }
 
+function StateResourcesDirectory({ onSelect }: { onSelect: (location: StateResourceLocation) => void }) {
+  const [query, setQuery] = useState("");
+  const normalizedQuery = query.trim().toLowerCase();
+  const visibleLocations = stateResourceLocations.filter((location) =>
+    !normalizedQuery || location.name.toLowerCase().includes(normalizedQuery)
+  );
+
+  return (
+    <section className="state-resource-directory" aria-labelledby="state-resource-directory-title">
+      <header>
+        <span>STATE-BY-STATE DIRECTORY</span>
+        <h2 id="state-resource-directory-title">Find Programs Where You Live</h2>
+        <p>
+          Choose a state or Puerto Rico to find housing, food, childcare, transportation,
+          disability, and other assistance programs available there.
+        </p>
+      </header>
+      <label className="state-resource-search">
+        Find your state or territory
+        <input
+          type="search"
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
+          placeholder="Start typing a location"
+        />
+      </label>
+      <nav className="state-resource-grid" aria-label="State and territory resource pages">
+        {visibleLocations.map((location) => (
+          <a
+            href={`/resources/states/${location.slug}`}
+            key={location.slug}
+            onClick={(event) => {
+              event.preventDefault();
+              onSelect(location);
+            }}
+          >
+            {location.name}
+          </a>
+        ))}
+      </nav>
+      {visibleLocations.length === 0 ? <p className="state-resource-empty">No locations match that search.</p> : null}
+    </section>
+  );
+}
+
+function StateResourcePage({ location, onBack }: { location: StateResourceLocation; onBack: () => void }) {
+  return (
+    <section className="page-shell state-resource-page" aria-labelledby="state-resource-title">
+      <PageFlourishHeader
+        eyebrow="RESOURCES / STATE PROGRAMS"
+        title={`${location.name} Resources`}
+        titleId="state-resource-title"
+        variant="resources"
+      >
+        <p>
+          State-specific assistance programs are organized here by need. Program details,
+          eligibility notes, application links, and contact information will appear as each listing is verified.
+        </p>
+      </PageFlourishHeader>
+
+      <button className="resource-back-button state-resource-back" type="button" onClick={onBack}>
+        Back To All States
+      </button>
+
+      <div className="state-resource-category-list" aria-label={`${location.name} resource categories`}>
+        {stateResourceCategories.map((category) => (
+          <section key={category}>
+            <h2>{category}</h2>
+            <p>Verified {location.name} programs and application information will be added here.</p>
+          </section>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function ResourceModule({
   moduleKey,
   onNavigate,
@@ -6661,6 +6743,10 @@ function ResourceModule({
   const requestedDirectory = window.location.pathname.startsWith("/resources/")
     ? window.location.pathname.replace("/resources/", "")
     : "housing";
+  const requestedStateSlug = window.location.pathname.startsWith("/resources/states/")
+    ? window.location.pathname.replace("/resources/states/", "").split("/")[0]
+    : null;
+  const [activeStateSlug, setActiveStateSlug] = useState<string | null>(requestedStateSlug);
   const [activeDirectory, setActiveDirectory] = useState<string | null>(requestedDirectory || "housing");
   const freeResourceLabels = new Set([
     "Housing Strategy System",
@@ -6681,7 +6767,34 @@ function ResourceModule({
     setActiveFolder(requestedGuide?.priority ?? getInitialResourceFolder(moduleKey));
     setGuideLaunch(requestedGuide ? { guideId: requestedGuide.id, priorityId: requestedGuide.priority } : null);
     setActiveDirectory(requestedDirectory || "housing");
-  }, [moduleKey, requestedDirectory, requestedGuide]);
+    setActiveStateSlug(requestedStateSlug);
+  }, [moduleKey, requestedDirectory, requestedGuide, requestedStateSlug]);
+
+  useEffect(() => {
+    const syncStateRoute = () => {
+      const path = window.location.pathname;
+      setActiveStateSlug(path.startsWith("/resources/states/")
+        ? path.replace("/resources/states/", "").split("/")[0]
+        : null);
+    };
+    window.addEventListener("popstate", syncStateRoute);
+    return () => window.removeEventListener("popstate", syncStateRoute);
+  }, []);
+
+  const activeState = findStateResourceLocation(activeStateSlug);
+
+  if (activeState) {
+    return (
+      <StateResourcePage
+        location={activeState}
+        onBack={() => {
+          window.history.pushState({}, "", "/resources");
+          setActiveStateSlug(null);
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }}
+      />
+    );
+  }
 
   if (activeFolder === "legal") {
     return (
@@ -6898,6 +7011,14 @@ function ResourceModule({
           and previews from the separate Premium Survivor Library.
         </p>
       </PageFlourishHeader>
+
+      <StateResourcesDirectory
+        onSelect={(location) => {
+          window.history.pushState({}, "", `/resources/states/${location.slug}`);
+          setActiveStateSlug(location.slug);
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }}
+      />
 
       <div className="resource-directory-tree" id="resource-directory" aria-label="Resource directories">
         {resourceDirectories.map((directory) => {
