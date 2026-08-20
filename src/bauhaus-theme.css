@@ -7361,6 +7361,246 @@ body:has(.assessment-workspace),
   color: var(--ss-white) !important;
 }
 
+/* Agency feedback: one continuous, private questionnaire. */
+.hud-frame.module-local-help .state-resource-top-actions {
+  align-items: stretch !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 18px !important;
+  margin: 0 8px 34px 0 !important;
+}
+
+.hud-frame.module-local-help .state-resource-top-actions .state-resource-back {
+  margin: 0 !important;
+}
+
+.hud-frame.module-local-help .state-resource-review-button {
+  align-items: center !important;
+  background: var(--ss-red) !important;
+  border: 3px solid var(--ss-ink) !important;
+  box-shadow: 6px 6px 0 var(--ss-blue) !important;
+  color: var(--ss-white) !important;
+  display: inline-flex !important;
+  font-family: "Space Grotesk", sans-serif !important;
+  font-weight: 900 !important;
+  min-height: 50px !important;
+  padding: 10px 18px !important;
+  text-decoration: none !important;
+  text-transform: uppercase !important;
+}
+
+.hud-frame.module-local-help .state-resource-review-button:is(:hover, :focus-visible) {
+  background: var(--ss-blue) !important;
+  box-shadow: 3px 3px 0 var(--ss-yellow) !important;
+  transform: translate(3px, 3px) !important;
+}
+
+.hud-frame.module-local-help .agency-review-page {
+  color: var(--ss-white) !important;
+}
+
+.hud-frame.module-local-help .agency-review-hero {
+  background: var(--ss-ink) !important;
+  border: 4px solid var(--ss-blue) !important;
+  box-shadow: 10px 10px 0 var(--ss-red) !important;
+  color: var(--ss-white) !important;
+  margin: 0 10px 34px 0 !important;
+  padding: clamp(26px, 5vw, 58px) !important;
+  position: relative !important;
+}
+
+.hud-frame.module-local-help .agency-review-hero::before {
+  background: linear-gradient(90deg, var(--ss-blue) 0 25%, var(--ss-red) 25% 50%, var(--ss-yellow) 50% 75%, var(--ss-green) 75%) !important;
+  content: "" !important;
+  height: 12px !important;
+  left: 0 !important;
+  position: absolute !important;
+  right: 0 !important;
+  top: 0 !important;
+}
+
+.hud-frame.module-local-help .agency-review-hero :is(h1, p) {
+  color: var(--ss-white) !important;
+}
+
+.hud-frame.module-local-help .agency-review-hero > p:first-child {
+  font-family: "Space Grotesk", sans-serif !important;
+  font-weight: 900 !important;
+  margin: 0 0 12px !important;
+}
+
+.hud-frame.module-local-help .agency-review-hero h1 {
+  font-size: clamp(2.4rem, 7vw, 5.4rem) !important;
+  line-height: .92 !important;
+  margin: 0 0 18px !important;
+}
+
+.hud-frame.module-local-help .agency-review-hero > p:last-child {
+  font-size: 1.05rem !important;
+  line-height: 1.65 !important;
+  margin: 0 !important;
+  max-width: 760px !important;
+}
+
+.hud-frame.module-local-help .agency-review-back {
+  background: var(--ss-ink) !important;
+  border: 3px solid var(--ss-red) !important;
+  box-shadow: 5px 5px 0 var(--ss-blue) !important;
+  color: var(--ss-white) !important;
+  margin: 0 5px 30px 0 !important;
+}
+
+.hud-frame.module-local-help .agency-review-form,
+.hud-frame.module-local-help .agency-review-success {
+  background: var(--ss-ink) !important;
+  border: 4px solid var(--ss-blue) !important;
+  box-shadow: 11px 11px 0 var(--ss-red) !important;
+  color: var(--ss-white) !important;
+  margin: 0 11px 14px 0 !important;
+  padding: clamp(18px, 4vw, 48px) !important;
+}
+
+.hud-frame.module-local-help .agency-review-form :is(h2, p, label, legend, span),
+.hud-frame.module-local-help .agency-review-success :is(h2, p) {
+  color: var(--ss-white) !important;
+}
+
+.hud-frame.module-local-help .agency-review-notice {
+  border-bottom: 5px solid var(--ss-yellow) !important;
+  padding: 0 0 30px !important;
+}
+
+.hud-frame.module-local-help .agency-review-notice h2,
+.hud-frame.module-local-help .agency-review-section > h2 {
+  font-size: clamp(1.55rem, 4vw, 2.4rem) !important;
+  margin: 0 0 12px !important;
+}
+
+.hud-frame.module-local-help .agency-review-notice p {
+  line-height: 1.65 !important;
+  margin: 0 !important;
+}
+
+.hud-frame.module-local-help .agency-review-section {
+  border-bottom: 5px solid var(--ss-blue) !important;
+  padding: clamp(30px, 5vw, 54px) 0 !important;
+}
+
+.hud-frame.module-local-help .agency-review-section:nth-of-type(3n+2) { border-bottom-color: var(--ss-red) !important; }
+.hud-frame.module-local-help .agency-review-section:nth-of-type(3n) { border-bottom-color: var(--ss-yellow) !important; }
+
+.hud-frame.module-local-help .agency-review-question {
+  border: 0 !important;
+  margin: 30px 0 0 !important;
+  min-width: 0 !important;
+  padding: 0 !important;
+}
+
+.hud-frame.module-local-help .agency-review-question legend,
+.hud-frame.module-local-help :is(.agency-review-input, .agency-review-textarea) > span {
+  font-family: "Space Grotesk", sans-serif !important;
+  font-size: 1.05rem !important;
+  font-weight: 800 !important;
+  margin-bottom: 12px !important;
+}
+
+.hud-frame.module-local-help .agency-review-options {
+  display: grid !important;
+  gap: 10px !important;
+  margin-top: 12px !important;
+}
+
+.hud-frame.module-local-help .agency-review-options-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+.hud-frame.module-local-help .agency-review-options label,
+.hud-frame.module-local-help .agency-review-consent {
+  align-items: flex-start !important;
+  background: #202329 !important;
+  border: 2px solid var(--ss-blue) !important;
+  display: flex !important;
+  gap: 10px !important;
+  line-height: 1.45 !important;
+  padding: 12px 14px !important;
+}
+
+.hud-frame.module-local-help .agency-review-options label:nth-child(3n+2) { border-color: var(--ss-red) !important; }
+.hud-frame.module-local-help .agency-review-options label:nth-child(3n) { border-color: var(--ss-yellow) !important; }
+
+.hud-frame.module-local-help .agency-review-options input,
+.hud-frame.module-local-help .agency-review-consent input {
+  accent-color: var(--ss-red) !important;
+  flex: 0 0 auto !important;
+  height: 18px !important;
+  margin-top: 2px !important;
+  width: 18px !important;
+}
+
+.hud-frame.module-local-help .agency-review-input,
+.hud-frame.module-local-help .agency-review-textarea {
+  display: grid !important;
+  margin: 26px 0 0 !important;
+}
+
+.hud-frame.module-local-help :is(.agency-review-input input, .agency-review-textarea textarea) {
+  background: var(--ss-white) !important;
+  border: 3px solid var(--ss-blue) !important;
+  border-radius: 0 !important;
+  color: var(--ss-ink) !important;
+  font: inherit !important;
+  padding: 13px !important;
+  width: 100% !important;
+}
+
+.hud-frame.module-local-help .agency-review-textarea textarea {
+  min-height: 140px !important;
+  resize: vertical !important;
+}
+
+.hud-frame.module-local-help .agency-review-consent {
+  border-color: var(--ss-yellow) !important;
+  margin-top: 28px !important;
+}
+
+.hud-frame.module-local-help .agency-review-honeypot {
+  height: 1px !important;
+  left: -10000px !important;
+  overflow: hidden !important;
+  position: absolute !important;
+  width: 1px !important;
+}
+
+.hud-frame.module-local-help .agency-review-error {
+  background: var(--ss-red) !important;
+  border: 3px solid var(--ss-white) !important;
+  font-weight: 800 !important;
+  margin: 28px 0 0 !important;
+  padding: 14px !important;
+}
+
+.hud-frame.module-local-help .agency-review-submit {
+  background: var(--ss-yellow) !important;
+  border: 4px solid var(--ss-blue) !important;
+  box-shadow: 7px 7px 0 var(--ss-red) !important;
+  color: var(--ss-ink) !important;
+  font-family: "Space Grotesk", sans-serif !important;
+  font-size: 1.1rem !important;
+  font-weight: 900 !important;
+  margin: 34px 7px 7px 0 !important;
+  min-height: 54px !important;
+  padding: 12px 22px !important;
+  text-transform: uppercase !important;
+}
+
+.hud-frame.module-local-help .agency-review-submit:disabled { cursor: wait !important; opacity: .7 !important; }
+
+@media (max-width: 720px) {
+  .hud-frame.module-local-help .agency-review-options-grid { grid-template-columns: 1fr !important; }
+  .hud-frame.module-local-help .state-resource-top-actions { display: grid !important; }
+  .hud-frame.module-local-help .state-resource-review-button { justify-content: center !important; }
+}
+
 /* Homepage notices and frame alignment. Keep this after historical theme layers. */
 .hud-frame.module-home .home-top-notices {
   display: grid !important;

@@ -7,6 +7,7 @@ import denialSupportTwo from "./assets/support/denial-support-2.png";
 import dvFundingInfographic from "./assets/systems/dv-funding-infographic.png";
 import blankProposedSapcrOrderPreview from "./assets/library/blank-proposed-sapcr-order-preview.png";
 import { CommercePageTemplate, EditorialPageTemplate } from "./components/PageTemplates";
+import { AgencyReviewForm } from "./components/AgencyReviewForm";
 import { HousingStrategySystem } from "./components/HousingStrategySystem";
 import {
   findStateResourceLocation,
@@ -6889,9 +6890,10 @@ function StateResourcePage({ location, onBack }: { location: StateResourceLocati
         </p>
       </PageFlourishHeader>
 
-      <button className="resource-back-button state-resource-back" type="button" onClick={onBack}>
-        Back To All States
-      </button>
+      <div className="state-resource-top-actions">
+        <button className="resource-back-button state-resource-back" type="button" onClick={onBack}>Back To All States</button>
+        <a className="state-resource-review-button" href={`/resources/review-agency?state=${encodeURIComponent(location.name)}`}>Review An Agency</a>
+      </div>
 
       {hasPrograms ? (
         <aside className="state-resource-verification" aria-label="Resource verification note">
@@ -6966,6 +6968,7 @@ function ResourceModule({
     : null;
   const [activeStateSlug, setActiveStateSlug] = useState<string | null>(requestedStateSlug);
   const [activeDirectory, setActiveDirectory] = useState<string | null>(requestedDirectory || "housing");
+  const isAgencyReview = window.location.pathname === "/resources/review-agency";
   const freeResourceLabels = new Set([
     "Housing Strategy System",
     "Housing Options",
@@ -7000,6 +7003,16 @@ function ResourceModule({
   }, []);
 
   const activeState = findStateResourceLocation(activeStateSlug);
+
+  if (isAgencyReview) {
+    const requestedStateName = new URLSearchParams(window.location.search).get("state") || "Your State";
+    return <AgencyReviewForm stateName={requestedStateName} onBack={() => {
+      const state = stateResourceLocations.find((item) => item.name === requestedStateName);
+      window.history.pushState({}, "", state ? `/resources/states/${state.slug}` : "/resources");
+      window.dispatchEvent(new PopStateEvent("popstate"));
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }} />;
+  }
 
   if (activeState) {
     return (
