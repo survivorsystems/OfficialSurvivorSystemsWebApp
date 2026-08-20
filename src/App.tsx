@@ -3218,7 +3218,7 @@ function getInitialModule(): ModuleKey {
   if (path === "/library") return "access";
   if (path === "/resources/access" || path === "/resources/access/view") return "access";
   if (path === "/subscribe") return "subscribe";
-  if (path === "/store") return "store";
+  if (path === "/store" || path.startsWith("/store/")) return "store";
   if (path.startsWith("/resources/")) return "local-help";
   if (path === "/resources") return "local-help";
 
@@ -3694,7 +3694,82 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
   );
 }
 
+type BundleDownload = {
+  name: string;
+  url: string;
+};
+
 function StoreModule() {
+  const isHealingBundleSuccess = window.location.pathname === "/store/survivor-healing-bundle/success";
+  const [bundleDownloads, setBundleDownloads] = useState<BundleDownload[]>([]);
+  const [bundleAccessStatus, setBundleAccessStatus] = useState<"idle" | "loading" | "ready" | "error">("idle");
+  const [bundleAccessMessage, setBundleAccessMessage] = useState("");
+
+  useEffect(() => {
+    if (!isHealingBundleSuccess) return;
+    const sessionId = new URLSearchParams(window.location.search).get("session_id");
+    if (!sessionId) {
+      setBundleAccessStatus("error");
+      setBundleAccessMessage("The Stripe checkout confirmation is missing. Please use the return link from your completed checkout.");
+      return;
+    }
+
+    const controller = new AbortController();
+    setBundleAccessStatus("loading");
+    fetch(`/api/bundle-access?session_id=${encodeURIComponent(sessionId)}`, { signal: controller.signal })
+      .then(async (response) => {
+        const result = await response.json() as { downloads?: BundleDownload[]; error?: string };
+        if (!response.ok || !result.downloads) throw new Error(result.error || "The bundle could not be prepared.");
+        setBundleDownloads(result.downloads);
+        setBundleAccessStatus("ready");
+      })
+      .catch((error: unknown) => {
+        if (controller.signal.aborted) return;
+        setBundleAccessStatus("error");
+        setBundleAccessMessage(error instanceof Error ? error.message : "The bundle could not be prepared.");
+      });
+
+    return () => controller.abort();
+  }, [isHealingBundleSuccess]);
+
+  if (isHealingBundleSuccess) {
+    return (
+      <section className="page-shell store-module store-bundle-success" aria-labelledby="store-bundle-success-title">
+        <PageFlourishHeader
+          eyebrow="PURCHASE COMPLETE"
+          title="Your Survivor Healing Bundle"
+          titleId="store-bundle-success-title"
+          variant="resources"
+        >
+          <p>Your five resources will appear below after the completed Stripe payment is verified.</p>
+        </PageFlourishHeader>
+
+        <section className="store-delivery-panel" aria-live="polite">
+          {bundleAccessStatus === "loading" ? <p>Preparing your secure downloads...</p> : null}
+          {bundleAccessStatus === "error" ? (
+            <>
+              <h2>We couldn't prepare the files yet.</h2>
+              <p>{bundleAccessMessage}</p>
+              <button type="button" onClick={() => window.location.reload()}>Try Again</button>
+            </>
+          ) : null}
+          {bundleAccessStatus === "ready" ? (
+            <>
+              <span>SECURE DOWNLOADS</span>
+              <h2>Everything in your bundle</h2>
+              <p>These private links expire after ten minutes. Refresh this page to generate new links from the verified purchase.</p>
+              <div className="store-download-list">
+                {bundleDownloads.map((download) => (
+                  <a key={download.name} href={download.url}>{download.name}</a>
+                ))}
+              </div>
+            </>
+          ) : null}
+        </section>
+      </section>
+    );
+  }
+
   const plannedKits = [
     {
       title: "Family Court Kit",
@@ -3725,12 +3800,31 @@ function StoreModule() {
       </PageFlourishHeader>
 
       <section className="store-status" aria-labelledby="store-status-title">
-        <span>KITS ARE BEING ASSEMBLED</span>
+        <span>THE FIRST KIT IS READY</span>
         <h2 id="store-status-title">Built around a need, not a pile of downloads.</h2>
-        <p>Details, previews, and pricing will appear as each collection is finalized.</p>
+        <p>Each collection brings related tools together around one practical area of rebuilding.</p>
       </section>
 
-      <div className="store-kit-grid" aria-label="Kits in preparation">
+      <div className="store-live-kit" aria-label="Available kit">
+        <article>
+          <span>AVAILABLE NOW</span>
+          <h2>Survivor Healing Bundle</h2>
+          <p>A five-part collection for rebuilding emotional, financial, sexual, and personal autonomy while examining the larger systems that shape control.</p>
+          <ul>
+            <li>Emotional Autonomy Restoration</li>
+            <li>Financial Autonomy Restoration</li>
+            <li>Sexual Autonomy Restoration</li>
+            <li>Total Autonomy Restoration</li>
+            <li>Dismantling The Patriarchy</li>
+          </ul>
+          <div className="store-purchase-row">
+            <strong>$14.99</strong>
+            <a href="https://buy.stripe.com/9B68wR0Ko0cr7Vm9QbfQI03">Purchase Securely</a>
+          </div>
+        </article>
+      </div>
+
+      <div className="store-kit-grid" aria-label="More kits in preparation">
         {plannedKits.map((kit) => (
           <article key={kit.title}>
             <span>IN PREPARATION</span>

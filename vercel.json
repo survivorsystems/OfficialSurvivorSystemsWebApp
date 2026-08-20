@@ -61,6 +61,10 @@
       "destination": "/index.html"
     },
     {
+      "source": "/store/survivor-healing-bundle/success",
+      "destination": "/index.html"
+    },
+    {
       "source": "/subscribe",
       "destination": "/index.html"
     }
