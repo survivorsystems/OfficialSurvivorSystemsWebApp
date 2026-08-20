@@ -7189,3 +7189,34 @@ body:has(.assessment-workspace),
 .hud-frame.module-government .nonprofit-audit-header > span {
   color: var(--ss-yellow) !important;
 }
+
+/* Homepage content sits directly on its yellow canvas, without interior-page stripes. */
+.hud-frame.module-home .folk-main-shell,
+.hud-frame.module-home .terminal-screen,
+.hud-frame.terminal-frame.module-home .terminal-content {
+  background-color: var(--ss-yellow) !important;
+  background-image: none !important;
+}
+
+.hud-frame.terminal-frame.module-home .terminal-content {
+  padding: clamp(22px, 3vw, 42px) !important;
+}
+
+.hud-frame.module-home .home-terminal.bauhaus-home {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.hud-frame.module-home .folk-main-shell::before,
+.hud-frame.module-home .folk-main-shell::after {
+  display: none !important;
+}
+
+@media (max-width: 720px) {
+  .hud-frame.terminal-frame.module-home .terminal-content {
+    padding: 16px !important;
+  }
+}
