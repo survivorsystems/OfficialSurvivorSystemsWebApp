@@ -7238,3 +7238,31 @@ body:has(.assessment-workspace),
 .hud-frame.module-home .folk-sidebar .desktop-icon-grid {
   background: var(--ss-ink) !important;
 }
+
+/* State-page navigation stays legible against the yellow canvas. */
+.hud-frame.module-local-help .state-resource-back,
+.hud-frame.module-local-help .state-resource-category-nav a,
+.hud-frame.module-local-help .state-resource-category-nav a:nth-child(n) {
+  background: var(--ss-ink) !important;
+  border: 3px solid var(--ss-blue) !important;
+  box-shadow: 5px 5px 0 var(--ss-red) !important;
+  color: var(--ss-white) !important;
+}
+
+.hud-frame.module-local-help .state-resource-category-nav a:nth-child(even) {
+  border-color: var(--ss-red) !important;
+  box-shadow-color: var(--ss-blue) !important;
+}
+
+.hud-frame.module-local-help .state-resource-back:is(:hover, :focus-visible),
+.hud-frame.module-local-help .state-resource-category-nav a:is(:hover, :focus-visible) {
+  background: #292d34 !important;
+  color: var(--ss-white) !important;
+}
+
+.hud-frame.terminal-frame.module-local-help .terminal-content .resource-back-button.state-resource-back {
+  background: var(--ss-ink) !important;
+  border-color: var(--ss-blue) !important;
+  box-shadow: 5px 5px 0 var(--ss-red) !important;
+  color: var(--ss-white) !important;
+}
