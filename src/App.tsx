@@ -3599,6 +3599,33 @@ function TerminalChrome({
 function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: string) => void }) {
   return (
     <section className="home-terminal bauhaus-home" aria-labelledby="home-title">
+      <div className="home-top-notices" aria-label="Important safety and educational notices">
+        <section className="home-privacy-panel" aria-labelledby="home-privacy">
+          <div>
+            <p className="folk-kicker">A NOTE ABOUT DEVICE SAFETY</p>
+            <h2 id="home-privacy">Abusers often monitor devices and online activity.</h2>
+            <p>
+              Cyberstalking can include checking browser history, accessing accounts, tracking a
+              phone's location, reading messages, monitoring shared plans, or installing surveillance
+              software. Changing settings or clearing history can sometimes alert the person monitoring
+              you. Use a safer device when possible and make changes only when they feel safe for you.
+            </p>
+            <button type="button" onClick={() => onNavigate("how-to", "/guides/browser-trace-cleanup")}>
+              Open Digital Safety Guide
+            </button>
+          </div>
+        </section>
+
+        <aside className="home-education-disclaimer" aria-labelledby="home-education-disclaimer-title">
+          <strong id="home-education-disclaimer-title">Educational information, not individualized advice</strong>
+          <p>
+            Survivor Systems provides general educational information and practical planning tools.
+            Nothing on this site should be understood as legal, medical, financial, mental-health,
+            or other individualized professional advice unless a page explicitly states otherwise.
+          </p>
+        </aside>
+      </div>
+
       <header className="home-briefing-bar">
         <div>
           <span>SURVIVOR SYSTEMS</span>
@@ -3627,33 +3654,6 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
             <button type="button" onClick={() => onNavigate("local-help", "/resources")}>Browse Everything</button>
           </div>
         </article>
-      </div>
-
-      <aside className="home-education-disclaimer" aria-labelledby="home-education-disclaimer-title">
-        <strong id="home-education-disclaimer-title">Educational information, not individualized advice</strong>
-        <p>
-          Survivor Systems provides general educational information and practical planning tools.
-          Nothing on this site should be understood as legal, medical, financial, mental-health,
-          or other individualized professional advice unless a page explicitly states otherwise.
-        </p>
-      </aside>
-
-      <div className="home-support-grid">
-        <section className="home-privacy-panel" aria-labelledby="home-privacy">
-          <div>
-            <p className="folk-kicker">A NOTE ABOUT DEVICE SAFETY</p>
-            <h2 id="home-privacy">Abusers often monitor devices and online activity.</h2>
-            <p>
-              Cyberstalking can include checking browser history, accessing accounts, tracking a
-              phone's location, reading messages, monitoring shared plans, or installing surveillance
-              software. Changing settings or clearing history can sometimes alert the person monitoring
-              you. Use a safer device when possible and make changes only when they feel safe for you.
-            </p>
-            <button type="button" onClick={() => onNavigate("how-to", "/guides/browser-trace-cleanup")}>
-              Open Digital Safety Guide
-            </button>
-          </div>
-        </section>
       </div>
 
       <section className="home-site-guide" aria-labelledby="home-site-guide-title">

@@ -7266,3 +7266,127 @@ body:has(.assessment-workspace),
   box-shadow: 5px 5px 0 var(--ss-red) !important;
   color: var(--ss-white) !important;
 }
+
+/* Homepage notices and frame alignment. Keep this after historical theme layers. */
+.hud-frame.module-home .home-top-notices {
+  display: grid !important;
+  gap: 24px !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  margin: 0 10px 34px 0 !important;
+}
+
+.hud-frame.module-home .home-top-notices .home-privacy-panel,
+.hud-frame.module-home .home-top-notices .home-education-disclaimer {
+  align-items: start !important;
+  background: var(--ss-ink) !important;
+  border: 4px solid var(--ss-ink) !important;
+  border-radius: 0 !important;
+  color: var(--ss-white) !important;
+  height: 100% !important;
+  margin: 0 !important;
+  min-width: 0 !important;
+  padding: clamp(22px, 3vw, 34px) !important;
+}
+
+.hud-frame.module-home .home-top-notices .home-privacy-panel {
+  box-shadow: 10px 10px 0 var(--ss-blue) !important;
+}
+
+.hud-frame.module-home .home-top-notices .home-education-disclaimer {
+  box-shadow: 10px 10px 0 var(--ss-red) !important;
+}
+
+.hud-frame.module-home .home-top-notices .home-privacy-panel::before,
+.hud-frame.module-home .home-top-notices .home-privacy-panel::after,
+.hud-frame.module-home .home-top-notices .home-education-disclaimer::before,
+.hud-frame.module-home .home-top-notices .home-education-disclaimer::after {
+  display: none !important;
+}
+
+.hud-frame.module-home .home-top-notices .home-privacy-panel h2 {
+  font-family: var(--ss-font-display) !important;
+  font-size: clamp(1.45rem, 2.7vw, 2.35rem) !important;
+  line-height: 1.02 !important;
+  margin: 8px 0 14px !important;
+}
+
+.hud-frame.module-home .home-top-notices .home-privacy-panel p,
+.hud-frame.module-home .home-top-notices .home-education-disclaimer p {
+  color: var(--ss-white) !important;
+  font-size: 0.98rem !important;
+  line-height: 1.55 !important;
+  margin-bottom: 0 !important;
+}
+
+.hud-frame.module-home .home-top-notices .home-education-disclaimer strong {
+  color: var(--ss-yellow) !important;
+  font-size: clamp(1.35rem, 2.4vw, 2rem) !important;
+  line-height: 1.08 !important;
+}
+
+.hud-frame.module-home .home-top-notices .home-privacy-panel button {
+  background: var(--ss-red) !important;
+  border: 3px solid var(--ss-white) !important;
+  box-shadow: 5px 5px 0 var(--ss-yellow) !important;
+  color: var(--ss-white) !important;
+  margin-top: 20px !important;
+}
+
+.hud-frame.module-home .home-briefing-bar {
+  margin-top: 0 !important;
+}
+
+.hud-frame.module-home .home-hero-composition {
+  border: 4px solid var(--ss-ink) !important;
+  border-radius: 0 !important;
+  box-shadow: 10px 10px 0 var(--ss-blue) !important;
+  margin: 0 10px 34px 0 !important;
+}
+
+.hud-frame.module-home .home-site-guide .home-category-card,
+.hud-frame.module-home .home-site-guide .home-category-card:nth-child(n) {
+  border: 3px solid var(--ss-ink) !important;
+  border-radius: 0 !important;
+  clip-path: none !important;
+  filter: none !important;
+  margin: 8px !important;
+  padding: clamp(30px, 3vw, 44px) !important;
+}
+
+.hud-frame.module-home .home-site-guide .home-category-card:nth-child(1) {
+  box-shadow: 7px 7px 0 var(--ss-red) !important;
+}
+
+.hud-frame.module-home .home-site-guide .home-category-card:nth-child(2) {
+  box-shadow: 7px 7px 0 var(--ss-yellow) !important;
+}
+
+.hud-frame.module-home .home-site-guide .home-category-card:nth-child(3) {
+  box-shadow: 7px 7px 0 var(--ss-blue) !important;
+}
+
+.hud-frame.module-home .home-site-guide .home-category-card:nth-child(4) {
+  box-shadow: 7px 7px 0 var(--ss-yellow) !important;
+}
+
+.hud-frame.module-home .home-site-guide .home-category-card:nth-child(5) {
+  box-shadow: 7px 7px 0 var(--ss-red) !important;
+}
+
+@media (max-width: 980px) {
+  .hud-frame.module-home .home-top-notices {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .hud-frame.module-home .home-top-notices {
+    gap: 20px !important;
+    margin-bottom: 28px !important;
+  }
+
+  .hud-frame.module-home .home-top-notices .home-privacy-panel,
+  .hud-frame.module-home .home-top-notices .home-education-disclaimer {
+    padding: 22px !important;
+  }
+}
