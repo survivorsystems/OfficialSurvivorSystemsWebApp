@@ -6801,7 +6801,7 @@ function StateResourcePage({ location, onBack }: { location: StateResourceLocati
 
       {hasPrograms ? (
         <aside className="state-resource-verification" aria-label="Resource verification note">
-          <strong>Information reviewed August 19, 2026</strong>
+          <strong>Information reviewed {location.reviewedOn ?? "recently"}</strong>
           <p>Funding, capacity, eligibility, and waitlists can change. Confirm current availability directly with the provider before relying on a program.</p>
         </aside>
       ) : null}
