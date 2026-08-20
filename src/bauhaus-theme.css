@@ -7030,3 +7030,51 @@ body:has(.assessment-workspace),
 .hud-frame.module-about .about-offerings-grid article :is(h3, p, span) {
   color: var(--ss-white) !important;
 }
+
+/* The page canvas is the composition: yellow field with full-height striped rails. */
+.hud-frame .folk-main-shell,
+.hud-frame:not(.module-home) .folk-main-shell {
+  background: var(--ss-yellow) !important;
+  padding: 0 !important;
+}
+
+.hud-frame .terminal-screen,
+.hud-frame:not(.module-home) .terminal-screen {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+  max-width: none !important;
+}
+
+.hud-frame.terminal-frame .terminal-content,
+.hud-frame:is(.module-advocacy, .module-local-help) .terminal-content,
+.hud-frame.module-about .terminal-content,
+.hud-frame.module-how-to .terminal-content,
+.hud-frame.module-subscribe .terminal-content {
+  background-color: var(--ss-yellow) !important;
+  background-image:
+    repeating-linear-gradient(90deg, var(--ss-ink) 0 12px, var(--ss-white) 12px 24px),
+    repeating-linear-gradient(90deg, var(--ss-ink) 0 12px, var(--ss-white) 12px 24px) !important;
+  background-position: left top, right top !important;
+  background-repeat: no-repeat !important;
+  background-size: 48px 100%, 48px 100% !important;
+  min-height: 100vh !important;
+  padding-left: clamp(72px, 7vw, 104px) !important;
+  padding-right: clamp(72px, 7vw, 104px) !important;
+}
+
+@media (max-width: 720px) {
+  .hud-frame.terminal-frame .terminal-content,
+  .hud-frame:is(.module-advocacy, .module-local-help) .terminal-content,
+  .hud-frame.module-about .terminal-content,
+  .hud-frame.module-how-to .terminal-content,
+  .hud-frame.module-subscribe .terminal-content {
+    background-image:
+      repeating-linear-gradient(90deg, var(--ss-ink) 0 6px, var(--ss-white) 6px 12px),
+      repeating-linear-gradient(90deg, var(--ss-ink) 0 6px, var(--ss-white) 6px 12px) !important;
+    background-size: 24px 100%, 24px 100% !important;
+    padding-left: 38px !important;
+    padding-right: 38px !important;
+  }
+}
