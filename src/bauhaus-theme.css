@@ -5750,6 +5750,32 @@ body:has(.assessment-workspace),
   color: var(--ss-yellow) !important;
 }
 
+/* Win over older route-specific header palettes without reviving per-page themes. */
+.hud-frame.terminal-frame:not(.module-home) .terminal-content .page-flourish-header.page-flourish-header {
+  background: var(--ss-ink) !important;
+  border: 4px solid var(--ss-red) !important;
+  border-left: 16px solid var(--ss-blue) !important;
+  box-shadow: 10px 10px 0 var(--ss-yellow) !important;
+}
+
+.hud-frame.terminal-frame:not(.module-home) .terminal-content .page-flourish-header.page-flourish-header::before {
+  background: linear-gradient(
+    90deg,
+    var(--ss-red) 0 34%,
+    var(--ss-blue) 34% 67%,
+    var(--ss-yellow) 67% 100%
+  ) !important;
+  display: block !important;
+}
+
+.hud-frame.terminal-frame:not(.module-home) .terminal-content .page-flourish-header.page-flourish-header :is(.folk-kicker, h1, h2, p, span, strong) {
+  color: var(--ss-white) !important;
+}
+
+.hud-frame.terminal-frame:not(.module-home) .terminal-content .page-flourish-header.page-flourish-header .folk-kicker {
+  color: var(--ss-yellow) !important;
+}
+
 .hud-frame.module-government .audit-steps {
   display: block !important;
 }
@@ -7103,4 +7129,63 @@ body:has(.assessment-workspace),
   .hud-frame.module-home .home-hero-composition .home-message > p {
     max-width: 72ch !important;
   }
+}
+
+/* Unified page headers: black field with the three primary Survivor Systems accents. */
+.hud-frame:not(.module-home) .terminal-content .page-flourish-header,
+.hud-frame.module-government .systems-page-header,
+.hud-frame .assessment-workspace .assessment-modal-header,
+.hud-frame.module-subscribe .subscribe-module > .ss-template-header,
+.hud-frame.module-government .nonprofit-audit-header {
+  background: var(--ss-ink) !important;
+  border: 4px solid var(--ss-red) !important;
+  border-left: 16px solid var(--ss-blue) !important;
+  box-shadow: 10px 10px 0 var(--ss-yellow) !important;
+  color: var(--ss-white) !important;
+  overflow: hidden !important;
+  padding-top: clamp(48px, 6vw, 76px) !important;
+  position: relative !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .page-flourish-header::before,
+.hud-frame.module-government .systems-page-header::before,
+.hud-frame .assessment-workspace .assessment-modal-header::before,
+.hud-frame.module-subscribe .subscribe-module > .ss-template-header::before,
+.hud-frame.module-government .nonprofit-audit-header::before {
+  background: linear-gradient(
+    90deg,
+    var(--ss-red) 0 34%,
+    var(--ss-blue) 34% 67%,
+    var(--ss-yellow) 67% 100%
+  ) !important;
+  content: "" !important;
+  display: block !important;
+  height: 14px !important;
+  inset: 0 0 auto !important;
+  position: absolute !important;
+  width: 100% !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .page-flourish-header::after,
+.hud-frame.module-government .systems-page-header::after,
+.hud-frame .assessment-workspace .assessment-modal-header::after,
+.hud-frame.module-subscribe .subscribe-module > .ss-template-header::after,
+.hud-frame.module-government .nonprofit-audit-header::after {
+  display: none !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .page-flourish-header :is(.folk-kicker, h1, h2, p, span, strong),
+.hud-frame.module-government .systems-page-header :is(h1, h2, p, span, strong),
+.hud-frame .assessment-workspace .assessment-modal-header :is(h1, h2, p, span, strong),
+.hud-frame.module-subscribe .subscribe-module > .ss-template-header :is(h1, h2, p, span, strong),
+.hud-frame.module-government .nonprofit-audit-header :is(h1, h2, p, span, strong) {
+  color: var(--ss-white) !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content .page-flourish-header .folk-kicker,
+.hud-frame.module-government .systems-page-header > span,
+.hud-frame .assessment-workspace .assessment-modal-header > span,
+.hud-frame.module-subscribe .subscribe-module > .ss-template-header > span,
+.hud-frame.module-government .nonprofit-audit-header > span {
+  color: var(--ss-yellow) !important;
 }
