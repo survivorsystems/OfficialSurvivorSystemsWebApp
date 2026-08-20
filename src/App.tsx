@@ -1333,13 +1333,13 @@ const housingGuideSections: RebuildingGuideSection[] = [
 
 const moduleRoutes: Record<ModuleKey, { label: string; path: string }> = {
   home: { label: "Home", path: "/" },
-  assessments: { label: "Clarity", path: "/strategy" },
+  assessments: { label: "Assessments", path: "/assessments" },
   guides: { label: "Guides", path: "/guides" },
   planners: { label: "Resources", path: "/resources" },
   toolkits: { label: "Resources", path: "/resources" },
   education: { label: "Surviving", path: "/surviving" },
   about: { label: "About", path: "/about" },
-  advocacy: { label: "Clarity", path: "/strategy" },
+  advocacy: { label: "Assessments", path: "/assessments" },
   government: { label: "Systems", path: "/systems" },
   support: { label: "Support", path: "/support" },
   "am-i-crazy": { label: "Was I Crazy?", path: "/am-i-crazy" },
@@ -1390,7 +1390,6 @@ const navItems: Array<{ key: ModuleKey; label: string; path: string; code: Sideb
   { key: "local-help", label: "Resources", path: "/resources", code: "toolkits" },
   { key: "guides", label: "Guides", path: "/guides", code: "guides" },
   { key: "store", label: "Store", path: "/store", code: "planners" },
-  { key: "advocacy", label: "Clarity", path: "/strategy", code: "advocacy" },
   { key: "government", label: "Systems", path: "/systems", code: "government" },
   { key: "about", label: "About", path: "/about", code: "about" },
 ];
@@ -1508,7 +1507,7 @@ function isPrimaryNavActive(activeModule: ModuleKey, navKey: ModuleKey) {
     return activeModule === "local-help" || activeModule === "planners" || activeModule === "toolkits" || activeModule === "access" || activeModule === "library";
   }
 
-  if (navKey === "guides") return activeModule === "guides" || activeModule === "how-to" || activeModule === "legal" || activeModule === "rebuilding";
+  if (navKey === "guides") return activeModule === "guides" || activeModule === "how-to" || activeModule === "legal" || activeModule === "rebuilding" || activeModule === "advocacy" || activeModule === "assessments" || activeModule === "am-i-crazy";
 
   if (navKey === "advocacy") return activeModule === "advocacy" || activeModule === "assessments" || activeModule === "am-i-crazy";
 
@@ -2540,7 +2539,7 @@ const categoryFiles: Record<
     ],
   },
   advocacy: {
-    title: "Clarity",
+    title: "Assessments",
     intro:
       "Support-facing resources: what to ask for, who might help, how to explain the situation, and how to keep power dynamics visible.",
     files: [
@@ -3436,7 +3435,7 @@ function resolveCommand(query: string) {
   }
 
   if (/\b(advocacy|advocate|hotline|shelter|support|near|local)\b/.test(normalized)) {
-    return { message: "Opening Clarity.", target: navItemFor("advocacy") };
+    return { message: "Opening Assessments.", target: navItemFor("advocacy") };
   }
 
   if (/\b(government|snap|tanf|benefits|court|legal|rights|order|documents|public assistance)\b/.test(normalized)) {
@@ -3444,7 +3443,7 @@ function resolveCommand(query: string) {
   }
 
   if (/ctrl\s*\+\s*esc|\bfirst steps?\b|\bprep\b/.test(normalized)) {
-    return { message: "OPENING CLARITY...", target: navItemFor("advocacy") };
+    return { message: "OPENING ASSESSMENTS...", target: navItemFor("advocacy") };
   }
 
   if (/\b(go.?bag|bag|simulator|arcade|prep|pack)\b/.test(normalized)) {
@@ -3502,7 +3501,7 @@ function TerminalCommand({
           autoComplete="off"
           id="terminal-command"
           onChange={(event) => setQuery(event.target.value)}
-          placeholder="Try: Clarity, Resources, Systems, About..."
+          placeholder="Try: Guides, Assessments, Resources, Store..."
           spellCheck={false}
           type="search"
           value={query}
@@ -3622,7 +3621,7 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
             the sections most relevant to you. Your answers aren't saved or transmitted.
           </p>
           <div className="home-hero-actions" aria-label="Start options">
-            <button className="home-primary-action" type="button" onClick={() => onNavigate("advocacy", "/strategy")}>
+            <button className="home-primary-action" type="button" onClick={() => onNavigate("advocacy", "/assessments")}>
               Start Here
             </button>
             <button type="button" onClick={() => onNavigate("local-help", "/resources")}>Browse Everything</button>
@@ -3680,9 +3679,9 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
             <button type="button" onClick={() => onNavigate("store", "/store")}>Visit the Store</button>
           </article>
           <article className="home-category-card">
-            <h2>Clarity</h2>
+            <h2>Assessments</h2>
             <p>Private, in-browser assessments that help name patterns, organize concerns, and find a practical place to begin.</p>
-            <button type="button" onClick={() => onNavigate("advocacy", "/strategy")}>Explore Clarity</button>
+            <button type="button" onClick={() => onNavigate("advocacy", "/assessments")}>Open Assessments</button>
           </article>
           <article className="home-category-card">
             <h2>About</h2>
@@ -3908,7 +3907,7 @@ function AboutModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: str
         <h2 id="about-start-title">You don't have to solve everything at once.</h2>
         <p>You don't need to know exactly what kind of help you need before you begin.</p>
         <div className="about-start-actions">
-          <button type="button" onClick={() => onNavigate("advocacy", "/strategy")}>Explore Clarity</button>
+          <button type="button" onClick={() => onNavigate("advocacy", "/assessments")}>Open Assessments</button>
           <button type="button" onClick={() => onNavigate("local-help", "/resources")}>Browse Resources</button>
         </div>
         <p><strong>You just need a place to start.</strong></p>
@@ -4510,7 +4509,7 @@ function CategoryModule({
   const baseContent = categoryFiles[category];
   const content = category === "advocacy"
     ? {
-        title: "Clarity",
+        title: "Assessments",
         intro: "Use an assessment to name patterns, understand what is affecting your choices, and find a practical place to begin.",
         files: categoryFiles.assessments.files,
       }
@@ -4570,6 +4569,14 @@ function CategoryModule({
 
       {category === "guides" ? (
         <div className="guide-category-directory">
+          <section className="guide-assessment-entry" aria-labelledby="guide-assessment-entry-title">
+            <div>
+              <span>PRIVATE, IN-BROWSER TOOLS</span>
+              <h2 id="guide-assessment-entry-title">Assessments</h2>
+              <p>Name patterns, organize concerns, and find a practical place to begin. Answers stay in temporary browser state and are not saved or transmitted.</p>
+            </div>
+            <button type="button" onClick={() => onNavigate("advocacy", "/assessments")}>Open Assessments</button>
+          </section>
           {guideCategories.map((guideCategory) => (
             <section className="guide-category-section" key={guideCategory.id}>
               <header>

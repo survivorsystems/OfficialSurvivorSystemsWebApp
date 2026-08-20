@@ -6697,6 +6697,63 @@ body:has(.assessment-workspace),
   margin: 0 !important;
 }
 
+/* Assessments now sit inside the Guides information hierarchy. */
+.hud-frame.module-guides .guide-assessment-entry {
+  align-items: center !important;
+  background: var(--ss-ink) !important;
+  border: 4px solid var(--ss-blue) !important;
+  box-shadow: 9px 9px 0 var(--ss-yellow) !important;
+  color: var(--ss-white) !important;
+  display: grid !important;
+  gap: clamp(22px, 4vw, 48px) !important;
+  grid-template-columns: minmax(0, 1fr) auto !important;
+  margin: 0 9px 38px 0 !important;
+  padding: clamp(26px, 5vw, 48px) !important;
+}
+
+.hud-frame.module-guides .guide-assessment-entry :is(span, h2, p) {
+  color: var(--ss-white) !important;
+}
+
+.hud-frame.module-guides .guide-assessment-entry span {
+  color: var(--ss-yellow) !important;
+  font-size: 0.76rem !important;
+  font-weight: 900 !important;
+}
+
+.hud-frame.module-guides .guide-assessment-entry h2 {
+  font-size: clamp(2rem, 5vw, 4rem) !important;
+  margin: 8px 0 12px !important;
+}
+
+.hud-frame.module-guides .guide-assessment-entry p {
+  line-height: 1.62 !important;
+  margin: 0 !important;
+  max-width: 72ch !important;
+}
+
+.hud-frame.module-guides .guide-assessment-entry button {
+  background: var(--ss-red) !important;
+  border: 3px solid var(--ss-white) !important;
+  box-shadow: 6px 6px 0 var(--ss-yellow) !important;
+  color: var(--ss-white) !important;
+  font-weight: 900 !important;
+  min-height: 52px !important;
+  padding: 12px 18px !important;
+  white-space: nowrap !important;
+}
+
+@media (max-width: 720px) {
+  .hud-frame.module-guides .guide-assessment-entry {
+    align-items: stretch !important;
+    grid-template-columns: 1fr !important;
+  }
+
+  .hud-frame.module-guides .guide-assessment-entry button {
+    width: 100% !important;
+  }
+}
+
 @media (max-width: 940px) {
   .hud-frame.module-store .store-kit-grid {
     grid-template-columns: 1fr !important;
