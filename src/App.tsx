@@ -4581,7 +4581,6 @@ function CategoryModule({
             <section className="guide-category-section" key={guideCategory.id}>
               <header>
                 <div><span className="terminal-label">CATEGORY</span><h2>{guideCategory.label}</h2><p>{guideCategory.description}</p></div>
-                <button type="button" onClick={() => onNavigate("local-help", `/resources/${guideCategory.id}`)}>Related Resources</button>
               </header>
               <div className="category-file-grid">{guideCategory.files.map(renderCategoryFile)}</div>
             </section>
@@ -7122,6 +7121,8 @@ function ResourceModule({
       ],
     },
   ];
+  void resourceDirectories;
+  void freeResourceLabels;
 
   return (
     <section className="page-shell resources-module" aria-label="Resources">
@@ -7133,7 +7134,7 @@ function ResourceModule({
       >
         <p>
           Browse state-specific housing, food, childcare, transportation, disability, immigration,
-          trafficking, and other assistance programs, plus practical planning resources.
+          trafficking, and other assistance programs.
         </p>
       </PageFlourishHeader>
 
@@ -7144,50 +7145,6 @@ function ResourceModule({
           window.scrollTo({ top: 0, behavior: "smooth" });
         }}
       />
-
-      <div className="resource-directory-tree" id="resource-directory" aria-label="Resource directories">
-        {resourceDirectories.map((directory) => {
-          const isOpen = activeDirectory === directory.id;
-
-          return (
-            <section className={`resource-directory${isOpen ? " open" : ""}`} key={directory.id}>
-              <button
-                className="resource-directory-toggle"
-                type="button"
-                onClick={() => setActiveDirectory(isOpen ? null : directory.id)}
-                aria-expanded={isOpen}
-              >
-                <span>
-                  <strong>{directory.label}</strong>
-                  <small>{directory.description}</small>
-                </span>
-              </button>
-              {isOpen ? (
-                <div className="resource-file-list">
-                  {directory.files.map((file) => (
-                    <button className="resource-file-row" key={file.label} type="button" onClick={file.action}>
-                      <span>{file.label}</span>
-                      <small className={`resource-access-badge ${
-                        file.label.includes("In Development")
-                          ? "resource-access-badge-pending"
-                          : freeResourceLabels.has(file.label)
-                            ? "resource-access-badge-free"
-                            : "resource-access-badge-paid"
-                      }`}>
-                        {file.label.includes("In Development")
-                          ? "COMING SOON"
-                          : freeResourceLabels.has(file.label)
-                            ? "FREE RESOURCE"
-                            : "PREMIUM SURVIVOR LIBRARY"}
-                      </small>
-                    </button>
-                  ))}
-                </div>
-              ) : null}
-            </section>
-          );
-        })}
-      </div>
 
       <section className="resource-support-callout" aria-labelledby="resource-support-title">
         <div>

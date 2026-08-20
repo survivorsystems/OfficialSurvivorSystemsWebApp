@@ -6784,14 +6784,14 @@ body:has(.assessment-workspace),
 
 /* Blue leads; vermillion and yellow trade border and shadow roles. */
 .hud-frame.module-local-help .terminal-content .resources-module > .page-flourish-header {
-  background: var(--ss-yellow) !important;
-  border: 3px solid var(--ss-blue) !important;
-  border-left: 18px solid var(--ss-blue) !important;
-  box-shadow: 10px 10px 0 var(--ss-red) !important;
+  background: var(--ss-blue) !important;
+  border: 3px solid var(--ss-red) !important;
+  border-left: 18px solid var(--ss-red) !important;
+  box-shadow: 10px 10px 0 var(--ss-ink) !important;
 }
 
-.hud-frame.module-local-help .terminal-content .resources-module > .page-flourish-header .folk-kicker {
-  color: var(--ss-ink) !important;
+.hud-frame.module-local-help .terminal-content .resources-module > .page-flourish-header :is(.folk-kicker, h1, p) {
+  color: var(--ss-white) !important;
 }
 
 .hud-frame.module-government .systems-page-header {
@@ -7076,5 +7076,31 @@ body:has(.assessment-workspace),
     background-size: 24px 100%, 24px 100% !important;
     padding-left: 38px !important;
     padding-right: 38px !important;
+  }
+}
+
+/* Keep the homepage generous without letting the striped canvas squeeze laptop layouts. */
+@media (min-width: 721px) and (max-width: 1440px) {
+  .hud-frame.module-home .terminal-content {
+    background-size: 24px 100%, 24px 100% !important;
+    padding-left: 32px !important;
+    padding-right: 32px !important;
+  }
+
+  .hud-frame.module-home .home-terminal.bauhaus-home {
+    padding: 18px !important;
+  }
+
+  .hud-frame.module-home .home-hero-composition .refined-home-message {
+    gap: 12px !important;
+    padding: 38px clamp(32px, 3vw, 44px) !important;
+  }
+
+  .hud-frame.module-home .home-hero-composition .home-message h1 {
+    margin-bottom: 20px !important;
+  }
+
+  .hud-frame.module-home .home-hero-composition .home-message > p {
+    max-width: 72ch !important;
   }
 }
