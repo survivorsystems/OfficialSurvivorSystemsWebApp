@@ -7220,3 +7220,21 @@ body:has(.assessment-workspace),
     padding: 16px !important;
   }
 }
+
+/* Flat header accents only: no gradients in the shared page-header treatment. */
+.hud-frame:not(.module-home) .terminal-content .page-flourish-header::before,
+.hud-frame.terminal-frame:not(.module-home) .terminal-content .page-flourish-header.page-flourish-header::before,
+.hud-frame.module-government .systems-page-header::before,
+.hud-frame .assessment-workspace .assessment-modal-header::before,
+.hud-frame.module-subscribe .subscribe-module > .ss-template-header::before,
+.hud-frame.module-government .nonprofit-audit-header::before {
+  background: var(--ss-blue) !important;
+}
+
+/* The navigation lives on a black field; color comes from its dimensional cards. */
+.hud-frame .folk-sidebar,
+.hud-frame.module-home .folk-sidebar,
+.hud-frame .folk-sidebar .desktop-icon-grid,
+.hud-frame.module-home .folk-sidebar .desktop-icon-grid {
+  background: var(--ss-ink) !important;
+}
