@@ -11,7 +11,8 @@ import { AgencyReviewForm } from "./components/AgencyReviewForm";
 import { HousingStrategySystem } from "./components/HousingStrategySystem";
 import {
   findStateResourceLocation,
-  stateResourceCategories,
+  getProgramsForStateCategory,
+  getStateResourceCategories,
   stateResourceLocations,
   stateResourcePrograms,
   type StateResourceLocation,
@@ -6889,6 +6890,7 @@ function StateResourcesDirectory({ onSelect }: { onSelect: (location: StateResou
 function StateResourcePage({ location, onBack }: { location: StateResourceLocation; onBack: () => void }) {
   const programsByCategory = stateResourcePrograms[location.slug] ?? {};
   const hasPrograms = Object.values(programsByCategory).some((programs) => programs && programs.length > 0);
+  const categories = getStateResourceCategories(location.slug);
 
   return (
     <section className="page-shell state-resource-page" aria-labelledby="state-resource-title">
@@ -6917,14 +6919,14 @@ function StateResourcePage({ location, onBack }: { location: StateResourceLocati
       ) : null}
 
       <nav className="state-resource-category-nav" aria-label={`${location.name} resource categories`}>
-        {stateResourceCategories.map((category) => (
+        {categories.map((category) => (
           <a href={`#${category.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`} key={category}>{category}</a>
         ))}
       </nav>
 
       <div className="state-resource-category-list" aria-label={`${location.name} resource categories`}>
-        {stateResourceCategories.map((category) => {
-          const programs = programsByCategory[category] ?? [];
+        {categories.map((category) => {
+          const programs = getProgramsForStateCategory(location.slug, category);
           return (
             <section key={category} id={category.toLowerCase().replace(/[^a-z0-9]+/g, "-")}>
               <h2>{category}</h2>

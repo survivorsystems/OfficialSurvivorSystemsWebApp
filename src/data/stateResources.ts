@@ -94,6 +94,7 @@ const stateResourceReviewDates: Partial<Record<string, string>> = {
   arkansas: "August 20, 2026",
   colorado: "August 20, 2026",
   california: "August 20, 2026",
+  delaware: "August 21, 2026",
 };
 
 export const stateResourceLocations: StateResourceLocation[] = locationNames.map((name) => ({
@@ -1826,6 +1827,352 @@ export const stateResourcePrograms: Partial<Record<string, Partial<Record<StateR
       },
     ],
   },
+  delaware: {
+    Housing: [
+      {
+        name: "Housing Alliance Delaware - Centralized Intake",
+        summary: "Delaware's coordinated entry point for people experiencing homelessness, including emergency-shelter availability and referrals into Rapid Re-Housing and other homeless-housing programs.",
+        access: "Call or text 1-833-FIND-BED, Monday-Friday, 8 a.m.-5 p.m., or email intake@housingalliancede.org.",
+        coverage: "Statewide",
+        phone: "833-346-3233",
+        url: "https://www.housingalliancede.org/centralized-intake",
+      },
+      {
+        name: "Delaware 211",
+        summary: "Provides statewide navigation for emergency shelter, rent and utility help, transportation, food, legal resources, and currently funded local programs.",
+        access: "Dial 2-1-1, call the toll-free number, or text your ZIP code to 898-211. Live help is published Monday-Friday, 8 a.m.-7 p.m.",
+        coverage: "Statewide",
+        phone: "800-560-3372",
+        url: "https://delaware211.org/get-help/contact-us/",
+      },
+      {
+        name: "DSS Emergency and Transitional Housing",
+        summary: "State-funded emergency shelter and transitional-housing assistance, including short-term motel vouchers when appropriate and when funding is available.",
+        access: "Call 211 for immediate shelter needs or visit a Delaware State Service Center.",
+        coverage: "Statewide",
+        url: "https://dhss.delaware.gov/dss/division-of-social-services/emergency-and-transitional-housing/",
+        note: "Motel vouchers are temporary, depend on capacity and funding, and the current state page lists a $1,200 annual cap.",
+      },
+      {
+        name: "Emergency Solutions Grants Homelessness Prevention",
+        summary: "Funded providers may offer housing stabilization, arrears help, and other eligible prevention costs for qualifying households at risk of homelessness or fleeing domestic violence.",
+        access: "Start with Delaware 211 or Centralized Intake for routing to a currently funded community provider.",
+        coverage: "Statewide through funded providers",
+        url: "https://www.destatehousing.com/wp-content/uploads/2026/04/FY25-Emergency-Solutions-Grants-Policy-Manual.pdf",
+      },
+      {
+        name: "DelawareHousingSearch.org",
+        summary: "Free statewide locator for market-rate, affordable, subsidized, and accessible rentals, with saved searches and listing alerts.",
+        access: "Search online or call for housing-search assistance Monday-Friday, 9 a.m.-8 p.m.",
+        coverage: "Statewide",
+        phone: "877-428-8844",
+        url: "https://www.delawarehousingsearch.org/",
+      },
+      {
+        name: "Delaware State Housing Authority",
+        summary: "Administers affordable rental programs, public housing, Housing Choice Vouchers in Kent and Sussex Counties, supportive rental programs, and homeownership products.",
+        access: "Use DSHA's Find Housing tools or call for program information.",
+        coverage: "Statewide; direct voucher and public-housing administration in Kent and Sussex Counties",
+        phone: "302-739-4263",
+        secondaryPhone: "888-363-8808",
+        url: "https://www.destatehousing.com/find/",
+        note: "DSHA's former Housing Stability Program closed May 7, 2025. DSHA currently directs emergency-rent requests to 211.",
+      },
+      {
+        name: "Centralized Public Housing and Voucher Waitlist",
+        summary: "One application system serves Delaware's five public housing authorities for public housing and Housing Choice Voucher waitlists.",
+        access: "Apply through Delaware.AffordableHousing.com, select every suitable authority, and keep the application updated.",
+        coverage: "Statewide",
+        url: "https://secure.destatehousing.com/",
+        note: "The current DSHA portal states that the centralized waitlist is open. Waitlist status can change.",
+      },
+      {
+        name: "State Rental Assistance Program",
+        summary: "State-funded rental subsidy for qualifying low-income people who need affordable housing plus supportive services to live independently.",
+        fit: "Current target populations include people leaving long-term care, people at risk of institutional placement, youth exiting foster care, and families where housing blocks reunification.",
+        access: "Referral only through DHSS or the Department of Services for Children, Youth and Their Families. DHSS clients can ask a case manager or call the Aging and Disability Resource Center.",
+        coverage: "Statewide referral program",
+        phone: "800-223-9074",
+        url: "https://www.destatehousing.com/find/subsidized-rental-programs/",
+      },
+      {
+        name: "Section 811 Project Rental Assistance",
+        summary: "Project-based subsidy tied to designated properties for extremely low-income people under age 62 with disabilities who require qualifying long-term services.",
+        access: "Referral only through a DHSS representative or case manager.",
+        coverage: "Participating Delaware properties",
+        url: "https://www.destatehousing.com/find/subsidized-rental-programs/",
+      },
+      {
+        name: "Domestic Violence Housing Options",
+        summary: "Delaware's domestic-violence programs can connect survivors with confidential emergency shelter, transitional housing, housing navigation, and case management.",
+        access: "New Castle County: 302-762-6110. Kent and Sussex Counties: 302-422-8058. Bilingual Kent/Sussex line: 302-745-9874.",
+        coverage: "Statewide through county-based survivor programs",
+        url: "https://dvcc.delaware.gov/victim-service-resources/",
+      },
+      {
+        name: "Delaware Continuum of Care Rapid Re-Housing",
+        summary: "Rapid Re-Housing referrals are managed through coordinated entry, which assesses and prioritizes households and sends referrals when funded providers have capacity.",
+        access: "People experiencing homelessness should call Centralized Intake at 1-833-FIND-BED, Monday-Friday, 8 a.m.-5 p.m.",
+        coverage: "Statewide",
+        phone: "833-346-3233",
+        url: "https://www.housingalliancede.org/centralized-intake",
+      },
+      {
+        name: "Survivor Ventures Housing Stability Program",
+        summary: "Trafficking-specific housing pathway offering phased rental assistance for up to 12 months plus housing advocacy focused on barriers such as damaged credit and financial exploitation.",
+        fit: "Eligible survivors of sex or labor trafficking.",
+        access: "Contact Survivor Ventures for current Delaware intake and capacity.",
+        coverage: "Delaware",
+        phone: "757-317-0352",
+        url: "https://www.survivorventures.org/housingstabilityprogram",
+      },
+      {
+        name: "DSS Emergency Assistance for Rent",
+        summary: "State Service Centers can screen for emergency help with rent, utilities, shelter, and other critical needs after an unexpected crisis.",
+        access: "Visit a State Service Center or call DSS. Bring proof of the emergency, housing costs, income or benefits, and any eviction or late-rent notices.",
+        coverage: "Statewide",
+        phone: "302-255-9040",
+        url: "https://dhss.delaware.gov/dss/locations/northeast-state-service-center/",
+      },
+    ],
+    Food: [
+      {
+        name: "Delaware SNAP",
+        summary: "Provides monthly food benefits through EBT for eligible households under Delaware's current income, household, residency, and immigration rules.",
+        access: "Apply through Delaware ASSIST or a State Service Center. Complete the state screening rather than assuming work rules or another eligibility rule disqualifies you.",
+        coverage: "Statewide",
+        phone: "302-255-9040",
+        url: "https://dhss.delaware.gov/dss/division-of-social-services/snap/",
+      },
+      {
+        name: "Emergency Food and Pantry Navigation",
+        summary: "Delaware 211 maintains current food-resource referrals, and many State Service Centers host or connect residents with emergency pantries. Food Bank of Delaware is a major statewide partner.",
+        access: "Call 211 or use the Delaware 211 resource directory when food is needed immediately.",
+        coverage: "Statewide",
+        phone: "800-560-3372",
+        url: "https://delaware211.org/resources/",
+      },
+    ],
+    "Childcare Assistance": [
+      {
+        name: "Purchase of Care",
+        summary: "Delaware's childcare subsidy pays part of the cost directly to participating providers for qualifying families who need early-learning or after-school care.",
+        fit: "The child generally must be under 13; some children with special needs may qualify beyond age 13 with medical certification.",
+        access: "Apply through Delaware ASSIST or a State Service Center. Families choose a licensed provider that accepts Purchase of Care.",
+        coverage: "Statewide",
+        phone: "302-255-9040",
+        url: "https://dhss.delaware.gov/dss/division-of-social-services/child-care-assistance/",
+        note: "New-application income eligibility is generally at or below 200% of the federal poverty level, with a graduated phase-out at annual redetermination under current rules.",
+      },
+      {
+        name: "Children and Families First Childcare Search Help",
+        summary: "Helps families search for childcare providers, including providers participating in Purchase of Care.",
+        access: "Call for current provider-search assistance.",
+        coverage: "Statewide",
+        phone: "800-220-3092",
+        url: "https://dhss.delaware.gov/dss/division-of-social-services/child-care-assistance/",
+      },
+    ],
+    "Transportation Assistance": [
+      {
+        name: "Delaware Medicaid Non-Emergency Medical Transportation",
+        summary: "Free transportation to covered medical services for fully eligible Delaware Medicaid and Delaware Healthy Children Program members who need a ride.",
+        access: "Schedule through Modivcare at least three days before the appointment when possible.",
+        coverage: "Statewide for eligible members",
+        phone: "866-412-3778",
+        url: "https://dhss.delaware.gov/dmma/home/medical-transportation/",
+      },
+      {
+        name: "DART First State",
+        summary: "Statewide fixed-route bus service with standard, reduced, daily, and multi-day fare options.",
+        access: "Call for current routes, schedules, fares, and reduced-fare requirements.",
+        coverage: "Statewide",
+        phone: "800-652-3278",
+        url: "https://www.dartfirststate.com/RiderInfo/Fares/",
+      },
+      {
+        name: "DART ADA Paratransit",
+        summary: "Door-to-door or comparable transportation for people whose disability prevents use of fixed-route service and who meet ADA eligibility rules.",
+        access: "Call to request an application or reservation information.",
+        coverage: "Eligible Delaware service areas",
+        phone: "800-553-3278",
+        url: "https://dartfirststate.com/RiderInfo/Paratransit/index.shtml",
+      },
+      {
+        name: "Get-a-Job, Get-a-Ride",
+        summary: "DART program offering a free 30-day bus pass for new employees whose employer participates in the program.",
+        access: "Confirm employer participation and current program requirements with DART.",
+        coverage: "Participating Delaware employers and routes",
+        url: "https://www.dartfirststate.com/",
+      },
+      {
+        name: "DSS Emergency Assistance Transportation",
+        summary: "Emergency Assistance may cover transportation in qualifying family crises along with moving, shelter, utility, and other emergency needs.",
+        access: "Ask a DSS State Service Center specifically whether transportation help is available for the household's emergency-assistance eligibility.",
+        coverage: "Statewide, subject to eligibility and funding",
+        url: "https://dhss.delaware.gov/wp-content/uploads/sites/2/2026/06/Delaware-TANF-State-Plan-2023-2026.pdf",
+      },
+    ],
+    Disability: [
+      {
+        name: "Community Legal Aid Society Disabilities Law Program",
+        summary: "CLASI provides civil legal assistance to people with disabilities, including help involving housing, public benefits, discrimination, and other disability-related rights.",
+        access: "Contact the CLASI office serving your county for intake.",
+        coverage: "Statewide",
+        phone: "302-575-0660",
+        url: "https://www.declasi.org/",
+      },
+      {
+        name: "Aging and Disability Resource Center",
+        summary: "Screens people for disability and long-term-support pathways, including referral-only housing programs such as SRAP when applicable.",
+        access: "Call for options counseling and screening.",
+        coverage: "Statewide",
+        phone: "800-223-9074",
+        url: "https://dhss.delaware.gov/dhss/dsaapd/adrc/",
+      },
+    ],
+    Immigration: [
+      {
+        name: "Community Legal Aid Society Immigration Unit",
+        summary: "Free immigration legal help for Delaware survivors of domestic violence, human trafficking, or other violent crime, and for abused, abandoned, or neglected immigrant children.",
+        access: "Services include T visas, U visas, VAWA self-petitions, and Special Immigrant Juvenile Status. New Castle: 302-575-0660; Kent: 302-674-8500; Sussex: 302-856-0038.",
+        coverage: "Statewide through county offices",
+        url: "https://www.declasi.org/legal-services/immigration-legal-services/",
+      },
+      {
+        name: "Delaware DOJ Office of Immigration Assistance",
+        summary: "Assists Delaware residents applying for citizenship or immigration benefits, opens case files, follows up with federal agencies, and acts as a USCIS liaison.",
+        access: "Call and leave a message for assistance.",
+        coverage: "Statewide",
+        phone: "302-577-8390",
+        url: "https://attorneygeneral.delaware.gov/executive/immigrationassistance/",
+      },
+      {
+        name: "Office of New Americans",
+        summary: "Provides current Know Your Rights information and links Delaware residents to legitimate immigration services, legal aid, and community organizations.",
+        access: "Call or use the state resource site.",
+        coverage: "Statewide",
+        phone: "302-577-8767",
+        url: "https://ona.delaware.gov/immigrantrights/",
+      },
+      {
+        name: "Catholic Charities Immigration Services",
+        summary: "Nonprofit immigration legal services for adjustment of status, family petitions, citizenship, Temporary Protected Status, and related matters.",
+        access: "Call for current intake and case eligibility.",
+        coverage: "Delaware",
+        phone: "302-655-9624",
+        url: "https://www.immigrationadvocates.org/nonprofit/legaldirectory/search?state=DE",
+        note: "Use licensed attorneys or DOJ-recognized nonprofit representatives and avoid notario fraud.",
+      },
+    ],
+    Trafficking: [
+      {
+        name: "Survivor Ventures - Delaware",
+        summary: "Serves sex- and labor-trafficking survivors through immediate stabilization, housing, employment, economic-independence support, crisis placements, and case management.",
+        access: "Contact Survivor Ventures for current intake and program availability.",
+        coverage: "Delaware; Wilmington office",
+        phone: "757-317-0352",
+        url: "https://www.survivorventures.org/housingstabilityprogram",
+      },
+      {
+        name: "Restoration Now - The Salvation Army Delaware",
+        summary: "Provides emergency shelter and trauma-informed case management for women trafficking survivors, including housing and employment search, court accompaniment, mentoring, education, and referrals.",
+        access: "Call the Wilmington program for current intake.",
+        coverage: "Delaware",
+        phone: "302-256-1511",
+        url: "https://www.salvationarmyusa.org/usa-eastern-territory/eastern-pennsylvania-and-delaware/human-trafficking/",
+      },
+      {
+        name: "Delaware Anti-Trafficking Action Council",
+        summary: "State anti-trafficking council and resource hub publishing Delaware crisis contacts and survivor-service materials.",
+        access: "DATAC: 302-577-5030. State crisis line: 800-262-9800. Minors: 800-292-9582. New Castle County Police trafficking line: 302-395-2727.",
+        coverage: "Statewide",
+        url: "https://datac.delaware.gov/",
+      },
+      {
+        name: "National Human Trafficking Hotline",
+        summary: "24-hour hotline that can identify local shelter, legal, and service options and accept reports when the caller chooses to report.",
+        access: "Call or text 233733.",
+        coverage: "National, including Delaware",
+        phone: "888-373-7888",
+        url: "https://humantraffickinghotline.org/en/statistics/delaware",
+        note: "Delaware law states that trafficking victims may access state-identified victim benefits and services regardless of immigration status.",
+      },
+    ],
+    "Other Programs": [
+      {
+        name: "Temporary Assistance for Needy Families",
+        summary: "Delaware's principal cash-assistance program for qualifying families with children, with employment and approved work-activity requirements for many adults.",
+        access: "Apply through Delaware ASSIST or a State Service Center.",
+        coverage: "Statewide",
+        phone: "302-255-9040",
+        url: "https://dhss.delaware.gov/dss/division-of-social-services/temporary-assistance-for-needy-families-tanf/",
+        note: "Current benefit amounts and time limits depend on household composition and program rules. Ask about domestic-violence-related good cause when a requirement creates a safety concern.",
+      },
+      {
+        name: "General Assistance",
+        summary: "State-funded cash assistance for certain low-income Delaware residents who do not qualify for TANF or Social Security.",
+        fit: "Eligibility includes certain adults too sick to work, caregivers for a sick household member, adults age 55 or older with no other income, and certain high-school students over 18.",
+        access: "Apply through Delaware ASSIST, a State Service Center, or DSS.",
+        coverage: "Statewide",
+        phone: "302-255-9040",
+        url: "https://dhss.delaware.gov/dss/division-of-social-services/general-assistance/",
+      },
+      {
+        name: "Refugee Cash Assistance",
+        summary: "Federally funded financial and resettlement assistance for eligible refugees and other qualifying humanitarian entrants.",
+        access: "Apply or request screening through Delaware ASSIST or DSS.",
+        coverage: "Statewide",
+        phone: "302-255-9040",
+        url: "https://dhss.delaware.gov/dss/division-of-social-services/cash-assistance/",
+      },
+      {
+        name: "Kinship Care Program",
+        summary: "Short-term state support for non-parent relatives during the first 180 days after a child moves into their home, covering immediate clothing, shelter, health, safety, and school needs.",
+        access: "Apply through DSS or a State Service Center.",
+        coverage: "Statewide",
+        url: "https://dhss.delaware.gov/dss/division-of-social-services/cash-assistance/",
+      },
+      {
+        name: "Delaware Legal Help Link",
+        summary: "Statewide online triage created by Delaware's nonprofit civil legal-aid providers for domestic violence, housing, family, immigration, benefits, debt, and other civil issues.",
+        access: "Complete the online triage to reach an appropriate legitimate provider.",
+        coverage: "Statewide",
+        url: "https://delegalhelplink.org/",
+      },
+      {
+        name: "Right to Representation in Evictions",
+        summary: "Qualifying low-income Delaware tenants facing eviction or loss of a voucher or public housing may have a right to free legal representation.",
+        access: "Start with Delaware Legal Help Link or call 211 as soon as a late-rent, termination, or court notice arrives. Subsidized housing cases generally route to CLASI; private housing cases to Legal Services Corporation of Delaware.",
+        coverage: "Qualifying Delaware eviction and subsidy-termination matters",
+        url: "https://delegalhelplink.org/dehousing-1",
+        note: "Eligibility, landlord exemptions, and provider capacity apply. Do not wait for the hearing date to seek help.",
+      },
+      {
+        name: "Community Legal Aid Society",
+        summary: "Free civil legal services for qualifying low-income residents, people with disabilities, adults 60 and older, victims of violence or crime, and eligible immigrants.",
+        access: "Contact the office serving your county. New Castle: 302-575-0660; Kent: 302-674-8500; Sussex: 302-856-0038.",
+        coverage: "Statewide",
+        url: "https://www.declasi.org/",
+      },
+      {
+        name: "Delaware Volunteer Legal Services",
+        summary: "Pro bono civil legal help that may include Protection From Abuse, custody or visitation where domestic violence is present, limited divorce matters, estate documents, and eviction representation.",
+        access: "Call DVLS or the Legal Help Link referral number.",
+        coverage: "Delaware",
+        phone: "302-478-8680",
+        secondaryPhone: "302-478-8850",
+        url: "https://www.dvls.org/get-legal-help/",
+      },
+      {
+        name: "Delaware State Courts Legal Assistance Directory",
+        summary: "Court-maintained directory of civil legal-aid and lawyer-referral resources for people unsure which organization handles their issue.",
+        access: "Use the court directory to identify the appropriate legal-help pathway.",
+        coverage: "Statewide",
+        url: "https://courts.delaware.gov/help/legalassistance",
+      },
+    ],
+  },
   colorado: {
     Housing: [
       {
@@ -2203,3 +2550,56 @@ export const stateResourcePrograms: Partial<Record<string, Partial<Record<StateR
     ],
   },
 };
+
+const delawareResourceCategories = [
+  "Homelessness Prevention & Intervention",
+  "Housing",
+  "Subsidized Housing",
+  "Cash Assistance",
+  "Immigration Services",
+  "Trafficking Victim Services",
+  "Rapid Rehousing",
+  "Legal Assistance",
+  "Rental Assistance",
+  "SNAP / Food Assistance",
+  "Transportation Assistance",
+  "Childcare Assistance",
+] as const;
+
+const delawareProgramsByCategory: Record<(typeof delawareResourceCategories)[number], string[]> = {
+  "Homelessness Prevention & Intervention": [
+    "Housing Alliance Delaware - Centralized Intake",
+    "Delaware 211",
+    "DSS Emergency and Transitional Housing",
+    "Emergency Solutions Grants Homelessness Prevention",
+  ],
+  Housing: ["DelawareHousingSearch.org", "Delaware State Housing Authority", "Domestic Violence Housing Options"],
+  "Subsidized Housing": ["Centralized Public Housing and Voucher Waitlist", "State Rental Assistance Program", "Section 811 Project Rental Assistance"],
+  "Cash Assistance": ["Temporary Assistance for Needy Families", "General Assistance", "Refugee Cash Assistance", "Kinship Care Program"],
+  "Immigration Services": ["Community Legal Aid Society Immigration Unit", "Delaware DOJ Office of Immigration Assistance", "Office of New Americans", "Catholic Charities Immigration Services"],
+  "Trafficking Victim Services": ["Survivor Ventures - Delaware", "Restoration Now - The Salvation Army Delaware", "Delaware Anti-Trafficking Action Council", "National Human Trafficking Hotline"],
+  "Rapid Rehousing": ["Delaware Continuum of Care Rapid Re-Housing", "Survivor Ventures Housing Stability Program"],
+  "Legal Assistance": ["Delaware Legal Help Link", "Right to Representation in Evictions", "Community Legal Aid Society", "Delaware Volunteer Legal Services", "Delaware State Courts Legal Assistance Directory"],
+  "Rental Assistance": ["DSS Emergency Assistance for Rent", "Emergency Solutions Grants Homelessness Prevention", "Survivor Ventures Housing Stability Program"],
+  "SNAP / Food Assistance": ["Delaware SNAP", "Emergency Food and Pantry Navigation"],
+  "Transportation Assistance": ["Delaware Medicaid Non-Emergency Medical Transportation", "DART First State", "DART ADA Paratransit", "Get-a-Job, Get-a-Ride", "DSS Emergency Assistance Transportation"],
+  "Childcare Assistance": ["Purchase of Care", "Children and Families First Childcare Search Help"],
+};
+
+export function getStateResourceCategories(slug: string): readonly string[] {
+  return slug === "delaware" ? delawareResourceCategories : stateResourceCategories;
+}
+
+export function getProgramsForStateCategory(slug: string, category: string): StateResourceProgram[] {
+  const groupedPrograms = stateResourcePrograms[slug] ?? {};
+  if (slug !== "delaware") {
+    return groupedPrograms[category as StateResourceCategory] ?? [];
+  }
+
+  const allPrograms = Object.values(groupedPrograms).flatMap((programs) => programs ?? []);
+  const names = delawareProgramsByCategory[category as keyof typeof delawareProgramsByCategory] ?? [];
+  return names.flatMap((name) => {
+    const program = allPrograms.find((candidate) => candidate.name === name);
+    return program ? [program] : [];
+  });
+}

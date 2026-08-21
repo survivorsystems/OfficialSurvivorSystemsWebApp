@@ -4323,6 +4323,196 @@ body:has(.assessment-workspace),
   background-size: 100% 420px !important;
 }
 
+/* Resources edition: the homepage's Bauhaus newspaper system, without changing directory behavior. */
+.hud-frame.module-local-help .terminal-content:has(> .resources-module) {
+  background-color: var(--ss-white) !important;
+  background-image: linear-gradient(
+    180deg,
+    var(--ss-ink) 0 18px,
+    var(--ss-white) 18px 52px,
+    var(--ss-ink) 52px 59px,
+    var(--ss-blue) 59px 72px,
+    var(--ss-white) 72px 118px,
+    var(--ss-ink) 118px 136px,
+    var(--ss-white) 136px 170px,
+    var(--ss-red) 170px 182px,
+    var(--ss-ink) 182px 190px,
+    var(--ss-white) 190px 246px,
+    var(--ss-yellow) 246px 260px,
+    var(--ss-ink) 260px 278px,
+    var(--ss-white) 278px 326px,
+    var(--ss-green) 326px 334px,
+    var(--ss-ink) 334px 354px,
+    var(--ss-white) 354px 420px
+  ) !important;
+  background-position: left top !important;
+  background-repeat: repeat-y !important;
+  background-size: 100% 420px !important;
+  padding: clamp(22px, 3vw, 42px) !important;
+}
+
+.hud-frame.module-local-help .resources-module {
+  display: grid !important;
+  gap: 28px !important;
+  margin: 0 auto !important;
+  max-width: 1220px !important;
+}
+
+.hud-frame.module-local-help .terminal-content .resources-module > .page-flourish-header {
+  background: var(--ss-white) !important;
+  border: 4px solid var(--ss-ink) !important;
+  border-left: 4px solid var(--ss-ink) !important;
+  box-shadow: 12px 12px 0 var(--ss-blue) !important;
+  color: var(--ss-ink) !important;
+  margin: 0 12px 12px 0 !important;
+  padding: clamp(30px, 5vw, 62px) !important;
+}
+
+.hud-frame.module-local-help .terminal-content .resources-module > .page-flourish-header::before {
+  background: linear-gradient(90deg, var(--ss-blue) 0 30%, var(--ss-red) 30% 58%, var(--ss-yellow) 58% 82%, var(--ss-green) 82%) !important;
+  content: "" !important;
+  display: block !important;
+  height: 12px !important;
+  inset: 0 0 auto !important;
+  position: absolute !important;
+}
+
+.hud-frame.module-local-help .terminal-content .resources-module > .page-flourish-header :is(.folk-kicker, h1, p) {
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.module-local-help .terminal-content .resources-module > .page-flourish-header .folk-kicker {
+  color: var(--ss-red) !important;
+  font-family: var(--ss-font-body) !important;
+  font-weight: 900 !important;
+}
+
+.hud-frame.module-local-help .terminal-content .resources-module > .page-flourish-header h1 {
+  border-bottom: 5px solid var(--ss-ink) !important;
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+  font-size: clamp(3.5rem, 8vw, 7.2rem) !important;
+  line-height: .9 !important;
+  margin: 8px 0 22px !important;
+  padding-bottom: 18px !important;
+}
+
+.hud-frame.module-local-help .terminal-content .resources-module > .page-flourish-header h1::first-letter,
+.hud-frame.module-local-help .state-resource-directory h2::first-letter,
+.hud-frame.module-local-help .resource-support-callout h2::first-letter {
+  font-family: "Brush Script MT", "Segoe Script", cursive !important;
+  font-size: 1.15em !important;
+  font-weight: 400 !important;
+}
+
+.hud-frame.module-local-help .terminal-content .resources-module > .page-flourish-header p {
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+  font-size: clamp(1.08rem, 1.8vw, 1.3rem) !important;
+  line-height: 1.55 !important;
+  max-width: 70ch !important;
+}
+
+.hud-frame.module-local-help .resources-module .state-resource-directory {
+  background: var(--ss-white) !important;
+  border: 4px solid var(--ss-ink) !important;
+  box-shadow: 12px 12px 0 var(--ss-red) !important;
+  color: var(--ss-ink) !important;
+  margin: 0 12px 12px 0 !important;
+  padding: clamp(28px, 5vw, 54px) !important;
+}
+
+.hud-frame.module-local-help .resources-module .state-resource-directory header {
+  border-bottom: 5px solid var(--ss-ink) !important;
+  max-width: none !important;
+  padding-bottom: 22px !important;
+}
+
+.hud-frame.module-local-help .resources-module .state-resource-directory header > span {
+  color: var(--ss-blue) !important;
+  font-family: var(--ss-font-body) !important;
+}
+
+.hud-frame.module-local-help .resources-module .state-resource-directory :is(h2, p, label) {
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.module-local-help .resources-module .state-resource-directory h2 {
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+  font-size: clamp(2.8rem, 6vw, 5.4rem) !important;
+  line-height: .92 !important;
+}
+
+.hud-frame.module-local-help .resources-module .state-resource-directory header p,
+.hud-frame.module-local-help .resources-module .state-resource-search {
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+  font-size: 1.05rem !important;
+}
+
+.hud-frame.module-local-help .resources-module .state-resource-search input {
+  border-color: var(--ss-ink) !important;
+  box-shadow: 5px 5px 0 var(--ss-yellow) !important;
+}
+
+.hud-frame.module-local-help .resources-module .state-resource-grid a,
+.hud-frame.module-local-help .resources-module .state-resource-grid a:nth-child(n) {
+  background: var(--ss-ink) !important;
+  border: 3px solid var(--ss-blue) !important;
+  box-shadow: 6px 6px 0 var(--ss-red) !important;
+  color: var(--ss-white) !important;
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+  font-size: 1.08rem !important;
+}
+
+.hud-frame.module-local-help .resources-module .state-resource-grid a:nth-child(4n+2) {
+  border-color: var(--ss-red) !important;
+  box-shadow-color: var(--ss-yellow) !important;
+}
+
+.hud-frame.module-local-help .resources-module .state-resource-grid a:nth-child(4n+3) {
+  border-color: var(--ss-yellow) !important;
+  box-shadow-color: var(--ss-blue) !important;
+}
+
+.hud-frame.module-local-help .resources-module .state-resource-grid a:nth-child(4n) {
+  border-color: var(--ss-green) !important;
+  box-shadow-color: var(--ss-red) !important;
+}
+
+.hud-frame.module-local-help .resources-module .state-resource-grid a:is(:hover, :focus-visible) {
+  background: #292d34 !important;
+  box-shadow: 2px 2px 0 var(--ss-yellow) !important;
+}
+
+.hud-frame.module-local-help .resources-module .resource-support-callout {
+  background: var(--ss-ink) !important;
+  border: 4px solid var(--ss-ink) !important;
+  box-shadow: 10px 10px 0 var(--ss-yellow) !important;
+  margin: 0 10px 10px 0 !important;
+  padding: clamp(24px, 4vw, 40px) !important;
+}
+
+.hud-frame.module-local-help .resources-module .resource-support-callout h2 {
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+  font-size: clamp(2rem, 4vw, 3.2rem) !important;
+}
+
+.hud-frame.module-local-help .resources-module .resource-support-callout button {
+  background: var(--ss-red) !important;
+  border: 3px solid var(--ss-white) !important;
+  box-shadow: 5px 5px 0 var(--ss-blue) !important;
+  color: var(--ss-white) !important;
+}
+
+@media (max-width: 720px) {
+  .hud-frame.module-local-help .terminal-content:has(> .resources-module) {
+    padding: 16px !important;
+  }
+
+  .hud-frame.module-local-help .terminal-content .resources-module > .page-flourish-header,
+  .hud-frame.module-local-help .resources-module .state-resource-directory {
+    padding: 24px 20px !important;
+  }
+}
+
 .hud-frame.module-home .home-terminal.bauhaus-home {
   display: grid !important;
   gap: 28px !important;
@@ -7981,6 +8171,53 @@ body:has(.assessment-workspace),
   .hud-frame.module-home .home-top-notices .home-education-disclaimer {
     padding: 22px !important;
   }
+}
+
+/* Final Resources edition lock. */
+.hud-frame.terminal-frame.module-local-help .terminal-content .resources-module > .page-flourish-header.page-flourish-header {
+  background: var(--ss-white) !important;
+  border: 4px solid var(--ss-ink) !important;
+  box-shadow: 12px 12px 0 var(--ss-blue) !important;
+  color: var(--ss-ink) !important;
+  padding: clamp(30px, 5vw, 62px) !important;
+}
+
+.hud-frame.terminal-frame.module-local-help .terminal-content .resources-module > .page-flourish-header.page-flourish-header::before {
+  background: linear-gradient(90deg, var(--ss-blue) 0 30%, var(--ss-red) 30% 58%, var(--ss-yellow) 58% 82%, var(--ss-green) 82%) !important;
+  display: block !important;
+}
+
+.hud-frame.terminal-frame.module-local-help .terminal-content .resources-module > .page-flourish-header.page-flourish-header :is(.folk-kicker, h1, p) {
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame.module-local-help .terminal-content .resources-module > .page-flourish-header.page-flourish-header .folk-kicker {
+  color: var(--ss-red) !important;
+}
+
+.hud-frame.module-local-help .resources-module .state-resource-directory,
+.hud-frame.module-local-help .resources-module .resource-support-callout {
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+}
+
+.hud-frame.module-local-help .resources-module .state-resource-grid a:nth-child(4n+1) {
+  border-color: var(--ss-blue) !important;
+  box-shadow: 6px 6px 0 var(--ss-red) !important;
+}
+
+.hud-frame.module-local-help .resources-module .state-resource-grid a:nth-child(4n+2) {
+  border-color: var(--ss-red) !important;
+  box-shadow: 6px 6px 0 var(--ss-yellow) !important;
+}
+
+.hud-frame.module-local-help .resources-module .state-resource-grid a:nth-child(4n+3) {
+  border-color: var(--ss-yellow) !important;
+  box-shadow: 6px 6px 0 var(--ss-blue) !important;
+}
+
+.hud-frame.module-local-help .resources-module .state-resource-grid a:nth-child(4n) {
+  border-color: var(--ss-green) !important;
+  box-shadow: 6px 6px 0 var(--ss-red) !important;
 }
 
 /* Final homepage canvas lock: one stripe layer, with no old yellow shell underneath it. */
