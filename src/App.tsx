@@ -3614,19 +3614,24 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
         <h1 id="home-title"><span className="editorial-initial">W</span>elcome to Survivor Systems</h1>
         <div className="home-editorial-lead-copy">
           <p>
-            Surviving abuse is only one part of getting free. Leaving can mean suddenly having to
-            navigate housing, money, transportation, benefits, court, safety, documentation, work,
-            childcare, technology, healthcare, and a dozen other systems while you're already running
-            on fumes.
+            Welcome to <strong>Survivor Systems</strong>, a place for practical tools for when your life
+            has become an administrative nightmare.
           </p>
           <p>
-            Most resources treat those problems separately. Survivor Systems looks at the whole picture.
-            This is a practical resource and strategy platform designed to help you understand what's
-            happening, see where control may still be applied, and make informed decisions about what
-            comes next.
+            Find state-specific housing, financial, legal, childcare, transportation, immigration, and
+            survivor resources. Use trackers to document what's happening. Build court records that make
+            sense. Organize money, housing applications, safety information, and next steps. Grab workbooks
+            and kits for rebuilding autonomy, income, routines, identity, and everything else abuse has a
+            way of hijacking.
+          </p>
+          <p><strong>No inspirational-poster bullshit. No pretending a hotline fixes everything.</strong></p>
+          <p>
+            Just information, tools, templates, and systems you can actually use to figure out what's
+            available, make informed decisions, keep your receipts, and move your life in the direction
+            <strong> you</strong> choose.
           </p>
         </div>
-        <p className="home-editorial-deck">Better information. Clearer strategy. Your decisions.</p>
+        <p className="home-editorial-deck">Welcome in. Use what helps. Leave what doesn't.</p>
       </article>
 
       <div className="home-editorial-secondary" aria-label="Where to begin and device safety">
@@ -3927,15 +3932,14 @@ function AboutModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: str
           <span>WHAT SURVIVOR SYSTEMS DOES DIFFERENTLY</span>
           <h2 id="about-difference-title">Better information. Clearer strategy. Your decisions.</h2>
           <p>
-            Survivor Systems is designed around that overlap. We're not here to patronize you or
-            sugarcoat anything. We are here to prepare you for your new life, free from abuse, with
-            information we wish we had. Information that could make what feels impossible very possible,
-            step by step.
+            Survivor Systems is designed around that overlap. We're not here to patronize you or sugarcoat
+            anything. We are here to prepare you for your new life, free from abuse, with information we
+            wish we had. Information that could make what feels impossible, very possible. Step by step.
           </p>
           <p>
-            Think of Survivor Systems like a friend guiding you through rebuilding your new life with
-            wisdom and experience. The goal isn't to tell survivors what to do. It's to help people see
-            the board more clearly so they can make their own decisions.
+            Think of Survivor Systems like a friend guiding you through how to navigate rebuilding your
+            new life with wisdom and experience. The goal isn't to tell survivors what to do. It's to help
+            people see the board more clearly so they can make their own decisions.
           </p>
           <p>
             That might mean taking an assessment to identify financial captivity or post-separation
@@ -3943,7 +3947,7 @@ function AboutModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: str
             a free resource, building a practical plan, documenting what's happening, or getting help
             thinking through a complicated situation.
           </p>
-          <p><strong>Sometimes the most powerful thing a survivor can have is better information and a clearer strategy.</strong></p>
+          <p><strong>Sometimes the most powerful thing a survivor can have is simply better information and a clearer strategy.</strong></p>
         </div>
       </section>
 
@@ -3966,17 +3970,18 @@ function AboutModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: str
             <span>STRATEGY</span>
             <h3>One-on-one support</h3>
             <p>
-              Strategy services are available for people who need help organizing a complicated
-              situation, identifying options, or figuring out which questions to ask next.
+              I also offer one-on-one strategy services for people who need help organizing a complicated
+              situation, identifying options, or figuring out what questions they should be asking next.
             </p>
           </article>
           <article>
             <span>TRAINING</span>
             <h3>Professional education</h3>
             <p>
-              Training and consulting are available for organizations, advocates, service providers,
-              and professionals seeking a deeper understanding of coercive control, survivor barriers,
-              post-separation abuse, and the ways systems can create additional obstacles.
+              Training and consulting are available for organizations, advocates, service providers, and
+              professionals who want a deeper understanding of coercive control, survivor barriers,
+              post-separation abuse, and the ways different systems can unintentionally create additional
+              obstacles for people trying to rebuild.
             </p>
           </article>
         </div>
@@ -3994,7 +3999,7 @@ function AboutModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: str
           <li>They deserve options.</li>
           <li>They deserve practical tools.</li>
           <li>They deserve to understand the systems affecting their lives.</li>
-          <li>They deserve resources that recognize escaping control and rebuilding autonomy aren't the same thing.</li>
+          <li>And they deserve resources that recognize escaping control and rebuilding autonomy aren't the same thing.</li>
         </ul>
         <p>
           The goal of Survivor Systems is to make rebuilding a little less confusing, a little more
@@ -4006,6 +4011,10 @@ function AboutModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: str
         <span>START WHEREVER YOU ARE</span>
         <h2 id="about-start-title">You don't have to solve everything at once.</h2>
         <p>You don't need to know exactly what kind of help you need before you begin.</p>
+        <p>Take an assessment if you're trying to understand what's happening.</p>
+        <p>Browse the resource library if you're looking for practical information.</p>
+        <p>Book a strategy session if your situation is complicated and you need help sorting through the moving pieces.</p>
+        <p>If you're an organization or professional interested in training or consulting, you can learn more about working together.</p>
         <div className="about-start-actions">
           <button type="button" onClick={() => onNavigate("advocacy", "/assessments")}>Open Assessments</button>
           <button type="button" onClick={() => onNavigate("local-help", "/resources")}>Browse Resources</button>

@@ -4425,6 +4425,11 @@ body:has(.assessment-workspace),
 
 .hud-frame.module-home .home-editorial-lead-copy p + p { margin-top: 18px !important; }
 
+.hud-frame.module-home .home-editorial-lead-copy strong {
+  color: var(--ss-red) !important;
+  font-weight: 700 !important;
+}
+
 .hud-frame.module-home .home-editorial-deck {
   border-left: 14px solid var(--ss-yellow) !important;
   color: var(--ss-ink) !important;
