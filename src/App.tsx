@@ -3638,8 +3638,10 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
 
       <div className="home-editorial-secondary" aria-label="Where to begin and device safety">
         <article className="home-start-story">
-          <p className="home-editorial-kicker">A GUIDED PLACE TO BEGIN</p>
-          <h2><span className="editorial-initial">S</span>tart Here</h2>
+          <header className="home-article-header">
+            <p className="home-editorial-kicker">A GUIDED PLACE TO BEGIN</p>
+            <h2><span className="editorial-initial">S</span>tart Here</h2>
+          </header>
           <p>
             There is a lot here: assessments, safety information, practical guides, state resources,
             planning tools, and rebuilding support. Start Here asks a few questions and points you
@@ -3652,8 +3654,10 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
         </article>
 
         <article className="home-safety-story" aria-labelledby="home-privacy">
-          <p className="home-editorial-kicker">A NOTE ABOUT DEVICE SAFETY</p>
-          <h2 id="home-privacy"><span className="editorial-initial">A</span>busers often monitor devices and online activity.</h2>
+          <header className="home-article-header">
+            <p className="home-editorial-kicker">A NOTE ABOUT DEVICE SAFETY</p>
+            <h2 id="home-privacy"><span className="editorial-initial">A</span>busers often monitor devices and online activity.</h2>
+          </header>
           <p>
             Cyberstalking can include checking browser history, accessing accounts, tracking a phone's
             location, reading messages, or installing surveillance software. Changing settings or
