@@ -9375,3 +9375,252 @@ html::-webkit-scrollbar-corner {
     max-width: 520px !important;
   }
 }
+
+/* Guides are newspaper articles: white sheets, ink rules, and editorial callouts. */
+.hud-frame:is(.module-guides, .module-how-to, .module-legal) .terminal-content,
+.hud-frame:is(.module-guides, .module-how-to, .module-legal) .terminal-content * {
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+}
+
+.hud-frame.module-guides .category-module > .page-flourish-header,
+.hud-frame.module-how-to .how-to-guide-page,
+.hud-frame.module-legal .legal-guide-shell {
+  background: var(--ss-white) !important;
+  border: 4px solid var(--ss-ink) !important;
+  box-shadow: 12px 12px 0 var(--ss-blue) !important;
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.module-how-to .how-to-guide-page,
+.hud-frame.module-legal .legal-guide-shell {
+  margin: 0 12px 42px 0 !important;
+  padding: clamp(26px, 5vw, 64px) !important;
+}
+
+.hud-frame:is(.module-how-to, .module-legal) .terminal-content :is(.how-to-guide-page, .legal-guide-shell) :is(
+  h1, h2, h3, h4, h5, h6, p, li, label, span, small, strong, em, code, blockquote, summary, a, dt, dd
+) {
+  color: var(--ss-ink) !important;
+  text-shadow: none !important;
+}
+
+.hud-frame.module-how-to .how-to-guide-page :is(.ss-template-header, .page-flourish-header, .how-to-hero),
+.hud-frame.module-legal .legal-guide-shell :is(.ss-template-header, .page-flourish-header) {
+  background: var(--ss-white) !important;
+  border: 0 !important;
+  border-bottom: 8px solid var(--ss-red) !important;
+  color: var(--ss-ink) !important;
+  padding: 0 0 clamp(24px, 4vw, 42px) !important;
+}
+
+.hud-frame:is(.module-how-to, .module-legal) .terminal-content :is(
+  .ss-template-eyebrow,
+  .eyebrow,
+  .terminal-label,
+  .page-kicker p,
+  .snap-guide-card-header small
+) {
+  color: var(--ss-red) !important;
+  font-weight: 700 !important;
+}
+
+.hud-frame.module-how-to .how-to-guide-page .ss-template-index,
+.hud-frame.module-how-to .how-to-guide-page .how-to-command-strip {
+  background: var(--ss-yellow) !important;
+  border: 3px solid var(--ss-ink) !important;
+  box-shadow: 7px 7px 0 var(--ss-red) !important;
+  color: var(--ss-ink) !important;
+  margin: 28px 7px 34px 0 !important;
+}
+
+.hud-frame.module-how-to .how-to-guide-page :is(.ss-template-index, .how-to-command-strip) span {
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.module-how-to .how-to-guide-page :is(
+  .snap-guide-grid,
+  .compensation-coverage-grid,
+  .compensation-process-grid,
+  .compensation-clauses-grid,
+  .housing-options-pathways
+),
+.hud-frame.module-legal .legal-guide-shell :is(.legal-step-grid, .legal-motion-grid, .legal-note-grid) {
+  background: var(--ss-white) !important;
+  border: 4px solid var(--ss-ink) !important;
+  box-shadow: none !important;
+  display: block !important;
+  margin: 30px 0 !important;
+  overflow: hidden !important;
+}
+
+.hud-frame.module-how-to .how-to-guide-page :is(
+  .snap-guide-card,
+  .compensation-coverage-grid > article,
+  .compensation-process-grid > article,
+  .compensation-clauses-grid > article,
+  .housing-option-pathway
+),
+.hud-frame.module-legal .legal-guide-shell :is(.legal-step-card, .legal-motion-card, .legal-note) {
+  background: var(--ss-white) !important;
+  border: 0 !important;
+  border-bottom: 3px solid var(--ss-ink) !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  margin: 0 !important;
+  padding: clamp(28px, 5vw, 56px) !important;
+}
+
+.hud-frame.module-how-to .how-to-guide-page :is(
+  .snap-guide-card,
+  .compensation-coverage-grid > article,
+  .compensation-process-grid > article,
+  .compensation-clauses-grid > article,
+  .housing-option-pathway
+):last-child,
+.hud-frame.module-legal .legal-guide-shell :is(.legal-step-card, .legal-motion-card, .legal-note):last-child {
+  border-bottom: 0 !important;
+}
+
+.hud-frame.module-how-to .how-to-guide-page .snap-guide-card {
+  border-left: 0 !important;
+}
+
+.hud-frame.module-how-to .how-to-guide-page .snap-guide-card h2,
+.hud-frame.module-how-to .how-to-guide-page .housing-option-pathway summary,
+.hud-frame.module-legal .legal-guide-shell :is(.legal-step-card, .legal-motion-card, .legal-note) h2 {
+  color: var(--ss-ink) !important;
+  font-size: clamp(22px, 3vw, 28px) !important;
+  max-width: none !important;
+}
+
+.hud-frame.module-how-to .how-to-guide-page .snap-guide-card h2::first-letter,
+.hud-frame.module-legal .legal-guide-shell :is(.legal-step-card, .legal-motion-card, .legal-note) h2::first-letter {
+  color: var(--ss-red) !important;
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+}
+
+.hud-frame.module-how-to .how-to-guide-page :is(ul, ol) {
+  background: var(--ss-white) !important;
+  border-left: 8px solid var(--ss-yellow) !important;
+  color: var(--ss-ink) !important;
+  margin: 18px 0 !important;
+  padding: 12px 20px 12px 38px !important;
+}
+
+.hud-frame.module-how-to .how-to-guide-page :is(
+  .how-to-system-note,
+  .housing-options-master-script,
+  .phrase-bank,
+  blockquote,
+  .state-program-note
+),
+.hud-frame.module-legal .legal-guide-shell :is(.legal-warning, .legal-reminder, .legal-motion-block, blockquote) {
+  background: var(--ss-white) !important;
+  border: 0 !important;
+  border-left: 12px solid var(--ss-red) !important;
+  box-shadow: 8px 8px 0 var(--ss-yellow) !important;
+  color: var(--ss-ink) !important;
+  margin: 28px 8px 34px 0 !important;
+  padding: clamp(22px, 4vw, 34px) !important;
+}
+
+.hud-frame.module-how-to .how-to-guide-page :is(
+  .how-to-system-note,
+  .housing-options-master-script,
+  .phrase-bank,
+  blockquote
+) :is(h2, h3, p, li, span, strong, code),
+.hud-frame.module-legal .legal-guide-shell :is(.legal-warning, .legal-reminder, .legal-motion-block, blockquote) :is(h2, h3, p, li, span, strong, code) {
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.module-how-to .how-to-guide-page :is(.phrase-bank, blockquote) {
+  border-left-color: var(--ss-blue) !important;
+  box-shadow-color: var(--ss-red) !important;
+}
+
+/* Guides directory uses article cards under colored newspaper section banners. */
+.hud-frame.module-guides .guide-assessment-entry,
+.hud-frame.module-guides .guide-category-section,
+.hud-frame.module-guides .guide-category-section:nth-child(n) {
+  background: var(--ss-white) !important;
+  border: 4px solid var(--ss-ink) !important;
+  box-shadow: 10px 10px 0 var(--ss-blue) !important;
+  color: var(--ss-ink) !important;
+  overflow: hidden !important;
+}
+
+.hud-frame.module-guides .guide-assessment-entry :is(span, h2, p),
+.hud-frame.module-guides .guide-category-section :is(h2, h3, p, span, strong) {
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.module-guides .guide-category-section > header {
+  background: var(--ss-red) !important;
+  border-bottom: 4px solid var(--ss-ink) !important;
+  padding: 22px clamp(24px, 4vw, 40px) !important;
+}
+
+.hud-frame.module-guides .guide-category-section:nth-child(4n + 2) > header {
+  background: var(--ss-yellow) !important;
+}
+
+.hud-frame.module-guides .guide-category-section:nth-child(4n + 3) > header {
+  background: var(--ss-green) !important;
+}
+
+.hud-frame.module-guides .guide-category-section:nth-child(4n) > header {
+  background: var(--ss-blue) !important;
+}
+
+.hud-frame.module-guides .guide-category-section > header :is(h2, p, span, strong) {
+  color: var(--ss-white) !important;
+}
+
+.hud-frame.module-guides .guide-category-section:nth-child(4n + 2) > header :is(h2, p, span, strong) {
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.module-guides .guide-category-section .category-file-grid {
+  background: var(--ss-white) !important;
+  gap: 24px !important;
+  padding: clamp(24px, 4vw, 40px) !important;
+}
+
+.hud-frame.module-guides .guide-category-section .category-file-card,
+.hud-frame.module-guides .guide-category-section .category-file-card:nth-child(n) {
+  background: var(--ss-white) !important;
+  border: 3px solid var(--ss-ink) !important;
+  box-shadow: 7px 7px 0 var(--ss-red) !important;
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.module-guides .guide-category-section .category-file-card:nth-child(3n + 2) {
+  box-shadow-color: var(--ss-yellow) !important;
+}
+
+.hud-frame.module-guides .guide-category-section .category-file-card:nth-child(3n) {
+  box-shadow-color: var(--ss-blue) !important;
+}
+
+.hud-frame.module-guides .guide-category-section .category-file-card :is(h2, h3, p, span, strong) {
+  color: var(--ss-ink) !important;
+}
+
+@media (max-width: 600px) {
+  .hud-frame.module-how-to .how-to-guide-page,
+  .hud-frame.module-legal .legal-guide-shell {
+    padding: 20px !important;
+  }
+
+  .hud-frame.module-how-to .how-to-guide-page :is(
+    .snap-guide-card,
+    .compensation-coverage-grid > article,
+    .compensation-process-grid > article,
+    .compensation-clauses-grid > article,
+    .housing-option-pathway
+  ),
+  .hud-frame.module-legal .legal-guide-shell :is(.legal-step-card, .legal-motion-card, .legal-note) {
+    padding: 24px 20px !important;
+  }
+}
