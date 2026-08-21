@@ -7772,6 +7772,22 @@ body:has(.assessment-workspace),
   padding-left: 22px !important;
 }
 
+.hud-frame.module-store .store-kit-preview {
+  background: var(--ss-white) !important;
+  border: 4px solid var(--ss-white) !important;
+  box-shadow: 9px 9px 0 var(--ss-yellow) !important;
+  margin: 0 9px 34px 0 !important;
+  overflow: hidden !important;
+}
+
+.hud-frame.module-store .store-kit-preview img {
+  aspect-ratio: 1456 / 1092 !important;
+  display: block !important;
+  height: auto !important;
+  object-fit: contain !important;
+  width: 100% !important;
+}
+
 .hud-frame.module-store .store-purchase-row {
   align-items: center !important;
   border-top: 3px solid var(--ss-white) !important;

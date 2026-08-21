@@ -6,6 +6,7 @@ import denialSupportOne from "./assets/support/denial-support-1.png";
 import denialSupportTwo from "./assets/support/denial-support-2.png";
 import dvFundingInfographic from "./assets/systems/dv-funding-infographic.png";
 import blankProposedSapcrOrderPreview from "./assets/library/blank-proposed-sapcr-order-preview.png";
+import survivorHealingBundleMockup from "./assets/store/survivor-healing-bundle-mockup.png";
 import { CommercePageTemplate, EditorialPageTemplate } from "./components/PageTemplates";
 import { AgencyReviewForm } from "./components/AgencyReviewForm";
 import { HousingStrategySystem } from "./components/HousingStrategySystem";
@@ -3819,6 +3820,13 @@ function StoreModule() {
 
       <div className="store-live-kit" aria-label="Available kit">
         <article>
+          <figure className="store-kit-preview">
+            <img
+              src={survivorHealingBundleMockup}
+              alt="Survivor Healing Bundle workbook covers and interior pages for emotional, financial, sexual, and total autonomy restoration"
+              decoding="async"
+            />
+          </figure>
           <span>AVAILABLE NOW</span>
           <h2>Survivor Healing Bundle</h2>
           <p>A five-part collection for rebuilding emotional, financial, sexual, and personal autonomy while examining the larger systems that shape control.</p>
