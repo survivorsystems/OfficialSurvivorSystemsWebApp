@@ -94,6 +94,7 @@ const stateResourceReviewDates: Partial<Record<string, string>> = {
   arkansas: "August 20, 2026",
   colorado: "August 20, 2026",
   california: "August 20, 2026",
+  connecticut: "August 21, 2026",
   delaware: "August 21, 2026",
 };
 
@@ -1827,6 +1828,299 @@ export const stateResourcePrograms: Partial<Record<string, Partial<Record<StateR
       },
     ],
   },
+  connecticut: {
+    Housing: [
+      {
+        name: "Connecticut 2-1-1 / Coordinated Access Networks",
+        summary: "Connecticut's main entry point for homelessness prevention, diversion, emergency shelter, outreach, rapid rehousing, and housing navigation.",
+        access: "Dial 2-1-1 and choose Option 3 for a Housing Crisis Specialist. Published hours are Monday-Friday, 8:30 a.m.-4 p.m.",
+        coverage: "Statewide through regional Coordinated Access Networks",
+        phone: "211",
+        url: "https://www.211ct.org/topic_pages/housing",
+      },
+      {
+        name: "Eviction Prevention Fund 2.0",
+        summary: "May cover up to three months of rental arrears or $5,000, whichever comes first, for qualifying Connecticut tenants facing eviction after an eligible hardship.",
+        access: "Call for current screening, income rules, required hardship documentation, and eviction-stage requirements.",
+        coverage: "Statewide, subject to eligibility and funding",
+        phone: "844-864-8328",
+        url: "https://www.easthaven-ct.gov/DocumentCenter/View/902/Department-of-Housing-Eviction-Assistance-2026pdf",
+        note: "Older pandemic-era UniteCT descriptions should not be treated as a currently open general rental-assistance program.",
+      },
+      {
+        name: "Connecticut Right to Counsel",
+        summary: "Provides free legal representation to qualifying tenants facing eviction or the loss of a housing subsidy.",
+        access: "Call as soon as an eviction, termination, or court notice arrives.",
+        coverage: "Income-eligible Connecticut tenants",
+        phone: "800-559-1565",
+        url: "https://evictionhelpct.org/",
+      },
+      {
+        name: "Safe Connect",
+        summary: "Connecticut's statewide domestic violence response line can connect survivors with confidential, survivor-specific support when abuse is affecting housing or safety.",
+        access: "Call the statewide line for current local services and housing pathways.",
+        coverage: "Statewide",
+        phone: "888-774-2900",
+        url: "https://www.211ct.org/topic_pages/housing",
+      },
+      {
+        name: "CTHousingSearch.org",
+        summary: "Free statewide locator for market-rate and affordable rentals, accessible units, senior housing, veterans' housing, and government-assisted housing.",
+        access: "Search by location, price, and accessibility needs online, or call Monday-Friday, 9 a.m.-8 p.m. Spanish assistance is available.",
+        coverage: "Statewide",
+        phone: "877-428-8844",
+        url: "https://www.cthousingsearch.org/",
+      },
+      {
+        name: "Time To Own - CHFA",
+        summary: "Offers eligible buyers using a CHFA first mortgage a 0% forgivable loan for down payment and closing costs, with no monthly payment and up to $25,000 available.",
+        access: "Review current funding and apply through a CHFA-approved lender.",
+        coverage: "Eligible Connecticut homebuyers",
+        url: "https://www.chfa.org/homebuyers-homeowners/homebuyers/time-to-own-down-payment-assistance-program-loan/",
+        note: "Ten percent is forgiven each year over ten years. Funding is finite, so verify current availability.",
+      },
+      {
+        name: "Emergency Mortgage Assistance Program",
+        summary: "May bring mortgage or related property arrears current and provide periodic payment help for eligible homeowners at risk of foreclosure after a qualifying hardship.",
+        access: "Contact CHFA for current eligibility and application steps.",
+        coverage: "Eligible Connecticut homeowners",
+        phone: "860-571-3500",
+        url: "https://www.chfa.org/homeowners/emergency-mortgage-assistance-program/",
+      },
+      {
+        name: "Section 8 Housing Choice Voucher Program",
+        summary: "Connecticut DOH and more than 40 local public housing agencies administer rental vouchers through separate waiting lists.",
+        access: "Check individual local housing-authority lists rather than relying only on the state list.",
+        coverage: "Statewide through state and local administrators",
+        url: "https://portal.ct.gov/doh/doh/programs/section-8-housing-choice-voucher-program",
+        note: "The state DOH waiting list is currently closed, but local lists open and close separately.",
+      },
+      {
+        name: "Special-purpose Housing Choice Vouchers",
+        summary: "Special voucher pathways include Family Unification Program vouchers, Mainstream vouchers for eligible people with disabilities, and preferences tied to Money Follows the Person transitions.",
+        access: "Review the state program information and ask the relevant agency or caseworker about referral requirements.",
+        coverage: "Qualifying Connecticut households",
+        url: "https://portal.ct.gov/doh/doh/programs/section-8-housing-choice-voucher-program",
+      },
+      {
+        name: "State Rental Assistance Program",
+        summary: "Connecticut's state-funded subsidy helps very-low-income households rent privately owned housing, with the subsidy paid to the landlord.",
+        access: "Check the state page for current eligibility, openings, and application pathways.",
+        coverage: "Statewide",
+        url: "https://portal.ct.gov/doh/doh/programs/rental-assistance-program",
+      },
+      {
+        name: "Security Deposit Guarantee Program",
+        summary: "May guarantee a landlord up to two months' rent as a security deposit for qualifying households documented as chronically homeless or leaving shelters, plus certain Section 8 Mobility participants.",
+        access: "A referral must come through the Coordinated Access Network.",
+        coverage: "Qualifying CAN-referred households",
+        url: "https://portal.ct.gov/doh/doh/programs/security-deposit-program",
+      },
+      {
+        name: "Connecticut Rapid Re-Housing through CAN",
+        summary: "The coordinated homeless-response system screens people experiencing literal homelessness and matches eligible households to available rapid-rehousing programs.",
+        access: "Start with 2-1-1, Option 3.",
+        coverage: "Statewide through regional Coordinated Access Networks",
+        phone: "211",
+        url: "https://www.act-ct.org/rrh.html",
+      },
+      {
+        name: "Domestic Violence & Human Trafficking Rapid Re-Housing - CCADV",
+        summary: "Survivor-specific rapid rehousing with housing-location help, temporary rent subsidies, trauma-informed case management, financial education, and economic empowerment.",
+        access: "Contact Connecticut's domestic violence service network for current referral pathways.",
+        coverage: "Statewide survivor-specific program",
+        url: "https://www.ctcadv.org/advocacy",
+      },
+      {
+        name: "New Reach",
+        summary: "Offers rapid rehousing with temporary rental assistance and supportive services.",
+        access: "When a referral is required, housing-crisis access begins through Connecticut's coordinated system.",
+        coverage: "Connecticut service areas",
+        url: "https://www.newreach.org/",
+      },
+    ],
+    Food: [
+      {
+        name: "Connecticut SNAP",
+        summary: "Provides food assistance through EBT for eligible households. Applications can be completed online, by mail, or in person.",
+        access: "Apply through Connecticut DSS / ConneCT. Eligibility depends on current income rules, deductions, and household circumstances.",
+        coverage: "Statewide",
+        url: "https://portal.ct.gov/dss/snap",
+        note: "Connecticut implemented major SNAP work-rule changes in 2026. Use current DSS screening rather than assuming eligibility from older guidance.",
+      },
+      {
+        name: "2026 SNAP Transition Grocery Support",
+        summary: "Connecticut Community Action Agencies began distributing a one-time $300 grocery card to certain people who lost SNAP specifically because of new federal work-rule changes.",
+        access: "Review current DSS guidance and contact a local Community Action Agency to confirm qualification and availability.",
+        coverage: "Certain affected Connecticut residents",
+        url: "https://portal.ct.gov/dss/lists/administrative-hearings-decisions/snap-eligibility/snap-eligibility-2026",
+      },
+    ],
+    "Childcare Assistance": [
+      {
+        name: "Care 4 Kids",
+        summary: "Connecticut's primary childcare subsidy for qualifying families who are working or participating in approved education, training, or Jobs First activities.",
+        fit: "Children generally must be under 13, or under 19 with qualifying special needs.",
+        access: "Call or apply through Care 4 Kids and review the current income guidelines.",
+        coverage: "Statewide",
+        phone: "888-214-5437",
+        url: "https://www.ctcare4kids.com/care-4-kids-program/care4kids-info/",
+        note: "Care 4 Kids currently uses an enrollment list. Families experiencing homelessness are a high-priority group and should not assume the general wait estimate applies.",
+      },
+    ],
+    "Transportation Assistance": [
+      {
+        name: "HUSKY / Medicaid Non-Emergency Medical Transportation",
+        summary: "Provides transportation to covered medical care for eligible members who lack a ride, including transit passes, mileage reimbursement, sedan or livery service, and wheelchair-accessible rides when appropriate.",
+        access: "Schedule through Medical Transportation Management.",
+        coverage: "Eligible HUSKY A, C, and D, Covered Connecticut, and certain limited-benefit members",
+        phone: "855-478-7350",
+        url: "https://portal.ct.gov/dss/health-and-home-care/non-emergency-medical-transportation/eligibility/",
+      },
+      {
+        name: "Jobs First Employment Services",
+        summary: "TFA recipients assigned to JFES may receive case-management help with transportation needed for employment or required participation, along with related work supports.",
+        access: "Ask the assigned JFES caseworker what transportation and childcare supports are available.",
+        coverage: "Eligible TFA recipients",
+        url: "https://portal.ct.gov/dol/divisions/jobs-first-employment-services/program-details",
+      },
+      {
+        name: "CTtransit Reduced Fares",
+        summary: "Offers reduced public-transit fares for adults age 65 and older and qualifying people with disabilities.",
+        access: "Review current ID or Medicare documentation requirements before traveling.",
+        coverage: "Participating CTtransit services",
+        url: "https://www.cttransit.com/fares",
+      },
+    ],
+    Immigration: [
+      {
+        name: "Connecticut Institute for Refugees and Immigrants",
+        summary: "Affordable immigration legal services including VAWA-related cases, trafficking- and crime-survivor relief, asylum, removal defense, family petitions, adjustment of status, and citizenship.",
+        access: "Call for current intake and fees.",
+        coverage: "Statewide",
+        phone: "203-336-0141",
+        url: "https://cirict.org/immigration-legal-services/",
+      },
+      {
+        name: "Integrated Refugee & Immigrant Services",
+        summary: "Supports refugees and immigrants through New Haven, Hartford, New London, and remote or satellite services.",
+        access: "Call the Client Help Line.",
+        coverage: "Connecticut through multiple locations and remote services",
+        phone: "203-997-8490",
+        url: "https://irisct.org/contact-us/",
+      },
+      {
+        name: "Immigration Advocacy & Support Center",
+        summary: "Provides immigration legal services in southeast Connecticut on a sliding-fee scale; SNAP and HUSKY recipients qualify for the lowest fee tier.",
+        access: "Call for intake.",
+        coverage: "Southeast Connecticut",
+        phone: "860-629-7758",
+        url: "https://www.iascct.org/",
+      },
+      {
+        name: "The American Immigrant Legal Clinic",
+        summary: "Provides free representation to low-income immigrants detained in Connecticut, including bond, habeas, and merits hearings.",
+        access: "Call for current intake and representation criteria.",
+        coverage: "Low-income immigrants detained in Connecticut",
+        phone: "203-667-2500",
+        url: "https://www.tailcproject.org/",
+      },
+      {
+        name: "Connecticut State Immigration Resource Page",
+        summary: "State-maintained collection of family preparedness, legal and advocacy, and Know Your Rights resources.",
+        access: "Use the online collection to identify current legal and community support.",
+        coverage: "Statewide information",
+        url: "https://portal.ct.gov/dcf/knowledge-base/articles/supports-for-children-and-families/immigration/immigration-resources",
+      },
+    ],
+    Trafficking: [
+      {
+        name: "The Underground New England",
+        summary: "Adult survivor support including peer mentoring, case management, health-care connections, housing assistance, short-term financial help, basic needs, financial coaching, and community support.",
+        access: "Call for current survivor-support intake.",
+        coverage: "Adult trafficking survivors in Connecticut and New England",
+        phone: "860-249-1644",
+        url: "https://theundergroundne.org/survivor-support/",
+      },
+      {
+        name: "Love146 Connecticut Survivor Care",
+        summary: "Specialized statewide care for trafficked or exploited children and youth, including rapid safety response, long-term care, mental-health support, advocacy, justice-system assistance, and transition support.",
+        access: "Call the Connecticut Survivor Care referral line.",
+        coverage: "Children and youth statewide",
+        phone: "203-361-7899",
+        url: "https://love146.org/ct/",
+      },
+      {
+        name: "CIRI - Trafficking and Crime Survivor Immigration Relief",
+        summary: "Immigration representation for survivors of trafficking, domestic violence, and other serious crimes, including T visa, U visa, and other humanitarian relief when appropriate.",
+        access: "Call CIRI for current legal-services intake.",
+        coverage: "Statewide",
+        phone: "203-336-0141",
+        url: "https://cirict.org/immigration-legal-services/",
+      },
+    ],
+    "Other Programs": [
+      {
+        name: "Temporary Family Assistance",
+        summary: "Connecticut's TANF cash-assistance program for qualifying families with children.",
+        access: "Apply through Connecticut DSS / ConneCT.",
+        coverage: "Statewide",
+        url: "https://portal.ct.gov/dss/knowledge-base/articles/cash-assistance/temporary-family-assistance",
+        note: "Employable adults generally face a 36-month time limit, with possible extensions. Current rules generally allow families to hold up to $6,000 in assets.",
+      },
+      {
+        name: "State Administered General Assistance",
+        summary: "Cash assistance primarily for very-low-income adults unable to work because of a documented medical condition or another qualifying reason, including some people awaiting SSI or SSDI decisions.",
+        access: "Apply through Connecticut DSS / ConneCT.",
+        coverage: "Statewide",
+        url: "https://portal.ct.gov/dss/knowledge-base/articles/cash-assistance/state-administered-general-assistance",
+      },
+      {
+        name: "State Supplement",
+        summary: "Additional cash assistance for qualifying older adults and people who are blind or disabled.",
+        access: "Review DSS eligibility and application information.",
+        coverage: "Statewide",
+        url: "https://portal.ct.gov/dss/find-benefits-and-support/cash-assistance",
+      },
+      {
+        name: "Refugee Cash Assistance",
+        summary: "Federally funded cash and medical assistance for qualifying refugees and certain other ORR-eligible people.",
+        access: "Apply through Connecticut DSS / ConneCT.",
+        coverage: "Statewide for eligible entrants",
+        url: "https://portal.ct.gov/dss/knowledge-base/articles/cash-assistance/refugee-assistance-program",
+        note: "Current DSS materials state benefits may be available for up to four months from ORR eligibility.",
+      },
+      {
+        name: "Statewide Legal Services of Connecticut",
+        summary: "The primary civil legal-aid intake and referral system for low-income residents, handling or routing family, housing, public-benefits, unemployment, and other civil matters.",
+        access: "Call the statewide intake line.",
+        coverage: "Statewide",
+        phone: "800-453-3320",
+        url: "https://slsct.org/contact-us/",
+      },
+      {
+        name: "Connecticut Legal Services",
+        summary: "Civil legal aid involving housing, homelessness prevention, domestic violence and family matters, public benefits, disability, and certain immigrant-survivor cases.",
+        access: "Use the organization's current intake process.",
+        coverage: "122 of Connecticut's 169 communities",
+        url: "https://ctlegal.org/the-problems-we-solve/",
+      },
+      {
+        name: "Greater Hartford Legal Aid",
+        summary: "Civil legal assistance in the Hartford region, including representation for low-income survivors in restraining-order matters alongside domestic violence advocates.",
+        access: "Contact GHLA for current intake.",
+        coverage: "Greater Hartford",
+        url: "https://www.ghla.org/",
+      },
+      {
+        name: "New Haven Legal Assistance Association",
+        summary: "Civil legal aid involving housing, public benefits, family and domestic violence, and humanitarian immigration matters such as VAWA petitions, U visas, and T visas.",
+        access: "Contact NHLAA for current intake.",
+        coverage: "Greater New Haven",
+        url: "https://nhlegal.org/",
+      },
+    ],
+  },
   delaware: {
     Housing: [
       {
@@ -2551,7 +2845,7 @@ export const stateResourcePrograms: Partial<Record<string, Partial<Record<StateR
   },
 };
 
-const delawareResourceCategories = [
+const twelveCategoryStateResourceCategories = [
   "Homelessness Prevention & Intervention",
   "Housing",
   "Subsidized Housing",
@@ -2566,7 +2860,10 @@ const delawareResourceCategories = [
   "Childcare Assistance",
 ] as const;
 
-const delawareProgramsByCategory: Record<(typeof delawareResourceCategories)[number], string[]> = {
+type TwelveCategoryStateResourceCategory = (typeof twelveCategoryStateResourceCategories)[number];
+type TwelveCategoryProgramMap = Record<TwelveCategoryStateResourceCategory, string[]>;
+
+const delawareProgramsByCategory: TwelveCategoryProgramMap = {
   "Homelessness Prevention & Intervention": [
     "Housing Alliance Delaware - Centralized Intake",
     "Delaware 211",
@@ -2586,18 +2883,39 @@ const delawareProgramsByCategory: Record<(typeof delawareResourceCategories)[num
   "Childcare Assistance": ["Purchase of Care", "Children and Families First Childcare Search Help"],
 };
 
+const connecticutProgramsByCategory: TwelveCategoryProgramMap = {
+  "Homelessness Prevention & Intervention": ["Connecticut 2-1-1 / Coordinated Access Networks", "Eviction Prevention Fund 2.0", "Connecticut Right to Counsel", "Safe Connect"],
+  Housing: ["CTHousingSearch.org", "Time To Own - CHFA", "Emergency Mortgage Assistance Program"],
+  "Subsidized Housing": ["Section 8 Housing Choice Voucher Program", "Special-purpose Housing Choice Vouchers", "State Rental Assistance Program", "Security Deposit Guarantee Program"],
+  "Cash Assistance": ["Temporary Family Assistance", "State Administered General Assistance", "State Supplement", "Refugee Cash Assistance"],
+  "Immigration Services": ["Connecticut Institute for Refugees and Immigrants", "Integrated Refugee & Immigrant Services", "Immigration Advocacy & Support Center", "The American Immigrant Legal Clinic", "Connecticut State Immigration Resource Page"],
+  "Trafficking Victim Services": ["The Underground New England", "Love146 Connecticut Survivor Care", "CIRI - Trafficking and Crime Survivor Immigration Relief"],
+  "Rapid Rehousing": ["Connecticut Rapid Re-Housing through CAN", "Domestic Violence & Human Trafficking Rapid Re-Housing - CCADV", "New Reach"],
+  "Legal Assistance": ["Statewide Legal Services of Connecticut", "Connecticut Legal Services", "Greater Hartford Legal Aid", "New Haven Legal Assistance Association", "Connecticut Right to Counsel"],
+  "Rental Assistance": ["Eviction Prevention Fund 2.0", "State Rental Assistance Program", "Section 8 Housing Choice Voucher Program", "Security Deposit Guarantee Program"],
+  "SNAP / Food Assistance": ["Connecticut SNAP", "2026 SNAP Transition Grocery Support"],
+  "Transportation Assistance": ["HUSKY / Medicaid Non-Emergency Medical Transportation", "Jobs First Employment Services", "CTtransit Reduced Fares"],
+  "Childcare Assistance": ["Care 4 Kids"],
+};
+
+const twelveCategoryProgramsByState: Partial<Record<string, TwelveCategoryProgramMap>> = {
+  connecticut: connecticutProgramsByCategory,
+  delaware: delawareProgramsByCategory,
+};
+
 export function getStateResourceCategories(slug: string): readonly string[] {
-  return slug === "delaware" ? delawareResourceCategories : stateResourceCategories;
+  return twelveCategoryProgramsByState[slug] ? twelveCategoryStateResourceCategories : stateResourceCategories;
 }
 
 export function getProgramsForStateCategory(slug: string, category: string): StateResourceProgram[] {
   const groupedPrograms = stateResourcePrograms[slug] ?? {};
-  if (slug !== "delaware") {
+  const categoryMap = twelveCategoryProgramsByState[slug];
+  if (!categoryMap) {
     return groupedPrograms[category as StateResourceCategory] ?? [];
   }
 
   const allPrograms = Object.values(groupedPrograms).flatMap((programs) => programs ?? []);
-  const names = delawareProgramsByCategory[category as keyof typeof delawareProgramsByCategory] ?? [];
+  const names = categoryMap[category as TwelveCategoryStateResourceCategory] ?? [];
   return names.flatMap((name) => {
     const program = allPrograms.find((candidate) => candidate.name === name);
     return program ? [program] : [];
