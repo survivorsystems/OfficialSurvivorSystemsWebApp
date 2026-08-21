@@ -1500,11 +1500,6 @@ function SidebarIcon({ icon }: { icon: SidebarIconKey }) {
   }
 }
 
-function navItemFor(key: ModuleKey) {
-  const route = moduleRoutes[key] ?? moduleRoutes.home;
-  return { key, ...route };
-}
-
 function isPrimaryNavActive(activeModule: ModuleKey, navKey: ModuleKey) {
   if (navKey === "local-help") {
     return activeModule === "local-help" || activeModule === "planners" || activeModule === "toolkits" || activeModule === "access" || activeModule === "library";
@@ -3380,142 +3375,7 @@ function ModuleLoading({ label }: { label: string }) {
   );
 }
 
-function resolveCommand(query: string) {
-  const normalized = query.trim().toLowerCase();
-
-  if (!normalized) {
-    return { message: "Type a page name or describe what you need.", target: null };
-  }
-
-  if (
-    normalized === "exit" ||
-    normalized === "escape" ||
-    normalized.includes("quick exit") ||
-    normalized.includes("iluvrocks")
-  ) {
-    return { message: "Opening the Quick Exit page.", target: "quick-exit" as const };
-  }
-
-  if (/\b(help|menu|options|commands|where)\b/.test(normalized)) {
-    return {
-      message:
-        "AVAILABLE: CLARITY, RESOURCES, SURVIVING, GOVERNMENT, ABOUT, SUPPORT, QUICK EXIT.",
-      target: null,
-    };
-  }
-
-  const match = allNavTargets.find((item) => {
-    const label = item.label.toLowerCase();
-    return normalized.includes(label) || label.includes(normalized);
-  });
-
-  if (match) {
-    return { message: `Opening ${match.label}.`, target: match };
-  }
-
-  if (/\b(assessments?|quiz|scan|was i crazy|crazy|abused|abuse|gaslight|gaslighting|reality)\b/.test(normalized)) {
-    return { message: "OPENING CLARITY...", target: navItemFor("advocacy") };
-  }
-
-  if (/\b(guides?|how to|housing|routine|pet|browser|car)\b/.test(normalized)) {
-    return { message: "OPENING RESOURCES...", target: navItemFor("local-help") };
-  }
-
-  if (/\b(planners?|trackers?)\b/.test(normalized)) {
-    return { message: "Opening planners and trackers.", target: navItemFor("planners") };
-  }
-
-  if (/\b(toolkits?|database|access pass|access information|access info|passes|pass options|download|downloads|library|paid|stripe)\b/.test(normalized)) {
-    return { message: "Opening the Premium Survivor Library.", target: navItemFor("toolkits") };
-  }
-
-  if (/\b(surviving|education|awareness|learn|dynamics|gray rock|statistics|be so for real)\b/.test(normalized)) {
-    return { message: "OPENING SURVIVING...", target: navItemFor("education") };
-  }
-
-  if (/\b(about|mission|privacy|founder|who built)\b/.test(normalized)) {
-    return { message: "Opening About.", target: navItemFor("about") };
-  }
-
-  if (/\b(advocacy|advocate|hotline|shelter|support|near|local)\b/.test(normalized)) {
-    return { message: "Opening Assessments.", target: navItemFor("advocacy") };
-  }
-
-  if (/\b(government|snap|tanf|benefits|court|legal|rights|order|documents|public assistance)\b/.test(normalized)) {
-    return { message: "Opening Systems.", target: navItemFor("government") };
-  }
-
-  if (/ctrl\s*\+\s*esc|\bfirst steps?\b|\bprep\b/.test(normalized)) {
-    return { message: "OPENING ASSESSMENTS...", target: navItemFor("advocacy") };
-  }
-
-  if (/\b(go.?bag|bag|simulator|arcade|prep|pack)\b/.test(normalized)) {
-    return { message: "OPENING RESOURCES...", target: navItemFor("local-help") };
-  }
-
-  if (/\b(plan|safety|prepare|documents|checklist)\b/.test(normalized)) {
-    return { message: "Opening planners and trackers.", target: navItemFor("planners") };
-  }
-
-  if (/\b(leave|leaving|go bag|escape|exit plan)\b/.test(normalized)) {
-    return { message: "Opening direct support options.", target: navItemFor("planning") };
-  }
-
-  if (/\b(rebuild|money|housing|future|after)\b/.test(normalized)) {
-    return { message: "OPENING RESOURCES...", target: navItemFor("local-help") };
-  }
-
-  return {
-    message:
-      "TRY: CLARITY, RESOURCES, SURVIVING, GOVERNMENT, ABOUT, SUPPORT, OR QUICK EXIT.",
-    target: null,
-  };
-}
-
-function TerminalCommand({
-  onNavigate,
-}: {
-  onNavigate: (module: ModuleKey, path: string) => void;
-}) {
-  const [query, setQuery] = useState("");
-  const [systemReply, setSystemReply] = useState("Type a section name or what you need.");
-
-  function submitCommand(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const result = resolveCommand(query);
-    setSystemReply(result.message);
-    setQuery("");
-
-    if (result.target === "quick-exit") {
-      window.setTimeout(leaveSite, 240);
-      return;
-    }
-
-    if (result.target) {
-      window.setTimeout(() => onNavigate(result.target.key, result.target.path), 420);
-    }
-  }
-
-  return (
-    <form className="command-terminal" onSubmit={submitCommand}>
-      <label htmlFor="terminal-command">Find a page</label>
-      <div className="command-input-row">
-        <input
-          autoComplete="off"
-          id="terminal-command"
-          onChange={(event) => setQuery(event.target.value)}
-          placeholder="Try: Guides, Assessments, Resources, Store..."
-          spellCheck={false}
-          type="search"
-          value={query}
-        />
-      </div>
-      <p aria-live="polite">{systemReply}</p>
-    </form>
-  );
-}
-
-function TerminalChrome({
+function SiteChrome({
   activeModule,
   children,
   onNavigate,
@@ -3528,8 +3388,8 @@ function TerminalChrome({
   const visualModule = activeModule === "access" ? "library" : activeModule;
 
   return (
-    <main className={`terminal-frame app-frame win95-frame hud-frame module-${visualModule}`}>
-      <section className="win95-desktop" aria-label="Survivor Systems">
+    <main className={`terminal-frame app-frame hud-frame module-${visualModule}`}>
+      <section className="site-shell" aria-label="Survivor Systems">
         <aside className="folk-sidebar">
           <button className="desktop-brand-panel" type="button" onClick={() => onNavigate("home", "/")}>
             <BrandLogo />
@@ -3556,31 +3416,7 @@ function TerminalChrome({
         </button>
 
         <section className="folk-main-shell">
-          <section className={`terminal-screen win95-window hud-window hud-window-${visualModule}`} aria-label={`${activeLabel} window`}>
-          <div className="win95-titlebar">
-            <div className="win95-titlebar-label">
-              <span>{activeLabel}</span>
-            </div>
-            <div className="win95-window-controls">
-              <button
-                aria-label="Close window and return to desktop"
-                type="button"
-                onClick={() => onNavigate("home", "/")}
-              >
-                x
-              </button>
-            </div>
-          </div>
-
-          <header className="terminal-topbar">
-            <div className="terminal-heading-row">
-              <div className="terminal-topbar-title">
-                <span className="terminal-label">SURVIVOR SYSTEMS</span>
-                <h1>{activeLabel}</h1>
-              </div>
-            </div>
-            <TerminalCommand onNavigate={onNavigate} />
-          </header>
+          <section className={`terminal-screen hud-window hud-window-${visualModule}`} aria-label={activeLabel}>
           <div className="terminal-content">
             {activeModule !== "home" ? (
               <header className="site-editorial-masthead" aria-label="Survivor Systems">
@@ -3597,15 +3433,6 @@ function TerminalChrome({
           </section>
         </section>
 
-        <footer className="win95-taskbar">
-          <button className="win95-start" type="button" onClick={() => onNavigate("home", "/")}>
-            Start
-          </button>
-          <div className="win95-taskbar-slot">
-            <span aria-hidden="true" />
-            {activeLabel}
-          </div>
-        </footer>
       </section>
     </main>
   );
@@ -8200,12 +8027,12 @@ export function App() {
   );
 
   return (
-    <TerminalChrome activeModule={loadingModule ?? activeModule} onNavigate={navigate}>
+    <SiteChrome activeModule={loadingModule ?? activeModule} onNavigate={navigate}>
       {loadingModule && loadingLabel ? (
         <ModuleLoading label={loadingLabel} />
       ) : (
         moduleContent
       )}
-    </TerminalChrome>
+    </SiteChrome>
   );
 }

@@ -5336,7 +5336,7 @@ button:disabled {
 }
 
 /* Windows-style Survivor OS first pass */
-.win95-frame {
+.terminal-frame {
   background:
     linear-gradient(135deg, rgba(255, 79, 216, 0.1), transparent 28%),
     linear-gradient(315deg, rgba(0, 234, 255, 0.12), transparent 24%),
@@ -5351,12 +5351,12 @@ button:disabled {
   padding: 0;
 }
 
-.win95-frame::before,
-.win95-frame::after {
+.terminal-frame::before,
+.terminal-frame::after {
   display: none;
 }
 
-.win95-desktop {
+.site-shell {
   background:
     radial-gradient(circle at 14% 18%, rgba(255, 79, 216, 0.1), transparent 18%),
     radial-gradient(circle at 84% 78%, rgba(0, 234, 255, 0.12), transparent 22%),
@@ -5516,7 +5516,7 @@ button:disabled {
   top: 7px;
 }
 
-.win95-window {
+.terminal-screen {
   align-self: stretch;
   background: #c3c3c3;
   border: 2px solid;
@@ -5533,41 +5533,12 @@ button:disabled {
   position: relative;
 }
 
-.win95-titlebar {
-  align-items: center;
-  background: linear-gradient(90deg, #001a7a, #008fb5 70%, #6f1a91);
-  color: #fff6dd;
-  display: flex;
-  font-size: 0.86rem;
-  font-weight: 900;
-  justify-content: space-between;
-  letter-spacing: 0.04em;
-  min-height: 40px;
-  padding: 7px 8px;
-  text-shadow: 1px 1px 0 #000;
-}
-
-.win95-titlebar-label {
-  align-items: center;
-  display: inline-flex;
-  gap: 8px;
-  min-width: 0;
-}
-
-.win95-titlebar-icon {
-  background: #ffd56b;
-  border: 1px solid #141414;
-  box-shadow: inset -2px -2px 0 #b87916, inset 1px 1px 0 #fff6bb;
-  height: 14px;
-  width: 18px;
-}
-
-.win95-window-controls {
+.terminal-screen-controls {
   display: inline-flex;
   gap: 4px;
 }
 
-.win95-window-controls span {
+.terminal-screen-controls span {
   background: #c3c3c3;
   border: 2px solid;
   border-color: #ffffff #424242 #424242 #ffffff;
@@ -5576,7 +5547,7 @@ button:disabled {
   width: 22px;
 }
 
-.win95-window .terminal-topbar {
+.terminal-screen .terminal-topbar {
   background: #d7d1bd;
   border: 2px solid;
   border-color: #7a7469 #ffffff #ffffff #7a7469;
@@ -5587,24 +5558,24 @@ button:disabled {
   padding: 10px 12px;
 }
 
-.win95-window .terminal-topbar h1 {
+.terminal-screen .terminal-topbar h1 {
   color: #050505;
   font-size: clamp(1.25rem, 2.2vw, 1.75rem);
   text-shadow: none;
 }
 
-.win95-window .terminal-label {
+.terminal-screen .terminal-label {
   color: #003f4a;
   text-shadow: none;
 }
 
-.win95-window .system-status {
+.terminal-screen .system-status {
   color: #030303;
   text-shadow: none;
 }
 
-.win95-window .system-status span,
-.win95-window .system-status strong {
+.terminal-screen .system-status span,
+.terminal-screen .system-status strong {
   background: #c3c3c3;
   border: 2px solid;
   border-color: #ffffff #777 #777 #ffffff;
@@ -5612,7 +5583,7 @@ button:disabled {
   text-shadow: none;
 }
 
-.win95-window .command-terminal {
+.terminal-screen .command-terminal {
   background: #0a0a0d;
   border: 2px solid;
   border-color: #777 #ffffff #ffffff #777;
@@ -5620,7 +5591,7 @@ button:disabled {
   box-shadow: inset 0 0 0 1px #000;
 }
 
-.win95-window .terminal-content {
+.terminal-screen .terminal-content {
   background: #000;
   border: 2px solid;
   border-color: #777 #ffffff #ffffff #777;
@@ -5632,9 +5603,9 @@ button:disabled {
   padding: clamp(18px, 2.2vw, 30px);
 }
 
-.win95-window .terminal-screen::after,
-.win95-window::before,
-.win95-window::after {
+.terminal-screen .terminal-screen::after,
+.terminal-screen::before,
+.terminal-screen::after {
   display: none;
 }
 
@@ -5643,62 +5614,8 @@ button:disabled {
   display: none;
 }
 
-.win95-taskbar {
-  align-items: center;
-  background: #c3c3c3;
-  border-top: 2px solid #fff6dd;
-  bottom: 0;
-  box-shadow: inset 0 1px 0 #ffffff;
-  display: grid;
-  gap: 8px;
-  grid-template-columns: auto minmax(0, 1fr) auto;
-  left: 0;
-  min-height: 42px;
-  padding: 5px 8px;
-  position: absolute;
-  right: 0;
-  z-index: 5;
-}
-
-.win95-start,
-.win95-taskbar-exit,
-.win95-taskbar-slot {
-  align-items: center;
-  background: #c3c3c3;
-  border: 2px solid;
-  border-color: #ffffff #424242 #424242 #ffffff;
-  box-shadow: 1px 1px 0 #000;
-  color: #050505;
-  display: inline-flex;
-  font-weight: 900;
-  gap: 7px;
-  min-height: 28px;
-  padding: 3px 10px;
-  text-shadow: none;
-}
-
-.win95-start:active,
-.win95-taskbar-exit:active {
-  border-color: #424242 #ffffff #ffffff #424242;
-  box-shadow: inset 1px 1px 0 #777;
-  transform: translateY(1px);
-}
-
-.win95-taskbar-slot {
-  justify-content: start;
-  overflow: hidden;
-}
-
-.win95-taskbar-slot span {
-  background: #ffd56b;
-  border: 1px solid #111;
-  display: inline-block;
-  height: 14px;
-  width: 18px;
-}
-
 @media (max-width: 860px) {
-  .win95-desktop {
+  .site-shell {
     grid-template-columns: 1fr;
     padding: 10px 10px 54px;
   }
@@ -5717,29 +5634,21 @@ button:disabled {
     width: 86px;
   }
 
-  .win95-window {
+  .terminal-screen {
     min-height: calc(100vh - 170px);
   }
 
-  .win95-window .terminal-topbar {
+  .terminal-screen .terminal-topbar {
     padding: 8px;
   }
 
-  .win95-window .terminal-content {
+  .terminal-screen .terminal-content {
     padding: 14px;
-  }
-
-  .win95-taskbar {
-    grid-template-columns: auto minmax(0, 1fr);
-  }
-
-  .win95-taskbar-exit {
-    display: none;
   }
 }
 
 /* Desktop shell direction: teal desktop, black shell, dark gray windows */
-.win95-frame {
+.terminal-frame {
   background: #008080;
   border-color: #ffffff #161616 #161616 #ffffff;
   box-shadow:
@@ -5748,7 +5657,7 @@ button:disabled {
     0 0 0 2px rgba(0, 0, 0, 0.86);
 }
 
-.win95-desktop {
+.site-shell {
   background: #000000;
   background-size: auto;
   gap: 22px;
@@ -5864,7 +5773,7 @@ button:disabled {
   border-radius: 4px;
 }
 
-.win95-window {
+.terminal-screen {
   align-self: start;
   background: #050505;
   border: 3px solid #050505;
@@ -5877,16 +5786,8 @@ button:disabled {
   min-height: calc(100vh - 132px);
 }
 
-.win95-titlebar {
-  background: linear-gradient(90deg, #4b168f, #006dff);
-  border-bottom: 2px solid #ffffff;
-  color: #ffffff;
-  min-height: 32px;
-  padding: 4px 8px;
-}
-
-.win95-window-controls span,
-.win95-window-controls button {
+.terminal-screen-controls span,
+.terminal-screen-controls button {
   align-items: center;
   background: #c0c0c0;
   border: 2px solid;
@@ -5905,36 +5806,36 @@ button:disabled {
   width: 20px;
 }
 
-.win95-window-controls button:hover,
-.win95-window-controls button:focus-visible {
+.terminal-screen-controls button:hover,
+.terminal-screen-controls button:focus-visible {
   background: #ff4fd8;
   color: #050505;
   outline: 1px dotted #050505;
 }
 
-.win95-window-controls button:active {
+.terminal-screen-controls button:active {
   border-color: #404040 #ffffff #ffffff #404040;
   box-shadow: inset 1px 1px 0 #777777;
   transform: translateY(1px);
 }
 
-.win95-window .terminal-topbar {
+.terminal-screen .terminal-topbar {
   background: #f4f1e8;
   border: 2px solid;
   border-color: #ffffff #8a867a #8a867a #ffffff;
   color: #050505;
 }
 
-.win95-window .terminal-topbar h1 {
+.terminal-screen .terminal-topbar h1 {
   color: #050505;
 }
 
-.win95-window .terminal-label {
+.terminal-screen .terminal-label {
   color: #4f1187;
 }
 
-.win95-window .system-status span,
-.win95-window .system-status strong {
+.terminal-screen .system-status span,
+.terminal-screen .system-status strong {
   background: #0b0b0d;
   border-color: #ffffff #5a5a5a #5a5a5a #ffffff;
   color: #5cff9d;
@@ -5942,36 +5843,35 @@ button:disabled {
   text-align: center;
 }
 
-.win95-window .system-status strong {
+.terminal-screen .system-status strong {
   color: #5cff9d;
   min-width: 150px;
 }
 
-.win95-window .command-terminal {
+.terminal-screen .command-terminal {
   background: #000000;
   border-color: #555555 #ffffff #ffffff #555555;
 }
 
-.win95-window .terminal-content {
+.terminal-screen .terminal-content {
   background: #f4f1e8;
   border: 2px solid;
   border-color: #ffffff #555555 #555555 #ffffff;
   color: #101010;
 }
 
-.win95-window .terminal-content a,
-.win95-window .terminal-content button:not(.desktop-icon):not(.win95-start):not(.win95-taskbar-exit) {
+.terminal-screen .terminal-content a {
   color: #004fd6;
 }
 
-.win95-window .terminal-content h2,
-.win95-window .terminal-content h3,
-.win95-window .terminal-content .terminal-label {
+.terminal-screen .terminal-content h2,
+.terminal-screen .terminal-content h3,
+.terminal-screen .terminal-content .terminal-label {
   color: #4b168f;
 }
 
-.win95-window .terminal-content h2:nth-of-type(even),
-.win95-window .terminal-content h3:nth-of-type(even) {
+.terminal-screen .terminal-content h2:nth-of-type(even),
+.terminal-screen .terminal-content h3:nth-of-type(even) {
   color: #006dff;
 }
 
@@ -6034,16 +5934,16 @@ button:disabled {
   transform: translateY(1px);
 }
 
-.win95-window .terminal-content .terminal-actions button,
-.win95-window .terminal-content .primary-action,
-.win95-window .terminal-content .secondary-action,
-.win95-window .terminal-content .quick-exit,
-.win95-window .terminal-content .text-link,
-.win95-window .terminal-content .resource-back-button,
-.win95-window .terminal-content .planning-module-key,
-.win95-window .terminal-content .resource-folder-card button,
-.win95-window .terminal-content .library-pass-card button,
-.win95-window .terminal-content .how-to-folder-bar button {
+.terminal-screen .terminal-content .terminal-actions button,
+.terminal-screen .terminal-content .primary-action,
+.terminal-screen .terminal-content .secondary-action,
+.terminal-screen .terminal-content .quick-exit,
+.terminal-screen .terminal-content .text-link,
+.terminal-screen .terminal-content .resource-back-button,
+.terminal-screen .terminal-content .planning-module-key,
+.terminal-screen .terminal-content .resource-folder-card button,
+.terminal-screen .terminal-content .library-pass-card button,
+.terminal-screen .terminal-content .how-to-folder-bar button {
   color: #050505;
 }
 
@@ -6108,12 +6008,12 @@ button:disabled {
 }
 
 @media (max-width: 860px) {
-  .win95-desktop {
+  .site-shell {
     grid-template-columns: 1fr;
   }
 
   .desktop-brand-panel,
-  .win95-window {
+  .terminal-screen {
     grid-column: 1;
   }
 
@@ -6123,42 +6023,9 @@ button:disabled {
     max-width: none;
   }
 
-  .win95-window {
+  .terminal-screen {
     margin: 0;
   }
-}
-
-.win95-taskbar {
-  background:
-    linear-gradient(180deg, #3b3b43, #24242a);
-  border-top: 2px solid #ffffff;
-  min-height: 56px;
-  padding: 8px 10px;
-}
-
-.win95-start,
-.win95-taskbar-exit,
-.win95-taskbar-slot {
-  background:
-    linear-gradient(180deg, #52525c, #2e2e35);
-  border-color: #ffffff #111111 #111111 #ffffff;
-  color: #ffffff;
-  min-height: 36px;
-  text-shadow: 1px 1px 0 #000000;
-}
-
-.win95-start:hover,
-.win95-start:focus-visible,
-.win95-taskbar-exit:hover,
-.win95-taskbar-exit:focus-visible {
-  background: #ff4fd8;
-  color: #111111;
-  text-shadow: none;
-}
-
-.win95-taskbar-slot span {
-  background: #5cff9d;
-  box-shadow: 0 0 8px rgba(92, 255, 157, 0.44);
 }
 
 .planning-landing-panel {
@@ -6504,63 +6371,58 @@ button:disabled {
   }
 }
 
-.win95-desktop,
-.win95-window,
-.desktop-brand-panel,
-.win95-taskbar {
+.site-shell,
+.terminal-screen,
+.desktop-brand-panel {
   background: #000000;
 }
 
-.win95-window {
+.terminal-screen {
   border-color: #000000;
   box-shadow: none;
   outline: 0;
 }
 
-.win95-taskbar {
-  border-top-color: #111111;
-}
-
-.win95-window .terminal-topbar {
+.terminal-screen .terminal-topbar {
   color: #050505;
 }
 
-.win95-window .terminal-topbar h1,
-.win95-window .terminal-topbar .terminal-label {
+.terminal-screen .terminal-topbar h1,
+.terminal-screen .terminal-topbar .terminal-label {
   color: #050505;
   text-shadow: none;
 }
 
-.win95-window .command-terminal {
+.terminal-screen .command-terminal {
   background: #f4f1e8;
   border-color: #111111;
   box-shadow: inset 1px 1px 0 #ffffff, inset -1px -1px 0 #8a867a;
 }
 
-.win95-window .command-terminal label,
-.win95-window .command-terminal p {
+.terminal-screen .command-terminal label,
+.terminal-screen .command-terminal p {
   color: #050505;
   text-shadow: none;
 }
 
-.win95-window .command-input-row {
+.terminal-screen .command-input-row {
   background: #ffffff;
   border-color: #111111;
   box-shadow: inset 1px 1px 0 #8a867a;
 }
 
-.win95-window .command-input-row span {
+.terminal-screen .command-input-row span {
   color: #0f7a3d;
   text-shadow: none;
 }
 
-.win95-window .command-input-row input {
+.terminal-screen .command-input-row input {
   color: #050505;
   caret-color: #4b168f;
   text-shadow: none;
 }
 
-.win95-window .command-input-row input::placeholder {
+.terminal-screen .command-input-row input::placeholder {
   color: #555555;
 }
 
@@ -6596,13 +6458,11 @@ button:not(.desktop-icon):not(.planning-document-key):not(.resource-document-key
   transform: translateY(1px);
 }
 
-.win95-window .terminal-content button:not(.desktop-icon):not(.planning-document-key):not(.resource-document-key),
-.win95-window .terminal-content button:not(.desktop-icon):not(.planning-document-key):not(.resource-document-key):hover,
-.win95-window .terminal-content button:not(.desktop-icon):not(.planning-document-key):not(.resource-document-key):focus-visible {
+.terminal-screen .terminal-content button:not(.desktop-icon):not(.planning-document-key):not(.resource-document-key),
+.terminal-screen .terminal-content button:not(.desktop-icon):not(.planning-document-key):not(.resource-document-key):hover,
+.terminal-screen .terminal-content button:not(.desktop-icon):not(.planning-document-key):not(.resource-document-key):focus-visible {
   color: #050505;
 }
-
-/* Matrix/HUD terminal pass */
 .sr-only {
   height: 1px;
   margin: -1px;
@@ -6610,104 +6470,6 @@ button:not(.desktop-icon):not(.planning-document-key):not(.resource-document-key
   position: absolute;
   white-space: nowrap;
   width: 1px;
-}
-
-.matrix-checkpoint {
-  background: #000000;
-  color: #0f7f2c;
-  min-height: 100vh;
-  padding: clamp(18px, 5vw, 64px);
-}
-
-.matrix-checkpoint::before {
-  background:
-    linear-gradient(rgba(11, 255, 82, 0.05) 50%, transparent 50%),
-    radial-gradient(circle at 50% 50%, rgba(15, 127, 44, 0.18), transparent 62%);
-  background-size: 100% 5px, auto;
-  opacity: 0.8;
-}
-
-.matrix-gate-panel {
-  align-items: start;
-  background: #000000;
-  border: 0;
-  box-shadow: none;
-  color: #0f7f2c;
-  display: grid;
-  justify-content: start;
-  max-width: 980px;
-  min-height: 58vh;
-  padding: clamp(22px, 6vw, 72px);
-  width: 100%;
-}
-
-.matrix-typed-prompt {
-  color: #0f7f2c;
-  font-family: var(--font-pixel);
-  font-size: clamp(1.15rem, 2.4vw, 2.4rem);
-  line-height: 1.55;
-  margin: 0;
-  text-shadow: 0 0 12px rgba(11, 255, 82, 0.32);
-  white-space: pre-wrap;
-}
-
-.matrix-yn-form {
-  align-items: center;
-  display: flex;
-  gap: 12px;
-  margin-top: 26px;
-}
-
-.matrix-yn-form span,
-.matrix-yn-form input,
-.matrix-yn-form button {
-  color: #0f7f2c;
-  font-family: var(--font-pixel);
-  font-size: clamp(1.1rem, 2vw, 1.65rem);
-}
-
-.matrix-yn-form input {
-  background: transparent;
-  border: 0;
-  border-bottom: 2px solid #0f7f2c;
-  box-shadow: 0 8px 18px rgba(11, 255, 82, 0.08);
-  outline: 0;
-  text-transform: lowercase;
-  width: 5ch;
-}
-
-.matrix-yn-form button,
-.matrix-warning-panel .terminal-actions button {
-  background: #0f7f2c;
-  border: 1px solid #30ff76;
-  box-shadow: 0 0 16px rgba(11, 255, 82, 0.2);
-  color: #000000;
-  font-family: var(--font-pixel);
-  text-shadow: none;
-}
-
-.matrix-warning-panel {
-  border-left: 3px solid #0f7f2c;
-  color: #56ff88;
-  display: grid;
-  gap: 18px;
-  max-width: 920px;
-}
-
-.matrix-warning-panel h1 {
-  color: #56ff88;
-  font-family: var(--font-pixel);
-  font-size: clamp(1rem, 2.2vw, 2rem);
-  letter-spacing: 0;
-  margin: 0;
-}
-
-.matrix-warning-panel p,
-.matrix-warning-panel li {
-  color: #b7ffc9;
-  font-family: var(--font-mono);
-  font-size: clamp(0.9rem, 1.5vw, 1.08rem);
-  line-height: 1.65;
 }
 
 .hud-frame {
@@ -6765,7 +6527,7 @@ button:not(.desktop-icon):not(.planning-document-key):not(.resource-document-key
   --hud-panel: rgba(19, 15, 0, 0.94);
 }
 
-.hud-frame .win95-desktop {
+.hud-frame .site-shell {
   background:
     radial-gradient(circle at 78% 22%, color-mix(in srgb, var(--hud) 12%, transparent), transparent 22%),
     linear-gradient(color-mix(in srgb, var(--hud) 10%, transparent) 1px, transparent 1px),
@@ -6815,7 +6577,7 @@ button:not(.desktop-icon):not(.planning-document-key):not(.resource-document-key
   color: var(--hud);
 }
 
-.hud-frame .win95-window {
+.hud-frame .terminal-screen {
   background: var(--hud-bg);
   border: 1px solid var(--hud-dim);
   box-shadow:
@@ -6825,24 +6587,8 @@ button:not(.desktop-icon):not(.planning-document-key):not(.resource-document-key
   min-height: calc(100vh - 92px);
 }
 
-.hud-frame .win95-titlebar {
-  background: #000000;
-  border-bottom: 1px solid var(--hud-dim);
-  color: var(--hud-hot);
-  min-height: 42px;
-}
-
-.hud-frame .win95-titlebar::after {
-  color: var(--hud);
-  content: "SYS 01  RUN  NET  AUX";
-  font-family: var(--font-pixel);
-  font-size: 0.62rem;
-  letter-spacing: 0.18em;
-  margin-left: auto;
-}
-
-.hud-frame .win95-window-controls span,
-.hud-frame .win95-window-controls button {
+.hud-frame .terminal-screen-controls span,
+.hud-frame .terminal-screen-controls button {
   background: var(--hud);
   border: 1px solid var(--hud-hot);
   border-radius: 0;
@@ -6851,18 +6597,18 @@ button:not(.desktop-icon):not(.planning-document-key):not(.resource-document-key
 }
 
 .hud-frame .terminal-topbar,
-.hud-frame .win95-window .terminal-topbar,
+.hud-frame .terminal-screen .terminal-topbar,
 .hud-frame .terminal-content,
-.hud-frame .win95-window .terminal-content {
+.hud-frame .terminal-screen .terminal-content {
   background: var(--hud-panel);
   border: 1px solid var(--hud-dim);
   color: var(--hud-hot);
 }
 
 .hud-frame .terminal-topbar h1,
-.hud-frame .win95-window .terminal-topbar h1,
+.hud-frame .terminal-screen .terminal-topbar h1,
 .hud-frame .terminal-label,
-.hud-frame .win95-window .terminal-label,
+.hud-frame .terminal-screen .terminal-label,
 .hud-frame .terminal-content h1,
 .hud-frame .terminal-content h2,
 .hud-frame .terminal-content h3 {
@@ -6872,15 +6618,15 @@ button:not(.desktop-icon):not(.planning-document-key):not(.resource-document-key
 
 .hud-frame .system-status span,
 .hud-frame .system-status strong,
-.hud-frame .win95-window .system-status span,
-.hud-frame .win95-window .system-status strong {
+.hud-frame .terminal-screen .system-status span,
+.hud-frame .terminal-screen .system-status strong {
   background: #000000;
   border: 1px solid var(--hud-dim);
   color: var(--hud-hot);
 }
 
 .hud-frame .command-terminal,
-.hud-frame .win95-window .command-terminal {
+.hud-frame .terminal-screen .command-terminal {
   background: #000000;
   border: 1px solid var(--hud-dim);
 }
@@ -6962,7 +6708,7 @@ button:not(.desktop-icon):not(.planning-document-key):not(.resource-document-key
 }
 
 @media (max-width: 860px) {
-  .hud-frame .win95-desktop {
+  .hud-frame .site-shell {
     grid-template-columns: 1fr;
   }
 
@@ -6976,7 +6722,7 @@ button:not(.desktop-icon):not(.planning-document-key):not(.resource-document-key
     display: none;
   }
 
-  .hud-frame .win95-window {
+  .hud-frame .terminal-screen {
     grid-column: 1;
     grid-row: 2;
     margin: 0;
@@ -7010,7 +6756,7 @@ button:not(.desktop-icon):not(.planning-document-key):not(.resource-document-key
   color: var(--hud-readable);
 }
 
-.hud-frame .win95-desktop {
+.hud-frame .site-shell {
   background:
     radial-gradient(circle at 74% 14%, rgba(32, 255, 44, 0.08), transparent 24%),
     linear-gradient(rgba(32, 255, 44, 0.08) 1px, transparent 1px),
@@ -7089,7 +6835,7 @@ button:not(.desktop-icon):not(.planning-document-key):not(.resource-document-key
   display: none;
 }
 
-.hud-frame .win95-window {
+.hud-frame .terminal-screen {
   background: #000000;
   border: 1px solid var(--hud-dim);
   box-shadow:
@@ -7097,24 +6843,8 @@ button:not(.desktop-icon):not(.planning-document-key):not(.resource-document-key
     0 0 30px rgba(32, 255, 44, 0.12);
 }
 
-.hud-frame .win95-titlebar {
-  background: #010901;
-  border-bottom: 1px solid var(--hud-dim);
-  color: var(--hud);
-  min-height: 34px;
-}
-
-.hud-frame .win95-titlebar::after {
-  color: var(--hud-readable);
-  content: "SYS 01  RUN  NET";
-}
-
-.hud-frame .win95-titlebar-label {
-  color: var(--hud);
-}
-
-.hud-frame .win95-window-controls span,
-.hud-frame .win95-window-controls button {
+.hud-frame .terminal-screen-controls span,
+.hud-frame .terminal-screen-controls button {
   background: #0b7e1d;
   border-color: #22ff31;
   box-shadow: none;
@@ -7123,20 +6853,20 @@ button:not(.desktop-icon):not(.planning-document-key):not(.resource-document-key
   min-width: 36px;
 }
 
-.hud-frame .win95-window-controls span:nth-child(2) {
+.hud-frame .terminal-screen-controls span:nth-child(2) {
   background: #20ff2c;
 }
 
-.hud-frame .win95-window-controls button:hover,
-.hud-frame .win95-window-controls button:focus-visible {
+.hud-frame .terminal-screen-controls button:hover,
+.hud-frame .terminal-screen-controls button:focus-visible {
   background: #72ff78;
   color: #000000;
 }
 
 .hud-frame .terminal-topbar,
-.hud-frame .win95-window .terminal-topbar,
+.hud-frame .terminal-screen .terminal-topbar,
 .hud-frame .terminal-content,
-.hud-frame .win95-window .terminal-content {
+.hud-frame .terminal-screen .terminal-content {
   background: #000000;
   border: 0;
   box-shadow: none;
@@ -7157,9 +6887,9 @@ button:not(.desktop-icon):not(.planning-document-key):not(.resource-document-key
 }
 
 .hud-frame .terminal-topbar h1,
-.hud-frame .win95-window .terminal-topbar h1,
+.hud-frame .terminal-screen .terminal-topbar h1,
 .hud-frame .terminal-label,
-.hud-frame .win95-window .terminal-label,
+.hud-frame .terminal-screen .terminal-label,
 .hud-frame .terminal-content h1,
 .hud-frame .terminal-content h2,
 .hud-frame .terminal-content h3,
@@ -7177,15 +6907,15 @@ button:not(.desktop-icon):not(.planning-document-key):not(.resource-document-key
 
 .hud-frame .system-status span,
 .hud-frame .system-status strong,
-.hud-frame .win95-window .system-status span,
-.hud-frame .win95-window .system-status strong {
+.hud-frame .terminal-screen .system-status span,
+.hud-frame .terminal-screen .system-status strong {
   background: transparent;
   border: 0;
   color: var(--hud-readable);
 }
 
 .hud-frame .command-terminal,
-.hud-frame .win95-window .command-terminal {
+.hud-frame .terminal-screen .command-terminal {
   background: #010901;
   border: 1px solid rgba(32, 255, 44, 0.28);
   box-shadow: none;
@@ -7360,10 +7090,6 @@ button:not(.desktop-icon):not(.planning-document-key):not(.resource-document-key
   min-width: min(100%, 250px);
 }
 
-.win95-taskbar {
-  display: none;
-}
-
 @media (max-width: 860px) {
   .housing-page-summary {
     grid-template-columns: 1fr;
@@ -7378,7 +7104,7 @@ button:not(.desktop-icon):not(.planning-document-key):not(.resource-document-key
     width: 100%;
   }
 
-  .hud-frame .win95-desktop {
+  .hud-frame .site-shell {
     grid-template-columns: 1fr;
   }
 
@@ -7395,7 +7121,7 @@ button:not(.desktop-icon):not(.planning-document-key):not(.resource-document-key
     font-size: 0.48rem;
   }
 
-  .hud-frame .win95-window {
+  .hud-frame .terminal-screen {
     grid-column: 1;
   }
 
@@ -7405,7 +7131,7 @@ button:not(.desktop-icon):not(.planning-document-key):not(.resource-document-key
 }
 
 /* July 4 cleanup: mission rail + flatter terminal screen. */
-.hud-frame .win95-desktop {
+.hud-frame .site-shell {
   grid-template-columns: minmax(156px, 184px) minmax(0, 1fr);
 }
 
@@ -7437,7 +7163,7 @@ button:not(.desktop-icon):not(.planning-document-key):not(.resource-document-key
   margin: 0;
 }
 
-.hud-frame .win95-window {
+.hud-frame .terminal-screen {
   min-height: calc(100vh - 34px);
 }
 
@@ -7714,7 +7440,7 @@ body {
 }
 
 .hud-frame,
-.win95-frame,
+.terminal-frame,
 .app-frame,
 .terminal-frame {
   background:
@@ -7726,12 +7452,12 @@ body {
 
 .hud-frame::before,
 .hud-frame::after,
-.win95-desktop::before,
-.win95-desktop::after {
+.site-shell::before,
+.site-shell::after {
   display: none;
 }
 
-.hud-frame .win95-desktop {
+.hud-frame .site-shell {
   background:
     linear-gradient(90deg, transparent 0 97%, rgba(216, 169, 62, 0.06) 97% 100%),
     radial-gradient(circle at 35% 22%, rgba(244, 223, 189, 0.045), transparent 16rem),
@@ -7995,9 +7721,9 @@ body {
   position: absolute;
 }
 
-.hud-frame .win95-window,
+.hud-frame .terminal-screen,
 .terminal-screen,
-.win95-window {
+.terminal-screen {
   background: transparent;
   border: 0;
   box-shadow: none;
@@ -8008,9 +7734,7 @@ body {
   z-index: 1;
 }
 
-.win95-titlebar,
 .terminal-topbar,
-.win95-taskbar,
 .command-terminal {
   display: none;
 }
@@ -8231,7 +7955,7 @@ a,
   border-color: rgba(10, 16, 11, 0.84);
 }
 
-.win95-window .terminal-content .resource-directory-toggle,
+.terminal-screen .terminal-content .resource-directory-toggle,
 .resource-file-list,
 .resource-file-row {
   color: var(--folk-parchment) !important;
@@ -8241,9 +7965,9 @@ a,
   border-color: rgba(201, 85, 45, 0.54) !important;
 }
 
-.win95-window .terminal-content input,
-.win95-window .terminal-content textarea,
-.win95-window .terminal-content select {
+.terminal-screen .terminal-content input,
+.terminal-screen .terminal-content textarea,
+.terminal-screen .terminal-content select {
   background: rgba(10, 16, 11, 0.9);
   border: 1px solid var(--folk-border);
   border-radius: 6px;
@@ -8251,7 +7975,7 @@ a,
 }
 
 @media (max-width: 980px) {
-  .hud-frame .win95-desktop {
+  .hud-frame .site-shell {
     grid-template-columns: 1fr;
   }
 
@@ -8291,7 +8015,7 @@ a,
   background: var(--archive-ink) !important;
 }
 
-.module-home .win95-desktop {
+.module-home .site-shell {
   background:
     radial-gradient(circle at 72% 6%, rgba(60, 119, 114, 0.13), transparent 25%),
     linear-gradient(135deg, #0b100e, #121b17 54%, #0d1411) !important;
@@ -8301,9 +8025,7 @@ a,
   padding: 14px !important;
 }
 
-.module-home .win95-titlebar,
-.module-home .terminal-topbar,
-.module-home .win95-taskbar {
+.module-home .terminal-topbar {
   display: none !important;
 }
 
@@ -8855,7 +8577,7 @@ a,
 }
 
 @media (max-width: 980px) {
-  .module-home .win95-desktop {
+  .module-home .site-shell {
     grid-template-columns: 1fr !important;
     padding: 8px !important;
   }
@@ -9891,7 +9613,7 @@ a,
   background: var(--classic-ink) !important;
 }
 
-.module-home .win95-desktop {
+.module-home .site-shell {
   background-color: var(--classic-ink) !important;
 }
 
@@ -10265,8 +9987,7 @@ a,
 .resource-directory-icon,
 .resource-folder-launch-icon,
 .planning-document-icon,
-.support-icon,
-.win95-titlebar-icon {
+.support-icon {
   display: none !important;
 }
 
@@ -10325,7 +10046,7 @@ a,
   background: var(--archive-night) !important;
 }
 
-.module-home .win95-desktop {
+.module-home .site-shell {
   background-color: var(--archive-night) !important;
   gap: 22px !important;
   padding: 18px !important;
@@ -10695,7 +10416,7 @@ a,
 }
 
 @media (max-width: 680px) {
-  .module-home .win95-desktop {
+  .module-home .site-shell {
     padding: 10px !important;
   }
 
@@ -10731,7 +10452,7 @@ a,
 }
 
 @media (max-width: 620px) {
-  .hud-frame .win95-desktop {
+  .hud-frame .site-shell {
     padding: 10px;
   }
 
@@ -10756,8 +10477,6 @@ a,
     grid-template-columns: 1fr;
   }
 }
-
-/* Final folk-theme cleanup: retire the old matrix/HUD artifacts. */
 .hud-frame,
 .hud-frame.module-home,
 .hud-frame.module-assessments,
@@ -10791,7 +10510,7 @@ a,
   font-family: var(--font-clean);
 }
 
-.hud-frame .win95-desktop {
+.hud-frame .site-shell {
   background:
     radial-gradient(circle at 84% 14%, rgba(201, 85, 45, 0.12), transparent 20rem),
     linear-gradient(90deg, transparent 0 96%, rgba(216, 169, 62, 0.05) 96% 100%),
@@ -10802,9 +10521,9 @@ a,
   grid-template-columns: minmax(218px, 252px) minmax(0, 1fr);
 }
 
-.hud-frame .win95-window,
+.hud-frame .terminal-screen,
 .terminal-screen,
-.win95-window {
+.terminal-screen {
   background: transparent;
   border: 0;
   box-shadow: none;
@@ -10812,18 +10531,15 @@ a,
   min-height: calc(100vh - 48px);
 }
 
-.hud-frame .win95-titlebar,
 .hud-frame .terminal-topbar,
 .hud-frame .command-terminal,
-.win95-titlebar,
 .terminal-topbar,
-.command-terminal,
-.win95-taskbar {
+.command-terminal {
   display: none;
 }
 
 .hud-frame .terminal-content,
-.hud-frame .win95-window .terminal-content {
+.hud-frame .terminal-screen .terminal-content {
   background: transparent;
   border: 0;
   box-shadow: none;
@@ -10844,9 +10560,9 @@ a,
 .hud-frame .terminal-content h3,
 .hud-frame .terminal-content h4,
 .hud-frame .terminal-content strong,
-.hud-frame .win95-window .terminal-content h1,
-.hud-frame .win95-window .terminal-content h2,
-.hud-frame .win95-window .terminal-content h3,
+.hud-frame .terminal-screen .terminal-content h1,
+.hud-frame .terminal-screen .terminal-content h2,
+.hud-frame .terminal-screen .terminal-content h3,
 .hud-frame .terminal-content .terminal-label {
   color: var(--folk-cream);
   font-family: var(--font-editorial);
@@ -10867,10 +10583,10 @@ a,
 .hud-frame .terminal-content li,
 .hud-frame .terminal-content small,
 .hud-frame .terminal-content span,
-.hud-frame .win95-window .terminal-content p,
-.hud-frame .win95-window .terminal-content li,
-.hud-frame .win95-window .terminal-content small,
-.hud-frame .win95-window .terminal-content span,
+.hud-frame .terminal-screen .terminal-content p,
+.hud-frame .terminal-screen .terminal-content li,
+.hud-frame .terminal-screen .terminal-content small,
+.hud-frame .terminal-screen .terminal-content span,
 .category-intro,
 .resource-directory-toggle small,
 .resource-file-row {
@@ -10880,7 +10596,7 @@ a,
 }
 
 .hud-frame .terminal-label,
-.hud-frame .win95-window .terminal-label,
+.hud-frame .terminal-screen .terminal-label,
 .terminal-label,
 .eyebrow,
 .page-kicker,
@@ -11145,7 +10861,7 @@ a,
 }
 
 @media (max-width: 980px) {
-  .hud-frame .win95-desktop {
+  .hud-frame .site-shell {
     grid-template-columns: 1fr;
   }
 
@@ -11375,7 +11091,7 @@ body::after {
 
 .terminal-frame,
 .hud-frame,
-.win95-frame,
+.terminal-frame,
 .app-frame {
   background:
     radial-gradient(circle at 77% 18%, rgba(201, 85, 45, 0.14), transparent 26rem),
@@ -11396,7 +11112,7 @@ body::after {
   display: none !important;
 }
 
-.hud-frame .win95-desktop {
+.hud-frame .site-shell {
   background:
     radial-gradient(circle at 84% 14%, rgba(201, 85, 45, 0.12), transparent 20rem),
     radial-gradient(circle at 22% 72%, rgba(47, 109, 100, 0.14), transparent 18rem),
@@ -12144,7 +11860,7 @@ body::after {
 }
 
 @media (max-width: 980px) {
-  .hud-frame .win95-desktop {
+  .hud-frame .site-shell {
     grid-template-columns: 1fr !important;
   }
 
@@ -12169,7 +11885,7 @@ body::after {
 }
 
 @media (max-width: 640px) {
-  .hud-frame .win95-desktop {
+  .hud-frame .site-shell {
     padding: 10px !important;
   }
 
@@ -14196,7 +13912,7 @@ body::after {
 
 /* Final Bauhaus prototype lock. This must remain last during concept review. */
 .module-home,
-.module-home .win95-desktop,
+.module-home .site-shell,
 .module-home .folk-main-shell,
 .module-home .terminal-screen,
 .module-home .terminal-content {
@@ -14206,7 +13922,7 @@ body::after {
   box-shadow: none !important;
 }
 
-.module-home .win95-desktop {
+.module-home .site-shell {
   padding: 0 !important;
 }
 
@@ -14219,9 +13935,7 @@ body::after {
   max-width: none !important;
 }
 
-.module-home .win95-titlebar,
-.module-home .terminal-topbar,
-.module-home .win95-taskbar {
+.module-home .terminal-topbar {
   display: none !important;
 }
 

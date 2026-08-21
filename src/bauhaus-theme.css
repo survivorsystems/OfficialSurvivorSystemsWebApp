@@ -64,17 +64,13 @@ body {
   min-height: 100vh !important;
 }
 
-.hud-frame .win95-desktop {
+.hud-frame .site-shell {
   background: var(--ss-ink) !important;
   display: grid !important;
   grid-template-columns: var(--ss-sidebar-width) minmax(0, 1fr) !important;
   grid-template-rows: minmax(100vh, auto) !important;
   min-height: 100vh !important;
   padding: 0 !important;
-}
-
-.hud-frame .win95-taskbar {
-  display: none !important;
 }
 
 /* Sidebar */
@@ -287,36 +283,7 @@ body {
   display: none !important;
 }
 
-.hud-frame:not(.module-home) .win95-titlebar {
-  align-items: center !important;
-  background: var(--ss-route-accent) !important;
-  border: 0 !important;
-  border-bottom: var(--ss-border) !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-  color: var(--ss-ink) !important;
-  display: flex !important;
-  justify-content: space-between !important;
-  min-height: 42px !important;
-  padding: 6px 8px 6px 16px !important;
-}
-
-.hud-frame:not(.module-home) .win95-titlebar::after {
-  content: none !important;
-  display: none !important;
-}
-
-.hud-frame:not(.module-home) .win95-titlebar-label,
-.hud-frame:not(.module-home) .win95-titlebar-label span {
-  color: var(--ss-ink) !important;
-  font-family: var(--ss-font-body) !important;
-  font-size: 0.75rem !important;
-  font-weight: 900 !important;
-  letter-spacing: 0.1em !important;
-  text-transform: uppercase !important;
-}
-
-.hud-frame:not(.module-home) .win95-window-controls {
+.hud-frame:not(.module-home) .terminal-screen-controls {
   align-items: center !important;
   display: flex !important;
   gap: 6px !important;
@@ -326,7 +293,7 @@ body {
   transform: none !important;
 }
 
-.hud-frame:not(.module-home) .win95-window-controls > span {
+.hud-frame:not(.module-home) .terminal-screen-controls > span {
   background: transparent !important;
   border: 0 !important;
   box-shadow: none !important;
@@ -338,7 +305,7 @@ body {
   padding: 0 4px !important;
 }
 
-.hud-frame:not(.module-home) .win95-window-controls button {
+.hud-frame:not(.module-home) .terminal-screen-controls button {
   align-items: center !important;
   background: var(--ss-ink) !important;
   border: 2px solid var(--ss-ink) !important;
@@ -356,7 +323,7 @@ body {
 }
 
 .hud-frame:not(.module-home):not(.module-advocacy):not(.module-local-help):not(.module-about):not(.module-government) .terminal-topbar,
-.hud-frame:not(.module-home):not(.module-advocacy):not(.module-local-help):not(.module-about):not(.module-government) .win95-window .terminal-topbar {
+.hud-frame:not(.module-home):not(.module-advocacy):not(.module-local-help):not(.module-about):not(.module-government) .terminal-screen .terminal-topbar {
   background: var(--ss-white) !important;
   border: 0 !important;
   border-bottom: var(--ss-border) !important;
@@ -383,7 +350,7 @@ body {
 }
 
 .hud-frame:not(.module-home) .terminal-topbar h1,
-.hud-frame:not(.module-home) .win95-window .terminal-topbar h1 {
+.hud-frame:not(.module-home) .terminal-screen .terminal-topbar h1 {
   color: var(--ss-ink) !important;
   font-family: var(--ss-font-display) !important;
   font-size: clamp(2rem, 4vw, 4.5rem) !important;
@@ -480,8 +447,7 @@ body {
   font-weight: 900;
 }
 
-.hud-frame:not(.module-home) .terminal-content :is(button, .terminal-button):hover,
-.hud-frame:not(.module-home) .terminal-content :is(button, .terminal-button):focus-visible {
+.hud-frame:not(.module-home) .terminal-content :is(button, .terminal-button):hover, .hud-frame:not(.module-home) .terminal-content :is(button, .terminal-button):focus-visible {
   box-shadow: 2px 2px 0 var(--ss-route-accent);
   transform: translate(2px, 2px);
 }
@@ -728,8 +694,7 @@ body {
   padding: 26px !important;
 }
 
-.hud-frame:is(.module-guides, .module-how-to) .terminal-content .guide-category-section::before,
-.hud-frame:is(.module-guides, .module-how-to) .terminal-content .guide-category-section::after {
+.hud-frame:is(.module-guides, .module-how-to) .terminal-content .guide-category-section::before, .hud-frame:is(.module-guides, .module-how-to) .terminal-content .guide-category-section::after {
   display: none !important;
 }
 
@@ -1012,7 +977,7 @@ body {
 }
 
 @media (max-width: 980px) {
-  .hud-frame .win95-desktop {
+  .hud-frame .site-shell {
     display: block !important;
   }
 
@@ -1586,8 +1551,7 @@ body {
 }
 
 /* Guide copy must remain ink-on-paper regardless of older route themes. */
-.hud-frame:is(.module-guides, .module-how-to) .terminal-content,
-.hud-frame:is(.module-guides, .module-how-to) .terminal-content :is(
+.hud-frame:is(.module-guides, .module-how-to) .terminal-content, .hud-frame:is(.module-guides, .module-how-to) .terminal-content :is(
   h1, h2, h3, h4, h5, h6, p, li, label, span, small, strong, em, code, a
 ) {
   color: var(--ss-ink) !important;
@@ -1780,7 +1744,7 @@ body {
   .go-bag-checklist-section,
   .ss-template-section
 )::before,
-.hud-frame:not(.module-home) .terminal-content :is(
+  .hud-frame:not(.module-home) .terminal-content :is(
   .library-section,
   .library-rule-strip,
   .support-principles,
@@ -1828,9 +1792,7 @@ body {
   }
 }
 
-.hud-frame:is(.module-guides, .module-how-to) .terminal-content .terminal-label,
-.hud-frame:is(.module-guides, .module-how-to) .terminal-content .ss-template-kicker,
-.hud-frame:is(.module-guides, .module-how-to) .terminal-content .ss-section-index {
+.hud-frame:is(.module-guides, .module-how-to) .terminal-content .terminal-label, .hud-frame:is(.module-guides, .module-how-to) .terminal-content .ss-template-kicker, .hud-frame:is(.module-guides, .module-how-to) .terminal-content .ss-section-index {
   color: var(--ss-blue) !important;
 }
 
@@ -2113,14 +2075,7 @@ body {
   letter-spacing: 0 !important;
 }
 
-.hud-frame :is(h1, h2, h3, h4, h5, h6),
-.hud-frame .brand-logo-survivor,
-.hud-frame .brand-logo-systems,
-.hud-frame .desktop-icon-title,
-.hud-frame .terminal-topbar-title,
-.hud-frame .ss-template-title,
-.hud-frame .ss-section-heading h2,
-.hud-frame .ss-assessment-question h2 {
+.hud-frame :is(h1, h2, h3, h4, h5, h6), .hud-frame .brand-logo-survivor, .hud-frame .brand-logo-systems, .hud-frame .desktop-icon-title, .hud-frame .terminal-topbar-title, .hud-frame .ss-template-title, .hud-frame .ss-section-heading h2, .hud-frame .ss-assessment-question h2 {
   font-family: var(--ss-font-display) !important;
   font-style: normal !important;
   font-weight: 700 !important;
@@ -2228,7 +2183,7 @@ body {
   .legal-category-card,
   .phrase-bank
 )::before,
-.hud-frame:not(.module-home) .terminal-content :is(
+  .hud-frame:not(.module-home) .terminal-content :is(
   .category-file-card,
   .assessment-panel,
   .denial-panel,
@@ -2332,7 +2287,7 @@ body {
   .how-to-guide-actions,
   .library-card-actions
 ) button,
-.hud-frame:not(.module-home) .terminal-content .category-file-title-button {
+  .hud-frame:not(.module-home) .terminal-content .category-file-title-button {
   background: var(--ss-route-accent) !important;
   border: 2px solid var(--ss-ink) !important;
   border-radius: 0 !important;
@@ -2351,14 +2306,14 @@ body {
   .how-to-guide-actions,
   .library-card-actions
 ) button:hover,
-.hud-frame:not(.module-home) .terminal-content :is(
+  .hud-frame:not(.module-home) .terminal-content :is(
   .terminal-actions,
   .ss-template-actions,
   .how-to-guide-actions,
   .library-card-actions
 ) button:focus-visible,
-.hud-frame:not(.module-home) .terminal-content .category-file-title-button:hover,
-.hud-frame:not(.module-home) .terminal-content .category-file-title-button:focus-visible {
+  .hud-frame:not(.module-home) .terminal-content .category-file-title-button:hover,
+  .hud-frame:not(.module-home) .terminal-content .category-file-title-button:focus-visible {
   box-shadow: 2px 2px 0 var(--ss-route-accent) !important;
   transform: translate(2px, 2px) !important;
 }
@@ -2421,8 +2376,7 @@ body {
   display: none !important;
 }
 
-.hud-frame:not(.module-home) .terminal-content .category-module > .page-flourish-header :is(p, span, strong),
-.hud-frame:is(.module-guides, .module-how-to) .terminal-content :is(
+.hud-frame:not(.module-home) .terminal-content .category-module > .page-flourish-header :is(p, span, strong), .hud-frame:is(.module-guides, .module-how-to) .terminal-content :is(
   h1, h2, h3, h4, h5, h6, p, li, label, span, small, strong, em, code, a
 ) {
   color: var(--ss-ink) !important;
@@ -2437,8 +2391,7 @@ body {
   text-shadow: none !important;
 }
 
-.hud-frame:is(.module-assessments, .module-advocacy) .terminal-content button:not(.category-file-title-button),
-.hud-frame:is(.module-assessments, .module-advocacy) .terminal-content button:not(.category-file-title-button) :is(span, small, strong) {
+.hud-frame:is(.module-assessments, .module-advocacy) .terminal-content button:not(.category-file-title-button), .hud-frame:is(.module-assessments, .module-advocacy) .terminal-content button:not(.category-file-title-button) :is(span, small, strong) {
   color: var(--ss-white) !important;
 }
 
@@ -2448,16 +2401,13 @@ body {
   button.selected,
   button[aria-checked="true"],
   button[aria-pressed="true"]
-),
-.hud-frame:is(.module-assessments, .module-advocacy) .terminal-content :is(
+), .hud-frame:is(.module-assessments, .module-advocacy) .terminal-content :is(
   button:hover,
   button:focus-visible,
   button.selected,
   button[aria-checked="true"],
   button[aria-pressed="true"]
-) :is(span, small, strong),
-.hud-frame:is(.module-assessments, .module-advocacy) .terminal-content .category-file-title-button,
-.hud-frame:is(.module-assessments, .module-advocacy) .terminal-content .category-file-title-button :is(h2, h3, span) {
+) :is(span, small, strong), .hud-frame:is(.module-assessments, .module-advocacy) .terminal-content .category-file-title-button, .hud-frame:is(.module-assessments, .module-advocacy) .terminal-content .category-file-title-button :is(h2, h3, span) {
   color: #000 !important;
 }
 
@@ -2561,13 +2511,11 @@ body {
   background: var(--ss-green) !important;
 }
 
-.hud-frame.module-advocacy .terminal-content .category-file-card :is(h2, p),
-.hud-frame.module-advocacy .terminal-content .category-file-title-button {
+.hud-frame.module-advocacy .terminal-content .category-file-card :is(h2, p), .hud-frame.module-advocacy .terminal-content .category-file-title-button {
   color: var(--ss-white) !important;
 }
 
-.hud-frame.module-advocacy .terminal-content .category-file-card:nth-child(4) :is(h2, p),
-.hud-frame.module-advocacy .terminal-content .category-file-card:nth-child(4) .category-file-title-button {
+.hud-frame.module-advocacy .terminal-content .category-file-card:nth-child(4) :is(h2, p), .hud-frame.module-advocacy .terminal-content .category-file-card:nth-child(4) .category-file-title-button {
   color: var(--ss-ink) !important;
 }
 
@@ -3426,8 +3374,7 @@ body {
   padding: clamp(24px, 4vw, 46px) !important;
 }
 
-.hud-frame.module-library .library-public-preview > div:last-child > :is(span, h3, p),
-.hud-frame.module-library .library-public-preview :is(dt, dd) {
+.hud-frame.module-library .library-public-preview > div:last-child > :is(span, h3, p), .hud-frame.module-library .library-public-preview :is(dt, dd) {
   color: var(--ss-white) !important;
 }
 
@@ -3733,8 +3680,7 @@ body {
 
 .hud-frame.module-how-to .terminal-content .how-to-guide-page :is(
   h1, h2, h3, h4, h5, h6, p, li, label, span, small, strong, em, code, blockquote, summary
-),
-.hud-frame.module-legal .terminal-content .legal-guide-shell :is(
+), .hud-frame.module-legal .terminal-content .legal-guide-shell :is(
   h1, h2, h3, h4, h5, h6, p, li, label, span, small, strong, em, code, blockquote
 ) {
   color: var(--ss-white) !important;
@@ -3754,7 +3700,7 @@ body {
   .how-to-system-note,
   .housing-options-master-script
 ),
-.hud-frame.module-legal .terminal-content .legal-guide-shell :is(
+  .hud-frame.module-legal .terminal-content .legal-guide-shell :is(
   .ss-template-header,
   .ss-template-body,
   .legal-warning,
@@ -3792,7 +3738,7 @@ body {
   .housing-option-pathway,
   .compensation-coverage-grid > article
 ),
-.hud-frame.module-legal .terminal-content .legal-guide-shell :is(
+  .hud-frame.module-legal .terminal-content .legal-guide-shell :is(
   .legal-step-card,
   .legal-motion-card,
   .legal-note,
@@ -3816,7 +3762,7 @@ body {
   .housing-option-pathway,
   .compensation-coverage-grid > article
 ):nth-child(3n + 2),
-.hud-frame.module-legal .terminal-content .legal-guide-shell :is(
+  .hud-frame.module-legal .terminal-content .legal-guide-shell :is(
   .legal-step-card,
   .legal-motion-card,
   .legal-note
@@ -3831,7 +3777,7 @@ body {
   .housing-option-pathway,
   .compensation-coverage-grid > article
 ):nth-child(3n + 3),
-.hud-frame.module-legal .terminal-content .legal-guide-shell :is(
+  .hud-frame.module-legal .terminal-content .legal-guide-shell :is(
   .legal-step-card,
   .legal-motion-card,
   .legal-note
@@ -3844,7 +3790,7 @@ body {
   .housing-options-pathways,
   .compensation-coverage-grid
 ),
-.hud-frame.module-legal .terminal-content .legal-guide-shell :is(
+  .hud-frame.module-legal .terminal-content .legal-guide-shell :is(
   .legal-step-grid,
   .legal-motion-grid,
   .legal-note-grid
@@ -3960,28 +3906,20 @@ body {
 }
 
 /* Assessments are long documents. Never trap their content inside legacy app-frame overflow. */
-.hud-frame:is(.module-assessments, .module-advocacy),
-.hud-frame:is(.module-assessments, .module-advocacy) .win95-desktop {
+.hud-frame:is(.module-assessments, .module-advocacy), .hud-frame:is(.module-assessments, .module-advocacy) .site-shell {
   height: auto !important;
   max-height: none !important;
   overflow-x: clip !important;
   overflow-y: visible !important;
 }
 
-.hud-frame:is(.module-assessments, .module-advocacy) .folk-main-shell,
-.hud-frame:is(.module-assessments, .module-advocacy) .terminal-screen,
-.hud-frame:is(.module-assessments, .module-advocacy) .terminal-content,
-.hud-frame:is(.module-assessments, .module-advocacy) .assessment-workspace,
-.hud-frame:is(.module-assessments, .module-advocacy) .assessment-modal-backdrop,
-.hud-frame:is(.module-assessments, .module-advocacy) .assessment-modal,
-.hud-frame:is(.module-assessments, .module-advocacy) .assessment-modal-body {
+.hud-frame:is(.module-assessments, .module-advocacy) .folk-main-shell, .hud-frame:is(.module-assessments, .module-advocacy) .terminal-screen, .hud-frame:is(.module-assessments, .module-advocacy) .terminal-content, .hud-frame:is(.module-assessments, .module-advocacy) .assessment-workspace, .hud-frame:is(.module-assessments, .module-advocacy) .assessment-modal-backdrop, .hud-frame:is(.module-assessments, .module-advocacy) .assessment-modal, .hud-frame:is(.module-assessments, .module-advocacy) .assessment-modal-body {
   height: auto !important;
   max-height: none !important;
   overflow: visible !important;
 }
 
-.hud-frame:is(.module-assessments, .module-advocacy) .terminal-screen,
-.hud-frame:is(.module-assessments, .module-advocacy) .terminal-content {
+.hud-frame:is(.module-assessments, .module-advocacy) .terminal-screen, .hud-frame:is(.module-assessments, .module-advocacy) .terminal-content {
   min-height: 0 !important;
 }
 
@@ -4090,13 +4028,11 @@ body:has(.assessment-workspace),
   color: #000 !important;
 }
 
-.hud-frame .terminal-content .resources-module .resource-directory:nth-child(4n + 1) .resource-directory-toggle :is(strong, small),
-.hud-frame .terminal-content .resources-module .resource-directory:nth-child(4n) .resource-directory-toggle :is(strong, small) {
+.hud-frame .terminal-content .resources-module .resource-directory:nth-child(4n + 1) .resource-directory-toggle :is(strong, small), .hud-frame .terminal-content .resources-module .resource-directory:nth-child(4n) .resource-directory-toggle :is(strong, small) {
   color: #000 !important;
 }
 
-.hud-frame .terminal-content .resources-module .resource-directory:nth-child(4n + 2) .resource-directory-toggle :is(strong, small),
-.hud-frame .terminal-content .resources-module .resource-directory:nth-child(4n + 3) .resource-directory-toggle :is(strong, small) {
+.hud-frame .terminal-content .resources-module .resource-directory:nth-child(4n + 2) .resource-directory-toggle :is(strong, small), .hud-frame .terminal-content .resources-module .resource-directory:nth-child(4n + 3) .resource-directory-toggle :is(strong, small) {
   color: var(--ss-white) !important;
 }
 
@@ -4378,8 +4314,7 @@ body:has(.assessment-workspace),
   padding-bottom: 18px !important;
 }
 
-.hud-frame:is(.module-about, .module-store, .module-guides) .terminal-content :is(.about-story, .store-module, .category-module) > .page-flourish-header.page-flourish-header h1::first-letter,
-.hud-frame:is(.module-about, .module-store, .module-guides) .terminal-content :is(.about-story, .store-module, .category-module) h2::first-letter {
+.hud-frame:is(.module-about, .module-store, .module-guides) .terminal-content :is(.about-story, .store-module, .category-module) > .page-flourish-header.page-flourish-header h1::first-letter, .hud-frame:is(.module-about, .module-store, .module-guides) .terminal-content :is(.about-story, .store-module, .category-module) h2::first-letter {
   font-family: "Parisienne", "Snell Roundhand", "Segoe Script", cursive !important;
   font-size: 1.12em !important;
   font-weight: 400 !important;
@@ -4466,7 +4401,7 @@ body:has(.assessment-workspace),
   .about-principles,
   .about-start
 ) :is(section > div > span, section > header > span),
-.hud-frame.module-about .about-story > :is(.about-strategy-callout, .about-start) > span {
+  .hud-frame.module-about .about-story > :is(.about-strategy-callout, .about-start) > span {
   color: var(--ss-yellow) !important;
 }
 
@@ -5298,13 +5233,11 @@ body:has(.assessment-workspace),
   box-shadow: 9px 9px 0 var(--ss-red) !important;
 }
 
-.hud-frame.module-advocacy .terminal-content .category-file-card:nth-child(4) :is(h2, p),
-.hud-frame.module-advocacy .terminal-content .category-file-card:nth-child(4) .category-file-title-button {
+.hud-frame.module-advocacy .terminal-content .category-file-card:nth-child(4) :is(h2, p), .hud-frame.module-advocacy .terminal-content .category-file-card:nth-child(4) .category-file-title-button {
   color: var(--ss-ink) !important;
 }
 
-.hud-frame.module-advocacy .terminal-content .category-file-card:not(:nth-child(4)) :is(h2, p),
-.hud-frame.module-advocacy .terminal-content .category-file-card:not(:nth-child(4)) .category-file-title-button {
+.hud-frame.module-advocacy .terminal-content .category-file-card:not(:nth-child(4)) :is(h2, p), .hud-frame.module-advocacy .terminal-content .category-file-card:not(:nth-child(4)) .category-file-title-button {
   color: var(--ss-white) !important;
 }
 
@@ -5355,9 +5288,7 @@ body:has(.assessment-workspace),
   box-shadow: 6px 6px 0 var(--ss-red) !important;
 }
 
-.hud-frame.module-about .about-offerings-grid article :is(h3, p, span),
-.hud-frame.module-about .about-offerings-grid article:nth-child(2) :is(h3, p, span),
-.hud-frame.module-about .about-offerings-grid article:nth-child(3) :is(h3, p, span) {
+.hud-frame.module-about .about-offerings-grid article :is(h3, p, span), .hud-frame.module-about .about-offerings-grid article:nth-child(2) :is(h3, p, span), .hud-frame.module-about .about-offerings-grid article:nth-child(3) :is(h3, p, span) {
   color: var(--ss-white) !important;
 }
 
@@ -5544,7 +5475,7 @@ body:has(.assessment-workspace),
 }
 
 /* Homepage depth: palette-colored separation instead of a flat black field. */
-.hud-frame.module-home .win95-desktop,
+.hud-frame.module-home .site-shell,
 .hud-frame.module-home .folk-main-shell,
 .hud-frame.module-home .terminal-screen,
 .hud-frame.module-home .terminal-content {
@@ -5672,14 +5603,11 @@ body:has(.assessment-workspace),
   background: var(--ss-paper-deep) !important;
 }
 
-.hud-frame.module-home .home-site-guide .home-category-card:nth-child(2) :is(h2, p),
-.hud-frame.module-home .home-site-guide .home-category-card:nth-child(4) :is(h2, p) {
+.hud-frame.module-home .home-site-guide .home-category-card:nth-child(2) :is(h2, p), .hud-frame.module-home .home-site-guide .home-category-card:nth-child(4) :is(h2, p) {
   color: var(--ss-white) !important;
 }
 
-.hud-frame.module-home .home-site-guide .home-category-card:nth-child(1) :is(h2, p),
-.hud-frame.module-home .home-site-guide .home-category-card:nth-child(3) :is(h2, p),
-.hud-frame.module-home .home-site-guide .home-category-card:nth-child(5) :is(h2, p) {
+.hud-frame.module-home .home-site-guide .home-category-card:nth-child(1) :is(h2, p), .hud-frame.module-home .home-site-guide .home-category-card:nth-child(3) :is(h2, p), .hud-frame.module-home .home-site-guide .home-category-card:nth-child(5) :is(h2, p) {
   color: var(--ss-ink) !important;
 }
 
@@ -6059,8 +5987,7 @@ body:has(.assessment-workspace),
 }
 
 /* Final guide contract. Keep every guide on one continuous black reading surface. */
-.hud-frame:is(.module-how-to, .module-legal) .terminal-content :is(.how-to-guide-page, .legal-guide-shell),
-.hud-frame.module-government .terminal-content .nonprofit-audit-page {
+.hud-frame:is(.module-how-to, .module-legal) .terminal-content :is(.how-to-guide-page, .legal-guide-shell), .hud-frame.module-government .terminal-content .nonprofit-audit-page {
   background: var(--ss-ink) !important;
   border: 4px solid var(--ss-blue) !important;
   border-radius: 0 !important;
@@ -6082,8 +6009,7 @@ body:has(.assessment-workspace),
   box-shadow: 12px 12px 0 var(--ss-red) !important;
 }
 
-.hud-frame:is(.module-how-to, .module-legal) .terminal-content :is(.how-to-guide-page, .legal-guide-shell) :is(h1, h2, h3, h4, h5, h6, p, li, label, span, small, strong, em, code, blockquote, summary, a),
-.hud-frame.module-government .terminal-content .nonprofit-audit-page :is(h1, h2, h3, h4, h5, h6, p, li, label, span, small, strong, em, code, blockquote, a) {
+.hud-frame:is(.module-how-to, .module-legal) .terminal-content :is(.how-to-guide-page, .legal-guide-shell) :is(h1, h2, h3, h4, h5, h6, p, li, label, span, small, strong, em, code, blockquote, summary, a), .hud-frame.module-government .terminal-content .nonprofit-audit-page :is(h1, h2, h3, h4, h5, h6, p, li, label, span, small, strong, em, code, blockquote, a) {
   color: var(--ss-white) !important;
   text-shadow: none !important;
 }
@@ -6094,8 +6020,7 @@ body:has(.assessment-workspace),
   .compensation-clauses-grid, .housing-options-pathways, .how-to-system-note,
   .housing-options-master-script, .legal-warning, .legal-step-section,
   .legal-motion-section, .legal-note-grid, .legal-reminder
-),
-.hud-frame.module-government .terminal-content .nonprofit-audit-page :is(
+), .hud-frame.module-government .terminal-content .nonprofit-audit-page :is(
   .nonprofit-audit-header, .audit-intro, .audit-steps, .audit-money-trail
 ) {
   background: transparent !important;
@@ -6110,8 +6035,7 @@ body:has(.assessment-workspace),
   .snap-guide-card, .how-to-system-note, .housing-options-master-script,
   .housing-option-pathway, .compensation-coverage-grid > article,
   .legal-step-card, .legal-motion-card, .legal-note, .legal-reminder, .legal-warning
-),
-.hud-frame.module-government .terminal-content .nonprofit-audit-page .audit-steps > section {
+), .hud-frame.module-government .terminal-content .nonprofit-audit-page .audit-steps > section {
   background: transparent !important;
   border: 0 !important;
   border-bottom: 4px solid var(--ss-blue) !important;
@@ -6126,8 +6050,7 @@ body:has(.assessment-workspace),
   .snap-guide-card, .how-to-system-note, .housing-options-master-script,
   .housing-option-pathway, .compensation-coverage-grid > article,
   .legal-step-card, .legal-motion-card, .legal-note
-):nth-child(3n + 2),
-.hud-frame.module-government .terminal-content .nonprofit-audit-page .audit-steps > section:nth-child(3n + 2) {
+):nth-child(3n + 2), .hud-frame.module-government .terminal-content .nonprofit-audit-page .audit-steps > section:nth-child(3n + 2) {
   border-bottom-color: var(--ss-red) !important;
 }
 
@@ -6135,16 +6058,14 @@ body:has(.assessment-workspace),
   .snap-guide-card, .how-to-system-note, .housing-options-master-script,
   .housing-option-pathway, .compensation-coverage-grid > article,
   .legal-step-card, .legal-motion-card, .legal-note
-):nth-child(3n + 3),
-.hud-frame.module-government .terminal-content .nonprofit-audit-page .audit-steps > section:nth-child(3n + 3) {
+):nth-child(3n + 3), .hud-frame.module-government .terminal-content .nonprofit-audit-page .audit-steps > section:nth-child(3n + 3) {
   border-bottom-color: var(--ss-yellow) !important;
 }
 
 .hud-frame:is(.module-how-to, .module-legal) .terminal-content :is(.how-to-guide-page, .legal-guide-shell) :is(
   .snap-guide-grid, .housing-options-pathways, .compensation-coverage-grid,
   .legal-step-grid, .legal-motion-grid, .legal-note-grid
-),
-.hud-frame.module-government .terminal-content .nonprofit-audit-page .audit-steps {
+), .hud-frame.module-government .terminal-content .nonprofit-audit-page .audit-steps {
   display: block !important;
   gap: 0 !important;
 }
@@ -6154,8 +6075,7 @@ body:has(.assessment-workspace),
   color: var(--ss-white) !important;
 }
 
-.hud-frame:is(.module-how-to, .module-legal) .terminal-content :is(.how-to-guide-page, .legal-guide-shell) :is(ul, ol),
-.hud-frame.module-government .terminal-content .nonprofit-audit-page :is(ul, ol) {
+.hud-frame:is(.module-how-to, .module-legal) .terminal-content :is(.how-to-guide-page, .legal-guide-shell) :is(ul, ol), .hud-frame.module-government .terminal-content .nonprofit-audit-page :is(ul, ol) {
   background: transparent !important;
   border-left: 6px solid var(--ss-yellow) !important;
   color: var(--ss-white) !important;
@@ -6635,8 +6555,8 @@ body:has(.assessment-workspace),
   .state-funding-summary,
   .local-funding-summary
 ) > section:nth-of-type(even) :is(h3, p, li, strong, blockquote),
-.hud-frame.module-government .local-advocacy-sections > section:not(:nth-child(3n + 3)) :is(span, h3, p, li, strong),
-.hud-frame.module-government .audit-steps > section:not(:nth-child(3n + 3)) :is(span, h3, p, li, strong, blockquote) {
+  .hud-frame.module-government .local-advocacy-sections > section:not(:nth-child(3n + 3)) :is(span, h3, p, li, strong),
+  .hud-frame.module-government .audit-steps > section:not(:nth-child(3n + 3)) :is(span, h3, p, li, strong, blockquote) {
   color: var(--ss-ink) !important;
 }
 
@@ -6947,13 +6867,11 @@ body:has(.assessment-workspace),
   }
 }
 
-.hud-frame.module-about .about-story .about-offerings .about-offerings-grid article:nth-child(2) :is(h3, p, span),
-.hud-frame.module-about .about-story .about-offerings .about-offerings-grid article:nth-child(3) :is(h3, p, span) {
+.hud-frame.module-about .about-story .about-offerings .about-offerings-grid article:nth-child(2) :is(h3, p, span), .hud-frame.module-about .about-story .about-offerings .about-offerings-grid article:nth-child(3) :is(h3, p, span) {
   color: var(--ss-white) !important;
 }
 
-.hud-frame.module-about .about-story .about-offerings .about-offerings-grid article:nth-child(2) :is(h3, p, span),
-.hud-frame.module-about .about-story .about-offerings .about-offerings-grid article:nth-child(3) :is(h3, p, span) {
+.hud-frame.module-about .about-story .about-offerings .about-offerings-grid article:nth-child(2) :is(h3, p, span), .hud-frame.module-about .about-story .about-offerings .about-offerings-grid article:nth-child(3) :is(h3, p, span) {
   color: var(--ss-white) !important;
 }
 
@@ -6961,8 +6879,7 @@ body:has(.assessment-workspace),
   color: var(--ss-white) !important;
 }
 
-.hud-frame.module-about .about-offerings-grid article:nth-child(2) :is(h3, p, span),
-.hud-frame.module-about .about-offerings-grid article:nth-child(3) :is(h3, p, span) {
+.hud-frame.module-about .about-offerings-grid article:nth-child(2) :is(h3, p, span), .hud-frame.module-about .about-offerings-grid article:nth-child(3) :is(h3, p, span) {
   color: var(--ss-ink) !important;
 }
 
@@ -7748,8 +7665,7 @@ body:has(.assessment-workspace),
   font-weight: 900 !important;
 }
 
-.hud-frame.module-store .store-live-kit :is(h2, p, li),
-.hud-frame.module-store .store-delivery-panel :is(h2, p) {
+.hud-frame.module-store .store-live-kit :is(h2, p, li), .hud-frame.module-store .store-delivery-panel :is(h2, p) {
   color: var(--ss-white) !important;
 }
 
@@ -7839,7 +7755,7 @@ body:has(.assessment-workspace),
 }
 
 /* Interior pages sit directly beside navigation instead of inside a black moat. */
-.hud-frame:not(.module-home) .win95-desktop {
+.hud-frame:not(.module-home) .site-shell {
   column-gap: 0 !important;
   gap: 0 !important;
 }
@@ -7854,10 +7770,6 @@ body:has(.assessment-workspace),
   box-shadow: none !important;
   margin: 0 !important;
   max-width: none !important;
-}
-
-.hud-frame:not(.module-home) .win95-titlebar {
-  display: none !important;
 }
 
 /* Blue leads; vermillion and yellow trade border and shadow roles. */
@@ -8226,11 +8138,7 @@ body:has(.assessment-workspace),
   display: none !important;
 }
 
-.hud-frame:not(.module-home) .terminal-content .page-flourish-header :is(.folk-kicker, h1, h2, p, span, strong),
-.hud-frame.module-government .systems-page-header :is(h1, h2, p, span, strong),
-.hud-frame .assessment-workspace .assessment-modal-header :is(h1, h2, p, span, strong),
-.hud-frame.module-subscribe .subscribe-module > .ss-template-header :is(h1, h2, p, span, strong),
-.hud-frame.module-government .nonprofit-audit-header :is(h1, h2, p, span, strong) {
+.hud-frame:not(.module-home) .terminal-content .page-flourish-header :is(.folk-kicker, h1, h2, p, span, strong), .hud-frame.module-government .systems-page-header :is(h1, h2, p, span, strong), .hud-frame .assessment-workspace .assessment-modal-header :is(h1, h2, p, span, strong), .hud-frame.module-subscribe .subscribe-module > .ss-template-header :is(h1, h2, p, span, strong), .hud-frame.module-government .nonprofit-audit-header :is(h1, h2, p, span, strong) {
   color: var(--ss-white) !important;
 }
 
@@ -8306,8 +8214,7 @@ body:has(.assessment-workspace),
   box-shadow-color: var(--ss-blue) !important;
 }
 
-.hud-frame.module-local-help .state-resource-back:is(:hover, :focus-visible),
-.hud-frame.module-local-help .state-resource-category-nav a:is(:hover, :focus-visible) {
+.hud-frame.module-local-help .state-resource-back:is(:hover, :focus-visible), .hud-frame.module-local-help .state-resource-category-nav a:is(:hover, :focus-visible) {
   background: #292d34 !important;
   color: var(--ss-white) !important;
 }
@@ -8418,8 +8325,7 @@ body:has(.assessment-workspace),
   padding: clamp(18px, 4vw, 48px) !important;
 }
 
-.hud-frame.module-local-help .agency-review-form :is(h2, p, label, legend, span),
-.hud-frame.module-local-help .agency-review-success :is(h2, p) {
+.hud-frame.module-local-help .agency-review-form :is(h2, p, label, legend, span), .hud-frame.module-local-help .agency-review-success :is(h2, p) {
   color: var(--ss-white) !important;
 }
 
@@ -8731,7 +8637,7 @@ body:has(.assessment-workspace),
 }
 
 /* Final homepage canvas lock: one stripe layer, with no old yellow shell underneath it. */
-.hud-frame.module-home .win95-desktop {
+.hud-frame.module-home .site-shell {
   background: var(--ss-ink) !important;
 }
 
@@ -8770,7 +8676,7 @@ body:has(.assessment-workspace),
 }
 
 /* Final newspaper-edition lock for About, Store, and Guides. */
-#root .hud-frame.terminal-frame:is(.module-about, .module-store, .module-guides) .win95-window .terminal-topbar {
+#root .hud-frame.terminal-frame:is(.module-about, .module-store, .module-guides) .terminal-screen .terminal-topbar {
   display: none !important;
 }
 
@@ -8901,10 +8807,7 @@ body:has(.assessment-workspace),
   box-shadow-color: var(--ss-red) !important;
 }
 
-.hud-frame.terminal-frame.module-about .about-story .about-offerings-grid article :is(h3, p, span),
-.hud-frame.terminal-frame.module-store .store-kit-grid article :is(h2, p, span),
-.hud-frame.terminal-frame.module-guides .guide-category-section :is(h2, h3, p, span, strong),
-.hud-frame.terminal-frame.module-guides .guide-category-section .category-file-card :is(h3, p, span, strong) {
+.hud-frame.terminal-frame.module-about .about-story .about-offerings-grid article :is(h3, p, span), .hud-frame.terminal-frame.module-store .store-kit-grid article :is(h2, p, span), .hud-frame.terminal-frame.module-guides .guide-category-section :is(h2, h3, p, span, strong), .hud-frame.terminal-frame.module-guides .guide-category-section .category-file-card :is(h3, p, span, strong) {
   color: var(--ss-white) !important;
 }
 
@@ -8973,8 +8876,7 @@ body:has(.assessment-workspace),
   color: var(--ss-ink) !important;
 }
 
-.hud-frame.terminal-frame.module-store .store-status :is(span, h2, p),
-.hud-frame.terminal-frame.module-store .store-kit-grid article :is(span, h2, p) {
+.hud-frame.terminal-frame.module-store .store-status :is(span, h2, p), .hud-frame.terminal-frame.module-store .store-kit-grid article :is(span, h2, p) {
   color: var(--ss-ink) !important;
 }
 
@@ -9004,9 +8906,7 @@ body:has(.assessment-workspace),
   color: var(--ss-ink) !important;
 }
 
-.hud-frame.module-advocacy .terminal-content .category-file-card:nth-child(2) :is(h2, h3, p, span, strong, button),
-.hud-frame.module-advocacy .terminal-content .category-file-card:nth-child(5) :is(h2, h3, p, span, strong, button),
-.hud-frame.module-government .systems-articles article:nth-child(odd) :is(h2, h3, p, span, strong) {
+.hud-frame.module-advocacy .terminal-content .category-file-card:nth-child(2) :is(h2, h3, p, span, strong, button), .hud-frame.module-advocacy .terminal-content .category-file-card:nth-child(5) :is(h2, h3, p, span, strong, button), .hud-frame.module-government .systems-articles article:nth-child(odd) :is(h2, h3, p, span, strong) {
   color: var(--ss-ink) !important;
 }
 
@@ -9263,8 +9163,7 @@ body:has(.assessment-workspace),
   text-align: right !important;
 }
 
-.hud-frame .terminal-content :is(.page-flourish-header, .ss-template-header, .assessment-page-header) h1,
-.hud-frame:not(.module-home) .terminal-content > :is(section, article, div) h1 {
+.hud-frame .terminal-content :is(.page-flourish-header, .ss-template-header, .assessment-page-header) h1, .hud-frame:not(.module-home) .terminal-content > :is(section, article, div) h1 {
   font-family: "Times New Roman", Times, Georgia, serif !important;
   font-size: 28px !important;
   font-weight: 700 !important;
