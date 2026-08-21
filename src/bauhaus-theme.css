@@ -9089,3 +9089,124 @@ body:has(.assessment-workspace),
     padding: 16px 20px 18px !important;
   }
 }
+
+/* Newspaper typography is sitewide; scripted initials belong only to the homepage. */
+.hud-frame:not(.module-go-bag-prep) .terminal-content,
+.hud-frame:not(.module-go-bag-prep) .terminal-content :is(
+  h1, h2, h3, h4, h5, h6, p, li, a, button, label, input, textarea, select,
+  span, strong, em, small, dt, dd, blockquote, figcaption
+) {
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+  letter-spacing: 0 !important;
+}
+
+.hud-frame:not(.module-home) .terminal-content :is(h1, h2, h3, h4, h5, h6)::first-letter {
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+  font-size: inherit !important;
+  font-weight: inherit !important;
+}
+
+.hud-frame.module-home .terminal-content .editorial-initial {
+  font-family: "Parisienne", "Snell Roundhand", "Segoe Script", cursive !important;
+  font-weight: 400 !important;
+}
+
+/* State directories use one newspaper sheet with colored category mastheads. */
+.hud-frame.module-local-help .state-resource-category-list {
+  background: var(--ss-white) !important;
+  border: 4px solid var(--ss-ink) !important;
+  box-shadow: 12px 12px 0 var(--ss-blue) !important;
+  color: var(--ss-ink) !important;
+  padding: 0 !important;
+}
+
+.hud-frame.module-local-help .state-resource-category-list > section {
+  background: var(--ss-white) !important;
+  border-bottom: 4px solid var(--ss-ink) !important;
+  color: var(--ss-ink) !important;
+  padding: 0 clamp(24px, 5vw, 48px) clamp(30px, 5vw, 48px) !important;
+}
+
+.hud-frame.module-local-help .state-resource-category-list > section:last-child {
+  border-bottom: 0 !important;
+}
+
+.hud-frame.module-local-help .state-resource-category-list > section > h2 {
+  border-bottom: 4px solid var(--ss-ink) !important;
+  color: var(--ss-white) !important;
+  margin: 0 calc(clamp(24px, 5vw, 48px) * -1) 0 !important;
+  padding: 18px clamp(24px, 5vw, 48px) 20px !important;
+}
+
+.hud-frame.module-local-help .state-resource-category-list > section:nth-child(4n + 1) > h2 {
+  background: var(--ss-red) !important;
+}
+
+.hud-frame.module-local-help .state-resource-category-list > section:nth-child(4n + 2) > h2 {
+  background: var(--ss-yellow) !important;
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.module-local-help .state-resource-category-list > section:nth-child(4n + 3) > h2 {
+  background: var(--ss-green) !important;
+}
+
+.hud-frame.module-local-help .state-resource-category-list > section:nth-child(4n) > h2 {
+  background: var(--ss-blue) !important;
+}
+
+.hud-frame.module-local-help .state-resource-category-list > section > p {
+  color: var(--ss-ink) !important;
+  padding-top: 24px !important;
+}
+
+.hud-frame.module-local-help .state-program-list {
+  margin-top: 0 !important;
+}
+
+.hud-frame.module-local-help .state-program-list article {
+  background: var(--ss-white) !important;
+  border-left-width: 10px !important;
+  border-top: 2px solid var(--ss-ink) !important;
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.module-local-help .state-program-list article:first-child {
+  border-top: 0 !important;
+}
+
+.hud-frame.module-local-help .state-program-list article:last-child {
+  border-bottom: 0 !important;
+}
+
+.hud-frame.module-local-help .state-program-list :is(h3, p, dt, dd, strong) {
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.module-local-help .state-program-list dt {
+  color: var(--ss-red) !important;
+}
+
+.hud-frame.module-local-help .state-program-list dl > div {
+  border-left-color: var(--ss-blue) !important;
+}
+
+.hud-frame.module-local-help .state-program-note,
+.hud-frame.module-local-help .state-program-note :is(p, strong) {
+  color: var(--ss-white) !important;
+}
+
+.hud-frame.module-local-help .state-program-actions a {
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+}
+
+@media (max-width: 600px) {
+  .hud-frame.module-local-help .state-resource-category-list > section {
+    padding-inline: 20px !important;
+  }
+
+  .hud-frame.module-local-help .state-resource-category-list > section > h2 {
+    margin-inline: -20px !important;
+    padding-inline: 20px !important;
+  }
+}
