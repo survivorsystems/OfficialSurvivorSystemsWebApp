@@ -7983,9 +7983,20 @@ body:has(.assessment-workspace),
   }
 }
 
-/* Final homepage canvas lock: alternating editorial rules with measured color interruptions. */
-.hud-frame.module-home .folk-main-shell,
-.hud-frame.module-home .terminal-screen,
+/* Final homepage canvas lock: one stripe layer, with no old yellow shell underneath it. */
+.hud-frame.module-home .win95-desktop {
+  background: var(--ss-ink) !important;
+}
+
+.hud-frame.module-home .folk-main-shell {
+  background: var(--ss-white) !important;
+  padding: 0 !important;
+}
+
+.hud-frame.module-home .terminal-screen {
+  background: transparent !important;
+}
+
 .hud-frame.terminal-frame.module-home .terminal-content {
   background-color: var(--ss-white) !important;
   background-image: linear-gradient(
