@@ -11,6 +11,9 @@ importers:
       '@fontsource/inter':
         specifier: ^5.3.0
         version: 5.3.0
+      '@fontsource/parisienne':
+        specifier: ^5.3.0
+        version: 5.3.0
       '@fontsource/space-grotesk':
         specifier: ^5.3.0
         version: 5.3.0
@@ -550,6 +553,9 @@ packages:
 
   '@fontsource/inter@5.3.0':
     resolution: {integrity: sha512-RofMylZmjlJEfELXeNHFWBRcSs75rGU/6bV2S2jfnvv/3rPXPGe0LgUJTklcHZ9lM4OZmAVFhcJPnACfb91A3g==}
+
+  '@fontsource/parisienne@5.3.0':
+    resolution: {integrity: sha512-YbfjZDYy7FMTVE0HRgejkGX3T5iFfgagOYtAAAymq9GklviFAZ1GqIdlyviNe23TiR20f2K7zxsL4AECtWnkEQ==}
 
   '@fontsource/space-grotesk@5.3.0':
     resolution: {integrity: sha512-ksnGizDPXIDuvqcTYTSrmZ+evx9sDlS8rp7+42BQ7wU+spt3twEoXfbJz672C+5CLg6VeUQwRy5RXshWb67LcQ==}
@@ -1200,6 +1206,7 @@ packages:
   eslint@9.39.4:
     resolution: {integrity: sha512-XoMjdBOwe/esVgEvLmNsD3IRHkm7fbKIUGvrleloJXUZgDHig2IPWNniv+GwjyJXzuNqVjlr5+4yVUZjycJwfQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
     peerDependencies:
       jiti: '*'
@@ -2212,6 +2219,8 @@ snapshots:
   '@fastify/busboy@2.1.1': {}
 
   '@fontsource/inter@5.3.0': {}
+
+  '@fontsource/parisienne@5.3.0': {}
 
   '@fontsource/space-grotesk@5.3.0': {}
 
