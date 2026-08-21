@@ -3600,67 +3600,72 @@ function TerminalChrome({
 function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: string) => void }) {
   return (
     <section className="home-terminal bauhaus-home" aria-labelledby="home-title">
-      <div className="home-top-notices" aria-label="Important safety and educational notices">
-        <section className="home-privacy-panel" aria-labelledby="home-privacy">
-          <div>
-            <p className="folk-kicker">A NOTE ABOUT DEVICE SAFETY</p>
-            <h2 id="home-privacy">Abusers often monitor devices and online activity.</h2>
-            <p>
-              Cyberstalking can include checking browser history, accessing accounts, tracking a
-              phone's location, reading messages, monitoring shared plans, or installing surveillance
-              software. Changing settings or clearing history can sometimes alert the person monitoring
-              you. Use a safer device when possible and make changes only when they feel safe for you.
-            </p>
-            <button type="button" onClick={() => onNavigate("how-to", "/guides/browser-trace-cleanup")}>
-              Open Digital Safety Guide
-            </button>
-          </div>
-        </section>
-
-        <aside className="home-education-disclaimer" aria-labelledby="home-education-disclaimer-title">
-          <strong id="home-education-disclaimer-title">Educational information, not individualized advice</strong>
-          <p>
-            Survivor Systems provides general educational information and practical planning tools.
-            Nothing on this site should be understood as legal, medical, financial, mental-health,
-            or other individualized professional advice unless a page explicitly states otherwise.
-          </p>
-        </aside>
-      </div>
-
-      <header className="home-briefing-bar">
+      <header className="home-editorial-masthead">
+        <p>TOOLS FOR CLARITY, AUTONOMY + REBUILDING</p>
         <div>
-          <span>SURVIVOR SYSTEMS</span>
-          <strong>TOOLS FOR CLARITY + AUTONOMY</strong>
+          <span>EST. 2026</span>
+          <strong>SURVIVOR SYSTEMS</strong>
+          <span>START ANYWHERE</span>
         </div>
-        <p>EST. 2026&nbsp;&nbsp;/&nbsp;&nbsp;START ANYWHERE</p>
       </header>
 
-      <div className="home-hero-composition">
-        <article className="home-message refined-home-message">
-          <p className="folk-kicker">01 / A GUIDED PLACE TO BEGIN</p>
-          <h1 id="home-title">Start<br /><em>Here</em></h1>
+      <article className="home-editorial-lead">
+        <p className="home-editorial-kicker">PRACTICAL INFORMATION FOR THE WHOLE PICTURE</p>
+        <h1 id="home-title"><span className="editorial-initial">W</span>elcome to Survivor Systems</h1>
+        <div className="home-editorial-lead-copy">
           <p>
-            There is a lot here: assessments, safety information, practical guides, housing,
-            benefits, legal-system help, planning tools, and rebuilding resources. You can explore
-            any part of the site at any time.
+            Surviving abuse is only one part of getting free. Leaving can mean suddenly having to
+            navigate housing, money, transportation, benefits, court, safety, documentation, work,
+            childcare, technology, healthcare, and a dozen other systems while you're already running
+            on fumes.
           </p>
           <p>
-            If you aren't sure where to begin, Start Here asks a few questions and points you toward
-            the sections most relevant to you. Your answers aren't saved or transmitted.
+            Most resources treat those problems separately. Survivor Systems looks at the whole picture.
+            This is a practical resource and strategy platform designed to help you understand what's
+            happening, see where control may still be applied, and make informed decisions about what
+            comes next.
           </p>
-          <div className="home-hero-actions" aria-label="Start options">
-            <button className="home-primary-action" type="button" onClick={() => onNavigate("advocacy", "/assessments")}>
-              Start Here
-            </button>
-            <button type="button" onClick={() => onNavigate("local-help", "/resources")}>Browse Everything</button>
+        </div>
+        <p className="home-editorial-deck">Better information. Clearer strategy. Your decisions.</p>
+      </article>
+
+      <div className="home-editorial-secondary" aria-label="Where to begin and device safety">
+        <article className="home-start-story">
+          <p className="home-editorial-kicker">A GUIDED PLACE TO BEGIN</p>
+          <h2><span className="editorial-initial">S</span>tart Here</h2>
+          <p>
+            There is a lot here: assessments, safety information, practical guides, state resources,
+            planning tools, and rebuilding support. Start Here asks a few questions and points you
+            toward what may be most relevant. Your answers aren't saved or transmitted.
+          </p>
+          <div className="home-editorial-actions">
+            <button type="button" onClick={() => onNavigate("advocacy", "/assessments")}>Take Start Here</button>
+            <button type="button" onClick={() => onNavigate("local-help", "/resources")}>Browse Resources</button>
           </div>
         </article>
+
+        <article className="home-safety-story" aria-labelledby="home-privacy">
+          <p className="home-editorial-kicker">A NOTE ABOUT DEVICE SAFETY</p>
+          <h2 id="home-privacy"><span className="editorial-initial">A</span>busers often monitor devices and online activity.</h2>
+          <p>
+            Cyberstalking can include checking browser history, accessing accounts, tracking a phone's
+            location, reading messages, or installing surveillance software. Changing settings or
+            clearing history can sometimes alert the person monitoring you. Use a safer device when
+            possible and make changes only when they feel safe for you.
+          </p>
+          <button type="button" onClick={() => onNavigate("how-to", "/guides/browser-trace-cleanup")}>Open Digital Safety Guide</button>
+        </article>
       </div>
+
+      <aside className="home-editorial-disclaimer" aria-labelledby="home-education-disclaimer-title">
+        <strong id="home-education-disclaimer-title">Educational information, not individualized advice.</strong>
+        <p>Survivor Systems provides general educational information and practical planning tools. Nothing on this site is legal, medical, financial, mental-health, or other individualized professional advice unless a page explicitly states otherwise.</p>
+      </aside>
 
       <section className="home-site-guide" aria-labelledby="home-site-guide-title">
         <header className="home-index-heading">
           <span>EXPLORE THE SITE</span>
-          <h2 id="home-site-guide-title">Site Map</h2>
+          <h2 id="home-site-guide-title"><span className="editorial-initial">S</span>ite Map</h2>
           <p>Each section has a different job. Start wherever fits your situation.</p>
         </header>
         <div className="home-category-grid">

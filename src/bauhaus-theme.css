@@ -4295,6 +4295,259 @@ body:has(.assessment-workspace),
   }
 }
 
+/* Homepage editorial edition: Bauhaus color discipline meets a newspaper front page. */
+.hud-frame.module-home .folk-main-shell,
+.hud-frame.module-home .terminal-screen,
+.hud-frame.terminal-frame.module-home .terminal-content {
+  background-color: var(--ss-white) !important;
+  background-image: linear-gradient(
+    180deg,
+    var(--ss-ink) 0 18px,
+    var(--ss-white) 18px 52px,
+    var(--ss-ink) 52px 59px,
+    var(--ss-blue) 59px 72px,
+    var(--ss-white) 72px 118px,
+    var(--ss-ink) 118px 136px,
+    var(--ss-white) 136px 170px,
+    var(--ss-red) 170px 182px,
+    var(--ss-ink) 182px 190px,
+    var(--ss-white) 190px 246px,
+    var(--ss-yellow) 246px 260px,
+    var(--ss-ink) 260px 278px,
+    var(--ss-white) 278px 326px,
+    var(--ss-green) 326px 334px,
+    var(--ss-ink) 334px 354px,
+    var(--ss-white) 354px 420px
+  ) !important;
+  background-repeat: repeat-y !important;
+  background-size: 100% 420px !important;
+}
+
+.hud-frame.module-home .home-terminal.bauhaus-home {
+  display: grid !important;
+  gap: 28px !important;
+  max-width: 1220px !important;
+  margin: 0 auto !important;
+}
+
+.hud-frame.module-home :is(.home-editorial-masthead, .home-editorial-lead, .home-editorial-secondary, .home-editorial-disclaimer, .home-site-guide) {
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+}
+
+.hud-frame.module-home .home-editorial-masthead {
+  background: var(--ss-white) !important;
+  border: 4px solid var(--ss-ink) !important;
+  color: var(--ss-ink) !important;
+  padding: 14px 22px 12px !important;
+  text-align: center !important;
+}
+
+.hud-frame.module-home .home-editorial-masthead > p {
+  border-bottom: 2px solid var(--ss-ink) !important;
+  color: var(--ss-ink) !important;
+  font-family: var(--ss-font-body) !important;
+  font-size: .72rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0 !important;
+  margin: 0 0 9px !important;
+  padding-bottom: 8px !important;
+}
+
+.hud-frame.module-home .home-editorial-masthead > div {
+  align-items: center !important;
+  display: grid !important;
+  grid-template-columns: 1fr auto 1fr !important;
+}
+
+.hud-frame.module-home .home-editorial-masthead strong {
+  color: var(--ss-ink) !important;
+  font-size: clamp(2rem, 5vw, 4.5rem) !important;
+  line-height: .9 !important;
+}
+
+.hud-frame.module-home .home-editorial-masthead span {
+  color: var(--ss-ink) !important;
+  font-family: var(--ss-font-body) !important;
+  font-size: .72rem !important;
+  font-weight: 800 !important;
+}
+
+.hud-frame.module-home .home-editorial-masthead span:first-child { text-align: left !important; }
+.hud-frame.module-home .home-editorial-masthead span:last-child { text-align: right !important; }
+
+.hud-frame.module-home .home-editorial-lead {
+  background: var(--ss-white) !important;
+  border: 4px solid var(--ss-ink) !important;
+  box-shadow: 12px 12px 0 var(--ss-blue) !important;
+  color: var(--ss-ink) !important;
+  padding: clamp(28px, 5vw, 68px) !important;
+}
+
+.hud-frame.module-home .home-editorial-kicker {
+  color: var(--ss-red) !important;
+  font-family: var(--ss-font-body) !important;
+  font-size: .76rem !important;
+  font-weight: 900 !important;
+  margin: 0 0 14px !important;
+}
+
+.hud-frame.module-home .home-editorial-lead h1 {
+  border-bottom: 5px solid var(--ss-ink) !important;
+  color: var(--ss-ink) !important;
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+  font-size: clamp(3.4rem, 8vw, 7.5rem) !important;
+  font-weight: 700 !important;
+  line-height: .88 !important;
+  margin: 0 0 24px !important;
+  padding-bottom: 24px !important;
+}
+
+.hud-frame.module-home .editorial-initial {
+  color: inherit !important;
+  font-family: "Brush Script MT", "Segoe Script", cursive !important;
+  font-size: 1.18em !important;
+  font-weight: 400 !important;
+  line-height: .7 !important;
+}
+
+.hud-frame.module-home .home-editorial-lead-copy {
+  column-count: 2 !important;
+  column-gap: clamp(28px, 5vw, 58px) !important;
+  column-rule: 2px solid var(--ss-ink) !important;
+}
+
+.hud-frame.module-home .home-editorial-lead-copy p {
+  color: var(--ss-ink) !important;
+  font-size: clamp(1.08rem, 1.7vw, 1.28rem) !important;
+  line-height: 1.55 !important;
+  margin: 0 !important;
+}
+
+.hud-frame.module-home .home-editorial-lead-copy p + p { margin-top: 18px !important; }
+
+.hud-frame.module-home .home-editorial-deck {
+  border-left: 14px solid var(--ss-yellow) !important;
+  color: var(--ss-ink) !important;
+  font-size: clamp(1.25rem, 2.3vw, 1.7rem) !important;
+  font-style: italic !important;
+  font-weight: 700 !important;
+  margin: 30px 0 0 !important;
+  padding: 8px 0 8px 18px !important;
+}
+
+.hud-frame.module-home .home-editorial-secondary {
+  display: grid !important;
+  gap: 28px !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+.hud-frame.module-home .home-editorial-secondary > article {
+  border: 4px solid var(--ss-ink) !important;
+  color: var(--ss-ink) !important;
+  padding: clamp(24px, 4vw, 42px) !important;
+}
+
+.hud-frame.module-home .home-start-story {
+  background: var(--ss-yellow) !important;
+  box-shadow: 10px 10px 0 var(--ss-red) !important;
+}
+
+.hud-frame.module-home .home-safety-story {
+  background: var(--ss-white) !important;
+  box-shadow: 10px 10px 0 var(--ss-green) !important;
+}
+
+.hud-frame.module-home .home-editorial-secondary h2,
+.hud-frame.module-home .home-index-heading h2 {
+  color: var(--ss-ink) !important;
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+  font-size: clamp(2.1rem, 4vw, 3.4rem) !important;
+  line-height: .96 !important;
+  margin: 0 0 18px !important;
+}
+
+.hud-frame.module-home .home-editorial-secondary article > p:not(.home-editorial-kicker) {
+  color: var(--ss-ink) !important;
+  font-size: 1.05rem !important;
+  line-height: 1.55 !important;
+}
+
+.hud-frame.module-home .home-editorial-actions {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 12px !important;
+  margin-top: 24px !important;
+}
+
+.hud-frame.module-home .home-editorial-secondary button {
+  background: var(--ss-ink) !important;
+  border: 3px solid var(--ss-blue) !important;
+  border-radius: 0 !important;
+  box-shadow: 5px 5px 0 var(--ss-red) !important;
+  color: var(--ss-white) !important;
+  font-family: var(--ss-font-body) !important;
+  font-weight: 900 !important;
+}
+
+.hud-frame.module-home .home-safety-story > button {
+  margin-top: 24px !important;
+}
+
+.hud-frame.module-home .home-editorial-secondary button:is(:hover, :focus-visible) {
+  box-shadow: 2px 2px 0 var(--ss-yellow) !important;
+  transform: translate(3px, 3px) !important;
+}
+
+.hud-frame.module-home .home-editorial-disclaimer {
+  align-items: baseline !important;
+  background: var(--ss-ink) !important;
+  border-left: 14px solid var(--ss-red) !important;
+  color: var(--ss-white) !important;
+  display: grid !important;
+  gap: 16px !important;
+  grid-template-columns: minmax(220px, .75fr) 2fr !important;
+  padding: 18px 22px !important;
+}
+
+.hud-frame.module-home .home-editorial-disclaimer :is(strong, p) {
+  color: var(--ss-white) !important;
+  margin: 0 !important;
+}
+
+.hud-frame.module-home .home-editorial-disclaimer p { line-height: 1.5 !important; }
+
+.hud-frame.module-home .home-site-guide {
+  background: var(--ss-white) !important;
+  border: 4px solid var(--ss-ink) !important;
+  padding: clamp(24px, 4vw, 42px) !important;
+}
+
+.hud-frame.module-home .home-index-heading {
+  background: transparent !important;
+  border-bottom: 5px solid var(--ss-ink) !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  margin-bottom: 24px !important;
+  padding: 0 0 20px !important;
+}
+
+.hud-frame.module-home .home-index-heading :is(span, h2, p) { color: var(--ss-ink) !important; }
+
+@media (max-width: 760px) {
+  .hud-frame.module-home .home-editorial-masthead > div { grid-template-columns: 1fr !important; gap: 8px !important; }
+  .hud-frame.module-home .home-editorial-masthead span { display: none !important; }
+  .hud-frame.module-home .home-editorial-lead-copy { column-count: 1 !important; column-rule: 0 !important; }
+  .hud-frame.module-home .home-editorial-secondary { grid-template-columns: 1fr !important; }
+  .hud-frame.module-home .home-editorial-disclaimer { grid-template-columns: 1fr !important; }
+}
+
+@media (max-width: 520px) {
+  .hud-frame.module-home .home-editorial-lead { padding: 24px 20px !important; }
+  .hud-frame.module-home .home-editorial-lead h1 { font-size: clamp(3rem, 15vw, 4.4rem) !important; }
+  .hud-frame.module-home .home-editorial-secondary > article { padding: 24px 20px !important; }
+  .hud-frame.module-home .home-editorial-actions { display: grid !important; }
+}
+
 /* Clarity gets the same architectural depth as the homepage and Systems page. */
 .hud-frame.module-advocacy .terminal-content .category-module > .page-flourish-header {
   background: var(--ss-blue) !important;
@@ -7723,4 +7976,32 @@ body:has(.assessment-workspace),
   .hud-frame.module-home .home-top-notices .home-education-disclaimer {
     padding: 22px !important;
   }
+}
+
+/* Final homepage canvas lock: alternating editorial rules with measured color interruptions. */
+.hud-frame.module-home .folk-main-shell,
+.hud-frame.module-home .terminal-screen,
+.hud-frame.terminal-frame.module-home .terminal-content {
+  background-color: var(--ss-white) !important;
+  background-image: linear-gradient(
+    180deg,
+    var(--ss-ink) 0 18px,
+    var(--ss-white) 18px 52px,
+    var(--ss-ink) 52px 59px,
+    var(--ss-blue) 59px 72px,
+    var(--ss-white) 72px 118px,
+    var(--ss-ink) 118px 136px,
+    var(--ss-white) 136px 170px,
+    var(--ss-red) 170px 182px,
+    var(--ss-ink) 182px 190px,
+    var(--ss-white) 190px 246px,
+    var(--ss-yellow) 246px 260px,
+    var(--ss-ink) 260px 278px,
+    var(--ss-white) 278px 326px,
+    var(--ss-green) 326px 334px,
+    var(--ss-ink) 334px 354px,
+    var(--ss-white) 354px 420px
+  ) !important;
+  background-repeat: repeat-y !important;
+  background-size: 100% 420px !important;
 }
