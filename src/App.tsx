@@ -3581,7 +3581,19 @@ function TerminalChrome({
             </div>
             <TerminalCommand onNavigate={onNavigate} />
           </header>
-          <div className="terminal-content">{children}</div>
+          <div className="terminal-content">
+            {activeModule !== "home" ? (
+              <header className="site-editorial-masthead" aria-label="Survivor Systems">
+                <p>TOOLS FOR CLARITY, AUTONOMY + REBUILDING</p>
+                <div>
+                  <span>EST. 2026</span>
+                  <strong>SURVIVOR SYSTEMS</strong>
+                  <span>START ANYWHERE</span>
+                </div>
+              </header>
+            ) : null}
+            {children}
+          </div>
           </section>
         </section>
 
@@ -3613,7 +3625,7 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
 
       <article className="home-editorial-lead">
         <p className="home-editorial-kicker">PRACTICAL INFORMATION FOR THE WHOLE PICTURE</p>
-        <h1 id="home-title"><span className="editorial-initial">W</span>elcome to Survivor Systems</h1>
+        <h1 id="home-title">Welcome to Survivor Systems</h1>
         <div className="home-editorial-lead-copy">
           <p>
             Welcome to <strong>Survivor Systems</strong>, a place for practical tools for when your life
@@ -3640,7 +3652,7 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
         <article className="home-start-story">
           <header className="home-article-header">
             <p className="home-editorial-kicker">A GUIDED PLACE TO BEGIN</p>
-            <h2><span className="editorial-initial">S</span>tart Here</h2>
+            <h2>Start Here</h2>
           </header>
           <p>
             There is a lot here: assessments, safety information, practical guides, state resources,
@@ -3656,7 +3668,7 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
         <article className="home-safety-story" aria-labelledby="home-privacy">
           <header className="home-article-header">
             <p className="home-editorial-kicker">A NOTE ABOUT DEVICE SAFETY</p>
-            <h2 id="home-privacy"><span className="editorial-initial">A</span>busers often monitor devices and online activity.</h2>
+            <h2 id="home-privacy">Abusers often monitor devices and online activity.</h2>
           </header>
           <p>
             Cyberstalking can include checking browser history, accessing accounts, tracking a phone's
@@ -3676,7 +3688,7 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
       <section className="home-site-guide" aria-labelledby="home-site-guide-title">
         <header className="home-index-heading">
           <span>EXPLORE THE SITE</span>
-          <h2 id="home-site-guide-title"><span className="editorial-initial">S</span>ite Map</h2>
+          <h2 id="home-site-guide-title">Site Map</h2>
           <p>Each section has a different job. Start wherever fits your situation.</p>
         </header>
         <div className="home-category-grid">
