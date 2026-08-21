@@ -4314,12 +4314,6 @@ body:has(.assessment-workspace),
   padding-bottom: 18px !important;
 }
 
-.hud-frame:is(.module-about, .module-store, .module-guides) .terminal-content :is(.about-story, .store-module, .category-module) > .page-flourish-header.page-flourish-header h1::first-letter, .hud-frame:is(.module-about, .module-store, .module-guides) .terminal-content :is(.about-story, .store-module, .category-module) h2::first-letter {
-  font-family: "Parisienne", "Snell Roundhand", "Segoe Script", cursive !important;
-  font-size: 1.12em !important;
-  font-weight: 400 !important;
-}
-
 .hud-frame:is(.module-about, .module-store, .module-guides) .terminal-content :is(.about-story, .store-module, .category-module) > .page-flourish-header.page-flourish-header p {
   font-family: "Times New Roman", Times, Georgia, serif !important;
   font-size: clamp(1.08rem, 1.8vw, 1.3rem) !important;
@@ -4635,13 +4629,6 @@ body:has(.assessment-workspace),
   padding-bottom: 18px !important;
 }
 
-.hud-frame.terminal-frame.module-local-help .terminal-content .state-resource-page > .page-flourish-header.page-flourish-header h1::first-letter,
-.hud-frame.module-local-help .state-resource-category-list h2::first-letter {
-  font-family: "Parisienne", "Snell Roundhand", "Segoe Script", cursive !important;
-  font-size: 1.12em !important;
-  font-weight: 400 !important;
-}
-
 .hud-frame.terminal-frame.module-local-help .terminal-content .state-resource-page > .page-flourish-header.page-flourish-header p {
   font-family: "Times New Roman", Times, Georgia, serif !important;
   font-size: clamp(1.08rem, 1.8vw, 1.3rem) !important;
@@ -4823,14 +4810,6 @@ body:has(.assessment-workspace),
   line-height: .9 !important;
   margin: 8px 0 22px !important;
   padding-bottom: 18px !important;
-}
-
-.hud-frame.module-local-help .terminal-content .resources-module > .page-flourish-header h1::first-letter,
-.hud-frame.module-local-help .state-resource-directory h2::first-letter,
-.hud-frame.module-local-help .resource-support-callout h2::first-letter {
-  font-family: "Parisienne", "Snell Roundhand", "Segoe Script", cursive !important;
-  font-size: 1.15em !important;
-  font-weight: 400 !important;
 }
 
 .hud-frame.module-local-help .terminal-content .resources-module > .page-flourish-header p {
@@ -5019,14 +4998,6 @@ body:has(.assessment-workspace),
   line-height: .88 !important;
   margin: 0 0 24px !important;
   padding-bottom: 24px !important;
-}
-
-.hud-frame.module-home .editorial-initial {
-  color: inherit !important;
-  font-family: "Parisienne", "Snell Roundhand", "Segoe Script", cursive !important;
-  font-size: 1.18em !important;
-  font-weight: 400 !important;
-  line-height: .7 !important;
 }
 
 .hud-frame.module-home .home-editorial-lead-copy {
@@ -8826,29 +8797,10 @@ body:has(.assessment-workspace),
   }
 }
 
-/* Editorial refinement: genuine calligraphy, calmer headlines, and more white newsprint. */
-.hud-frame .terminal-content :is(
-  .editorial-initial,
-  .page-flourish-header h1::first-letter,
-  .state-resource-directory h2::first-letter,
-  .resource-support-callout h2::first-letter,
-  .state-resource-category-list h2::first-letter,
-  .about-story h2::first-letter,
-  .store-module h2::first-letter,
-  .category-module h2::first-letter
-) {
-  font-family: "Parisienne", "Snell Roundhand", "Segoe Script", cursive !important;
-  font-weight: 400 !important;
-}
-
 .hud-frame.module-home .home-editorial-lead h1 {
   font-size: clamp(2.5rem, 4.4vw, 4.15rem) !important;
   line-height: .96 !important;
   max-width: 18ch !important;
-}
-
-.hud-frame.module-home .editorial-initial {
-  font-size: 1.24em !important;
 }
 
 /* White article cards alternate with the black feature stories across major sections. */
@@ -9004,11 +8956,6 @@ body:has(.assessment-workspace),
   font-family: "Times New Roman", Times, Georgia, serif !important;
   font-size: inherit !important;
   font-weight: inherit !important;
-}
-
-.hud-frame.module-home .terminal-content .editorial-initial {
-  font-family: "Parisienne", "Snell Roundhand", "Segoe Script", cursive !important;
-  font-weight: 400 !important;
 }
 
 /* State directories use one newspaper sheet with colored category mastheads. */
