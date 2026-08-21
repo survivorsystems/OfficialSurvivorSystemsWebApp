@@ -9624,3 +9624,26 @@ html::-webkit-scrollbar-corner {
     padding: 24px 20px !important;
   }
 }
+
+/* Resources uses a restrained newspaper headline scale. */
+.hud-frame.module-local-help .terminal-content .resources-module > .page-flourish-header h1,
+.hud-frame.module-local-help .terminal-content .state-resource-page > .page-flourish-header h1 {
+  font-size: 28px !important;
+  line-height: 1.08 !important;
+  max-width: none !important;
+}
+
+.hud-frame.module-local-help .terminal-content .resources-module :is(
+  .state-resource-directory,
+  .resource-support-callout
+) h2,
+.hud-frame.module-local-help .terminal-content .state-resource-category-list > section > h2 {
+  font-size: clamp(22px, 2.4vw, 28px) !important;
+  line-height: 1.12 !important;
+  max-width: none !important;
+}
+
+.hud-frame.module-local-help .terminal-content .state-program-list h3 {
+  font-size: clamp(19px, 2vw, 24px) !important;
+  line-height: 1.18 !important;
+}
