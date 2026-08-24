@@ -9819,6 +9819,58 @@ html::-webkit-scrollbar-corner {
   color: var(--ss-white) !important;
 }
 
+/* Readability lock: every long-form guide uses white newsprint and dark ink. */
+.hud-frame:is(.module-how-to, .module-legal) .terminal-content :is(.how-to-guide-page, .legal-guide-shell) {
+  background: var(--ss-white) !important;
+  border: 4px solid var(--ss-ink) !important;
+  box-shadow: 10px 10px 0 var(--ss-blue) !important;
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame:is(.module-how-to, .module-legal) .terminal-content :is(.how-to-guide-page, .legal-guide-shell) :is(
+  h1, h2, h3, h4, h5, h6, p, li, label, span, small, strong, em, code, blockquote, summary, dt, dd
+) {
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame:is(.module-how-to, .module-legal) .terminal-content :is(.how-to-guide-page, .legal-guide-shell) :is(
+  .snap-guide-card, .how-to-system-note, .housing-options-master-script,
+  .housing-option-pathway, .compensation-coverage-grid > article,
+  .legal-step-card, .legal-motion-card, .legal-note, .legal-reminder,
+  .legal-warning, .legal-motion-block, .phrase-bank, blockquote, ul, ol
+) {
+  background-color: var(--ss-white) !important;
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame:is(.module-how-to, .module-legal) .terminal-content :is(.how-to-guide-page, .legal-guide-shell) button {
+  background: var(--ss-ink) !important;
+  border-color: var(--ss-red) !important;
+  color: var(--ss-white) !important;
+}
+
+.hud-frame:is(.module-how-to, .module-legal) .terminal-content :is(.how-to-guide-page, .legal-guide-shell) a:not(.back-button) {
+  color: #174ea6 !important;
+  font-weight: 700 !important;
+}
+
+.hud-frame:is(.module-how-to, .module-legal) .terminal-content :is(.how-to-guide-page, .legal-guide-shell) :is(
+  .ss-template-header, .page-flourish-header, .how-to-hero
+) h1,
+.hud-frame.module-local-help .terminal-content .state-resource-page > .page-flourish-header h1 {
+  font-size: clamp(28px, 3.25vw, 40px) !important;
+  line-height: 1.08 !important;
+  max-width: none !important;
+}
+
+.hud-frame.module-local-help .state-program-note {
+  border: 0 !important;
+  color: var(--ss-red) !important;
+  font-weight: 900 !important;
+  margin: 18px 0 0 !important;
+  padding: 0 !important;
+}
+
 .hud-frame.module-library .library-preview-card,
 .hud-frame.module-library .library-preview-card > div:last-child,
 .hud-frame.module-library .library-public-preview,

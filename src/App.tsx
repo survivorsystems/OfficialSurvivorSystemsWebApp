@@ -97,7 +97,6 @@ type ModuleKey =
   | "advocacy"
   | "government"
   | "support"
-  | "am-i-crazy"
   | "go-bag-prep"
   | "planning"
   | "rebuilding"
@@ -1346,7 +1345,6 @@ const moduleRoutes: Record<ModuleKey, { label: string; path: string }> = {
   advocacy: { label: "Assessments", path: "/assessments" },
   government: { label: "Systems", path: "/systems" },
   support: { label: "Support", path: "/support" },
-  "am-i-crazy": { label: "Was I Crazy?", path: "/am-i-crazy" },
   "go-bag-prep": { label: "Immediate Support", path: "/crisis-support" },
   planning: { label: "Immediate Support", path: "/crisis-support" },
   rebuilding: { label: "Guides", path: "/rebuilding" },
@@ -1368,7 +1366,6 @@ const allNavTargets: Array<{ key: ModuleKey; label: string; path: string }> = [
   { key: "advocacy", ...moduleRoutes.advocacy },
   { key: "government", ...moduleRoutes.government },
   { key: "support", ...moduleRoutes.support },
-  { key: "am-i-crazy", label: "Was I Crazy", path: "/am-i-crazy" },
   { key: "planning", label: "Immediate Support", path: "/crisis-support" },
   { key: "local-help", ...moduleRoutes["local-help"] },
   { key: "how-to", ...moduleRoutes["how-to"] },
@@ -1506,9 +1503,9 @@ function isPrimaryNavActive(activeModule: ModuleKey, navKey: ModuleKey) {
     return activeModule === "local-help" || activeModule === "planners" || activeModule === "toolkits" || activeModule === "access" || activeModule === "library";
   }
 
-  if (navKey === "guides") return activeModule === "guides" || activeModule === "how-to" || activeModule === "legal" || activeModule === "rebuilding" || activeModule === "advocacy" || activeModule === "assessments" || activeModule === "am-i-crazy";
+  if (navKey === "guides") return activeModule === "guides" || activeModule === "how-to" || activeModule === "legal" || activeModule === "rebuilding" || activeModule === "advocacy" || activeModule === "assessments";
 
-  if (navKey === "advocacy") return activeModule === "advocacy" || activeModule === "assessments" || activeModule === "am-i-crazy";
+  if (navKey === "advocacy") return activeModule === "advocacy" || activeModule === "assessments";
 
   if (navKey === "access") {
     return activeModule === "access" || activeModule === "library";
@@ -2275,13 +2272,6 @@ const categoryFiles: Record<
       "Interactive browser-only tools that help a user name patterns, reality-check old stories, and decide what kind of support file to open next.",
     files: [
       {
-        title: "Was I Crazy?",
-        description: "Reality-check assessment for gaslighting, blame shifting, fear, control, and memory fog.",
-        status: "LIVE",
-        target: "am-i-crazy",
-        path: "/am-i-crazy",
-      },
-      {
         title: "Is It Love or Fear?",
         description: "A 24-item relationship reality assessment with a separate priority pattern check.",
         status: "LIVE",
@@ -2492,11 +2482,6 @@ const categoryFiles: Record<
       "Information for staying safer during the planning phase, documenting abuse, understanding risk, and preparing for an exit. More resources are being built for this section.",
     files: [
       {
-        title: "Gaslighting & Reality Rewriting",
-        description: "Why confusion can become evidence instead of a personal failure.",
-        status: "QUEUED",
-      },
-      {
         title: "Gray Rocking For Survival",
         description: "Not about being right. About getting out of the interaction with less fuel on the fire.",
         status: "QUEUED",
@@ -2505,13 +2490,6 @@ const categoryFiles: Record<
         title: "Be So For Real",
         description: "A future statistics-and-reality section with the sassy system voice intact.",
         status: "QUEUED",
-      },
-      {
-        title: "Was I Crazy?",
-        description: "The current live assessment also functions as pattern education.",
-        status: "LIVE",
-        target: "am-i-crazy",
-        path: "/am-i-crazy",
       },
     ],
   },
@@ -6647,7 +6625,7 @@ type GuideLaunch = {
   priorityId: HowToGuide["priority"];
 };
 
-function getInitialResourceFolder(moduleKey: Exclude<ModuleKey, "home" | "am-i-crazy" | "go-bag-prep">): ResourceFolder {
+function getInitialResourceFolder(moduleKey: Exclude<ModuleKey, "home" | "go-bag-prep">): ResourceFolder {
   if (moduleKey === "how-to") return "landing";
   if (moduleKey === "legal") return "legal";
   if (moduleKey === "library") return "access";
@@ -6768,7 +6746,7 @@ function StateResourcePage({ location, onBack }: { location: StateResourceLocati
                         {program.access ? <div><dt>How to access it</dt><dd>{program.access}</dd></div> : null}
                         {program.coverage ? <div><dt>Service area</dt><dd>{program.coverage}</dd></div> : null}
                       </dl>
-                      {program.note ? <p className="state-program-note"><strong>Of note:</strong> {program.note}</p> : null}
+                      {program.note ? <p className="state-program-note">{program.note}</p> : null}
                       <div className="state-program-actions">
                         {program.phone ? <a href={`tel:${program.phone.replace(/[^0-9+]/g, "")}`}>Call {program.phone}</a> : null}
                         {program.secondaryPhone ? <a href={`tel:${program.secondaryPhone.replace(/[^0-9+]/g, "")}`}>Call {program.secondaryPhone}</a> : null}
@@ -6792,7 +6770,7 @@ function ResourceModule({
   moduleKey,
   onNavigate,
 }: {
-  moduleKey: Exclude<ModuleKey, "home" | "am-i-crazy" | "go-bag-prep">;
+  moduleKey: Exclude<ModuleKey, "home" | "go-bag-prep">;
   onNavigate: (module: ModuleKey, path: string) => void;
 }) {
   const requestedGuideId = window.location.pathname.startsWith("/guides/")
@@ -7946,7 +7924,7 @@ export function App() {
   }, []);
 
   useEffect(() => {
-    if (activeModule !== "am-i-crazy" && activeModule !== "planning" && activeModule !== "go-bag-prep") {
+    if (activeModule !== "planning" && activeModule !== "go-bag-prep") {
       setControlPanel(defaultControlPanel);
     }
   }, [activeModule]);
@@ -7980,8 +7958,6 @@ export function App() {
     activeModule === "education" ||
     activeModule === "advocacy" ? (
     <CategoryModule category={activeModule} onNavigate={navigate} />
-  ) : activeModule === "am-i-crazy" ? (
-    <AmICrazyModule onControlPanelChange={updateControlPanel} onNavigate={navigate} />
   ) : activeModule === "go-bag-prep" ? (
     <PlanningModule onControlPanelChange={updateControlPanel} onNavigate={navigate} />
   ) : activeModule === "planning" ? (
