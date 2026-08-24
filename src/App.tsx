@@ -3626,7 +3626,7 @@ function StoreModule() {
           </ul>
           <div className="store-purchase-row">
             <strong>$14.99</strong>
-            <a href="https://buy.stripe.com/9B68wR0Ko0cr7Vm9QbfQI03">Buy</a>
+            <a href="https://buy.stripe.com/9B68wR0Ko0cr7Vm9QbfQI03">Add to Cart</a>
           </div>
         </article>
       </div>
