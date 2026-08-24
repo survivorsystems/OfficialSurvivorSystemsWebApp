@@ -10488,6 +10488,25 @@ body,
   background-image: none !important;
 }
 
+.hud-frame.terminal-frame.module-home .folk-main-shell,
+.hud-frame.terminal-frame.module-home .terminal-screen,
+.hud-frame.terminal-frame.module-home .terminal-content {
+  background-color: var(--ss-paper) !important;
+  margin: 0 !important;
+  max-width: none !important;
+  min-height: 100vh !important;
+  width: 100% !important;
+}
+
+.hud-frame.terminal-frame.module-home .home-terminal.bauhaus-home {
+  box-sizing: border-box !important;
+  margin: 0 !important;
+  max-width: none !important;
+  min-height: 100vh !important;
+  padding: clamp(24px, 4vw, 64px) !important;
+  width: 100% !important;
+}
+
 .hud-frame.terminal-frame.module-local-help .terminal-content,
 .hud-frame.terminal-frame.module-local-help .terminal-content:has(> .resources-module),
 .hud-frame.terminal-frame.module-local-help .terminal-content:has(> .state-resource-page) {
