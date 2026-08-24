@@ -1111,6 +1111,36 @@ body {
   color: var(--ss-white) !important;
 }
 
+/* Editorial cleanup: no decorative stripes on Home and no colored card shadows. */
+.hud-frame.module-home .terminal-content,
+.hud-frame.module-home .terminal-content *,
+.hud-frame.module-home .terminal-content *::before,
+.hud-frame.module-home .terminal-content *::after {
+  background-image: none !important;
+}
+
+.hud-frame.module-home .home-hero-composition::before,
+.hud-frame.module-home .home-terminal.bauhaus-home::before,
+.hud-frame.module-home .home-terminal.bauhaus-home::after,
+.hud-frame.module-home .folk-main-shell::before,
+.hud-frame.module-home .folk-main-shell::after {
+  display: none !important;
+}
+
+.hud-frame .terminal-content :is(
+  article,
+  [class*="-card"],
+  [class*="-panel"],
+  [class*="-callout"],
+  .page-flourish-header,
+  .ss-template,
+  .state-resource-category-list,
+  .how-to-guide-page,
+  .legal-guide-shell
+) {
+  box-shadow: none !important;
+}
+
 /* Safety control: approximately quarter-sized on a standard-density screen. */
 .hud-frame .floating-quick-escape {
   font-size: 0.7rem !important;
