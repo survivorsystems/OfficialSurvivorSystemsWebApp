@@ -10654,6 +10654,187 @@ body,
   text-underline-offset: 4px !important;
 }
 
+/* FINAL About and Store editions: foundational linen and newsprint. */
+.hud-frame.terminal-frame:is(.module-about, .module-store) .terminal-content {
+  background: var(--ss-paper) !important;
+  background-image: none !important;
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame:is(.module-about, .module-store) .terminal-content :is(.about-story, .store-module) {
+  color: var(--ss-ink) !important;
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+  max-width: none !important;
+  width: 100% !important;
+}
+
+.hud-frame.terminal-frame:is(.module-about, .module-store) .terminal-content :is(.about-story, .store-module) > .page-flourish-header.page-flourish-header {
+  background: var(--ss-white) !important;
+  background-image: none !important;
+  border: 3px solid var(--ss-ink) !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame:is(.module-about, .module-store) .terminal-content :is(.about-story, .store-module) > .page-flourish-header.page-flourish-header::before,
+.hud-frame.terminal-frame:is(.module-about, .module-store) .terminal-content :is(.about-story, .store-module) > .page-flourish-header.page-flourish-header::after {
+  display: none !important;
+}
+
+.hud-frame.terminal-frame:is(.module-about, .module-store) .terminal-content :is(.about-story, .store-module) > .page-flourish-header.page-flourish-header :is(
+  .folk-kicker, h1, p, span, strong
+) {
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame:is(.module-about, .module-store) .terminal-content :is(.about-story, .store-module) > .page-flourish-header.page-flourish-header .folk-kicker {
+  color: var(--ss-red) !important;
+}
+
+.hud-frame.terminal-frame.module-about .about-story > :is(
+  section,
+  blockquote,
+  .about-story-intro,
+  .about-founder-section,
+  .about-strategy-callout,
+  .about-overlap-section,
+  .about-difference-section,
+  .about-offerings,
+  .about-principles
+) {
+  background: var(--ss-white) !important;
+  background-image: none !important;
+  border: 1px solid var(--ss-ink) !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame.module-about .about-story > :is(section, blockquote) :is(
+  h2, h3, p, li, span, strong
+) {
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame.module-about .about-story > :is(section, blockquote) > div > span,
+.hud-frame.terminal-frame.module-about .about-story > blockquote > span,
+.hud-frame.terminal-frame.module-about .about-offerings > header > span {
+  color: var(--ss-red) !important;
+}
+
+.hud-frame.terminal-frame.module-about .about-story .about-strategy-callout {
+  background: var(--ss-paper-deep) !important;
+  border-left: 6px solid var(--ss-red) !important;
+}
+
+.hud-frame.terminal-frame.module-about .about-offerings-grid article,
+.hud-frame.terminal-frame.module-about .about-offerings-grid article:nth-child(n) {
+  background: var(--ss-white) !important;
+  border: 1px solid var(--ss-ink) !important;
+  border-left: 4px solid var(--ss-red) !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame.module-about .about-offerings-grid article :is(h3, p, span, strong) {
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame.module-about .about-story button {
+  background: var(--ss-ink) !important;
+  border: 1px solid var(--ss-ink) !important;
+  box-shadow: none !important;
+  color: var(--ss-white) !important;
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+  text-transform: none !important;
+  transform: none !important;
+}
+
+.hud-frame.terminal-frame.module-store .store-module :is(
+  .store-status,
+  .store-live-kit > article,
+  .store-kit-grid > article,
+  .store-delivery-panel
+) {
+  background: var(--ss-white) !important;
+  background-image: none !important;
+  border: 1px solid var(--ss-ink) !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame.module-store .store-module :is(
+  .store-status,
+  .store-live-kit > article,
+  .store-kit-grid > article,
+  .store-delivery-panel
+) :is(h2, h3, p, li, span, strong, small) {
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame.module-store .store-module :is(.store-status, .store-kit-grid > article) > span,
+.hud-frame.terminal-frame.module-store .store-live-kit > article > span,
+.hud-frame.terminal-frame.module-store .store-delivery-panel > span {
+  color: var(--ss-red) !important;
+}
+
+.hud-frame.terminal-frame.module-store .store-kit-preview {
+  background: var(--ss-paper-deep) !important;
+  border: 1px solid var(--ss-ink) !important;
+  box-shadow: none !important;
+}
+
+.hud-frame.terminal-frame.module-store .store-purchase-row {
+  border-top: 3px double var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame.module-store .store-purchase-row a,
+.hud-frame.terminal-frame.module-store .store-delivery-panel :is(button, a),
+.hud-frame.terminal-frame.module-store .store-download-list a {
+  background: var(--ss-ink) !important;
+  border: 1px solid var(--ss-ink) !important;
+  box-shadow: none !important;
+  color: var(--ss-white) !important;
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+  font-weight: 700 !important;
+  text-transform: none !important;
+  transform: none !important;
+}
+
+.hud-frame.terminal-frame:is(.module-about, .module-store) .terminal-content :is(button, a):is(:hover, :focus-visible) {
+  outline: 2px solid var(--ss-red) !important;
+  outline-offset: 2px !important;
+  transform: none !important;
+}
+
+#root .hud-frame.terminal-frame.module-about .terminal-content .about-story > :is(section, blockquote),
+#root .hud-frame.terminal-frame.module-about .terminal-content .about-story .about-offerings-grid article:nth-child(n) {
+  background: var(--ss-white) !important;
+  background-image: none !important;
+  border-color: var(--ss-ink) !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+}
+
+#root .hud-frame.terminal-frame.module-about .terminal-content .about-story > :is(section, blockquote) :is(
+  h2, h3, p, li, span, strong
+),
+#root .hud-frame.terminal-frame.module-about .terminal-content .about-story .about-offerings-grid article:nth-child(n) :is(
+  h2, h3, p, li, span, strong
+) {
+  color: var(--ss-ink) !important;
+}
+
+#root .hud-frame.terminal-frame.module-about .terminal-content .about-story .about-strategy-callout {
+  background: var(--ss-paper-deep) !important;
+  border-left-color: var(--ss-red) !important;
+}
+
+#root .hud-frame.terminal-frame.module-about .terminal-content .about-story button,
+#root .hud-frame.terminal-frame.module-about .terminal-content .about-story button :is(span, strong) {
+  background: var(--ss-ink) !important;
+  color: var(--ss-white) !important;
+}
+
 .hud-frame.module-home :is(
   .home-hero-composition::before,
   .home-terminal.bauhaus-home::before,

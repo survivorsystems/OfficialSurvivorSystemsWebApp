@@ -1364,7 +1364,6 @@ const allNavTargets: Array<{ key: ModuleKey; label: string; path: string }> = [
   { key: "education", ...moduleRoutes.education },
   { key: "about", ...moduleRoutes.about },
   { key: "advocacy", ...moduleRoutes.advocacy },
-  { key: "government", ...moduleRoutes.government },
   { key: "support", ...moduleRoutes.support },
   { key: "planning", label: "Immediate Support", path: "/crisis-support" },
   { key: "local-help", ...moduleRoutes["local-help"] },
@@ -1391,7 +1390,6 @@ const navItems: Array<{ key: ModuleKey; label: string; path: string; code: Sideb
   { key: "local-help", label: "Resources", path: "/resources", code: "toolkits" },
   { key: "guides", label: "Guides", path: "/guides", code: "guides" },
   { key: "store", label: "Store", path: "/store", code: "planners" },
-  { key: "government", label: "Systems", path: "/systems", code: "government" },
   { key: "about", label: "About", path: "/about", code: "about" },
 ];
 
@@ -3185,7 +3183,6 @@ function getInitialModule(): ModuleKey {
   if (path === "/surviving" || path === "/education-awareness") return "advocacy";
   if (path === "/about") return "about";
   if (path === "/strategy" || path === "/advocacy") return "advocacy";
-  if (path === "/government" || path === "/systems") return "government";
   if (path === "/support") return "support";
   if (path === "/rebuilding") return "rebuilding";
   if (path === "/planning" || path === "/go-bag-prep" || path === "/crisis-support") return "planning";
@@ -7953,8 +7950,6 @@ export function App() {
     <HomeModule onNavigate={navigate} />
   ) : activeModule === "about" ? (
     <AboutModule onNavigate={navigate} />
-  ) : activeModule === "government" ? (
-    <SystemsModule />
   ) : activeModule === "assessments" ||
     activeModule === "guides" ||
     activeModule === "education" ||
