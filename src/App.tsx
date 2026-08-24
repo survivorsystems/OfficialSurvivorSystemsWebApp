@@ -3512,40 +3512,6 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
         <p>Survivor Systems provides general educational information and practical planning tools. Nothing on this site is legal, medical, financial, mental-health, or other individualized professional advice unless a page explicitly states otherwise.</p>
       </aside>
 
-      <section className="home-site-guide" aria-labelledby="home-site-guide-title">
-        <header className="home-index-heading">
-          <span>EXPLORE THE SITE</span>
-          <h2 id="home-site-guide-title">Site Map</h2>
-          <p>Each section has a different job. Start wherever fits your situation.</p>
-        </header>
-        <div className="home-category-grid">
-          <article className="home-category-card">
-            <h2>Resources</h2>
-            <p>State-by-state housing, food, childcare, transportation, disability, immigration, trafficking, and assistance directories.</p>
-            <button type="button" onClick={() => onNavigate("local-help", "/resources")}>Explore Resources</button>
-          </article>
-          <article className="home-category-card">
-            <h2>Guides</h2>
-            <p>Practical walkthroughs for housing, benefits, court preparation, digital safety, daily stability, and difficult transitions.</p>
-            <button type="button" onClick={() => onNavigate("guides", "/guides")}>Browse Guides</button>
-          </article>
-          <article className="home-category-card">
-            <h2>Store</h2>
-            <p>Focused Survivor Systems kits that organize related planners, logs, checklists, and preparation tools around a specific need.</p>
-            <button type="button" onClick={() => onNavigate("store", "/store")}>Visit the Store</button>
-          </article>
-          <article className="home-category-card">
-            <h2>Assessments</h2>
-            <p>Private, in-browser assessments that help name patterns, organize concerns, and find a practical place to begin.</p>
-            <button type="button" onClick={() => onNavigate("advocacy", "/assessments")}>Open Assessments</button>
-          </article>
-          <article className="home-category-card">
-            <h2>About</h2>
-            <p>The purpose, safety approach, privacy commitments, and values behind Survivor Systems.</p>
-            <button type="button" onClick={() => onNavigate("about", "/about")}>About Survivor Systems</button>
-          </article>
-        </div>
-      </section>
     </section>
   );
 }
