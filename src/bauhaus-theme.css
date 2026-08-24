@@ -9780,3 +9780,80 @@ html::-webkit-scrollbar-corner {
     margin-left: 10px !important;
   }
 }
+
+/* Contrast lock: white article bodies always use dark ink. */
+.hud-frame.module-guides .guide-assessment-entry :is(h2, h3, p, span, strong),
+.hud-frame.module-guides .guide-category-section .category-file-card :is(h2, h3, p, span, strong, small),
+.hud-frame.module-guides .guide-category-section .category-file-card .category-file-title-button {
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.module-guides .guide-category-section .category-file-card > button:not(.category-file-title-button),
+.hud-frame.module-guides .guide-assessment-entry > button {
+  color: var(--ss-white) !important;
+}
+
+.hud-frame.module-library .library-preview-card,
+.hud-frame.module-library .library-preview-card > div:last-child,
+.hud-frame.module-library .library-public-preview,
+.hud-frame.module-library .library-public-preview > div:last-child {
+  background: var(--ss-white) !important;
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.module-library .library-preview-card > div:last-child :is(
+  .library-resource-format,
+  h2, h3, p, small, strong, a
+),
+.hud-frame.module-library .library-public-preview > div:last-child :is(
+  h2, h3, p, small, strong, a, dt, dd
+) {
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.module-library .library-preview-card > div:last-child > .library-resource-format,
+.hud-frame.module-library .library-public-preview > div:last-child > span {
+  color: var(--ss-red) !important;
+}
+
+.hud-frame.module-library .library-preview-card h3 a,
+.hud-frame.module-library .library-public-preview h3 a {
+  color: var(--ss-ink) !important;
+  text-decoration-color: var(--ss-red) !important;
+}
+
+.hud-frame.module-library .library-preview-card .library-access-note {
+  border-left: 6px solid var(--ss-yellow) !important;
+  color: var(--ss-ink) !important;
+  padding-left: 12px !important;
+}
+
+.hud-frame.module-library .library-public-preview dl > div {
+  background: var(--ss-ink) !important;
+}
+
+.hud-frame.module-library .library-public-preview dl > div dt {
+  color: var(--ss-yellow) !important;
+}
+
+.hud-frame.module-library .library-public-preview dl > div dd,
+.hud-frame.module-library .library-public-preview-mark :is(strong, span),
+.hud-frame.module-library .library-preview-frame :is(strong, span, small),
+.hud-frame.module-library .library-preview-actions button,
+.hud-frame.module-library .library-public-preview-actions button {
+  color: var(--ss-white) !important;
+}
+
+/* Other established white surfaces use ink unless they are explicit controls. */
+.hud-frame .terminal-content :is(
+  .store-status,
+  .store-live-kit > article,
+  .store-kit-grid > article,
+  .state-resource-directory,
+  .state-resource-category-list,
+  .about-story-intro,
+  .about-overlap-section,
+  .about-principles
+) :is(h1, h2, h3, h4, p, li, label, small, strong, em, dt, dd) {
+  color: var(--ss-ink) !important;
+}
