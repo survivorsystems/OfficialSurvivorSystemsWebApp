@@ -6758,7 +6758,7 @@ function StateResourcePage({ location, onBack }: { location: StateResourceLocati
                         {program.access ? <div><dt>How to access it</dt><dd>{program.access}</dd></div> : null}
                         {program.coverage ? <div><dt>Service area</dt><dd>{program.coverage}</dd></div> : null}
                       </dl>
-                      {program.note ? <p className="state-program-note"><strong>Important:</strong> {program.note}</p> : null}
+                      {program.note ? <p className="state-program-note"><strong>Of note:</strong> {program.note}</p> : null}
                       <div className="state-program-actions">
                         {program.phone ? <a href={`tel:${program.phone.replace(/[^0-9+]/g, "")}`}>Call {program.phone}</a> : null}
                         {program.secondaryPhone ? <a href={`tel:${program.secondaryPhone.replace(/[^0-9+]/g, "")}`}>Call {program.secondaryPhone}</a> : null}

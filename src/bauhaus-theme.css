@@ -7379,10 +7379,12 @@ body:has(.assessment-workspace),
 }
 
 .hud-frame.module-local-help .state-program-note {
-  background: var(--ss-blue) !important;
-  border: 3px solid var(--ss-red) !important;
-  margin: 20px 0 0 !important;
-  padding: 14px 16px !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-left: 4px solid var(--ss-red) !important;
+  box-shadow: none !important;
+  margin: 20px 0 0 18px !important;
+  padding: 2px 0 2px 14px !important;
 }
 
 .hud-frame.module-local-help .state-program-actions {
@@ -9034,7 +9036,7 @@ body:has(.assessment-workspace),
 
 .hud-frame.module-local-help .state-program-note,
 .hud-frame.module-local-help .state-program-note :is(p, strong) {
-  color: var(--ss-white) !important;
+  color: var(--ss-red) !important;
 }
 
 .hud-frame.module-local-help .state-program-actions a {
