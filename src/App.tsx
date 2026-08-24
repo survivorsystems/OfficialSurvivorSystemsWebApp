@@ -7715,40 +7715,38 @@ function LegalGuidePage({
 
         <section className="legal-motion-section" aria-label={`${guide.title} sections`}>
           <div className="legal-motion-grid">
-            {guide.sections.map((section) => (
-              <article className="legal-motion-card" key={section.title}>
-                <h3>
-                  {section.title}
-                  {section.tag ? <span>{section.tag}</span> : null}
-                </h3>
-                {section.blocks.map((block) => (
-                  <div className="legal-motion-block" key={block.title}>
-                    <strong> {block.title}</strong>
-                    <ul>
-                      {block.items.map((item) => (
-                        <li key={item.name ?? item.text}>
-                          {item.name ? <span>{item.name}</span> : null}
-                          {item.text}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </article>
+            {guide.sections.map((section, sectionIndex) => (
+              <section className="legal-article-section" key={section.title}>
+                <article className="legal-motion-card">
+                  <h3>
+                    {section.title}
+                    {section.tag ? <span>{section.tag}</span> : null}
+                  </h3>
+                  {section.blocks.map((block) => (
+                    <div className="legal-motion-block" key={block.title}>
+                      <strong>{block.title}</strong>
+                      <ul>
+                        {block.items.map((item) => (
+                          <li key={item.name ?? item.text}>
+                            {item.name ? <span>{item.name}</span> : null}
+                            {item.text}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </article>
+                {guide.notes?.[sectionIndex] ? (
+                  <aside className="legal-note legal-note-inline">
+                    <span>OF NOTE</span>
+                    <strong>{guide.notes[sectionIndex].title}</strong>
+                    <p>{guide.notes[sectionIndex].body}</p>
+                  </aside>
+                ) : null}
+              </section>
             ))}
           </div>
         </section>
-
-        {guide.notes ? (
-          <div className="legal-note-grid">
-            {guide.notes.map((note) => (
-              <div className="legal-note" key={note.title}>
-                <strong> {note.title}</strong>
-                <p>{note.body}</p>
-              </div>
-            ))}
-          </div>
-        ) : null}
 
         {guide.reminder ? (
           <div className="legal-reminder">

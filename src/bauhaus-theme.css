@@ -8952,12 +8952,6 @@ body:has(.assessment-workspace),
   letter-spacing: 0 !important;
 }
 
-.hud-frame:not(.module-home) .terminal-content :is(h1, h2, h3, h4, h5, h6)::first-letter {
-  font-family: "Times New Roman", Times, Georgia, serif !important;
-  font-size: inherit !important;
-  font-weight: inherit !important;
-}
-
 /* State directories use one newspaper sheet with colored category mastheads. */
 .hud-frame.module-local-help .state-resource-category-list {
   background: var(--ss-white) !important;
@@ -9134,8 +9128,7 @@ body:has(.assessment-workspace),
 
 /* Times New Roman throughout, including the former scripted first letters. */
 .hud-frame .terminal-content,
-.hud-frame .terminal-content *,
-.hud-frame .terminal-content *::first-letter {
+.hud-frame .terminal-content * {
   font-family: "Times New Roman", Times, Georgia, serif !important;
 }
 
@@ -9493,12 +9486,6 @@ html::-webkit-scrollbar-corner {
   max-width: none !important;
 }
 
-.hud-frame.module-how-to .how-to-guide-page .snap-guide-card h2::first-letter,
-.hud-frame.module-legal .legal-guide-shell :is(.legal-step-card, .legal-motion-card, .legal-note) h2::first-letter {
-  color: var(--ss-red) !important;
-  font-family: "Times New Roman", Times, Georgia, serif !important;
-}
-
 .hud-frame.module-how-to .how-to-guide-page :is(ul, ol) {
   background: var(--ss-white) !important;
   border-left: 8px solid var(--ss-yellow) !important;
@@ -9646,4 +9633,150 @@ html::-webkit-scrollbar-corner {
 .hud-frame.module-local-help .terminal-content .state-program-list h3 {
   font-size: clamp(19px, 2vw, 24px) !important;
   line-height: 1.18 !important;
+}
+
+/* Final guide article contract: no framed prose, no styled first capitals. */
+.hud-frame.module-how-to .how-to-guide-page,
+.hud-frame.module-legal .legal-guide-shell {
+  border-color: var(--ss-ink) !important;
+  box-shadow: none !important;
+}
+
+.hud-frame:is(.module-how-to, .module-legal) .terminal-content :is(
+  .ss-template-header,
+  .page-flourish-header,
+  .how-to-hero
+) {
+  border-bottom: 3px solid var(--ss-ink) !important;
+  padding-top: 26px !important;
+  position: relative !important;
+}
+
+.hud-frame:is(.module-how-to, .module-legal) .terminal-content :is(
+  .ss-template-header,
+  .page-flourish-header,
+  .how-to-hero
+)::before {
+  background: linear-gradient(
+    90deg,
+    var(--ss-blue) 0 25%,
+    var(--ss-red) 25% 50%,
+    var(--ss-yellow) 50% 75%,
+    var(--ss-green) 75% 100%
+  ) !important;
+  content: "" !important;
+  display: block !important;
+  height: 12px !important;
+  inset: 0 0 auto 0 !important;
+  opacity: 1 !important;
+  position: absolute !important;
+  width: 100% !important;
+}
+
+.hud-frame.module-legal .legal-guide-shell :is(.legal-motion-grid, .legal-step-grid, .legal-note-grid) {
+  border: 0 !important;
+  margin: 24px 0 !important;
+  overflow: visible !important;
+}
+
+.hud-frame.module-legal .legal-guide-shell .legal-article-section {
+  background: var(--ss-white) !important;
+  border-bottom: 3px solid var(--ss-ink) !important;
+  color: var(--ss-ink) !important;
+  padding: clamp(30px, 5vw, 56px) 0 !important;
+}
+
+.hud-frame.module-legal .legal-guide-shell .legal-article-section:last-child {
+  border-bottom: 0 !important;
+}
+
+.hud-frame.module-legal .legal-guide-shell .legal-motion-card {
+  background: var(--ss-white) !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  padding: 0 !important;
+}
+
+.hud-frame.module-legal .legal-guide-shell .legal-motion-card > h3 {
+  border-bottom: 2px solid var(--ss-ink) !important;
+  color: var(--ss-ink) !important;
+  font-size: clamp(22px, 3vw, 28px) !important;
+  margin: 0 0 24px !important;
+  padding-bottom: 10px !important;
+}
+
+.hud-frame.module-legal .legal-guide-shell .legal-motion-block {
+  background: var(--ss-white) !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  margin: 0 0 26px !important;
+  padding: 0 !important;
+}
+
+.hud-frame.module-legal .legal-guide-shell .legal-motion-block:last-child {
+  margin-bottom: 0 !important;
+}
+
+.hud-frame.module-legal .legal-guide-shell .legal-motion-block > strong {
+  color: var(--ss-red) !important;
+  display: block !important;
+  font-size: 18px !important;
+  margin-bottom: 8px !important;
+}
+
+.hud-frame.module-legal .legal-guide-shell .legal-motion-block ul {
+  background: var(--ss-white) !important;
+  border: 0 !important;
+  color: var(--ss-ink) !important;
+  margin: 0 !important;
+  padding: 0 0 0 24px !important;
+}
+
+.hud-frame.module-legal .legal-guide-shell .legal-note-inline,
+.hud-frame.module-legal .legal-guide-shell .legal-warning,
+.hud-frame.module-legal .legal-guide-shell .legal-reminder,
+.hud-frame.module-how-to .how-to-guide-page :is(.how-to-system-note, .housing-options-master-script) {
+  background: var(--ss-white) !important;
+  border: 0 !important;
+  border-left: 10px solid var(--ss-red) !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  margin: 26px 0 0 clamp(18px, 8vw, 110px) !important;
+  max-width: 78ch !important;
+  padding: 8px 0 8px 22px !important;
+}
+
+.hud-frame.module-legal .legal-guide-shell .legal-warning {
+  border-left-color: var(--ss-yellow) !important;
+  margin-bottom: 34px !important;
+  margin-top: 26px !important;
+}
+
+.hud-frame.module-legal .legal-guide-shell .legal-reminder,
+.hud-frame.module-how-to .how-to-guide-page :is(.how-to-system-note, .housing-options-master-script) {
+  border-left-color: var(--ss-blue) !important;
+  margin-bottom: 34px !important;
+}
+
+.hud-frame.module-legal .legal-guide-shell .legal-note-inline > span {
+  color: var(--ss-red) !important;
+  display: block !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  margin-bottom: 5px !important;
+}
+
+.hud-frame.module-legal .legal-guide-shell :is(.legal-note-inline, .legal-warning, .legal-reminder) :is(strong, p, span),
+.hud-frame.module-how-to .how-to-guide-page :is(.how-to-system-note, .housing-options-master-script) :is(h2, h3, p, strong) {
+  background: transparent !important;
+  color: var(--ss-ink) !important;
+}
+
+@media (max-width: 600px) {
+  .hud-frame.module-legal .legal-guide-shell :is(.legal-note-inline, .legal-warning, .legal-reminder),
+  .hud-frame.module-how-to .how-to-guide-page :is(.how-to-system-note, .housing-options-master-script) {
+    margin-left: 10px !important;
+  }
 }
