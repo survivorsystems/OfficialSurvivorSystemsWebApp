@@ -1,17 +1,17 @@
-/* Survivor Systems Bauhaus design system
+/* Survivor Systems editorial site theme.
    This file is intentionally imported after legacy styles. New shared UI work
    should use these tokens and primitives instead of adding route-specific themes. */
 
 :root {
-  --ss-paper: #eee5d5;
-  --ss-paper-deep: #dfd2bb;
+  --ss-paper: #f0e7d7;
+  --ss-paper-deep: #e5dac7;
   --ss-ink: #1f2227;
   --ss-ink-soft: #34373d;
   --ss-green: #0b9d4a;
   --ss-blue: #3f6bb4;
   --ss-red: #eb4e1b;
   --ss-yellow: #eec626;
-  --ss-white: #fffdf7;
+  --ss-white: #fffdf8;
   --ss-border: 3px solid var(--ss-ink);
   --ss-shadow-blue: 5px 5px 0 var(--ss-blue);
   --ss-shadow-red: 5px 5px 0 var(--ss-red);
@@ -22,8 +22,8 @@
   --ss-space-5: 36px;
   --ss-space-6: 54px;
   --ss-sidebar-width: 248px;
-  --ss-font-display: "Space Grotesk", sans-serif;
-  --ss-font-body: "Inter", sans-serif;
+  --ss-font-display: "Times New Roman", Times, Georgia, serif;
+  --ss-font-body: "Times New Roman", Times, Georgia, serif;
   --ss-route-accent: var(--ss-blue);
   --ss-route-action-text: var(--ss-white);
 }
@@ -9934,4 +9934,73 @@ html::-webkit-scrollbar-corner {
   .about-principles
 ) :is(h1, h2, h3, h4, p, li, label, small, strong, em, dt, dd) {
   color: var(--ss-ink) !important;
+}
+
+/* Editorial canvas: continuous linen from the navigation rail to the scrollbar. */
+html,
+body,
+#root,
+.hud-frame.terminal-frame,
+.hud-frame .site-shell,
+.hud-frame .folk-main-shell,
+.hud-frame .terminal-screen,
+.hud-frame .terminal-content,
+.hud-frame.module-home .terminal-screen,
+.hud-frame.module-home .terminal-content,
+.hud-frame.module-home .home-terminal.bauhaus-home {
+  background-color: var(--ss-paper) !important;
+  background-image: none !important;
+}
+
+.hud-frame .folk-main-shell {
+  padding: 0 !important;
+}
+
+.hud-frame .terminal-screen,
+.hud-frame:not(.module-home) .terminal-screen {
+  border: 0 !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+  max-width: none !important;
+  min-height: 100vh !important;
+  overflow: visible !important;
+  width: 100% !important;
+}
+
+.hud-frame .terminal-content,
+.hud-frame:is(.module-advocacy, .module-local-help) .terminal-content {
+  background: var(--ss-paper) !important;
+  min-height: 100vh !important;
+  padding: clamp(24px, 4vw, 64px) !important;
+  width: 100% !important;
+}
+
+.hud-frame.module-home .terminal-content {
+  padding: 0 !important;
+}
+
+.hud-frame.module-home .home-terminal.bauhaus-home {
+  padding: clamp(24px, 4vw, 64px) !important;
+}
+
+.hud-frame .terminal-content::before,
+.hud-frame .terminal-content::after,
+.hud-frame.module-home .home-terminal.bauhaus-home::before,
+.hud-frame.module-home .home-terminal.bauhaus-home::after {
+  background-image: none !important;
+}
+
+@media (max-width: 980px) {
+  .hud-frame .folk-main-shell {
+    padding: 0 !important;
+  }
+
+  .hud-frame .terminal-content,
+  .hud-frame:is(.module-advocacy, .module-local-help) .terminal-content {
+    padding: 24px !important;
+  }
+
+  .hud-frame.module-home .terminal-content {
+    padding: 0 !important;
+  }
 }
