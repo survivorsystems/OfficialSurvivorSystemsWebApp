@@ -10516,6 +10516,125 @@ body,
   transform: none !important;
 }
 
+/* FINAL Guides directory: readable newsprint cards and summaries. */
+.hud-frame.terminal-frame.module-guides .terminal-content {
+  background: var(--ss-paper) !important;
+  background-image: none !important;
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame.module-guides .terminal-content .category-module > .page-flourish-header.page-flourish-header {
+  background: var(--ss-white) !important;
+  background-image: none !important;
+  border: 3px solid var(--ss-ink) !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame.module-guides .terminal-content .category-module > .page-flourish-header.page-flourish-header::before,
+.hud-frame.terminal-frame.module-guides .terminal-content .category-module > .page-flourish-header.page-flourish-header::after {
+  display: none !important;
+}
+
+.hud-frame.terminal-frame.module-guides .terminal-content .category-module > .page-flourish-header.page-flourish-header :is(
+  .folk-kicker, h1, p, span, strong
+) {
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame.module-guides .terminal-content .category-module > .page-flourish-header.page-flourish-header .folk-kicker {
+  color: var(--ss-red) !important;
+}
+
+.hud-frame.terminal-frame.module-guides .guide-assessment-entry,
+.hud-frame.terminal-frame.module-guides .guide-category-section,
+.hud-frame.terminal-frame.module-guides .guide-category-section:nth-child(n) {
+  background: var(--ss-white) !important;
+  background-image: none !important;
+  border: 2px solid var(--ss-ink) !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame.module-guides .guide-assessment-entry :is(span, h2, p, strong),
+.hud-frame.terminal-frame.module-guides .guide-category-section :is(h2, h3, p, span, strong) {
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame.module-guides .guide-assessment-entry > div > span,
+.hud-frame.terminal-frame.module-guides .guide-category-section .terminal-label {
+  color: var(--ss-red) !important;
+}
+
+.hud-frame.terminal-frame.module-guides .guide-assessment-entry > button,
+.hud-frame.terminal-frame.module-guides .guide-category-section .category-file-card > button:not(.category-file-title-button) {
+  background: var(--ss-ink) !important;
+  border: 1px solid var(--ss-ink) !important;
+  box-shadow: none !important;
+  color: var(--ss-white) !important;
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+  font-weight: 700 !important;
+  text-transform: none !important;
+  transform: none !important;
+}
+
+.hud-frame.terminal-frame.module-guides .guide-assessment-entry > button:is(:hover, :focus-visible),
+.hud-frame.terminal-frame.module-guides .guide-category-section .category-file-card > button:not(.category-file-title-button):is(:hover, :focus-visible) {
+  background: #38342f !important;
+  color: var(--ss-white) !important;
+  outline: 2px solid var(--ss-red) !important;
+  outline-offset: 2px !important;
+  transform: none !important;
+}
+
+.hud-frame.terminal-frame.module-guides .guide-category-section > header,
+.hud-frame.terminal-frame.module-guides .guide-category-section:nth-child(n) > header {
+  background: var(--ss-white) !important;
+  border-bottom: 3px double var(--ss-ink) !important;
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame.module-guides .guide-category-section > header :is(h2, h3, p, span, strong),
+.hud-frame.terminal-frame.module-guides .guide-category-section:nth-child(n) > header :is(h2, h3, p, span, strong) {
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame.module-guides .guide-category-section > header .terminal-label {
+  color: var(--ss-red) !important;
+}
+
+.hud-frame.terminal-frame.module-guides .guide-category-section .category-file-grid {
+  background: var(--ss-white) !important;
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame.module-guides .guide-category-section .category-file-card,
+.hud-frame.terminal-frame.module-guides .guide-category-section .category-file-card:nth-child(n) {
+  background: var(--ss-white) !important;
+  border: 1px solid var(--ss-ink) !important;
+  border-left: 4px solid var(--ss-red) !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame.module-guides .guide-category-section .category-file-card :is(
+  h2, h3, p, span, strong, small
+),
+.hud-frame.terminal-frame.module-guides .guide-category-section .category-file-card .category-file-title-button {
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame.module-guides .guide-category-section .category-file-card .category-file-title-button {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+  text-align: left !important;
+  text-decoration: underline !important;
+  text-decoration-color: var(--ss-red) !important;
+  text-underline-offset: 4px !important;
+}
+
 .hud-frame.module-home :is(
   .home-hero-composition::before,
   .home-terminal.bauhaus-home::before,
