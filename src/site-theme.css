@@ -1141,6 +1141,301 @@ body {
   box-shadow: none !important;
 }
 
+/* FINAL local-help specificity lock, verified against production selectors. */
+.hud-frame.terminal-frame.module-local-help .terminal-content,
+.hud-frame.terminal-frame.module-local-help .terminal-content:has(> .resources-module),
+.hud-frame.terminal-frame.module-local-help .terminal-content:has(> .state-resource-page) {
+  background: var(--ss-paper) !important;
+  background-color: var(--ss-paper) !important;
+  background-image: none !important;
+  background-repeat: no-repeat !important;
+  background-size: auto !important;
+}
+
+.hud-frame.terminal-frame.module-local-help .terminal-content .resources-module > .page-flourish-header.page-flourish-header,
+.hud-frame.terminal-frame.module-local-help .terminal-content .state-resource-page > .page-flourish-header.page-flourish-header {
+  background: var(--ss-white) !important;
+  background-image: none !important;
+  border: 3px solid var(--ss-ink) !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame.module-local-help .terminal-content .state-resource-page .state-resource-top-actions > .state-resource-back.resource-back-button {
+  background: var(--ss-white) !important;
+  border: 1px solid var(--ss-ink) !important;
+  border-left: 5px solid var(--ss-red) !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+  text-transform: none !important;
+  transform: none !important;
+}
+
+/* FINAL Resources edition: linen canvas, newsprint cards, and printer's rules. */
+.hud-frame.terminal-frame.module-local-help .terminal-content {
+  background: var(--ss-paper) !important;
+  background-image: none !important;
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame.module-local-help .terminal-content :is(
+  .resources-module,
+  .state-resource-page
+) {
+  color: var(--ss-ink) !important;
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+  max-width: none !important;
+  width: 100% !important;
+}
+
+.hud-frame.terminal-frame.module-local-help .terminal-content :is(
+  .resources-module,
+  .state-resource-page
+) > .page-flourish-header.page-flourish-header {
+  background: var(--ss-white) !important;
+  background-image: none !important;
+  border: 3px solid var(--ss-ink) !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  padding: clamp(28px, 4vw, 52px) !important;
+}
+
+.hud-frame.terminal-frame.module-local-help .terminal-content :is(
+  .resources-module,
+  .state-resource-page
+) > .page-flourish-header.page-flourish-header::before,
+.hud-frame.terminal-frame.module-local-help .terminal-content :is(
+  .resources-module,
+  .state-resource-page
+) > .page-flourish-header.page-flourish-header::after {
+  display: none !important;
+}
+
+.hud-frame.terminal-frame.module-local-help .terminal-content :is(
+  .resources-module,
+  .state-resource-page
+) > .page-flourish-header.page-flourish-header :is(.folk-kicker, h1, p, span, strong) {
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame.module-local-help .terminal-content :is(
+  .resources-module,
+  .state-resource-page
+) > .page-flourish-header.page-flourish-header .folk-kicker {
+  color: var(--ss-red) !important;
+}
+
+.hud-frame.terminal-frame.module-local-help .resources-module :is(
+  .state-resource-directory,
+  .resource-support-callout
+) {
+  background: var(--ss-white) !important;
+  background-image: none !important;
+  border: 2px solid var(--ss-ink) !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame.module-local-help .resources-module :is(
+  .state-resource-directory,
+  .resource-support-callout
+) :is(h2, h3, p, label, span, strong) {
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame.module-local-help .resources-module .state-resource-directory header {
+  background: transparent !important;
+  border-bottom: 3px double var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame.module-local-help .resources-module .state-resource-directory header > span {
+  color: var(--ss-red) !important;
+}
+
+.hud-frame.terminal-frame.module-local-help .resources-module .state-resource-search input {
+  background: var(--ss-white) !important;
+  border: 1px solid var(--ss-ink) !important;
+  box-shadow: inset 5px 0 0 var(--ss-red) !important;
+  color: var(--ss-ink) !important;
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+}
+
+.hud-frame.terminal-frame.module-local-help .resources-module .state-resource-grid a,
+.hud-frame.terminal-frame.module-local-help .resources-module .state-resource-grid a:nth-child(n) {
+  background: transparent !important;
+  border: 0 !important;
+  border-bottom: 1px solid rgba(31, 34, 39, 0.45) !important;
+  border-left: 4px solid var(--ss-red) !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+  font-weight: 700 !important;
+  transform: none !important;
+}
+
+.hud-frame.terminal-frame.module-local-help .resources-module .state-resource-grid a:is(:hover, :focus-visible) {
+  background: var(--ss-paper-deep) !important;
+  border-left-color: #9f2f22 !important;
+  box-shadow: inset 4px 0 0 rgba(31, 34, 39, 0.12) !important;
+  color: var(--ss-ink) !important;
+  outline: 1px solid var(--ss-ink) !important;
+  transform: none !important;
+}
+
+.hud-frame.terminal-frame.module-local-help .state-resource-page .state-resource-top-actions {
+  align-items: stretch !important;
+  gap: 10px !important;
+}
+
+.hud-frame.terminal-frame.module-local-help .state-resource-page .state-resource-top-actions :is(
+  button,
+  a,
+  .state-resource-back,
+  .state-resource-download-button,
+  .state-resource-review-button
+) {
+  align-items: center !important;
+  background: var(--ss-white) !important;
+  border: 1px solid var(--ss-ink) !important;
+  border-left: 5px solid var(--ss-red) !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  display: inline-flex !important;
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+  font-weight: 700 !important;
+  justify-content: center !important;
+  min-height: 48px !important;
+  padding: 10px 16px !important;
+  text-decoration: none !important;
+  text-transform: none !important;
+  transform: none !important;
+}
+
+.hud-frame.terminal-frame.module-local-help .state-resource-page .state-resource-top-actions :is(button, a):is(:hover, :focus-visible) {
+  background: var(--ss-paper-deep) !important;
+  box-shadow: inset 4px 0 0 rgba(31, 34, 39, 0.12) !important;
+  color: var(--ss-ink) !important;
+  outline: 1px solid var(--ss-ink) !important;
+  transform: none !important;
+}
+
+.hud-frame.terminal-frame.module-local-help .state-resource-page .state-resource-verification {
+  background: var(--ss-paper-deep) !important;
+  border: 1px solid var(--ss-ink) !important;
+  border-left: 6px solid var(--ss-red) !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame.module-local-help .state-resource-page .state-resource-verification :is(strong, p) {
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame.module-local-help .state-resource-page .state-resource-category-nav {
+  gap: 0 !important;
+}
+
+.hud-frame.terminal-frame.module-local-help .state-resource-page .state-resource-category-nav a,
+.hud-frame.terminal-frame.module-local-help .state-resource-page .state-resource-category-nav a:nth-child(n) {
+  background: var(--ss-white) !important;
+  border: 0 !important;
+  border-bottom: 1px solid rgba(31, 34, 39, 0.5) !important;
+  border-left: 4px solid var(--ss-red) !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+  font-weight: 700 !important;
+  min-height: 48px !important;
+  transform: none !important;
+}
+
+.hud-frame.terminal-frame.module-local-help .state-resource-page .state-resource-category-nav a:is(:hover, :focus-visible) {
+  background: var(--ss-paper-deep) !important;
+  box-shadow: inset 4px 0 0 rgba(31, 34, 39, 0.12) !important;
+  color: var(--ss-ink) !important;
+  outline: 1px solid var(--ss-ink) !important;
+  transform: none !important;
+}
+
+.hud-frame.terminal-frame.module-local-help .state-resource-page .state-resource-category-list {
+  background: var(--ss-white) !important;
+  border: 2px solid var(--ss-ink) !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  padding: clamp(20px, 4vw, 44px) !important;
+}
+
+.hud-frame.terminal-frame.module-local-help .state-resource-page .state-resource-category-list > section,
+.hud-frame.terminal-frame.module-local-help .state-resource-page .state-resource-category-list > section:nth-child(n) {
+  background: transparent !important;
+  border: 0 !important;
+  border-bottom: 3px double var(--ss-ink) !important;
+  padding: clamp(30px, 5vw, 56px) 0 !important;
+}
+
+.hud-frame.terminal-frame.module-local-help .state-resource-page .state-resource-category-list > section:last-child {
+  border-bottom: 0 !important;
+}
+
+.hud-frame.terminal-frame.module-local-help .state-resource-page .state-resource-category-list > section > h2,
+.hud-frame.terminal-frame.module-local-help .state-resource-page .state-resource-category-list > section:nth-child(n) > h2 {
+  background: transparent !important;
+  border-bottom: 2px solid var(--ss-ink) !important;
+  color: var(--ss-ink) !important;
+  margin: 0 0 24px !important;
+  padding: 0 0 10px !important;
+}
+
+.hud-frame.terminal-frame.module-local-help .state-resource-page .state-resource-category-list :is(p, h3, dt, dd, strong) {
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame.module-local-help .state-resource-page .state-program-list article,
+.hud-frame.terminal-frame.module-local-help .state-resource-page .state-program-list article:nth-child(n) {
+  background: transparent !important;
+  border: 0 !important;
+  border-left: 4px solid var(--ss-red) !important;
+  border-top: 1px solid rgba(31, 34, 39, 0.35) !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  padding: clamp(24px, 4vw, 38px) !important;
+}
+
+.hud-frame.terminal-frame.module-local-help .state-resource-page .state-program-list article:first-child {
+  border-top: 0 !important;
+}
+
+.hud-frame.terminal-frame.module-local-help .state-resource-page .state-program-list dl > div {
+  border-left: 2px solid var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame.module-local-help .state-resource-page .state-program-list dt {
+  color: var(--ss-red) !important;
+}
+
+.hud-frame.terminal-frame.module-local-help .state-resource-page .state-program-actions a,
+.hud-frame.terminal-frame.module-local-help .state-resource-page .state-program-actions a:nth-child(n),
+.hud-frame.terminal-frame.module-local-help .resources-module .resource-support-callout button {
+  background: var(--ss-ink) !important;
+  border: 1px solid var(--ss-ink) !important;
+  box-shadow: none !important;
+  color: var(--ss-white) !important;
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+  font-weight: 700 !important;
+  text-transform: none !important;
+  transform: none !important;
+}
+
+.hud-frame.terminal-frame.module-local-help .state-resource-page .state-program-actions a:is(:hover, :focus-visible),
+.hud-frame.terminal-frame.module-local-help .resources-module .resource-support-callout button:is(:hover, :focus-visible) {
+  background: #38342f !important;
+  color: var(--ss-white) !important;
+  outline: 2px solid var(--ss-red) !important;
+  outline-offset: 2px !important;
+  transform: none !important;
+}
+
 /* Specificity lock verified against the deployed homepage. */
 .hud-frame.terminal-frame.module-home .terminal-content {
   background: var(--ss-paper) !important;
@@ -10191,6 +10486,34 @@ body,
 .hud-frame.terminal-frame.module-home .terminal-content *::before,
 .hud-frame.terminal-frame.module-home .terminal-content *::after {
   background-image: none !important;
+}
+
+.hud-frame.terminal-frame.module-local-help .terminal-content,
+.hud-frame.terminal-frame.module-local-help .terminal-content:has(> .resources-module),
+.hud-frame.terminal-frame.module-local-help .terminal-content:has(> .state-resource-page) {
+  background: var(--ss-paper) !important;
+  background-image: none !important;
+  background-repeat: no-repeat !important;
+  background-size: auto !important;
+}
+
+.hud-frame.terminal-frame.module-local-help .terminal-content .resources-module > .page-flourish-header.page-flourish-header,
+.hud-frame.terminal-frame.module-local-help .terminal-content .state-resource-page > .page-flourish-header.page-flourish-header {
+  background: var(--ss-white) !important;
+  background-image: none !important;
+  border: 3px solid var(--ss-ink) !important;
+  box-shadow: none !important;
+}
+
+.hud-frame.terminal-frame.module-local-help .terminal-content .state-resource-page .state-resource-top-actions > .state-resource-back.resource-back-button {
+  background: var(--ss-white) !important;
+  border: 1px solid var(--ss-ink) !important;
+  border-left: 5px solid var(--ss-red) !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+  text-transform: none !important;
+  transform: none !important;
 }
 
 .hud-frame.module-home :is(
