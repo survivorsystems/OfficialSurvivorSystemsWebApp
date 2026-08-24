@@ -2,6 +2,7 @@ export type StateResourceLocation = {
   name: string;
   slug: string;
   reviewedOn?: string;
+  downloadFile?: string;
 };
 
 export const stateResourceCategories = [
@@ -106,10 +107,27 @@ const stateResourceReviewDates: Partial<Record<string, string>> = {
   kentucky: "August 24, 2026",
 };
 
+const stateResourceDownloadFiles: Partial<Record<string, string>> = {
+  alabama: "Alabama_Survivor_Resource_Guide.pdf",
+  alaska: "Alaska_Survivor_Resource_Guide.pdf",
+  arizona: "Survivor_Systems_Arizona_Resource_Research.pdf",
+  arkansas: "Survivor_Systems_Arkansas_Resource_Research.pdf",
+  california: "Survivor_Systems_California_Resource_Research.pdf",
+  colorado: "Survivor_Systems_Colorado_Resource_Research.pdf",
+  connecticut: "Connecticut_Survivor_Resources.pdf",
+  delaware: "Delaware_Survivor_Resources.pdf",
+  georgia: "Georgia_Survivor_Resources.pdf",
+  hawaii: "Hawaii_Survivor_Resources.pdf",
+  idaho: "Idaho_Survivor_Resources.pdf",
+  iowa: "Iowa_Survivor_Resources.pdf",
+  kansas: "Kansas_Survivor_Systems_Resource_Guide_2026_REVISED.pdf",
+};
+
 export const stateResourceLocations: StateResourceLocation[] = locationNames.map((name) => ({
   name,
   slug: slugifyLocation(name),
   reviewedOn: stateResourceReviewDates[slugifyLocation(name)],
+  downloadFile: stateResourceDownloadFiles[slugifyLocation(name)],
 }));
 
 export function findStateResourceLocation(slug: string | null) {

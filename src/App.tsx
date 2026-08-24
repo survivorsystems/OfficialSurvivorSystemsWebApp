@@ -1,6 +1,7 @@
 import { type FormEvent, type KeyboardEvent as ReactKeyboardEvent, type ReactNode, useCallback, useEffect, useRef, useState } from "react";
 import {
   BookOpenCheck,
+  Download,
 } from "lucide-react";
 import denialSupportOne from "./assets/support/denial-support-1.png";
 import denialSupportTwo from "./assets/support/denial-support-2.png";
@@ -6708,6 +6709,9 @@ function StateResourcePage({ location, onBack }: { location: StateResourceLocati
   const programsByCategory = stateResourcePrograms[location.slug] ?? {};
   const hasPrograms = Object.values(programsByCategory).some((programs) => programs && programs.length > 0);
   const categories = getStateResourceCategories(location.slug);
+  const stateDownloadUrl = location.downloadFile
+    ? `${import.meta.env.VITE_SUPABASE_URL ?? "https://nwpqdpfhburdeprbfkqi.supabase.co"}/storage/v1/object/public/${encodeURIComponent("State Resources Bucket")}/${encodeURIComponent(location.downloadFile)}?download=${encodeURIComponent(location.downloadFile)}`
+    : null;
 
   return (
     <section className="page-shell state-resource-page" aria-labelledby="state-resource-title">
@@ -6725,6 +6729,12 @@ function StateResourcePage({ location, onBack }: { location: StateResourceLocati
 
       <div className="state-resource-top-actions">
         <button className="resource-back-button state-resource-back" type="button" onClick={onBack}>Back To All States</button>
+        {stateDownloadUrl ? (
+          <a className="state-resource-download-button" href={stateDownloadUrl}>
+            <Download aria-hidden="true" size={20} strokeWidth={2.5} />
+            Download State Info
+          </a>
+        ) : null}
         <a className="state-resource-review-button" href={`/resources/review-agency?state=${encodeURIComponent(location.name)}`}>Review An Agency</a>
       </div>
 
