@@ -1141,6 +1141,89 @@ body {
   box-shadow: none !important;
 }
 
+/* Specificity lock verified against the deployed homepage. */
+.hud-frame.terminal-frame.module-home .terminal-content {
+  background: var(--ss-paper) !important;
+  background-color: var(--ss-paper) !important;
+  background-image: none !important;
+  background-repeat: no-repeat !important;
+  background-size: auto !important;
+}
+
+.hud-frame.terminal-frame.module-home .terminal-content :is(
+  .home-editorial-lead,
+  .home-editorial-secondary > article,
+  .home-editorial-disclaimer,
+  .home-site-guide,
+  .home-category-card,
+  .home-top-notices > section,
+  .home-hero-composition
+) {
+  box-shadow: none !important;
+}
+
+/* Antique editorial navigation: flat paper tabs separated by printer's rules. */
+.hud-frame.terminal-frame .folk-sidebar,
+.hud-frame.terminal-frame.module-home .folk-sidebar,
+.hud-frame.terminal-frame .folk-sidebar .desktop-icon-grid,
+.hud-frame.terminal-frame.module-home .folk-sidebar .desktop-icon-grid {
+  background: var(--ss-paper-deep) !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+.hud-frame.terminal-frame .folk-sidebar .desktop-icon-grid {
+  gap: 0 !important;
+  padding: 18px 14px 28px !important;
+}
+
+.hud-frame.terminal-frame .folk-sidebar .desktop-icon-grid > .desktop-icon,
+.hud-frame.terminal-frame .folk-sidebar .desktop-icon-grid > .desktop-icon:nth-child(n) {
+  background: transparent !important;
+  border: 0 !important;
+  border-bottom: 1px solid rgba(31, 34, 39, 0.55) !important;
+  border-left: 5px solid var(--ss-red) !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+  min-height: 54px !important;
+  padding: 13px 15px !important;
+  transform: none !important;
+}
+
+.hud-frame.terminal-frame .folk-sidebar .desktop-icon-grid > .desktop-icon .desktop-icon-title,
+.hud-frame.terminal-frame .folk-sidebar .desktop-icon-grid > .desktop-icon:nth-child(n) .desktop-icon-title {
+  color: var(--ss-ink) !important;
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+  font-size: 1.06rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0 !important;
+  line-height: 1.2 !important;
+  text-transform: none !important;
+}
+
+.hud-frame.terminal-frame .folk-sidebar .desktop-icon-grid > .desktop-icon:is(:hover, :focus-visible, .is-pressed) {
+  background: #d8cbb5 !important;
+  border-bottom-color: var(--ss-ink) !important;
+  border-left-color: #9f2f22 !important;
+  box-shadow: inset 4px 0 0 rgba(31, 34, 39, 0.12) !important;
+  outline: 1px solid var(--ss-ink) !important;
+  outline-offset: -1px !important;
+  transform: none !important;
+}
+
+.hud-frame.terminal-frame .folk-sidebar .desktop-icon-grid > .desktop-icon.active,
+.hud-frame.terminal-frame .folk-sidebar .desktop-icon-grid > .desktop-icon.active:nth-child(n) {
+  background: var(--ss-ink) !important;
+  border-left-color: var(--ss-red) !important;
+  box-shadow: none !important;
+  outline: 0 !important;
+}
+
+.hud-frame.terminal-frame .folk-sidebar .desktop-icon-grid > .desktop-icon.active .desktop-icon-title {
+  color: var(--ss-white) !important;
+}
+
 /* Safety control: approximately quarter-sized on a standard-density screen. */
 .hud-frame .floating-quick-escape {
   font-size: 0.7rem !important;
@@ -10103,10 +10186,10 @@ body,
 }
 
 /* FINAL editorial cleanup. Keep this at the literal end of the cascade. */
-.hud-frame.module-home .terminal-content,
-.hud-frame.module-home .terminal-content *,
-.hud-frame.module-home .terminal-content *::before,
-.hud-frame.module-home .terminal-content *::after {
+.hud-frame.terminal-frame.module-home .terminal-content,
+.hud-frame.terminal-frame.module-home .terminal-content *,
+.hud-frame.terminal-frame.module-home .terminal-content *::before,
+.hud-frame.terminal-frame.module-home .terminal-content *::after {
   background-image: none !important;
 }
 
