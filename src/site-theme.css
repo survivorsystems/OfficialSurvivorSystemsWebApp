@@ -1044,6 +1044,73 @@ body {
   }
 }
 
+/* Editorial navigation: darker linen, text-only tabs, and a React-driven press state. */
+.hud-frame .folk-sidebar,
+.hud-frame.module-home .folk-sidebar,
+.hud-frame .folk-sidebar .desktop-icon-grid,
+.hud-frame.module-home .folk-sidebar .desktop-icon-grid {
+  background: var(--ss-paper-deep) !important;
+}
+
+.hud-frame .folk-sidebar {
+  border-right: 2px solid var(--ss-ink) !important;
+}
+
+.hud-frame .folk-sidebar .desktop-icon-grid,
+.hud-frame.module-home .folk-sidebar .desktop-icon-grid {
+  gap: 10px !important;
+  padding: 18px 14px 28px !important;
+}
+
+.hud-frame .folk-sidebar .desktop-icon-grid > .desktop-icon,
+.hud-frame .folk-sidebar .desktop-icon-grid > .desktop-icon:nth-child(n) {
+  background: var(--ss-white) !important;
+  border: 2px solid var(--ss-ink) !important;
+  border-left: 9px solid var(--ss-red) !important;
+  box-shadow: 5px 5px 0 rgba(31, 34, 39, 0.78) !important;
+  color: var(--ss-ink) !important;
+  display: block !important;
+  font-family: var(--ss-font-body) !important;
+  min-height: 54px !important;
+  padding: 12px 16px !important;
+  text-align: left !important;
+  transform: translate(0, 0) !important;
+  transition: background-color 120ms ease, box-shadow 120ms ease, transform 120ms ease !important;
+}
+
+.hud-frame .folk-sidebar .desktop-icon-grid > .desktop-icon .desktop-icon-title {
+  color: var(--ss-ink) !important;
+  font-family: var(--ss-font-body) !important;
+  font-size: 1rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+
+.hud-frame .folk-sidebar .desktop-icon-grid > .desktop-icon:is(:hover, :focus-visible, .is-pressed) {
+  background: #e8ddca !important;
+  border-color: var(--ss-ink) !important;
+  border-left-color: var(--ss-red) !important;
+  box-shadow: inset 3px 3px 0 rgba(31, 34, 39, 0.2), 1px 1px 0 var(--ss-ink) !important;
+  outline: 0 !important;
+  transform: translate(4px, 4px) !important;
+}
+
+.hud-frame .folk-sidebar .desktop-icon-grid > .desktop-icon.active {
+  background: var(--ss-ink) !important;
+  border-color: var(--ss-ink) !important;
+  border-left-color: var(--ss-red) !important;
+  outline: 0 !important;
+}
+
+.hud-frame .folk-sidebar .desktop-icon-grid > .desktop-icon.active .desktop-icon-title {
+  color: var(--ss-white) !important;
+}
+
+.hud-frame .folk-sidebar .desktop-icon-grid > .desktop-icon.active.is-pressed .desktop-icon-title {
+  color: var(--ss-white) !important;
+}
+
 /* Safety control: approximately quarter-sized on a standard-density screen. */
 .hud-frame .floating-quick-escape {
   font-size: 0.7rem !important;

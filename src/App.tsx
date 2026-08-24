@@ -3365,6 +3365,7 @@ function SiteChrome({
 }) {
   const activeLabel = moduleRoutes[activeModule]?.label ?? "Home";
   const visualModule = activeModule === "access" ? "library" : activeModule;
+  const [pressedNavItem, setPressedNavItem] = useState<ModuleKey | null>(null);
 
   return (
     <main className={`terminal-frame app-frame hud-frame module-${visualModule}`}>
@@ -3376,14 +3377,15 @@ function SiteChrome({
           <nav className="desktop-icon-grid" aria-label="Site navigation">
             {navItems.map((item) => (
               <button
-                className={`desktop-icon desktop-icon-${item.code}${isPrimaryNavActive(activeModule, item.key) ? " active" : ""}`}
+                className={`desktop-icon desktop-icon-${item.code}${isPrimaryNavActive(activeModule, item.key) ? " active" : ""}${pressedNavItem === item.key ? " is-pressed" : ""}`}
                 key={item.key}
                 type="button"
                 onClick={() => onNavigate(item.key, item.path)}
+                onBlur={() => setPressedNavItem(null)}
+                onFocus={() => setPressedNavItem(item.key)}
+                onMouseEnter={() => setPressedNavItem(item.key)}
+                onMouseLeave={() => setPressedNavItem(null)}
               >
-                <span className="desktop-icon-code" aria-hidden="true">
-                  <SidebarIcon icon={item.code} />
-                </span>
                 <span className="desktop-icon-title">{item.label}</span>
               </button>
             ))}
