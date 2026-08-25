@@ -9560,6 +9560,166 @@ body:has(.assessment-workspace),
   display: none !important;
 }
 
+/* High-specificity lock against the remaining legacy state-header rules. */
+#root .hud-frame.terminal-frame.module-local-help .terminal-content .resources-module > .page-flourish-header.page-flourish-header h1,
+#root .hud-frame.terminal-frame.module-local-help .terminal-content .state-resource-page > .page-flourish-header.page-flourish-header h1 {
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+  font-size: clamp(24px, 2.75vw, 34px) !important;
+  font-weight: 700 !important;
+  line-height: 1.05 !important;
+  max-width: none !important;
+  text-wrap: balance;
+}
+
+#root .hud-frame.terminal-frame:not(.module-go-bag-prep) .terminal-content .page-flourish-header.page-flourish-header::before,
+#root .hud-frame.terminal-frame:not(.module-go-bag-prep) .terminal-content .page-flourish-header.page-flourish-header::after,
+#root .hud-frame.terminal-frame:not(.module-go-bag-prep) .terminal-content .ss-template-header.ss-template-header::before,
+#root .hud-frame.terminal-frame:not(.module-go-bag-prep) .terminal-content .ss-template-header.ss-template-header::after,
+#root .hud-frame.terminal-frame:not(.module-go-bag-prep) .terminal-content .assessment-modal-header.assessment-modal-header::before,
+#root .hud-frame.terminal-frame:not(.module-go-bag-prep) .terminal-content .assessment-modal-header.assessment-modal-header::after {
+  background: none !important;
+  content: none !important;
+  display: none !important;
+}
+
+#root .hud-frame.terminal-frame .terminal-content a.state-resource-download-button,
+#root .hud-frame.terminal-frame .terminal-content a.state-resource-review-button,
+#root .hud-frame.terminal-frame .terminal-content button.resource-back-button {
+  background: var(--ss-action-red) !important;
+  background-image: none !important;
+  border: 1px solid var(--ss-action-red-dark) !important;
+  box-shadow: none !important;
+  color: var(--ss-white) !important;
+  transform: none !important;
+}
+
+#root .hud-frame.terminal-frame .terminal-content :is(
+  a.state-resource-download-button,
+  a.state-resource-review-button,
+  button.resource-back-button
+):is(:hover, :focus-visible) {
+  background: var(--ss-action-red-dark) !important;
+  border-color: var(--ss-action-red-dark) !important;
+  box-shadow: none !important;
+  color: var(--ss-white) !important;
+  transform: none !important;
+}
+
+/* State resource filtering: flat category choices and an unframed results flow. */
+#root .hud-frame.terminal-frame.module-local-help .terminal-content .state-resource-category-nav {
+  background: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  display: grid !important;
+  gap: 10px !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  margin: 28px 0 22px !important;
+  padding: 0 !important;
+}
+
+#root .hud-frame.terminal-frame.module-local-help .terminal-content .state-resource-category-nav button {
+  background: var(--ss-white) !important;
+  background-image: none !important;
+  border: 1px solid var(--ss-ink) !important;
+  border-left: 5px solid var(--ss-red) !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  cursor: pointer !important;
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+  min-height: 54px !important;
+  padding: 12px 14px !important;
+  text-align: left !important;
+  text-transform: none !important;
+  transform: none !important;
+}
+
+#root .hud-frame.terminal-frame.module-local-help .terminal-content .state-resource-category-nav button[aria-pressed="true"] {
+  background: var(--ss-action-red) !important;
+  border-color: var(--ss-action-red-dark) !important;
+  color: var(--ss-white) !important;
+}
+
+#root .hud-frame.terminal-frame.module-local-help .terminal-content .state-resource-category-nav button.state-resource-view-all {
+  background: var(--ss-action-red) !important;
+  border-color: var(--ss-action-red-dark) !important;
+  color: var(--ss-white) !important;
+  font-weight: 700 !important;
+}
+
+#root .hud-frame.terminal-frame.module-local-help .terminal-content .state-resource-category-nav button:is(:hover, :focus-visible) {
+  background: var(--ss-action-red-dark) !important;
+  border-color: var(--ss-action-red-dark) !important;
+  box-shadow: none !important;
+  color: var(--ss-white) !important;
+  outline: 2px solid var(--ss-ink) !important;
+  outline-offset: 2px !important;
+  transform: none !important;
+}
+
+#root .hud-frame.terminal-frame.module-local-help .terminal-content .state-resource-category-prompt {
+  background: transparent !important;
+  border: 0 !important;
+  border-left: 5px solid var(--ss-red) !important;
+  color: var(--ss-ink) !important;
+  margin: 24px 0 !important;
+  padding: 8px 0 8px 16px !important;
+}
+
+#root .hud-frame.terminal-frame.module-local-help .terminal-content .state-resource-results {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  margin: 28px 0 0 !important;
+  padding: 0 !important;
+}
+
+#root .hud-frame.terminal-frame.module-local-help .terminal-content .state-resource-results-toolbar {
+  align-items: center !important;
+  background: var(--ss-white) !important;
+  border: 1px solid var(--ss-ink) !important;
+  border-bottom: 3px double var(--ss-ink) !important;
+  box-shadow: none !important;
+  display: flex !important;
+  gap: 18px !important;
+  justify-content: space-between !important;
+  margin: 0 !important;
+  padding: 16px 18px !important;
+}
+
+#root .hud-frame.terminal-frame.module-local-help .terminal-content .state-resource-results-toolbar div {
+  display: grid !important;
+  gap: 3px !important;
+}
+
+#root .hud-frame.terminal-frame.module-local-help .terminal-content .state-resource-results-toolbar span {
+  color: var(--ss-red) !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+}
+
+#root .hud-frame.terminal-frame.module-local-help .terminal-content .state-resource-results-toolbar strong {
+  color: var(--ss-ink) !important;
+  font-size: 18px !important;
+}
+
+#root .hud-frame.terminal-frame.module-local-help .terminal-content .state-resource-results .state-resource-category-list {
+  box-shadow: none !important;
+  margin-top: 0 !important;
+}
+
+@media (max-width: 760px) {
+  #root .hud-frame.terminal-frame.module-local-help .terminal-content .state-resource-category-nav {
+    grid-template-columns: 1fr !important;
+  }
+
+  #root .hud-frame.terminal-frame.module-local-help .terminal-content .state-resource-results-toolbar {
+    align-items: stretch !important;
+    flex-direction: column !important;
+  }
+}
+
 .hud-frame:not(.module-home) .site-editorial-masthead {
   background: var(--ss-white) !important;
   border: 4px solid var(--ss-ink) !important;
@@ -11187,4 +11347,44 @@ body,
   box-shadow: none !important;
   color: var(--ss-white) !important;
   opacity: .7 !important;
+}
+
+/* Final newspaper headers: smaller state headlines and no legacy color rails. */
+.hud-frame.module-local-help .terminal-content .resources-module > .page-flourish-header h1,
+.hud-frame.module-local-help .terminal-content .state-resource-page > .page-flourish-header h1 {
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+  font-size: clamp(24px, 2.75vw, 34px) !important;
+  font-weight: 700 !important;
+  line-height: 1.05 !important;
+  max-width: none !important;
+  text-wrap: balance;
+}
+
+.hud-frame.module-local-help .state-resource-directory > header h2 {
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+  font-size: clamp(22px, 2.35vw, 30px) !important;
+  font-weight: 700 !important;
+  line-height: 1.08 !important;
+  text-wrap: balance;
+}
+
+.hud-frame:not(.module-go-bag-prep) .terminal-content :is(
+  .page-flourish-header,
+  .ss-template-header,
+  .assessment-page-header,
+  .assessment-modal-header,
+  .systems-page-header,
+  .nonprofit-audit-header
+)::before,
+.hud-frame:not(.module-go-bag-prep) .terminal-content :is(
+  .page-flourish-header,
+  .ss-template-header,
+  .assessment-page-header,
+  .assessment-modal-header,
+  .systems-page-header,
+  .nonprofit-audit-header
+)::after {
+  background: none !important;
+  content: none !important;
+  display: none !important;
 }

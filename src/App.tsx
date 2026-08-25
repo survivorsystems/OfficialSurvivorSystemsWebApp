@@ -6679,12 +6679,34 @@ function StateResourcesDirectory({ onSelect }: { onSelect: (location: StateResou
 }
 
 function StateResourcePage({ location, onBack }: { location: StateResourceLocation; onBack: () => void }) {
-  const programsByCategory = stateResourcePrograms[location.slug] ?? {};
-  const hasPrograms = Object.values(programsByCategory).some((programs) => programs && programs.length > 0);
   const categories = getStateResourceCategories(location.slug);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [showAllCategories, setShowAllCategories] = useState(false);
   const stateDownloadUrl = location.downloadFile
     ? `${import.meta.env.VITE_SUPABASE_URL ?? "https://nwpqdpfhburdeprbfkqi.supabase.co"}/storage/v1/object/public/${encodeURIComponent("State Resources Bucket")}/${encodeURIComponent(location.downloadFile)}?download=${encodeURIComponent(location.downloadFile)}`
     : null;
+  const visibleCategories = showAllCategories
+    ? categories
+    : categories.filter((category) => selectedCategories.includes(category));
+
+  useEffect(() => {
+    setSelectedCategories([]);
+    setShowAllCategories(false);
+  }, [location.slug]);
+
+  function toggleCategory(category: string) {
+    setShowAllCategories(false);
+    setSelectedCategories((current) =>
+      current.includes(category)
+        ? current.filter((item) => item !== category)
+        : [...current, category],
+    );
+  }
+
+  function viewAllCategories() {
+    setSelectedCategories([]);
+    setShowAllCategories(true);
+  }
 
   return (
     <section className="page-shell state-resource-page" aria-labelledby="state-resource-title">
@@ -6711,21 +6733,45 @@ function StateResourcePage({ location, onBack }: { location: StateResourceLocati
         <a className="state-resource-review-button" href={`/resources/review-agency?state=${encodeURIComponent(location.name)}`}>Review An Agency</a>
       </div>
 
-      {hasPrograms ? (
-        <aside className="state-resource-verification" aria-label="Resource verification note">
-          <strong>Information reviewed {location.reviewedOn ?? "recently"}</strong>
-          <p>Funding, capacity, eligibility, and waitlists can change. Confirm current availability directly with the provider before relying on a program.</p>
-        </aside>
-      ) : null}
-
       <nav className="state-resource-category-nav" aria-label={`${location.name} resource categories`}>
+        <button
+          className="state-resource-view-all"
+          type="button"
+          onClick={viewAllCategories}
+        >
+          View All Resources
+        </button>
         {categories.map((category) => (
-          <a href={`#${category.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`} key={category}>{category}</a>
+          <button
+            aria-pressed={!showAllCategories && selectedCategories.includes(category)}
+            key={category}
+            type="button"
+            onClick={() => toggleCategory(category)}
+          >
+            {category}
+          </button>
         ))}
       </nav>
 
-      <div className="state-resource-category-list" aria-label={`${location.name} resource categories`}>
-        {categories.map((category) => {
+      {!showAllCategories && selectedCategories.length === 0 ? (
+        <p className="state-resource-category-prompt">
+          Choose one or more categories above, or view every resource available in {location.name}.
+        </p>
+      ) : null}
+
+      {visibleCategories.length > 0 ? (
+        <section className="state-resource-results" aria-label={`${location.name} selected resources`}>
+          <header className="state-resource-results-toolbar">
+            <div>
+              <span>{showAllCategories ? "ALL CATEGORIES" : "SELECTED CATEGORIES"}</span>
+              <strong>{showAllCategories ? `${categories.length} categories` : `${selectedCategories.length} selected`}</strong>
+            </div>
+            {!showAllCategories ? (
+              <button type="button" onClick={viewAllCategories}>View All Resources</button>
+            ) : null}
+          </header>
+          <div className="state-resource-category-list" aria-label={`${location.name} resource categories`}>
+          {visibleCategories.map((category) => {
           const programs = getProgramsForStateCategory(location.slug, category);
           return (
             <section key={category} id={category.toLowerCase().replace(/[^a-z0-9]+/g, "-")}>
@@ -6755,8 +6801,10 @@ function StateResourcePage({ location, onBack }: { location: StateResourceLocati
               )}
             </section>
           );
-        })}
-      </div>
+          })}
+          </div>
+        </section>
+      ) : null}
     </section>
   );
 }
