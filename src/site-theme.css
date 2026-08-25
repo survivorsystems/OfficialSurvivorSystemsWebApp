@@ -26,6 +26,8 @@
   --ss-font-body: "Times New Roman", Times, Georgia, serif;
   --ss-route-accent: var(--ss-blue);
   --ss-route-action-text: var(--ss-white);
+  --ss-action-red: #b4232a;
+  --ss-action-red-dark: #87191f;
 }
 
 .module-assessments,
@@ -11110,4 +11112,79 @@ body,
 .hud-frame.terminal-frame:is(.module-advocacy, .module-assessments) .assessment-workspace .freedom-response-list button.selected strong {
   background: var(--ss-red) !important;
   color: var(--ss-white) !important;
+}
+
+/* FINAL command-button treatment: flat red, without the old colored shadows. */
+.hud-frame .terminal-content button:not(.category-file-title-button):not([role="radio"]):not([aria-pressed]),
+.hud-frame .terminal-content a.button,
+.hud-frame .terminal-content a[class*="-button"],
+.hud-frame .terminal-content :is(
+  .store-purchase-row,
+  .store-download-list,
+  .state-program-actions,
+  .library-preview-actions,
+  .library-public-preview-actions,
+  .subscribe-actions,
+  .support-page-actions,
+  .ss-template-actions,
+  .home-editorial-actions
+) a {
+  background: var(--ss-action-red) !important;
+  background-image: none !important;
+  border: 1px solid var(--ss-action-red-dark) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: var(--ss-white) !important;
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+  text-shadow: none !important;
+  text-transform: none !important;
+  transform: none !important;
+}
+
+.hud-frame .terminal-content button:not(.category-file-title-button):not([role="radio"]):not([aria-pressed]) :is(span, strong, small, svg),
+.hud-frame .terminal-content a.button :is(span, strong, small, svg),
+.hud-frame .terminal-content a[class*="-button"] :is(span, strong, small, svg),
+.hud-frame .terminal-content :is(
+  .store-purchase-row,
+  .store-download-list,
+  .state-program-actions,
+  .library-preview-actions,
+  .library-public-preview-actions,
+  .subscribe-actions,
+  .support-page-actions,
+  .ss-template-actions,
+  .home-editorial-actions
+) a :is(span, strong, small, svg) {
+  color: var(--ss-white) !important;
+}
+
+.hud-frame .terminal-content button:not(.category-file-title-button):not([role="radio"]):not([aria-pressed]):is(:hover, :focus-visible),
+.hud-frame .terminal-content a.button:is(:hover, :focus-visible),
+.hud-frame .terminal-content a[class*="-button"]:is(:hover, :focus-visible),
+.hud-frame .terminal-content :is(
+  .store-purchase-row,
+  .store-download-list,
+  .state-program-actions,
+  .library-preview-actions,
+  .library-public-preview-actions,
+  .subscribe-actions,
+  .support-page-actions,
+  .ss-template-actions,
+  .home-editorial-actions
+) a:is(:hover, :focus-visible) {
+  background: var(--ss-action-red-dark) !important;
+  border-color: var(--ss-action-red-dark) !important;
+  box-shadow: none !important;
+  color: var(--ss-white) !important;
+  outline: 2px solid var(--ss-ink) !important;
+  outline-offset: 2px !important;
+  transform: none !important;
+}
+
+.hud-frame .terminal-content button:not(.category-file-title-button):not([role="radio"]):not([aria-pressed]):disabled {
+  background: #756b67 !important;
+  border-color: #5f5652 !important;
+  box-shadow: none !important;
+  color: var(--ss-white) !important;
+  opacity: .7 !important;
 }
