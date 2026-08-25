@@ -3400,9 +3400,7 @@ function SiteChrome({
               <header className="site-editorial-masthead" aria-label="Survivor Systems">
                 <p>TOOLS FOR CLARITY, AUTONOMY + REBUILDING</p>
                 <div>
-                  <span>EST. 2026</span>
                   <strong>SURVIVOR SYSTEMS</strong>
-                  <span>START ANYWHERE</span>
                 </div>
               </header>
             ) : null}
@@ -3422,9 +3420,7 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
       <header className="home-editorial-masthead">
         <p>TOOLS FOR CLARITY, AUTONOMY + REBUILDING</p>
         <div>
-          <span>EST. 2026</span>
           <strong>SURVIVOR SYSTEMS</strong>
-          <span>START ANYWHERE</span>
         </div>
       </header>
 

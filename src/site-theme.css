@@ -10889,3 +10889,27 @@ body,
 ) {
   box-shadow: none !important;
 }
+
+/* Final homepage alignment lock. */
+.hud-frame.terminal-frame.module-home .site-shell {
+  column-gap: 0 !important;
+  gap: 0 !important;
+}
+
+.hud-frame.terminal-frame.module-home .home-terminal.bauhaus-home {
+  gap: 28px !important;
+  padding: 0 0 32px !important;
+}
+
+.hud-frame.module-home .home-editorial-masthead > div,
+.hud-frame:not(.module-home) .site-editorial-masthead > div {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  justify-items: center !important;
+}
+
+.hud-frame.module-home .home-editorial-masthead strong,
+.hud-frame:not(.module-home) .site-editorial-masthead strong {
+  grid-column: 1 !important;
+  text-align: center !important;
+}
