@@ -10913,3 +10913,201 @@ body,
   grid-column: 1 !important;
   text-align: center !important;
 }
+
+/* FINAL Assessments edition: quiet linen, readable newsprint, dependable controls. */
+.hud-frame.terminal-frame:is(.module-advocacy, .module-assessments) .terminal-content {
+  background: var(--ss-paper) !important;
+  background-image: none !important;
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame:is(.module-advocacy, .module-assessments) .terminal-content .category-module > .page-flourish-header.page-flourish-header {
+  background: var(--ss-white) !important;
+  background-image: none !important;
+  border: 1px solid var(--ss-ink) !important;
+  border-top: 5px solid var(--ss-ink) !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame:is(.module-advocacy, .module-assessments) .terminal-content .category-module > .page-flourish-header.page-flourish-header::before,
+.hud-frame.terminal-frame:is(.module-advocacy, .module-assessments) .terminal-content .category-module > .page-flourish-header.page-flourish-header::after {
+  display: none !important;
+}
+
+.hud-frame.terminal-frame:is(.module-advocacy, .module-assessments) .terminal-content .category-module > .page-flourish-header.page-flourish-header :is(.folk-kicker, h1, p, span, strong) {
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame:is(.module-advocacy, .module-assessments) .terminal-content .category-module > .page-flourish-header.page-flourish-header .folk-kicker {
+  color: var(--ss-red) !important;
+}
+
+.hud-frame.terminal-frame:is(.module-advocacy, .module-assessments) .terminal-content .category-module > .page-flourish-header.page-flourish-header h1 {
+  font-size: clamp(32px, 4vw, 48px) !important;
+  line-height: 1 !important;
+}
+
+.hud-frame.terminal-frame:is(.module-advocacy, .module-assessments) .terminal-content .category-file-grid {
+  gap: 18px !important;
+}
+
+.hud-frame.terminal-frame:is(.module-advocacy, .module-assessments) .terminal-content .category-file-card,
+.hud-frame.terminal-frame:is(.module-advocacy, .module-assessments) .terminal-content .category-file-card:nth-child(n) {
+  background: var(--ss-white) !important;
+  background-image: none !important;
+  border: 1px solid var(--ss-ink) !important;
+  border-left: 5px solid var(--ss-red) !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  padding: 0 22px 24px !important;
+}
+
+.hud-frame.terminal-frame:is(.module-advocacy, .module-assessments) .terminal-content .category-file-card h2,
+.hud-frame.terminal-frame:is(.module-advocacy, .module-assessments) .terminal-content .category-file-card:nth-child(n) h2 {
+  background: var(--ss-white) !important;
+  border-bottom: 3px double var(--ss-ink) !important;
+  color: var(--ss-ink) !important;
+  margin: 0 -22px 18px !important;
+  padding: 16px 22px !important;
+}
+
+.hud-frame.terminal-frame:is(.module-advocacy, .module-assessments) .terminal-content .category-file-card :is(h2, h3, p, span, strong, small),
+.hud-frame.terminal-frame:is(.module-advocacy, .module-assessments) .terminal-content .category-file-card .category-file-title-button {
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame:is(.module-advocacy, .module-assessments) .terminal-content .category-file-card .category-file-title-button {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+  text-align: left !important;
+  text-decoration: underline !important;
+  text-decoration-color: var(--ss-red) !important;
+  text-underline-offset: 4px !important;
+  transform: none !important;
+}
+
+.hud-frame.terminal-frame:is(.module-advocacy, .module-assessments) .terminal-content .category-file-card > button:not(.category-file-title-button) {
+  background: var(--ss-ink) !important;
+  border: 1px solid var(--ss-ink) !important;
+  box-shadow: none !important;
+  color: var(--ss-white) !important;
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+  text-transform: none !important;
+  transform: none !important;
+}
+
+.hud-frame.terminal-frame:is(.module-advocacy, .module-assessments) .assessment-workspace .assessment-modal {
+  background: var(--ss-white) !important;
+  border: 1px solid var(--ss-ink) !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame:is(.module-advocacy, .module-assessments) .assessment-workspace .assessment-modal-header {
+  background: var(--ss-white) !important;
+  border: 0 !important;
+  border-bottom: 4px double var(--ss-ink) !important;
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame:is(.module-advocacy, .module-assessments) .assessment-workspace .assessment-modal-header :is(h1, h2, p, span, strong) {
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame:is(.module-advocacy, .module-assessments) .assessment-workspace .assessment-modal-header .terminal-label {
+  color: var(--ss-red) !important;
+}
+
+.hud-frame.terminal-frame:is(.module-advocacy, .module-assessments) .assessment-workspace .assessment-modal-body,
+.hud-frame.terminal-frame:is(.module-advocacy, .module-assessments) .assessment-workspace .assessment-modal-body :is(section, article) {
+  background-color: var(--ss-white) !important;
+  background-image: none !important;
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame:is(.module-advocacy, .module-assessments) .assessment-workspace .assessment-modal-body :is(h2, h3, h4, p, li, label, span, strong, small) {
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame:is(.module-advocacy, .module-assessments) .assessment-workspace .question-status {
+  background: var(--ss-paper-deep) !important;
+  border: 1px solid var(--ss-ink) !important;
+  box-shadow: none !important;
+}
+
+.hud-frame.terminal-frame:is(.module-advocacy, .module-assessments) .assessment-workspace .assessment-modal-body > h2 {
+  border-left: 6px solid var(--ss-red) !important;
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame:is(.module-advocacy, .module-assessments) .assessment-workspace .assessment-modal button {
+  background: var(--ss-ink) !important;
+  border: 1px solid var(--ss-ink) !important;
+  box-shadow: none !important;
+  color: var(--ss-white) !important;
+  cursor: pointer !important;
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+  pointer-events: auto !important;
+  text-transform: none !important;
+  transform: none !important;
+}
+
+.hud-frame.terminal-frame:is(.module-advocacy, .module-assessments) .assessment-workspace .assessment-modal button:is(:hover, :focus-visible) {
+  background: #38342f !important;
+  color: var(--ss-white) !important;
+  outline: 2px solid var(--ss-red) !important;
+  outline-offset: 2px !important;
+  transform: none !important;
+}
+
+.hud-frame.terminal-frame:is(.module-advocacy, .module-assessments) .assessment-workspace .assessment-modal button:disabled {
+  background: #6d6962 !important;
+  color: var(--ss-white) !important;
+  cursor: not-allowed !important;
+  opacity: .65 !important;
+}
+
+.hud-frame.terminal-frame:is(.module-advocacy, .module-assessments) .assessment-workspace :is(.love-fear-scale label, .freedom-scale-summary article) {
+  background: var(--ss-white) !important;
+  border-color: var(--ss-ink) !important;
+  border-top-color: var(--ss-ink) !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame:is(.module-advocacy, .module-assessments) .assessment-workspace .freedom-response-list button {
+  background: var(--ss-white) !important;
+  border: 1px solid var(--ss-ink) !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  cursor: pointer !important;
+  pointer-events: auto !important;
+  position: relative !important;
+  touch-action: manipulation !important;
+  transform: none !important;
+  z-index: 1 !important;
+}
+
+.hud-frame.terminal-frame:is(.module-advocacy, .module-assessments) .assessment-workspace .freedom-response-list button:hover,
+.hud-frame.terminal-frame:is(.module-advocacy, .module-assessments) .assessment-workspace .freedom-response-list button:focus-visible {
+  background: var(--ss-paper-deep) !important;
+  outline: 2px solid var(--ss-red) !important;
+  outline-offset: 2px !important;
+}
+
+.hud-frame.terminal-frame:is(.module-advocacy, .module-assessments) .assessment-workspace .freedom-response-list button[aria-checked="true"],
+.hud-frame.terminal-frame:is(.module-advocacy, .module-assessments) .assessment-workspace .freedom-response-list button.selected {
+  background: var(--ss-paper-deep) !important;
+  border-left: 9px solid var(--ss-red) !important;
+  box-shadow: inset 0 0 0 2px var(--ss-ink) !important;
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame:is(.module-advocacy, .module-assessments) .assessment-workspace .freedom-response-list button[aria-checked="true"] strong,
+.hud-frame.terminal-frame:is(.module-advocacy, .module-assessments) .assessment-workspace .freedom-response-list button.selected strong {
+  background: var(--ss-red) !important;
+  color: var(--ss-white) !important;
+}
