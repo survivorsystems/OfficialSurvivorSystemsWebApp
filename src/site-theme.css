@@ -11388,3 +11388,542 @@ body,
   content: none !important;
   display: none !important;
 }
+
+/* FINAL long-form guide contract: one readable newspaper article per guide. */
+.hud-frame.terminal-frame:is(.module-how-to, .module-legal) .terminal-content {
+  background: var(--ss-paper) !important;
+  background-image: none !important;
+  box-sizing: border-box !important;
+  color: var(--ss-ink) !important;
+  padding: clamp(18px, 2.5vw, 36px) !important;
+  width: 100% !important;
+}
+
+.hud-frame.terminal-frame:is(.module-how-to, .module-legal) .terminal-content > :is(
+  .how-to-guide-page,
+  .rebuilding-module,
+  .legal-guide-shell
+) {
+  background: var(--ss-white) !important;
+  background-image: none !important;
+  border: 1px solid var(--ss-ink) !important;
+  box-shadow: none !important;
+  box-sizing: border-box !important;
+  color: var(--ss-ink) !important;
+  margin: 0 !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  overflow: visible !important;
+  padding: clamp(24px, 5vw, 72px) !important;
+  width: 100% !important;
+}
+
+.hud-frame.terminal-frame:is(.module-how-to, .module-legal) .terminal-content > :is(
+  .how-to-guide-page,
+  .rebuilding-module,
+  .legal-guide-shell
+),
+.hud-frame.terminal-frame:is(.module-how-to, .module-legal) .terminal-content > :is(
+  .how-to-guide-page,
+  .rebuilding-module,
+  .legal-guide-shell
+) * {
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+  text-shadow: none !important;
+}
+
+.hud-frame.terminal-frame:is(.module-how-to, .module-legal) .terminal-content > :is(
+  .how-to-guide-page,
+  .rebuilding-module,
+  .legal-guide-shell
+) :is(h1, h2, h3, h4, h5, h6, p, li, label, span, small, strong, em, code, blockquote, summary, dt, dd) {
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame:is(.module-how-to, .module-legal) .terminal-content > :is(
+  .how-to-guide-page,
+  .rebuilding-module,
+  .legal-guide-shell
+) > :is(.page-flourish-header, .ss-template-header, .how-to-hero) {
+  background: var(--ss-white) !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-bottom: 4px double var(--ss-ink) !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  margin: 0 0 clamp(26px, 4vw, 46px) !important;
+  padding: 0 0 clamp(22px, 3vw, 34px) !important;
+}
+
+.hud-frame.terminal-frame:is(.module-how-to, .module-legal) .terminal-content > :is(
+  .how-to-guide-page,
+  .rebuilding-module,
+  .legal-guide-shell
+) > :is(.page-flourish-header, .ss-template-header, .how-to-hero)::before,
+.hud-frame.terminal-frame:is(.module-how-to, .module-legal) .terminal-content > :is(
+  .how-to-guide-page,
+  .rebuilding-module,
+  .legal-guide-shell
+) > :is(.page-flourish-header, .ss-template-header, .how-to-hero)::after {
+  background: none !important;
+  content: none !important;
+  display: none !important;
+}
+
+.hud-frame.terminal-frame:is(.module-how-to, .module-legal) .terminal-content > :is(
+  .how-to-guide-page,
+  .rebuilding-module,
+  .legal-guide-shell
+) > :is(.page-flourish-header, .ss-template-header, .how-to-hero) h1 {
+  color: var(--ss-ink) !important;
+  font-size: clamp(28px, 3.4vw, 42px) !important;
+  line-height: 1.02 !important;
+  max-width: none !important;
+}
+
+.hud-frame.terminal-frame:is(.module-how-to, .module-legal) .terminal-content > :is(
+  .how-to-guide-page,
+  .rebuilding-module,
+  .legal-guide-shell
+) :is(.folk-kicker, .ss-template-eyebrow, .eyebrow, .page-kicker p, .terminal-label, .housing-summary-label) {
+  color: var(--ss-red) !important;
+}
+
+/* Article indexes are plain editorial rules, never colored banners. */
+.hud-frame.terminal-frame.module-how-to .terminal-content > :is(.how-to-guide-page, .rebuilding-module) :is(
+  .ss-template-index,
+  .how-to-command-strip,
+  .housing-command-strip
+) {
+  background: var(--ss-white) !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--ss-ink) !important;
+  border-top: 1px solid var(--ss-ink) !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  margin: 0 0 clamp(28px, 4vw, 48px) !important;
+  padding: 14px 0 !important;
+}
+
+.hud-frame.terminal-frame.module-how-to .terminal-content > :is(.how-to-guide-page, .rebuilding-module) :is(
+  .ss-template-index,
+  .how-to-command-strip,
+  .housing-command-strip
+) span {
+  background: transparent !important;
+  border: 0 !important;
+  color: var(--ss-ink) !important;
+  box-shadow: none !important;
+}
+
+/* Housing Guide and ordinary how-to sections read as one continuous article. */
+.hud-frame.terminal-frame.module-how-to .terminal-content > :is(.how-to-guide-page, .rebuilding-module) :is(
+  .rebuilding-section-grid,
+  .snap-guide-grid,
+  .housing-options-pathways,
+  .compensation-coverage-grid,
+  .compensation-process-grid,
+  .compensation-clauses-grid
+) {
+  background: var(--ss-white) !important;
+  background-image: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  display: block !important;
+  margin: 0 !important;
+  overflow: visible !important;
+}
+
+.hud-frame.terminal-frame.module-how-to .terminal-content > :is(.how-to-guide-page, .rebuilding-module) :is(
+  .rebuilding-guide-card,
+  .snap-guide-card,
+  .housing-option-pathway,
+  .compensation-coverage-grid > article,
+  .compensation-process-grid > article,
+  .compensation-clauses-grid > article
+) {
+  background: var(--ss-white) !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--ss-ink) !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  margin: 0 !important;
+  padding: clamp(30px, 5vw, 58px) 0 !important;
+}
+
+.hud-frame.terminal-frame.module-how-to .terminal-content > :is(.how-to-guide-page, .rebuilding-module) :is(
+  .rebuilding-guide-card,
+  .snap-guide-card,
+  .housing-option-pathway,
+  .compensation-coverage-grid > article,
+  .compensation-process-grid > article,
+  .compensation-clauses-grid > article
+):last-child {
+  border-bottom: 0 !important;
+}
+
+.hud-frame.terminal-frame.module-how-to .terminal-content .rebuilding-guide-card-header,
+.hud-frame.terminal-frame.module-how-to .terminal-content .snap-guide-card-header {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  color: var(--ss-red) !important;
+  margin: 0 0 10px !important;
+  padding: 0 !important;
+}
+
+.hud-frame.terminal-frame.module-how-to .terminal-content :is(.rebuilding-guide-card-header, .snap-guide-card-header) > span,
+.hud-frame.terminal-frame.module-how-to .terminal-content .housing-option-pathway summary > span {
+  display: none !important;
+}
+
+.hud-frame.terminal-frame.module-how-to .terminal-content :is(.rebuilding-guide-card-header, .snap-guide-card-header) small {
+  color: var(--ss-red) !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0 !important;
+}
+
+.hud-frame.terminal-frame.module-how-to .terminal-content .housing-option-pathway summary {
+  background: var(--ss-white) !important;
+  border: 0 !important;
+  color: var(--ss-ink) !important;
+  font-size: clamp(22px, 2.6vw, 30px) !important;
+  padding: 0 !important;
+}
+
+.hud-frame.terminal-frame.module-how-to .terminal-content .housing-option-pathway > div {
+  background: var(--ss-white) !important;
+  border: 0 !important;
+  color: var(--ss-ink) !important;
+  padding: 22px 0 0 !important;
+}
+
+.hud-frame.terminal-frame.module-how-to .terminal-content .housing-page-summary,
+.hud-frame.terminal-frame.module-how-to .terminal-content .rebuilding-bottom-line {
+  background: var(--ss-white) !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--ss-ink) !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  margin: 0 !important;
+  padding: 0 0 clamp(30px, 5vw, 54px) !important;
+}
+
+.hud-frame.terminal-frame.module-how-to .terminal-content .rebuilding-bottom-line {
+  border-bottom: 0 !important;
+  border-top: 4px double var(--ss-ink) !important;
+  padding-top: clamp(30px, 5vw, 54px) !important;
+}
+
+/* Notes sit in the article margin with one restrained red rule. */
+.hud-frame.terminal-frame:is(.module-how-to, .module-legal) .terminal-content > :is(
+  .how-to-guide-page,
+  .rebuilding-module,
+  .legal-guide-shell
+) :is(
+  .how-to-system-note,
+  .housing-options-master-script,
+  .phrase-bank,
+  blockquote,
+  .legal-note-inline,
+  .legal-warning,
+  .legal-reminder,
+  .legal-motion-block
+) {
+  background: var(--ss-white) !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-left: 6px solid var(--ss-red) !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  margin: 28px 0 34px clamp(12px, 7vw, 96px) !important;
+  max-width: 82ch !important;
+  padding: 5px 0 5px 22px !important;
+}
+
+.hud-frame.terminal-frame:is(.module-how-to, .module-legal) .terminal-content > :is(
+  .how-to-guide-page,
+  .rebuilding-module,
+  .legal-guide-shell
+) :is(ul, ol) {
+  background: var(--ss-white) !important;
+  background-image: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  margin: 18px 0 !important;
+  padding: 0 0 0 26px !important;
+}
+
+/* Legal guides use the same uninterrupted article treatment. */
+.hud-frame.terminal-frame.module-legal .terminal-content .legal-guide-shell :is(
+  .legal-article-section,
+  .legal-step-grid,
+  .legal-motion-grid,
+  .legal-note-grid,
+  .legal-step-card,
+  .legal-motion-card,
+  .legal-note
+) {
+  background: var(--ss-white) !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame.module-legal .terminal-content .legal-guide-shell .legal-article-section {
+  border: 0 !important;
+  border-bottom: 1px solid var(--ss-ink) !important;
+  padding: clamp(30px, 5vw, 58px) 0 !important;
+}
+
+.hud-frame.terminal-frame.module-legal .terminal-content .legal-guide-shell .legal-article-section:last-child {
+  border-bottom: 0 !important;
+}
+
+@media (max-width: 700px) {
+  .hud-frame.terminal-frame:is(.module-how-to, .module-legal) .terminal-content {
+    padding: 12px !important;
+  }
+
+  .hud-frame.terminal-frame:is(.module-how-to, .module-legal) .terminal-content > :is(
+    .how-to-guide-page,
+    .rebuilding-module,
+    .legal-guide-shell
+  ) {
+    padding: 24px 18px !important;
+  }
+
+  .hud-frame.terminal-frame:is(.module-how-to, .module-legal) .terminal-content > :is(
+    .how-to-guide-page,
+    .rebuilding-module,
+    .legal-guide-shell
+  ) :is(
+    .how-to-system-note,
+    .housing-options-master-script,
+    .phrase-bank,
+    blockquote,
+    .legal-note-inline,
+    .legal-warning,
+    .legal-reminder,
+    .legal-motion-block
+  ) {
+    margin-left: 0 !important;
+  }
+}
+
+#root .hud-frame.terminal-frame.module-rebuilding .terminal-content .rebuilding-module > .page-flourish-header.page-flourish-rebuilding {
+  background: var(--ss-white) !important;
+  background-color: var(--ss-white) !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-bottom: 4px double var(--ss-ink) !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  margin: 0 0 clamp(26px, 4vw, 46px) !important;
+  padding: 0 0 clamp(22px, 3vw, 34px) !important;
+}
+
+#root .hud-frame.terminal-frame.module-rebuilding .terminal-content .rebuilding-module > .page-flourish-header.page-flourish-rebuilding :is(
+  .page-flourish-copy,
+  .page-flourish-art,
+  .folk-kicker,
+  h1,
+  p,
+  span,
+  strong
+) {
+  background: transparent !important;
+  background-image: none !important;
+  border-color: var(--ss-ink) !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  text-shadow: none !important;
+}
+
+#root .hud-frame.terminal-frame.module-rebuilding .terminal-content .rebuilding-module > .page-flourish-header.page-flourish-rebuilding .folk-kicker {
+  color: var(--ss-red) !important;
+  display: block !important;
+}
+
+#root .hud-frame.terminal-frame.module-rebuilding .terminal-content .rebuilding-module > .page-flourish-header.page-flourish-rebuilding h1 {
+  display: block !important;
+}
+
+#root .hud-frame.terminal-frame.module-rebuilding .terminal-content .rebuilding-module > .page-flourish-header.page-flourish-rebuilding :is(
+  .page-flourish-art,
+  .page-flourish-art::before,
+  .page-flourish-art::after
+) {
+  display: none !important;
+}
+
+/* The Housing Guide is routed through its own rebuilding module. */
+.hud-frame.terminal-frame.module-rebuilding :is(.folk-main-shell, .terminal-screen, .terminal-content) {
+  background: var(--ss-paper) !important;
+  background-image: none !important;
+}
+
+.hud-frame.terminal-frame.module-rebuilding .terminal-content {
+  box-sizing: border-box !important;
+  min-height: 100vh !important;
+  padding: clamp(18px, 2.5vw, 36px) !important;
+  width: 100% !important;
+}
+
+.hud-frame.terminal-frame.module-rebuilding .terminal-content > .rebuilding-module {
+  background: var(--ss-white) !important;
+  background-image: none !important;
+  border: 1px solid var(--ss-ink) !important;
+  box-shadow: none !important;
+  box-sizing: border-box !important;
+  color: var(--ss-ink) !important;
+  margin: 0 !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  padding: clamp(24px, 5vw, 72px) !important;
+  width: 100% !important;
+}
+
+.hud-frame.terminal-frame.module-rebuilding .terminal-content > .rebuilding-module,
+.hud-frame.terminal-frame.module-rebuilding .terminal-content > .rebuilding-module * {
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+  text-shadow: none !important;
+}
+
+.hud-frame.terminal-frame.module-rebuilding .terminal-content > .rebuilding-module :is(
+  h1, h2, h3, h4, p, li, span, small, strong, em, label
+) {
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame.module-rebuilding .rebuilding-module > .page-flourish-header {
+  background: var(--ss-white) !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-bottom: 4px double var(--ss-ink) !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  margin: 0 0 clamp(26px, 4vw, 46px) !important;
+  padding: 0 0 clamp(22px, 3vw, 34px) !important;
+}
+
+.hud-frame.terminal-frame.module-rebuilding .rebuilding-module > .page-flourish-header::before,
+.hud-frame.terminal-frame.module-rebuilding .rebuilding-module > .page-flourish-header::after {
+  background: none !important;
+  content: none !important;
+  display: none !important;
+}
+
+.hud-frame.terminal-frame.module-rebuilding .rebuilding-module > .page-flourish-header h1 {
+  color: var(--ss-ink) !important;
+  font-size: clamp(28px, 3.4vw, 42px) !important;
+  line-height: 1.02 !important;
+  max-width: none !important;
+}
+
+.hud-frame.terminal-frame.module-rebuilding .rebuilding-module :is(
+  .folk-kicker, .terminal-label, .housing-summary-label, .rebuilding-guide-card-header small
+) {
+  color: var(--ss-red) !important;
+}
+
+.hud-frame.terminal-frame.module-rebuilding .rebuilding-module .housing-command-strip {
+  background: var(--ss-white) !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--ss-ink) !important;
+  border-top: 1px solid var(--ss-ink) !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  margin: 0 0 clamp(28px, 4vw, 48px) !important;
+  padding: 14px 0 !important;
+}
+
+.hud-frame.terminal-frame.module-rebuilding .rebuilding-module .housing-command-strip span {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame.module-rebuilding .rebuilding-module :is(
+  .housing-page-summary,
+  .rebuilding-bottom-line,
+  .rebuilding-section-grid,
+  .rebuilding-guide-card,
+  .rebuilding-guide-card:nth-child(n)
+) {
+  background: var(--ss-white) !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame.module-rebuilding .rebuilding-module .housing-page-summary {
+  border: 0 !important;
+  border-bottom: 1px solid var(--ss-ink) !important;
+  margin: 0 !important;
+  padding: 0 0 clamp(30px, 5vw, 54px) !important;
+}
+
+.hud-frame.terminal-frame.module-rebuilding .rebuilding-module .rebuilding-section-grid {
+  border: 0 !important;
+  display: block !important;
+  margin: 0 !important;
+  overflow: visible !important;
+}
+
+.hud-frame.terminal-frame.module-rebuilding .rebuilding-module .rebuilding-guide-card,
+.hud-frame.terminal-frame.module-rebuilding .rebuilding-module .rebuilding-guide-card:nth-child(n) {
+  border: 0 !important;
+  border-bottom: 1px solid var(--ss-ink) !important;
+  margin: 0 !important;
+  padding: clamp(30px, 5vw, 58px) 0 !important;
+}
+
+.hud-frame.terminal-frame.module-rebuilding .rebuilding-module .rebuilding-guide-card:last-child {
+  border-bottom: 0 !important;
+}
+
+.hud-frame.terminal-frame.module-rebuilding .rebuilding-module .rebuilding-guide-card-header {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  margin: 0 0 10px !important;
+  padding: 0 !important;
+}
+
+.hud-frame.terminal-frame.module-rebuilding .rebuilding-module .rebuilding-guide-card-header > span {
+  display: none !important;
+}
+
+.hud-frame.terminal-frame.module-rebuilding .rebuilding-module .rebuilding-bottom-line {
+  border: 0 !important;
+  border-top: 4px double var(--ss-ink) !important;
+  margin: 0 !important;
+  padding: clamp(30px, 5vw, 54px) 0 0 !important;
+}
+
+.hud-frame.terminal-frame.module-rebuilding .rebuilding-module :is(ul, ol) {
+  background: var(--ss-white) !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  margin: 18px 0 !important;
+  padding: 0 0 0 26px !important;
+}
+
+@media (max-width: 700px) {
+  .hud-frame.terminal-frame.module-rebuilding .terminal-content {
+    padding: 12px !important;
+  }
+
+  .hud-frame.terminal-frame.module-rebuilding .terminal-content > .rebuilding-module {
+    padding: 24px 18px !important;
+  }
+}
