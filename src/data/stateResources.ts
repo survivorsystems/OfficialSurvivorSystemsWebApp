@@ -112,6 +112,7 @@ const stateResourceReviewDates: Partial<Record<string, string>> = {
   michigan: "August 24, 2026",
   minnesota: "August 25, 2026",
   mississippi: "August 25, 2026",
+  missouri: "August 25, 2026",
 };
 
 const stateResourceDownloadFiles: Partial<Record<string, string>> = {
@@ -136,6 +137,7 @@ const stateResourceDownloadFiles: Partial<Record<string, string>> = {
   michigan: "Michigan_Survivor_Systems_Resource_Guide_2026.pdf",
   minnesota: "Minnesota_Survivor_Resource_Guide.pdf",
   mississippi: "Mississippi_Survivor_Resource_Guide.pdf",
+  missouri: "Missouri_Survivor_Resource_Guide.pdf",
 };
 
 export const stateResourceLocations: StateResourceLocation[] = locationNames.map((name) => ({
@@ -8558,6 +8560,66 @@ export const stateResourcePrograms: Partial<Record<string, Partial<Record<StateR
       },
     ],
   },
+  missouri: {
+    Housing: [
+      { name: "Missouri 211", summary: "Free, confidential statewide referrals for shelter, rent, utilities, food, transportation, childcare, and crisis services.", access: "Dial 211, press 6 for homeless services when prompted, or use the online directory.", coverage: "Statewide", phone: "211 or 800-427-4626", secondaryPhone: "TTY 866-385-6525", url: "https://helpingpeople.org/united-way-2-1-1" },
+      { name: "Missouri Balance of State Coordinated Entry", summary: "Entry to homelessness services across the Balance of State's 101-county area.", access: "Use the regional-lead directory or ask 211 for the access point serving the county.", coverage: "101-county Balance of State", url: "https://moboscoc.org/members/coordinated-entry", note: "Separate systems serve Missouri's major metro areas." },
+      { name: "MOCADSV Provider Map", summary: "Locates Missouri domestic violence and sexual assault programs for shelter, advocacy, and safety planning.", access: "Use the statewide map or call a national hotline for connection to a Missouri program.", coverage: "Statewide", phone: "DV: 800-799-7233", secondaryPhone: "Sexual assault: 800-656-4673", url: "https://www.mocadsv.org/how-to-get-help", note: "MOCADSV itself is not a 24-hour crisis provider." },
+      { name: "MHDC Assistance for Renters", summary: "State housing page linking homelessness, eviction-prevention, and housing-assistance resources.", access: "Choose the relevant housing route and contact the listed local provider.", coverage: "Statewide directory", url: "https://mhdc.com/programs/housing-services/renters" },
+      { name: "MOCADSV Local Service Providers", summary: "Local survivor programs may offer emergency shelter, advocacy, counseling, court help, and housing navigation.", access: "Use the map and contact a program serving a geographically safe area.", coverage: "Statewide provider network", phone: "800-799-7233", url: "https://www.mocadsv.org/how-to-get-help" },
+      { name: "Missouri 211 Housing and Shelter Search", summary: "Locates overnight shelter, transitional housing, day centers, rental help, and Coordinated Entry.", access: "Call with a safe ZIP code or county and describe household, accessibility, and animal needs.", coverage: "Statewide", phone: "211 or 800-427-4626", url: "https://search.211helps.org" },
+      { name: "MHDC Affordable Housing Locator", summary: "Searchable inventory of affordable and income-restricted Missouri rental properties.", access: "Search by location and confirm vacancies, eligibility, and waitlists directly with properties.", coverage: "Statewide", phone: "816-759-6600", url: "https://mhdc.com/programs/asset-management/affordable-housing-locator", note: "The locator is not an application and does not guarantee availability." },
+      { name: "DMH Housing Resources", summary: "Housing access and support resources, especially for people connected to behavioral-health or disability services.", access: "Review the resources or contact the state housing unit for local assessment access points.", coverage: "Statewide", url: "https://dmh.mo.gov/housing/unit/housing-resources" },
+      { name: "HUD Missouri Rental Help", summary: "Official route to local public housing agencies and HUD-assisted properties.", access: "Identify every housing authority serving safe areas and check each waitlist separately.", coverage: "Statewide", url: "https://www.hud.gov/states/missouri" },
+      { name: "Local Public Housing Authorities", summary: "Missouri housing authorities separately administer public housing and Housing Choice Voucher waitlists.", access: "Use HUD's directory, apply to each open list, and save confirmations.", coverage: "Local jurisdictions statewide", phone: "Housing counselor: 800-569-4287", url: "https://www.hud.gov/housingcounseling" },
+      { name: "Missouri VAWA Housing Protections", summary: "Covered federally assisted housing may provide confidentiality, emergency-transfer, and lease-bifurcation rights.", access: "Ask for HUD's VAWA Notice and self-certification form and contact legal aid if rights are denied.", coverage: "Covered federally assisted housing", url: "https://www.hud.gov/vawa" },
+      { name: "Missouri Metro Coordinated Entry Systems", summary: "Missouri metro regions operate separate systems for rapid rehousing and other homelessness interventions.", access: "Call 211, provide the county, and ask specifically for a Coordinated Entry assessment.", coverage: "Missouri metro regions", phone: "211", url: "https://www.hud.gov/states/missouri" },
+      { name: "Missouri Housing Emergency Solutions Program", summary: "Local MHDC-funded providers offer homelessness prevention, shelter, and rapid rehousing.", access: "Apply through a funded local provider located through 211, not through MHDC itself.", coverage: "Local providers statewide", phone: "211", url: "https://mhdc.com/programs/hud-programs/housing-emergency-solutions-program" },
+      { name: "Missouri Victim-Service Rapid Rehousing", summary: "Some survivor programs offer confidential or domestic-violence-specific rapid rehousing and flexible assistance.", access: "Ask the local MOCADSV provider about current confidential housing help.", coverage: "Program-dependent statewide", url: "https://www.mocadsv.org/how-to-get-help" },
+      { name: "DMH Rental Assistance Program", summary: "One-time annual housing-expense help, as funds allow, through qualifying behavioral-health pathways.", access: "Ask an eligible case manager to submit the application.", coverage: "Eligible participants statewide", url: "https://dmh.mo.gov/housing/unit/rental-assistance", note: "This is not emergency help and may take about a month after approval." },
+      { name: "Missouri Coordinated Entry Prevention", summary: "Regional systems may provide prevention or diversion under local eligibility and priority rules.", access: "Call 211 and request homelessness-prevention screening, not only a shelter list.", coverage: "Regional systems statewide", phone: "211", url: "https://moboscoc.org/members/coordinated-entry" },
+    ],
+    Food: [
+      { name: "Missouri SNAP", summary: "Monthly food benefits for eligible households through Missouri Family Support Division.", access: "Apply through myDSS, upload requested proof, and complete the interview.", coverage: "Statewide", phone: "855-373-4636", url: "https://mydss.mo.gov/food-assistance", note: "Qualifying emergency households may receive expedited processing." },
+      { name: "myDSS Benefit Portals", summary: "Official application, document upload, status, and case-management links.", access: "Submit promptly and retain confirmation numbers.", coverage: "Statewide", url: "https://mydss.mo.gov/dss-benefit-portals" },
+      { name: "Missouri Food Bank Association", summary: "Routes households to Missouri food banks and local pantry networks.", access: "Use the member map or call 211 for food available today.", coverage: "Statewide", phone: "211", url: "https://feedingmissouri.org" },
+      { name: "Missouri WIC", summary: "Nutrition benefits and services for eligible pregnant or postpartum people, infants, and children under five.", access: "Use the clinic locator or contact the state WIC office.", coverage: "Statewide local clinics", phone: "800-392-8209", url: "https://health.mo.gov/living/families/wic" },
+    ],
+    "Childcare Assistance": [
+      { name: "Missouri Child Care Subsidy", summary: "Helps eligible families pay for care while working, seeking work, attending school, or training.", access: "Apply through the Parent Portal even while the waitlist is active to preserve application order.", coverage: "Statewide", phone: "573-415-8605", url: "https://dese.mo.gov/childhood/child-care-subsidy/families", note: "A waitlist for new applications began March 1, 2026." },
+      { name: "Missouri Child Care Subsidy Waitlist", summary: "Current waitlist rules, priority rankings, and application updates.", access: "Read current notices and keep portal contact information updated.", coverage: "Statewide", phone: "573-415-8605", url: "https://dese.mo.gov/childhood/child-care-subsidy-waitlist", note: "Families already approved must renew on time to avoid interruption." },
+      { name: "Missouri Childhood Resource and Referral", summary: "Helps families locate providers and complete subsidy-related steps.", access: "Call the family support line for provider-search assistance.", coverage: "Statewide", phone: "573-415-8605", url: "https://dese.mo.gov/childhood/child-care-subsidy/families" },
+      { name: "Missouri Head Start and Early Head Start", summary: "Free early learning and family support for eligible pregnant people and families with young children.", access: "Use the federal locator and ask local programs about openings and priority.", coverage: "Local programs statewide", url: "https://headstart.gov/center-locator" },
+    ],
+    "Transportation Assistance": [
+      { name: "MO HealthNet Non-Emergency Medical Transportation", summary: "Free rides to covered care for eligible participants without another way to travel.", access: "Call MTM in advance, keep the trip number, and use the late-ride line if needed.", coverage: "Eligible MO HealthNet participants statewide", phone: "Reservations: 866-269-5927", secondaryPhone: "Late ride: 866-269-5944", url: "https://mydss.mo.gov/mhd/transportation" },
+      { name: "MO HealthNet Mileage Reimbursement", summary: "Eligible transportation users may receive reimbursement when a friend or household member drives to covered care.", access: "Ask MTM about approval and documentation before the trip.", coverage: "Eligible MO HealthNet participants", phone: "866-269-5927", url: "https://www.mtm-inc.net/missouri" },
+      { name: "MO Rides", summary: "Statewide information and referral network for public, nonprofit, and specialized transportation.", access: "Search providers or call for navigation.", coverage: "Statewide", phone: "844-836-7433", url: "https://morides.org" },
+      { name: "Missouri 211 and Survivor Transportation", summary: "Finds local buses, rural demand-response, gas help, volunteer drivers, and shelter transportation.", access: "Call 211 or a local survivor program and state accessibility, child-seat, and service-animal needs.", coverage: "Statewide", phone: "211", url: "https://search.211helps.org" },
+    ],
+    Immigration: [
+      { name: "Legal Aid of Western Missouri Immigration Law Project", summary: "Immigration representation in western Missouri, including survivor remedies.", access: "Contact LAWMO for immigration intake and survivor-remedy screening.", coverage: "Western Missouri", phone: "816-474-6750", url: "https://lawmo.org/immigration-law-project" },
+      { name: "Legal Services of Eastern Missouri Immigration Law Program", summary: "Legal help for immigrant victims of crime, trafficking, and abuse.", access: "Call and identify urgent court, detention, or filing deadlines.", coverage: "Eastern Missouri", phone: "314-256-8705", url: "https://lsem.org/immigration-law" },
+      { name: "MICA Project", summary: "Immigration representation including asylum, removal defense, SIJS, T visas, U visas, and VAWA matters.", access: "Contact the program for intake and current eligibility.", coverage: "St. Louis area and eligible Missouri clients", phone: "314-995-6995", url: "https://www.mica-project.org" },
+      { name: "Missouri Nonprofit Immigration Directory", summary: "Verified nonprofit immigration legal-service directory searchable by location and case type.", access: "Filter for Missouri and the specific remedy or proceeding involved.", coverage: "Statewide directory", url: "https://www.immigrationadvocates.org/nonprofit/legaldirectory/search?state=MO", note: "Use qualified nonprofit providers or licensed attorneys; avoid notario fraud." },
+    ],
+    Trafficking: [
+      { name: "National Human Trafficking Hotline Missouri", summary: "Confidential 24-hour safety planning and referrals for sex or labor trafficking.", access: "Call, text, or use online chat and share only what feels safe.", coverage: "National service available in Missouri", phone: "888-373-7888", secondaryPhone: "Text 233733", url: "https://humantraffickinghotline.org", note: "The hotline is not law enforcement." },
+      { name: "Healing Action Network", summary: "Survivor-centered case management, peer support, trauma therapy, and basic-needs help for adults.", access: "Contact Healing Action for service screening.", coverage: "St. Louis area", phone: "314-833-4515", url: "https://healingaction.org" },
+      { name: "Central Missouri Stop Human Trafficking Coalition", summary: "Direct support and navigation for trafficking survivors in Central Missouri.", access: "Call the coalition helpline for assistance or referral.", coverage: "Central Missouri", phone: "866-590-5959", url: "https://stophumantraffickingmo.com" },
+      { name: "Missouri DSS Human Trafficking Resource Guide", summary: "State resource list for youth and adult trafficking services by area and population.", access: "Review the guide and confirm age and geographic eligibility directly with providers.", coverage: "Statewide directory", url: "https://dss.mo.gov/cd/keeping-kids-safe/resource-guide.htm" },
+    ],
+    "Other Programs": [
+      { name: "Missouri Temporary Assistance", summary: "Monthly cash assistance for eligible parents or guardians caring for children.", access: "Apply through myDSS, by form, or through Family Support Division.", coverage: "Statewide", phone: "855-373-4636", url: "https://mydss.mo.gov/temporary-assistance/apply" },
+      { name: "myDSS Benefit Portal", summary: "Single online entry for benefits applications, document upload, status checks, and reported changes.", access: "Save confirmations and screenshots of every submission.", coverage: "Statewide", url: "https://mydss.mo.gov/apply" },
+      { name: "Missouri Community Action Agencies", summary: "Local agencies may offer utility, rent, transportation, emergency, and employment support.", access: "Call 211 and ask which agency serves the county and has open assistance.", coverage: "Local agencies statewide", phone: "211", url: "https://communityaction.org/find-a-cap" },
+      { name: "Missouri Crime Victims Compensation", summary: "Reimbursement for certain crime-related expenses when statutory eligibility rules are met.", access: "Review covered losses and deadlines and contact the program for claim help.", coverage: "Eligible crime victims statewide", phone: "573-526-6006", url: "https://dps.mo.gov/dir/programs/cvc", note: "Compensation is reimbursement-based, not unrestricted emergency cash." },
+      { name: "Missouri Legal Services", summary: "Statewide router to the regional civil legal-aid program serving each county.", access: "Use the county-based office directory and apply online or by phone.", coverage: "Statewide", url: "https://www.lsmo.org" },
+      { name: "Legal Services of Eastern Missouri", summary: "Civil legal help in eastern counties involving housing, family safety, benefits, and immigration.", access: "Apply online or call during posted intake hours and state deadlines first.", coverage: "Eastern Missouri", phone: "314-534-4200", secondaryPhone: "800-444-0514", url: "https://lsem.org/get-help-now" },
+      { name: "Legal Aid of Western Missouri", summary: "Civil legal assistance across western Missouri involving housing, family, benefits, and immigration.", access: "Apply online or call the central office.", coverage: "Western Missouri", phone: "816-474-6750", url: "https://lawmo.org" },
+      { name: "Southern and Mid-Missouri Legal Services", summary: "Regional civil legal aid for southern and central counties, including specialized survivor assistance.", access: "Use the county directory to identify the correct program.", coverage: "Southern and central Missouri", phone: "Mid-Missouri: 573-634-4545", secondaryPhone: "800-568-4931", url: "https://www.lsmo.org/page/967/how-apply-legal-aid" },
+    ],
+  },
 };
 
 const twelveCategoryStateResourceCategories = [
@@ -9709,6 +9771,81 @@ const mississippiProgramsByCategory: TwelveCategoryProgramMap = {
   ],
 };
 
+const missouriProgramsByCategory: TwelveCategoryProgramMap = {
+  "Homelessness Prevention & Intervention": [
+    "Missouri 211",
+    "Missouri Balance of State Coordinated Entry",
+    "MOCADSV Provider Map",
+    "MHDC Assistance for Renters",
+  ],
+  Housing: [
+    "MOCADSV Local Service Providers",
+    "Missouri 211 Housing and Shelter Search",
+    "MHDC Affordable Housing Locator",
+    "DMH Housing Resources",
+  ],
+  "Subsidized Housing": [
+    "HUD Missouri Rental Help",
+    "MHDC Affordable Housing Locator",
+    "Local Public Housing Authorities",
+    "Missouri VAWA Housing Protections",
+  ],
+  "Cash Assistance": [
+    "Missouri Temporary Assistance",
+    "myDSS Benefit Portal",
+    "Missouri Community Action Agencies",
+    "Missouri Crime Victims Compensation",
+  ],
+  "Immigration Services": [
+    "Legal Aid of Western Missouri Immigration Law Project",
+    "Legal Services of Eastern Missouri Immigration Law Program",
+    "MICA Project",
+    "Missouri Nonprofit Immigration Directory",
+  ],
+  "Trafficking Victim Services": [
+    "National Human Trafficking Hotline Missouri",
+    "Healing Action Network",
+    "Central Missouri Stop Human Trafficking Coalition",
+    "Missouri DSS Human Trafficking Resource Guide",
+  ],
+  "Rapid Rehousing": [
+    "Missouri Balance of State Coordinated Entry",
+    "Missouri Metro Coordinated Entry Systems",
+    "Missouri Housing Emergency Solutions Program",
+    "Missouri Victim-Service Rapid Rehousing",
+  ],
+  "Legal Assistance": [
+    "Missouri Legal Services",
+    "Legal Services of Eastern Missouri",
+    "Legal Aid of Western Missouri",
+    "Southern and Mid-Missouri Legal Services",
+  ],
+  "Rental Assistance": [
+    "Missouri 211",
+    "MHDC Assistance for Renters",
+    "DMH Rental Assistance Program",
+    "Missouri Coordinated Entry Prevention",
+  ],
+  "SNAP / Food Assistance": [
+    "Missouri SNAP",
+    "myDSS Benefit Portals",
+    "Missouri Food Bank Association",
+    "Missouri WIC",
+  ],
+  "Transportation Assistance": [
+    "MO HealthNet Non-Emergency Medical Transportation",
+    "MO HealthNet Mileage Reimbursement",
+    "MO Rides",
+    "Missouri 211 and Survivor Transportation",
+  ],
+  "Childcare Assistance": [
+    "Missouri Child Care Subsidy",
+    "Missouri Child Care Subsidy Waitlist",
+    "Missouri Childhood Resource and Referral",
+    "Missouri Head Start and Early Head Start",
+  ],
+};
+
 const twelveCategoryProgramsByState: Partial<Record<string, TwelveCategoryProgramMap>> = {
   connecticut: connecticutProgramsByCategory,
   delaware: delawareProgramsByCategory,
@@ -9727,6 +9864,7 @@ const twelveCategoryProgramsByState: Partial<Record<string, TwelveCategoryProgra
   michigan: michiganProgramsByCategory,
   minnesota: minnesotaProgramsByCategory,
   mississippi: mississippiProgramsByCategory,
+  missouri: missouriProgramsByCategory,
 };
 
 export function getStateResourceCategories(slug: string): readonly string[] {
