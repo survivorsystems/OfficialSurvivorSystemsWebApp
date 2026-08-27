@@ -1336,13 +1336,13 @@ const housingGuideSections: RebuildingGuideSection[] = [
 
 const moduleRoutes: Record<ModuleKey, { label: string; path: string }> = {
   home: { label: "Home", path: "/" },
-  assessments: { label: "Assessments", path: "/assessments" },
+  assessments: { label: "Guides", path: "/guides" },
   guides: { label: "Guides", path: "/guides" },
   planners: { label: "Resources", path: "/resources" },
   toolkits: { label: "Resources", path: "/resources" },
   education: { label: "Surviving", path: "/surviving" },
   about: { label: "About", path: "/about" },
-  advocacy: { label: "Assessments", path: "/assessments" },
+  advocacy: { label: "Guides", path: "/guides" },
   government: { label: "Systems", path: "/systems" },
   support: { label: "Support", path: "/support" },
   "go-bag-prep": { label: "Immediate Support", path: "/crisis-support" },
@@ -1501,9 +1501,7 @@ function isPrimaryNavActive(activeModule: ModuleKey, navKey: ModuleKey) {
     return activeModule === "local-help" || activeModule === "planners" || activeModule === "toolkits" || activeModule === "access" || activeModule === "library";
   }
 
-  if (navKey === "guides") return activeModule === "guides" || activeModule === "how-to" || activeModule === "legal" || activeModule === "rebuilding" || activeModule === "advocacy" || activeModule === "assessments";
-
-  if (navKey === "advocacy") return activeModule === "advocacy" || activeModule === "assessments";
+  if (navKey === "guides") return activeModule === "guides" || activeModule === "how-to" || activeModule === "legal" || activeModule === "rebuilding";
 
   if (navKey === "access") {
     return activeModule === "access" || activeModule === "library";
@@ -1520,7 +1518,6 @@ type CategoryFile = {
   guideId?: string;
   target?: ModuleKey;
   path?: string;
-  modal?: "love-or-fear" | "freedom-test" | "coercive-control-map" | "financial-captivity";
 };
 
 type ResourceCategoryId =
@@ -2265,40 +2262,9 @@ const categoryFiles: Record<
   }
 > = {
   assessments: {
-    title: "Assessments",
-    intro:
-      "Interactive browser-only tools that help a user name patterns, reality-check old stories, and decide what kind of support file to open next.",
-    files: [
-      {
-        title: "Is It Love or Fear?",
-        description: "A 24-item relationship reality assessment with a separate priority pattern check.",
-        status: "LIVE",
-        modal: "love-or-fear",
-      },
-      {
-        title: "The Freedom Test",
-        description: "How much freedom do you actually have without retaliation?",
-        status: "LIVE",
-        modal: "freedom-test",
-      },
-      {
-        title: "Coercive Control Pattern Map",
-        description: "Map where control is operating, how concentrated it is, and which behaviors matter on their own.",
-        status: "LIVE",
-        modal: "coercive-control-map",
-      },
-      {
-        title: "Financial Captivity Assessment",
-        description: "Is money being used to reduce your choices and establish control over you?",
-        status: "LIVE",
-        modal: "financial-captivity",
-      },
-      {
-        title: "Rebuilding Readiness Check",
-        description: "Future assessment for housing, benefits, paperwork, emotional bandwidth, and next-step capacity.",
-        status: "QUEUED",
-      },
-    ],
+    title: "Guides",
+    intro: "Practical information and survivor-centered resources.",
+    files: [],
   },
   guides: {
     title: "Guides",
@@ -2503,7 +2469,7 @@ const categoryFiles: Record<
       },
       {
         title: "Privacy Position",
-        description: "No accounts for free tools, no answer storage for assessments, and no unnecessary data collection.",
+        description: "No accounts for free tools and no unnecessary data collection.",
         status: "LIVE",
       },
       {
@@ -2514,7 +2480,7 @@ const categoryFiles: Record<
     ],
   },
   advocacy: {
-    title: "Assessments",
+    title: "Guides",
     intro:
       "Support-facing resources: what to ask for, who might help, how to explain the situation, and how to keep power dynamics visible.",
     files: [
@@ -3167,7 +3133,7 @@ const defaultControlPanel: ControlPanelState = {
       tone: "purple",
     },
   ],
-  notice: "Choose a page or assessment whenever you are ready.",
+  notice: "Choose a page whenever you are ready.",
 };
 
 function leaveSite() {
@@ -3176,13 +3142,13 @@ function leaveSite() {
 
 function getInitialModule(): ModuleKey {
   const path = window.location.pathname;
-  if (path === "/assessments") return "advocacy";
+  if (path === "/assessments") return "guides";
   if (path === "/guides") return "guides";
   if (path.startsWith("/guides/")) return "how-to";
   if (path === "/planners-trackers" || path === "/toolkits") return "local-help";
-  if (path === "/surviving" || path === "/education-awareness") return "advocacy";
+  if (path === "/surviving" || path === "/education-awareness") return "guides";
   if (path === "/about") return "about";
-  if (path === "/strategy" || path === "/advocacy") return "advocacy";
+  if (path === "/strategy" || path === "/advocacy") return "guides";
   if (path === "/support") return "support";
   if (path === "/rebuilding") return "rebuilding";
   if (path === "/planning" || path === "/go-bag-prep" || path === "/crisis-support") return "planning";
@@ -3449,23 +3415,7 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
         <p className="home-editorial-deck">Welcome in. Use what helps. Leave what doesn't.</p>
       </article>
 
-      <div className="home-editorial-secondary" aria-label="Where to begin and device safety">
-        <article className="home-start-story">
-          <header className="home-article-header">
-            <p className="home-editorial-kicker">A GUIDED PLACE TO BEGIN</p>
-            <h2>Start Here</h2>
-          </header>
-          <p>
-            There is a lot here: assessments, safety information, practical guides, state resources,
-            planning tools, and rebuilding support. Start Here asks a few questions and points you
-            toward what may be most relevant. Your answers aren't saved or transmitted.
-          </p>
-          <div className="home-editorial-actions">
-            <button type="button" onClick={() => onNavigate("advocacy", "/assessments")}>Take Start Here</button>
-            <button type="button" onClick={() => onNavigate("local-help", "/resources")}>Browse Resources</button>
-          </div>
-        </article>
-
+      <div className="home-editorial-secondary home-editorial-secondary-single" aria-label="Device safety">
         <article className="home-safety-story" aria-labelledby="home-privacy">
           <header className="home-article-header">
             <p className="home-editorial-kicker">A NOTE ABOUT DEVICE SAFETY</p>
@@ -3734,10 +3684,9 @@ function AboutModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: str
             people see the board more clearly so they can make their own decisions.
           </p>
           <p>
-            That might mean taking an assessment to identify financial captivity or post-separation
-            control. It might mean learning how a particular system works before walking into it, finding
-            a free resource, building a practical plan, documenting what's happening, or getting help
-            thinking through a complicated situation.
+            That might mean learning how a particular system works before walking into it, finding a free
+            resource, building a practical plan, documenting what's happening, or getting help thinking
+            through a complicated situation.
           </p>
           <p><strong>Sometimes the most powerful thing a survivor can have is simply better information and a clearer strategy.</strong></p>
         </div>
@@ -3745,15 +3694,15 @@ function AboutModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: str
 
       <section className="about-offerings" aria-labelledby="about-offerings-title">
         <header>
-          <span>RESOURCES, ASSESSMENTS, SERVICES + TRAINING</span>
+          <span>RESOURCES, SERVICES + TRAINING</span>
           <h2 id="about-offerings-title">Practical support for survivors and the people serving them.</h2>
         </header>
         <div className="about-offerings-grid">
           <article>
             <span>TOOLS</span>
-            <h3>Resources and assessments</h3>
+            <h3>Resources and practical tools</h3>
             <p>
-              Educational resources, assessments, planners, guides, and strategy tools for people
+              Educational resources, planners, guides, and strategy tools for people
               rebuilding after abuse. Some resources are completely free. Others are low-cost tools
               designed to help fund the project while keeping information accessible.
             </p>
@@ -3803,12 +3752,10 @@ function AboutModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: str
         <span>START WHEREVER YOU ARE</span>
         <h2 id="about-start-title">You don't have to solve everything at once.</h2>
         <p>You don't need to know exactly what kind of help you need before you begin.</p>
-        <p>Take an assessment if you're trying to understand what's happening.</p>
         <p>Browse the resource library if you're looking for practical information.</p>
         <p>Book a strategy session if your situation is complicated and you need help sorting through the moving pieces.</p>
         <p>If you're an organization or professional interested in training or consulting, you can learn more about working together.</p>
         <div className="about-start-actions">
-          <button type="button" onClick={() => onNavigate("advocacy", "/assessments")}>Open Assessments</button>
           <button type="button" onClick={() => onNavigate("local-help", "/resources")}>Browse Resources</button>
         </div>
         <p><strong>You just need a place to start.</strong></p>
@@ -4408,14 +4355,7 @@ function CategoryModule({
   onNavigate: (module: ModuleKey, path: string) => void;
 }) {
   const baseContent = categoryFiles[category];
-  const content = category === "advocacy"
-    ? {
-        title: "Assessments",
-        intro: "Use an assessment to name patterns, understand what is affecting your choices, and find a practical place to begin.",
-        files: categoryFiles.assessments.files,
-      }
-    : baseContent;
-  const [activeModal, setActiveModal] = useState<CategoryFile["modal"] | null>(null);
+  const content = baseContent;
   const guideCategories = category === "guides"
     ? resourceCategoryDefinitions
         .map((definition) => ({ ...definition, files: content.files.filter((file) => file.categoryId === definition.id) }))
@@ -4425,29 +4365,14 @@ function CategoryModule({
   function renderCategoryFile(file: CategoryFile) {
     return (
       <article className="category-file-card" key={file.title}>
-        {file.modal ? (
-          <h2><button className="category-file-title-button" type="button" onClick={() => setActiveModal(file.modal ?? null)}>{file.title}</button></h2>
-        ) : <h2>{file.title}</h2>}
+        <h2>{file.title}</h2>
         <p>{file.description}</p>
-        {file.modal ? (
-          <button type="button" onClick={() => setActiveModal(file.modal ?? null)}>Open Assessment</button>
-        ) : file.guideId ? (
+        {file.guideId ? (
           <button type="button" onClick={() => onNavigate("how-to", `/guides/${file.guideId}`)}>Open Guide</button>
         ) : file.target && file.path ? (
           <button type="button" onClick={() => onNavigate(file.target as ModuleKey, file.path as string)}>{category === "guides" ? "Open Guide" : "Open File"}</button>
         ) : <button type="button" disabled>Queued</button>}
       </article>
-    );
-  }
-
-  if (activeModal) {
-    return (
-      <section className="page-shell category-module assessment-workspace" aria-label="Assessment workspace">
-        {activeModal === "love-or-fear" ? <LoveFearAssessmentModal onClose={() => setActiveModal(null)} /> : null}
-        {activeModal === "freedom-test" ? <FreedomTestAssessmentModal onClose={() => setActiveModal(null)} /> : null}
-        {activeModal === "coercive-control-map" ? <CoerciveControlPatternMapModal onClose={() => setActiveModal(null)} /> : null}
-        {activeModal === "financial-captivity" ? <FinancialCaptivityAssessmentModal onClose={() => setActiveModal(null)} /> : null}
-      </section>
     );
   }
 
@@ -4459,7 +4384,7 @@ function CategoryModule({
     >
       {category !== "government" ? (
         <PageFlourishHeader
-          eyebrow={category === "advocacy" ? "PRIVATE, IN-BROWSER ASSESSMENTS" : content.title}
+          eyebrow={content.title}
           title={content.title}
           titleId={`${category}-title`}
           variant={category}
@@ -4470,14 +4395,6 @@ function CategoryModule({
 
       {category === "guides" ? (
         <div className="guide-category-directory">
-          <section className="guide-assessment-entry" aria-labelledby="guide-assessment-entry-title">
-            <div>
-              <span>PRIVATE, IN-BROWSER TOOLS</span>
-              <h2 id="guide-assessment-entry-title">Assessments</h2>
-              <p>Name patterns, organize concerns, and find a practical place to begin. Answers stay in temporary browser state and are not saved or transmitted.</p>
-            </div>
-            <button type="button" onClick={() => onNavigate("advocacy", "/assessments")}>Open Assessments</button>
-          </section>
           {guideCategories.map((guideCategory) => (
             <section className="guide-category-section" key={guideCategory.id}>
               <header>
@@ -6945,7 +6862,7 @@ function ResourceModule({
       description: "Housing systems, applications, Coordinated Entry, waitlists, utilities, and follow-up.",
       files: [
         {
-          label: "Housing Strategy System",
+          label: "Housing Resource Directory",
           action: () => {
             window.history.pushState({}, "", "/resources/housing-strategy");
             setActiveDirectory("housing-strategy");
@@ -7176,7 +7093,7 @@ function SupportModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: s
           <ul>
             <li>Free access to essential educational and crisis-reference tools</li>
             <li>Privacy-minded, account-optional experiences wherever possible</li>
-            <li>New guides, assessments, planners, and survivor-centered resources</li>
+            <li>New guides, planners, and survivor-centered resources</li>
             <li>Independent maintenance of the Survivor Systems platform</li>
           </ul>
         </aside>
@@ -7994,10 +7911,7 @@ export function App() {
     <HomeModule onNavigate={navigate} />
   ) : activeModule === "about" ? (
     <AboutModule onNavigate={navigate} />
-  ) : activeModule === "assessments" ||
-    activeModule === "guides" ||
-    activeModule === "education" ||
-    activeModule === "advocacy" ? (
+  ) : activeModule === "guides" || activeModule === "education" ? (
     <CategoryModule category={activeModule} onNavigate={navigate} />
   ) : activeModule === "go-bag-prep" ? (
     <PlanningModule onControlPanelChange={updateControlPanel} onNavigate={navigate} />

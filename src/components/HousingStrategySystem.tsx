@@ -129,9 +129,8 @@ function MatchCard({ match }: { match: HousingMatch }) {
   </article>;
 }
 
-export function HousingStrategySystem({ onBack }: { onBack: () => void }) {
-  const requestedView = new URLSearchParams(window.location.search).get("view");
-  const [view, setView] = useState<View>(requestedView === "assessment" ? "assessment" : "landing");
+function LegacyHousingStrategySystem({ onBack }: { onBack: () => void }) {
+  const [view, setView] = useState<View>("browse");
   const [answers, setAnswers] = useState<HousingAssessmentAnswers>({ ...emptyHousingAnswers });
   const [step, setStep] = useState(0);
   const [search, setSearch] = useState("");
@@ -178,7 +177,7 @@ export function HousingStrategySystem({ onBack }: { onBack: () => void }) {
   if (detail) return <section className="housing-strategy-system"><ResourceDetail resource={detail} onBack={() => setDetail(null)} /></section>;
 
   return <section className="housing-strategy-system" aria-labelledby="housing-strategy-title">
-    <header className="housing-system-header"><div><p className="housing-kicker">RESOURCES / HOUSING</p><h1 id="housing-strategy-title">Housing Strategy System</h1><p>Explore housing pathways directly or answer a set of questions to build a practical housing strategy. Assessment answers stay in this browser session and are not saved.</p></div><button className="resource-back-button" type="button" onClick={onBack}><ArrowLeft size={18}/> Back to Resources</button></header>
+    <header className="housing-system-header"><div><p className="housing-kicker">RESOURCES / HOUSING</p><h1 id="housing-strategy-title">Housing Resource Directory</h1><p>Browse housing programs, protections, inventories, financing options, and places to look for housing.</p></div><button className="resource-back-button" type="button" onClick={onBack}><ArrowLeft size={18}/> Back to Resources</button></header>
 
     {view === "landing" ? <div className="housing-entry-grid">
       <article><span>01</span><h2>Browse Housing Resources</h2><p>Search all 28 programs, protections, inventories, financing options, and places to look for housing.</p><button type="button" onClick={()=>setView("browse")}>Browse Resources <ChevronRight size={18}/></button></article>
@@ -211,4 +210,67 @@ function HousingResults({ matches, actions, onReset }: { matches: HousingMatch[]
     <section className="housing-action-plan"><h3>Your Next Steps</h3>{(["start","next","later"] as const).map(horizon=>{const items=actions.filter(a=>a.horizon===horizon).slice(0,5);return items.length?<div key={horizon}><h4>{horizon==="start"?"Start Here":horizon==="next"?"Next":"Longer Term"}</h4><ol>{items.map(item=><li key={`${horizon}-${item.resourceId}`}>{item.action}</li>)}</ol></div>:null})}</section>
     <p className="housing-privacy-note">This strategy was generated in this browser session. Your answers were not saved. Program availability and eligibility must be confirmed by the administering property, agency, housing authority, lender, or provider.</p>
   </section>;
+}
+
+export function HousingStrategySystem({ onBack }: { onBack: () => void }) {
+  const [search, setSearch] = useState("");
+  const [category, setCategory] = useState("all");
+  const [needFilter, setNeedFilter] = useState("");
+  const [situationFilter, setSituationFilter] = useState("");
+  const [populationFilter, setPopulationFilter] = useState("");
+  const [detail, setDetail] = useState<HousingResource | null>(null);
+
+  const visibleResources = useMemo(() => {
+    const normalized = search.trim().toLowerCase();
+    const categoryRule = categories.find((item) => item.id === category) ?? categories[0];
+
+    return housingResources.filter((resource) => {
+      const searchable = [
+        resource.name,
+        resource.shortName,
+        resource.userFacingSummary,
+        ...resource.assistanceTypes,
+        ...resource.housingGoals,
+        ...resource.barrierTags,
+        ...resource.populationTags,
+      ].filter(Boolean).join(" ").toLowerCase();
+
+      return categoryRule.matches(resource)
+        && (!normalized || searchable.includes(normalized))
+        && (!needFilter || resource.housingGoals.includes(needFilter) || resource.barrierTags.includes(needFilter))
+        && (!situationFilter || resource.housingStatuses.includes(situationFilter))
+        && (!populationFilter || resource.populationTags.includes(populationFilter));
+    });
+  }, [category, needFilter, populationFilter, search, situationFilter]);
+
+  if (detail) {
+    return <section className="housing-strategy-system"><ResourceDetail resource={detail} onBack={() => setDetail(null)} /></section>;
+  }
+
+  return (
+    <section className="housing-strategy-system" aria-labelledby="housing-strategy-title">
+      <header className="housing-system-header">
+        <div>
+          <p className="housing-kicker">RESOURCES / HOUSING</p>
+          <h1 id="housing-strategy-title">Housing Resource Directory</h1>
+          <p>Browse housing programs, protections, inventories, financing options, and places to look for housing.</p>
+        </div>
+        <button className="resource-back-button" type="button" onClick={onBack}><ArrowLeft size={18}/> Back to Resources</button>
+      </header>
+
+      <section className="housing-browser">
+        <div className="housing-browser-tools">
+          <label className="housing-search"><Search size={20}/><input aria-label="Search housing resources" placeholder="Search housing resources" value={search} onChange={(event) => setSearch(event.target.value)}/></label>
+          <div className="housing-filter-grid">
+            <label>Need<select value={needFilter} onChange={(event) => setNeedFilter(event.target.value)}><option value="">All needs</option>{goalOptions.slice(0, -1).map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}</select></label>
+            <label>Situation<select value={situationFilter} onChange={(event) => setSituationFilter(event.target.value)}><option value="">All situations</option>{statusOptions.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}</select></label>
+            <label>Circumstance<select value={populationFilter} onChange={(event) => setPopulationFilter(event.target.value)}><option value="">All circumstances</option>{circumstanceOptions.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}</select></label>
+          </div>
+        </div>
+        <nav className="housing-category-nav" aria-label="Housing resource categories">{categories.map((item) => <button className={category === item.id ? "active" : ""} key={item.id} type="button" onClick={() => setCategory(item.id)}>{item.label}</button>)}</nav>
+        <p className="housing-result-count">{visibleResources.length} resources</p>
+        <div className="housing-resource-grid">{visibleResources.map((resource) => <ResourceCard key={resource.id} resource={resource} onOpen={() => setDetail(resource)}/>)}</div>
+      </section>
+    </section>
+  );
 }

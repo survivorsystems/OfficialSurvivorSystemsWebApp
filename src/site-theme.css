@@ -11076,6 +11076,10 @@ body,
   text-align: center !important;
 }
 
+.hud-frame.module-home .home-editorial-secondary.home-editorial-secondary-single {
+  grid-template-columns: minmax(0, 1fr) !important;
+}
+
 /* FINAL Assessments edition: quiet linen, readable newsprint, dependable controls. */
 .hud-frame.terminal-frame:is(.module-advocacy, .module-assessments) .terminal-content {
   background: var(--ss-paper) !important;
