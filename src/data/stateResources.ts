@@ -113,6 +113,7 @@ const stateResourceReviewDates: Partial<Record<string, string>> = {
   minnesota: "August 25, 2026",
   mississippi: "August 25, 2026",
   missouri: "August 25, 2026",
+  montana: "August 25, 2026",
 };
 
 const stateResourceDownloadFiles: Partial<Record<string, string>> = {
@@ -138,6 +139,7 @@ const stateResourceDownloadFiles: Partial<Record<string, string>> = {
   minnesota: "Minnesota_Survivor_Resource_Guide.pdf",
   mississippi: "Mississippi_Survivor_Resource_Guide.pdf",
   missouri: "Missouri_Survivor_Resource_Guide.pdf",
+  montana: "Montana_Survivor_Resource_Guide.pdf",
 };
 
 export const stateResourceLocations: StateResourceLocation[] = locationNames.map((name) => ({
@@ -8620,6 +8622,69 @@ export const stateResourcePrograms: Partial<Record<string, Partial<Record<StateR
       { name: "Southern and Mid-Missouri Legal Services", summary: "Regional civil legal aid for southern and central counties, including specialized survivor assistance.", access: "Use the county directory to identify the correct program.", coverage: "Southern and central Missouri", phone: "Mid-Missouri: 573-634-4545", secondaryPhone: "800-568-4931", url: "https://www.lsmo.org/page/967/how-apply-legal-aid" },
     ],
   },
+  montana: {
+    Housing: [
+      { name: "Montana 211", summary: "Free, confidential statewide referrals for shelter, rent, utilities, food, transportation, and crisis services.", access: "Dial 211 with a safe ZIP code or county and ask which programs are accepting referrals today.", coverage: "Statewide", phone: "211", url: "https://montana211.org", note: "This is a referral service, not a shelter." },
+      { name: "Montana Continuum of Care Coordinated Entry", summary: "Statewide assessment and referral route for federally funded homelessness programs.", access: "Use the access-point list or ask 211 for the provider serving the area.", coverage: "Statewide", url: "https://www.mtcoc.org", note: "The Continuum of Care does not provide direct household assistance." },
+      { name: "MCADSV Victim-Service Programs by Region", summary: "Locates confidential domestic and sexual violence safety planning, shelter, and advocacy.", access: "Choose a geographically safe region or call a national hotline for immediate connection.", coverage: "Regional programs statewide", phone: "888-404-7794", url: "https://www.mcadsv.com/victim-service-programs-by-region", note: "MCADSV itself is not a 24-hour crisis provider." },
+      { name: "Montana Emergency Solutions Grant Providers", summary: "Local grantees may provide homelessness prevention, emergency shelter, and rapid rehousing.", access: "Enter through Coordinated Entry or ask 211 for the current provider in the county.", coverage: "Local providers statewide", phone: "211", url: "https://dphhs.mt.gov/hcsd/EmergencySolutionsGrant" },
+      { name: "MCADSV Regional Provider Directory", summary: "Local programs may offer emergency shelter, confidential advocacy, relocation support, and help with children or pets.", access: "Contact the program serving a safe region and explain transportation or accessibility needs.", coverage: "Regional programs statewide", phone: "888-404-7794", url: "https://www.mcadsv.com/victim-service-programs-by-region" },
+      { name: "Montana 211 Housing Search", summary: "Finds emergency shelter, transitional housing, warming centers, and local homelessness access points.", access: "Call with household size, county, accessibility, animal needs, and a safe callback method.", coverage: "Statewide", phone: "211", url: "https://montana211.org" },
+      { name: "MTHousingSearch", summary: "Free statewide search for affordable, accessible, and special-needs rentals.", access: "Search listings and confirm vacancies, deposits, and eligibility directly with properties.", coverage: "Statewide", url: "https://mthousingsearch.com", note: "Listings do not guarantee availability." },
+      { name: "Montana Community Action and HRDC Network", summary: "Ten regional agencies connect residents to housing, energy, transportation, and stabilization programs.", access: "Use the county list to identify the agency serving the location.", coverage: "Regional agencies statewide", phone: "211", url: "https://montanacommunityaction.com" },
+      { name: "Montana Housing Choice Voucher Program", summary: "Tenant-based Section 8 assistance administered through ten regional waiting lists.", access: "Apply through Montana Housing and compare geographic safety and wait times before selecting one regional list.", coverage: "Ten Montana regions", phone: "406-841-2700", url: "https://commerce.mt.gov/Housing/Rental-Assistance/Housing-Choice-Voucher-Program", note: "The HCV and Moderate Rehabilitation waitlists were open when checked August 25, 2026." },
+      { name: "HUD Montana Rental Resources", summary: "Official links to public housing authorities, HUD-assisted properties, and Tribally Designated Housing Entities.", access: "Contact each relevant PHA or TDHE about programs and separate waitlists.", coverage: "Statewide and Tribal housing entities", phone: "PHA help: 800-955-2232", url: "https://www.hud.gov/states/montana" },
+      { name: "Montana Housing Project-Based Programs", summary: "Project-Based Section 8 and Section 811 assistance tied to particular properties.", access: "Use Montana Housing and MTHousingSearch and ask properties directly about waitlists.", coverage: "Participating properties statewide", phone: "406-841-2700", url: "https://commerce.mt.gov/Housing/Rental-Assistance" },
+      { name: "Montana VAWA Housing Protections", summary: "Covered federally assisted housing may provide confidentiality, emergency-transfer, and lease-bifurcation rights.", access: "Ask for HUD's VAWA notice and self-certification form and contact legal aid if denied.", coverage: "Covered federally assisted housing", url: "https://www.hud.gov/vawa" },
+      { name: "Montana CoC Rapid Rehousing Entry", summary: "Statewide assessment and prioritization for rapid rehousing and other homelessness programs.", access: "Use the access-point list or ask 211 for the provider serving the county.", coverage: "Statewide", phone: "211", url: "https://www.mtcoc.org" },
+      { name: "Montana ESG Rapid Rehousing", summary: "Local grantees may provide short- or medium-term rental assistance and stabilization.", access: "Apply through a provider identified by Coordinated Entry or 211.", coverage: "Local providers statewide", url: "https://dphhs.mt.gov/hcsd/EmergencySolutionsGrant" },
+      { name: "Montana Victim-Service Housing Assistance", summary: "Some survivor programs have confidential housing navigation, flexible aid, or domestic-violence-specific rapid rehousing.", access: "Ask the local program whether confidential housing help is available.", coverage: "Program-dependent statewide", url: "https://www.mcadsv.com/victim-service-programs-by-region" },
+      { name: "Montana Emergency Housing Voucher Referrals", summary: "Limited vouchers target people who are homeless, at risk, recently homeless, or fleeing violence or trafficking.", access: "Ask Coordinated Entry whether referrals are currently possible; households generally cannot self-refer.", coverage: "Statewide when referrals are available", phone: "406-841-2700", url: "https://commerce.mt.gov/Housing/Rental-Assistance/Emergency-Housing-Voucher-Program" },
+      { name: "Montana 211 Rental-Assistance Referral", summary: "Finds rent, deposit, utility, and eviction-prevention programs by location.", access: "Ask the specialist to verify currently open funding for the ZIP code.", coverage: "Statewide", phone: "211", url: "https://montana211.org" },
+      { name: "Montana Coordinated Entry Prevention", summary: "Local access points may screen households at imminent risk for prevention or diversion.", access: "Ask specifically for prevention screening and describe any eviction notice or unsafe displacement.", coverage: "Regional access points statewide", phone: "211", url: "https://www.mtcoc.org" },
+      { name: "Montana Survivor Flexible Assistance", summary: "Local programs may have limited relocation, hotel, deposit, transportation, or flexible funds.", access: "Ask a confidential advocate what is available and whether a police report is required.", coverage: "Program-dependent statewide", phone: "888-404-7794", url: "https://www.mcadsv.com/victim-service-programs-by-region", note: "Funding is local and not guaranteed." },
+    ],
+    Food: [
+      { name: "Montana SNAP", summary: "Monthly food benefits for eligible households.", access: "Apply online or through an Office of Public Assistance and complete the interview and verification.", coverage: "Statewide", phone: "888-706-1535", url: "https://dphhs.mt.gov/hcsd/SNAP", note: "Ask about expedited processing when cash and food are extremely limited." },
+      { name: "Montana Office of Public Assistance", summary: "Local and statewide help with SNAP, TANF, and other benefit applications and case questions.", access: "Use the office directory or Public Assistance Helpline.", coverage: "Statewide", phone: "888-706-1535", url: "https://dphhs.mt.gov/HCSD/OfficeofPublicAssistance" },
+      { name: "Montana Food Bank Network", summary: "Statewide food-bank network and local pantry locator.", access: "Use the food finder or call 211 for food available today.", coverage: "Statewide", phone: "211", url: "https://mfbn.org" },
+      { name: "Montana WIC", summary: "Nutrition benefits and support for eligible pregnant or postpartum people, infants, and children under five.", access: "Contact the state program or a local WIC clinic.", coverage: "Statewide local clinics", url: "https://dphhs.mt.gov/ecfsd/WIC" },
+    ],
+    "Childcare Assistance": [
+      { name: "Best Beginnings Child Care Scholarship", summary: "Subsidized childcare for eligible families, generally with income and activity requirements and a sliding copayment.", access: "Apply through the state parent portal and submit county-routed verification.", coverage: "Statewide", url: "https://dphhs.mt.gov/ecfsd/childcare/BestBeginningsScholarships" },
+      { name: "Montana Child Care Resources", summary: "Official parent information, provider search, and program contacts.", access: "Locate care and the Child Care Resource and Referral agency serving the county.", coverage: "Statewide", url: "https://dphhs.mt.gov/ecfsd/childcare" },
+      { name: "Montana MAQCS Regional Contacts", summary: "County-based contacts for scholarship processing and childcare questions.", access: "Use the directory and keep copies of documents and notices.", coverage: "County-routed statewide", url: "https://dphhs.mt.gov/ecfsd/MAQCS/Contacts" },
+      { name: "Montana Head Start and Early Head Start", summary: "Free early learning and family support for eligible pregnant people and families with young children.", access: "Use the federal locator and ask local programs about openings, transportation, and priority.", coverage: "Local programs statewide", url: "https://headstart.gov/center-locator" },
+    ],
+    "Transportation Assistance": [
+      { name: "Montana Medicaid Transportation", summary: "Prior-authorized nonemergency travel to covered medical care, with possible mileage, meals, or lodging under program rules.", access: "Request approval before travel and keep the authorization or trip number.", coverage: "Eligible Medicaid members statewide", phone: "800-292-7114", url: "https://dphhs.mt.gov/MontanaHealthcarePrograms/Medicaid/montanahealthcaretransportation" },
+      { name: "Montana 211 Transportation Search", summary: "Finds local transit, rural demand-response, volunteer drivers, and gas assistance.", access: "Call with origin, destination, date, mobility needs, and whether children will travel.", coverage: "Statewide", phone: "211", url: "https://montana211.org" },
+      { name: "Montana Victim-Service Transportation", summary: "Survivor programs may arrange safe transportation or limited gas, bus, or relocation help.", access: "Ask a local program and avoid sharing an unsafe pickup address.", coverage: "Program-dependent statewide", url: "https://www.mcadsv.com/victim-service-programs-by-region" },
+      { name: "Tribal Health and CHR Transportation", summary: "Tribal Health and Community Health Representative programs may coordinate eligible health-related travel.", access: "Ask the relevant Tribal Health office about service area, eligibility, and advance notice.", coverage: "Participating Tribal communities", url: "https://www.ihs.gov/billings/healthcarefacilities" },
+    ],
+    Immigration: [
+      { name: "Montana Nonprofit Immigration Directory", summary: "Verified nonprofit immigration legal-services directory searchable by Montana location and case type.", access: "Filter for Montana and the needed remedy, including T visa, U visa, VAWA, asylum, or removal defense.", coverage: "Statewide directory", url: "https://www.immigrationadvocates.org/nonprofit/legaldirectory/search?state=MT", note: "Avoid notarios and guaranteed-result claims." },
+      { name: "International Rescue Committee Missoula", summary: "Immigration services with intake dependent on case type and capacity.", access: "Call to confirm whether the office handles the matter or can refer elsewhere.", coverage: "Missoula and eligible clients", phone: "406-926-1982", url: "https://www.rescue.org/united-states/missoula-mt" },
+      { name: "National Immigrant Justice Center Trafficking Legal Services", summary: "Legal screening for noncitizen trafficking survivors, including possible immigration relief.", access: "Call for trafficking legal services and mention detention or filing deadlines first.", coverage: "National service available to eligible Montana survivors", phone: "312-660-1370", url: "https://immigrantjustice.org/for-immigrants/services/legal-services-for-victims-of-human-trafficking" },
+      { name: "Montana Legal Services Immigration Referral", summary: "Civil legal-aid intake that can identify related family, housing, benefits, and qualified immigration referrals.", access: "Apply online or call and ask specifically for a qualified immigration referral.", coverage: "Statewide", phone: "800-666-6899", url: "https://www.mtlsa.org/apply-for-services" },
+    ],
+    Trafficking: [
+      { name: "National Human Trafficking Hotline Montana", summary: "Confidential 24-hour safety planning and referrals for sex or labor trafficking.", access: "Call, text, or chat and share only what feels safe.", coverage: "National service available in Montana", phone: "888-373-7888", secondaryPhone: "Text 233733", url: "https://humantraffickinghotline.org", note: "The hotline is not law enforcement." },
+      { name: "Montana Human Trafficking Reporting Line", summary: "State channel for reporting suspected trafficking to Montana law enforcement.", access: "Use only when making a law-enforcement report is safe and desired.", coverage: "Statewide", phone: "833-406-STOP", url: "https://dojmt.gov/attorney-general-knudsen-relaunches-montana-human-trafficking-hotline-and-expands-reporting-tools", note: "This is a law-enforcement reporting channel, not confidential advocacy." },
+      { name: "Alix House Trafficking Legal Assistance", summary: "Trauma-informed legal assistance for trafficking survivors and people at risk.", access: "Request an intake or referral through the program information page.", coverage: "Montana program service area", url: "https://www.thefriendshipcenter.org/post/partner-spotlight-trauma-informed-legal-assistance-for-human-trafficking-survivors" },
+      { name: "MCADSV Local Programs", summary: "Regional programs can help with safety planning, shelter, and referrals for overlapping abuse or exploitation.", access: "Use the regional map and ask for a confidential advocate.", coverage: "Regional programs statewide", phone: "888-404-7794", url: "https://www.mcadsv.com/victim-service-programs-by-region" },
+    ],
+    "Other Programs": [
+      { name: "Montana TANF", summary: "Monthly cash assistance and employment services for eligible families with children.", access: "Apply online or through an Office of Public Assistance.", coverage: "Statewide", phone: "888-706-1535", url: "https://dphhs.mt.gov/HCSD/tanf" },
+      { name: "Montana Assistance Portal", summary: "Official online application for TANF, SNAP, and other benefits.", access: "Submit online, save confirmation details, and upload requested verification.", coverage: "Statewide", phone: "888-706-1535", url: "https://apply.mt.gov" },
+      { name: "Montana Tribal TANF Programs", summary: "Some Tribal Nations administer TANF for eligible members or residents in designated service areas.", access: "Ask the Tribe's social-services office whether Tribal or state TANF is the correct route.", coverage: "Participating Tribal service areas", url: "https://www.acf.hhs.gov/ofa/map/tribes-operating-tribal-tanf-programs" },
+      { name: "Montana Community Action Emergency Help", summary: "Regional agencies may have flexible, utility, transportation, or other short-term assistance.", access: "Use the county network or 211 to identify currently funded help.", coverage: "Regional agencies statewide", phone: "211", url: "https://montanacommunityaction.com", note: "Availability changes by region and funding cycle." },
+      { name: "Montana Legal Services Association", summary: "Statewide civil legal aid involving housing, family safety, public benefits, and consumer matters.", access: "Apply online or call Tuesday through Thursday, 9 a.m. to 1 p.m., and state deadlines first.", coverage: "Statewide", phone: "800-666-6899", url: "https://www.mtlsa.org/apply-for-services" },
+      { name: "MontanaLawHelp", summary: "Plain-language legal information, forms, and referral links for Montana civil matters.", access: "Search the issue and county and use legal-aid intake when advice or representation is needed.", coverage: "Statewide", url: "https://www.montanalawhelp.org" },
+      { name: "Montana Courts Self-Help", summary: "Court forms and self-help information for protection orders, family law, housing, and other civil cases.", access: "Use forms carefully and seek legal advice where deadlines or safety are involved.", coverage: "Statewide", url: "https://courts.mt.gov/selfhelp" },
+      { name: "Montana Tribal Victim and Legal Services", summary: "Tribal Nations may operate victim advocates, legal aid, or court assistance under distinct jurisdiction rules.", access: "Contact the Tribe's victim-services or legal office and ask whether state, Tribal, or both courts are involved.", coverage: "Participating Tribal Nations", phone: "CSKT example: 406-675-2700", secondaryPhone: "877-231-5173", url: "https://www.montanalawhelp.org/organizations/csk-tribal-crime-victim-advocate-program" },
+    ],
+  },
 };
 
 const twelveCategoryStateResourceCategories = [
@@ -9846,6 +9911,21 @@ const missouriProgramsByCategory: TwelveCategoryProgramMap = {
   ],
 };
 
+const montanaProgramsByCategory: TwelveCategoryProgramMap = {
+  "Homelessness Prevention & Intervention": ["Montana 211", "Montana Continuum of Care Coordinated Entry", "MCADSV Victim-Service Programs by Region", "Montana Emergency Solutions Grant Providers"],
+  Housing: ["MCADSV Regional Provider Directory", "Montana 211 Housing Search", "MTHousingSearch", "Montana Community Action and HRDC Network"],
+  "Subsidized Housing": ["Montana Housing Choice Voucher Program", "HUD Montana Rental Resources", "Montana Housing Project-Based Programs", "Montana VAWA Housing Protections"],
+  "Cash Assistance": ["Montana TANF", "Montana Assistance Portal", "Montana Tribal TANF Programs", "Montana Community Action Emergency Help"],
+  "Immigration Services": ["Montana Nonprofit Immigration Directory", "International Rescue Committee Missoula", "National Immigrant Justice Center Trafficking Legal Services", "Montana Legal Services Immigration Referral"],
+  "Trafficking Victim Services": ["National Human Trafficking Hotline Montana", "Montana Human Trafficking Reporting Line", "Alix House Trafficking Legal Assistance", "MCADSV Local Programs"],
+  "Rapid Rehousing": ["Montana CoC Rapid Rehousing Entry", "Montana ESG Rapid Rehousing", "Montana Victim-Service Housing Assistance", "Montana Emergency Housing Voucher Referrals"],
+  "Legal Assistance": ["Montana Legal Services Association", "MontanaLawHelp", "Montana Courts Self-Help", "Montana Tribal Victim and Legal Services"],
+  "Rental Assistance": ["Montana 211 Rental-Assistance Referral", "Montana Community Action and HRDC Network", "Montana Coordinated Entry Prevention", "Montana Survivor Flexible Assistance"],
+  "SNAP / Food Assistance": ["Montana SNAP", "Montana Office of Public Assistance", "Montana Food Bank Network", "Montana WIC"],
+  "Transportation Assistance": ["Montana Medicaid Transportation", "Montana 211 Transportation Search", "Montana Victim-Service Transportation", "Tribal Health and CHR Transportation"],
+  "Childcare Assistance": ["Best Beginnings Child Care Scholarship", "Montana Child Care Resources", "Montana MAQCS Regional Contacts", "Montana Head Start and Early Head Start"],
+};
+
 const twelveCategoryProgramsByState: Partial<Record<string, TwelveCategoryProgramMap>> = {
   connecticut: connecticutProgramsByCategory,
   delaware: delawareProgramsByCategory,
@@ -9865,6 +9945,7 @@ const twelveCategoryProgramsByState: Partial<Record<string, TwelveCategoryProgra
   minnesota: minnesotaProgramsByCategory,
   mississippi: mississippiProgramsByCategory,
   missouri: missouriProgramsByCategory,
+  montana: montanaProgramsByCategory,
 };
 
 export function getStateResourceCategories(slug: string): readonly string[] {
