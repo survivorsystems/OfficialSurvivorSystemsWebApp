@@ -11478,6 +11478,12 @@ body,
   text-wrap: balance;
 }
 
+/* State directory field labels: preserve red while improving scanability. */
+.hud-frame.terminal-frame.module-local-help .terminal-content .state-program-list dt {
+  color: var(--ss-red) !important;
+  font-size: 0.874rem !important;
+}
+
 .hud-frame:not(.module-go-bag-prep) .terminal-content :is(
   .page-flourish-header,
   .ss-template-header,
