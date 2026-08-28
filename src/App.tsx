@@ -308,12 +308,12 @@ const legalCategories: LegalCategory[] = [
 const libraryPasses: LibraryPass[] = [
   {
     id: "subscriber-library",
-    title: "Premium Survivor Library",
+    title: "Survivor Systems Store",
     price: "MONTHLY",
-    scope: "One subscription for the complete library of planners, trackers, templates, and deeper guides.",
-    viewing: "Unlimited library viewing while subscribed.",
-    unlocks: "Download any subscriber resource included in the library.",
-    renewal: "Renews monthly until canceled.",
+    scope: "Shop practical planners, trackers, templates, workbooks, and guides as individual products and bundles.",
+    viewing: "See exactly what is included before buying.",
+    unlocks: "Purchase only the products that are useful to you.",
+    renewal: "One-time purchase.",
   },
 ];
 
@@ -1173,7 +1173,7 @@ const familyCourtGuideSections: LegalGuideSection[] = [
       {
         title: "Court Planner Connection",
         items: [
-          { text: "Subscribers have access to the Court Planner for case information, court dates, filing deadlines, motions, service attempts, evidence, witnesses, requested orders, hearing preparation, and follow-up tasks." },
+          { text: "Court-planning products may be available in the Store for case information, court dates, filing deadlines, motions, service attempts, evidence, witnesses, requested orders, hearing preparation, and follow-up tasks." },
         ],
       },
     ],
@@ -1198,7 +1198,7 @@ const civilProtectiveOrderGuide: LegalGuidePageData = {
     {
       title: "Use The Court Planner",
       body:
-        "Subscribers have access to court-planning resources for case overview, dates, deadlines, evidence, witnesses, requested protections, pre-court prep, after-court notes, follow-up tasks, and expiration-date tracking.",
+        "Court-planning products may be available in the Store for case overview, dates, deadlines, evidence, witnesses, requested protections, pre-court prep, after-court notes, follow-up tasks, and expiration-date tracking.",
     },
   ],
   reminder: {
@@ -1317,21 +1317,6 @@ const housingGuideSections: RebuildingGuideSection[] = [
       "Utility assistance, SNAP, Medicaid, TANF, transportation, and other benefits applications.",
     ],
   },
-  {
-    id: "subscriber-tools",
-    label: "SUBSCRIBER TOOLS",
-    title: "When You Are Ready To Go Deeper",
-    body: [
-      "Once you have some privacy back and a space to plan from, staying on top of housing applications, utility assistance, and benefits can feel overwhelming.",
-      "Subscribers have access to dedicated trackers built specifically for this stage of the process, designed to keep everything in one place so nothing falls through the cracks.",
-    ],
-    items: [
-      "Housing Assistance Tracker for applications, deadlines, caseworkers, and follow-up.",
-      "Utility Assistance Tracker for LIHEAP, local programs, and utility account status.",
-      "Benefits Assistance Tracker for SNAP, Medicaid, TANF, and other benefits.",
-      "Local resource category pages for the programs, offices, and organizations worth tracking.",
-    ],
-  },
 ];
 
 const moduleRoutes: Record<ModuleKey, { label: string; path: string }> = {
@@ -1351,9 +1336,9 @@ const moduleRoutes: Record<ModuleKey, { label: string; path: string }> = {
   "local-help": { label: "Resources", path: "/resources" },
   "how-to": { label: "Guides", path: "/guides" },
   legal: { label: "Guides", path: "/guides" },
-  library: { label: "Premium Survivor Library", path: "/resources/access" },
-  access: { label: "Premium Survivor Library", path: "/resources/access" },
-  subscribe: { label: "Subscribe", path: "/subscribe" },
+  library: { label: "Store", path: "/store" },
+  access: { label: "Store", path: "/store" },
+  subscribe: { label: "Store", path: "/store" },
   store: { label: "Store", path: "/store" },
 };
 
@@ -2383,8 +2368,8 @@ const categoryFiles: Record<
       "Reusable systems for tracking the chaos: documents, calls, benefits, housing, court dates, appointments, deadlines, and resource contact logs.",
     files: [
       {
-        title: "Premium Survivor Library Access",
-        description: "Subscriber access, library previews, and deeper planner and tracker resources.",
+        title: "Survivor Systems Store",
+        description: "Individual products and curated bundles of planners, trackers, workbooks, and practical resources.",
         status: "LIVE",
         target: "access",
         path: "/resources/access",
@@ -2419,7 +2404,7 @@ const categoryFiles: Record<
     files: [
       {
         title: "Resource Library",
-        description: "The subscriber toolkit library with previews, planners, trackers, and downloads.",
+        description: "The product catalog with previews, planners, trackers, and downloads.",
         status: "LIVE",
         target: "access",
         path: "/resources/access",
@@ -3156,8 +3141,8 @@ function getInitialModule(): ModuleKey {
   if (path === "/how-to") return "how-to";
   if (path === "/legal") return "legal";
   if (path === "/library") return "access";
-  if (path === "/resources/access" || path === "/resources/access/view") return "access";
-  if (path === "/subscribe") return "subscribe";
+  if (path === "/resources/access" || path === "/resources/access/view") return "store";
+  if (path === "/subscribe") return "store";
   if (path === "/store" || path.startsWith("/store/")) return "store";
   if (path.startsWith("/resources/")) return "local-help";
   if (path === "/resources") return "local-help";
@@ -3445,11 +3430,39 @@ type BundleDownload = {
   url: string;
 };
 
+const healingBundleProduct = {
+  id: "survivor-healing-bundle",
+  title: "Survivor Healing Bundle",
+  price: 14.99,
+  checkoutUrl: "https://buy.stripe.com/9B68wR0Ko0cr7Vm9QbfQI03",
+} as const;
+
+const storeCartKey = "survivor-systems-store-cart-v1";
+
 function StoreModule() {
   const isHealingBundleSuccess = window.location.pathname === "/store/survivor-healing-bundle/success";
   const [bundleDownloads, setBundleDownloads] = useState<BundleDownload[]>([]);
   const [bundleAccessStatus, setBundleAccessStatus] = useState<"idle" | "loading" | "ready" | "error">("idle");
   const [bundleAccessMessage, setBundleAccessMessage] = useState("");
+  const [cartProductIds, setCartProductIds] = useState<string[]>(() => {
+    try {
+      const savedCart = window.localStorage.getItem(storeCartKey);
+      return savedCart ? JSON.parse(savedCart) as string[] : [];
+    } catch {
+      return [];
+    }
+  });
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
+  const healingBundleInCart = cartProductIds.includes(healingBundleProduct.id);
+
+  useEffect(() => {
+    try {
+      window.localStorage.setItem(storeCartKey, JSON.stringify(cartProductIds));
+    } catch {
+      // The cart still works for this visit when browser storage is unavailable.
+    }
+  }, [cartProductIds]);
 
   useEffect(() => {
     if (!isHealingBundleSuccess) return;
@@ -3468,6 +3481,7 @@ function StoreModule() {
         if (!response.ok || !result.downloads) throw new Error(result.error || "The bundle could not be prepared.");
         setBundleDownloads(result.downloads);
         setBundleAccessStatus("ready");
+        setCartProductIds((current) => current.filter((productId) => productId !== healingBundleProduct.id));
       })
       .catch((error: unknown) => {
         if (controller.signal.aborted) return;
@@ -3531,6 +3545,22 @@ function StoreModule() {
     },
   ];
 
+  const addHealingBundleToCart = () => {
+    setCartProductIds((current) => current.includes(healingBundleProduct.id)
+      ? current
+      : [...current, healingBundleProduct.id]);
+    setIsCartOpen(true);
+  };
+
+  const removeHealingBundleFromCart = () => {
+    setCartProductIds((current) => current.filter((productId) => productId !== healingBundleProduct.id));
+  };
+
+  const checkoutCart = () => {
+    if (!healingBundleInCart) return;
+    window.location.assign(healingBundleProduct.checkoutUrl);
+  };
+
   return (
     <section className="page-shell store-module" aria-labelledby="store-title">
       <PageFlourishHeader
@@ -3544,6 +3574,53 @@ function StoreModule() {
           Each kit will clearly show what is included before purchase.
         </p>
       </PageFlourishHeader>
+
+      <div className="store-cart-controls">
+        <button
+          type="button"
+          className="store-cart-toggle"
+          aria-expanded={isCartOpen}
+          aria-controls="store-cart"
+          onClick={() => setIsCartOpen((current) => !current)}
+        >
+          Cart ({cartProductIds.length})
+        </button>
+      </div>
+
+      {isCartOpen ? (
+        <section id="store-cart" className="store-cart" aria-labelledby="store-cart-title">
+          <div className="store-cart-heading">
+            <div>
+              <span>YOUR CART</span>
+              <h2 id="store-cart-title">Review before checkout</h2>
+            </div>
+            <button type="button" className="store-cart-close" onClick={() => setIsCartOpen(false)}>Close</button>
+          </div>
+          {healingBundleInCart ? (
+            <>
+              <div className="store-cart-item">
+                <div>
+                  <strong>{healingBundleProduct.title}</strong>
+                  <span>Five digital workbooks</span>
+                </div>
+                <strong>${healingBundleProduct.price.toFixed(2)}</strong>
+                <button type="button" onClick={removeHealingBundleFromCart}>Remove</button>
+              </div>
+              <div className="store-cart-total">
+                <span>Subtotal</span>
+                <strong>${healingBundleProduct.price.toFixed(2)}</strong>
+              </div>
+              <p className="store-cart-note">Payment is completed securely through Stripe. Digital purchases are delivered after payment is confirmed.</p>
+              <button type="button" className="store-checkout-button" onClick={checkoutCart}>Checkout</button>
+            </>
+          ) : (
+            <div className="store-cart-empty">
+              <p>Your cart is empty.</p>
+              <button type="button" onClick={() => setIsCartOpen(false)}>Continue shopping</button>
+            </div>
+          )}
+        </section>
+      ) : null}
 
       <section className="store-status" aria-labelledby="store-status-title">
         <span>THE FIRST KIT IS READY</span>
@@ -3572,7 +3649,9 @@ function StoreModule() {
           </ul>
           <div className="store-purchase-row">
             <strong>$14.99</strong>
-            <a href="https://buy.stripe.com/9B68wR0Ko0cr7Vm9QbfQI03">Add to Cart</a>
+            <button type="button" onClick={addHealingBundleToCart} disabled={healingBundleInCart}>
+              {healingBundleInCart ? "In Cart" : "Add to Cart"}
+            </button>
           </div>
         </article>
       </div>
@@ -4368,9 +4447,9 @@ function CategoryModule({
         <h2>{file.title}</h2>
         <p>{file.description}</p>
         {file.guideId ? (
-          <button type="button" onClick={() => onNavigate("how-to", `/guides/${file.guideId}`)}>Open Guide</button>
+          <button type="button" onClick={() => onNavigate("how-to", `/guides/${file.guideId}`)}>Read</button>
         ) : file.target && file.path ? (
-          <button type="button" onClick={() => onNavigate(file.target as ModuleKey, file.path as string)}>{category === "guides" ? "Open Guide" : "Open File"}</button>
+          <button type="button" onClick={() => onNavigate(file.target as ModuleKey, file.path as string)}>{category === "guides" ? "Read" : "Open File"}</button>
         ) : <button type="button" disabled>Queued</button>}
       </article>
     );
@@ -5975,14 +6054,10 @@ function SnapTanfGuide({ onBack, onNavigate }: { onBack: () => void; onNavigate:
           utility assistance, emergency financial help, and local services can each bring their own
           forms, deadlines, calls, and document requests.
         </p>
-        <p>
-          The Premium Survivor Library holds the deeper Resource Navigation System: trackers for
-          applications, case numbers, worker information, documents, deadlines, phone-call notes,
-          local resources, and what to work on next.
-        </p>
+        <p>Related planners and tracker bundles may be available as products in the Survivor Systems Store.</p>
         <div className="terminal-actions denial-actions">
-          <button type="button" onClick={() => onNavigate("library", "/resources")}>
-            View Premium Survivor Library
+          <button type="button" onClick={() => onNavigate("store", "/store")}>
+            Visit the Store
           </button>
           <button type="button" onClick={onBack}>
             Back To How To Guides
@@ -6514,11 +6589,11 @@ function HowToModule({
                 <p>{guide.description}</p>
                 {guide.action === "navigate" ? (
                   <button type="button" onClick={() => onNavigate(guide.target ?? "home", guide.path ?? "/")}>
-                    Open Guide
+                    Read
                   </button>
                 ) : (
                   <button type="button" onClick={() => setActiveGuideId(guide.id)}>
-                    Open Guide
+                    Read
                   </button>
                 )}
               </article>
@@ -6820,14 +6895,7 @@ function ResourceModule({
   }
 
   if (activeFolder === "access") {
-    return (
-      <section className="resources-nested-shell">
-        <button className="resource-back-button" type="button" onClick={() => setActiveFolder("landing")}>
-          Back To Resource Folders
-        </button>
-        <AccessInformationModule />
-      </section>
-    );
+    return <StoreModule />;
   }
 
   if (activeDirectory === "housing-strategy") {
@@ -7116,34 +7184,34 @@ function SubscribeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path:
       window.location.assign(checkoutUrl);
       return;
     }
-    setCheckoutNotice("Secure subscription checkout is being connected. You can still browse every library summary and preview.");
+    setCheckoutNotice("Secure product checkout is being connected. You can still browse the Store.");
   }
 
   return (
     <CommercePageTemplate
       className="page-shell subscribe-module"
-      eyebrow="Premium Survivor Library"
-      intro={<p>One recurring subscription opens the complete collection of private planners, templates, trackers, and downloadable guides.</p>}
-      title="Subscribe"
+      eyebrow="Survivor Systems Store"
+      intro={<p>Shop individual products and curated bundles of practical planners, templates, trackers, workbooks, and guides.</p>}
+      title="Store"
       titleId="subscribe-title"
     >
       <section className="subscribe-offer" aria-labelledby="subscribe-offer-title">
         <header>
-          <span>MONTHLY ACCESS</span>
-          <h2 id="subscribe-offer-title">The Complete Premium Survivor Library</h2>
-          <p>Browse public summaries before subscribing. Once your subscription is active, sign in with your subscriber email to open and download the protected files.</p>
+          <span>PRODUCTS AND BUNDLES</span>
+          <h2 id="subscribe-offer-title">Choose What Is Useful To You</h2>
+          <p>See what each product includes, then purchase only the tools you want.</p>
         </header>
 
-        <div className="subscribe-benefits" aria-label="Subscription includes">
-          <p><strong>Unlimited access</strong><span>View the full private library while your subscription is active.</span></p>
-          <p><strong>Downloads included</strong><span>Open and download every resource included with Premium access.</span></p>
-          <p><strong>Growing collection</strong><span>New planners, templates, trackers, and guides are included as they are published.</span></p>
-          <p><strong>Cancel anytime</strong><span>Your subscription renews monthly until you cancel it.</span></p>
+        <div className="subscribe-benefits" aria-label="Store benefits">
+          <p><strong>One-time purchases</strong><span>No recurring access plan.</span></p>
+          <p><strong>Clear contents</strong><span>Each listing explains exactly what the product or bundle contains.</span></p>
+          <p><strong>Useful groupings</strong><span>Related resources can be packaged together as focused kits.</span></p>
+          <p><strong>Your choice</strong><span>Buy only what supports the work you are doing.</span></p>
         </div>
 
         <div className="subscribe-actions">
           <button type="button" onClick={beginSubscription}>Continue to Secure Checkout</button>
-          <button type="button" onClick={() => onNavigate("access", "/resources/access")}>Back to Library Previews</button>
+          <button type="button" onClick={() => onNavigate("store", "/store")}>Back to Store</button>
         </div>
         {checkoutNotice ? <p className="subscribe-checkout-notice" role="status">{checkoutNotice}</p> : null}
       </section>
@@ -7169,9 +7237,9 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     if (librarySession && params.get("checkout") === "success") {
-      setLibraryAccessMessage("Your Premium access is ready. You can open or download any full resource below.");
+      setLibraryAccessMessage("Your purchased product is ready to open or download.");
     } else if (params.has("access_error")) {
-      setLibraryAccessMessage("Checkout was completed, but access could not be confirmed yet. Use Restore Premium Access below with the email used at checkout.");
+      setLibraryAccessMessage("Checkout was completed, but the purchase could not be confirmed yet. Use the email from checkout to restore the purchase.");
     }
   }, [librarySession]);
 
@@ -7245,7 +7313,7 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
 
   async function openLibraryResource(resource: SubscriberCatalogItem) {
     if (!librarySession) {
-      setLibraryAccessMessage("Subscribe or restore Premium access on this device before opening the full resource.");
+      setLibraryAccessMessage("Purchase or restore this product on this device before opening the full resource.");
       return;
     }
     setOpeningResourceId(resource.id);
@@ -7261,7 +7329,7 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
   }
 
   function promptLibraryAccess() {
-    setLibraryAccessMessage("Already subscribed? Restore access with the email used at checkout. New subscribers can start with the Subscribe button.");
+    setLibraryAccessMessage("Already purchased this product? Restore it with the email used at checkout. New customers can begin in the Store.");
     document.getElementById("library-subscriber-sign-in-title")?.scrollIntoView({ behavior: "smooth", block: "center" });
   }
 
@@ -7297,19 +7365,19 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
     return (
       <CommercePageTemplate
         className="page-shell library-module library-document-page"
-        eyebrow="Premium Survivor Library / Document"
+        eyebrow="Store Purchase / Document"
         intro={<p>{viewerResource?.preview ?? "Opening your protected library document."}</p>}
-        title={viewerResource?.title ?? "Premium Library Document"}
+        title={viewerResource?.title ?? "Purchased Document"}
         titleId="library-document-title"
       >
         <div className="library-document-toolbar">
-          <button type="button" onClick={returnToPremiumIndex}>Back to Premium Library</button>
+          <button type="button" onClick={returnToPremiumIndex}>Back to Purchases</button>
           {viewerStatus === "ready" && viewerUrl && viewerResource ? (
             <a href={downloadUrl(viewerUrl, viewerResource)}>Download Document</a>
           ) : null}
         </div>
         {catalogStatus === "loading" || viewerStatus === "loading" ? <p className="library-catalog-status" role="status">Opening the protected document...</p> : null}
-        {catalogStatus === "ready" && !viewerResource ? <p className="library-catalog-status library-catalog-error" role="alert">This document is not listed in the Premium Survivor Library.</p> : null}
+        {catalogStatus === "ready" && !viewerResource ? <p className="library-catalog-status library-catalog-error" role="alert">This document is not listed with the available products.</p> : null}
         {viewerStatus === "error" ? <p className="library-catalog-status library-catalog-error" role="alert">This document could not be opened. Return to the library and try again.</p> : null}
         {viewerStatus === "ready" && viewerUrl && viewerResource ? (
           <section className="library-document-reader" aria-label={`${viewerResource.title} document viewer`}>
@@ -7324,17 +7392,17 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
     return (
       <CommercePageTemplate
         className="page-shell library-module library-subscriber-index"
-        eyebrow="Resources / Premium Library"
+        eyebrow="Store / Purchases"
         intro={<p>Select any title to read the document in your browser or download a copy.</p>}
-        title="Premium Survivor Library"
+        title="Your Purchases"
         titleId="library-title"
       >
         <div className="library-access-active">
-          <strong>Premium access is active</strong>
-          <span>{librarySession.email ?? "Subscriber access"}</span>
+          <strong>Purchase confirmed</strong>
+          <span>{librarySession.email ?? "Customer email"}</span>
         </div>
         {libraryAccessMessage ? <p className="library-catalog-status" role="status">{libraryAccessMessage}</p> : null}
-        {catalogStatus === "loading" ? <p className="library-catalog-status" role="status">Loading your Premium library...</p> : null}
+        {catalogStatus === "loading" ? <p className="library-catalog-status" role="status">Loading your purchases...</p> : null}
         {catalogStatus === "error" ? <p className="library-catalog-status library-catalog-error" role="alert">The library could not be reached. Please refresh the page.</p> : null}
         {catalogStatus === "ready" ? (
           <div className="library-subscriber-list">
@@ -7365,29 +7433,28 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
         className="page-shell library-module"
         eyebrow="Resources / Library"
         intro={<p>
-          Free guides stay available under Resources. The Premium Survivor Library holds deeper templates,
-          trackers, guides, and long-form systems in one recurring subscription.
+          Free guides stay available under Resources. Products and curated bundles are sold separately in the Store.
         </p>}
-        title="Premium Survivor Library"
+        title="Survivor Systems Store"
         titleId="library-title"
       >
 
       <div className="library-rule-strip" aria-label="Library rules">
         <span>Unlimited Viewing</span>
-        <span>Subscriber Downloads</span>
+        <span>Product Downloads</span>
         <span>New Resources Added</span>
-        <span>Cancel Anytime</span>
+        <span>One-Time Purchases</span>
       </div>
 
       <section className="library-section" aria-labelledby="library-options-title">
-        <div className="terminal-label">PREMIUM SURVIVOR LIBRARY</div>
-        <h2 id="library-options-title">Premium Access</h2>
+        <div className="terminal-label">SURVIVOR SYSTEMS STORE</div>
+        <h2 id="library-options-title">Products and Bundles</h2>
         <div className="library-pass-grid">
           {libraryPasses.map((pass) => (
             <article className="library-pass-card" key={pass.id}>
               <div className="library-card-header">
                 <span>{pass.price}</span>
-                <small>MONTHLY SUBSCRIPTION</small>
+                <small>MONTHLY ACCESS</small>
               </div>
               <h3>{pass.title}</h3>
               <p>{pass.scope}</p>
@@ -7396,8 +7463,8 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
                 <li>{pass.unlocks}</li>
                 <li>{pass.renewal}</li>
               </ul>
-              <button type="button" onClick={() => window.location.assign("/subscribe")}>
-                Subscribe to Premium
+              <button type="button" onClick={() => window.location.assign("/store")}>
+                Visit the Store
               </button>
             </article>
           ))}
@@ -7420,9 +7487,9 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
 
       <section className="library-section" aria-labelledby="library-preview-title">
         <div className="terminal-label">RESOURCE PREVIEWS</div>
-        <h2 id="library-preview-title">Look Inside Before Subscribing</h2>
+        <h2 id="library-preview-title">Look Inside Before Buying</h2>
         <p>Every visitor can browse and preview every resource indexed in the Survivor Systems library. No sign-in is required for previews.</p>
-        {catalogStatus === "loading" ? <p className="library-catalog-status" role="status">Loading the Premium Survivor Library catalog...</p> : null}
+        {catalogStatus === "loading" ? <p className="library-catalog-status" role="status">Loading the product catalog...</p> : null}
         {catalogStatus === "error" ? <p className="library-catalog-status library-catalog-error" role="alert">The live library catalog could not be reached. No private files were exposed.</p> : null}
         {catalogStatus === "ready" ? (
           <>
@@ -7455,7 +7522,7 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
                 )}
                 <div>
                   <span>{previewResource.category}</span>
-                  <h3 id="library-public-preview-title"><a href="/subscribe">{previewResource.title}</a></h3>
+                  <h3 id="library-public-preview-title"><a href="/store">{previewResource.title}</a></h3>
                   <p>{previewResource.preview}</p>
                   <dl>
                     <div><dt>Format</dt><dd>{previewResource.format}</dd></div>
@@ -7469,7 +7536,7 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
                         {openingResourceId === previewResource.id ? "Opening..." : "Open or Download Full Resource"}
                       </button>
                     ) : (
-                      <button type="button" onClick={promptLibraryAccess}>Restore Premium Access</button>
+                      <button type="button" onClick={promptLibraryAccess}>Restore Purchase</button>
                     )}
                   </div>
                 </div>
@@ -7492,7 +7559,7 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
               )}
               <div>
                 <span className="library-resource-format">{resource.format}</span>
-                <h3><a href="/subscribe">{resource.title}</a></h3>
+                <h3><a href="/store">{resource.title}</a></h3>
                 <p>{resource.preview}</p>
                 <small>{resource.category}</small>
                 <p className="library-access-note">{resource.access}</p>
@@ -7503,7 +7570,7 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
                       {openingResourceId === resource.id ? "Opening..." : "Open or Download Full Resource"}
                     </button>
                   ) : (
-                    <button type="button" onClick={promptLibraryAccess}>Restore Premium Access</button>
+                    <button type="button" onClick={promptLibraryAccess}>Restore Purchase</button>
                   )}
                 </div>
               </div>
@@ -7515,18 +7582,18 @@ function LibraryModule({ initialSearch = "" }: { initialSearch?: string }) {
         ) : null}
 
         <section className="library-sign-in-panel" aria-labelledby="library-subscriber-sign-in-title">
-          <h3 id="library-subscriber-sign-in-title">Restore Premium Access</h3>
+          <h3 id="library-subscriber-sign-in-title">Restore a Purchase</h3>
           <p>Checkout unlocks the library automatically. On a different browser or device, use the email from checkout to restore access. Public summaries above never require an account.</p>
           <form onSubmit={requestLibrarySignIn}>
             <label>
-              Subscriber email
+              Checkout email
               <input type="email" autoComplete="email" required value={libraryEmail} onChange={(event) => setLibraryEmail(event.target.value)} />
             </label>
             <button type="submit" disabled={libraryAuthStatus === "sending"}>
               {libraryAuthStatus === "sending" ? "Sending Link..." : "Email My Access Link"}
             </button>
             {libraryAuthStatus === "sent" ? <p role="status">Check your email, then use the link to restore the library on this device.</p> : null}
-            {libraryAuthStatus === "error" ? <p role="alert">The access link could not be sent. Confirm this is the email used at Premium checkout.</p> : null}
+            {libraryAuthStatus === "error" ? <p role="alert">The access link could not be sent. Confirm this is the email used at checkout.</p> : null}
           </form>
           {libraryAccessMessage ? <p className="library-catalog-status library-catalog-error" role="alert">{libraryAccessMessage}</p> : null}
         </section>
@@ -7573,14 +7640,14 @@ function RebuildingModule({
           <h2 id="housing-page-summary-title">A practical guide to navigating housing systems</h2>
           <p>
             Learn where to begin, what to ask, which records to keep, and how to follow up across
-            housing programs. The Housing Assistance Tracker is a separate tool in the Premium Survivor Library.
+            housing programs. Related planning tools may be available in the Survivor Systems Store.
           </p>
         </div>
         <button
           type="button"
-          onClick={() => onNavigate("access", "/resources/access?preview=housing")}
+          onClick={() => onNavigate("store", "/store")}
         >
-          Preview Subscriber Housing Tools
+          Visit the Store
         </button>
       </section>
 
@@ -7797,11 +7864,10 @@ function LegalModule() {
               </p>
             </div>
             <div className="legal-note">
-              <strong> Premium Survivor Library Connection</strong>
+              <strong> Related Store Products</strong>
               <p>
-                Subscribers have access to the Court Planner, which is built for everything that
-                happens around the filing, not the motion itself: case numbers, court contacts, local
-                resources, evidence logs, statement practice, court vocabulary, logistics, and
+                Court-planning products may be available in the Store for case numbers, court contacts,
+                local resources, evidence logs, statement practice, court vocabulary, logistics, and
                 after-court notes.
               </p>
             </div>

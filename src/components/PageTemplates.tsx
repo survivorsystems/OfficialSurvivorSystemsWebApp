@@ -130,7 +130,7 @@ export function CommercePageTemplate({
           <h1 id={titleId}>{title}</h1>
           <div className="ss-template-intro">{intro}</div>
         </div>
-        <aside className="ss-template-status"><span>SUBSCRIPTION</span><strong>MONTHLY</strong><small>CANCEL ANYTIME</small></aside>
+        <aside className="ss-template-status"><span>STORE</span><strong>PRODUCTS</strong><small>ONE-TIME PURCHASES</small></aside>
       </header>
       <p className="ss-commerce-notice">{notice}</p>
       <div className="ss-template-body">{children}</div>

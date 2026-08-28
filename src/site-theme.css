@@ -10949,9 +10949,10 @@ body,
   border-top: 3px double var(--ss-ink) !important;
 }
 
-.hud-frame.terminal-frame.module-store .store-purchase-row a,
+.hud-frame.terminal-frame.module-store .store-purchase-row :is(a, button),
 .hud-frame.terminal-frame.module-store .store-delivery-panel :is(button, a),
-.hud-frame.terminal-frame.module-store .store-download-list a {
+.hud-frame.terminal-frame.module-store .store-download-list a,
+.hud-frame.terminal-frame.module-store .store-cart button {
   background: var(--ss-ink) !important;
   border: 1px solid var(--ss-ink) !important;
   box-shadow: none !important;
@@ -10960,6 +10961,111 @@ body,
   font-weight: 700 !important;
   text-transform: none !important;
   transform: none !important;
+}
+
+.hud-frame.terminal-frame.module-store .store-cart-controls {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 0 1rem;
+}
+
+.hud-frame.terminal-frame.module-store .store-cart-toggle {
+  background: var(--ss-red) !important;
+  border: 1px solid var(--ss-ink) !important;
+  color: var(--ss-white) !important;
+  cursor: pointer;
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 0.65rem 1rem;
+}
+
+.hud-frame.terminal-frame.module-store .store-cart {
+  background: var(--ss-white) !important;
+  border: 1px solid var(--ss-ink) !important;
+  border-top: 5px solid var(--ss-red) !important;
+  color: var(--ss-ink) !important;
+  margin-bottom: 1.25rem;
+  padding: clamp(1rem, 2.5vw, 1.5rem);
+}
+
+.hud-frame.terminal-frame.module-store .store-cart :is(h2, p, span, strong) {
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame.module-store .store-cart-heading,
+.hud-frame.terminal-frame.module-store .store-cart-item,
+.hud-frame.terminal-frame.module-store .store-cart-total {
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.hud-frame.terminal-frame.module-store .store-cart-heading {
+  border-bottom: 3px double var(--ss-ink);
+  padding-bottom: 0.75rem;
+}
+
+.hud-frame.terminal-frame.module-store .store-cart-heading span {
+  color: var(--ss-red) !important;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.hud-frame.terminal-frame.module-store .store-cart-heading h2 {
+  font-size: clamp(1.35rem, 3vw, 1.75rem) !important;
+  margin: 0.15rem 0 0;
+}
+
+.hud-frame.terminal-frame.module-store .store-cart-item {
+  border-bottom: 1px solid var(--ss-ink);
+  padding: 1rem 0;
+}
+
+.hud-frame.terminal-frame.module-store .store-cart-item > div {
+  display: grid;
+  gap: 0.2rem;
+  margin-right: auto;
+}
+
+.hud-frame.terminal-frame.module-store .store-cart-item > div span {
+  font-size: 0.9rem;
+}
+
+.hud-frame.terminal-frame.module-store .store-cart-item button,
+.hud-frame.terminal-frame.module-store .store-cart-close,
+.hud-frame.terminal-frame.module-store .store-cart-empty button {
+  background: transparent !important;
+  color: var(--ss-red) !important;
+  padding: 0.45rem 0.65rem;
+}
+
+.hud-frame.terminal-frame.module-store .store-cart-total {
+  font-size: 1.1rem;
+  padding: 0.9rem 0 0.35rem;
+}
+
+.hud-frame.terminal-frame.module-store .store-cart-note {
+  font-size: 0.9rem;
+  margin: 0.5rem 0 1rem;
+}
+
+.hud-frame.terminal-frame.module-store .store-checkout-button {
+  background: var(--ss-red) !important;
+  width: 100%;
+}
+
+.hud-frame.terminal-frame.module-store .store-purchase-row button:disabled {
+  cursor: default;
+  opacity: 0.7;
+}
+
+@media (max-width: 600px) {
+  .hud-frame.terminal-frame.module-store .store-cart-item {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
 }
 
 .hud-frame.terminal-frame:is(.module-about, .module-store) .terminal-content :is(button, a):is(:hover, :focus-visible) {
@@ -11718,6 +11824,11 @@ body,
   ) {
     margin-left: 0 !important;
   }
+}
+
+/* Guides index headline: 15% smaller than the shared 28px page-title size. */
+.hud-frame.terminal-frame.module-guides .terminal-content .category-module > .page-flourish-header.page-flourish-header h1 {
+  font-size: 23.8px !important;
 }
 
 #root .hud-frame.terminal-frame.module-rebuilding .terminal-content .rebuilding-module > .page-flourish-header.page-flourish-rebuilding {
