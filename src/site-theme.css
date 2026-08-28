@@ -11478,6 +11478,139 @@ body,
   text-wrap: balance;
 }
 
+/* Free resource index: simple newspaper listings with direct public downloads. */
+.hud-frame.terminal-frame.module-free-resources .terminal-content {
+  background: var(--ss-paper) !important;
+}
+
+.hud-frame.terminal-frame.module-free-resources .free-resources-module {
+  color: var(--ss-ink) !important;
+  max-width: none !important;
+}
+
+.hud-frame.terminal-frame.module-free-resources .free-resources-module > .page-flourish-header,
+.hud-frame.terminal-frame.module-free-resources .free-resources-safety-note,
+.hud-frame.terminal-frame.module-free-resources .free-resources-list {
+  background: var(--ss-white) !important;
+  border: 1px solid var(--ss-ink) !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame.module-free-resources .free-resources-module > .page-flourish-header {
+  border-top: 5px solid var(--ss-red) !important;
+}
+
+.hud-frame.terminal-frame.module-free-resources .free-resources-module :is(h1, h2, p, span, strong, a) {
+  color: var(--ss-ink) !important;
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+}
+
+.hud-frame.terminal-frame.module-free-resources .free-resources-safety-note {
+  border-left: 5px solid var(--ss-red) !important;
+  margin: 1rem 0;
+  padding: 1rem 1.25rem;
+}
+
+.hud-frame.terminal-frame.module-free-resources .free-resources-safety-note strong {
+  color: var(--ss-red) !important;
+}
+
+.hud-frame.terminal-frame.module-free-resources .free-resources-safety-note p {
+  margin: 0.35rem 0 0;
+}
+
+.hud-frame.terminal-frame.module-free-resources .free-resources-list {
+  padding: 0 clamp(1rem, 3vw, 2rem);
+}
+
+.hud-frame.terminal-frame.module-free-resources .free-resources-list article {
+  align-items: center;
+  border-bottom: 1px solid var(--ss-ink);
+  display: flex;
+  gap: 1.25rem;
+  justify-content: space-between;
+  padding: 1.25rem 0;
+}
+
+.hud-frame.terminal-frame.module-free-resources .free-resources-list article:last-child {
+  border-bottom: 0;
+}
+
+.hud-frame.terminal-frame.module-free-resources .free-resources-list article > div > span {
+  color: var(--ss-red) !important;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.hud-frame.terminal-frame.module-free-resources .free-resources-list h2 {
+  font-size: clamp(1.25rem, 2.5vw, 1.65rem) !important;
+  margin: 0.25rem 0;
+}
+
+.hud-frame.terminal-frame.module-free-resources .free-resources-list h2 a {
+  text-decoration-color: var(--ss-red);
+  text-underline-offset: 0.18em;
+}
+
+.hud-frame.terminal-frame.module-free-resources .free-resources-list p {
+  margin: 0;
+}
+
+.hud-frame.terminal-frame.module-free-resources .free-resource-download {
+  align-items: center;
+  background: var(--ss-red) !important;
+  border: 1px solid var(--ss-ink) !important;
+  color: var(--ss-white) !important;
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: 0.45rem;
+  padding: 0.65rem 0.85rem;
+  text-decoration: none;
+}
+
+.hud-frame.terminal-frame.module-free-resources .free-resource-download :is(span, svg) {
+  color: var(--ss-white) !important;
+}
+
+.hud-frame.terminal-frame.module-free-resources .free-resource-download svg {
+  height: 1rem;
+  width: 1rem;
+}
+
+.hud-frame.terminal-frame.module-home .home-free-resources {
+  background: var(--ss-white) !important;
+  border: 1px solid var(--ss-ink) !important;
+  border-top: 5px solid var(--ss-red) !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  margin: 1rem 0;
+  padding: clamp(1rem, 3vw, 1.5rem);
+}
+
+.hud-frame.terminal-frame.module-home .home-free-resources :is(h2, p) {
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame.module-home .home-free-resources button {
+  background: var(--ss-red) !important;
+  border: 1px solid var(--ss-ink) !important;
+  box-shadow: none !important;
+  color: var(--ss-white) !important;
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+}
+
+@media (max-width: 600px) {
+  .hud-frame.terminal-frame.module-free-resources .free-resources-list article {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .hud-frame.terminal-frame.module-free-resources .free-resource-download {
+    justify-content: center;
+  }
+}
+
 /* State directory field labels: preserve red while improving scanability. */
 .hud-frame.terminal-frame.module-local-help .terminal-content .state-program-list dt {
   color: var(--ss-red) !important;

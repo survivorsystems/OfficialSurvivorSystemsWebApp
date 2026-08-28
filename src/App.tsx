@@ -106,6 +106,7 @@ type ModuleKey =
   | "library"
   | "access"
   | "subscribe"
+  | "free-resources"
   | "store";
 
 type AssessmentAnswer = {
@@ -1339,6 +1340,7 @@ const moduleRoutes: Record<ModuleKey, { label: string; path: string }> = {
   library: { label: "Store", path: "/store" },
   access: { label: "Store", path: "/store" },
   subscribe: { label: "Store", path: "/store" },
+  "free-resources": { label: "Free Resources", path: "/free-resources" },
   store: { label: "Store", path: "/store" },
 };
 
@@ -3143,6 +3145,7 @@ function getInitialModule(): ModuleKey {
   if (path === "/library") return "access";
   if (path === "/resources/access" || path === "/resources/access/view") return "store";
   if (path === "/subscribe") return "store";
+  if (path === "/free-resources") return "free-resources";
   if (path === "/store" || path.startsWith("/store/")) return "store";
   if (path.startsWith("/resources/")) return "local-help";
   if (path === "/resources") return "local-help";
@@ -3400,6 +3403,15 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
         <p className="home-editorial-deck">Welcome in. Use what helps. Leave what doesn't.</p>
       </article>
 
+      <article className="home-free-resources" aria-labelledby="home-free-resources-title">
+        <header className="home-article-header">
+          <p className="home-editorial-kicker">DOWNLOAD AND USE WHAT HELPS</p>
+          <h2 id="home-free-resources-title">Free Resources</h2>
+        </header>
+        <p>Download practical Survivor Systems trackers and tools without an account or purchase.</p>
+        <button type="button" onClick={() => onNavigate("free-resources", "/free-resources")}>Browse Free Resources</button>
+      </article>
+
       <div className="home-editorial-secondary home-editorial-secondary-single" aria-label="Device safety">
         <article className="home-safety-story" aria-labelledby="home-privacy">
           <header className="home-article-header">
@@ -3421,6 +3433,81 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
         <p>Survivor Systems provides general educational information and practical planning tools. Nothing on this site is legal, medical, financial, mental-health, or other individualized professional advice unless a page explicitly states otherwise.</p>
       </aside>
 
+    </section>
+  );
+}
+
+type FreeDownloadResource = {
+  id: string;
+  name: string;
+  fileName: string;
+  url: string;
+  size: number | null;
+};
+
+function formatDownloadSize(size: number | null) {
+  if (!size) return null;
+  if (size < 1024 * 1024) return `${Math.max(1, Math.round(size / 1024))} KB`;
+  return `${(size / (1024 * 1024)).toFixed(1)} MB`;
+}
+
+function FreeResourcesModule() {
+  const [resources, setResources] = useState<FreeDownloadResource[]>([]);
+  const [status, setStatus] = useState<"loading" | "ready" | "error">("loading");
+
+  useEffect(() => {
+    const controller = new AbortController();
+    fetch("/api/free-resources", { signal: controller.signal })
+      .then(async (response) => {
+        const result = await response.json() as { resources?: FreeDownloadResource[]; error?: string };
+        if (!response.ok || !result.resources) throw new Error(result.error || "Resources could not be loaded.");
+        setResources(result.resources);
+        setStatus("ready");
+      })
+      .catch((error: unknown) => {
+        if (controller.signal.aborted) return;
+        console.error(error);
+        setStatus("error");
+      });
+    return () => controller.abort();
+  }, []);
+
+  return (
+    <section className="page-shell free-resources-module" aria-labelledby="free-resources-title">
+      <PageFlourishHeader
+        eyebrow="DOWNLOADS / FREE TO USE"
+        title="Free Resources"
+        titleId="free-resources-title"
+        variant="resources"
+      >
+        <p>Practical trackers and tools you can download without creating an account or making a purchase.</p>
+      </PageFlourishHeader>
+
+      <aside className="free-resources-safety-note">
+        <strong>A note about downloaded files</strong>
+        <p>Downloads may remain in your device's files, browser history, or recent-items list. Use a safer device when possible if someone monitors your activity.</p>
+      </aside>
+
+      {status === "loading" ? <p className="free-resources-status" role="status">Loading free resources...</p> : null}
+      {status === "error" ? <p className="free-resources-status" role="alert">The downloads could not be loaded right now. Please refresh and try again.</p> : null}
+      {status === "ready" && resources.length === 0 ? <p className="free-resources-status">Free downloads are being prepared.</p> : null}
+      {status === "ready" && resources.length > 0 ? (
+        <div className="free-resources-list" aria-label="Free downloads">
+          {resources.map((resource) => (
+            <article key={resource.id}>
+              <div>
+                <span>FREE DOWNLOAD{formatDownloadSize(resource.size) ? ` / ${formatDownloadSize(resource.size)}` : ""}</span>
+                <h2><a href={resource.url}>{resource.name}</a></h2>
+                <p>{resource.fileName.toLowerCase().endsWith(".pdf") ? "PDF document" : "Downloadable resource"}</p>
+              </div>
+              <a className="free-resource-download" href={resource.url} aria-label={`Download ${resource.name}`}>
+                <Download aria-hidden="true" />
+                <span>Download</span>
+              </a>
+            </article>
+          ))}
+        </div>
+      ) : null}
     </section>
   );
 }
@@ -7991,6 +8078,8 @@ export function App() {
     <SubscribeModule onNavigate={navigate} />
   ) : activeModule === "store" ? (
     <StoreModule />
+  ) : activeModule === "free-resources" ? (
+    <FreeResourcesModule />
   ) : activeModule === "local-help" || activeModule === "how-to" || activeModule === "legal" || activeModule === "library" ? (
     <ResourceModule moduleKey={activeModule} onNavigate={navigate} />
   ) : (
