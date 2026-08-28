@@ -6722,7 +6722,7 @@ function StateResourcePage({ location, onBack }: { location: StateResourceLocati
             Download State Info
           </a>
         ) : null}
-        <a className="state-resource-review-button" href={`/resources/review-agency?state=${encodeURIComponent(location.name)}`}>Review An Agency</a>
+        <a className="state-resource-review-button" href={`/resources/review-agency?state=${encodeURIComponent(location.name)}`}>Review Resource</a>
       </div>
 
       <nav className="state-resource-category-nav" aria-label={`${location.name} resource categories`}>

@@ -115,6 +115,7 @@ const stateResourceReviewDates: Partial<Record<string, string>> = {
   missouri: "August 25, 2026",
   montana: "August 25, 2026",
   nebraska: "August 25, 2026",
+  nevada: "August 25, 2026",
 };
 
 const stateResourceDownloadFiles: Partial<Record<string, string>> = {
@@ -142,6 +143,7 @@ const stateResourceDownloadFiles: Partial<Record<string, string>> = {
   missouri: "Missouri_Survivor_Resource_Guide.pdf",
   montana: "Montana_Survivor_Resource_Guide.pdf",
   nebraska: "Nebraska_Survivor_Resource_Guide.pdf",
+  nevada: "Nevada_Survivor_Resource_Guide.pdf",
 };
 
 export const stateResourceLocations: StateResourceLocation[] = locationNames.map((name) => ({
@@ -8751,6 +8753,70 @@ export const stateResourcePrograms: Partial<Record<string, Partial<Record<StateR
       { name: "Nebraska Coalition Legal Resources", summary: "Survivor-focused legal and immigration assistance links, including protection-order help.", access: "Use the resource page and local provider map for confidential advocacy.", coverage: "Statewide", phone: "402-476-6256", url: "https://nebraskacoalition.org/find-help/legal-resources" },
     ],
   },
+  nevada: {
+    Housing: [
+      { name: "Nevada 211", summary: "Statewide referrals for shelter, rent, utilities, food, transportation, and local crisis programs.", access: "Dial 211, call the alternate number, text a ZIP code to 898211, or use the directory.", coverage: "Statewide", phone: "211", secondaryPhone: "866-535-5654", url: "https://www.nevada211.org", note: "This is a referral service, not a shelter or guarantee of funding." },
+      { name: "Southern Nevada Coordinated Entry", summary: "Clark County system connecting single adults, families, youth, and survivors to homelessness services.", access: "Call Clark County Social Service or use a Help Hope Home access point.", coverage: "Clark County and Southern Nevada", phone: "702-455-4270", url: "https://helphopehome.org/coordinated-entry" },
+      { name: "Washoe County Coordinated Entry", summary: "Centralized assessment and prioritization for housing resources in Reno, Sparks, and Washoe County.", access: "Use the county page for current access locations and hours.", coverage: "Washoe County", url: "https://washoecounty.gov/homeless/regional_governance_and_coordination/coc/coordinated_entry.php" },
+      { name: "Rural Nevada Coordinated Entry", summary: "Shared assessment process serving Nevada's rural communities.", access: "Use the resource page or call for the correct local partner.", coverage: "Rural Nevada", phone: "702-614-6690 ext. 2", secondaryPhone: "775-562-4644", url: "https://ruralnevadacoc.org/resources-page" },
+      { name: "NCEDSV Direct-Service Organizations", summary: "Local domestic and sexual violence programs provide confidential shelter, advocacy, counseling, and safety planning.", access: "Use the statewide member directory or Nevada 211 to reach a safe local program.", coverage: "Member programs statewide", phone: "800-230-1955", url: "https://www.ncedsv.org", note: "NCEDSV is not an emergency shelter or crisis hotline." },
+      { name: "Nevada 211 Domestic Violence Services", summary: "Locates counseling, emergency shelter, legal help, and survivor support groups by community.", access: "Call, text a ZIP code to 898211, or search online using a safer device.", coverage: "Statewide", phone: "211", secondaryPhone: "866-535-5654", url: "https://www.nevada211.org/domestic-violence-services" },
+      { name: "NVHousingSearch.org", summary: "Free statewide locator for affordable, accessible, and market-rate rentals.", access: "Search by city, county, or ZIP code and call properties directly about vacancies and waitlists.", coverage: "Statewide", phone: "877-428-8844", url: "https://nvhousingsearch.org", note: "Listings do not guarantee availability." },
+      { name: "Nevada Regional Homelessness Directories", summary: "Regional Coordinated Entry systems identify emergency and transitional housing in Clark, Washoe, and rural counties.", access: "Use the system serving the location where the household is staying.", coverage: "Three regional systems statewide", url: "https://www.hud.gov/states/nevada" },
+      { name: "Southern Nevada Regional Housing Authority", summary: "Public housing and Housing Choice Voucher programs for Clark County and Southern Nevada.", access: "Check the applicant portal and waitlist announcements and save every confirmation.", coverage: "Clark County and Southern Nevada", phone: "702-477-3100", url: "https://www.snvrha.org" },
+      { name: "Reno Housing Authority", summary: "Housing Choice Vouchers and assisted housing in Washoe County.", access: "Review current waiting lists and apply directly through the housing authority.", coverage: "Washoe County", phone: "775-329-3630", url: "https://www.renoha.org/rental-assistance" },
+      { name: "Nevada Rural Housing", summary: "Housing Choice Vouchers, project-based vouchers, and rental programs across rural Nevada.", access: "Check current waitlist status and application instructions.", coverage: "Rural Nevada", phone: "775-887-1795", url: "https://nvrural.org/programs/rental-assistance" },
+      { name: "Nevada VAWA Housing Protections", summary: "Survivors in covered federally assisted housing may have confidentiality, emergency-transfer, and lease-bifurcation rights.", access: "Request HUD's VAWA notice and self-certification form and contact legal aid if denied.", coverage: "Covered federally assisted housing", url: "https://www.hud.gov/vawa" },
+      { name: "Southern Nevada Rapid Rehousing Entry", summary: "Clark County assessment and prioritization route for rapid rehousing and other housing programs.", access: "Call Clark County Social Service or use a Help Hope Home access point.", coverage: "Clark County", phone: "702-455-4270", url: "https://helphopehome.org/coordinated-entry" },
+      { name: "Washoe County Rapid Rehousing Entry", summary: "Washoe County route to community housing resources, including rapid-rehousing referrals.", access: "Use current access locations and complete the Coordinated Entry assessment.", coverage: "Washoe County", url: "https://washoecounty.gov/homeless/regional_governance_and_coordination/coc/coordinated_entry.php" },
+      { name: "Rural Nevada Rapid Rehousing Entry", summary: "Shared route for rural households experiencing homelessness.", access: "Contact Rural Nevada Coordinated Entry and ask for the local assessment partner.", coverage: "Rural Nevada", phone: "702-614-6690 ext. 2", secondaryPhone: "775-562-4644", url: "https://ruralnevadacoc.org/resources-page" },
+      { name: "Nevada Victim-Service Housing Programs", summary: "Some survivor agencies provide confidential rapid rehousing or relocation funds outside ordinary homelessness databases.", access: "Ask the local NCEDSV program specifically about confidential housing assistance.", coverage: "Program-dependent statewide", url: "https://www.ncedsv.org" },
+      { name: "Nevada 211 Housing Expense Assistance", summary: "Statewide referrals for rent, deposits, utilities, and eviction-prevention programs.", access: "Call or text a ZIP code to 898211 and ask which programs are accepting applications now.", coverage: "Statewide", phone: "211", secondaryPhone: "866-535-5654", url: "https://www.nevada211.org/housing-and-shelter/housing-expense-assistance" },
+      { name: "Clark County Rental and Utility Assistance", summary: "County financial and eviction-prevention programs for qualifying Clark County residents.", access: "Apply through the county assistance portal or call Social Service.", coverage: "Clark County", phone: "702-455-4270", url: "https://chap.clarkcountynv.gov" },
+      { name: "Washoe County Rental and Deposit Assistance", summary: "Short-term help with rent, security deposits, or utilities for qualifying residents.", access: "Review current eligibility and apply through county Human Services.", coverage: "Washoe County", url: "https://washoecounty.gov/hsa/adult_services/programs_and_services/rental_assistance/index.php" },
+      { name: "Nevada Rural Housing Assistance", summary: "Rural programs may include security-deposit, emergency, and voucher assistance when funded.", access: "Check current programs and waitlist announcements directly.", coverage: "Rural Nevada", phone: "775-887-1795", url: "https://nvrural.org/programs/rental-assistance" },
+    ],
+    Food: [
+      { name: "Nevada SNAP", summary: "Monthly food benefits for eligible households.", access: "Apply through Access Nevada and complete the interview and verification.", coverage: "Statewide", phone: "775-684-0800", url: "https://www.dss.nv.gov/programs/snap" },
+      { name: "Access Nevada SNAP Portal", summary: "Official benefits application, document, and case-management portal.", access: "Submit promptly and retain confirmation numbers, screenshots, and notices.", coverage: "Statewide", url: "https://www.dss.nv.gov/access-nv" },
+      { name: "Nevada Legal Services SNAP Help", summary: "Legal help may be available for wrongful SNAP denial, termination, or appeal issues.", access: "Apply online or call immediately after receiving an adverse notice.", coverage: "Statewide", phone: "866-432-0404", url: "https://nevadalegalservices.org" },
+      { name: "Nevada 211 Food Resources", summary: "Locates food banks, pantries, meals, and mobile distributions by ZIP code.", access: "Call 211 or search online for food available today.", coverage: "Statewide", phone: "211", secondaryPhone: "866-535-5654", url: "https://www.nevada211.org" },
+    ],
+    "Childcare Assistance": [
+      { name: "Nevada Child Care and Development Program", summary: "State childcare subsidy information, policy, and application support.", access: "Use Access Nevada or the current childcare application and complete verification.", coverage: "Statewide", phone: "775-684-0625", url: "https://www.dss.nv.gov/programs/child-care" },
+      { name: "Southern Nevada Child Care Subsidy", summary: "Childcare subsidy applications and case assistance for Southern Nevada families.", access: "Use the subsidy page and current Southern Nevada contact instructions.", coverage: "Southern Nevada", url: "https://www.nevadachildcare.org/child-care-subsidy-assistance" },
+      { name: "The Children's Cabinet", summary: "Northern Nevada subsidy assistance and statewide childcare provider-search support.", access: "Apply online or contact the subsidy team.", coverage: "Northern Nevada subsidy assistance; statewide provider search", phone: "775-856-6200", url: "https://www.childrenscabinet.org/who-we-serve/i-am-a-parent/child-care-financial-assistance" },
+      { name: "Nevada Head Start and Early Head Start", summary: "Free early learning and family support for eligible pregnant people and families with young children.", access: "Use the federal locator and ask local programs about openings, transportation, and priority.", coverage: "Local programs statewide", url: "https://headstart.gov/center-locator" },
+    ],
+    "Transportation Assistance": [
+      { name: "Nevada Medicaid Nonemergency Transportation", summary: "MTM schedules rides to covered Medicaid services for eligible members.", access: "Call at least three business days ahead unless the trip is urgent or a hospital discharge.", coverage: "Eligible Nevada Medicaid members statewide", phone: "844-879-7341", url: "https://www.mtm-inc.net/nevada" },
+      { name: "Nevada Medicaid Ride Support", summary: "MTM handles cancellations, late pickups, and unscheduled return rides.", access: "Call with the trip number and report a pickup more than 15 minutes late.", coverage: "Eligible Nevada Medicaid members statewide", phone: "844-879-7341", url: "https://www.mtm-inc.net/nevada/members" },
+      { name: "Nevada 211 Local Transportation", summary: "Finds rural transit, demand-response, senior or disabled transit, gas help, and volunteer rides.", access: "Call with origin, destination, timing, accessibility, and child-seat needs.", coverage: "Statewide", phone: "211", secondaryPhone: "866-535-5654", url: "https://www.nevada211.org/transportation/medical-transportation" },
+      { name: "Nevada Survivor-Program Transportation", summary: "Programs may arrange emergency safe transport or limited gas, bus, or relocation help.", access: "Ask the local NCEDSV program and provide only a safe pickup location.", coverage: "Program-dependent statewide", url: "https://www.ncedsv.org" },
+    ],
+    Immigration: [
+      { name: "Legal Aid Center of Southern Nevada Immigration Project", summary: "Direct representation for qualifying survivors seeking VAWA, U visa, T visa, or SIJS relief.", access: "Call the Immigration Project and select option 4.", coverage: "Southern Nevada and qualifying clients", phone: "702-386-1070 option 4", url: "https://www.lacsn.org/immigration" },
+      { name: "Nevada Legal Services Immigration Help", summary: "Statewide nonprofit assistance including some T visa, U visa, and VAWA matters.", access: "Apply through the nearest office and disclose deadlines or detention immediately.", coverage: "Statewide", phone: "866-432-0404", url: "https://nevadalegalservices.org" },
+      { name: "Mother Cabrini Immigration Legal Services", summary: "DOJ-recognized immigration program serving multiple northern and rural counties.", access: "Call for intake and confirm case type and geographic eligibility.", coverage: "Northern and rural Nevada service counties", phone: "775-393-3877", url: "https://ccsnn.org/pages/immigration-legal-services" },
+      { name: "Nevada Nonprofit Immigration Directory", summary: "Verified nonprofit immigration providers searchable by Nevada location and case type.", access: "Filter for the needed remedy and confirm current intake before sending documents.", coverage: "Statewide directory", url: "https://www.immigrationadvocates.org/nonprofit/legaldirectory/search?state=NV", note: "Use nonprofit attorneys or DOJ-accredited representatives, not notarios." },
+    ],
+    Trafficking: [
+      { name: "National Human Trafficking Hotline Nevada", summary: "Confidential 24-hour safety planning and referrals for sex or labor trafficking.", access: "Call, text, or chat and share only what feels safe.", coverage: "National service available in Nevada", phone: "888-373-7888", secondaryPhone: "Text 233733", url: "https://humantraffickinghotline.org", note: "The hotline is not law enforcement." },
+      { name: "Nevada Attorney General Victim-Service List", summary: "State directory of Nevada organizations serving trafficking victims.", access: "Review the provider list, contact the best regional fit, and verify current capacity.", coverage: "Statewide directory", url: "https://ag.nv.gov/Human_Trafficking/HT_Help" },
+      { name: "Southern Nevada Trafficking Survivor Crisis Line", summary: "Victim-support line connected to Southern Nevada's multidisciplinary trafficking response.", access: "Call for survivor support; use 911 only for immediate danger when safe.", coverage: "Southern Nevada", phone: "702-936-4004", url: "https://www.lvmpd.com/services/southern-nevada-human-trafficking-task-force" },
+      { name: "Nevada Survivor Immigration Legal Services", summary: "Legal Aid Center of Southern Nevada and Nevada Legal Services screen trafficking survivors for T visas and related relief.", access: "Contact the appropriate office and request trafficking-informed immigration intake.", coverage: "Statewide through regional providers", phone: "702-386-1070 option 4", secondaryPhone: "866-432-0404", url: "https://www.lacsn.org/immigration" },
+    ],
+    "Other Programs": [
+      { name: "Nevada TANF", summary: "Cash assistance and self-sufficiency services for eligible families with dependent children.", access: "Apply online through Access Nevada or submit the current assistance application.", coverage: "Statewide", phone: "775-684-0800", url: "https://www.dss.nv.gov/programs/tanf" },
+      { name: "Access Nevada Benefits Portal", summary: "Official portal for cash, food, and medical assistance applications and case management.", access: "Register, submit the application, and save confirmations and notices.", coverage: "Statewide", url: "https://www.dss.nv.gov/access-nv" },
+      { name: "Nevada TANF Child-Only and Temporary Categories", summary: "Child-only help may fit kinship or ineligible-adult households; limited temporary payments require special approval.", access: "Identify every potentially applicable category during TANF intake.", coverage: "Statewide", url: "https://www.dss.nv.gov/programs/tanf/program-categories" },
+      { name: "Nevada County Emergency Assistance", summary: "Clark County and other local agencies may offer financial, transportation, or emergency support.", access: "Call 211 for the responsible county agency and currently open assistance.", coverage: "County and local programs statewide", phone: "211", url: "https://www.nevada211.org" },
+      { name: "Nevada Legal Services", summary: "Statewide civil legal aid for eligible residents, including housing, family safety, benefits, and immigration matters.", access: "Complete online intake or call the nearest office and state the next deadline first.", coverage: "Statewide", phone: "866-432-0404", url: "https://nevadalegalservices.org" },
+      { name: "Legal Aid Center of Southern Nevada", summary: "Free civil legal help including domestic violence, immigration, family, and consumer matters.", access: "Use online intake or call the appropriate project.", coverage: "Southern Nevada", phone: "702-386-1070", url: "https://www.lacsn.org" },
+      { name: "Northern Nevada Legal Aid", summary: "Civil legal help including family, housing, and protection-order matters.", access: "Apply and explain urgent deadlines.", coverage: "Reno and Northern Nevada", phone: "775-329-2727", url: "https://www.nnlegalaid.org" },
+      { name: "Nevada Courts Legal Help", summary: "Court forms, procedural information, and reduced-fee lawyer referral when legal aid cannot assist.", access: "Use self-help cautiously or call the lawyer-referral service for a prequalified referral.", coverage: "Statewide", phone: "800-789-5747", url: "https://selfhelp.nvcourts.gov/self-help/getting-started/lawyers-and-legal-help/free-and-low-cost-legal-help" },
+    ],
+  },
 };
 
 const twelveCategoryStateResourceCategories = [
@@ -10007,6 +10073,21 @@ const nebraskaProgramsByCategory: TwelveCategoryProgramMap = {
   "Childcare Assistance": ["Nebraska Child Care Subsidy", "iServe Nebraska Child Care Portal", "Nebraska Child Care Referral Network", "Nebraska Head Start and Early Head Start"],
 };
 
+const nevadaProgramsByCategory: TwelveCategoryProgramMap = {
+  "Homelessness Prevention & Intervention": ["Nevada 211", "Southern Nevada Coordinated Entry", "Washoe County Coordinated Entry", "Rural Nevada Coordinated Entry"],
+  Housing: ["NCEDSV Direct-Service Organizations", "Nevada 211 Domestic Violence Services", "NVHousingSearch.org", "Nevada Regional Homelessness Directories"],
+  "Subsidized Housing": ["Southern Nevada Regional Housing Authority", "Reno Housing Authority", "Nevada Rural Housing", "Nevada VAWA Housing Protections"],
+  "Cash Assistance": ["Nevada TANF", "Access Nevada Benefits Portal", "Nevada TANF Child-Only and Temporary Categories", "Nevada County Emergency Assistance"],
+  "Immigration Services": ["Legal Aid Center of Southern Nevada Immigration Project", "Nevada Legal Services Immigration Help", "Mother Cabrini Immigration Legal Services", "Nevada Nonprofit Immigration Directory"],
+  "Trafficking Victim Services": ["National Human Trafficking Hotline Nevada", "Nevada Attorney General Victim-Service List", "Southern Nevada Trafficking Survivor Crisis Line", "Nevada Survivor Immigration Legal Services"],
+  "Rapid Rehousing": ["Southern Nevada Rapid Rehousing Entry", "Washoe County Rapid Rehousing Entry", "Rural Nevada Rapid Rehousing Entry", "Nevada Victim-Service Housing Programs"],
+  "Legal Assistance": ["Nevada Legal Services", "Legal Aid Center of Southern Nevada", "Northern Nevada Legal Aid", "Nevada Courts Legal Help"],
+  "Rental Assistance": ["Nevada 211 Housing Expense Assistance", "Clark County Rental and Utility Assistance", "Washoe County Rental and Deposit Assistance", "Nevada Rural Housing Assistance"],
+  "SNAP / Food Assistance": ["Nevada SNAP", "Access Nevada SNAP Portal", "Nevada Legal Services SNAP Help", "Nevada 211 Food Resources"],
+  "Transportation Assistance": ["Nevada Medicaid Nonemergency Transportation", "Nevada Medicaid Ride Support", "Nevada 211 Local Transportation", "Nevada Survivor-Program Transportation"],
+  "Childcare Assistance": ["Nevada Child Care and Development Program", "Southern Nevada Child Care Subsidy", "The Children's Cabinet", "Nevada Head Start and Early Head Start"],
+};
+
 const twelveCategoryProgramsByState: Partial<Record<string, TwelveCategoryProgramMap>> = {
   connecticut: connecticutProgramsByCategory,
   delaware: delawareProgramsByCategory,
@@ -10028,6 +10109,7 @@ const twelveCategoryProgramsByState: Partial<Record<string, TwelveCategoryProgra
   missouri: missouriProgramsByCategory,
   montana: montanaProgramsByCategory,
   nebraska: nebraskaProgramsByCategory,
+  nevada: nevadaProgramsByCategory,
 };
 
 export function getStateResourceCategories(slug: string): readonly string[] {

@@ -112,7 +112,7 @@ export function AgencyReviewForm({ stateName, onBack }: AgencyReviewFormProps) {
   return <section className="page-shell agency-review-page" aria-labelledby="agency-review-title">
     <header className="agency-review-hero">
       <p>RESOURCE DIRECTORY FEEDBACK</p>
-      <h1 id="agency-review-title">Review An Agency</h1>
+      <h1 id="agency-review-title">Review Resource</h1>
       <p>Your experience can help other survivors make better-informed choices and help Survivor Systems identify patterns in access to services.</p>
     </header>
     <button className="resource-back-button agency-review-back" type="button" onClick={onBack}>Back To {stateName} Resources</button>
