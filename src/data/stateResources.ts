@@ -114,6 +114,7 @@ const stateResourceReviewDates: Partial<Record<string, string>> = {
   mississippi: "August 25, 2026",
   missouri: "August 25, 2026",
   montana: "August 25, 2026",
+  nebraska: "August 25, 2026",
 };
 
 const stateResourceDownloadFiles: Partial<Record<string, string>> = {
@@ -140,6 +141,7 @@ const stateResourceDownloadFiles: Partial<Record<string, string>> = {
   mississippi: "Mississippi_Survivor_Resource_Guide.pdf",
   missouri: "Missouri_Survivor_Resource_Guide.pdf",
   montana: "Montana_Survivor_Resource_Guide.pdf",
+  nebraska: "Nebraska_Survivor_Resource_Guide.pdf",
 };
 
 export const stateResourceLocations: StateResourceLocation[] = locationNames.map((name) => ({
@@ -8685,6 +8687,70 @@ export const stateResourcePrograms: Partial<Record<string, Partial<Record<StateR
       { name: "Montana Tribal Victim and Legal Services", summary: "Tribal Nations may operate victim advocates, legal aid, or court assistance under distinct jurisdiction rules.", access: "Contact the Tribe's victim-services or legal office and ask whether state, Tribal, or both courts are involved.", coverage: "Participating Tribal Nations", phone: "CSKT example: 406-675-2700", secondaryPhone: "877-231-5173", url: "https://www.montanalawhelp.org/organizations/csk-tribal-crime-victim-advocate-program" },
     ],
   },
+  nebraska: {
+    Housing: [
+      { name: "Nebraska 211", summary: "Statewide referrals for shelter, rent, utilities, food, transportation, and currently active local programs.", access: "Dial 211, use the alternate number if needed, and provide a safe ZIP code.", coverage: "Statewide", phone: "211", secondaryPhone: "402-444-6666", url: "https://search.ne211.org", note: "This is a referral service, not a shelter or guarantee of funding." },
+      { name: "Nebraska DHHS Coordinated Entry Access Points", summary: "Official list of agencies that assess and refer people to prevention, rapid rehousing, and other housing programs.", access: "Use the statewide provider list and contact the access point serving the current location.", coverage: "Regional systems statewide", url: "https://dhhs.ne.gov/Pages/Nebraska-Homeless-Assistance-Program-Recipients.aspx" },
+      { name: "All Doors Lead Home", summary: "Coordinated Entry information and public access points for Lincoln and Nebraska Balance of State communities.", access: "Use a public access point or ask 211 for the correct agency.", coverage: "Lincoln and Balance of State", url: "https://community-services.unl.edu/coordinated-entry" },
+      { name: "Nebraska Coalition Network Programs", summary: "Local and Tribal survivor programs provide confidential shelter, safety planning, transportation, and advocacy.", access: "Use the provider map and choose a geographically safe program.", coverage: "Local and Tribal programs statewide", phone: "402-476-6256", url: "https://nebraskacoalition.org/find-help", note: "The Coalition office is not a 24-hour crisis line." },
+      { name: "Nebraska Coalition Provider Map", summary: "Maps network and Tribal programs serving domestic and sexual violence survivors.", access: "Filter by location and contact a local 24-hour program for confidential shelter screening.", coverage: "Statewide network", phone: "402-476-6256", url: "https://nebraskacoalition.org/find-help" },
+      { name: "Nebraska Homeless Assistance Provider List", summary: "Official statewide table identifying emergency shelter, prevention, and rapid-rehousing providers.", access: "Select the nearest safe region and call before traveling.", coverage: "Regional providers statewide", url: "https://dhhs.ne.gov/Pages/Nebraska-Homeless-Assistance-Program-Recipients.aspx" },
+      { name: "NIFA Renter Resources", summary: "Free ZIP-code search for affordable housing, accessibility, and related support services.", access: "Search by ZIP code and contact properties directly about vacancies and waitlists.", coverage: "Statewide", url: "https://www.nifa.org/homebuyers-renters/renters" },
+      { name: "HUD Resource Locator", summary: "Searches HUD-assisted housing and local housing resources.", access: "Locate properties, then call management about vacancies, deposits, and application rules.", coverage: "Nationwide locator available in Nebraska", url: "https://resources.hud.gov", note: "HUD does not maintain property vacancies or waitlists." },
+      { name: "HUD Nebraska Rental Help", summary: "Official route to Nebraska public housing authorities and HUD-assisted property resources.", access: "Identify each housing authority serving a safe area and check every waitlist separately.", coverage: "Statewide", phone: "402-492-3100", url: "https://www.hud.gov/states/nebraska" },
+      { name: "Nebraska Public Housing Authorities", summary: "Local authorities administer public housing and Housing Choice Voucher programs under separate rules and waitlists.", access: "Apply directly to each authority, save confirmations, and update contact information after moving.", coverage: "Local jurisdictions statewide", phone: "800-955-2232", url: "https://www.hud.gov/contactus/public-housing-contacts" },
+      { name: "NIFA Affordable Housing Search", summary: "Searches affordable and income-restricted housing and related support by ZIP code.", access: "Contact each property about income limits, accessibility, vacancies, and waitlists.", coverage: "Statewide", url: "https://www.nifa.org/homebuyers-renters/renters" },
+      { name: "Nebraska VAWA Housing Protections", summary: "Survivors in covered federally assisted housing may have confidentiality, emergency-transfer, and lease-bifurcation rights.", access: "Request HUD's VAWA notice and self-certification form and contact legal aid if rights are denied.", coverage: "Covered federally assisted housing", url: "https://www.hud.gov/vawa" },
+      { name: "Nebraska Coordinated Entry Rapid Rehousing", summary: "Statewide assessment and referral route for rapid rehousing and other homelessness programs.", access: "Contact the official access point serving the current location.", coverage: "Regional systems statewide", url: "https://dhhs.ne.gov/Pages/Nebraska-Homeless-Assistance-Program-Recipients.aspx" },
+      { name: "All Doors Lead Home Rapid Rehousing", summary: "Coordinated Entry route for rapid rehousing in Lincoln and Balance of State communities.", access: "Use a public access point and explain homelessness, unsafe displacement, and household needs.", coverage: "Lincoln and Balance of State", url: "https://community-services.unl.edu/coordinated-entry" },
+      { name: "Threshold Continuum of Care", summary: "Omaha-area Coordinated Entry access points and street outreach resources.", access: "Choose an access point from the Threshold resource directory.", coverage: "Omaha area", url: "https://www.thresholdcoc.org/resources" },
+      { name: "Nebraska Victim-Service Housing Assistance", summary: "Some survivor programs have confidential rapid rehousing, relocation, or flexible assistance outside ordinary homelessness databases.", access: "Ask a Nebraska Coalition provider about confidential housing options.", coverage: "Program-dependent statewide", url: "https://nebraskacoalition.org/find-help" },
+      { name: "Nebraska 211 Rental Assistance", summary: "Live referrals for rent, deposits, eviction prevention, utilities, and Community Action programs.", access: "Ask the specialist to confirm currently open funding for the ZIP code.", coverage: "Statewide", phone: "211", secondaryPhone: "402-444-6666", url: "https://search.ne211.org" },
+      { name: "Nebraska Homeless Assistance Prevention Providers", summary: "Official regional list of agencies providing homelessness prevention and rapid rehousing.", access: "Contact the provider serving the area; DHHS does not take household applications directly.", coverage: "Regional providers statewide", url: "https://dhhs.ne.gov/Pages/Nebraska-Homeless-Assistance-Program-Recipients.aspx" },
+      { name: "Nebraska Coordinated Entry Prevention", summary: "Regional systems may screen households at imminent risk for prevention or diversion resources.", access: "Ask for prevention screening and state any eviction deadline or safety-related displacement.", coverage: "Regional systems statewide", url: "https://community-services.unl.edu/coordinated-entry" },
+      { name: "Nebraska Survivor Flexible Assistance", summary: "Local survivor programs may have limited relocation, deposit, hotel, utility, or transportation funds.", access: "Ask a confidential advocate what is currently available and how documentation can be handled safely.", coverage: "Program-dependent statewide", url: "https://nebraskacoalition.org/find-help", note: "Availability is local and not guaranteed." },
+    ],
+    Food: [
+      { name: "Nebraska SNAP", summary: "Monthly food benefits for eligible households.", access: "Apply through iServe, complete the interview, and submit verification promptly.", coverage: "Statewide", phone: "800-383-4278", url: "https://dhhs.ne.gov/pages/snap.aspx" },
+      { name: "iServe Nebraska SNAP Portal", summary: "Official application, review, and case-management portal for SNAP and other benefits.", access: "Save screenshots, notices, and confirmation numbers.", coverage: "Statewide", url: "https://iserve.nebraska.gov" },
+      { name: "Nebraska 211 Food Resources", summary: "Finds food banks, pantries, mobile distributions, and meals available locally.", access: "Call 211 or search by ZIP code for food available today.", coverage: "Statewide", phone: "211", url: "https://search.ne211.org" },
+      { name: "Nebraska WIC", summary: "Nutrition benefits and support for eligible pregnant or postpartum people, infants, and children under five.", access: "Use the state clinic information and contact a local WIC office.", coverage: "Local clinics statewide", phone: "800-942-1171", url: "https://dhhs.ne.gov/Pages/WIC.aspx" },
+    ],
+    "Childcare Assistance": [
+      { name: "Nebraska Child Care Subsidy", summary: "Helps eligible families pay for care for children age 12 and younger, or qualifying children with special needs up to age 19.", access: "Apply through iServe and complete the required phone interview.", coverage: "Statewide", phone: "800-383-4278", url: "https://dhhs.ne.gov/Pages/Child-Care-Subsidy-Information-for-Parents.aspx" },
+      { name: "iServe Nebraska Child Care Portal", summary: "Official application portal for childcare subsidy and economic assistance.", access: "Apply promptly and upload income, activity, and household verification.", coverage: "Statewide", url: "https://iserve.nebraska.gov" },
+      { name: "Nebraska Child Care Referral Network", summary: "Helps families search for licensed childcare and compare available providers.", access: "Use the statewide search and contact providers about openings and subsidy acceptance.", coverage: "Statewide", url: "https://www.nechildcarereferral.org" },
+      { name: "Nebraska Head Start and Early Head Start", summary: "Free early learning and family support for eligible pregnant people and families with young children.", access: "Use the federal locator and ask local programs about openings, transportation, and priority.", coverage: "Local programs statewide", url: "https://headstart.gov/center-locator" },
+    ],
+    "Transportation Assistance": [
+      { name: "Nebraska Medicaid Transportation Benefit", summary: "Covers medically necessary transportation when an eligible member has no other ride.", access: "Confirm the Heritage Health plan and use its transportation broker before travel.", coverage: "Eligible Medicaid members statewide", phone: "855-632-7633", url: "https://dhhs.ne.gov/Pages/Medicaid-Services.aspx" },
+      { name: "Nebraska Total Care Transportation", summary: "MTM schedules nonemergency medical transportation for Nebraska Total Care members.", access: "Call as early as possible and report cancellations or changes.", coverage: "Nebraska Total Care members", phone: "844-261-7834", url: "https://www.nebraskatotalcare.com/members/medicaid/benefits-services/transportation.html" },
+      { name: "UnitedHealthcare Community Plan Transportation", summary: "MTM schedules covered rides for UnitedHealthcare Community Plan members.", access: "Call Monday through Friday during posted hours and keep the trip number.", coverage: "Eligible UHC Community Plan members", phone: "888-777-6924", url: "https://www.uhcprovider.com/en/health-plans-by-state/nebraska-health-plans/ne-comm-plan-home/ne-cp-transportation.html" },
+      { name: "Molina Transportation and Local Referrals", summary: "Molina members can schedule covered medical rides through MTM; 211 locates rural transit, volunteer drivers, and local gas help.", access: "Call the correct plan or 211 and state accessibility, child-seat, and safe pickup needs.", coverage: "Molina members and local programs statewide", phone: "888-889-0421", secondaryPhone: "211", url: "https://www.molinahealthcare.com/providers/ne/medicaid/resources/Transportation.aspx" },
+    ],
+    Immigration: [
+      { name: "Nebraska Immigration Legal Assistance Hotline", summary: "Free, confidential statewide screening and referral for low-income immigrants and refugees.", access: "Call Monday through Thursday during posted hours; press 9 to leave a voicemail if needed.", coverage: "Statewide", phone: "855-307-6730", url: "https://ciraconnect.org/legal-representation" },
+      { name: "Center for Immigrant and Refugee Advancement", summary: "Nonprofit immigration representation with offices across Nebraska and services for trafficking survivors.", access: "Enter through the hotline and ask about T visa, U visa, VAWA, asylum, or other relief.", coverage: "Statewide", phone: "855-307-6730", url: "https://ciraconnect.org" },
+      { name: "Center for Legal Immigration Assistance", summary: "Lincoln-based nonprofit providing free and low-cost immigration legal services statewide.", access: "Contact the program or enter through the statewide hotline for case and capacity screening.", coverage: "Statewide", phone: "402-471-1777", url: "https://www.clianeb.org" },
+      { name: "Nebraska Nonprofit Immigration Directory", summary: "Verified nonprofit legal-services directory searchable by Nebraska location and legal issue.", access: "Filter by case type and confirm current intake before sending documents.", coverage: "Statewide directory", url: "https://www.immigrationadvocates.org/nonprofit/legaldirectory/search?state=NE", note: "Use qualified attorneys or DOJ-accredited representatives, not notarios." },
+    ],
+    Trafficking: [
+      { name: "National Human Trafficking Hotline Nebraska", summary: "Confidential 24-hour safety planning and referrals for sex or labor trafficking.", access: "Call, text, or chat and share only what feels safe.", coverage: "National service available in Nebraska", phone: "888-373-7888", secondaryPhone: "Text 233733", url: "https://humantraffickinghotline.org", note: "The hotline is not law enforcement." },
+      { name: "Nebraska Coalition Trafficking Support", summary: "Local and Tribal survivor programs provide crisis advocacy, shelter, transportation, and legal or medical advocacy.", access: "Use the network map and ask for a confidential advocate familiar with trafficking.", coverage: "Local and Tribal programs statewide", phone: "402-476-6256", url: "https://nebraskacoalition.org/find-help" },
+      { name: "CIRA Trafficking Services", summary: "Immigration representation and funded nonlegal services for eligible trafficking survivors.", access: "Call the statewide immigration hotline and identify trafficking-related legal or service needs.", coverage: "Eligible survivors statewide", phone: "855-307-6730", url: "https://ciraconnect.org/legal-representation" },
+      { name: "Nebraska Human Trafficking Tip Line", summary: "Anonymous tips go to the Nebraska Information Analysis Center and local investigators.", access: "Use only when law-enforcement reporting is safe and desired.", coverage: "Statewide", phone: "833-757-5665", url: "https://projectharmony.com/services/response-services/centralized-intake-and-anti-trafficking-services", note: "This is an investigative tip line, not confidential survivor advocacy." },
+    ],
+    "Other Programs": [
+      { name: "Nebraska Aid to Dependent Children", summary: "TANF-funded cash assistance for eligible low-income families with children.", access: "Apply through iServe Nebraska or contact Economic Assistance.", coverage: "Statewide", phone: "800-383-4278", url: "https://dhhs.ne.gov/Pages/TANF.aspx" },
+      { name: "iServe Nebraska Benefits Portal", summary: "Official application and case portal for economic assistance and Medicaid programs.", access: "Create an account, submit the application, and save the confirmation.", coverage: "Statewide", phone: "800-383-4278", url: "https://iserve.nebraska.gov" },
+      { name: "Nebraska Emergency Cash Assistance", summary: "Limited DHHS emergency help may be available when current program criteria are met.", access: "Ask Economic Assistance whether an emergency program fits the crisis.", coverage: "Statewide when funding and eligibility allow", phone: "800-383-4278", url: "https://dhhs.ne.gov" },
+      { name: "Nebraska Community Action Agencies", summary: "Regional agencies may offer emergency, utility, transportation, housing, or employment support.", access: "Call 211 and request the agency serving the county and information about currently open funds.", coverage: "Regional agencies statewide", phone: "211", url: "https://search.ne211.org" },
+      { name: "Legal Aid of Nebraska AccessLine", summary: "Statewide civil legal screening, advice, and possible representation for eligible people.", access: "Apply online or call during posted hours and state the next deadline first.", coverage: "Statewide", phone: "877-250-2016", url: "https://legalaidofnebraska.org" },
+      { name: "Legal Aid of Nebraska Handbooks", summary: "Nebraska-specific guides on protection orders, financial abuse, housing, and other civil issues.", access: "Use the guides for preparation while seeking advice about deadlines and strategy.", coverage: "Statewide online resources", url: "https://legalaidofnebraska.org/online-resources/all-legal-aid-handbooks.html" },
+      { name: "Native American AccessLine", summary: "Legal Aid intake focused on legal issues affecting Native American applicants.", access: "Call Monday through Thursday during posted intake hours.", coverage: "Eligible Native American applicants", phone: "800-729-9908", url: "https://legalaidofnebraska.org/call-for-help.html" },
+      { name: "Nebraska Coalition Legal Resources", summary: "Survivor-focused legal and immigration assistance links, including protection-order help.", access: "Use the resource page and local provider map for confidential advocacy.", coverage: "Statewide", phone: "402-476-6256", url: "https://nebraskacoalition.org/find-help/legal-resources" },
+    ],
+  },
 };
 
 const twelveCategoryStateResourceCategories = [
@@ -9926,6 +9992,21 @@ const montanaProgramsByCategory: TwelveCategoryProgramMap = {
   "Childcare Assistance": ["Best Beginnings Child Care Scholarship", "Montana Child Care Resources", "Montana MAQCS Regional Contacts", "Montana Head Start and Early Head Start"],
 };
 
+const nebraskaProgramsByCategory: TwelveCategoryProgramMap = {
+  "Homelessness Prevention & Intervention": ["Nebraska 211", "Nebraska DHHS Coordinated Entry Access Points", "All Doors Lead Home", "Nebraska Coalition Network Programs"],
+  Housing: ["Nebraska Coalition Provider Map", "Nebraska Homeless Assistance Provider List", "NIFA Renter Resources", "HUD Resource Locator"],
+  "Subsidized Housing": ["HUD Nebraska Rental Help", "Nebraska Public Housing Authorities", "NIFA Affordable Housing Search", "Nebraska VAWA Housing Protections"],
+  "Cash Assistance": ["Nebraska Aid to Dependent Children", "iServe Nebraska Benefits Portal", "Nebraska Emergency Cash Assistance", "Nebraska Community Action Agencies"],
+  "Immigration Services": ["Nebraska Immigration Legal Assistance Hotline", "Center for Immigrant and Refugee Advancement", "Center for Legal Immigration Assistance", "Nebraska Nonprofit Immigration Directory"],
+  "Trafficking Victim Services": ["National Human Trafficking Hotline Nebraska", "Nebraska Coalition Trafficking Support", "CIRA Trafficking Services", "Nebraska Human Trafficking Tip Line"],
+  "Rapid Rehousing": ["Nebraska Coordinated Entry Rapid Rehousing", "All Doors Lead Home Rapid Rehousing", "Threshold Continuum of Care", "Nebraska Victim-Service Housing Assistance"],
+  "Legal Assistance": ["Legal Aid of Nebraska AccessLine", "Legal Aid of Nebraska Handbooks", "Native American AccessLine", "Nebraska Coalition Legal Resources"],
+  "Rental Assistance": ["Nebraska 211 Rental Assistance", "Nebraska Homeless Assistance Prevention Providers", "Nebraska Coordinated Entry Prevention", "Nebraska Survivor Flexible Assistance"],
+  "SNAP / Food Assistance": ["Nebraska SNAP", "iServe Nebraska SNAP Portal", "Nebraska 211 Food Resources", "Nebraska WIC"],
+  "Transportation Assistance": ["Nebraska Medicaid Transportation Benefit", "Nebraska Total Care Transportation", "UnitedHealthcare Community Plan Transportation", "Molina Transportation and Local Referrals"],
+  "Childcare Assistance": ["Nebraska Child Care Subsidy", "iServe Nebraska Child Care Portal", "Nebraska Child Care Referral Network", "Nebraska Head Start and Early Head Start"],
+};
+
 const twelveCategoryProgramsByState: Partial<Record<string, TwelveCategoryProgramMap>> = {
   connecticut: connecticutProgramsByCategory,
   delaware: delawareProgramsByCategory,
@@ -9946,6 +10027,7 @@ const twelveCategoryProgramsByState: Partial<Record<string, TwelveCategoryProgra
   mississippi: mississippiProgramsByCategory,
   missouri: missouriProgramsByCategory,
   montana: montanaProgramsByCategory,
+  nebraska: nebraskaProgramsByCategory,
 };
 
 export function getStateResourceCategories(slug: string): readonly string[] {
