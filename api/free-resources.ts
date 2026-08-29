@@ -5,7 +5,7 @@ const bucket = "Public Bucket Files";
 const folder = "Free Trackers";
 
 type StorageObject = {
-  id: string | null;
+  id?: string | null;
   name: string;
   metadata?: { size?: number } | null;
 };
@@ -35,7 +35,8 @@ async function locateFreeResources(supabase: ReturnType<typeof createAdminClient
       if (!item.name || item.name.startsWith(".")) continue;
       const itemPath = path ? `${path}/${item.name}` : item.name;
 
-      if (item.id === null) {
+      const isFolder = item.id == null && item.metadata == null;
+      if (isFolder) {
         const targetBranch = insideTarget || normalizeFolderName(item.name) === targetName;
         await walk(itemPath, targetBranch, depth + 1);
       } else if (insideTarget) {
@@ -44,8 +45,10 @@ async function locateFreeResources(supabase: ReturnType<typeof createAdminClient
     }
   }
 
-  await walk();
-  return located;
+  await walk(folder, true);
+  if (located.length === 0) await walk();
+
+  return Array.from(new Map(located.map((item) => [item.path, item])).values());
 }
 
 function displayName(fileName: string) {
