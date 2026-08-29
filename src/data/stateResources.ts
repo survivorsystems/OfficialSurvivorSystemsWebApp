@@ -130,6 +130,8 @@ const stateResourceDownloadFiles: Partial<Record<string, string>> = {
   georgia: "Georgia_Survivor_Resources.pdf",
   hawaii: "Hawaii_Survivor_Resources.pdf",
   idaho: "Idaho_Survivor_Resources.pdf",
+  illinois: "Illinois_Survivor_Resources.pdf",
+  indiana: "Indiana_Survivor_Resources.pdf",
   iowa: "Iowa_Survivor_Resources.pdf",
   kansas: "Kansas_Survivor_Systems_Resource_Guide_2026_REVISED.pdf",
   kentucky: "Kentucky_Survivor_Systems_Resource_Guide_2026.pdf",
