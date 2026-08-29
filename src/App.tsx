@@ -320,6 +320,15 @@ const libraryPasses: LibraryPass[] = [
 
 const howToGuides: HowToGuide[] = [
   {
+    id: "why-abusers-abuse",
+    title: "Why Abusers Abuse",
+    subtitle: "What the research actually says about function, entitlement, control, excuses, and change.",
+    status: "LONG-FORM ARTICLE",
+    description: "An evidence-informed look at what abuse accomplishes, why explanations are not exoneration, and why a survivor does not have to solve an abuser before protecting themselves.",
+    action: "open",
+    priority: "priority-3",
+  },
+  {
     id: "they-didnt-hit-you-though",
     title: "They Didn't Hit You Though",
     subtitle: "The cumulative architecture of subtle psychological abuse.",
@@ -1331,21 +1340,21 @@ const housingGuideSections: RebuildingGuideSection[] = [
 
 const moduleRoutes: Record<ModuleKey, { label: string; path: string }> = {
   home: { label: "Home", path: "/" },
-  assessments: { label: "Guides & Articles", path: "/guides" },
-  guides: { label: "Guides & Articles", path: "/guides" },
+  assessments: { label: "Articles & Guides", path: "/guides" },
+  guides: { label: "Articles & Guides", path: "/guides" },
   planners: { label: "Resources", path: "/resources" },
   toolkits: { label: "Resources", path: "/resources" },
   education: { label: "Surviving", path: "/surviving" },
   about: { label: "About", path: "/about" },
-  advocacy: { label: "Guides & Articles", path: "/guides" },
+  advocacy: { label: "Articles & Guides", path: "/guides" },
   government: { label: "Systems", path: "/systems" },
   support: { label: "Support", path: "/support" },
   "go-bag-prep": { label: "Immediate Support", path: "/crisis-support" },
   planning: { label: "Immediate Support", path: "/crisis-support" },
-  rebuilding: { label: "Guides & Articles", path: "/rebuilding" },
+  rebuilding: { label: "Articles & Guides", path: "/rebuilding" },
   "local-help": { label: "Resources", path: "/resources" },
-  "how-to": { label: "Guides & Articles", path: "/guides" },
-  legal: { label: "Guides & Articles", path: "/guides" },
+  "how-to": { label: "Articles & Guides", path: "/guides" },
+  legal: { label: "Articles & Guides", path: "/guides" },
   library: { label: "Store", path: "/store" },
   access: { label: "Store", path: "/store" },
   subscribe: { label: "Store", path: "/store" },
@@ -1384,7 +1393,7 @@ type SidebarIconKey =
 const navItems: Array<{ key: ModuleKey; label: string; path: string; code: SidebarIconKey }> = [
   { key: "home", label: "Home", path: "/", code: "home" },
   { key: "local-help", label: "Resources", path: "/resources", code: "toolkits" },
-  { key: "guides", label: "Guides & Articles", path: "/guides", code: "guides" },
+  { key: "guides", label: "Articles & Guides", path: "/guides", code: "guides" },
   { key: "store", label: "Store", path: "/store", code: "planners" },
   { key: "about", label: "About", path: "/about", code: "about" },
 ];
@@ -2265,7 +2274,7 @@ const categoryFiles: Record<
     files: [],
   },
   guides: {
-    title: "Guides & Articles",
+    title: "Articles & Guides",
     intro:
       "Practical walkthroughs for doing the work, plus long-form articles for understanding the systems and patterns surrounding it.",
     files: [
@@ -2275,6 +2284,13 @@ const categoryFiles: Record<
         status: "ARTICLE",
         categoryId: "articles",
         guideId: "they-didnt-hit-you-though",
+      },
+      {
+        title: "Why Abusers Abuse",
+        description: "What research says about the function of abuse, control, entitlement, jealousy, denial, blame, selective behavior, and the difficult evidence on change.",
+        status: "ARTICLE",
+        categoryId: "articles",
+        guideId: "why-abusers-abuse",
       },
       {
         title: "Housing Options",
@@ -6036,7 +6052,7 @@ function PlanningLanding({
 }
 
 function PlanningResourcePage({
-  backLabel = "Back To How To Guides",
+  backLabel = "Back to Articles & Guides",
   onBack,
   resourceId,
 }: {
@@ -6165,7 +6181,7 @@ function SnapTanfGuide({ onBack, onNavigate }: { onBack: () => void; onNavigate:
             Visit the Store
           </button>
           <button type="button" onClick={onBack}>
-            Back To How To Guides
+            Back to Articles &amp; Guides
           </button>
           <button type="button" onClick={leaveSite}>
             Quick Exit
@@ -6244,7 +6260,7 @@ function PracticalHowToGuide({
               </button>
             ) : null}
             <button type="button" onClick={onBack}>
-              Back To How To Guides
+              Back to Articles &amp; Guides
             </button>
             <button type="button" onClick={leaveSite}>
               Quick Exit
@@ -6640,7 +6656,70 @@ function TheyDidntHitYouThoughArticle({ onBack }: { onBack: () => void }) {
         <p>Lohmann et al., <cite>The Trauma and Mental Health Impacts of Coercive Control</cite>, 2024.</p>
         <p>Atienzar-Prieto, Baker &amp; Meyer, <cite>Technology-Facilitated Coercive Control</cite>, 2025.</p>
       </footer>
-      <button type="button" className="editorial-feature-back" onClick={onBack}>Back to Guides &amp; Articles</button>
+      <button type="button" className="editorial-feature-back" onClick={onBack}>Back to Articles &amp; Guides</button>
+    </article>
+  );
+}
+
+const whyAbusersAbuseSections = [
+  ["Abuse accomplishes something", "One useful way to understand abusive behavior is to stop looking only at what the abuser says they felt and examine what the behavior accomplished. Yelling ended the disagreement. Threatening suicide stopped you from leaving. Accusing you of cheating got plans canceled. Taking money made travel harder. The silent treatment trained an apology. Behavior that reliably produces a desired result can become extremely durable. Sometimes a person is emotionally flooded. Sometimes they are also getting exactly what they want. Both can exist in the same person."],
+  ["Control does not announce itself", "People rarely announce the operating system. Control appears through rules, consequences, and pressure: who you can talk to, how quickly you must respond, whether you can spend money, disagree, have privacy, end an argument, or end the relationship. Control can be a motive, an outcome, or the organizing principle of the relationship."],
+  ["Entitlement gives abuse permission", "Control gets easier when someone believes they are entitled to things another adult can refuse: attention, body, location, passwords, money, labor, sex, children, forgiveness, or immediate access. Someone operating from entitlement can experience another person's autonomy as something being done to them. That interpretation is not reasonable, but it helps explain why an ordinary no can trigger escalation."],
+  ["Jealousy can become a justification for ownership", "Jealousy is a normal emotion. What someone believes jealousy permits is separate. Feeling jealous does not authorize phone searches, isolation, interrogation, stalking, accusations, sexual coercion, location tracking, or violence. Millions of people experience jealousy without terrorizing anyone. Healthy jealousy gets managed. Abusive jealousy gets handed a badge and promoted to sheriff."],
+  ["Some abuse is reactive. Some is calculated. A person can do both.", "Emotional dysregulation can contribute to violence, but lost control becomes a poor universal theory when behavior requires planning. Surveillance software, hidden money, fake accounts, selective threats, isolation, and adjusted stories for professionals all require decisions. Research with perpetrators finds both reactive aggression and deliberate behavior intended to retaliate or gain control."],
+  ["Protecting the ego can become somebody else's full-time job", "Some abusive people are extraordinarily sensitive to humiliation, rejection, criticism, perceived disrespect, or loss of status. It may look like arrogance, superiority, constant correction, never admitting fault, needing to win, or exploding when challenged. A survivor can spend years trying to stabilize someone else's self-worth while the target keeps moving. Eventually every boundary becomes rejection and every independent thought becomes disloyalty."],
+  ["Their past may explain risk. It does not make the decision disappear.", "Adverse childhood experiences are associated with later IPV perpetration and victimization, but the relationship is not destiny. Trauma can shape attachment, emotional regulation, hypervigilance, beliefs, and models for resolving conflict. Then adulthood still arrives with choices. A survivor's childhood is not an invoice their partner has to pay."],
+  ["Alcohol can increase risk without authoring the abuse", "Harmful alcohol use is associated with greater IPV risk and can lower inhibition, increase aggression, worsen regulation, and increase severity. It cannot magically install a complete belief system about another person's rights. Plenty of drunk people become loud, sleepy, sentimental, or deeply committed to ordering mozzarella sticks. They do not all become abusive. Both the alcohol problem and the abuse problem deserve attention."],
+  ["Mental illness is not one clean explanation", "There is no single abuser diagnosis. Millions of people live with serious mental illness without abusing partners. A diagnosis may help explain symptoms, but it cannot automatically explain a sustained pattern of surveillance, intimidation, punishment, exploitation, or selective retaliation. Diagnosing an ex from social media is unnecessary. You already have behavior. Behavior is enough to evaluate."],
+  ["Denial helps the abuse survive", "Denial, minimization, justification, and blame can protect identity and self-esteem while preserving the conditions that allow abuse to continue. If hitting becomes losing a temper, the problem is anger. If controlling clothes becomes protection, the problem is love. If tracking becomes trust issues, the problem is insecurity. If screaming for hours becomes communication problems, apparently both people need a workbook. Language can shrink accountability until the behavior disappears."],
+  ["Blaming you solves two problems at once", "Blame protects the abusive person's self-image and transfers responsibility for preventing future abuse onto you. Do not make them jealous. Do not use that tone. Do not mention leaving. The rules become detailed, and successful compliance rarely ends the system. It creates more rules because intimidation has proven useful."],
+  ["Remorse is an emotion. Change is a behavioral process.", "An abusive person can be funny, affectionate, helpful, charming, and sincerely remorseful. Contradictions do not erase the pattern. Someone can cry sincerely and still avoid accountability. They can love you and still believe their feelings entitle them to control you. They can miss you desperately and still be dangerous."],
+  ["Intimate relationships provide unique access", "A partner knows your finances, childhood, insecurities, schedule, passwords, children, sexual history, immigration status, dreams, and soft spots. That is extraordinary leverage. Some people are aggressive everywhere; others concentrate violence in intimate relationships. The fact that everyone at work thinks your partner is delightful says little about what happens in your kitchen. They are not dating him."],
+  ["Why loving them enough does not fix it", "Your love does not control another adult's behavior. Inside abuse, a survivor may explain better, stay calmer, research attachment, avoid triggers, offer reassurance, give space, set boundaries, forgive, and try again. Eventually the survivor becomes a full-time research department studying one extraordinarily committed pain in the ass. Meanwhile the person causing harm remains responsible for one person's behavior: their own."],
+  ["Can abusers change?", "Some do. Evidence from intervention research is mixed and effects are generally modest. Hope is not a treatment plan. Real change becomes observable over time: responsibility stops migrating to the victim, excuses lose usefulness, boundaries are respected when inconvenient, control is relinquished, consequences are accepted, and different responses replace jealousy, shame, anger, and rejection. A survivor does not have to remain available while somebody figures it out. You are not required to serve as their final exam."],
+  ["Ask what the abuse accomplishes", "You may never receive a satisfying motive. The abuser may not understand it, may refuse to admit it, or may offer whichever explanation gets the best response. Examine the function. Who changes plans, becomes afraid, apologizes, loses privacy, gives up money, stops seeing friends, avoids subjects, and becomes increasingly careful? Who gets access, ends the argument, defines reality, and becomes increasingly free? Understanding why people abuse matters. Understanding that you do not have to solve them before protecting yourself matters too."],
+] as const;
+
+const whyAbusersAbusePullQuotes: Partial<Record<number, string>> = {
+  0: "Sometimes the person is emotionally flooded. Sometimes they're also getting exactly what they want.",
+  4: "The uncontrollable emotional tornado can occasionally locate the brakes when there's a detective in the room.",
+  9: "Language can shrink accountability until the actual behavior disappears.",
+  11: "Remorse is an emotion. Change is a behavioral process.",
+  13: "A survivor can become a full-time research department studying one extraordinarily committed pain in the ass.",
+  14: "Hope isn't a treatment plan.",
+};
+
+function WhyAbusersAbuseArticle({ onBack }: { onBack: () => void }) {
+  return (
+    <article className="editorial-feature-article" aria-labelledby="why-abusers-abuse-title">
+      <header className="editorial-feature-header">
+        <p>ABUSE / POWER / ACCOUNTABILITY</p>
+        <h1 id="why-abusers-abuse-title">Why Abusers Abuse</h1>
+        <div className="editorial-feature-dek">What the research actually says about function, entitlement, excuses, and change.</div>
+        <div className="editorial-feature-byline"><span>Survivor Systems</span><span>Long-form analysis</span></div>
+      </header>
+      <div className="editorial-feature-columns">
+        {whyAbusersAbuseSections.map(([title, body], index) => (
+          <section className={index === 0 ? "editorial-feature-section editorial-feature-opening" : "editorial-feature-section"} key={title}>
+            <h2>{title}</h2>
+            <p>{body}</p>
+            {whyAbusersAbusePullQuotes[index] ? <blockquote className="editorial-pull-quote">{whyAbusersAbusePullQuotes[index]}</blockquote> : null}
+          </section>
+        ))}
+      </div>
+      <footer className="editorial-feature-sources">
+        <h2>Research used in this article</h2>
+        <p>Dempsey, Hammond &amp; Dixon, <cite>Examining Self-Reported Motivations for Intimate Partner Aggression</cite>, 2023.</p>
+        <p><cite>Everyone is Against Me: A Qualitative Study of Intimate Partner Violence Perpetration</cite>, 2024.</p>
+        <p>Smyth, Teicher &amp; Wilde, <cite>How Denial, Minimization, Justifying, and Blaming Operate</cite>, 2024.</p>
+        <p>Zhu et al., <cite>Adverse Childhood Experiences and Intimate Partner Violence</cite>, 2024.</p>
+        <p><cite>Reproductive Coercion and Abuse in Intimate Relationships</cite>, PLOS One, 2024.</p>
+        <p>Hilton &amp; Radatz, <cite>Coercive Control in a National U.S. Self-Report Survey</cite>, 2025.</p>
+        <p>Willoughby et al., <cite>Men's Alcohol Use, Masculinity and IPV Perpetration</cite>, 2025.</p>
+        <p>Tanyos et al., <cite>Perpetrator Alcohol Use and Intimate Partner Violence</cite>, 2026.</p>
+        <p>Babcock et al., <cite>Which Battering Interventions Work?</cite>, 2024.</p>
+      </footer>
+      <button type="button" className="editorial-feature-back" onClick={onBack}>Back to Articles &amp; Guides</button>
     </article>
   );
 }
@@ -6671,38 +6750,44 @@ function HowToModule({
     setActivePriorityId(initialPriority);
   }, [initialGuideId, initialPriority]);
 
+  const returnToArticlesAndGuides = () => onNavigate("guides", "/guides");
+
   if (activeGuideId === "they-didnt-hit-you-though") {
-    return <TheyDidntHitYouThoughArticle onBack={() => setActiveGuideId(null)} />;
+    return <TheyDidntHitYouThoughArticle onBack={returnToArticlesAndGuides} />;
+  }
+
+  if (activeGuideId === "why-abusers-abuse") {
+    return <WhyAbusersAbuseArticle onBack={returnToArticlesAndGuides} />;
   }
 
   if (activeGuideId === "snap-tanf") {
-    return <SnapTanfGuide onBack={() => setActiveGuideId(null)} onNavigate={onNavigate} />;
+    return <SnapTanfGuide onBack={returnToArticlesAndGuides} onNavigate={onNavigate} />;
   }
 
   if (activeGuideId === "housing-navigation") {
-    return <RebuildingModule onBack={() => setActiveGuideId(null)} onNavigate={onNavigate} />;
+    return <RebuildingModule onBack={returnToArticlesAndGuides} onNavigate={onNavigate} />;
   }
 
   if (activeGuideId === "housing-options") {
-    return <HousingOptionsGuide onBack={() => setActiveGuideId(null)} />;
+    return <HousingOptionsGuide onBack={returnToArticlesAndGuides} />;
   }
 
   if (activeGuideId === "crime-victim-compensation") {
-    return <CrimeVictimCompensationGuide onBack={() => setActiveGuideId(null)} />;
+    return <CrimeVictimCompensationGuide onBack={returnToArticlesAndGuides} />;
   }
 
   if (activeGuideId && practicalGuides[activeGuideId]) {
     return (
       <PracticalHowToGuide
         guide={practicalGuides[activeGuideId]}
-        onBack={() => setActiveGuideId(null)}
+        onBack={returnToArticlesAndGuides}
         onNavigate={onNavigate}
       />
     );
   }
 
   if (activeResourceId) {
-    return <PlanningResourcePage onBack={() => setActiveGuideId(null)} resourceId={activeResourceId} />;
+    return <PlanningResourcePage onBack={returnToArticlesAndGuides} resourceId={activeResourceId} />;
   }
 
   return (
