@@ -320,6 +320,15 @@ const libraryPasses: LibraryPass[] = [
 
 const howToGuides: HowToGuide[] = [
   {
+    id: "they-didnt-hit-you-though",
+    title: "They Didn't Hit You Though",
+    subtitle: "The cumulative architecture of subtle psychological abuse.",
+    status: "LONG-FORM ARTICLE",
+    description: "An evidence-informed examination of how ordinary-looking interactions can accumulate into shrinking autonomy, self-trust, and space for action.",
+    action: "open",
+    priority: "priority-3",
+  },
+  {
     id: "crime-victim-compensation",
     title: "Understanding Crime Victim Compensation",
     subtitle: "What it may pay, what controls a claim, and why it is rarely immediate cash.",
@@ -1322,21 +1331,21 @@ const housingGuideSections: RebuildingGuideSection[] = [
 
 const moduleRoutes: Record<ModuleKey, { label: string; path: string }> = {
   home: { label: "Home", path: "/" },
-  assessments: { label: "Guides", path: "/guides" },
-  guides: { label: "Guides", path: "/guides" },
+  assessments: { label: "Guides & Articles", path: "/guides" },
+  guides: { label: "Guides & Articles", path: "/guides" },
   planners: { label: "Resources", path: "/resources" },
   toolkits: { label: "Resources", path: "/resources" },
   education: { label: "Surviving", path: "/surviving" },
   about: { label: "About", path: "/about" },
-  advocacy: { label: "Guides", path: "/guides" },
+  advocacy: { label: "Guides & Articles", path: "/guides" },
   government: { label: "Systems", path: "/systems" },
   support: { label: "Support", path: "/support" },
   "go-bag-prep": { label: "Immediate Support", path: "/crisis-support" },
   planning: { label: "Immediate Support", path: "/crisis-support" },
-  rebuilding: { label: "Guides", path: "/rebuilding" },
+  rebuilding: { label: "Guides & Articles", path: "/rebuilding" },
   "local-help": { label: "Resources", path: "/resources" },
-  "how-to": { label: "Guides", path: "/guides" },
-  legal: { label: "Guides", path: "/guides" },
+  "how-to": { label: "Guides & Articles", path: "/guides" },
+  legal: { label: "Guides & Articles", path: "/guides" },
   library: { label: "Store", path: "/store" },
   access: { label: "Store", path: "/store" },
   subscribe: { label: "Store", path: "/store" },
@@ -1375,7 +1384,7 @@ type SidebarIconKey =
 const navItems: Array<{ key: ModuleKey; label: string; path: string; code: SidebarIconKey }> = [
   { key: "home", label: "Home", path: "/", code: "home" },
   { key: "local-help", label: "Resources", path: "/resources", code: "toolkits" },
-  { key: "guides", label: "Guides", path: "/guides", code: "guides" },
+  { key: "guides", label: "Guides & Articles", path: "/guides", code: "guides" },
   { key: "store", label: "Store", path: "/store", code: "planners" },
   { key: "about", label: "About", path: "/about", code: "about" },
 ];
@@ -1508,6 +1517,7 @@ type CategoryFile = {
 };
 
 type ResourceCategoryId =
+  | "articles"
   | "housing"
   | "legal-family"
   | "legal-civil"
@@ -1519,6 +1529,7 @@ type ResourceCategoryId =
   | "daily-stability";
 
 const resourceCategoryDefinitions: Array<{ id: ResourceCategoryId; label: string; description: string }> = [
+  { id: "articles", label: "Articles", description: "Long-form reporting and analysis about coercive control, psychological abuse, autonomy, and rebuilding." },
   { id: "housing", label: "Housing", description: "Housing systems, applications, Coordinated Entry, waitlists, utilities, and follow-up." },
   { id: "legal-family", label: "Legal // Family", description: "Family court, custody, caregiving, hearings, deadlines, and documentation." },
   { id: "legal-civil", label: "Legal // Civil", description: "Protective orders, civil filings, motions, evidence, and hearing preparation." },
@@ -2254,10 +2265,17 @@ const categoryFiles: Record<
     files: [],
   },
   guides: {
-    title: "Guides",
+    title: "Guides & Articles",
     intro:
-      "Live walkthroughs for the practical parts of rebuilding: housing, benefits, routines, digital traces, pets, and temporary survival logistics.",
+      "Practical walkthroughs for doing the work, plus long-form articles for understanding the systems and patterns surrounding it.",
     files: [
+      {
+        title: "They Didn't Hit You Though",
+        description: "How subtle psychological abuse contracts a person's freedom through accumulation, anticipation, undermining, withholding, isolation, and reality disputes.",
+        status: "ARTICLE",
+        categoryId: "articles",
+        guideId: "they-didnt-hit-you-though",
+      },
       {
         title: "Housing Options",
         description: "Fifteen housing pathways beyond emergency shelter, plus call scripts, privacy questions, and national starting points.",
@@ -6564,6 +6582,69 @@ function HousingOptionsGuide({ onBack }: { onBack: () => void }) {
   );
 }
 
+const psychologicalAbuseArticleSections = [
+  ["The harm can live in the accumulation", "One reason psychological abuse can take so long to recognize is that individual incidents, pulled out of the relationship and held up alone, can look almost stupid. They walked ahead of you. Sighed when you asked a question. Corrected you in front of somebody. Got quiet after you made plans with a friend. Explained something you already knew how to do. Try explaining five years of that to someone who wasn't there. Research on subtle abuse describes ordinary-looking processes of undermining, limiting, and withholding. The harm can live in the accumulation."],
+  ["Psychological abuse can shrink your space for action", "Researchers who study coercive control describe a person's space for action: the amount of ordinary life in which someone genuinely feels free to make choices. A review of 31 qualitative studies found progressive loss of agency as survivors' lives became organized around fear of repercussions. An abuser does not always have to remove a choice. They can make one option consistently unpleasant enough that you stop choosing it. Once that happens, the restriction begins looking voluntary."],
+  ["Control gets efficient when you start anticipating it", "Early in a relationship, the abuser may have to react. You make plans and they become cold. You raise a problem and lose the evening to hostility. After enough repetitions, you learn. Maybe next time you do not make the plans. The other person's mood becomes information you need before deciding how you are allowed to behave. Eventually they may not need to tell you what to do because you are already calculating what might happen if you do not."],
+  ["Tiny corrections can build a hierarchy of competence", "Infantilizing behavior often arrives disguised as help. A partner explains basic things, double-checks completed work, corrects insignificant details, takes tasks over, or speaks for you. One interaction may mean you are dating an irritating know-it-all. The effect changes when the same message appears across the relationship: I am more competent than you are. Their judgment becomes sensible, their memory accurate, and their interpretation rational until their opinion of your competence begins replacing your own."],
+  ["Moving the rules keeps you dependent on the referee", "Stable expectations can be negotiated. Constantly changing expectations cannot. You are criticized for not asking for help, then treated as helpless when you ask. Told to speak up, then punished for your tone. There is no stable answer because the interaction has stopped being mutual problem-solving. You are trying to solve for a variable that keeps moving."],
+  ["Shared space can become somebody else's territory", "Walking ahead of a partner does not automatically mean anything sinister. Sometimes one person has apparently entered the Olympic speed-walking trials without notifying anybody. Context changes the meaning. One person's schedule determines everybody else's noise. Their belongings are household objects while yours are clutter. Healthy couples may annoy each other over thermostats until the end of human civilization. The pattern matters when one person's preferences become the environment and the other's become requests for permission."],
+  ["Passive aggression makes punishment difficult to name", "Direct hostility is relatively easy to identify. Passive aggression offers plausible deniability. A partner becomes distant after a decision they dislike, answers ordinary questions with contemptuous sighs, or communicates hostility through tone while keeping their words innocent enough to defend. You know something happened. You also know you will need fourteen minutes and a whiteboard to explain why. The punishment worked even though nobody admitted there was a punishment."],
+  ["Withholding can become behavioral training", "Silence itself is not abusive. Taking space can be healthy when communicated clearly and not used as punishment. Deliberate withdrawal used to gain leverage works differently. Research connects persistent silent treatment with distress, lower self-esteem, and reduced control. If affection disappears when you disappoint a partner and returns after you back down, the relationship begins teaching you how to restore connection. There was never a direct command. There did not need to be one."],
+  ["Isolation can happen through friction", "Sometimes isolation is explicit. Other times maintaining relationships becomes exhausting. Every family visit creates tension afterward. Plans trigger an emergency, accusation, argument, or emotional crisis. You technically remain free to socialize. You also know you will pay for it later. As friends, family, and coworkers disappear as reference points, the abuser's interpretation occupies more territory."],
+  ["Gaslighting attacks your authority over your reality", "Gaslighting is not simply disagreement. It targets confidence in your ability to know what happened, interpret what you experience, and trust your judgment. Research identifies losses of self-trust, diminished sense of self, confusion, and mistrust. If someone has spent years positioning themselves as more rational and reliable, repeated claims that you misunderstood or remembered incorrectly carry an existing advantage. You stop trusting yourself as a witness to your own life."],
+  ["Public charm can become evidence against private reality", "The person who diminishes you at home may be patient with strangers, helpful to coworkers, funny with friends, and reasonable with professionals. That public personality protects their reputation and can work against your interpretation. But it also demonstrates capacity. Someone who remains polite when a boss frustrates them has shown that frustration does not automatically cause contempt. They know what respectful behavior looks like."],
+  ["Even kindness can complicate the picture", "A person can be loving, funny, generous, supportive, thoughtful, and abusive in the same relationship. The person who made you feel stupid yesterday makes breakfast today. Those experiences do not cancel one another. They make interpretation harder. Relationships are not spreadsheets where loving interactions automatically deduct harmful ones. The question is what the relationship is doing to your freedom and sense of self over time."],
+  ["Technology can make surveillance feel ordinary", "Couples share locations, passwords, devices, calendars, photos, phone plans, and social accounts. That access can be benign or become infrastructure for control. Sharing location because both people find it convenient is different from knowing that turning it off will generate questioning. The technology may be identical. The freedom surrounding it is not."],
+  ["Pay attention to what you have stopped doing", "Instead of deciding whether every strange interaction qualifies, look at your life before and after the pattern. Do you speak as freely? Trust your decisions? Use the whole house comfortably? Maintain relationships without worrying about the aftermath? Can you make a mistake without humiliation, disagree and remain secure, or trust your memory? These are not a diagnostic checklist. They examine whether your space for action has expanded or contracted."],
+  ["The absence of physical violence does not make the harm trivial", "A 2024 meta-analysis of 45 studies found moderate associations between coercive control and both PTSD and depression. Survivors of subtle abuse often spend years comparing what happened with something worse. Nobody hit me. Maybe I am making too much of this. Human beings do not need to be physically injured before chronic humiliation, unpredictability, domination, surveillance, or loss of autonomy can affect them."],
+  ["Ordinary assholery still exists", "Not every inconsiderate partner is abusive. People interrupt, hog the television, get defensive, and explain something you know while making you briefly contemplate throwing them into the sun. The difference becomes clearer through pattern, power, response, and effect. A healthy partner can be inconsiderate and respond when you tell them. Your independence remains legitimate. Your memory remains yours. Your competence is not perpetually on trial."],
+  ["They didn't hit you though", "Maybe they did not. Maybe the damage happened through a thousand tiny corrections, punishments, interruptions, humiliations, restrictions, withdrawals, and reality disputes that sound ridiculous individually. Maybe nobody explicitly told you to become smaller. You discovered that being smaller caused fewer problems. Look at the direction the relationship moved. Did your world get smaller? Did their authority get larger? Did you abandon pieces of your life because exercising them became too emotionally expensive?"],
+] as const;
+
+const psychologicalAbusePullQuotes: Partial<Record<number, string>> = {
+  1: "Nobody technically banned you. Your space for action still got smaller.",
+  2: "The prohibition has moved inside.",
+  5: "One person's preferences become the environment. The other's become requests for permission.",
+  9: "You stop trusting yourself as a witness to your own life.",
+  14: "A million paper cuts still change the person getting cut.",
+  16: "The individual interaction can look harmless. The system it creates isn't.",
+};
+
+function TheyDidntHitYouThoughArticle({ onBack }: { onBack: () => void }) {
+  return (
+    <article className="editorial-feature-article" aria-labelledby="they-didnt-hit-you-title">
+      <header className="editorial-feature-header">
+        <p>PSYCHOLOGICAL ABUSE / COERCIVE CONTROL</p>
+        <h1 id="they-didnt-hit-you-title">They Didn't Hit You Though</h1>
+        <div className="editorial-feature-dek">The individual interaction can look harmless. The system it creates isn't.</div>
+        <div className="editorial-feature-byline"><span>Survivor Systems</span><span>Long-form analysis</span></div>
+      </header>
+      <div className="editorial-feature-columns">
+        {psychologicalAbuseArticleSections.map(([title, body], index) => (
+          <section className={index === 0 ? "editorial-feature-section editorial-feature-opening" : "editorial-feature-section"} key={title}>
+            <h2>{title}</h2>
+            <p>{body}</p>
+            {psychologicalAbusePullQuotes[index] ? <blockquote className="editorial-pull-quote">{psychologicalAbusePullQuotes[index]}</blockquote> : null}
+          </section>
+        ))}
+      </div>
+      <footer className="editorial-feature-sources">
+        <h2>Research used in this article</h2>
+        <p>Parkinson, Jong &amp; Hanson, <cite>Subtle or Covert Abuse Within Intimate Partner Relationships</cite>, 2024.</p>
+        <p>Choudhury, Martland &amp; Luzon, <cite>Women's Experiences of Coercive Control in Intimate Partner Relationships</cite>, 2025.</p>
+        <p>Kassing et al., <cite>Slowly, Over Time, You Completely Lose Yourself</cite>, 2026.</p>
+        <p>Hailes &amp; Goodman, <cite>They're Out to Take Away Your Sanity</cite>, 2025.</p>
+        <p>Darke, Paterson &amp; van Golde, <cite>Gaslighting and Memory</cite>, 2025.</p>
+        <p>Dubey et al., <cite>Antecedents and Consequences of Silent Treatment</cite>, 2026.</p>
+        <p>Lohmann et al., <cite>The Trauma and Mental Health Impacts of Coercive Control</cite>, 2024.</p>
+        <p>Atienzar-Prieto, Baker &amp; Meyer, <cite>Technology-Facilitated Coercive Control</cite>, 2025.</p>
+      </footer>
+      <button type="button" className="editorial-feature-back" onClick={onBack}>Back to Guides &amp; Articles</button>
+    </article>
+  );
+}
+
 function HowToModule({
   initialGuideId = null,
   initialPriority = null,
@@ -6589,6 +6670,10 @@ function HowToModule({
     setActiveGuideId(initialGuideId);
     setActivePriorityId(initialPriority);
   }, [initialGuideId, initialPriority]);
+
+  if (activeGuideId === "they-didnt-hit-you-though") {
+    return <TheyDidntHitYouThoughArticle onBack={() => setActiveGuideId(null)} />;
+  }
 
   if (activeGuideId === "snap-tanf") {
     return <SnapTanfGuide onBack={() => setActiveGuideId(null)} onNavigate={onNavigate} />;
