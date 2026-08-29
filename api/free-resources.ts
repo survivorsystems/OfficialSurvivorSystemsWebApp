@@ -44,8 +44,12 @@ async function locateFreeResources(supabase: ReturnType<typeof createAdminClient
 }
 
 function displayName(fileName: string) {
-  const withoutExtension = fileName.replace(/\.[^.]+$/, "");
-  const readableName = withoutExtension.replace(/[_-]+/g, " ").replace(/\s+/g, " ").trim();
+  const withoutExtension = fileName.replace(/\.[^.]+$/, "").replace(/\s*\(\d+\)$/, "");
+  const readableName = withoutExtension
+    .replace(/([a-z])([A-Z])/g, "$1 $2")
+    .replace(/[_-]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
   if (/resource\s+navigation/i.test(readableName)) return "Resource Navigation Tracker";
   return readableName;
 }
