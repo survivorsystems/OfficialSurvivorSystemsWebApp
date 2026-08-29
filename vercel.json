@@ -61,6 +61,10 @@
       "destination": "/index.html"
     },
     {
+      "source": "/free-resources",
+      "destination": "/index.html"
+    },
+    {
       "source": "/store",
       "destination": "/index.html"
     },

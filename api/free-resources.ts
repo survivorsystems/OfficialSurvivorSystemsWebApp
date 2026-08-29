@@ -4,6 +4,50 @@ import type { VercelRequest, VercelResponse } from "@vercel/node";
 const bucket = "Public Bucket Files";
 const folder = "Free Trackers";
 
+type StorageObject = {
+  id: string | null;
+  name: string;
+  metadata?: { size?: number } | null;
+};
+
+type LocatedObject = {
+  object: StorageObject;
+  path: string;
+};
+
+function normalizeFolderName(name: string) {
+  return name.replace(/[_-]+/g, " ").replace(/\s+/g, " ").trim().toLowerCase();
+}
+
+async function locateFreeResources(supabase: ReturnType<typeof createAdminClient>) {
+  const located: LocatedObject[] = [];
+  const targetName = normalizeFolderName(folder);
+
+  async function walk(path = "", insideTarget = false, depth = 0): Promise<void> {
+    if (depth > 6) return;
+
+    const { data, error } = await supabase.storage
+      .from(bucket)
+      .list(path, { limit: 1000, sortBy: { column: "name", order: "asc" } });
+    if (error) throw error;
+
+    for (const item of (data ?? []) as StorageObject[]) {
+      if (!item.name || item.name.startsWith(".")) continue;
+      const itemPath = path ? `${path}/${item.name}` : item.name;
+
+      if (item.id === null) {
+        const targetBranch = insideTarget || normalizeFolderName(item.name) === targetName;
+        await walk(itemPath, targetBranch, depth + 1);
+      } else if (insideTarget) {
+        located.push({ object: item, path: itemPath });
+      }
+    }
+  }
+
+  await walk();
+  return located;
+}
+
 function displayName(fileName: string) {
   const withoutExtension = fileName.replace(/\.[^.]+$/, "");
   const readableName = withoutExtension.replace(/[_-]+/g, " ").replace(/\s+/g, " ").trim();
@@ -17,19 +61,11 @@ export default async function handler(request: VercelRequest, response: VercelRe
     return response.status(405).json({ error: "Method not allowed" });
   }
 
-  response.setHeader("Cache-Control", "public, max-age=60, s-maxage=300, stale-while-revalidate=600");
-
   try {
     const supabase = createAdminClient();
-    const { data: objects, error } = await supabase.storage
-      .from(bucket)
-      .list(folder, { limit: 100, sortBy: { column: "name", order: "asc" } });
-    if (error) throw error;
-
-    const resources = (objects ?? [])
-      .filter((object) => object.id && object.name && !object.name.startsWith("."))
-      .map((object) => {
-        const path = `${folder}/${object.name}`;
+    const objects = await locateFreeResources(supabase);
+    const resources = objects
+      .map(({ object, path }) => {
         const { data } = supabase.storage.from(bucket).getPublicUrl(path, { download: object.name });
         return {
           id: object.id,
@@ -39,6 +75,11 @@ export default async function handler(request: VercelRequest, response: VercelRe
           size: typeof object.metadata?.size === "number" ? object.metadata.size : null,
         };
       });
+
+    response.setHeader(
+      "Cache-Control",
+      resources.length > 0 ? "public, max-age=60, s-maxage=300, stale-while-revalidate=600" : "no-store",
+    );
 
     return response.status(200).json({ resources });
   } catch (error) {

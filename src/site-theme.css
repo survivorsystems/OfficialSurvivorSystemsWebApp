@@ -11488,7 +11488,6 @@ body,
   max-width: none !important;
 }
 
-.hud-frame.terminal-frame.module-free-resources .free-resources-module > .page-flourish-header,
 .hud-frame.terminal-frame.module-free-resources .free-resources-safety-note,
 .hud-frame.terminal-frame.module-free-resources .free-resources-list {
   background: var(--ss-white) !important;
@@ -11497,8 +11496,33 @@ body,
   color: var(--ss-ink) !important;
 }
 
-.hud-frame.terminal-frame.module-free-resources .free-resources-module > .page-flourish-header {
-  border-top: 5px solid var(--ss-red) !important;
+.hud-frame.terminal-frame.module-free-resources .free-resources-editorial-header {
+  background: transparent !important;
+  border-bottom: 4px double var(--ss-ink) !important;
+  color: var(--ss-ink) !important;
+  margin: 0 0 clamp(22px, 4vw, 38px) !important;
+  padding: 0 0 clamp(18px, 3vw, 28px) !important;
+}
+
+.hud-frame.terminal-frame.module-free-resources .free-resources-editorial-header > span {
+  color: var(--ss-red) !important;
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.hud-frame.terminal-frame.module-free-resources .free-resources-editorial-header h1 {
+  font-family: Didot, "Bodoni MT", Bodoni, "Times New Roman", serif !important;
+  font-size: clamp(2.25rem, 5vw, 4rem) !important;
+  line-height: 0.95 !important;
+  margin: 0 0 0.7rem !important;
+}
+
+.hud-frame.terminal-frame.module-free-resources .free-resources-editorial-header p {
+  font-size: clamp(1rem, 1.8vw, 1.2rem) !important;
+  margin: 0 !important;
+  max-width: 64ch;
 }
 
 .hud-frame.terminal-frame.module-free-resources .free-resources-module :is(h1, h2, p, span, strong, a) {

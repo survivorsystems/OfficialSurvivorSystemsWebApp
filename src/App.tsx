@@ -3508,14 +3508,11 @@ function FreeResourcesModule() {
 
   return (
     <section className="page-shell free-resources-module" aria-labelledby="free-resources-title">
-      <PageFlourishHeader
-        eyebrow="DOWNLOADS / FREE TO USE"
-        title="Free Resources"
-        titleId="free-resources-title"
-        variant="resources"
-      >
+      <header className="free-resources-editorial-header">
+        <span>DOWNLOADS / FREE TO USE</span>
+        <h1 id="free-resources-title">Free Resources</h1>
         <p>Practical trackers and tools you can download without creating an account or making a purchase.</p>
-      </PageFlourishHeader>
+      </header>
 
       <aside className="free-resources-safety-note">
         <strong>A note about downloaded files</strong>
