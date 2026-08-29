@@ -116,6 +116,7 @@ const stateResourceReviewDates: Partial<Record<string, string>> = {
   montana: "August 25, 2026",
   nebraska: "August 25, 2026",
   nevada: "August 25, 2026",
+  "new-hampshire": "August 26, 2026",
 };
 
 const stateResourceDownloadFiles: Partial<Record<string, string>> = {
@@ -146,6 +147,7 @@ const stateResourceDownloadFiles: Partial<Record<string, string>> = {
   montana: "Montana_Survivor_Resource_Guide.pdf",
   nebraska: "Nebraska_Survivor_Resource_Guide.pdf",
   nevada: "Nevada_Survivor_Resource_Guide.pdf",
+  "new-hampshire": "New_Hampshire_DV_Survivor_Resource_Guide_2026.pdf",
 };
 
 export const stateResourceLocations: StateResourceLocation[] = locationNames.map((name) => ({
@@ -8819,6 +8821,77 @@ export const stateResourcePrograms: Partial<Record<string, Partial<Record<StateR
       { name: "Nevada Courts Legal Help", summary: "Court forms, procedural information, and reduced-fee lawyer referral when legal aid cannot assist.", access: "Use self-help cautiously or call the lawyer-referral service for a prequalified referral.", coverage: "Statewide", phone: "800-789-5747", url: "https://selfhelp.nvcourts.gov/self-help/getting-started/lawyers-and-legal-help/free-and-low-cost-legal-help" },
     ],
   },
+  "new-hampshire": {
+    Housing: [
+      { name: "New Hampshire 211", summary: "Statewide referrals for emergency shelter, homelessness services, food, utilities, and Coordinated Entry.", access: "Dial 211 and ask specifically for a Coordinated Entry assessment; say if confidential handling is needed when fleeing violence.", coverage: "Statewide", phone: "211", secondaryPhone: "866-444-4211", url: "https://www.211nh.org" },
+      { name: "New Hampshire DHHS Homeless Services", summary: "State overview of shelters, prevention, outreach, Emergency Solutions Grant services, and Continuum of Care programs.", access: "Enter through 211 or the local city or town system.", coverage: "Statewide", phone: "211", url: "https://www.dhhs.nh.gov/programs-services/homeless-services" },
+      { name: "NHCADSV Crisis Centers", summary: "Twelve local crisis centers provide confidential advocacy, safety planning, emergency shelter, housing navigation, and court or hospital accompaniment.", access: "Call the statewide helpline for connection to a local confidential advocate.", coverage: "Statewide through local crisis centers", phone: "866-644-3574", url: "https://www.nhcadsv.org/member-programs.html" },
+      { name: "New Hampshire Town or City Welfare", summary: "Every municipality administers local general assistance for necessary needs such as rent, utilities, food, medication, or emergency lodging.", access: "Ask the current town or city hall for the welfare official and submit a written application for a written decision.", coverage: "Each New Hampshire municipality", url: "https://www.dhhs.nh.gov/programs-services/homeless-services", note: "Do not accept an informal denial. Ask to complete the written municipal-welfare application and request appeal instructions if denied." },
+      { name: "CAP Strafford County DV Housing Support", summary: "Statewide regional access point helping people fleeing domestic violence with prevention, diversion, shelter, rapid rehousing, permanent housing, and case management.", access: "Call the domestic-violence housing support program for screening and coordination with local crisis centers.", coverage: "Statewide regional access", phone: "603-435-2500 ext. 8122", url: "https://straffordcap.org/domestic-violence-housing-support/" },
+      { name: "NHCADSV Housing Access", summary: "Survivor-driven housing advocacy through coalition member programs, focused on reaching stable housing while rebuilding.", access: "Call the statewide helpline and ask for housing advocacy.", coverage: "Statewide through member programs", phone: "866-644-3574", url: "https://www.nhcadsv.org/support-services--programs.html" },
+      { name: "HUD New Hampshire Housing Directory", summary: "Official hub for public housing authorities, subsidized properties, housing counseling, rural rentals, and survivor-specific contacts.", access: "Use the directory and contact each relevant housing authority or property separately.", coverage: "Statewide", phone: "800-955-2232", url: "https://www.hud.gov/states/new-hampshire" },
+      { name: "New Hampshire Housing", summary: "State housing finance authority offering rental assistance, affordable-housing information, emergency renter resources, and voucher administration.", access: "Review renter resources and current application or waitlist instructions.", coverage: "Statewide", url: "https://www.nhhousing.org" },
+      { name: "NH Housing Choice Voucher Program", summary: "Very-low-income households pay a portion of income toward rent and utilities while NH Housing pays the approved balance.", access: "Apply while pursuing other options because the statewide wait may be very long.", coverage: "Statewide administration", url: "https://www.nhhousing.org", note: "Keep confirmation numbers and report safe contact changes quickly." },
+      { name: "New Hampshire Public Housing Authorities", summary: "Local authorities administer public housing and vouchers with independently opening and closing waitlists.", access: "Apply to more than one authority when allowed and track every application separately.", coverage: "Local jurisdictions statewide", phone: "800-955-2232", url: "https://www.hud.gov/states/new-hampshire" },
+      { name: "HUD Resource Locator New Hampshire", summary: "Searches subsidized properties by location and special-needs housing.", access: "Use the locator, then call each property manager about vacancies and its separate application.", coverage: "Statewide", url: "https://resources.hud.gov", note: "The locator does not show current vacancies." },
+      { name: "USDA Rural Development New Hampshire Rentals", summary: "Subsidized or rental-assisted multifamily properties in rural areas.", access: "Contact the Vermont and New Hampshire Rural Development office or individual properties.", coverage: "Rural New Hampshire", phone: "603-223-6035", url: "https://www.rd.usda.gov/programs-services/multi-family-housing-programs" },
+      { name: "New Hampshire Coordinated Entry", summary: "Common assessment route for rapid rehousing, permanent supportive housing, transitional housing, and other homelessness resources.", access: "Dial 211, state that the household is fleeing violence, and request confidential handling.", coverage: "Statewide regional access points", phone: "211", url: "https://www.dhhs.nh.gov/programs-services/homeless-services" },
+      { name: "CAP Strafford County Rapid Rehousing", summary: "Helps survivors fleeing domestic violence access prevention, diversion, rapid rehousing, and permanent housing through Coordinated Entry.", access: "Call the statewide DV housing access point for screening.", coverage: "Statewide regional access", phone: "603-435-2500 ext. 8122", url: "https://straffordcap.org/domestic-violence-housing-support/" },
+      { name: "HAVEN Housing Assistance", summary: "Coalition member with access to HUD rapid rehousing for eligible survivors fleeing domestic violence, sexual assault, stalking, or trafficking.", access: "Begin through Coordinated Entry by dialing 211.", coverage: "Program service area and eligible referrals", phone: "211", url: "https://havennh.org" },
+      { name: "Waypoint Young Adult Rapid Rehousing", summary: "No-fee program for young adults ages 18 to 24 experiencing homelessness or housing instability, with possible rental support for up to 24 months.", access: "Request referral through Coordinated Entry.", coverage: "Eligible young adults in program service areas", phone: "211", url: "https://waypointnh.org" },
+      { name: "New Hampshire Municipal Welfare Rent Help", summary: "Municipal general assistance may provide urgent rent or basic-needs help before an eviction deadline.", access: "Apply where currently staying, insist on a written application and decision, and request appeal instructions if denied.", coverage: "Each New Hampshire municipality", url: "https://www.dhhs.nh.gov/programs-services/homeless-services" },
+      { name: "New Hampshire Community Action Agencies", summary: "Regional agencies may have homelessness prevention, security-deposit, fuel, utility, weatherization, and housing-stability funds.", access: "Call 211 for the correct regional agency and ask what is open today.", coverage: "Regional agencies statewide", phone: "211", url: "https://www.211nh.org" },
+      { name: "YWCA NH REACH Housing", summary: "Survivor-driven Housing First and transitional-housing help that may cover deposits, first month's rent, or other short-term housing costs.", access: "Call the 24-hour line for screening and safe referral.", coverage: "New Hampshire program service area", phone: "603-668-2299", url: "https://ywcanh.org" },
+      { name: "New Hampshire Housing Renter Resources", summary: "Official portal for emergency renter resources, voucher information, and legal or rental-assistance links.", access: "Review current programs and contact the listed provider directly.", coverage: "Statewide", url: "https://www.nhhousing.org" },
+      { name: "603 Legal Aid Housing Help", summary: "Legal advice and referral for eviction, rent demands, unsafe conditions, subsidy termination, and denials of local welfare.", access: "Apply online or call and state the next deadline first.", coverage: "Statewide", phone: "800-639-5290", secondaryPhone: "603-224-3333", url: "https://www.603legalaid.org" },
+    ],
+    Food: [
+      { name: "New Hampshire SNAP", summary: "Monthly food benefits for eligible low-income households.", access: "Apply through NH EASY, by phone, or through a district office and ask about expedited SNAP when food and money are very limited.", coverage: "Statewide", phone: "844-275-3447", url: "https://www.dhhs.nh.gov/apply-assistance" },
+      { name: "NH EASY SNAP Portal", summary: "Online application, document upload, notices, and case management for SNAP and other benefits.", access: "Submit promptly and save confirmations and notices.", coverage: "Statewide", url: "https://nheasy.nh.gov" },
+      { name: "New Hampshire Food Bank and Local Pantries", summary: "Immediate food support through food banks, pantries, community meals, and local programs while SNAP is pending.", access: "Dial 211 for food available near a safe location.", coverage: "Statewide local network", phone: "211", url: "https://www.211nh.org" },
+    ],
+    "Childcare Assistance": [
+      { name: "New Hampshire Child Care Scholarship", summary: "Helps eligible families pay for childcare while a parent works, looks for work, attends approved education or training, or meets another qualifying need.", access: "Apply through NH EASY and complete requested verification.", coverage: "Statewide", phone: "844-275-3447", url: "https://www.dhhs.nh.gov/apply-assistance" },
+      { name: "NH EASY Child Care Portal", summary: "Application route for Child Care Scholarship alongside SNAP, cash, and Medicaid screening.", access: "Apply online, upload verification, and check notices.", coverage: "Statewide", url: "https://nheasy.nh.gov" },
+      { name: "Child Care Aware of New Hampshire", summary: "Childcare referrals and help identifying licensed providers, hours, age groups, and scholarship participation.", access: "Call the referral line and state schedule, location, accessibility, and safe-contact needs.", coverage: "Statewide", phone: "855-393-1731", url: "https://www.nh-connections.org/families/child-care-aware-of-nh/" },
+      { name: "New Hampshire Head Start and Early Head Start", summary: "Free early learning, family support, health, and nutrition services for eligible young children and pregnant families.", access: "Contact local programs about enrollment and waitlists.", coverage: "Local programs statewide", url: "https://headstart.gov/center-locator" },
+    ],
+    "Transportation Assistance": [
+      { name: "New Hampshire Medicaid Transportation", summary: "Rides or mileage reimbursement for covered Medicaid medical services when transportation is a barrier.", access: "Managed-care members contact their plan; fee-for-service members use the state process and should schedule ahead when possible.", coverage: "Eligible Medicaid members statewide", url: "https://www.dhhs.nh.gov/programs-services/medicaid/medicaid-transportation" },
+      { name: "Keep NH Moving", summary: "Searchable statewide database for buses, volunteer drivers, medical transportation, shuttles, accessible transportation, and some car-repair programs.", access: "Filter by town and eligibility.", coverage: "Statewide directory", url: "https://www.keepnhmoving.com" },
+      { name: "Easterseals New Hampshire Transportation", summary: "Curb-to-curb and lift-equipped transportation for medical appointments, prescriptions, groceries, school, and adult programs.", access: "Call for service-area, scheduling, and funding information.", coverage: "Program service areas", phone: "603-668-8603", secondaryPhone: "TTY 711", url: "https://www.easterseals.com/nh/programs/transportation-services/" },
+      { name: "FANF and SNAP Employment Transportation Support", summary: "Eligible employment or training participants may receive mileage or transportation reimbursement for approved activities.", access: "Ask the caseworker before travel and keep receipts and mileage records.", coverage: "Eligible participants statewide", phone: "844-275-3447", url: "https://www.dhhs.nh.gov/apply-assistance" },
+      { name: "New Hampshire Crisis Center Transportation", summary: "Local crisis centers may have flexible help for bus tickets, fuel, court or medical rides, relocation travel, or accompaniment.", access: "Call the statewide helpline and ask what is currently available.", coverage: "Program-dependent statewide", phone: "866-644-3574", url: "https://www.nhcadsv.org/member-programs.html" },
+    ],
+    Immigration: [
+      { name: "Catholic Charities New Hampshire Immigration Legal Services", summary: "DOJ-recognized program providing affordable immigration services and specialized help for survivors of violence, sexual assault, trafficking, and other crimes.", access: "Call for intake and ask specifically about survivor-related immigration relief.", coverage: "New Hampshire, with Nashua and Manchester offices", phone: "603-889-9431", url: "https://www.cc-nh.org/services/immigration-legal-services/" },
+      { name: "603 Legal Aid Immigration Referrals", summary: "Civil legal intake that can identify immigration-related survivor issues and connect applicants with appropriate providers.", access: "Apply online or call and mention urgent filing, detention, housing, or family deadlines.", coverage: "Statewide", phone: "800-639-5290", secondaryPhone: "603-224-3333", url: "https://www.603legalaid.org" },
+      { name: "USCIS Humanitarian Protections", summary: "Official information on VAWA self-petitions, U visas, T visas, and immigration options for abused spouses, children, or parents.", access: "Use the information with qualified legal screening rather than relying on an abuser's claims or a notario.", coverage: "Federal options available to qualifying New Hampshire residents", url: "https://www.uscis.gov/humanitarian" },
+      { name: "NHCADSV Immigration-Safe Advocacy", summary: "Confidential advocates coordinate interpreters, safety planning, legal referrals, shelter, and accompaniment regardless of background.", access: "Call the statewide helpline and request language access or immigration-informed support.", coverage: "Statewide through crisis centers", phone: "866-644-3574", url: "https://www.nhcadsv.org/member-programs.html" },
+    ],
+    Trafficking: [
+      { name: "NHCADSV Trafficking Survivor Services", summary: "Coalition crisis centers serve survivors of sex and labor trafficking with confidential advocacy, shelter, accompaniment, and housing or legal referrals.", access: "Call the statewide confidential helpline.", coverage: "Statewide through crisis centers", phone: "866-644-3574", url: "https://www.nhcadsv.org" },
+      { name: "New Hampshire Human Trafficking Collaborative Task Force", summary: "Statewide multidisciplinary network focused on victim-centered identification, services, investigation, and prevention.", access: "Use the coalition helpline for direct survivor support.", coverage: "Statewide coordination", url: "https://www.doj.nh.gov/criminal/victim-assistance/human-trafficking" },
+      { name: "National Human Trafficking Hotline New Hampshire", summary: "Confidential 24-hour help, safety planning, and referrals for sex or labor trafficking.", access: "Call, text, or chat and share only what feels safe.", coverage: "National service available in New Hampshire", phone: "888-373-7888", secondaryPhone: "Text 233733", url: "https://humantraffickinghotline.org" },
+      { name: "Catholic Charities New Hampshire Victims of Crime Services", summary: "Legal pathways and immigration help for people escaping violence or trafficking, with safety planning and community referrals.", access: "Call for intake and current eligibility.", coverage: "New Hampshire program service area", phone: "603-889-9431", url: "https://www.cc-nh.org/services/immigration-legal-services/" },
+    ],
+    "Other Programs": [
+      { name: "New Hampshire FANF", summary: "Cash assistance and self-sufficiency services for eligible families with dependent children.", access: "Apply through NH EASY or call DHHS and ask about domestic-violence good-cause or safety accommodations.", coverage: "Statewide", phone: "844-275-3447", url: "https://www.dhhs.nh.gov/apply-assistance" },
+      { name: "NH EASY Benefits Portal", summary: "One application and case portal for cash, SNAP, Medicaid, and Child Care Scholarship.", access: "Apply online and save confirmation and notice records.", coverage: "Statewide", url: "https://nheasy.nh.gov" },
+      { name: "New Hampshire Municipal General Assistance", summary: "Short-term assistance for basic needs when income and resources do not cover necessary expenses.", access: "Ask the town or city hall for the welfare official and submit a written application.", coverage: "Each New Hampshire municipality", url: "https://www.dhhs.nh.gov/programs-services/homeless-services" },
+      { name: "New Hampshire Victims Compensation", summary: "May reimburse eligible crime-related medical, counseling, wage, funeral, relocation, or safety expenses under current rules.", access: "Ask a crisis-center advocate for screening and application help.", coverage: "Eligible crime victims statewide", url: "https://www.doj.nh.gov/criminal/victim-assistance/victims-compensation-program" },
+      { name: "603 Legal Aid", summary: "Single entry point for free civil legal services involving protective orders, family matters, housing, benefits, utilities, disability rights, and other basic needs.", access: "Apply online anytime or call and state the next deadline first.", coverage: "Statewide", phone: "800-639-5290", secondaryPhone: "603-224-3333", url: "https://www.603legalaid.org" },
+      { name: "DOVE Project", summary: "Free legal representation for qualifying domestic-violence survivors at final restraining-order hearings.", access: "Begin through a local crisis center or the statewide helpline.", coverage: "Statewide for qualifying cases", phone: "866-644-3574", secondaryPhone: "800-277-5570", url: "https://www.nhcadsv.org/legal-resources.html" },
+      { name: "New Hampshire Legal Assistance", summary: "Representation and advice for low-income people in housing, domestic violence, family-law, and public-benefit matters.", access: "Enter through 603 Legal Aid.", coverage: "Statewide", phone: "800-639-5290", url: "https://www.nhla.org" },
+      { name: "New Hampshire Judicial Branch Protective Orders", summary: "Official forms and instructions for domestic-violence, stalking, and sexual-assault protective orders.", access: "Use court self-help carefully and ask an advocate about filing, confidentiality, accessibility, and accompaniment.", coverage: "Statewide courts", url: "https://www.courts.nh.gov/self-help/domestic-violence" },
+      { name: "Disability Rights Center New Hampshire", summary: "Information, referrals, advice, and representation for disability-related civil rights and access issues.", access: "Call for intake and accommodation help.", coverage: "Statewide", phone: "800-834-1721", secondaryPhone: "603-228-0432", url: "https://drcnh.org" },
+      { name: "NHCADSV Sexual Assault Crisis Centers", summary: "Free, confidential support with hospital, police, court, or child-advocacy-center accompaniment and medical or reporting options.", access: "Call the statewide 24-hour helpline.", coverage: "Statewide through local crisis centers", phone: "866-644-3574", secondaryPhone: "800-277-5570", url: "https://www.nhcadsv.org/member-programs.html" },
+      { name: "New Hampshire Sexual Assault Medical Exam", summary: "Medical and forensic exams are available without billing the survivor; eligible adults may choose an anonymous exam when mandatory reporting does not apply.", access: "Go to a hospital and request a sexual-assault exam, SANE nurse, and crisis advocate.", coverage: "New Hampshire hospitals", url: "https://www.nhcadsv.org/medicalforensic-exams.html", note: "A survivor can seek medical care without deciding immediately whether to report and may decline or stop any part of an adult exam unless a mandatory-reporting rule applies." },
+      { name: "New Hampshire SANE Care", summary: "Specially trained nurses provide medical care, injury assessment, evidence collection with consent, STI or pregnancy-related care, and referrals.", access: "Request a SANE nurse through a hospital emergency department.", coverage: "Participating New Hampshire hospitals", url: "https://www.nhcadsv.org/medicalforensic-exams.html" },
+      { name: "New Hampshire Sexual Assault Legal Help", summary: "Coalition legal resources and 603 Legal Aid address protective orders, privacy, housing, school or employment issues, family law, and crime-victim rights.", access: "Call the coalition helpline or 603 Legal Aid.", coverage: "Statewide", phone: "866-644-3574", secondaryPhone: "800-639-5290", url: "https://www.nhcadsv.org/legal-resources.html" },
+      { name: "RAINN National Sexual Assault Hotline New Hampshire", summary: "Confidential national phone and chat support that can route survivors to local resources.", access: "Call or use online chat and share only what feels safe.", coverage: "National service available in New Hampshire", phone: "800-656-4673", url: "https://hotline.rainn.org" },
+    ],
+  },
 };
 
 const twelveCategoryStateResourceCategories = [
@@ -8834,10 +8907,11 @@ const twelveCategoryStateResourceCategories = [
   "SNAP / Food Assistance",
   "Transportation Assistance",
   "Childcare Assistance",
+  "Sexual Assault / Rape Survivor Resources",
 ] as const;
 
 type TwelveCategoryStateResourceCategory = (typeof twelveCategoryStateResourceCategories)[number];
-type TwelveCategoryProgramMap = Record<TwelveCategoryStateResourceCategory, string[]>;
+type TwelveCategoryProgramMap = Partial<Record<TwelveCategoryStateResourceCategory, string[]>>;
 
 const delawareProgramsByCategory: TwelveCategoryProgramMap = {
   "Homelessness Prevention & Intervention": [
@@ -10090,6 +10164,22 @@ const nevadaProgramsByCategory: TwelveCategoryProgramMap = {
   "Childcare Assistance": ["Nevada Child Care and Development Program", "Southern Nevada Child Care Subsidy", "The Children's Cabinet", "Nevada Head Start and Early Head Start"],
 };
 
+const newHampshireProgramsByCategory: TwelveCategoryProgramMap = {
+  "Homelessness Prevention & Intervention": ["New Hampshire 211", "New Hampshire DHHS Homeless Services", "NHCADSV Crisis Centers", "New Hampshire Town or City Welfare"],
+  Housing: ["CAP Strafford County DV Housing Support", "NHCADSV Housing Access", "HUD New Hampshire Housing Directory", "New Hampshire Housing"],
+  "Subsidized Housing": ["NH Housing Choice Voucher Program", "New Hampshire Public Housing Authorities", "HUD Resource Locator New Hampshire", "USDA Rural Development New Hampshire Rentals"],
+  "Cash Assistance": ["New Hampshire FANF", "NH EASY Benefits Portal", "New Hampshire Municipal General Assistance", "New Hampshire Victims Compensation"],
+  "Immigration Services": ["Catholic Charities New Hampshire Immigration Legal Services", "603 Legal Aid Immigration Referrals", "USCIS Humanitarian Protections", "NHCADSV Immigration-Safe Advocacy"],
+  "Trafficking Victim Services": ["NHCADSV Trafficking Survivor Services", "New Hampshire Human Trafficking Collaborative Task Force", "National Human Trafficking Hotline New Hampshire", "Catholic Charities New Hampshire Victims of Crime Services"],
+  "Rapid Rehousing": ["New Hampshire Coordinated Entry", "CAP Strafford County Rapid Rehousing", "HAVEN Housing Assistance", "Waypoint Young Adult Rapid Rehousing"],
+  "Legal Assistance": ["603 Legal Aid", "DOVE Project", "New Hampshire Legal Assistance", "New Hampshire Judicial Branch Protective Orders", "Disability Rights Center New Hampshire"],
+  "Rental Assistance": ["New Hampshire Municipal Welfare Rent Help", "New Hampshire Community Action Agencies", "YWCA NH REACH Housing", "New Hampshire Housing Renter Resources", "603 Legal Aid Housing Help"],
+  "SNAP / Food Assistance": ["New Hampshire SNAP", "NH EASY SNAP Portal", "New Hampshire Food Bank and Local Pantries"],
+  "Transportation Assistance": ["New Hampshire Medicaid Transportation", "Keep NH Moving", "Easterseals New Hampshire Transportation", "FANF and SNAP Employment Transportation Support", "New Hampshire Crisis Center Transportation"],
+  "Childcare Assistance": ["New Hampshire Child Care Scholarship", "NH EASY Child Care Portal", "Child Care Aware of New Hampshire", "New Hampshire Head Start and Early Head Start"],
+  "Sexual Assault / Rape Survivor Resources": ["NHCADSV Sexual Assault Crisis Centers", "New Hampshire Sexual Assault Medical Exam", "New Hampshire SANE Care", "New Hampshire Sexual Assault Legal Help", "RAINN National Sexual Assault Hotline New Hampshire"],
+};
+
 const twelveCategoryProgramsByState: Partial<Record<string, TwelveCategoryProgramMap>> = {
   connecticut: connecticutProgramsByCategory,
   delaware: delawareProgramsByCategory,
@@ -10112,10 +10202,14 @@ const twelveCategoryProgramsByState: Partial<Record<string, TwelveCategoryProgra
   montana: montanaProgramsByCategory,
   nebraska: nebraskaProgramsByCategory,
   nevada: nevadaProgramsByCategory,
+  "new-hampshire": newHampshireProgramsByCategory,
 };
 
 export function getStateResourceCategories(slug: string): readonly string[] {
-  return twelveCategoryProgramsByState[slug] ? twelveCategoryStateResourceCategories : stateResourceCategories;
+  const categoryMap = twelveCategoryProgramsByState[slug];
+  return categoryMap
+    ? twelveCategoryStateResourceCategories.filter((category) => categoryMap[category] !== undefined)
+    : stateResourceCategories;
 }
 
 export function getProgramsForStateCategory(slug: string, category: string): StateResourceProgram[] {
