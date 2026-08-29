@@ -1,8 +1,7 @@
 import { createAdminClient } from "@supabase/server/core";
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 
-const bucket = "Public Bucket Files";
-const folder = "Free Trackers";
+const bucket = "Free Trackers";
 
 type StorageObject = {
   id?: string | null;
@@ -15,15 +14,10 @@ type LocatedObject = {
   path: string;
 };
 
-function normalizeFolderName(name: string) {
-  return name.replace(/[_-]+/g, " ").replace(/\s+/g, " ").trim().toLowerCase();
-}
-
 async function locateFreeResources(supabase: ReturnType<typeof createAdminClient>) {
   const located: LocatedObject[] = [];
-  const targetName = normalizeFolderName(folder);
 
-  async function walk(path = "", insideTarget = false, depth = 0): Promise<void> {
+  async function walk(path = "", depth = 0): Promise<void> {
     if (depth > 6) return;
 
     const { data, error } = await supabase.storage
@@ -37,16 +31,14 @@ async function locateFreeResources(supabase: ReturnType<typeof createAdminClient
 
       const isFolder = item.id == null && item.metadata == null;
       if (isFolder) {
-        const targetBranch = insideTarget || normalizeFolderName(item.name) === targetName;
-        await walk(itemPath, targetBranch, depth + 1);
-      } else if (insideTarget) {
+        await walk(itemPath, depth + 1);
+      } else {
         located.push({ object: item, path: itemPath });
       }
     }
   }
 
-  await walk(folder, true);
-  if (located.length === 0) await walk();
+  await walk();
 
   return Array.from(new Map(located.map((item) => [item.path, item])).values());
 }
