@@ -92,7 +92,7 @@ const stateResourceReviewDates: Partial<Record<string, string>> = {
   alabama: "August 31, 2026",
   alaska: "August 19, 2026",
   arizona: "August 20, 2026",
-  arkansas: "August 20, 2026",
+  arkansas: "August 31, 2026",
   colorado: "August 20, 2026",
   california: "August 20, 2026",
   connecticut: "August 21, 2026",
@@ -1538,6 +1538,22 @@ export const stateResourcePrograms: Partial<Record<string, Partial<Record<StateR
         coverage: "Arkansas; clinic availability changes",
         phone: "479-575-3056",
         url: "https://law.uark.edu/service-outreach/clinics/",
+      },
+      {
+        name: "Arkansas Coalition Against Sexual Assault",
+        summary: "Publishes current county service areas and crisis-center contacts for sexual-assault advocacy, forensic-exam accompaniment, counseling, and court support.",
+        access: "Use the county directory or call the national referral line when a county-specific center is not identified, then confirm local coverage before traveling.",
+        coverage: "County and regional programs statewide",
+        phone: "800-656-4673",
+        url: "https://www.arkcasa.org/copy-of-crisis-centers",
+      },
+      {
+        name: "Arkansas County-Checked Routing Directory",
+        summary: "County-by-county routing for the correct Continuum of Care, Community Action agency, domestic-violence shelter route, and sexual-assault service area.",
+        access: "Use the downloadable Arkansas guide to identify the published county route, then confirm intake, funding, safe data handling, transportation, and cross-county placement.",
+        coverage: "All 75 Arkansas counties",
+        url: "https://adfa.arkansas.gov/homelessness-solutions/",
+        note: "A shelter host county does not define its full intake area. ADFA administers funding but generally does not accept household ESG applications directly.",
       },
     ],
   },
@@ -9680,6 +9696,22 @@ const alabamaProgramsByCategory: TwelveCategoryProgramMap = {
   "Sexual Assault / Rape Survivor Resources": ["Alabama County-Checked Routing Directory", "Alabama Coalition Against Rape", "Family Sunshine Center", "Rape Counselors of East Alabama", "One Place Family Justice Center", "AshaKiran"],
 };
 
+const arkansasProgramsByCategory: TwelveCategoryProgramMap = {
+  "Homelessness Prevention & Intervention": ["Arkansas County-Checked Routing Directory", "Regional coordinated entry and rapid rehousing", "Local Community Action Agencies", "Arkansas domestic violence shelter directory"],
+  Housing: ["Arkansas County-Checked Routing Directory", "Arkansas domestic violence shelter directory", "Lonoke County Safe Haven", "ADFA affordable rental properties"],
+  "Subsidized Housing": ["Housing Choice Vouchers and Public Housing", "ADFA affordable rental properties", "HOME Tenant-Based Rental Assistance", "Section 811 and disability-accessible housing", "VAWA housing protections"],
+  "Cash Assistance": ["Transitional Employment Assistance", "Arkansas Crime Victims Reparations Board"],
+  "Immigration Services": ["Arkansas Immigrant Defense", "Canopy Northwest Arkansas immigration legal services", "University of Arkansas Immigration Clinic", "University of Arkansas School of Law clinics"],
+  "Trafficking Victim Services": ["Lonoke County Safe Haven human trafficking services", "Canopy NWA survivor services", "NWA Against Human Trafficking", "Hub of HOPE", "Hope Found NEA", "The Centers human trafficking treatment"],
+  "Rapid Rehousing": ["Arkansas County-Checked Routing Directory", "Regional coordinated entry and rapid rehousing", "Lonoke County Safe Haven"],
+  "Legal Assistance": ["Legal Aid of Arkansas", "Legal Aid Fair Housing Project", "Arkansas Order of Protection", "University of Arkansas School of Law clinics", "Limited driver-license address confidentiality"],
+  "Rental Assistance": ["Local Community Action Agencies", "Regional coordinated entry and rapid rehousing", "HOME Tenant-Based Rental Assistance", "Legal Aid Fair Housing Project"],
+  "SNAP / Food Assistance": ["Arkansas SNAP", "DHS county offices", "Community Action food resources"],
+  "Transportation Assistance": ["Arkansas Medicaid non-emergency transportation", "Arkansas public transit directory", "TEA transportation support", "Survivor-specific transportation help"],
+  "Childcare Assistance": ["Arkansas School Readiness Assistance", "TEA childcare support", "DHS county offices"],
+  "Sexual Assault / Rape Survivor Resources": ["Arkansas County-Checked Routing Directory", "Arkansas Coalition Against Sexual Assault", "Lonoke County Safe Haven", "Arkansas domestic violence shelter directory"],
+};
+
 const delawareProgramsByCategory: TwelveCategoryProgramMap = {
   "Homelessness Prevention & Intervention": [
     "Housing Alliance Delaware - Centralized Intake",
@@ -11109,6 +11141,7 @@ const rhodeIslandProgramsByCategory: TwelveCategoryProgramMap = {
 
 const twelveCategoryProgramsByState: Partial<Record<string, TwelveCategoryProgramMap>> = {
   alabama: alabamaProgramsByCategory,
+  arkansas: arkansasProgramsByCategory,
   connecticut: connecticutProgramsByCategory,
   delaware: delawareProgramsByCategory,
   georgia: georgiaProgramsByCategory,
