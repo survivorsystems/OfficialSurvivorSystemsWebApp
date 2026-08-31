@@ -94,7 +94,7 @@ const stateResourceReviewDates: Partial<Record<string, string>> = {
   arizona: "August 20, 2026",
   arkansas: "August 31, 2026",
   colorado: "August 20, 2026",
-  california: "August 20, 2026",
+  california: "August 31, 2026",
   connecticut: "August 21, 2026",
   delaware: "August 21, 2026",
   georgia: "August 21, 2026",
@@ -134,7 +134,7 @@ const stateResourceDownloadFiles: Partial<Record<string, string>> = {
   alaska: "Alaska_Survivor_Resource_Guide.pdf",
   arizona: "Survivor_Systems_Arizona_Resource_Research.pdf",
   arkansas: "Survivor_Systems_Arkansas_Resource_Research.pdf",
-  california: "Survivor_Systems_California_Resource_Research.pdf",
+  california: "California_Survivor_Resource_Guide_2026_County_Checked.pdf",
   colorado: "Survivor_Systems_Colorado_Resource_Research.pdf",
   connecticut: "Connecticut_Survivor_Resources.pdf",
   delaware: "Delaware_Survivor_Resources.pdf",
@@ -1930,6 +1930,22 @@ export const stateResourcePrograms: Partial<Record<string, Partial<Record<StateR
         coverage: "Broad statewide navigation; local coverage varies",
         url: "https://211ca.org/",
         note: "211 is a routing layer rather than the provider of the underlying benefit.",
+      },
+      {
+        name: "VALOR California Sexual Assault Directory",
+        summary: "County directory of rape-crisis centers and related organizations offering crisis response, confidential advocacy, forensic-exam accompaniment, counseling, and court support.",
+        access: "Search the current county directory and confirm the regional provider before traveling. Glenn, Sierra, and Yuba require hotline and cross-county routing because the reviewed directory displayed zero listings.",
+        coverage: "55 counties with displayed listings; cross-county referral for Glenn, Sierra, and Yuba",
+        phone: "800-656-4673",
+        url: "https://www.valor.us/get-help/get-help-california/",
+      },
+      {
+        name: "California County-Checked Routing Directory",
+        summary: "County-by-county routing for the correct homelessness Continuum of Care, BenefitsCal and county social-services office, live CPEDV domestic-violence map, and VALOR sexual-assault listings.",
+        access: "Use the downloadable county-checked guide to identify the local system, then confirm funding, intake, confidential data handling, transportation, and cross-county options.",
+        coverage: "All 58 California counties",
+        url: "https://211ca.org/",
+        note: "HCD and CDSS commonly administer funding while local agencies conduct household intake. CPEDV is a coalition and referral source, not a shelter.",
       },
     ],
   },
@@ -9712,6 +9728,22 @@ const arkansasProgramsByCategory: TwelveCategoryProgramMap = {
   "Sexual Assault / Rape Survivor Resources": ["Arkansas County-Checked Routing Directory", "Arkansas Coalition Against Sexual Assault", "Lonoke County Safe Haven", "Arkansas domestic violence shelter directory"],
 };
 
+const californiaProgramsByCategory: TwelveCategoryProgramMap = {
+  "Homelessness Prevention & Intervention": ["California County-Checked Routing Directory", "Local coordinated entry and rapid rehousing", "211 California", "California domestic violence program directory"],
+  Housing: ["California County-Checked Routing Directory", "California domestic violence program directory", "CalWORKs Homeless Assistance", "CalWORKs Housing Support Program", "Bringing Families Home"],
+  "Subsidized Housing": ["Housing Choice Vouchers and Public Housing", "Affordable and project-based housing search", "Housing and Disability Advocacy Program"],
+  "Cash Assistance": ["CalWORKs", "CalWORKs domestic abuse protections", "CalWORKs Family Stabilization", "Trafficking and Crime Victims Assistance Program", "California Victim Compensation Board"],
+  "Immigration Services": ["CDSS-funded immigration legal services", "California removal-defense providers", "CDSS immigration grantee contacts", "Trafficking and Crime Victims Assistance Program"],
+  "Trafficking Victim Services": ["CAST Los Angeles", "Central Valley Against Human Trafficking", "Community Against Sexual Harm", "GenerateHope", "CalVCB human trafficking benefits", "California Attorney General trafficking resources"],
+  "Rapid Rehousing": ["California County-Checked Routing Directory", "Local coordinated entry and rapid rehousing", "CalWORKs Housing Support Program", "California domestic violence program directory"],
+  "Legal Assistance": ["LawHelpCA", "California Courts domestic violence self-help", "Safe at Home", "Early lease termination for abuse", "Abuse-related eviction protections", "Coerced debt protections"],
+  "Rental Assistance": ["211 California", "CalWORKs Homeless Assistance", "CalWORKs Housing Support Program", "Local coordinated entry and rapid rehousing"],
+  "SNAP / Food Assistance": ["CalFresh", "BenefitsCal", "211 California food resources", "California county social-services offices"],
+  "Transportation Assistance": ["Medi-Cal transportation services", "CalWORKs transportation supportive services", "211 California transportation search", "CASH Sacramento survivor transportation"],
+  "Childcare Assistance": ["CalWORKs Child Care", "Child Care Resource and Referral", "CASH Sacramento childcare referrals"],
+  "Sexual Assault / Rape Survivor Resources": ["California County-Checked Routing Directory", "VALOR California Sexual Assault Directory", "California domestic violence program directory", "211 California"],
+};
+
 const delawareProgramsByCategory: TwelveCategoryProgramMap = {
   "Homelessness Prevention & Intervention": [
     "Housing Alliance Delaware - Centralized Intake",
@@ -11142,6 +11174,7 @@ const rhodeIslandProgramsByCategory: TwelveCategoryProgramMap = {
 const twelveCategoryProgramsByState: Partial<Record<string, TwelveCategoryProgramMap>> = {
   alabama: alabamaProgramsByCategory,
   arkansas: arkansasProgramsByCategory,
+  california: californiaProgramsByCategory,
   connecticut: connecticutProgramsByCategory,
   delaware: delawareProgramsByCategory,
   georgia: georgiaProgramsByCategory,
