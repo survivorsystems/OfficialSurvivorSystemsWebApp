@@ -2,6 +2,8 @@ import { createAdminClient } from "@supabase/server/core";
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import Stripe from "stripe";
 import { objectId, syncSubscription } from "./_lib/library-access.js";
+import { stripeObjectId } from "./_lib/store-catalog.js";
+import { syncStorePurchase, updateStoreOrderPaymentStatus } from "./_lib/store-purchases.js";
 
 export const config = { api: { bodyParser: false } };
 
@@ -28,11 +30,29 @@ async function processStripeEvent(event: Stripe.Event, stripe: Stripe, supabase:
   switch (event.type) {
     case "checkout.session.completed": {
       const session = event.data.object;
+      if (session.mode === "payment") {
+        await syncStorePurchase(supabase, stripe, session);
+        return;
+      }
       const subscriptionId = objectId(session.subscription);
       if (!subscriptionId) return;
       const subscription = await stripe.subscriptions.retrieve(subscriptionId);
       const email = session.customer_details?.email ?? session.customer_email;
       await syncSubscription(supabase, stripe, subscription, email);
+      return;
+    }
+    case "checkout.session.async_payment_succeeded":
+      await syncStorePurchase(supabase, stripe, event.data.object);
+      return;
+    case "checkout.session.async_payment_failed":
+      await updateStoreOrderPaymentStatus(supabase, event.data.object.id, "failed");
+      return;
+    case "charge.refunded": {
+      const paymentIntentId = stripeObjectId(event.data.object.payment_intent);
+      if (!paymentIntentId) return;
+      const sessions = await stripe.checkout.sessions.list({ payment_intent: paymentIntentId, limit: 1 });
+      const session = sessions.data[0];
+      if (session) await updateStoreOrderPaymentStatus(supabase, session.id, "refunded");
       return;
     }
     case "customer.subscription.created":
@@ -76,7 +96,7 @@ export default async function handler(request: VercelRequest, response: VercelRe
     return response.status(200).json({ received: true });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unknown webhook error";
-    console.error("Stripe library webhook failed:", message);
+    console.error("Stripe store webhook failed:", message);
     return response.status(400).json({ error: "Webhook processing failed" });
   }
 }
