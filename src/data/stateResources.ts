@@ -89,7 +89,7 @@ function slugifyLocation(name: string) {
 }
 
 const stateResourceReviewDates: Partial<Record<string, string>> = {
-  alabama: "August 19, 2026",
+  alabama: "August 31, 2026",
   alaska: "August 19, 2026",
   arizona: "August 20, 2026",
   arkansas: "August 20, 2026",
@@ -538,6 +538,22 @@ export const stateResourcePrograms: Partial<Record<string, Partial<Record<StateR
         coverage: "Statewide",
         phone: "888-421-1266",
         url: "https://www.211connectsalabama.org/",
+      },
+      {
+        name: "Alabama Coalition Against Rape",
+        summary: "Statewide sexual-assault referral route connecting survivors to current regional crisis response, forensic-exam accompaniment, advocacy, therapy, support groups, and court support.",
+        access: "Call the statewide referral line when the county's current provider is unknown and confirm the local program before traveling.",
+        coverage: "Statewide referral with regional providers",
+        phone: "800-656-4673",
+        url: "https://alcar.org/",
+      },
+      {
+        name: "Alabama County-Checked Routing Directory",
+        summary: "County-by-county routing for certified domestic-violence coverage, named sexual-assault coverage or statewide referral, current ESG housing networks, and DHR childcare management regions.",
+        access: "Use the downloadable Alabama guide to find the named county route, then confirm funding, intake, transportation, and safe contact before traveling or sharing sensitive information.",
+        coverage: "All 67 Alabama counties",
+        url: "https://acadv.org/get-help/",
+        note: "A statewide line is referral coverage, not proof of local capacity. A county without a named 2025 ESG award should still use 211, coordinated entry, Community Action, and survivor-specific advocacy.",
       },
     ],
   },
@@ -9648,6 +9664,22 @@ const twelveCategoryStateResourceCategories = [
 type TwelveCategoryStateResourceCategory = (typeof twelveCategoryStateResourceCategories)[number];
 type TwelveCategoryProgramMap = Partial<Record<TwelveCategoryStateResourceCategory, string[]>>;
 
+const alabamaProgramsByCategory: TwelveCategoryProgramMap = {
+  "Homelessness Prevention & Intervention": ["Alabama County-Checked Routing Directory", "Emergency Solutions Grant programs", "211 Connects Alabama", "Community Action Agencies", "Alabama Coalition Against Domestic Violence"],
+  Housing: ["Alabama County-Checked Routing Directory", "Alabama Coalition Against Domestic Violence", "HOME-ARP housing pathways", "Alabama Housing Finance Authority Apartment Finder", "USDA Rural Multifamily Rental Assistance"],
+  "Subsidized Housing": ["Housing Choice Vouchers and Public Housing", "Alabama Housing Finance Authority Apartment Finder", "USDA Rural Multifamily Rental Assistance", "HOME-ARP housing pathways"],
+  "Cash Assistance": ["Family Assistance (TANF) and Family Violence Option", "SAIL - Special Assessment, Intervention and Liaison", "Alabama Crime Victims Compensation"],
+  "Immigration Services": ["Hispanic and Immigrant Center of Alabama (HICA)", "AshaKiran", "Alabama Coalition for Immigrant Justice", "Qualified immigration legal screening", "Catholic Social Services immigration offices"],
+  "Trafficking Victim Services": ["National Human Trafficking Hotline", "The WellHouse", "Camille Place", "AshaKiran", "Regional trafficking contacts"],
+  "Rapid Rehousing": ["Alabama County-Checked Routing Directory", "Emergency Solutions Grant programs", "Alabama Coalition Against Domestic Violence", "Family Sunshine Center"],
+  "Legal Assistance": ["Legal Services Alabama", "Alabama Volunteer Lawyers Programs", "Protection From Abuse court forms", "Alabama Coalition Against Domestic Violence"],
+  "Rental Assistance": ["Emergency Solutions Grant programs", "Community Action Agencies", "211 Connects Alabama", "Alabama Crime Victims Compensation"],
+  "SNAP / Food Assistance": ["Alabama SNAP Food Assistance", "211 Connects Alabama", "Community Action Agencies"],
+  "Transportation Assistance": ["JOBS transportation support", "Alabama Medicaid Non-Emergency Transportation", "Community Action transportation help", "AshaKiran transportation and accompaniment"],
+  "Childcare Assistance": ["Alabama County-Checked Routing Directory", "Alabama DHR Child Care Subsidy", "JOBS childcare support"],
+  "Sexual Assault / Rape Survivor Resources": ["Alabama County-Checked Routing Directory", "Alabama Coalition Against Rape", "Family Sunshine Center", "Rape Counselors of East Alabama", "One Place Family Justice Center", "AshaKiran"],
+};
+
 const delawareProgramsByCategory: TwelveCategoryProgramMap = {
   "Homelessness Prevention & Intervention": [
     "Housing Alliance Delaware - Centralized Intake",
@@ -11076,6 +11108,7 @@ const rhodeIslandProgramsByCategory: TwelveCategoryProgramMap = {
 };
 
 const twelveCategoryProgramsByState: Partial<Record<string, TwelveCategoryProgramMap>> = {
+  alabama: alabamaProgramsByCategory,
   connecticut: connecticutProgramsByCategory,
   delaware: delawareProgramsByCategory,
   georgia: georgiaProgramsByCategory,
