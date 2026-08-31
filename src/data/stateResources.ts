@@ -125,6 +125,7 @@ const stateResourceReviewDates: Partial<Record<string, string>> = {
   ohio: "August 26, 2026",
   oklahoma: "August 27, 2026",
   oregon: "August 27, 2026",
+  pennsylvania: "August 27, 2026",
 };
 
 const stateResourceDownloadFiles: Partial<Record<string, string>> = {
@@ -164,6 +165,7 @@ const stateResourceDownloadFiles: Partial<Record<string, string>> = {
   ohio: "Ohio_DV_Survivor_Resource_Guide_2026.pdf",
   oklahoma: "Oklahoma_DV_Survivor_Resource_Guide_2026.pdf",
   oregon: "Oregon_DV_Survivor_Resource_Guide_2026.pdf",
+  pennsylvania: "Pennsylvania_DV_Survivor_Resource_Guide_2026.pdf",
 };
 
 export const stateResourceLocations: StateResourceLocation[] = locationNames.map((name) => ({
@@ -9497,6 +9499,70 @@ export const stateResourcePrograms: Partial<Record<string, Partial<Record<StateR
       { name: "RAINN Sexual Assault Hotline Oregon", summary: "Confidential national crisis support and connection to local sexual-assault services.", access: "Call or use online chat for another entry point or cross-state routing.", coverage: "National service available in Oregon", phone: "800-656-4673", url: "https://www.rainn.org/" },
     ],
   },
+  pennsylvania: {
+    Housing: [
+      { name: "Pennsylvania 211", summary: "Statewide routing to shelter, rent, utilities, food, transportation, and county services.", access: "Dial 211, text a ZIP code to 898211, and ask for several direct referrals.", coverage: "Statewide", phone: "211", url: "https://www.pa211.org/" },
+      { name: "Pennsylvania Homeless Assistance Program", summary: "County-administered prevention, emergency shelter, bridge housing, case management, and rental help.", access: "Apply through the county HAP provider because there is no single statewide intake.", coverage: "County programs statewide", url: "https://www.pa.gov/services/dhs/apply-for-the-homeless-assistance-program" },
+      { name: "PCADV Local Programs", summary: "Free confidential counseling, shelter, legal advocacy, and economic advocacy for survivors and children.", access: "Use the county directory and ask separately about shelter, motel, relocation, flexible funds, and housing advocacy.", coverage: "Local programs statewide", phone: "800-799-7233", url: "https://www.pcadv.org/find-help/" },
+      { name: "Pennsylvania Emergency Shelter Allowance", summary: "Possible special allowance for qualifying Pennsylvanians facing a housing crisis.", access: "Apply through the County Assistance Office and request a written decision if denied.", coverage: "County-administered statewide", url: "https://www.pa.gov/services/dhs/apply-for-the-emergency-shelter-allowance-esa" },
+      { name: "Pennsylvania Local DV Housing Programs", summary: "Emergency shelter, safe lodging, safety planning, and housing and economic advocacy through regional survivor programs.", access: "Search PCADV by county and confirm bed status and safe arrival before traveling.", coverage: "Regional programs statewide", url: "https://www.pcadv.org/find-help/" },
+      { name: "Pennsylvania Coordinated Entry", summary: "County assessment and routing into shelter, rapid rehousing, and permanent-housing programs.", access: "Call 211 for the current county access point and request a confidential victim-service route when HMIS disclosure is unsafe.", coverage: "County systems statewide", phone: "211", url: "https://www.pa211.org/" },
+      { name: "PAHousingSearch", summary: "Searchable affordable and market-rate rentals filtered by rent, accessibility, transit, and location.", access: "Contact each property directly to confirm vacancy and subsidy.", coverage: "Statewide", phone: "877-428-8844", secondaryPhone: "TTY 711", url: "https://www.pahousingsearch.com/" },
+      { name: "Pennsylvania Native Survivor Routing", summary: "Culturally specific confidential support and connections to Native victim resources.", access: "Call StrongHearts and ask for the closest culturally responsive partner and its eligibility rules.", coverage: "Native survivors statewide", phone: "844-762-8483", url: "https://strongheartshelpline.org/" },
+      { name: "Pennsylvania Public Housing Authorities", summary: "Local authorities administer Housing Choice Vouchers, public housing, and project-based programs with separate waitlists.", access: "Apply to multiple authorities and properties; Pennsylvania has no single Section 8 list.", coverage: "Local jurisdictions statewide", phone: "800-955-2232", url: "https://www.hud.gov/states/pennsylvania" },
+      { name: "Philadelphia Housing Authority HCV", summary: "Tenant-based voucher program for households targeting Philadelphia.", access: "Monitor the authority for reopening and check separate property lists.", coverage: "Philadelphia", url: "https://www.pha.phila.gov/", note: "The voucher waitlist was closed and drawing from its 2023 list when the guide was reviewed." },
+      { name: "Pittsburgh Housing Authority HCV", summary: "Housing Choice Voucher program for households targeting Pittsburgh.", access: "Monitor voucher and separate property waitlists.", coverage: "Pittsburgh", url: "https://hacp.org/", note: "The voucher waitlist was closed when the guide was reviewed." },
+      { name: "Pennsylvania LIHTC and Project-Based Housing", summary: "Income-restricted apartments with applications and assistance tied to individual properties.", access: "Search PAHousingSearch and apply directly to multiple properties.", coverage: "Participating properties statewide", url: "https://www.pahousingsearch.com/" },
+      { name: "Pennsylvania ESG Rapid Rehousing", summary: "Locally delivered federal funding for rapid rehousing, prevention, outreach, and emergency shelter.", access: "Enter through 211 or coordinated entry; the state funding agency does not house individuals directly.", coverage: "Local funded providers statewide", phone: "211", url: "https://dced.pa.gov/programs/emergency-solutions-grant-esg/" },
+      { name: "Pennsylvania HAP Rapid Rehousing", summary: "County bridge-housing and rehousing services helping households move toward permanent housing.", access: "Use the county HAP route and ask specifically for rapid rehousing.", coverage: "County programs statewide", url: "https://www.pa.gov/services/dhs/apply-for-the-homeless-assistance-program" },
+      { name: "PCADV Survivor Housing Advocacy", summary: "Confidential rapid rehousing, transitional housing, or flexible funds may be available through survivor providers.", access: "Ask about each housing funding stream even when shelter is full.", coverage: "Program-dependent statewide", url: "https://www.pcadv.org/find-help/" },
+      { name: "Pennsylvania HAP Rental Assistance", summary: "Potential rent, deposit, and stabilization help through county Homeless Assistance Program providers.", access: "Apply through county HAP or call 211 for direct intake.", coverage: "County programs statewide", phone: "211", url: "https://www.pa.gov/services/dhs/apply-for-the-homeless-assistance-program" },
+      { name: "Pennsylvania ERAP Status", summary: "Official status information for the former statewide pandemic-era Emergency Rental Assistance Program.", access: "Use HAP, ESA, 211, and local programs instead of old ERAP application links.", coverage: "Statewide information", url: "https://www.pa.gov/agencies/dhs/resources/for-residents/housing-resources", note: "The statewide ERAP program closed effective October 1, 2025." },
+      { name: "PCADV Economic and Housing Advocacy", summary: "Local survivor programs help with safety-related housing, landlord issues, and possible flexible funds.", access: "Contact the county program and request alternate documentation when an abuser controls records.", coverage: "Local programs statewide", url: "https://www.pcadv.org/find-help/" },
+      { name: "Pennsylvania Legal Aid Eviction Defense", summary: "Legal response to eviction, lockout, and landlord violations.", access: "Use PALawHelp immediately after receiving a notice or court papers.", coverage: "Regional legal-aid programs statewide", url: "https://www.palawhelp.org/" },
+    ],
+    Food: [
+      { name: "Pennsylvania SNAP", summary: "Monthly food benefits for eligible households through EBT.", access: "Apply through COMPASS or a County Assistance Office and explain inaccessible documents or unsafe contact.", coverage: "Statewide", phone: "800-692-7462", url: "https://www.compass.dhs.pa.gov/" },
+      { name: "Pennsylvania Expedited SNAP", summary: "Faster SNAP processing for households meeting very-low-income and resource rules.", access: "Ask the County Assistance Office to screen for expedited service when applying.", coverage: "Statewide for eligible households", phone: "800-692-7462", url: "https://www.compass.dhs.pa.gov/" },
+      { name: "Pennsylvania Emergency Food Resources", summary: "Food banks, pantries, community meals, and Tribal or Native resources while SNAP is pending.", access: "Dial 211 for a currently open site and confirm requirements before traveling.", coverage: "Statewide", phone: "211", url: "https://www.pa211.org/" },
+    ],
+    "Childcare Assistance": [
+      { name: "Pennsylvania Child Care Works", summary: "Subsidy administered by Early Learning Resource Centers for approved childcare while eligible families work or train.", access: "Apply through the ELRC and confirm copay, additional provider charges, and waitlist status.", coverage: "Statewide", phone: "877-472-5437", url: "https://www.pa.gov/agencies/dhs/resources/early-learning-child-care/child-care-works" },
+      { name: "Pennsylvania Child Care Works Priorities", summary: "TANF and former-TANF families have no waitlist, while children experiencing homelessness and other groups receive priority.", access: "Tell the ELRC about TANF history and homelessness and document the qualifying status.", coverage: "Statewide for qualifying families", phone: "877-472-5437", url: "https://www.pa.gov/agencies/dhs/resources/early-learning-child-care/child-care-works" },
+      { name: "Pennsylvania Pre-K Counts and Head Start", summary: "Free or low-cost early education for qualifying young children.", access: "Call 211 or the local ELRC and apply separately to available programs.", coverage: "Local programs statewide", phone: "211", url: "https://www.pa.gov/agencies/education/programs-and-services/instruction/early-learning" },
+      { name: "Pennsylvania Safe Childcare Planning", summary: "Guidance for provider selection, custody and protection-order documents, and authorized pickup protections.", access: "Ask the advocate and provider how restrictions are enforced and update paperwork promptly.", coverage: "Statewide guidance", url: "https://www.pcadv.org/find-help/" },
+    ],
+    "Transportation Assistance": [
+      { name: "Pennsylvania MATP", summary: "No-cost non-emergency transportation to covered care for Medical Assistance recipients with unmet transportation needs.", access: "Register with the county provider, schedule ahead, and ask about mileage reimbursement and attendants.", coverage: "County providers statewide", url: "https://www.pa.gov/services/dhs/medical-assistance-transportation-program" },
+      { name: "Pennsylvania County and Rural Transit", summary: "Shared-ride, fixed-route, and demand-response transportation through local transit authorities.", access: "Call 211 for transit covering both origin and destination counties and confirm reservation requirements.", coverage: "Regional systems statewide", phone: "211", url: "https://www.pa211.org/" },
+      { name: "Pennsylvania Survivor Transportation", summary: "Some domestic-violence and sexual-assault programs provide rides, bus tickets, fuel, or relocation help.", access: "Ask the local PCADV or PCAR program and confirm safe pickup and shelter intake.", coverage: "Program-dependent statewide", url: "https://www.pcadv.org/find-help/" },
+    ],
+    Immigration: [
+      { name: "PIRC Immigrant Survivors Project", summary: "Free immigration legal services for survivors of domestic violence, sexual assault, trafficking, and other violent crime.", access: "Confirm intake and geographic or case scope before sending documents.", coverage: "Statewide with central and rural referrals", url: "https://www.pirclaw.org/programs/immigrant-survivors-project/" },
+      { name: "HIAS Pennsylvania Domestic Violence Initiative", summary: "Free multilingual legal help with VAWA self-petitions, U and T visas, battered-spouse waivers, work authorization, and removal defense.", access: "Email the initiative and identify urgent deadlines.", coverage: "Philadelphia-area and statewide referral pathways", url: "https://hiaspa.org/about-us/expertise/immigrant-domestic-violence-survivors/" },
+      { name: "Community Justice Project Immigrant Survivor Help", summary: "Statewide civil legal advocacy offering selected immigrant-survivor remedies and benefit help.", access: "Call and identify abuse or trafficking during intake because case types vary by office.", coverage: "Regional offices statewide", phone: "800-322-7572", url: "https://www.communityjusticeproject.org/" },
+      { name: "Pennsylvania Nonprofit Immigration Directory", summary: "Directory of authorized nonprofit providers across Pennsylvania regions.", access: "Confirm attorney or DOJ accreditation and fees; never use a notario.", coverage: "Statewide directory", url: "https://www.immigrationadvocates.org/nonprofit/legaldirectory/" },
+    ],
+    Trafficking: [
+      { name: "National Human Trafficking Hotline Pennsylvania", summary: "Confidential national routing for sex and labor trafficking and cross-state assistance.", access: "Ask how information will be used before sharing names or locations.", coverage: "National service available in Pennsylvania", phone: "888-373-7888", secondaryPhone: "Text 233733", url: "https://humantraffickinghotline.org/" },
+      { name: "PCCD Trafficking Organization Search", summary: "Pennsylvania directory of trafficking task forces and funded organizations.", access: "Ask whether an entry offers confidential direct service or coordinates systems or law enforcement.", coverage: "Regional organizations statewide", url: "https://www.pa.gov/agencies/pccd/programs-and-services/human-trafficking-in-pa/search-for-organizations" },
+      { name: "Pennsylvania Trafficking Immigration Help", summary: "PIRC and HIAS provide T-visa and related immigration screening for noncitizen trafficking survivors.", access: "Contact the programs for qualified legal screening separate from emergency shelter intake.", coverage: "Statewide referral pathways", url: "https://www.pirclaw.org/programs/immigrant-survivors-project/" },
+      { name: "PCADV and PCAR Trafficking Advocacy", summary: "Local DV and rape-crisis programs may provide confidential advocacy, accompaniment, and service coordination where experiences overlap.", access: "Ask about trafficking experience and mandatory-reporting exceptions before disclosing details.", coverage: "Local programs statewide", phone: "888-772-7227", url: "https://pcar.org/help-pa/find-services" },
+    ],
+    "Other Programs": [
+      { name: "Pennsylvania TANF", summary: "Cash assistance for qualifying pregnant people, dependent children, parents, and caretaker relatives.", access: "Apply through COMPASS or a County Assistance Office and ask about domestic-violence good cause and accommodations.", coverage: "Statewide", phone: "800-692-7462", url: "https://www.pa.gov/agencies/dhs/resources/cash-assistance/tanf" },
+      { name: "Pennsylvania Victims Compensation", summary: "May cover eligible crime-related medical care, counseling, lost earnings, relocation, and other statutory losses.", access: "Apply through PA Crime Victims or with advocate help and ask about exceptions and deadlines.", coverage: "Eligible crime victims statewide", url: "https://www.pa.gov/agencies/pcv" },
+      { name: "Pennsylvania LIHEAP", summary: "Seasonal heating assistance and utility crisis grants for income-eligible households.", access: "Apply through COMPASS or the County Assistance Office during open enrollment.", coverage: "Statewide during open seasons", url: "https://www.compass.dhs.pa.gov/" },
+      { name: "PA Safe Law", summary: "Civil legal information, forms, and referrals for domestic violence and other crime victims, including protection orders, custody, and divorce.", access: "Call during weekday hours and state every deadline and hearing date.", coverage: "Statewide", phone: "833-727-2335", url: "https://pasafelaw.org/" },
+      { name: "PCADV Civil Legal Representation", summary: "Survivor legal services through affiliated local programs in selected areas.", access: "Use PCADV Find Help and ask whether the local program offers CLR and requires current client status.", coverage: "Participating service areas", url: "https://www.pcadv.org/find-help/" },
+      { name: "Pennsylvania Legal Aid Network", summary: "Regional civil legal aid involving housing, family, benefits, and other low-income civil matters.", access: "Apply early through PLAN or PALawHelp because capacity and priorities vary.", coverage: "Regional programs statewide", url: "https://palegalaid.net/" },
+      { name: "Pennsylvania Address Confidentiality Program", summary: "Substitute address program for eligible victims protecting a new location.", access: "Apply through a trained provider and ask how courts and agencies use the substitute address.", coverage: "Statewide for eligible survivors", phone: "800-563-6399", url: "https://www.pa.gov/agencies/ova/address-confidentiality-program" },
+      { name: "PCAR Statewide Routing", summary: "Connects survivors to the rape-crisis center serving every Pennsylvania county.", access: "Call for free confidential support and ask about mandated-reporting exceptions before disclosing.", coverage: "All Pennsylvania counties", phone: "888-772-7227", url: "https://pcar.org/help-pa/find-services" },
+      { name: "Pennsylvania Local Rape Crisis Centers", summary: "24-hour crisis counseling, hospital, police and court accompaniment, ongoing support, and services for loved ones.", access: "Use the PCAR county search and confirm the direct hotline and hospital coverage.", coverage: "All Pennsylvania counties", phone: "888-772-7227", url: "https://pcar.org/help-pa/find-services" },
+      { name: "Pennsylvania Regional Sexual Assault Programs", summary: "Metro and rural programs provide local crisis and accompaniment services, with PCAR routing all counties.", access: "Use PCAR's live directory rather than relying on older static program lists.", coverage: "Regional programs statewide", phone: "888-772-7227", url: "https://pcar.org/help-pa/find-services" },
+      { name: "RAINN Sexual Assault Hotline Pennsylvania", summary: "Confidential national support and cross-state routing to sexual-assault services.", access: "Call or use online chat for another entry point.", coverage: "National service available in Pennsylvania", phone: "800-656-4673", url: "https://www.rainn.org/" },
+    ],
+  },
 };
 
 const twelveCategoryStateResourceCategories = [
@@ -10913,6 +10979,22 @@ const oregonProgramsByCategory: TwelveCategoryProgramMap = {
   "Sexual Assault / Rape Survivor Resources": ["Oregon SATF Survivor Directory", "Call to Safety and Linea UNICA", "Sexual Assault Resource Center Oregon", "Oregon Regional Sexual Assault Programs", "RAINN Sexual Assault Hotline Oregon"],
 };
 
+const pennsylvaniaProgramsByCategory: TwelveCategoryProgramMap = {
+  "Homelessness Prevention & Intervention": ["Pennsylvania 211", "Pennsylvania Homeless Assistance Program", "PCADV Local Programs", "Pennsylvania Emergency Shelter Allowance"],
+  Housing: ["Pennsylvania Local DV Housing Programs", "Pennsylvania Coordinated Entry", "PAHousingSearch", "Pennsylvania Native Survivor Routing"],
+  "Subsidized Housing": ["Pennsylvania Public Housing Authorities", "Philadelphia Housing Authority HCV", "Pittsburgh Housing Authority HCV", "Pennsylvania LIHTC and Project-Based Housing"],
+  "Cash Assistance": ["Pennsylvania TANF", "Pennsylvania Victims Compensation", "Pennsylvania Emergency Shelter Allowance", "Pennsylvania LIHEAP"],
+  "Immigration Services": ["PIRC Immigrant Survivors Project", "HIAS Pennsylvania Domestic Violence Initiative", "Community Justice Project Immigrant Survivor Help", "Pennsylvania Nonprofit Immigration Directory"],
+  "Trafficking Victim Services": ["National Human Trafficking Hotline Pennsylvania", "PCCD Trafficking Organization Search", "Pennsylvania Trafficking Immigration Help", "PCADV and PCAR Trafficking Advocacy"],
+  "Rapid Rehousing": ["Pennsylvania ESG Rapid Rehousing", "Pennsylvania HAP Rapid Rehousing", "PCADV Survivor Housing Advocacy"],
+  "Legal Assistance": ["PA Safe Law", "PCADV Civil Legal Representation", "Pennsylvania Legal Aid Network", "Pennsylvania Address Confidentiality Program"],
+  "Rental Assistance": ["Pennsylvania HAP Rental Assistance", "Pennsylvania ERAP Status", "PCADV Economic and Housing Advocacy", "Pennsylvania Legal Aid Eviction Defense"],
+  "SNAP / Food Assistance": ["Pennsylvania SNAP", "Pennsylvania Expedited SNAP", "Pennsylvania Emergency Food Resources"],
+  "Transportation Assistance": ["Pennsylvania MATP", "Pennsylvania County and Rural Transit", "Pennsylvania Survivor Transportation"],
+  "Childcare Assistance": ["Pennsylvania Child Care Works", "Pennsylvania Child Care Works Priorities", "Pennsylvania Pre-K Counts and Head Start", "Pennsylvania Safe Childcare Planning"],
+  "Sexual Assault / Rape Survivor Resources": ["PCAR Statewide Routing", "Pennsylvania Local Rape Crisis Centers", "Pennsylvania Regional Sexual Assault Programs", "RAINN Sexual Assault Hotline Pennsylvania"],
+};
+
 const twelveCategoryProgramsByState: Partial<Record<string, TwelveCategoryProgramMap>> = {
   connecticut: connecticutProgramsByCategory,
   delaware: delawareProgramsByCategory,
@@ -10944,6 +11026,7 @@ const twelveCategoryProgramsByState: Partial<Record<string, TwelveCategoryProgra
   ohio: ohioProgramsByCategory,
   oklahoma: oklahomaProgramsByCategory,
   oregon: oregonProgramsByCategory,
+  pennsylvania: pennsylvaniaProgramsByCategory,
 };
 
 export function getStateResourceCategories(slug: string): readonly string[] {
