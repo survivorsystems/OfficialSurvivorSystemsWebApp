@@ -124,6 +124,7 @@ const stateResourceReviewDates: Partial<Record<string, string>> = {
   "north-dakota": "August 26, 2026",
   ohio: "August 26, 2026",
   oklahoma: "August 27, 2026",
+  oregon: "August 27, 2026",
 };
 
 const stateResourceDownloadFiles: Partial<Record<string, string>> = {
@@ -162,6 +163,7 @@ const stateResourceDownloadFiles: Partial<Record<string, string>> = {
   "north-dakota": "North_Dakota_DV_Survivor_Resource_Guide_2026.pdf",
   ohio: "Ohio_DV_Survivor_Resource_Guide_2026.pdf",
   oklahoma: "Oklahoma_DV_Survivor_Resource_Guide_2026.pdf",
+  oregon: "Oregon_DV_Survivor_Resource_Guide_2026.pdf",
 };
 
 export const stateResourceLocations: StateResourceLocation[] = locationNames.map((name) => ({
@@ -9429,6 +9431,72 @@ export const stateResourcePrograms: Partial<Record<string, Partial<Record<StateR
       { name: "OSBI Sexual Assault Survivor Resources", summary: "Official links for certified programs, Sexual Assault Kit Initiative information, and older kit-case contacts.", access: "Use SafeLine for immediate advocacy; contact OSBI for official kit information.", coverage: "Statewide information", url: "https://oklahoma.gov/osbi/services/investigative-services-division/investigative-statewide-units/about-saki/oksau.html" },
     ],
   },
+  oregon: {
+    Housing: [
+      { name: "Oregon 211info", summary: "Statewide referrals for shelter, rent, utilities, food, childcare, and other local resources.", access: "Dial 211, text a ZIP code to 898211, or call and request several current referrals.", coverage: "Statewide", phone: "866-698-6155", url: "https://www.211info.org/" },
+      { name: "Call to Safety", summary: "Confidential crisis support and routing to local domestic-violence and sexual-assault programs, including housing advocacy.", access: "Ask specifically about shelter, motel, flexible funds, relocation, pets, and housing advocacy.", coverage: "Statewide routing", phone: "888-235-5333", secondaryPhone: "Portland: 503-235-5333", url: "https://calltosafety.org/" },
+      { name: "OCADSV Program Directory", summary: "Searchable map of community-based and Tribal programs offering advocacy, lodging, housing information, financial support, and legal information.", access: "Contact listed programs directly and confirm their service area.", coverage: "Community and Tribal programs statewide", url: "https://www.ocadsv.org/find-help/" },
+      { name: "Oregon Community Action Agencies", summary: "Local anti-poverty agencies administering prevention, utility, shelter, and stabilization funds.", access: "Ask 211 for the agency serving the county and verify current funding.", coverage: "Local service areas statewide", phone: "211", url: "https://www.211info.org/" },
+      { name: "Oregon Local DV and SA Housing Programs", summary: "Confidential shelter, temporary lodging, housing advocacy, safety planning, and support across metro, coastal, rural, eastern, southern, and Tribal communities.", access: "Call Call to Safety or use the OCADSV county directory.", coverage: "Local programs statewide", phone: "888-235-5333", url: "https://www.ocadsv.org/find-help/" },
+      { name: "Oregon 211 Emergency Housing", summary: "Local referrals for emergency shelter, coordinated entry, and housing navigation.", access: "Ask about screening, identification, residency, and homelessness-definition requirements.", coverage: "Statewide routing", phone: "211", url: "https://www.211info.org/" },
+      { name: "Oregon Native and Tribal Survivor Programs", summary: "Culturally grounded domestic- and sexual-violence advocacy through Tribal and community-based programs.", access: "Use OCADSV filters or StrongHearts and ask about individual eligibility and jurisdiction.", coverage: "Tribal service areas statewide", phone: "844-762-8483", url: "https://www.ocadsv.org/find-help/" },
+      { name: "Oregon Regional Survivor Programs", summary: "County and multi-county programs provide local shelter, outreach, housing advocacy, and relocation support across Oregon's varied geography.", access: "Use the current OCADSV county map rather than an older static shelter list.", coverage: "Regional programs statewide", url: "https://www.ocadsv.org/find-help/" },
+      { name: "Oregon Local Public Housing Authorities", summary: "Independent local authorities administer Housing Choice Vouchers, public housing, and other rental programs.", access: "Apply separately to each authority serving an area where living is workable.", coverage: "Local jurisdictions statewide", phone: "800-955-2232", url: "https://www.hud.gov/states/oregon" },
+      { name: "OHCS Affordable Rental Housing", summary: "State-supported affordable properties and renter-resource information.", access: "Use the search, then apply directly to multiple properties and confirm vacancies.", coverage: "Statewide", url: "https://www.oregon.gov/ohcs/housing-assistance/pages/housing-assistance.aspx" },
+      { name: "Oregon Section 811 PRA", summary: "Project-based supportive rental assistance for extremely low-income households that include a person with a disability.", access: "Ask an eligible referral agency about disability and referral criteria.", coverage: "Participating properties statewide", url: "https://www.oregon.gov/ohcs/housing-assistance/pages/housing-assistance.aspx" },
+      { name: "Oregon PHA Survivor Preferences", summary: "Some authorities or coordinated-entry systems may use homelessness, disability, local, or survivor preferences alongside VAWA protections.", access: "Ask each authority how its current plan handles preferences and confidential documentation.", coverage: "Authority-specific statewide", url: "https://www.hud.gov/states/oregon", note: "VAWA protections do not guarantee an immediate voucher or unit." },
+      { name: "Oregon Coordinated Entry", summary: "Local assessment and referral for rapid rehousing, shelter, and permanent supportive housing.", access: "Call 211 for the county access point and request a confidential victim-service-provider route when needed.", coverage: "Local systems statewide", phone: "211", url: "https://www.211info.org/" },
+      { name: "OHCS Emergency Housing Assistance Network", summary: "State housing funding delivered through local Community Action and culturally specific partners for shelter, prevention, and rapid rehousing.", access: "Use 211 to find the local provider; OHCS does not issue direct payments to individuals.", coverage: "Local funded partners statewide", url: "https://www.oregon.gov/ohcs/housing-assistance/pages/housing-assistance.aspx" },
+      { name: "Oregon Survivor Rapid Rehousing", summary: "Victim-service providers may operate confidential rapid rehousing, transitional housing, or flexible-fund programs outside ordinary HMIS pathways.", access: "Call a local OCADSV program and ask separately about housing advocacy even when shelter is full.", coverage: "Program-dependent statewide", phone: "888-235-5333", url: "https://www.ocadsv.org/find-help/" },
+      { name: "Oregon 211 Rental Assistance", summary: "Local routing for rent, deposit, utility, and eviction-prevention programs.", access: "Ask whether funding is open today, which county is served, and what alternate proof is accepted.", coverage: "Statewide routing", phone: "211", url: "https://www.211info.org/" },
+      { name: "TA-DVS Housing Costs", summary: "May cover eligible one-time safety-plan expenses including deposits, move-in costs, locks, certain arrears, and relocation.", access: "Apply through local ODHS and complete verification within the program's 90-day window.", coverage: "Eligible Oregon residents statewide", phone: "800-699-9075", url: "https://www.oregon.gov/odhs/dv/pages/tadvs.aspx", note: "The maximum is $3,200 over 90 days and is not ongoing rent assistance." },
+      { name: "Fair Housing Council of Oregon", summary: "Evaluates housing discrimination involving disability, children, race, national origin, and other protected characteristics.", access: "Preserve messages, advertisements, notices, and application records.", coverage: "Statewide", phone: "800-424-3247", url: "https://fhco.org/" },
+      { name: "Oregon Legal Aid Eviction Defense", summary: "Legal help with eviction, lockout, unsafe conditions, and landlord-tenant disputes.", access: "Use Oregon Law Help immediately after receiving a termination or court notice.", coverage: "Regional legal-aid programs statewide", url: "https://oregonlawhelp.org/" },
+    ],
+    Food: [
+      { name: "Oregon SNAP", summary: "Monthly grocery benefits provided through the Oregon Trail Card.", access: "Apply through Benefits Oregon and explain inaccessible records, unsafe contact, and the household that actually buys and prepares food.", coverage: "Statewide", phone: "800-699-9075", url: "https://www.oregon.gov/odhs/food/pages/snap.aspx" },
+      { name: "Oregon SNAP Work-Rule Screening", summary: "Individual screening for federal work-rule exemptions affecting some adults ages 18-64.", access: "Ask ODHS to screen every exemption rather than assuming the rule applies.", coverage: "Statewide", phone: "833-947-1694", url: "https://www.oregon.gov/odhs/food/pages/snap.aspx" },
+      { name: "Oregon Emergency Food Resources", summary: "Food banks, pantries, community meals, and Tribal food programs while benefits are pending.", access: "Dial 211 for a currently open location and confirm requirements before traveling.", coverage: "Statewide", phone: "211", url: "https://www.211info.org/" },
+    ],
+    "Childcare Assistance": [
+      { name: "Oregon Employment Related Day Care", summary: "Childcare subsidy for qualifying work, school, TANF, medical-leave, and certain Child Welfare circumstances.", access: "Apply through Benefits Oregon and confirm waitlist exemption, copay, and approved-provider rules.", coverage: "Statewide", phone: "800-699-9075", url: "https://www.oregon.gov/delc/programs/pages/erdc.aspx", note: "ERDC had a waitlist when reviewed; some current or recent TANF or TA-DVS families may qualify for an exemption." },
+      { name: "Find Child Care Oregon", summary: "Search and referral help for childcare providers near safe housing, work, or school.", access: "Verify openings, ERDC approval, hours, transportation, and safe pickup restrictions.", coverage: "Statewide", secondaryPhone: "Text children or ninos to 898211", url: "https://www.211info.org/child-care/" },
+      { name: "Oregon Preschool Promise and OPK", summary: "Free early-learning programs for qualifying families, including prenatal-to-five and preschool-age pathways.", access: "Use the local Early Learning Hub or call 211; programs have separate enrollment and space limits.", coverage: "Local programs statewide", phone: "211", url: "https://www.oregon.gov/delc/programs/pages/default.aspx" },
+      { name: "Oregon ERDC Immigration Protection", summary: "Oregon states that income-qualified children living in Oregon may qualify regardless of immigration status and that ERDC is not counted in a public-charge test.", access: "Apply through ONE and seek qualified legal advice for individual immigration concerns.", coverage: "Statewide", phone: "800-520-5292", url: "https://www.oregon.gov/delc/programs/pages/erdc.aspx" },
+    ],
+    "Transportation Assistance": [
+      { name: "Oregon Health Plan Rides", summary: "Non-emergency medical transportation by taxi, bus, or local service, with possible approved gas, meals, or lodging.", access: "Find the brokerage for the member's CCO or county and schedule ahead.", coverage: "Eligible OHP Plus and OHP Bridge members statewide", url: "https://www.oregon.gov/oha/ohp/members/pages/rides.aspx" },
+      { name: "Oregon Rural and Regional Transit", summary: "County and regional demand-response, deviated-route, and intercity transportation.", access: "Call 211 for service covering both pickup and destination counties and ask about advance booking.", coverage: "Regional systems statewide", phone: "211", url: "https://www.211info.org/" },
+      { name: "Oregon Survivor Transportation", summary: "Advocacy programs may provide rides, fuel, bus tickets, or relocation travel; TA-DVS may cover approved moving and transportation costs.", access: "Confirm shelter intake and ask the local advocate and ODHS worker about current support.", coverage: "Program-dependent statewide", phone: "888-235-5333", url: "https://www.oregon.gov/odhs/dv/pages/tadvs.aspx" },
+    ],
+    Immigration: [
+      { name: "Catholic Charities Oregon Immigration Legal Services", summary: "Low-cost nonprofit representation for VAWA, U visas, T visas, asylum, family petitions, removal defense, and other matters.", access: "Confirm intake, fees, case type, and the qualifications of the representative.", coverage: "Statewide with services centered in Portland", phone: "503-542-2855", url: "https://www.catholiccharitiesoregon.org/services/migrant-services/immigration-legal-services/" },
+      { name: "Oregon Law Center Immigration Help", summary: "Regional civil legal programs offering selected U visa, VAWA, and related survivor help or nonprofit referrals.", access: "Use Oregon Law Help and state that the case involves abuse, assault, trafficking, or crime victimization.", coverage: "Regional offices statewide", phone: "800-520-5292", url: "https://oregonlawhelp.org/" },
+      { name: "Oregon Nonprofit Immigration Directory", summary: "Directory of authorized nonprofit immigration providers across Oregon communities.", access: "Confirm qualifications and fees; never use a notario.", coverage: "Statewide directory", url: "https://www.immigrationadvocates.org/nonprofit/legaldirectory/" },
+      { name: "Oregon DOJ U and T Visa Information", summary: "Official information about law-enforcement certification for crime-victim and trafficking immigration pathways.", access: "Use for orientation, then obtain legal advice before filing.", coverage: "Statewide certification information", url: "https://www.doj.state.or.us/crime-victims/victims-services/" },
+    ],
+    Trafficking: [
+      { name: "Safety Compass", summary: "Free confidential advocacy for survivors of commercial sexual exploitation and trafficking in northwest Oregon.", access: "Call the 24-hour helpline and confirm geographic coverage and housing support.", coverage: "Clackamas, Marion, Multnomah, and Washington County pathways", phone: "971-235-0021", url: "https://safetycompass.org/" },
+      { name: "Oregon Trafficking Coordinators", summary: "Official county task-force and coordinator directory covering metro, central, southern, eastern, and Columbia Gorge regions.", access: "Use listed confidential advocacy numbers for urgent help; task forces may not provide direct service.", coverage: "Regional networks statewide", url: "https://www.doj.state.or.us/crime-victims/victims-services/exploitation-and-sex-trafficking/" },
+      { name: "Oregon Regional Trafficking Lines", summary: "Regional trafficking contacts including Klamath, Umatilla County, and Multnomah pathways.", access: "Ask whether the number is confidential advocacy, coordination, or law enforcement before identifying yourself.", coverage: "Regional service areas statewide", phone: "833-256-4357", secondaryPhone: "Klamath: 541-884-0390", url: "https://www.doj.state.or.us/crime-victims/victims-services/exploitation-and-sex-trafficking/" },
+      { name: "National Human Trafficking Hotline Oregon", summary: "Confidential national routing for sex and labor trafficking, including cross-state and after-hours needs.", access: "Ask how information may be used before sharing names or locations.", coverage: "National service available in Oregon", phone: "888-373-7888", secondaryPhone: "Text 233733", url: "https://humantraffickinghotline.org/" },
+    ],
+    "Other Programs": [
+      { name: "Oregon TA-DVS", summary: "Up to $3,200 over 90 days for an approved domestic-violence safety plan, including certain deposits, relocation, security, lodging, storage, replacement, and arrears costs.", access: "Contact local ODHS and ask for the safest application method.", coverage: "Eligible pregnant people and caregivers statewide", phone: "800-699-9075", url: "https://www.oregon.gov/odhs/dv/pages/tadvs.aspx" },
+      { name: "Oregon TANF", summary: "Monthly cash assistance, case management, and employment support for qualifying pregnant people and families with children.", access: "Apply at Benefits Oregon and ask about domestic-violence waivers and good cause.", coverage: "Statewide", phone: "800-699-9075", url: "https://benefits.oregon.gov/" },
+      { name: "Oregon Crime Victims Compensation", summary: "May pay qualifying medical, counseling, funeral, lost-income, and other covered crime-related expenses.", access: "Ask about deadlines, exceptions, cooperation rules, and provider-direct payment.", coverage: "Eligible crime victims statewide", url: "https://www.doj.state.or.us/crime-victims/compensation/" },
+      { name: "Oregon Family Support and Connections", summary: "Voluntary stabilization support for eligible families receiving SNAP, TANF, ERDC, or OHP who are not in active Child Welfare services.", access: "Ask ODHS about local delivery and current eligibility.", coverage: "Local programs statewide", url: "https://www.oregon.gov/odhs/children-youth/pages/family-support-connections.aspx" },
+      { name: "Legal Aid Services of Oregon", summary: "Free civil legal help for eligible people involving domestic violence, family law, housing, benefits, employment, and safety-related issues.", access: "Use Oregon Law Help to find the correct office and state every deadline.", coverage: "Regional programs statewide", url: "https://lasoregon.org/" },
+      { name: "Oregon Public Benefits Hotline", summary: "Legal advice about SNAP, TANF, TA-DVS, ERDC, and other public benefits.", access: "Call promptly after a denial, termination, overpayment, or unsafe verification demand.", coverage: "Statewide", phone: "800-520-5292", url: "https://oregonlawhelp.org/" },
+      { name: "Oregon DOJ Crime Victim Legal Help", summary: "Connections to civil legal services for sexual assault, education, immigration, and other victim-related needs.", access: "Ask about free survivor-specific or limited-scope help before using a paid referral.", coverage: "Statewide", phone: "800-452-7636", url: "https://www.doj.state.or.us/crime-victims/victims-services/get-legal-help/" },
+      { name: "Oregon Survivor Housing Protections", summary: "Legal information about early lease termination, lock changes, removing an abuser in some situations, and survivor-related discrimination.", access: "Get advice about notice, proof, and timing before acting.", coverage: "Oregon renters statewide", url: "https://oregonlawhelp.org/" },
+      { name: "Oregon SATF Survivor Directory", summary: "County-by-county directory of confidential advocates, crisis lines, child advocacy centers, and victim assistance.", access: "Contact the listed local program and confirm its service area.", coverage: "All 36 counties", url: "https://oregonsatf.org/help-for-survivors-by-county" },
+      { name: "Call to Safety and Linea UNICA", summary: "24-hour sexual-violence crisis support, medical advocacy, and local routing, with a dedicated Spanish-language pathway.", access: "Call for advocacy or medical-care navigation without deciding immediately about police reporting.", coverage: "Statewide routing and Portland region", phone: "888-235-5333", secondaryPhone: "Spanish: 888-232-4448", url: "https://calltosafety.org/" },
+      { name: "Sexual Assault Resource Center Oregon", summary: "Free 24-hour crisis intervention, in-person response, and ongoing support for sexual-violence survivors.", access: "Confirm geographic coverage and hospital response before traveling.", coverage: "Washington County and metro-area pathways", url: "https://sarcoregon.org/" },
+      { name: "Oregon Regional Sexual Assault Programs", summary: "Local confidential crisis, hospital-accompaniment, and ongoing advocacy programs throughout Oregon.", access: "Use the SATF county directory for the current number and ask about confidentiality.", coverage: "All 36 counties", url: "https://oregonsatf.org/help-for-survivors-by-county" },
+      { name: "RAINN Sexual Assault Hotline Oregon", summary: "Confidential national crisis support and connection to local sexual-assault services.", access: "Call or use online chat for another entry point or cross-state routing.", coverage: "National service available in Oregon", phone: "800-656-4673", url: "https://www.rainn.org/" },
+    ],
+  },
 };
 
 const twelveCategoryStateResourceCategories = [
@@ -10829,6 +10897,22 @@ const oklahomaProgramsByCategory: TwelveCategoryProgramMap = {
   "Sexual Assault / Rape Survivor Resources": ["Oklahoma SafeLine Sexual Assault Support", "YWCA Oklahoma City Sexual Assault Services", "Women's Resource Center Norman", "DVIS Call Rape Tulsa", "RAINN Sexual Assault Hotline Oklahoma", "OSBI Sexual Assault Survivor Resources"],
 };
 
+const oregonProgramsByCategory: TwelveCategoryProgramMap = {
+  "Homelessness Prevention & Intervention": ["Oregon 211info", "Call to Safety", "OCADSV Program Directory", "Oregon Community Action Agencies"],
+  Housing: ["Oregon Local DV and SA Housing Programs", "Oregon 211 Emergency Housing", "Oregon Native and Tribal Survivor Programs", "Oregon Regional Survivor Programs"],
+  "Subsidized Housing": ["Oregon Local Public Housing Authorities", "OHCS Affordable Rental Housing", "Oregon Section 811 PRA", "Oregon PHA Survivor Preferences"],
+  "Cash Assistance": ["Oregon TA-DVS", "Oregon TANF", "Oregon Crime Victims Compensation", "Oregon Family Support and Connections"],
+  "Immigration Services": ["Catholic Charities Oregon Immigration Legal Services", "Oregon Law Center Immigration Help", "Oregon Nonprofit Immigration Directory", "Oregon DOJ U and T Visa Information"],
+  "Trafficking Victim Services": ["Safety Compass", "Oregon Trafficking Coordinators", "Oregon Regional Trafficking Lines", "National Human Trafficking Hotline Oregon"],
+  "Rapid Rehousing": ["Oregon Coordinated Entry", "OHCS Emergency Housing Assistance Network", "Oregon Survivor Rapid Rehousing"],
+  "Legal Assistance": ["Legal Aid Services of Oregon", "Oregon Public Benefits Hotline", "Oregon DOJ Crime Victim Legal Help", "Oregon Survivor Housing Protections"],
+  "Rental Assistance": ["Oregon 211 Rental Assistance", "TA-DVS Housing Costs", "Fair Housing Council of Oregon", "Oregon Legal Aid Eviction Defense"],
+  "SNAP / Food Assistance": ["Oregon SNAP", "Oregon SNAP Work-Rule Screening", "Oregon Emergency Food Resources"],
+  "Transportation Assistance": ["Oregon Health Plan Rides", "Oregon Rural and Regional Transit", "Oregon Survivor Transportation"],
+  "Childcare Assistance": ["Oregon Employment Related Day Care", "Find Child Care Oregon", "Oregon Preschool Promise and OPK", "Oregon ERDC Immigration Protection"],
+  "Sexual Assault / Rape Survivor Resources": ["Oregon SATF Survivor Directory", "Call to Safety and Linea UNICA", "Sexual Assault Resource Center Oregon", "Oregon Regional Sexual Assault Programs", "RAINN Sexual Assault Hotline Oregon"],
+};
+
 const twelveCategoryProgramsByState: Partial<Record<string, TwelveCategoryProgramMap>> = {
   connecticut: connecticutProgramsByCategory,
   delaware: delawareProgramsByCategory,
@@ -10859,6 +10943,7 @@ const twelveCategoryProgramsByState: Partial<Record<string, TwelveCategoryProgra
   "north-dakota": northDakotaProgramsByCategory,
   ohio: ohioProgramsByCategory,
   oklahoma: oklahomaProgramsByCategory,
+  oregon: oregonProgramsByCategory,
 };
 
 export function getStateResourceCategories(slug: string): readonly string[] {
