@@ -126,6 +126,7 @@ const stateResourceReviewDates: Partial<Record<string, string>> = {
   oklahoma: "August 27, 2026",
   oregon: "August 27, 2026",
   pennsylvania: "August 27, 2026",
+  "rhode-island": "August 27, 2026",
 };
 
 const stateResourceDownloadFiles: Partial<Record<string, string>> = {
@@ -166,6 +167,7 @@ const stateResourceDownloadFiles: Partial<Record<string, string>> = {
   oklahoma: "Oklahoma_DV_Survivor_Resource_Guide_2026.pdf",
   oregon: "Oregon_DV_Survivor_Resource_Guide_2026.pdf",
   pennsylvania: "Pennsylvania_DV_Survivor_Resource_Guide_2026.pdf",
+  "rhode-island": "Rhode_Island_DV_Survivor_Resource_Guide_2026.pdf",
 };
 
 export const stateResourceLocations: StateResourceLocation[] = locationNames.map((name) => ({
@@ -9563,6 +9565,68 @@ export const stateResourcePrograms: Partial<Record<string, Partial<Record<StateR
       { name: "RAINN Sexual Assault Hotline Pennsylvania", summary: "Confidential national support and cross-state routing to sexual-assault services.", access: "Call or use online chat for another entry point.", coverage: "National service available in Pennsylvania", phone: "800-656-4673", url: "https://www.rainn.org/" },
     ],
   },
+  "rhode-island": {
+    Housing: [
+      { name: "Rhode Island Victims of Crime Helpline", summary: "Confidential statewide safety planning and connection to domestic-violence shelter, advocacy, and housing help.", access: "Call 24/7 and ask separately about shelter, motel, relocation, flexible funds, and housing advocacy.", coverage: "Statewide", phone: "800-494-8100", url: "https://ricadv.org/" },
+      { name: "Rhode Island Regional Access Points", summary: "State-funded entry points for homelessness prevention, assessment, shelter connection, navigation, and supportive services.", access: "Use the current state list or ask 211 for the closest site and request a confidential survivor route when needed.", coverage: "Regional sites statewide", phone: "211", url: "https://housing.ri.gov/resources/individuals-experiencing-homelessness" },
+      { name: "Rhode Island 211", summary: "Statewide routing to shelter, rent, utilities, food, transportation, and other basic needs.", access: "Dial 211 and request several current referrals with open intake.", coverage: "Statewide", phone: "211", url: "https://www.unitedwayri.org/get-help/2-1-1/" },
+      { name: "Sojourner House Crisis and Housing", summary: "24-hour survivor helpline, emergency shelter, supportive housing, basic needs, and advocacy for all genders.", access: "Call before traveling because placement and housing-program capacity vary.", coverage: "Rhode Island", phone: "401-765-3232", url: "https://sojournerri.org/" },
+      { name: "RICADV Member Agencies", summary: "Regional domestic-violence programs providing confidential shelter, counseling, advocacy, and housing help.", access: "Use the statewide helpline or RICADV directory and ask about cross-region relocation.", coverage: "Regional programs statewide", phone: "800-494-8100", url: "https://ricadv.org/get-help/" },
+      { name: "HousingSearchRI", summary: "Searchable rental listings with rent, accessibility, and location filters.", access: "Contact properties directly about screening, fees, vacancies, and waitlists.", coverage: "Statewide", url: "https://www.rihousing.com/renters/" },
+      { name: "Sojourner House Housing Programs", summary: "Emergency, transitional, and permanent supportive housing plus short-term rental assistance when funded.", access: "Ask about every housing stream separately even when emergency shelter is full.", coverage: "Statewide, program dependent", phone: "401-765-3232", url: "https://sojournerri.org/" },
+      { name: "Rhode Island Native Survivor Routing", summary: "Culturally specific confidential advocacy and referrals for Native survivors, including Narragansett community members.", access: "Call StrongHearts for the closest culturally responsive provider and confirm local eligibility.", coverage: "Native survivors statewide", phone: "844-762-8483", url: "https://strongheartshelpline.org/" },
+      { name: "Rhode Island Centralized Waiting List", summary: "One application connecting to Housing Choice Voucher and project-based voucher lists run by RIHousing and most participating authorities.", access: "Select every appropriate list and keep all contact information current.", coverage: "Most participating housing authorities statewide", url: "https://www.rihousing.com/renters/" },
+      { name: "Rhode Island Local Housing Authorities", summary: "Public housing and other local programs that may require separate applications outside the centralized waiting list.", access: "Verify directly whether each authority participates in the centralized application.", coverage: "Local jurisdictions statewide", phone: "800-955-2232", url: "https://www.hud.gov/states/rhode-island" },
+      { name: "Rhode Island Project-Based Housing", summary: "Income-restricted and subsidized apartments where assistance remains with the unit.", access: "Search HousingSearchRI and apply directly to multiple properties.", coverage: "Participating properties statewide", url: "https://www.rihousing.com/renters/" },
+      { name: "Rhode Island RAP Rapid Rehousing", summary: "Regional assessment and referral for rapid rehousing, prevention, shelter, and housing navigation.", access: "Use the current RAP list or dial 211 and ask specifically for rapid rehousing.", coverage: "Regional systems statewide", phone: "211", url: "https://housing.ri.gov/resources/individuals-experiencing-homelessness" },
+      { name: "Sojourner House Survivor Rehousing", summary: "Short-term rental assistance and supportive housing tied to safety planning when programs have capacity.", access: "Ask separately about rental aid and housing advocacy after any shelter denial.", coverage: "Statewide, funding dependent", phone: "401-765-3232", url: "https://sojournerri.org/" },
+      { name: "Crossroads Rhode Island Housing Services", summary: "Shelter, housing problem-solving, and rehousing within Rhode Island's homelessness system.", access: "Begin through the appropriate RAP or 211 route because direct eligibility changes.", coverage: "State homelessness-system referrals", phone: "211", url: "https://www.crossroadsri.org/" },
+      { name: "Rhode Island Community Action Rental Help", summary: "Current local rent, deposit, utility, and emergency-fund referrals by municipality.", access: "Dial 211 and ask which fund is open now and which service area applies.", coverage: "Municipal and regional programs statewide", phone: "211", url: "https://www.unitedwayri.org/get-help/2-1-1/" },
+      { name: "Sojourner House Rental Assistance", summary: "Safety-related rent and utility assistance when grant funding is available.", access: "Ask about alternate proof if an abusive person controls leases, income records, or accounts.", coverage: "Statewide, funding dependent", phone: "401-765-3232", url: "https://sojournerri.org/" },
+      { name: "Rhode Island Legal Services Housing Help", summary: "Legal help with eviction, lockout, subsidy termination, and landlord-tenant disputes.", access: "Call immediately after receiving a notice, summons, or hearing date.", coverage: "Statewide for eligible clients", phone: "401-274-2652", url: "https://www.helprilaw.org/" },
+      { name: "RIHousing Renter Resources", summary: "Official voucher, affordable-housing, and housing-search information.", access: "Use the current official page and verify that any linked program remains open.", coverage: "Statewide", url: "https://www.rihousing.com/renters/" },
+    ],
+    Food: [
+      { name: "Rhode Island SNAP", summary: "Monthly food benefits on EBT for eligible households, including people newly separated from an abusive partner.", access: "Apply through RI DHS and explain the actual food household, inaccessible documents, and temporary living arrangements.", coverage: "Statewide", url: "https://dhs.ri.gov/programs-and-services/supplemental-nutrition-assistance-program-snap" },
+      { name: "Rhode Island Expedited SNAP", summary: "Faster benefits for households meeting very-low-income and resource criteria.", access: "Ask DHS to screen for expedited service when applying.", coverage: "Statewide for eligible households", url: "https://dhs.ri.gov/programs-and-services/supplemental-nutrition-assistance-program-snap" },
+      { name: "Rhode Island Emergency Food Resources", summary: "Pantries, community meals, and emergency food sites while benefits are pending.", access: "Dial 211 for a currently open site and verify hours and requirements.", coverage: "Statewide", phone: "211", url: "https://www.unitedwayri.org/get-help/2-1-1/" },
+    ],
+    "Childcare Assistance": [
+      { name: "Rhode Island CCAP", summary: "Subsidizes approved childcare for eligible Rhode Island families working, training, or meeting another qualifying activity.", access: "Apply through RI DHS and confirm copay, activity rules, and provider availability.", coverage: "Statewide", url: "https://dhs.ri.gov/programs-and-services/child-care/child-care-assistance-program-ccap" },
+      { name: "Rhode Island CCAP Child and Provider Rules", summary: "Coverage generally applies to children under 13, with extended eligibility for some children with special needs, through approved providers.", access: "Confirm the child's eligibility and that the chosen provider is CCAP approved.", coverage: "Statewide", url: "https://dhs.ri.gov/programs-and-services/child-care/child-care-assistance-program-ccap" },
+      { name: "Rhode Island Head Start and Early Head Start", summary: "Free early learning and family support for eligible young children and pregnant families.", access: "Call 211 or use the federal locator and apply directly to local programs.", coverage: "Local programs statewide", phone: "211", url: "https://headstart.gov/center-locator" },
+      { name: "Rhode Island Safe Childcare Planning", summary: "Planning involving custody documents, protection orders, authorized pickup lists, and identity verification.", access: "Coordinate with the provider and a survivor advocate and update documents promptly.", coverage: "Statewide guidance", url: "https://ricadv.org/get-help/" },
+    ],
+    "Transportation Assistance": [
+      { name: "Rhode Island Works Bus Passes", summary: "RIPTA Wave transit-card assistance for eligible RI Works participants traveling for approved activities.", access: "Call MTM and provide existing Wave card numbers when applicable.", coverage: "Eligible RI Works participants statewide", phone: "855-330-9131", url: "https://dhs.ri.gov/programs-and-services/ri-works-program" },
+      { name: "RIPTA Fixed-Route Transit", summary: "Statewide public-bus service and trip planning.", access: "Plan both directions and confirm evening, weekend, and less-dense-area connections.", coverage: "Statewide routes", phone: "401-781-9400", url: "https://www.ripta.com/" },
+      { name: "RIde ADA Paratransit", summary: "Origin-to-destination shared rides for approved people whose disability prevents use of regular buses.", access: "Complete certification and reserve ahead; ask about attendants and current fares.", coverage: "Eligible riders statewide", phone: "401-461-9760", url: "https://www.ripta.com/ride-paratransit-program/" },
+      { name: "Rhode Island Survivor Transportation", summary: "Possible bus passes, fuel, rides, or relocation help through survivor programs.", access: "Ask RICADV, Day One, or Sojourner House and confirm safe pickup and destination intake.", coverage: "Program-dependent statewide", phone: "800-494-8100", url: "https://ricadv.org/get-help/" },
+    ],
+    Immigration: [
+      { name: "Sojourner House Immigration Legal Services", summary: "DOJ-recognized survivor-specific representation for VAWA self-petitions, U and T visas, removal matters, and related relief.", access: "State the survivor-based issue and all court or immigration deadlines during intake.", coverage: "Rhode Island", phone: "401-861-6191", secondaryPhone: "Helpline: 401-765-3232", url: "https://sojournerri.org/" },
+      { name: "Dorcas International Immigration Legal Services", summary: "Nonprofit immigration assistance including VAWA, U, and T matters within current practice areas.", access: "Confirm intake, fees, and case scope; do not use a notario or send originals without instructions.", coverage: "Rhode Island", phone: "401-461-5940", url: "https://diiri.org/" },
+      { name: "Rhode Island Immigration Coalition Referrals", summary: "Current free and low-cost attorney pathways with a survivor-specific section.", access: "Ask explicitly whether a provider handles VAWA, U, or T cases.", coverage: "Statewide referral list", url: "https://www.riimmigration.org/" },
+    ],
+    Trafficking: [
+      { name: "Sojourner House THEIA Project", summary: "Confidential shelter, transitional housing, rental help, immigration advocacy, case management, and basic needs for labor- and sex-trafficking survivors.", access: "Call before traveling because location is confidential and placement depends on fit and capacity.", coverage: "Rhode Island", phone: "401-765-3232", url: "https://sojournerri.org/" },
+      { name: "Day One Trafficking Services", summary: "Crisis, hospital, police, clinical, and ongoing advocacy for sexual assault, domestic violence, and human trafficking.", access: "Ask about confidentiality and age-specific reporting duties before identifying yourself.", coverage: "Statewide", phone: "800-494-8100", secondaryPhone: "Office: 401-421-4100", url: "https://dayoneri.org/" },
+      { name: "National Human Trafficking Hotline Rhode Island", summary: "Confidential national routing and cross-state options for sex and labor trafficking.", access: "Ask how information will be used before sharing names or location.", coverage: "National service available in Rhode Island", phone: "888-373-7888", secondaryPhone: "Text 233733", url: "https://humantraffickinghotline.org/" },
+    ],
+    "Other Programs": [
+      { name: "Rhode Island Works", summary: "Cash and employment assistance for eligible families with children or qualifying pregnancies.", access: "Apply through RI DHS and request the applicable domestic-violence good-cause and safety process.", coverage: "Statewide", url: "https://dhs.ri.gov/programs-and-services/ri-works-program" },
+      { name: "Rhode Island General Public Assistance", summary: "Limited cash assistance for certain very-low-income adults meeting disability and program rules.", access: "Apply through RI DHS and ask specifically for GPA.", coverage: "Statewide for eligible adults", url: "https://dhs.ri.gov/apply-now" },
+      { name: "Rhode Island Crime Victim Compensation", summary: "Possible reimbursement for eligible medical, counseling, lost earnings, relocation, and other statutory crime-related expenses.", access: "Apply through the Attorney General or with advocate help and ask about exceptions and deadlines.", coverage: "Eligible crime victims statewide", url: "https://riag.ri.gov/victim-services" },
+      { name: "Rhode Island Legal Services", summary: "Free civil legal help for eligible low-income people involving housing, family, benefits, domestic violence, and other issues.", access: "State every hearing, notice, and filing deadline during intake.", coverage: "Statewide for eligible clients", phone: "401-274-2652", secondaryPhone: "800-662-5034", url: "https://www.helprilaw.org/" },
+      { name: "RICADV Court Advocacy", summary: "Safety planning, protective-order information, and court accompaniment through local survivor programs.", access: "Call the statewide helpline and ask separately whether attorney representation is available.", coverage: "Local programs statewide", phone: "800-494-8100", url: "https://ricadv.org/get-help/" },
+      { name: "Rhode Island Address Confidentiality Program", summary: "Substitute mailing address for eligible survivors who moved or are preparing to move because of domestic violence, stalking, sexual assault, or trafficking.", access: "Apply with safety planning before using the substitute address.", coverage: "Statewide for eligible survivors", phone: "401-222-5149", url: "https://www.sos.ri.gov/AddressConfidentialityProgram" },
+      { name: "Rhode Island Volunteer Lawyer Program", summary: "Possible pro bono civil representation when an eligible person is matched with a participating attorney.", access: "Complete screening while continuing to meet all court deadlines.", coverage: "Statewide for eligible civil matters", phone: "401-421-7758", secondaryPhone: "800-339-7758", url: "https://www.helprilaw.org/" },
+      { name: "Day One Victims of Crime Helpline", summary: "24-hour confidential crisis support and phone or in-person hospital and police advocacy after sexual assault or exploitation.", access: "Ask about confidentiality and reporting duties before sharing identifying details.", coverage: "Statewide", phone: "800-494-8100", url: "https://dayoneri.org/" },
+      { name: "Day One Ongoing Services", summary: "Trauma-informed counseling, victim advocacy, and ongoing support for survivors and loved ones.", access: "Use the crisis helpline for immediate needs and the office for ongoing intake.", coverage: "Statewide", phone: "401-421-4100", url: "https://dayoneri.org/" },
+      { name: "Rhode Island Sexual Assault Victims Bill of Rights", summary: "Official information about medical care, evidence, notification, and legal rights after sexual assault.", access: "Use with advocate support and do not delay time-sensitive medical care to research rights.", coverage: "Statewide", url: "https://riag.ri.gov/savbor" },
+      { name: "RAINN Sexual Assault Hotline Rhode Island", summary: "Confidential national support and cross-state routing.", access: "Call or use online chat for another entry point and ask local providers about Rhode Island evidence timelines.", coverage: "National service available in Rhode Island", phone: "800-656-4673", url: "https://www.rainn.org/" },
+    ],
+  },
 };
 
 const twelveCategoryStateResourceCategories = [
@@ -10995,6 +11059,22 @@ const pennsylvaniaProgramsByCategory: TwelveCategoryProgramMap = {
   "Sexual Assault / Rape Survivor Resources": ["PCAR Statewide Routing", "Pennsylvania Local Rape Crisis Centers", "Pennsylvania Regional Sexual Assault Programs", "RAINN Sexual Assault Hotline Pennsylvania"],
 };
 
+const rhodeIslandProgramsByCategory: TwelveCategoryProgramMap = {
+  "Homelessness Prevention & Intervention": ["Rhode Island Victims of Crime Helpline", "Rhode Island Regional Access Points", "Rhode Island 211", "Sojourner House Crisis and Housing"],
+  Housing: ["RICADV Member Agencies", "HousingSearchRI", "Sojourner House Housing Programs", "Rhode Island Native Survivor Routing"],
+  "Subsidized Housing": ["Rhode Island Centralized Waiting List", "Rhode Island Local Housing Authorities", "Rhode Island Project-Based Housing"],
+  "Cash Assistance": ["Rhode Island Works", "Rhode Island General Public Assistance", "Rhode Island Crime Victim Compensation"],
+  "Immigration Services": ["Sojourner House Immigration Legal Services", "Dorcas International Immigration Legal Services", "Rhode Island Immigration Coalition Referrals"],
+  "Trafficking Victim Services": ["Sojourner House THEIA Project", "Day One Trafficking Services", "National Human Trafficking Hotline Rhode Island"],
+  "Rapid Rehousing": ["Rhode Island RAP Rapid Rehousing", "Sojourner House Survivor Rehousing", "Crossroads Rhode Island Housing Services"],
+  "Legal Assistance": ["Rhode Island Legal Services", "RICADV Court Advocacy", "Rhode Island Address Confidentiality Program", "Rhode Island Volunteer Lawyer Program"],
+  "Rental Assistance": ["Rhode Island Community Action Rental Help", "Sojourner House Rental Assistance", "Rhode Island Legal Services Housing Help", "RIHousing Renter Resources"],
+  "SNAP / Food Assistance": ["Rhode Island SNAP", "Rhode Island Expedited SNAP", "Rhode Island Emergency Food Resources"],
+  "Transportation Assistance": ["Rhode Island Works Bus Passes", "RIPTA Fixed-Route Transit", "RIde ADA Paratransit", "Rhode Island Survivor Transportation"],
+  "Childcare Assistance": ["Rhode Island CCAP", "Rhode Island CCAP Child and Provider Rules", "Rhode Island Head Start and Early Head Start", "Rhode Island Safe Childcare Planning"],
+  "Sexual Assault / Rape Survivor Resources": ["Day One Victims of Crime Helpline", "Day One Ongoing Services", "Rhode Island Sexual Assault Victims Bill of Rights", "RAINN Sexual Assault Hotline Rhode Island"],
+};
+
 const twelveCategoryProgramsByState: Partial<Record<string, TwelveCategoryProgramMap>> = {
   connecticut: connecticutProgramsByCategory,
   delaware: delawareProgramsByCategory,
@@ -11027,6 +11107,7 @@ const twelveCategoryProgramsByState: Partial<Record<string, TwelveCategoryProgra
   oklahoma: oklahomaProgramsByCategory,
   oregon: oregonProgramsByCategory,
   pennsylvania: pennsylvaniaProgramsByCategory,
+  "rhode-island": rhodeIslandProgramsByCategory,
 };
 
 export function getStateResourceCategories(slug: string): readonly string[] {
