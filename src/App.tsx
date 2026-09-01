@@ -320,6 +320,15 @@ const libraryPasses: LibraryPass[] = [
 
 const howToGuides: HowToGuide[] = [
   {
+    id: "covered-and-uncovered",
+    title: "Covered and Uncovered",
+    subtitle: "A feminist history of coverture and the rights it left behind.",
+    status: "LONG-FORM ARTICLE",
+    description: "Marriage once made a woman legally disappear. The law gave her back her name, wages, property, and vote, but never quite finished making that freedom usable.",
+    action: "open",
+    priority: "priority-3",
+  },
+  {
     id: "why-abusers-abuse",
     title: "Why Abusers Abuse",
     subtitle: "What the research actually says about function, entitlement, control, excuses, and change.",
@@ -2278,6 +2287,13 @@ const categoryFiles: Record<
     intro:
       "Practical walkthroughs for doing the work, plus long-form articles for understanding the systems and patterns surrounding it.",
     files: [
+      {
+        title: "Covered and Uncovered",
+        description: "A feminist history of coverture, constitutional citizenship, economic personhood, and the unfinished work of making formal freedom usable.",
+        status: "ARTICLE",
+        categoryId: "articles",
+        guideId: "covered-and-uncovered",
+      },
       {
         title: "They Didn't Hit You Though",
         description: "How subtle psychological abuse contracts a person's freedom through accumulation, anticipation, undermining, withholding, isolation, and reality disputes.",
@@ -6595,6 +6611,132 @@ function HousingOptionsGuide({ onBack }: { onBack: () => void }) {
   );
 }
 
+const covertureArticleSections = [
+  {
+    title: "For most of American history, marriage was a legal disappearance",
+    paragraphs: [
+      "For most of American history, marriage was not merely a relationship. It was a legal event that rearranged who counted as a person. An unmarried woman could own property, enter contracts, and appear in court. A married woman could watch those abilities fold into her husband's identity almost overnight. The law called this coverture. It sounds delicate, like lace over a face. It was closer to a tarp thrown over a legal existence.",
+      "William Blackstone supplied the line that followed women for centuries: husband and wife were one person in law. Romantic, if you ignore the small administrative detail that the one person was him. Her earnings usually belonged to him. He controlled much of the property she brought into the marriage. She often could not sign a contract, bring a lawsuit, or be sued in her own name. The husband represented the household because the law had already decided the household was his jurisdiction.",
+      "Coverture was frequently sold as protection. A husband owed his wife support, assumed certain debts, and handled the family's public affairs. The bargain was described as shelter rather than subordination. That rhetorical trick should feel familiar: remove a woman's authority, call the removal care, and act surprised when she asks who is protecting her from the protector.",
+    ],
+  },
+  {
+    title: "The fine print was still a cage",
+    paragraphs: [
+      "Coverture was never a single, perfectly uniform code stamped across every marriage. Wealthy women could sometimes use trusts and separate estates to keep property beyond a husband's reach. Certain places recognized business exceptions for wives whose husbands were absent or had deserted them. Local law, equity courts, property forms, and commercial customs all changed how the rules worked.",
+      "But an exception available to a woman with assets, lawyers, trustees, and access to a court of equity was not freedom for women as a class. It was a luxury escape hatch. Poor women remained poor, and a legal workaround that required property was not especially useful to someone whose only asset was her labor, particularly when the law treated that labor as her husband's.",
+      "Even the familiar phrase women under coverture needs qualification. Coverture described the status of a free married woman whose legal position changed when she married. Enslaved Black women were subjected to a different and far more total system: they were denied ordinary property rights, lawful control over their labor, protection from sexual violence, and, in many jurisdictions, legally recognized marriage itself. Indigenous women lived within their own legal traditions before settler law displaced or distorted them. Immigrant women would later find their nationality tied to their husbands. There was never one universal female experience waiting politely inside the history books.",
+      "Some white wives were oppressed inside marriage while still benefiting from racial domination outside it. Mississippi's celebrated 1839 married women's property reform emerged from a world of debt, Chickasaw property traditions, and slavery; the litigation associated with Betsy Love Allen concerned an enslaved person creditors wanted to seize for her husband's debt. A reform could protect one woman's property while the property was another human being. History is rude that way. It refuses to produce uncomplicated heroines on demand.",
+    ],
+  },
+  {
+    title: "Freedom arrived by installment",
+    paragraphs: [
+      "The Married Women's Property Acts are often told as the moment the cage door opened. In reality, states dismantled coverture one hinge at a time. Early laws commonly protected property a wife inherited or brought into a marriage from her husband's creditors. Later reforms let her control earnings, manage property, enter contracts, and sue in her own name. The order varied by state, and no single statute restored everything at once.",
+      "At Seneca Falls in 1848, the Declaration of Sentiments called a married woman civilly dead. The phrase was political, but it caught the shape of the problem. Property, wages, divorce, child custody, obedience, and civic voice were not separate inconveniences. They were parts of one structure designed around male authority and female dependence.",
+      "Even after married women acquired separate legal identities, coverture's descendants lingered. Courts treated spouses as legally incapable of suing one another for injuries. Criminal law imagined that a wife had given permanent sexual consent at the altar. States assigned husbands control of jointly owned property, required men rather than women to pay alimony, and treated a woman's citizenship as something marriage could transfer. Each doctrine had to be challenged separately because the law had not built one wall. It had built a house.",
+      "This is why saying coverture ended is technically true and historically slippery. The classic rule is gone. The demolition took generations, and several rooms remained occupied long after everyone claimed the building had been condemned.",
+    ],
+  },
+  {
+    title: "A citizen, with terms and conditions",
+    paragraphs: [
+      "The original Constitution never announced that married women belonged to their husbands. It did something quieter: it left voting, property, marriage, and civil status largely to the states, where coverture already lived. Women could be among the people in one constitutional sentence and absent from political power in the next practical moment. The Bill of Rights restrained the federal government. It did not restrain a husband, rewrite a state's marriage law, or hand a wife a remedy against the household order.",
+      "The Fourteenth Amendment transformed the language of citizenship after the Civil War. Women were plainly persons and citizens, but courts were slow to give those words disruptive meaning. In 1873, the Supreme Court upheld Illinois's refusal to admit Myra Bradwell to the bar. One justice explained that woman's proper destiny was wife and mother, while the husband served as the family's public representative. Two years later, the Court agreed that women were citizens and then held that citizenship did not include a federal right to vote.",
+      "The Nineteenth Amendment finally prohibited government from denying the vote on account of sex in 1920. It was monumental. It was also not a magic wand. Poll taxes, literacy tests, racial violence, citizenship rules, and other barriers continued to block many Black, Indigenous, Asian American, Latina, and poor women. Voting rights did not automatically produce equal rights at work, in marriage, in credit, or over the body.",
+      "The modern constitutional attack on sex discrimination did not truly gather force until the 1970s. The Supreme Court began striking down laws that treated men as natural decision-makers and women as natural dependents. It rejected an automatic preference for men administering estates, military rules that presumed wives were dependent but forced husbands to prove the same thing, male-only alimony duties, and Louisiana's rule making the husband head and master of jointly owned property.",
+      "These cases mattered because they exposed the matching costumes assigned to everyone: man as provider, woman as dependent caregiver. Removing that script benefited women whose authority had been denied and men whose capacity for care had been treated as an exception. Equality was not women being invited into male life. It was government losing the power to assign either sex a life in advance.",
+    ],
+  },
+  {
+    title: "The home was never really private",
+    paragraphs: [
+      "The most enduring trick of coverture was making public power look private. Law created marriage, defined ownership, enforced contracts, assigned parentage, distributed benefits, and decided which violence counted. Then it described the household it had built as a private sphere beyond public concern.",
+      "Modern constitutional law still draws a consequential line between government and private conduct. The Constitution can stop a state from declaring husbands masters of marital property. It generally cannot require a couple to divide housework equally, compel a private employer to provide paid family leave, or guarantee the money that makes leaving an abusive home possible. Those problems can be addressed through legislation, labor policy, benefits, housing law, and family law, but not every injustice is automatically a constitutional violation.",
+      "That distinction is not academic when violence enters the home. States eventually abolished formal marital-rape exemptions and interspousal immunity, though the process was embarrassingly slow and uneven. Yet a legal right is only as useful as the system willing to enforce it. Police discretion, credibility judgments, access to counsel, financial dependence, housing shortages, and fear of losing children can turn a formal remedy into decorative paperwork.",
+      "The Supreme Court has also held that the Constitution generally does not require government to protect someone from private violence. In DeShaney, the Court found no general constitutional duty to protect a child from his abusive father. In Town of Castle Rock v. Gonzales, it rejected a due-process claim based on police failure to enforce a restraining order. In United States v. Morrison, it invalidated the federal civil remedy Congress created for survivors under the Violence Against Women Act. None of those opinions declared violence acceptable. Together, they reveal how readily law can recognize harm and still place the remedy outside the Constitution's reach.",
+    ],
+  },
+  {
+    title: "From the married couple to the individual woman",
+    paragraphs: [
+      "Reproductive-rights history tells a parallel story about who the law imagines at the center. Griswold v. Connecticut protected contraceptive use within marriage, speaking in the language of marital privacy. Eisenstadt v. Baird later extended contraception rights to unmarried people and centered the individual instead of the couple. It was a quiet conceptual revolution: the woman did not need marriage to become the container for her liberty.",
+      "Abortion rights traveled a more violent legal arc. Roe v. Wade and Planned Parenthood v. Casey protected abortion as a constitutional liberty. Dobbs v. Jackson Women's Health Organization overruled both in 2022 and returned abortion regulation to political processes, producing dramatically different rights depending on geography.",
+      "Coverture does not settle the abortion debate by itself, and pretending it does would be sloppy. Its relevance is structural. When courts ask whether a liberty is deeply rooted in history, they often examine eras in which women lacked political power and married women lacked full legal independence. A historical record created while women were legally covered by men becomes the measuring stick for whether modern women may claim a freedom. That is not neutral tradition. It is an archive with a thumb on the scale.",
+      "Pregnancy also exposes the distance between constitutional equality and statutory protection. In 1974, the Supreme Court held in Geduldig v. Aiello that excluding normal pregnancy from a state disability program was not automatically sex discrimination. Congress responded with the Pregnancy Discrimination Act, extending workplace protection through statute. The episode matters because it shows that the Constitution is a floor, not a complete blueprint. Legislatures can, and often must, go further.",
+      "The same limit appears when a rule is written in neutral language but lands heavily on women. A workplace may never say mothers need not apply while using scheduling, attendance, promotion, and leave policies designed around a worker with no caregiving demands. Under constitutional equal-protection doctrine, disproportionate harm alone usually does not prove unlawful intent. The policy can preserve an old hierarchy without using the old vocabulary.",
+    ],
+  },
+  {
+    title: "The economic woman appears",
+    paragraphs: [
+      "Coverture's vision of dependence did not remain inside marriage law. It seeped into citizenship, banking, employment, and the everyday paperwork of adulthood.",
+      "Under the Expatriation Act of 1907, an American woman who married a foreign man could lose her nationality in circumstances where an American man did not. The Cable Act of 1922 began restoring independent citizenship, but racial exclusions and other restrictions survived. A woman's national identity, like her legal identity, had to be pried loose from her husband's.",
+      "Credit offered another reminder that formal personhood and economic personhood are not identical. Before the Equal Credit Opportunity Act of 1974, lenders could discount a wife's income, insist on a male cosigner, or place a jointly paid account only in her husband's name. The statute prohibited discrimination based on sex and marital status. It could not retroactively create the credit history, savings, wages, collateral, or inherited wealth women had been prevented from accumulating.",
+      "Employment law has done similar work. The Constitution bars sex discrimination by government employers; statutes such as Title VII reach covered private employers. Statutory law recognizes pregnancy discrimination and sexual harassment in ways constitutional doctrine alone does not. Yet the country still organizes care as if every ideal worker has someone else handling children, meals, illness, appointments, laundry, and the thousand invisible acts that keep a life running.",
+      "In the 2025 American Time Use Survey, women were more likely than men to do household work on an average day and spent more time doing it. Among adults living with a child under six, women averaged substantially more primary childcare. Those numbers do not prove that a husband from 1765 is secretly assigning chores in every modern kitchen. They show that the provider-dependent arrangement outlived the laws that once made it compulsory.",
+    ],
+  },
+  {
+    title: "What survived and what did not",
+    paragraphs: [
+      "It is tempting to call every modern inequality coverture, but that flattens the history and makes the argument easier to dismiss. The direct legal doctrine is gone. A married woman has her own legal personality. She may own property, earn wages, make contracts, vote, sue, hold citizenship, and participate in civic life. A state generally cannot make her husband the master of joint property or write provider-and-dependent roles into law by sex.",
+      "What survives is not one undead rule wandering around in a powdered wig. It is an institutional inheritance. Benefits were built around dependency. Workplaces were built around an unencumbered worker. Credit systems assumed a male borrower. Family law grew from a household in which authority, money, and care had already been assigned. Social norms then learned to describe those assignments as preference, personality, or nature.",
+      "There are also cultural continuities, but they should be named honestly. The expectation that women will manage care may echo coverture without being coverture itself. An unequal marriage is not automatically a constitutional violation. A sexist employer may violate a statute rather than the Constitution. A police department's failure may be morally grotesque without fitting the narrow doctrine required for a federal constitutional claim. Precision does not weaken the feminist argument. It tells us which lever can actually move the problem.",
+      "That question lands differently depending on which woman is being asked to answer it. A wealthy woman may purchase childcare, legal representation, privacy, and a new address. A poor woman may technically possess every right in the Constitution while choosing between rent and counsel. An immigrant survivor may have a route to relief but fear the system that controls it. A Black mother may face both private violence and institutions primed to scrutinize her rather than protect her. An Indigenous woman may encounter jurisdictional gaps created by settler law. Women have rights now is true. It is also nowhere near a complete analysis of who can use them.",
+      "The law once made a married woman disappear and called the disappearance unity. Modern law has returned her separate name, her signature, her vote, her wages, and her citizenship. But it still treats too much domination as private, too much inequality as accidental, and too much protection as optional.",
+      "That is coverture's most useful lesson. Freedom is not merely the absence of a rule declaring that a husband owns the household. It is the presence of conditions that let a woman govern herself: enforceable rights, independent resources, credible remedies, and somewhere safe to go when the person or institution with power decides her freedom is inconvenient.",
+      "Women are no longer covered by their husbands in law. The unfinished question is whether being uncovered means standing in full citizenship, or simply standing alone.",
+    ],
+  },
+] as const;
+
+const coverturePullQuotes: Partial<Record<number, string>> = {
+  1: "Coverture did not make all women equal in powerlessness. It sorted women through marriage, race, wealth, citizenship, and access to law.",
+  3: "A woman could exist in constitutional theory while remaining restricted in constitutional life.",
+  5: "Liberty without capacity is an unlocked door at the top of a staircase with half the steps missing.",
+  7: "The deepest afterlife of coverture is the conversion problem: how does a woman convert formal personhood into safety, time, money, bodily control, credibility, and the ability to leave?",
+};
+
+function CoveredAndUncoveredArticle({ onBack }: { onBack: () => void }) {
+  return (
+    <article className="editorial-feature-article" aria-labelledby="covered-and-uncovered-title">
+      <header className="editorial-feature-header">
+        <p>HISTORY / POWER / WOMEN</p>
+        <h1 id="covered-and-uncovered-title">Covered and Uncovered</h1>
+        <div className="editorial-feature-dek">Marriage once made a woman legally disappear. The law eventually gave her back her name, her wages, her property, and her vote. It never quite finished the job of making that freedom usable.</div>
+        <div className="editorial-feature-byline"><span>Survivor Systems</span><span>A feminist history of coverture</span></div>
+      </header>
+      <div className="editorial-feature-columns">
+        {covertureArticleSections.map(({ title, paragraphs }, index) => (
+          <section className={index === 0 ? "editorial-feature-section editorial-feature-opening" : "editorial-feature-section"} key={title}>
+            <h2>{title}</h2>
+            {paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+            {coverturePullQuotes[index] ? <blockquote className="editorial-pull-quote">{coverturePullQuotes[index]}</blockquote> : null}
+          </section>
+        ))}
+      </div>
+      <footer className="editorial-feature-sources">
+        <h2>Selected sources and cases</h2>
+        <p>William Blackstone, <cite>Commentaries on the Laws of England</cite>, Book 1, Chapter 15 (1765).</p>
+        <p>New York, <cite>Act for the More Effectual Protection of the Property of Married Women</cite> (1848); <cite>Declaration of Sentiments and Resolutions</cite> (1848).</p>
+        <p>U.S. Constitution, Fourteenth and Nineteenth Amendments.</p>
+        <p><cite>Bradwell v. Illinois</cite> (1873); <cite>Minor v. Happersett</cite> (1875); <cite>Mackenzie v. Hare</cite> (1915).</p>
+        <p><cite>Reed v. Reed</cite> (1971); <cite>Frontiero v. Richardson</cite> (1973); <cite>Craig v. Boren</cite> (1976); <cite>United States v. Virginia</cite> (1996).</p>
+        <p><cite>Weinberger v. Wiesenfeld</cite> (1975); <cite>Orr v. Orr</cite> (1979); <cite>Kirchberg v. Feenstra</cite> (1981).</p>
+        <p><cite>Griswold v. Connecticut</cite> (1965); <cite>Eisenstadt v. Baird</cite> (1972); <cite>Roe v. Wade</cite> (1973); <cite>Planned Parenthood v. Casey</cite> (1992); <cite>Dobbs v. Jackson Women's Health Organization</cite> (2022).</p>
+        <p><cite>Geduldig v. Aiello</cite> (1974); Pregnancy Discrimination Act of 1978; <cite>Washington v. Davis</cite> (1976).</p>
+        <p><cite>DeShaney v. Winnebago County</cite> (1989); <cite>United States v. Morrison</cite> (2000); <cite>Town of Castle Rock v. Gonzales</cite> (2005).</p>
+        <p>Allison Anna Tait, <cite>The Beginning of the End of Coverture</cite> (2014); Sara Chatfield, <cite>Married Women's Economic Rights Reform in State Legislatures and Courts, 1839-1920</cite> (2018).</p>
+        <p>Darlene C. Goring, <cite>The History of Slave Marriage in the United States</cite> (2006); National Museum of African American History &amp; Culture, <cite>Illegal to Marry</cite>.</p>
+        <p>Federal Reserve Board, Regulation B history; U.S. Bureau of Labor Statistics, <cite>American Time Use Survey: 2025 Results</cite>.</p>
+        <p><strong>Editorial note:</strong> This article distinguishes formal coverture from its direct legal descendants, institutional inheritances, and cultural echoes. It describes constitutional law as of August 31, 2026 and is not legal advice.</p>
+      </footer>
+      <button type="button" className="editorial-feature-back" onClick={onBack}>Back to Articles &amp; Guides</button>
+    </article>
+  );
+}
+
 const psychologicalAbuseArticleSections = [
   ["The harm can live in the accumulation", "One reason psychological abuse can take so long to recognize is that individual incidents, pulled out of the relationship and held up alone, can look almost stupid. They walked ahead of you. Sighed when you asked a question. Corrected you in front of somebody. Got quiet after you made plans with a friend. Explained something you already knew how to do. Try explaining five years of that to someone who wasn't there. Research on subtle abuse describes ordinary-looking processes of undermining, limiting, and withholding. The harm can live in the accumulation."],
   ["Psychological abuse can shrink your space for action", "Researchers who study coercive control describe a person's space for action: the amount of ordinary life in which someone genuinely feels free to make choices. A review of 31 qualitative studies found progressive loss of agency as survivors' lives became organized around fear of repercussions. An abuser does not always have to remove a choice. They can make one option consistently unpleasant enough that you stop choosing it. Once that happens, the restriction begins looking voluntary."],
@@ -6748,6 +6890,10 @@ function HowToModule({
   }, [initialGuideId, initialPriority]);
 
   const returnToArticlesAndGuides = () => onNavigate("guides", "/guides");
+
+  if (activeGuideId === "covered-and-uncovered") {
+    return <CoveredAndUncoveredArticle onBack={returnToArticlesAndGuides} />;
+  }
 
   if (activeGuideId === "they-didnt-hit-you-though") {
     return <TheyDidntHitYouThoughArticle onBack={returnToArticlesAndGuides} />;
