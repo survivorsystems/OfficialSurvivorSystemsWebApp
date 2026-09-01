@@ -320,15 +320,6 @@ const libraryPasses: LibraryPass[] = [
 
 const howToGuides: HowToGuide[] = [
   {
-    id: "covered-and-uncovered",
-    title: "Covered and Uncovered",
-    subtitle: "Coverture, women's constitutional citizenship, and the public-private architecture of inequality.",
-    status: "LONG-FORM ARTICLE",
-    description: "How coverture was dismantled, what constitutional equality changed, and why formal legal personhood does not automatically create practical autonomy.",
-    action: "open",
-    priority: "priority-3",
-  },
-  {
     id: "why-abusers-abuse",
     title: "Why Abusers Abuse",
     subtitle: "What the research actually says about function, entitlement, control, excuses, and change.",
@@ -2287,13 +2278,6 @@ const categoryFiles: Record<
     intro:
       "Practical walkthroughs for doing the work, plus long-form articles for understanding the systems and patterns surrounding it.",
     files: [
-      {
-        title: "Covered and Uncovered",
-        description: "Coverture, women's constitutional citizenship, and the legal architecture connecting household power, public rights, private inequality, and usable autonomy.",
-        status: "ARTICLE",
-        categoryId: "articles",
-        guideId: "covered-and-uncovered",
-      },
       {
         title: "They Didn't Hit You Though",
         description: "How subtle psychological abuse contracts a person's freedom through accumulation, anticipation, undermining, withholding, isolation, and reality disputes.",
@@ -6611,149 +6595,6 @@ function HousingOptionsGuide({ onBack }: { onBack: () => void }) {
   );
 }
 
-const covertureArticleSections = [
-  {
-    title: "The household as a legal jurisdiction",
-    paragraphs: [
-      "Coverture is often summarized as the proposition that a wife had no rights. That captures the hierarchy but obscures the mechanism. Under English common law, an adult unmarried woman, a feme sole, could ordinarily hold property, contract, and litigate. Marriage changed her status to feme covert. Blackstone's Commentaries stated that her legal existence was suspended or incorporated into her husband's. Spouses generally could not contract directly with each other; a wife usually could not sue or be sued alone; her personal property vested in her husband; he controlled the rents and profits of much of her real property; and her labor and earnings were ordinarily treated as his.",
-      "The unity was asymmetrical. As Justice Hugo Black later observed, the proposition that husband and wife were one meant in operation that the one was the husband. It combined power with obligation: the husband owed necessaries, assumed some debts, and represented the household. Blackstone repeatedly described female disability as protection. That vocabulary matters. Coverture did not merely exclude a wife from public law. Law delegated governance to a husband and then redescribed dependence as shelter.",
-      "The doctrine was never total. Equity enforced separate estates placed in trust for married women, and some colonies and states recognized feme-sole-trader rules. These exceptions show flexibility, not equality. Separate estates required assets, drafting, trustees, and access to chancery, making legal independence easier for some propertied women than for poor women.",
-    ],
-  },
-  {
-    title: "American transplantation and its fractures",
-    paragraphs: [
-      "After independence, American courts and treatise writers received English marital-status rules through state common law. But there was never one nationwide law of coverture. State legislatures, courts, civil-law jurisdictions, Indigenous legal orders, local commercial practice, and equity produced variation.",
-      "That variation is indispensable to an honest account of race. Enslaved people generally could not enter marriages recognized by the state, own ordinary property, or claim the supposed protections and reciprocal obligations of common-law marriage. Enslaved Black women were subordinated by chattel status and sexual violence, not merely by the law of husband and wife. Emancipation brought legal recognition of Black marriages, but could also shift responsibility for support from public authorities to newly legalized families.",
-      "The history of married women's property reform was also bound to slavery. Mississippi's 1839 legislation arose in a landscape shaped by Chickasaw matrilineal property rules, debt protection, and ownership of enslaved persons. Reforms enlarging some women's property claims could preserve wealth extracted from other women and men. White wives could be subordinated within marriage while participating in racial domination.",
-    ],
-  },
-  {
-    title: "Reform came in waves",
-    paragraphs: [
-      "The Married Women's Property Acts were not a single emancipation statute. Early laws often protected a wife's inherited or premarital assets from her husband's creditors. Later measures gave her management rights, ownership of earnings, contractual capacity, and independent standing in court. The sequence differed by state.",
-      "New York's influential 1848 act preserved enumerated property owned at marriage and later acquired by gift or inheritance as if she were a single female. It did not immediately confer every capacity associated with independent personhood. Reformers at Seneca Falls connected property, wages, obedience, divorce, and guardianship of children, correctly identifying coverture as a system rather than one isolated property rule.",
-      "By the late nineteenth and twentieth centuries, statutes increasingly removed formal disabilities. Yet interspousal tort immunity, the marital-rape exemption, husband-as-head-and-master property rules, sex-specific support duties, and gendered citizenship rules survived. Dismantling each required a separate fight. Coverture ended through a long transition from status to formally individual legal personality, not in one event.",
-    ],
-  },
-  {
-    title: "Women in the original constitutional order",
-    paragraphs: [
-      "The federal Constitution did not adopt coverture by name. It also did not create a general sex-equality guarantee. Its original text largely left suffrage qualifications, domestic relations, property, and civil status to states. Women were among the people and persons protected by some constitutional language, but political membership and civil capacity were mediated by state law and prevailing status rules.",
-      "The distinction between possessing a constitutional right and having an effective remedy was stark. The Bill of Rights initially constrained the federal government, not states or husbands. A wife's household subordination was ordinarily treated as state common law or private relation, not a federal constitutional injury. Constitutional silence operated alongside a state-law regime of dependency.",
-      "The Fourteenth Amendment made national and state citizenship explicit and barred states from denying due process or equal protection. Women were persons and citizens, but the Supreme Court initially refused to translate citizenship into equal civic participation. Bradwell v. Illinois upheld Illinois's refusal to license Myra Bradwell as an attorney. Minor v. Happersett agreed women were citizens but held that citizenship did not itself carry a federal right to vote. A woman could be a constitutional citizen while the content of citizenship remained gendered.",
-    ],
-  },
-  {
-    title: "Public rights and equal citizenship",
-    paragraphs: [
-      "The Nineteenth Amendment prohibited the United States and states from denying or abridging the vote on account of sex. It did not erase poll taxes, literacy tests, violence, citizenship restrictions, or other barriers that continued to disenfranchise many Black, Indigenous, Asian American, Latina, and poor women. Nor did it automatically constitutionalize equality across work, family, or property.",
-      "Constitutional sex equality developed mainly through the Fourteenth Amendment beginning in the 1970s. Reed v. Reed invalidated a mandatory preference for men as estate administrators. Frontiero v. Richardson rejected military-benefit rules that presumed wives dependent but required husbands to prove dependency. Craig v. Boren established intermediate scrutiny. United States v. Virginia required an exceedingly persuasive justification for excluding women from the Virginia Military Institute.",
-      "The Court also invalidated Louisiana's husband-as-head-and-master control over jointly owned property, male-only alimony duties, and Social Security rules that treated women's wages as less important. Jury service followed a similar path from Hoyt v. Florida's acceptance of women's optional service to Taylor v. Louisiana and J.E.B. v. Alabama rejecting systematic exclusion and sex-based jury strikes.",
-      "Public constitutional equality still has limits. The Equal Protection Clause directly binds states, and the Fifth Amendment supplies an equal-protection component against the federal government. Private employers, landlords, lenders, schools, and spouses do not ordinarily become constitutional actors merely by discriminating. Statutes such as Title VII, Title IX, the Equal Credit Opportunity Act, and fair-housing laws are needed to regulate private conduct.",
-    ],
-  },
-  {
-    title: "Private life is constituted by public law",
-    paragraphs: [
-      "Calling family or market conduct private can mislead. Government defines marriage, property, parentage, contract enforcement, benefits, criminal offenses, and remedies. Coverture itself was public law that constructed a private household. Yet constitutional doctrine uses a state-action boundary: most constitutional rights restrain government rather than directly governing private relationships.",
-      "The state cannot ordinarily enact a rule making husbands masters of marital property. But the Constitution generally does not require a household to divide unpaid work equally, an employer to provide paid care leave, or government to eliminate the economic vulnerability that can make exit from abuse difficult. Statutes and policy can do so, but the Constitution supplies only partial leverage.",
-      "The same issue appears in violence. The marital-rape exemption treated a wife's consent as irrevocably conveyed by marriage. Interspousal tort immunity translated marital unity into lack of remedy. Their erosion restored legal separateness, but enforcement, credibility judgments, financial dependence, and access to counsel determine whether formal remedies work.",
-      "DeShaney v. Winnebago County held that due process generally does not require government to protect a person from private violence absent custody or another recognized exception. Town of Castle Rock v. Gonzales rejected a due-process property claim based on police nonenforcement of a restraining order. United States v. Morrison invalidated the federal civil remedy in the Violence Against Women Act. These decisions define much private violence as outside a direct federal constitutional remedy.",
-    ],
-  },
-  {
-    title: "Bodily autonomy, marriage, and reproductive liberty",
-    paragraphs: [
-      "Modern substantive due process recognized constitutional protection for intimate decisions. Griswold v. Connecticut protected married couples' contraceptive use in the language of marital privacy. Eisenstadt v. Baird extended contraceptive access to unmarried people and reformulated the right around the individual rather than the marital unit. That movement from couple to person is the inverse of coverture.",
-      "Roe v. Wade and Planned Parenthood v. Casey treated the decision to end a pregnancy as constitutionally protected liberty under different frameworks. Dobbs v. Jackson Women's Health Organization overruled both and held that the federal Constitution does not confer a right to abortion. Reproductive rights now vary substantially by state, federal statute, administrative policy, and state constitutional law.",
-      "Coverture does not mechanically answer the abortion controversy. The more precise connection is structural. A history-and-tradition test centered on eras when married women lacked full legal independence can import the exclusions of those eras into the baseline for recognizing liberty. Formal liberty can also coexist with lack of money, transportation, leave, childcare, or clinical access. Rights on paper and capacities in life are not identical.",
-    ],
-  },
-  {
-    title: "Pregnancy and the limits of classification doctrine",
-    paragraphs: [
-      "Sex-equality law does not automatically treat every rule affecting pregnancy as a facial sex classification. In Geduldig v. Aiello, the Court held that excluding normal pregnancy from a state disability-insurance program was not, without more, sex discrimination under equal protection. Congress later enacted the Pregnancy Discrimination Act of 1978, making pregnancy, childbirth, and related medical conditions part of Title VII's protection. Statutory equality extended beyond the constitutional floor.",
-      "The distinction between discriminatory classification and unequal effect is also crucial. Under Washington v. Davis and later cases, a facially neutral government policy with disproportionate effects generally violates equal protection only if discriminatory purpose is shown. Scheduling systems, caregiver penalties, wealth gaps, occupational sorting, and benefit structures may operate without an express women-only rule. Legislation or disparate-impact statutes may reach them, but constitutional claims are harder.",
-    ],
-  },
-  {
-    title: "Citizenship, name, and economic personhood",
-    paragraphs: [
-      "Coverture's derivative model entered nationality law. The Expatriation Act of 1907 caused an American woman who married a foreign man to take her husband's nationality in many circumstances; Mackenzie v. Hare upheld the rule. The Cable Act of 1922 partly restored independent nationality but retained racial and other limits. Citizenship reform, like property reform, was staged.",
-      "Economic institutions also assumed a male-headed household. Before the Equal Credit Opportunity Act of 1974 and Regulation B, lenders could discount wives' earnings, demand male cosigners, or report jointly paid accounts only in a husband's name. ECOA converted a private-market convention into a regulated civil-rights question. It did not create financial independence from nothing: accumulated wealth, prior credit files, collateral, wages, and unpaid care still shape borrowing capacity.",
-      "Employment law tells the same story. The Constitution bars sex discrimination by government employers, while Title VII reaches covered private employers. Yet the United States still allocates much care privately. In the 2025 American Time Use Survey, women were more likely than men to perform household activities on an average day and spent more time doing them. These figures do not prove that coverture caused any individual arrangement. They show that the breadwinner-dependent division remains socially patterned after its legal compulsion disappeared.",
-    ],
-  },
-  {
-    title: "What remains alive and what does not",
-    paragraphs: [
-      "Claims about coverture's legacy should pass three tests. First, identify a mechanism. A direct doctrinal remnant is stronger evidence than a vague resemblance. An institutional inheritance requires a documented historical link. A cultural parallel should be described as continuity or resonance, not legal survival.",
-      "Second, identify the legal level. The Constitution invalidates certain government classifications and protects some liberties. Statutes regulate private employers, lenders, schools, and violence. State family and property law structures households. Contracts and institutional practices allocate resources. Social norms affect bargaining and enforcement. Treating all of these as constitutional rights hides both the Constitution's power and its gaps.",
-      "Third, ask which women. Coverture's canonical subject was a free married woman whose status changed at marriage. Enslaved women were denied legal personhood through a different and more total regime. Indigenous women encountered imposed settler law that could displace their own legal orders. Immigrant women faced derivative nationality. Poor women had less access to equity workarounds, while white property-owning women could benefit from racial exploitation.",
-      "What is no longer lawful is substantial. A state may not generally make a husband master of jointly owned property, exclude women from civic institutions on archaic generalizations, or prescribe provider-dependent roles by sex. Married women possess separate legal personality, property and contractual capacity, citizenship, voting rights, and remedies unknown to classic coverture.",
-      "What remains is an unequal conversion problem. Formal personhood must be converted into security, voice, time, bodily control, and exit. Constitutional negative rights protect against specified government action; they do not ordinarily guarantee income, care infrastructure, protection from private violence, or equal power inside households. The result is not coverture unchanged. It is a formally individual legal order built on institutions whose default worker, citizen, debtor, and caregiver were historically gendered.",
-    ],
-  },
-  {
-    title: "Conclusion",
-    paragraphs: [
-      "Coverture's deepest lesson is that the boundary between public and private is itself a legal choice. The old law publicly authorized a husband to govern a supposedly private household. Modern law repudiates that status hierarchy and recognizes women as individual constitutional persons. Yet it also limits constitutional obligations through state-action rules, discriminatory-purpose requirements, and reluctance to impose affirmative duties.",
-      "Women's constitutional rights are real but incomplete in two distinct senses. Doctrinally, the Constitution prohibits many forms of public sex discrimination and protects voting, speech, procedure, and selected liberties, while leaving private conduct largely to legislation. Practically, rights require resources and institutions capable of making autonomy usable. The continuing project is not merely to remove the wife from her husband's legal cover. It is to ensure that uncovered personhood carries the material and remedial conditions of equal citizenship.",
-    ],
-  },
-] as const;
-
-const coverturePullQuotes: Partial<Record<number, string>> = {
-  0: "Law delegated governance to a husband and then redescribed dependence as shelter.",
-  3: "A woman could be a constitutional citizen while the content of citizenship remained gendered.",
-  5: "Coverture itself was public law that constructed a private household.",
-  6: "Rights on paper and capacities in life are not identical.",
-  9: "Formal personhood must be converted into security, voice, time, bodily control, and exit.",
-  10: "The boundary between public and private is itself a legal choice.",
-};
-
-function CoveredAndUncoveredArticle({ onBack }: { onBack: () => void }) {
-  return (
-    <article className="editorial-feature-article" aria-labelledby="covered-and-uncovered-title">
-      <header className="editorial-feature-header">
-        <p>LEGAL HISTORY / CONSTITUTIONAL RIGHTS</p>
-        <h1 id="covered-and-uncovered-title">Covered and Uncovered</h1>
-        <div className="editorial-feature-dek">Coverture, women's constitutional citizenship, and the public-private architecture of inequality.</div>
-        <div className="editorial-feature-byline"><span>Survivor Systems</span><span>Legal history and analysis</span></div>
-      </header>
-      <aside className="editorial-article-note">
-        This article provides historical and educational information, not legal advice. Constitutional and statutory rules are described as of August 31, 2026.
-      </aside>
-      <div className="editorial-feature-columns">
-        {covertureArticleSections.map(({ title, paragraphs }, index) => (
-          <section className={index === 0 ? "editorial-feature-section editorial-feature-opening" : "editorial-feature-section"} key={title}>
-            <h2>{title}</h2>
-            {paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
-            {coverturePullQuotes[index] ? <blockquote className="editorial-pull-quote">{coverturePullQuotes[index]}</blockquote> : null}
-          </section>
-        ))}
-      </div>
-      <footer className="editorial-feature-sources">
-        <h2>Selected authorities and research</h2>
-        <p>William Blackstone, <cite>Commentaries on the Laws of England</cite>, book 1, chapter 15 (1765).</p>
-        <p>New York, <cite>Act for the More Effectual Protection of the Property of Married Women</cite> (1848).</p>
-        <p>Elizabeth Cady Stanton et al., <cite>Declaration of Sentiments and Resolutions</cite> (1848).</p>
-        <p>U.S. Constitution, Fourteenth and Nineteenth Amendments.</p>
-        <p><cite>Bradwell v. Illinois</cite>; <cite>Minor v. Happersett</cite>; <cite>Mackenzie v. Hare</cite>.</p>
-        <p><cite>Reed v. Reed</cite>; <cite>Frontiero v. Richardson</cite>; <cite>Craig v. Boren</cite>; <cite>United States v. Virginia</cite>.</p>
-        <p><cite>Orr v. Orr</cite>; <cite>Kirchberg v. Feenstra</cite>; <cite>Weinberger v. Wiesenfeld</cite>; <cite>Califano v. Goldfarb</cite>.</p>
-        <p><cite>DeShaney v. Winnebago County</cite>; <cite>United States v. Morrison</cite>; <cite>Town of Castle Rock v. Gonzales</cite>.</p>
-        <p><cite>Griswold v. Connecticut</cite>; <cite>Eisenstadt v. Baird</cite>; <cite>Dobbs v. Jackson Women's Health Organization</cite>.</p>
-        <p>Allison Anna Tait, <cite>The Beginning of the End of Coverture</cite> (2014).</p>
-        <p>Sara Chatfield, <cite>Married Women's Economic Rights Reform in State Legislatures and Courts, 1839-1920</cite> (2018).</p>
-        <p>U.S. Bureau of Labor Statistics, <cite>American Time Use Survey: 2025 Results</cite> (2026).</p>
-      </footer>
-      <button type="button" className="editorial-feature-back" onClick={onBack}>Back to Articles &amp; Guides</button>
-    </article>
-  );
-}
-
 const psychologicalAbuseArticleSections = [
   ["The harm can live in the accumulation", "One reason psychological abuse can take so long to recognize is that individual incidents, pulled out of the relationship and held up alone, can look almost stupid. They walked ahead of you. Sighed when you asked a question. Corrected you in front of somebody. Got quiet after you made plans with a friend. Explained something you already knew how to do. Try explaining five years of that to someone who wasn't there. Research on subtle abuse describes ordinary-looking processes of undermining, limiting, and withholding. The harm can live in the accumulation."],
   ["Psychological abuse can shrink your space for action", "Researchers who study coercive control describe a person's space for action: the amount of ordinary life in which someone genuinely feels free to make choices. A review of 31 qualitative studies found progressive loss of agency as survivors' lives became organized around fear of repercussions. An abuser does not always have to remove a choice. They can make one option consistently unpleasant enough that you stop choosing it. Once that happens, the restriction begins looking voluntary."],
@@ -6907,10 +6748,6 @@ function HowToModule({
   }, [initialGuideId, initialPriority]);
 
   const returnToArticlesAndGuides = () => onNavigate("guides", "/guides");
-
-  if (activeGuideId === "covered-and-uncovered") {
-    return <CoveredAndUncoveredArticle onBack={returnToArticlesAndGuides} />;
-  }
 
   if (activeGuideId === "they-didnt-hit-you-though") {
     return <TheyDidntHitYouThoughArticle onBack={returnToArticlesAndGuides} />;
