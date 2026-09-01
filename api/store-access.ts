@@ -3,7 +3,8 @@ import type { VercelRequest, VercelResponse } from "@vercel/node";
 import Stripe from "stripe";
 import {
   normalizeStoreFileName,
-  storeProductsByStripeProductId,
+  findStoreProduct,
+  storeProductsBySlug,
   stripeObjectId,
   type StoreProduct,
 } from "./_lib/store-catalog.js";
@@ -67,7 +68,11 @@ export default async function handler(request: VercelRequest, response: VercelRe
     const purchasedProducts = new Map<string, StoreProduct>();
     for (const lineItem of lineItems.data) {
       const stripeProductId = stripeObjectId(lineItem.price?.product);
-      const product = stripeProductId ? storeProductsByStripeProductId.get(stripeProductId) : null;
+      const product = findStoreProduct(stripeProductId, lineItem.description);
+      if (product) purchasedProducts.set(product.slug, product);
+    }
+    for (const slug of checkout.metadata?.product_slugs?.split(",") ?? []) {
+      const product = storeProductsBySlug.get(slug);
       if (product) purchasedProducts.set(product.slug, product);
     }
     if (purchasedProducts.size === 0) {

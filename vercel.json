@@ -73,6 +73,10 @@
       "destination": "/index.html"
     },
     {
+      "source": "/store/order",
+      "destination": "/index.html"
+    },
+    {
       "source": "/subscribe",
       "destination": "/index.html"
     }

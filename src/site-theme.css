@@ -10949,6 +10949,117 @@ body,
   border-top: 3px double var(--ss-ink) !important;
 }
 
+/* Storefront: editorial product catalog and connected cart */
+.hud-frame.terminal-frame.module-store .store-product-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+#root .hud-frame.terminal-frame.module-store .terminal-content .store-module > .page-flourish-header h1 {
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+  font-size: clamp(1.75rem, 3vw, 2rem) !important;
+  line-height: 1.05 !important;
+  max-width: none !important;
+}
+
+.hud-frame.terminal-frame.module-store .store-product {
+  background: var(--ss-white) !important;
+  border: 1px solid var(--ss-ink) !important;
+  border-top: 7px solid var(--ss-red) !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: clamp(1rem, 2vw, 1.45rem);
+}
+
+.hud-frame.terminal-frame.module-store .store-product-featured {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: minmax(15rem, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(1.25rem, 3vw, 2.25rem);
+}
+
+.hud-frame.terminal-frame.module-store .store-product-copy {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.hud-frame.terminal-frame.module-store .store-product :is(h2, h3, p, span, strong) {
+  color: var(--ss-ink) !important;
+}
+
+.hud-frame.terminal-frame.module-store .store-product-copy > span {
+  color: var(--ss-red) !important;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.hud-frame.terminal-frame.module-store .store-product h2 {
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+  font-size: clamp(1.55rem, 3vw, 2rem) !important;
+  line-height: 1.05;
+  margin: 0.35rem 0 0.7rem;
+}
+
+.hud-frame.terminal-frame.module-store .store-product p {
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+.hud-frame.terminal-frame.module-store .store-product-includes {
+  border-left: 4px solid var(--ss-red);
+  margin-top: auto;
+  padding-left: 0.75rem;
+}
+
+.hud-frame.terminal-frame.module-store .store-product .store-purchase-row {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  padding-top: 0.9rem;
+}
+
+.hud-frame.terminal-frame.module-store .store-product .store-purchase-row > strong {
+  font-size: 1.3rem;
+}
+
+.hud-frame.terminal-frame.module-store .store-product .store-purchase-row button,
+.hud-frame.terminal-frame.module-store .store-checkout-button {
+  background: var(--ss-red) !important;
+  border-color: var(--ss-red) !important;
+}
+
+.hud-frame.terminal-frame.module-store .store-order-product {
+  border-top: 1px solid var(--ss-ink);
+  margin-top: 1rem;
+  padding-top: 1rem;
+}
+
+.hud-frame.terminal-frame.module-store .store-order-product h3 {
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+  font-size: 1.35rem;
+}
+
+.hud-frame.terminal-frame.module-store .store-checkout-error {
+  color: var(--ss-red) !important;
+  font-weight: 700;
+}
+
+@media (max-width: 760px) {
+  .hud-frame.terminal-frame.module-store .store-product-grid,
+  .hud-frame.terminal-frame.module-store .store-product-featured {
+    grid-template-columns: 1fr;
+  }
+}
+
 .hud-frame.terminal-frame.module-store .store-purchase-row :is(a, button),
 .hud-frame.terminal-frame.module-store .store-delivery-panel :is(button, a),
 .hud-frame.terminal-frame.module-store .store-download-list a,

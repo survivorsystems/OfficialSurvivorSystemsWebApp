@@ -3564,18 +3564,70 @@ type BundleDownload = {
   url: string;
 };
 
-const healingBundleProduct = {
+type StorefrontProduct = {
   id: "survivor-healing-bundle",
-  title: "Survivor Healing Bundle",
-  price: 14.99,
-  checkoutUrl: "https://buy.stripe.com/9B68wR0Ko0cr7Vm9QbfQI03",
-} as const;
+  title: string;
+  price: number;
+  description: string;
+  included: string;
+} | {
+  id: string;
+  title: string;
+  price: number;
+  description: string;
+  included: string;
+};
+
+const storefrontProducts: readonly StorefrontProduct[] = [
+  {
+    id: "survivor-healing-bundle",
+    title: "Survivor Healing Bundle",
+    price: 14.99,
+    description: "A five-part collection for rebuilding emotional, financial, sexual, and personal autonomy while examining the larger systems that shape control.",
+    included: "Five autonomy restoration workbooks",
+  },
+  {
+    id: "blank-motions-family-court",
+    title: "Blank Motions: Family Court",
+    price: 5.99,
+    description: "Blank fillable motions and court documents for family-court preparation, including motions to enforce or modify, a notice of court proceedings, and a proposed SAPCR order.",
+    included: "Four court documents in PDF and Word formats",
+  },
+  {
+    id: "family-court-guides-planner",
+    title: "Family Court Guides & Planner",
+    price: 30,
+    description: "Filing guides, decision planning, incident documentation, statement templates, court preparation, and practical worksheets gathered into one coordinated family-court kit.",
+    included: "Eleven guides, planners, and documentation tools",
+  },
+  {
+    id: "dvro-planner",
+    title: "DVRO Planner",
+    price: 19.99,
+    description: "Organize incidents, build a clear chronology, understand court language, prepare a statement, and keep restraining-order filing work together.",
+    included: "Eight planning, filing, and documentation tools",
+  },
+  {
+    id: "pro-se-filing-guide",
+    title: "Pro Se Filing Guide",
+    price: 4.99,
+    description: "Practical, understandable steps for self-represented litigants navigating forms, local rules, filing packets, service, deadlines, and hearing preparation.",
+    included: "Two step-by-step filing guides",
+  },
+  {
+    id: "documentation-bundle",
+    title: "Documentation Bundle",
+    price: 3.99,
+    description: "Record patterns over time and document individual incidents clearly for court preparation, advocacy, personal records, or future reference.",
+    included: "Chronological history and detailed incident logs",
+  },
+];
 
 const storeCartKey = "survivor-systems-store-cart-v1";
 
 function StoreModule() {
-  const isHealingBundleSuccess = window.location.pathname === "/store/survivor-healing-bundle/success";
-  const [bundleDownloads, setBundleDownloads] = useState<BundleDownload[]>([]);
+  const isStoreSuccess = window.location.pathname === "/store/order" || window.location.pathname === "/store/survivor-healing-bundle/success";
+  const [purchasedProducts, setPurchasedProducts] = useState<Array<{ slug: string; name: string; downloads: BundleDownload[] }>>([]);
   const [bundleAccessStatus, setBundleAccessStatus] = useState<"idle" | "loading" | "ready" | "error">("idle");
   const [bundleAccessMessage, setBundleAccessMessage] = useState("");
   const [cartProductIds, setCartProductIds] = useState<string[]>(() => {
@@ -3587,8 +3639,10 @@ function StoreModule() {
     }
   });
   const [isCartOpen, setIsCartOpen] = useState(false);
-
-  const healingBundleInCart = cartProductIds.includes(healingBundleProduct.id);
+  const [checkoutStatus, setCheckoutStatus] = useState<"idle" | "loading" | "error">("idle");
+  const [checkoutMessage, setCheckoutMessage] = useState("");
+  const cartProducts = storefrontProducts.filter((product) => cartProductIds.includes(product.id));
+  const cartTotal = cartProducts.reduce((sum, product) => sum + product.price, 0);
 
   useEffect(() => {
     try {
@@ -3599,7 +3653,7 @@ function StoreModule() {
   }, [cartProductIds]);
 
   useEffect(() => {
-    if (!isHealingBundleSuccess) return;
+    if (!isStoreSuccess) return;
     const sessionId = new URLSearchParams(window.location.search).get("session_id");
     if (!sessionId) {
       setBundleAccessStatus("error");
@@ -3609,13 +3663,13 @@ function StoreModule() {
 
     const controller = new AbortController();
     setBundleAccessStatus("loading");
-    fetch(`/api/bundle-access?session_id=${encodeURIComponent(sessionId)}`, { signal: controller.signal })
+    fetch(`/api/store-access?session_id=${encodeURIComponent(sessionId)}`, { signal: controller.signal })
       .then(async (response) => {
-        const result = await response.json() as { downloads?: BundleDownload[]; error?: string };
-        if (!response.ok || !result.downloads) throw new Error(result.error || "The bundle could not be prepared.");
-        setBundleDownloads(result.downloads);
+        const result = await response.json() as { products?: Array<{ slug: string; name: string; downloads: BundleDownload[] }>; error?: string };
+        if (!response.ok || !result.products) throw new Error(result.error || "The order could not be prepared.");
+        setPurchasedProducts(result.products);
         setBundleAccessStatus("ready");
-        setCartProductIds((current) => current.filter((productId) => productId !== healingBundleProduct.id));
+        setCartProductIds([]);
       })
       .catch((error: unknown) => {
         if (controller.signal.aborted) return;
@@ -3624,18 +3678,18 @@ function StoreModule() {
       });
 
     return () => controller.abort();
-  }, [isHealingBundleSuccess]);
+  }, [isStoreSuccess]);
 
-  if (isHealingBundleSuccess) {
+  if (isStoreSuccess) {
     return (
       <section className="page-shell store-module store-bundle-success" aria-labelledby="store-bundle-success-title">
         <PageFlourishHeader
           eyebrow="PURCHASE COMPLETE"
-          title="Your Survivor Healing Bundle"
+          title="Your Order"
           titleId="store-bundle-success-title"
           variant="resources"
         >
-          <p>Your five resources will appear below after the completed Stripe payment is verified.</p>
+          <p>Your purchased files will appear below after Stripe confirms the payment.</p>
         </PageFlourishHeader>
 
         <section className="store-delivery-panel" aria-live="polite">
@@ -3650,13 +3704,16 @@ function StoreModule() {
           {bundleAccessStatus === "ready" ? (
             <>
               <span>SECURE DOWNLOADS</span>
-              <h2>Everything in your bundle</h2>
+              <h2>Your purchased resources</h2>
               <p>These private links expire after ten minutes. Refresh this page to generate new links from the verified purchase.</p>
-              <div className="store-download-list">
-                {bundleDownloads.map((download) => (
-                  <a key={download.name} href={download.url}>{download.name}</a>
-                ))}
-              </div>
+              {purchasedProducts.map((product) => (
+                <section className="store-order-product" key={product.slug}>
+                  <h3>{product.name}</h3>
+                  <div className="store-download-list">
+                    {product.downloads.map((download) => <a key={download.name} href={download.url}>{download.name}</a>)}
+                  </div>
+                </section>
+              ))}
             </>
           ) : null}
         </section>
@@ -3664,35 +3721,32 @@ function StoreModule() {
     );
   }
 
-  const plannedKits = [
-    {
-      title: "Family Court Kit",
-      description: "Court planning, incident documentation, custody records, evidence organization, deadlines, and hearing preparation in one coordinated collection.",
-    },
-    {
-      title: "Protective Order Kit",
-      description: "Incident chronology, evidence preparation, filing organization, hearing planning, order records, and enforcement documentation.",
-    },
-    {
-      title: "Housing Stability Kit",
-      description: "Housing strategy, applications, waitlists, documents, program contacts, follow-up, utilities, and relocation planning.",
-    },
-  ];
-
-  const addHealingBundleToCart = () => {
-    setCartProductIds((current) => current.includes(healingBundleProduct.id)
-      ? current
-      : [...current, healingBundleProduct.id]);
+  const addToCart = (productId: string) => {
+    setCartProductIds((current) => current.includes(productId) ? current : [...current, productId]);
     setIsCartOpen(true);
   };
 
-  const removeHealingBundleFromCart = () => {
-    setCartProductIds((current) => current.filter((productId) => productId !== healingBundleProduct.id));
+  const removeFromCart = (productId: string) => {
+    setCartProductIds((current) => current.filter((savedId) => savedId !== productId));
   };
 
-  const checkoutCart = () => {
-    if (!healingBundleInCart) return;
-    window.location.assign(healingBundleProduct.checkoutUrl);
+  const checkoutCart = async () => {
+    if (cartProducts.length === 0 || checkoutStatus === "loading") return;
+    setCheckoutStatus("loading");
+    setCheckoutMessage("");
+    try {
+      const response = await fetch("/api/create-store-checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ productSlugs: cartProducts.map((product) => product.id) }),
+      });
+      const result = await response.json() as { url?: string; error?: string };
+      if (!response.ok || !result.url) throw new Error(result.error || "Checkout could not be opened.");
+      window.location.assign(result.url);
+    } catch (error) {
+      setCheckoutStatus("error");
+      setCheckoutMessage(error instanceof Error ? error.message : "Checkout could not be opened.");
+    }
   };
 
   return (
@@ -3705,7 +3759,7 @@ function StoreModule() {
       >
         <p>
           Focused collections of related tools, grouped around the real task someone is trying to manage.
-          Each kit will clearly show what is included before purchase.
+          Review what is included, add what helps to your cart, and check out securely through Stripe.
         </p>
       </PageFlourishHeader>
 
@@ -3730,22 +3784,24 @@ function StoreModule() {
             </div>
             <button type="button" className="store-cart-close" onClick={() => setIsCartOpen(false)}>Close</button>
           </div>
-          {healingBundleInCart ? (
+          {cartProducts.length > 0 ? (
             <>
-              <div className="store-cart-item">
-                <div>
-                  <strong>{healingBundleProduct.title}</strong>
-                  <span>Five digital workbooks</span>
+              {cartProducts.map((product) => (
+                <div className="store-cart-item" key={product.id}>
+                  <div><strong>{product.title}</strong><span>{product.included}</span></div>
+                  <strong>${product.price.toFixed(2)}</strong>
+                  <button type="button" onClick={() => removeFromCart(product.id)}>Remove</button>
                 </div>
-                <strong>${healingBundleProduct.price.toFixed(2)}</strong>
-                <button type="button" onClick={removeHealingBundleFromCart}>Remove</button>
-              </div>
+              ))}
               <div className="store-cart-total">
                 <span>Subtotal</span>
-                <strong>${healingBundleProduct.price.toFixed(2)}</strong>
+                <strong>${cartTotal.toFixed(2)}</strong>
               </div>
               <p className="store-cart-note">Payment is completed securely through Stripe. Digital purchases are delivered after payment is confirmed.</p>
-              <button type="button" className="store-checkout-button" onClick={checkoutCart}>Checkout</button>
+              {checkoutMessage ? <p role="alert" className="store-checkout-error">{checkoutMessage}</p> : null}
+              <button type="button" className="store-checkout-button" onClick={checkoutCart} disabled={checkoutStatus === "loading"}>
+                {checkoutStatus === "loading" ? "Opening secure checkout..." : "Checkout"}
+              </button>
             </>
           ) : (
             <div className="store-cart-empty">
@@ -3756,48 +3812,27 @@ function StoreModule() {
         </section>
       ) : null}
 
-      <section className="store-status" aria-labelledby="store-status-title">
-        <span>THE FIRST KIT IS READY</span>
-        <h2 id="store-status-title">Built around a need, not a pile of downloads.</h2>
-        <p>Each collection brings related tools together around one practical area of rebuilding.</p>
-      </section>
-
-      <div className="store-live-kit" aria-label="Available kit">
-        <article>
-          <figure className="store-kit-preview">
-            <img
-              src={survivorHealingBundleMockup}
-              alt="Survivor Healing Bundle workbook covers and interior pages for emotional, financial, sexual, and total autonomy restoration"
-              decoding="async"
-            />
-          </figure>
-          <span>AVAILABLE NOW</span>
-          <h2>Survivor Healing Bundle</h2>
-          <p>A five-part collection for rebuilding emotional, financial, sexual, and personal autonomy while examining the larger systems that shape control.</p>
-          <ul>
-            <li>Emotional Autonomy Restoration</li>
-            <li>Financial Autonomy Restoration</li>
-            <li>Sexual Autonomy Restoration</li>
-            <li>Total Autonomy Restoration</li>
-            <li>Dismantling The Patriarchy</li>
-          </ul>
-          <div className="store-purchase-row">
-            <strong>$14.99</strong>
-            <button type="button" onClick={addHealingBundleToCart} disabled={healingBundleInCart}>
-              {healingBundleInCart ? "In Cart" : "Add to Cart"}
-            </button>
-          </div>
-        </article>
-      </div>
-
-      <div className="store-kit-grid" aria-label="More kits in preparation">
-        {plannedKits.map((kit) => (
-          <article key={kit.title}>
-            <span>IN PREPARATION</span>
-            <h2>{kit.title}</h2>
-            <p>{kit.description}</p>
-          </article>
-        ))}
+      <div className="store-product-grid" aria-label="Available digital resources">
+        {storefrontProducts.map((product) => {
+          const inCart = cartProductIds.includes(product.id);
+          return (
+            <article className={product.id === "survivor-healing-bundle" ? "store-product store-product-featured" : "store-product"} key={product.id}>
+              {product.id === "survivor-healing-bundle" ? (
+                <figure className="store-kit-preview"><img src={survivorHealingBundleMockup} alt="Survivor Healing Bundle workbooks" decoding="async" /></figure>
+              ) : null}
+              <div className="store-product-copy">
+                <span>DIGITAL DOWNLOAD</span>
+                <h2>{product.title}</h2>
+                <p>{product.description}</p>
+                <p className="store-product-includes"><strong>Includes:</strong> {product.included}</p>
+                <div className="store-purchase-row">
+                  <strong>${product.price.toFixed(2)}</strong>
+                  <button type="button" onClick={() => addToCart(product.id)} disabled={inCart}>{inCart ? "In Cart" : "Add to Cart"}</button>
+                </div>
+              </div>
+            </article>
+          );
+        })}
       </div>
     </section>
   );

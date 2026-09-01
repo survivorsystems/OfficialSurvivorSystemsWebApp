@@ -12,6 +12,17 @@ export type StoreProduct = {
 
 export const storeProducts: readonly StoreProduct[] = [
   {
+    slug: "survivor-healing-bundle",
+    name: "Survivor Healing Bundle",
+    price: 14.99,
+    stripeProductId: "",
+    paymentLink: "https://buy.stripe.com/9B68wR0Ko0cr7Vm9QbfQI03",
+    bucket: "Paid Trauma Healing",
+    folder: "Trauma Healing",
+    requiredFileStems: ["Emotional Autonomy Restoration", "Financial Autonomy Restoration", "Sexual Autonomy Restoration", "Total Autonomy Restoration", "Dismantling The Patriarchy"],
+    description: "Five workbooks for rebuilding emotional, financial, sexual, and personal autonomy while examining the systems that shape control.",
+  },
+  {
     slug: "blank-motions-family-court",
     name: "Blank Motions: Family Court",
     price: 5.99,
@@ -69,7 +80,7 @@ export const storeProducts: readonly StoreProduct[] = [
 ];
 
 export const storeProductsByStripeProductId = new Map(
-  storeProducts.map((product) => [product.stripeProductId, product]),
+  storeProducts.filter((product) => product.stripeProductId).map((product) => [product.stripeProductId, product]),
 );
 
 export const storeProductsBySlug = new Map(
@@ -88,4 +99,13 @@ export function normalizeStoreFileName(value: string) {
     .replace(/\s+/g, " ")
     .trim()
     .toLowerCase();
+}
+
+export function findStoreProduct(stripeProductId: string | null, description?: string | null) {
+  if (stripeProductId) {
+    const byId = storeProductsByStripeProductId.get(stripeProductId);
+    if (byId) return byId;
+  }
+  const normalizedDescription = normalizeStoreFileName(description ?? "");
+  return storeProducts.find((product) => normalizeStoreFileName(product.name) === normalizedDescription) ?? null;
 }

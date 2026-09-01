@@ -1,6 +1,6 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import Stripe from "stripe";
-import { storeProductsByStripeProductId, stripeObjectId } from "./store-catalog.js";
+import { findStoreProduct, storeProductsBySlug, stripeObjectId } from "./store-catalog.js";
 
 function lineItemProductId(lineItem: Stripe.LineItem) {
   return stripeObjectId(lineItem.price?.product);
@@ -17,12 +17,13 @@ export async function syncStorePurchase(
     limit: 100,
     expand: ["data.price.product"],
   });
-  const recognizedItems = lineItems.data.flatMap((lineItem) => {
+  const metadataSlugs = checkout.metadata?.product_slugs?.split(",") ?? [];
+  const recognizedItems = lineItems.data.flatMap((lineItem, index) => {
     const stripeProductId = lineItemProductId(lineItem);
-    if (!stripeProductId) return [];
-    const product = storeProductsByStripeProductId.get(stripeProductId);
+    const product = findStoreProduct(stripeProductId, lineItem.description)
+      ?? storeProductsBySlug.get(metadataSlugs[index] ?? "");
     if (!product) return [];
-    return [{ lineItem, product, stripeProductId }];
+    return [{ lineItem, product, stripeProductId: stripeProductId ?? product.stripeProductId ?? product.slug }];
   });
   if (recognizedItems.length === 0) return null;
 
