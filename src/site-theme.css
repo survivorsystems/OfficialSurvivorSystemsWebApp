@@ -10958,7 +10958,7 @@ body,
 
 #root .hud-frame.terminal-frame.module-store .terminal-content .store-module > .page-flourish-header h1 {
   font-family: "Times New Roman", Times, Georgia, serif !important;
-  font-size: clamp(1.75rem, 3vw, 2rem) !important;
+  font-size: clamp(1.5rem, 2.55vw, 1.7rem) !important;
   line-height: 1.05 !important;
   max-width: none !important;
 }

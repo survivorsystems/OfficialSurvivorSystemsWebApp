@@ -3758,8 +3758,7 @@ function StoreModule() {
         variant="resources"
       >
         <p>
-          Focused collections of related tools, grouped around the real task someone is trying to manage.
-          Review what is included, add what helps to your cart, and check out securely through Stripe.
+          Welcome to the Survivor Systems Store, where you can find something to help you survive the systems.
         </p>
       </PageFlourishHeader>
 
