@@ -43,7 +43,7 @@ export default async function handler(request: VercelRequest, response: VercelRe
         "User-Agent": "SurvivorSystemsWebsite/1.0",
       },
       body: JSON.stringify({
-        from: process.env.RESEND_FROM_EMAIL?.trim() || "Survivor Systems <website@survivorsystems.org>",
+        from: process.env.RESEND_FROM_EMAIL?.trim() || "Survivor Systems <info@survivorsystems.org>",
         to: [requiredEnvironment("CONTACT_TO_EMAIL")],
         reply_to: email,
         subject: `[Survivor Systems] ${topic}`,
