@@ -3342,6 +3342,73 @@ function ModuleLoading({ label }: { label: string }) {
   );
 }
 
+function SiteFooter() {
+  const [contactStatus, setContactStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [contactMessage, setContactMessage] = useState("");
+  const donationUrl = String(import.meta.env.VITE_STRIPE_DONATION_URL ?? "").trim();
+
+  async function submitContact(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    setContactStatus("sending");
+    setContactMessage("");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(Object.fromEntries(formData.entries())),
+      });
+      const result = await response.json() as { sent?: boolean; error?: string };
+      if (!response.ok || !result.sent) throw new Error(result.error || "Your message could not be sent.");
+      form.reset();
+      setContactStatus("sent");
+      setContactMessage("Your message was sent. Thank you for reaching out.");
+    } catch (error) {
+      setContactStatus("error");
+      setContactMessage(error instanceof Error ? error.message : "Your message could not be sent.");
+    }
+  }
+
+  return (
+    <footer className="site-footer">
+      <section className="site-footer-contact" aria-labelledby="site-footer-contact-title">
+        <span>CONTACT</span>
+        <h2 id="site-footer-contact-title">Get in touch</h2>
+        <p>Ask a question, suggest a correction, get store support, or share an article idea. Please don’t include information that could put you at risk if someone else saw it.</p>
+        <form onSubmit={submitContact}>
+          <div className="site-footer-form-row">
+            <label>Name <span>(optional)</span><input type="text" name="name" autoComplete="name" maxLength={100} /></label>
+            <label>Email<input type="email" name="email" autoComplete="email" maxLength={254} required /></label>
+          </div>
+          <label>What can I help with?
+            <select name="topic" defaultValue="General question" required>
+              <option>General question</option>
+              <option>Article submission</option>
+              <option>Resource correction</option>
+              <option>Store support</option>
+            </select>
+          </label>
+          <label>Message<textarea name="message" rows={5} minLength={10} maxLength={5000} required /></label>
+          <label className="site-footer-honeypot" aria-hidden="true">Website<input type="text" name="website" tabIndex={-1} autoComplete="off" /></label>
+          <button type="submit" disabled={contactStatus === "sending"}>{contactStatus === "sending" ? "Sending..." : "Send Message"}</button>
+          {contactMessage ? <p className={`site-footer-form-status ${contactStatus}`} role="status">{contactMessage}</p> : null}
+        </form>
+      </section>
+
+      <aside className="site-footer-support" aria-labelledby="site-footer-support-title">
+        <span>SUPPORT THE WORK</span>
+        <h2 id="site-footer-support-title">Help keep practical information available.</h2>
+        <p>Donations support the research, writing, maintenance, and free resources that make Survivor Systems useful.</p>
+        {donationUrl ? <a className="site-footer-donate" href={donationUrl}>Donate</a> : <button className="site-footer-donate" type="button" disabled>Donate</button>}
+      </aside>
+
+      <p className="site-footer-fine-print">Survivor Systems provides educational information and practical tools. Nothing on this site is legal, medical, financial, or individualized professional advice.</p>
+    </footer>
+  );
+}
+
 function SiteChrome({
   activeModule,
   children,
@@ -3396,6 +3463,7 @@ function SiteChrome({
               </header>
             ) : null}
             {children}
+            <SiteFooter />
           </div>
           </section>
         </section>
