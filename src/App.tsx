@@ -1546,19 +1546,6 @@ type ResourceCategoryId =
   | "digital-safety"
   | "daily-stability";
 
-const resourceCategoryDefinitions: Array<{ id: ResourceCategoryId; label: string; description: string }> = [
-  { id: "articles", label: "Articles", description: "Long-form reporting and analysis about coercive control, psychological abuse, autonomy, and rebuilding." },
-  { id: "housing", label: "Housing", description: "Housing systems, applications, Coordinated Entry, waitlists, utilities, and follow-up." },
-  { id: "legal-family", label: "Legal // Family", description: "Family court, custody, caregiving, hearings, deadlines, and documentation." },
-  { id: "legal-civil", label: "Legal // Civil", description: "Protective orders, civil filings, motions, evidence, and hearing preparation." },
-  { id: "legal-criminal", label: "Legal // Criminal", description: "Reporting, criminal-system contact, victim services, incidents, and follow-up." },
-  { id: "food", label: "Food", description: "SNAP, food access, interviews, documents, pantries, and benefit follow-up." },
-  { id: "money", label: "Money", description: "Financial control, benefits, debt, credit, budgeting, records, and economic rebuilding." },
-  { id: "homelessness", label: "Homelessness", description: "Shelter systems, temporary housing, vehicle living, daily logistics, and contact tracking." },
-  { id: "digital-safety", label: "Digital Safety", description: "Browser traces, account access, device monitoring, safer browsing, and documentation." },
-  { id: "daily-stability", label: "Daily Stability", description: "Routines, pets, appointments, caregiving, and practical systems for disrupted days." },
-];
-
 type LoveFearScoredItem = {
   id: number;
   part: number;
@@ -3623,6 +3610,70 @@ const storefrontProducts: readonly StorefrontProduct[] = [
   },
 ];
 
+const editorialGuideSections: Array<{
+  id: string;
+  label: string;
+  description: string;
+  categories?: readonly ResourceCategoryId[];
+  fileTitles?: readonly string[];
+  excludeTitles?: readonly string[];
+}> = [
+  {
+    id: "understanding-abuse",
+    label: "Understanding Abuse",
+    description: "Reporting and analysis about coercive control, psychological abuse, autonomy, and the explanations that too often excuse harm.",
+    categories: ["articles"],
+    excludeTitles: ["Covered and Uncovered"],
+  },
+  {
+    id: "systems-failures",
+    label: "Systems & Institutional Failures",
+    description: "History and analysis about the laws, institutions, and inherited structures that shape whose freedom is recognized and whose is made difficult to use.",
+    fileTitles: ["Covered and Uncovered"],
+  },
+  {
+    id: "court-documentation",
+    label: "Court & Documentation",
+    description: "Plain-language preparation for family court, civil filings, protective orders, criminal systems, evidence, and deadlines.",
+    categories: ["legal-family", "legal-civil", "legal-criminal"],
+  },
+  {
+    id: "housing-survival",
+    label: "Housing & Practical Survival",
+    description: "Housing pathways, benefits, homelessness, vehicle living, food access, applications, and daily logistics.",
+    categories: ["housing", "homelessness", "food"],
+  },
+  {
+    id: "safety-technology",
+    label: "Safety & Technology",
+    description: "Safer browsing, digital traces, account access, device monitoring, and practical technology precautions.",
+    categories: ["digital-safety"],
+  },
+  {
+    id: "rebuilding-life",
+    label: "Rebuilding Life",
+    description: "Money, routines, caregiving, pets, appointments, and practical systems for rebuilding during disrupted days.",
+    categories: ["money", "daily-stability"],
+  },
+];
+
+const guideReadingTimes: Record<string, string> = {
+  "Covered and Uncovered": "12 min read",
+  "They Didn't Hit You Though": "10 min read",
+  "Why Abusers Abuse": "11 min read",
+  "Housing Options": "14 min read",
+  "How To Navigate Housing": "12 min read",
+  "How To Navigate SNAP & TANF": "10 min read",
+  "How To Live In Your Car": "13 min read",
+  "Digital Trace Cleanup": "7 min read",
+  "Family Court Guide": "12 min read",
+  "Civil Protective Order Guide": "11 min read",
+  "Motion Drafting Basics": "8 min read",
+  "Understanding Crime Victim Compensation": "12 min read",
+  "How To Create Routine While Life Is Chaotic": "7 min read",
+  "How To Make A Safety Plan For Your Pet": "8 min read",
+};
+
 const storeCartKey = "survivor-systems-store-cart-v1";
 
 function StoreModule() {
@@ -4604,14 +4655,29 @@ function CategoryModule({
   const baseContent = categoryFiles[category];
   const content = baseContent;
   const guideCategories = category === "guides"
-    ? resourceCategoryDefinitions
-        .map((definition) => ({ ...definition, files: content.files.filter((file) => file.categoryId === definition.id) }))
+    ? editorialGuideSections
+        .map((definition) => ({
+          ...definition,
+          files: content.files.filter((file) => {
+            if (file.status === "QUEUED" || definition.excludeTitles?.includes(file.title)) return false;
+            if (definition.fileTitles) return definition.fileTitles.includes(file.title);
+            return Boolean(file.categoryId && definition.categories?.includes(file.categoryId));
+          }),
+        }))
         .filter((definition) => definition.files.length > 0)
     : [];
+  const featuredGuide = category === "guides"
+    ? content.files.find((file) => file.guideId === "they-didnt-hit-you-though")
+    : undefined;
 
   function renderCategoryFile(file: CategoryFile) {
     return (
       <article className="category-file-card" key={file.title}>
+        <div className="category-file-meta">
+          <span>{file.status === "ARTICLE" ? "ARTICLE" : "PRACTICAL GUIDE"}</span>
+          <span>Survivor Systems</span>
+          {guideReadingTimes[file.title] ? <span>{guideReadingTimes[file.title]}</span> : null}
+        </div>
         <h2>{file.title}</h2>
         <p>{file.description}</p>
         {file.guideId ? (
@@ -4641,16 +4707,34 @@ function CategoryModule({
       ) : null}
 
       {category === "guides" ? (
-        <div className="guide-category-directory">
-          {guideCategories.map((guideCategory) => (
-            <section className="guide-category-section" key={guideCategory.id}>
-              <header>
-                <div><span className="terminal-label">CATEGORY</span><h2>{guideCategory.label}</h2><p>{guideCategory.description}</p></div>
-              </header>
-              <div className="category-file-grid">{guideCategory.files.map(renderCategoryFile)}</div>
-            </section>
-          ))}
-        </div>
+        <>
+          {featuredGuide ? (
+            <article className="guides-feature-story">
+              <div className="guides-feature-label">FEATURED STORY</div>
+              <div className="guides-feature-copy">
+                <div className="category-file-meta"><span>ARTICLE</span><span>Survivor Systems</span><span>{guideReadingTimes[featuredGuide.title]}</span></div>
+                <h2>{featuredGuide.title}</h2>
+                <p>{featuredGuide.description}</p>
+                <button type="button" onClick={() => onNavigate("how-to", `/guides/${featuredGuide.guideId}`)}>Read</button>
+              </div>
+            </article>
+          ) : null}
+
+          <div className="guide-category-directory">
+            {guideCategories.map((guideCategory) => (
+              <section className="guide-category-section" key={guideCategory.id}>
+                <header><h2>{guideCategory.label}</h2><p>{guideCategory.description}</p></header>
+                <div className="category-file-grid">{guideCategory.files.map(renderCategoryFile)}</div>
+              </section>
+            ))}
+          </div>
+
+          <aside className="guides-contributor-callout" aria-labelledby="guides-contributor-title">
+            <span>CONTRIBUTE</span>
+            <h2 id="guides-contributor-title">Lived experience belongs in the record.</h2>
+            <p>Survivor Systems welcomes article pitches from survivors writing about systems failures, institutional responses, and obstacles that deserve to be understood. Submission details will be added here soon.</p>
+          </aside>
+        </>
       ) : <div className="category-file-grid">{content.files.map(renderCategoryFile)}</div>}
     </section>
   );

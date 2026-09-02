@@ -12491,3 +12491,217 @@ body,
   max-width: none !important;
   width: 100% !important;
 }
+
+/* Articles & Guides directory: editorial contents page. */
+#root .hud-frame.terminal-frame.module-guides .guides-feature-story {
+  background: var(--ss-white) !important;
+  border: 1px solid var(--ss-ink) !important;
+  border-top: 8px solid var(--ss-red) !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  display: grid;
+  grid-template-columns: minmax(9rem, 0.28fr) minmax(0, 1fr);
+  margin: clamp(22px, 4vw, 42px) 0;
+  padding: clamp(24px, 4vw, 52px);
+}
+
+#root .hud-frame.terminal-frame.module-guides .guides-feature-label {
+  color: var(--ss-red) !important;
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+#root .hud-frame.terminal-frame.module-guides .guides-feature-copy {
+  border-left: 1px solid var(--ss-ink);
+  padding-left: clamp(20px, 3vw, 38px);
+}
+
+#root .hud-frame.terminal-frame.module-guides .guides-feature-story :is(h2, p, span, strong) {
+  color: var(--ss-ink) !important;
+}
+
+#root .hud-frame.terminal-frame.module-guides .guides-feature-story h2 {
+  font-family: Didot, "Bodoni MT", Bodoni, "Times New Roman", serif !important;
+  font-size: clamp(2rem, 5vw, 3.6rem) !important;
+  line-height: 1;
+  margin: 0.65rem 0 1rem;
+}
+
+#root .hud-frame.terminal-frame.module-guides .guides-feature-story p {
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  line-height: 1.55;
+  max-width: 65ch;
+}
+
+#root .hud-frame.terminal-frame.module-guides .guides-feature-story button {
+  background: var(--ss-red) !important;
+  border: 1px solid var(--ss-red) !important;
+  box-shadow: none !important;
+  color: var(--ss-white) !important;
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+  font-weight: 700;
+  margin-top: 1rem;
+  padding: 0.65rem 1.2rem;
+  text-transform: none !important;
+  transform: none !important;
+}
+
+#root .hud-frame.terminal-frame.module-guides .category-file-meta {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.8rem;
+  margin-bottom: 0.55rem;
+}
+
+#root .hud-frame.terminal-frame.module-guides .category-file-meta span {
+  color: #5b554d !important;
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+#root .hud-frame.terminal-frame.module-guides .category-file-meta span:first-child {
+  color: var(--ss-red) !important;
+}
+
+#root .hud-frame.terminal-frame.module-guides .category-file-meta span + span::before {
+  color: var(--ss-ink);
+  content: "|";
+  margin-right: 0.8rem;
+}
+
+#root .hud-frame.terminal-frame.module-guides .guide-category-directory {
+  background: var(--ss-white) !important;
+  border: 1px solid var(--ss-ink) !important;
+  padding: 0 clamp(22px, 4vw, 52px) !important;
+}
+
+#root .hud-frame.terminal-frame.module-guides .guide-category-section,
+#root .hud-frame.terminal-frame.module-guides .guide-category-section:nth-child(n) {
+  border: 0 !important;
+  border-bottom: 4px double var(--ss-ink) !important;
+  margin: 0 !important;
+  padding: clamp(30px, 5vw, 56px) 0 !important;
+}
+
+#root .hud-frame.terminal-frame.module-guides .guide-category-section:last-child {
+  border-bottom: 0 !important;
+}
+
+#root .hud-frame.terminal-frame.module-guides .guide-category-section > header,
+#root .hud-frame.terminal-frame.module-guides .guide-category-section:nth-child(n) > header {
+  border: 0 !important;
+  border-bottom: 1px solid var(--ss-ink) !important;
+  margin-bottom: 0 !important;
+  padding: 0 0 1.1rem !important;
+}
+
+#root .hud-frame.terminal-frame.module-guides .guide-category-section > header h2 {
+  font-family: Didot, "Bodoni MT", Bodoni, "Times New Roman", serif !important;
+  font-size: clamp(1.65rem, 3vw, 2.3rem) !important;
+  margin: 0 0 0.35rem;
+}
+
+#root .hud-frame.terminal-frame.module-guides .guide-category-section > header p {
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+  font-size: 1rem;
+  line-height: 1.45;
+  margin: 0;
+  max-width: 76ch;
+}
+
+#root .hud-frame.terminal-frame.module-guides .guide-category-section .category-file-grid {
+  display: grid !important;
+  gap: 0 !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+#root .hud-frame.terminal-frame.module-guides .guide-category-section .category-file-card,
+#root .hud-frame.terminal-frame.module-guides .guide-category-section .category-file-card:nth-child(n) {
+  border: 0 !important;
+  border-bottom: 1px solid #a69f94 !important;
+  border-left: 0 !important;
+  box-shadow: none !important;
+  display: flex;
+  flex-direction: column;
+  margin: 0 !important;
+  padding: clamp(22px, 3vw, 34px) clamp(18px, 3vw, 32px) clamp(22px, 3vw, 34px) 0 !important;
+}
+
+#root .hud-frame.terminal-frame.module-guides .guide-category-section .category-file-card:nth-child(even) {
+  border-left: 1px solid #a69f94 !important;
+  padding-left: clamp(18px, 3vw, 32px) !important;
+}
+
+#root .hud-frame.terminal-frame.module-guides .category-file-card h2 {
+  font-family: Didot, "Bodoni MT", Bodoni, "Times New Roman", serif !important;
+  font-size: clamp(1.35rem, 2.5vw, 1.85rem) !important;
+  line-height: 1.08;
+  margin: 0 0 0.65rem;
+}
+
+#root .hud-frame.terminal-frame.module-guides .category-file-card p {
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+#root .hud-frame.terminal-frame.module-guides .category-file-card > button:not(.category-file-title-button) {
+  align-self: flex-start;
+  background: var(--ss-red) !important;
+  border-color: var(--ss-red) !important;
+  margin-top: auto;
+}
+
+#root .hud-frame.terminal-frame.module-guides .guides-contributor-callout {
+  background: var(--ss-white) !important;
+  border: 1px solid var(--ss-ink) !important;
+  border-left: 7px solid var(--ss-red) !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  margin-top: clamp(22px, 4vw, 42px);
+  padding: clamp(22px, 4vw, 42px);
+}
+
+#root .hud-frame.terminal-frame.module-guides .guides-contributor-callout :is(h2, p) {
+  color: var(--ss-ink) !important;
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+}
+
+#root .hud-frame.terminal-frame.module-guides .guides-contributor-callout > span {
+  color: var(--ss-red) !important;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+#root .hud-frame.terminal-frame.module-guides .guides-contributor-callout h2 {
+  font-family: Didot, "Bodoni MT", Bodoni, "Times New Roman", serif !important;
+  font-size: clamp(1.6rem, 3vw, 2.2rem) !important;
+  margin: 0.35rem 0 0.75rem;
+}
+
+@media (max-width: 700px) {
+  #root .hud-frame.terminal-frame.module-guides .guides-feature-story {
+    grid-template-columns: 1fr;
+  }
+
+  #root .hud-frame.terminal-frame.module-guides .guides-feature-copy {
+    border-left: 0;
+    border-top: 1px solid var(--ss-ink);
+    margin-top: 0.8rem;
+    padding-left: 0;
+    padding-top: 1rem;
+  }
+
+  #root .hud-frame.terminal-frame.module-guides .guide-category-section .category-file-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  #root .hud-frame.terminal-frame.module-guides .guide-category-section .category-file-card:nth-child(even) {
+    border-left: 0 !important;
+    padding-left: 0 !important;
+  }
+}
