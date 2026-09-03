@@ -9544,6 +9544,96 @@ body:has(.assessment-workspace),
   font-family: "Times New Roman", Times, Georgia, serif !important;
 }
 
+.hud-frame.module-local-help .community-rating-empty {
+  border-left: 3px solid var(--ss-red) !important;
+  color: #5d554c !important;
+  font-style: italic !important;
+  margin: 22px 0 0 !important;
+  padding: 2px 0 2px 12px !important;
+}
+
+.hud-frame.module-local-help .state-resource-community-rating {
+  background: #f8f4eb !important;
+  border: 1px solid #b7ab99 !important;
+  border-left: 5px solid var(--ss-red) !important;
+  color: var(--ss-ink) !important;
+  display: grid !important;
+  gap: 16px !important;
+  grid-template-columns: minmax(150px, 0.75fr) minmax(280px, 1.5fr) !important;
+  margin-top: 24px !important;
+  padding: 18px !important;
+}
+
+.hud-frame.module-local-help .community-rating-summary {
+  display: grid !important;
+  gap: 3px !important;
+}
+
+.hud-frame.module-local-help .community-rating-summary span {
+  color: var(--ss-red) !important;
+  font-size: 0.78rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+}
+
+.hud-frame.module-local-help .community-rating-summary strong {
+  color: var(--ss-ink) !important;
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+  font-size: 1.25rem !important;
+}
+
+.hud-frame.module-local-help .state-resource-community-rating dl {
+  align-items: stretch !important;
+  display: grid !important;
+  gap: 8px !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  margin: 0 !important;
+}
+
+.hud-frame.module-local-help .state-resource-community-rating dl > div {
+  border: 0 !important;
+  border-left: 1px solid #b7ab99 !important;
+  display: grid !important;
+  gap: 3px !important;
+  padding: 2px 8px 2px 12px !important;
+}
+
+.hud-frame.module-local-help .state-resource-community-rating dt {
+  color: #5d554c !important;
+  font-size: 0.78rem !important;
+}
+
+.hud-frame.module-local-help .state-resource-community-rating dd {
+  color: var(--ss-ink) !important;
+  font-size: 1.2rem !important;
+  font-weight: 800 !important;
+}
+
+.hud-frame.module-local-help .state-resource-community-rating > p {
+  color: #5d554c !important;
+  font-size: 0.78rem !important;
+  grid-column: 1 / -1 !important;
+  margin: 0 !important;
+}
+
+.hud-frame.module-local-help .agency-public-rating small {
+  color: #d8d2c8 !important;
+  display: block !important;
+  font-size: 0.86rem !important;
+  margin-top: 3px !important;
+}
+
+@media (max-width: 700px) {
+  .hud-frame.module-local-help .state-resource-community-rating {
+    grid-template-columns: 1fr !important;
+  }
+
+  .hud-frame.module-local-help .state-resource-community-rating dl {
+    grid-template-columns: 1fr !important;
+  }
+}
+
 @media (max-width: 600px) {
   .hud-frame.module-local-help .state-resource-category-list > section {
     padding-inline: 20px !important;

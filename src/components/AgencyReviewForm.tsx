@@ -2,6 +2,8 @@ import { type FormEvent, useState } from "react";
 
 type AgencyReviewFormProps = {
   stateName: string;
+  resourceKey?: string;
+  resourceName?: string;
   onBack: () => void;
 };
 
@@ -42,9 +44,14 @@ const scales = {
   agreement: ["Strongly agree", "Agree", "Neutral", "Disagree", "Strongly disagree", "Not applicable"],
   judged: ["Never", "Rarely", "Sometimes", "Often", "Throughout the experience", "Prefer not to answer"],
   safer: ["Much more supported", "Somewhat more supported", "No difference", "Somewhat less supported", "Much less supported", "Not sure"],
-  rating: ["5 - Excellent", "4 - Good", "3 - Mixed", "2 - Poor", "1 - Very poor"],
   recommend: ["Yes", "Probably", "Maybe", "Probably not", "No", "I do not feel comfortable answering"],
 };
+
+const publicRatingOptions = [
+  { value: "trusted", label: "Trusted", detail: "This resource was helpful, respectful, or reliable." },
+  { value: "not_helpful", label: "Not Helpful", detail: "This resource did not provide useful help or meaningful access." },
+  { value: "possibly_dangerous", label: "Possibly Dangerous", detail: "Something about this resource's actions, advice, or handling may have increased risk or caused harm." },
+];
 
 function RadioQuestion({ name, legend, options }: { name: string; legend: string; options: string[] }) {
   return <fieldset className="agency-review-question"><legend>{legend}</legend><div className="agency-review-options">
@@ -62,7 +69,7 @@ function TextQuestion({ name, label, optional = true }: { name: string; label: s
   return <label className="agency-review-textarea"><span>{label}{optional ? " (optional)" : ""}</span><textarea name={name} rows={5} maxLength={3000} /></label>;
 }
 
-export function AgencyReviewForm({ stateName, onBack }: AgencyReviewFormProps) {
+export function AgencyReviewForm({ stateName, resourceKey, resourceName, onBack }: AgencyReviewFormProps) {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -76,6 +83,7 @@ export function AgencyReviewForm({ stateName, onBack }: AgencyReviewFormProps) {
     const answer = (name: string) => String(data.get(name) ?? "").trim();
     const payload = {
       state: stateName,
+      resourceKey,
       agencyName: answer("agencyName"),
       branchLocation: answer("branchLocation"),
       publicationPermission: answer("publicationPermission"),
@@ -88,7 +96,7 @@ export function AgencyReviewForm({ stateName, onBack }: AgencyReviewFormProps) {
         outcome: answer("outcome"), denialReasons: multi("denialReasons"), listingAccuracy: answer("listingAccuracy"),
         feltListenedTo: answer("feltListenedTo"), treatedWithRespect: answer("treatedWithRespect"),
         optionsExplained: answer("optionsExplained"), feltJudged: answer("feltJudged"), barriers: multi("barriers"),
-        supportImpact: answer("supportImpact"), overallRating: answer("overallRating"), recommendation: answer("recommendation"),
+        supportImpact: answer("supportImpact"), publicRating: answer("publicRating"), recommendation: answer("recommendation"),
         agencyDidWell: answer("agencyDidWell"), agencyCouldChange: answer("agencyCouldChange"), survivorShouldKnow: answer("survivorShouldKnow"),
         investigate: answer("investigate"), investigateWhy: answer("investigateWhy"), directoryIssues: multi("directoryIssues"),
         directoryExplanation: answer("directoryExplanation"), experienceNarrative: answer("experienceNarrative"),
@@ -116,11 +124,11 @@ export function AgencyReviewForm({ stateName, onBack }: AgencyReviewFormProps) {
       <p>Your experience can help other survivors make better-informed choices and help Survivor Systems identify patterns in access to services.</p>
     </header>
     <button className="resource-back-button agency-review-back" type="button" onClick={onBack}>Back To {stateName} Resources</button>
-    {status === "sent" ? <div className="agency-review-success" role="status"><h2>Thank you for sharing what happened.</h2><p>Your response was submitted privately. Survivor Systems will review it before using any part of it.</p></div> :
+    {status === "sent" ? <div className="agency-review-success" role="status"><h2>Thank you for sharing what happened.</h2><p>Your rating was added to the community totals. Written responses and follow-up information remain private.</p></div> :
     <form className="agency-review-form" onSubmit={submitReview}>
       <div className="agency-review-notice"><h2>Share only what feels safe.</h2><p>You do not have to explain or prove what happened. Please do not include your home address, Social Security number, case numbers, immigration document numbers, or another person’s identifying information.</p></div>
       <section className="agency-review-section"><h2>Agency And Visit</h2>
-        <label className="agency-review-input"><span>Agency or program name</span><input name="agencyName" required maxLength={200} /></label>
+        <label className="agency-review-input"><span>Agency or program name</span><input name="agencyName" required maxLength={200} defaultValue={resourceName} readOnly={Boolean(resourceName)} /></label>
         <label className="agency-review-input"><span>Location or branch (optional)</span><input name="branchLocation" maxLength={200} /></label>
         <RadioQuestion name="contactedWhen" legend="When did you contact this agency?" options={scales.contacted} />
         <CheckboxQuestion name="helpSought" legend="What kind of help were you seeking? Select all that apply." options={helpOptions} />
@@ -138,7 +146,9 @@ export function AgencyReviewForm({ stateName, onBack }: AgencyReviewFormProps) {
         <RadioQuestion name="feltJudged" legend="I felt judged, blamed, dismissed, or talked down to." options={scales.judged} />
         <CheckboxQuestion name="barriers" legend="What barriers did you encounter? Select all that apply." options={barrierOptions} />
         <RadioQuestion name="supportImpact" legend="After contacting this agency, did you feel safer or better supported?" options={scales.safer} />
-        <RadioQuestion name="overallRating" legend="How would you rate your overall experience?" options={scales.rating} />
+        <fieldset className="agency-review-question agency-public-rating"><legend>How would you describe this resource overall?</legend><div className="agency-review-options">
+          {publicRatingOptions.map((option) => <label key={option.value}><input type="radio" name="publicRating" value={option.value} required /> <span><strong>{option.label}</strong><small>{option.detail}</small></span></label>)}
+        </div></fieldset>
         <RadioQuestion name="recommendation" legend="Would you recommend this agency to another survivor?" options={scales.recommend} />
       </section>
       <section className="agency-review-section"><h2>In Your Words</h2>

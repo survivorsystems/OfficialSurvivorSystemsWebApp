@@ -88,6 +88,10 @@ function slugifyLocation(name: string) {
   return name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 }
 
+export function createStateResourceKey(state: string, resourceName: string) {
+  return `v1:${slugifyLocation(state)}:${slugifyLocation(resourceName)}`;
+}
+
 const stateResourceReviewDates: Partial<Record<string, string>> = {
   alabama: "August 31, 2026",
   alaska: "August 19, 2026",

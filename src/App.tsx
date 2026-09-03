@@ -15,6 +15,7 @@ import { CommercePageTemplate, EditorialPageTemplate } from "./components/PageTe
 import { AgencyReviewForm } from "./components/AgencyReviewForm";
 import { HousingStrategySystem } from "./components/HousingStrategySystem";
 import {
+  createStateResourceKey,
   findStateResourceLocation,
   getProgramsForStateCategory,
   getStateResourceCategories,
@@ -7289,10 +7290,57 @@ function StateResourcesDirectory({ onSelect }: { onSelect: (location: StateResou
   );
 }
 
+type CommunityRating = {
+  resourceKey: string;
+  total: number;
+  counts: {
+    trusted: number;
+    not_helpful: number;
+    possibly_dangerous: number;
+  };
+};
+
+const communityRatingLabels = {
+  trusted: "Trusted",
+  not_helpful: "Not Helpful",
+  possibly_dangerous: "Possibly Dangerous",
+} as const;
+
+function CommunityRatingPanel({ rating }: { rating?: CommunityRating }) {
+  if (!rating?.total) {
+    return <p className="community-rating-empty">No community ratings yet.</p>;
+  }
+
+  const entries = Object.entries(rating.counts) as Array<[keyof CommunityRating["counts"], number]>;
+  const highestCount = Math.max(...entries.map(([, count]) => count));
+  const leaders = entries.filter(([, count]) => count === highestCount);
+  const summary = leaders.length === 1 ? communityRatingLabels[leaders[0][0]] : "Mixed Feedback";
+
+  return (
+    <aside className="state-resource-community-rating" aria-label={`${rating.total} community ratings`}>
+      <div className="community-rating-summary">
+        <span>Community rating</span>
+        <strong>{summary}</strong>
+        <small>{rating.total} {rating.total === 1 ? "report" : "reports"}</small>
+      </div>
+      <dl>
+        {entries.map(([value, count]) => (
+          <div key={value}>
+            <dt>{communityRatingLabels[value]}</dt>
+            <dd>{count}</dd>
+          </div>
+        ))}
+      </dl>
+      <p>These are unverified reports from community members, not findings by Survivor Systems.</p>
+    </aside>
+  );
+}
+
 function StateResourcePage({ location, onBack }: { location: StateResourceLocation; onBack: () => void }) {
   const categories = getStateResourceCategories(location.slug);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [showAllCategories, setShowAllCategories] = useState(false);
+  const [communityRatings, setCommunityRatings] = useState<Record<string, CommunityRating>>({});
   const stateDownloadUrl = location.downloadFile
     ? `${import.meta.env.VITE_SUPABASE_URL ?? "https://nwpqdpfhburdeprbfkqi.supabase.co"}/storage/v1/object/public/${encodeURIComponent("State Resources Bucket")}/${encodeURIComponent(location.downloadFile)}?download=${encodeURIComponent(location.downloadFile)}`
     : null;
@@ -7304,6 +7352,22 @@ function StateResourcePage({ location, onBack }: { location: StateResourceLocati
     setSelectedCategories([]);
     setShowAllCategories(false);
   }, [location.slug]);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    fetch(`/api/resource-ratings?state=${encodeURIComponent(location.name)}`, { signal: controller.signal })
+      .then(async (result) => {
+        const payload = await result.json() as { ratings?: CommunityRating[] };
+        if (!result.ok || !payload.ratings) throw new Error("Community ratings could not be loaded.");
+        setCommunityRatings(Object.fromEntries(payload.ratings.map((rating) => [rating.resourceKey, rating])));
+      })
+      .catch((error: unknown) => {
+        if (controller.signal.aborted) return;
+        console.error(error);
+        setCommunityRatings({});
+      });
+    return () => controller.abort();
+  }, [location.name]);
 
   function toggleCategory(category: string) {
     setShowAllCategories(false);
@@ -7389,7 +7453,10 @@ function StateResourcePage({ location, onBack }: { location: StateResourceLocati
               <h2>{category}</h2>
               {programs.length > 0 ? (
                 <div className="state-program-list">
-                  {programs.map((program) => (
+                  {programs.map((program) => {
+                    const reviewKey = createStateResourceKey(location.name, program.name);
+                    const rating = communityRatings[reviewKey];
+                    return (
                     <article key={program.name}>
                       <h3>{program.name}</h3>
                       <p>{program.summary}</p>
@@ -7399,13 +7466,16 @@ function StateResourcePage({ location, onBack }: { location: StateResourceLocati
                         {program.coverage ? <div><dt>Service area</dt><dd>{program.coverage}</dd></div> : null}
                       </dl>
                       {program.note ? <p className="state-program-note">{program.note}</p> : null}
+                      <CommunityRatingPanel rating={rating} />
                       <div className="state-program-actions">
                         {program.phone ? <a href={`tel:${program.phone.replace(/[^0-9+]/g, "")}`}>Call {program.phone}</a> : null}
                         {program.secondaryPhone ? <a href={`tel:${program.secondaryPhone.replace(/[^0-9+]/g, "")}`}>Call {program.secondaryPhone}</a> : null}
                         {program.url ? <a href={program.url} target="_blank" rel="noreferrer">Official Website</a> : null}
+                        <a href={`/resources/review-agency?state=${encodeURIComponent(location.name)}&resource=${encodeURIComponent(program.name)}&key=${encodeURIComponent(reviewKey)}`}>Review This Resource</a>
                       </div>
                     </article>
-                  ))}
+                    );
+                  })}
                 </div>
               ) : (
                 <p>Verified {location.name} programs and application information will be added here.</p>
@@ -7480,8 +7550,11 @@ function ResourceModule({
   const activeState = findStateResourceLocation(activeStateSlug);
 
   if (isAgencyReview) {
-    const requestedStateName = new URLSearchParams(window.location.search).get("state") || "Your State";
-    return <AgencyReviewForm stateName={requestedStateName} onBack={() => {
+    const reviewParameters = new URLSearchParams(window.location.search);
+    const requestedStateName = reviewParameters.get("state") || "Your State";
+    const requestedResourceName = reviewParameters.get("resource") || undefined;
+    const requestedResourceKey = reviewParameters.get("key") || undefined;
+    return <AgencyReviewForm stateName={requestedStateName} resourceName={requestedResourceName} resourceKey={requestedResourceKey} onBack={() => {
       const state = stateResourceLocations.find((item) => item.name === requestedStateName);
       window.history.pushState({}, "", state ? `/resources/states/${state.slug}` : "/resources");
       window.dispatchEvent(new PopStateEvent("popstate"));

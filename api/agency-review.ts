@@ -4,13 +4,14 @@ import type { VercelRequest, VercelResponse } from "@vercel/node";
 const allowedAnswerKeys = new Set([
   "contactedWhen", "helpSought", "reachedAgency", "outcome", "denialReasons", "listingAccuracy",
   "feltListenedTo", "treatedWithRespect", "optionsExplained", "feltJudged", "barriers", "supportImpact",
-  "overallRating", "recommendation", "agencyDidWell", "agencyCouldChange", "survivorShouldKnow", "investigate",
+  "publicRating", "recommendation", "agencyDidWell", "agencyCouldChange", "survivorShouldKnow", "investigate",
   "investigateWhy", "directoryIssues", "directoryExplanation", "experienceNarrative", "afterwardNarrative",
   "additionalSurvivorNote",
 ]);
 
 type SubmissionInsert = {
   state: string;
+  resource_key: string;
   agency_name: string;
   branch_location: string | null;
   answers: Record<string, string | string[]>;
@@ -18,6 +19,7 @@ type SubmissionInsert = {
   follow_up_allowed: boolean;
   follow_up_contact: string | null;
   questionnaire_version: number;
+  public_rating: string;
 };
 
 type AgencyReviewDatabase = {
@@ -53,6 +55,14 @@ function cleanAnswers(value: unknown) {
   return answers;
 }
 
+function slug(value: string) {
+  return value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+}
+
+function resourceKey(state: string, agencyName: string) {
+  return `v1:${slug(state)}:${slug(agencyName)}`;
+}
+
 export default async function handler(request: VercelRequest, response: VercelResponse) {
   if (request.method !== "POST") {
     response.setHeader("Allow", "POST");
@@ -64,14 +74,19 @@ export default async function handler(request: VercelRequest, response: VercelRe
 
   const state = cleanText(body.state, 80);
   const agencyName = cleanText(body.agencyName, 200);
+  const publicRating = cleanText(body.answers?.publicRating, 40);
   const publicationPermission = cleanText(body.publicationPermission, 80);
   if (!state || !agencyName) return response.status(400).json({ error: "Please name the agency you are reviewing." });
+  if (!["trusted", "not_helpful", "possibly_dangerous"].includes(publicRating)) {
+    return response.status(400).json({ error: "Please choose the community rating that best reflects your experience." });
+  }
   if (body.privacyAcknowledged !== true) return response.status(400).json({ error: "Please confirm the privacy reminder before submitting." });
 
   try {
     const supabase = createAdminClient<AgencyReviewDatabase>();
     const { error } = await supabase.from("agency_experience_submissions").insert({
       state,
+      resource_key: resourceKey(state, agencyName),
       agency_name: agencyName,
       branch_location: cleanText(body.branchLocation, 200) || null,
       answers: cleanAnswers(body.answers),
@@ -79,6 +94,7 @@ export default async function handler(request: VercelRequest, response: VercelRe
       follow_up_allowed: body.followUpAllowed === true,
       follow_up_contact: body.followUpAllowed === true ? cleanText(body.followUpContact, 250) || null : null,
       questionnaire_version: 1,
+      public_rating: publicRating,
     });
     if (error) throw error;
     return response.status(201).json({ ok: true });
