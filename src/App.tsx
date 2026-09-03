@@ -8,6 +8,9 @@ import denialSupportTwo from "./assets/support/denial-support-2.png";
 import dvFundingInfographic from "./assets/systems/dv-funding-infographic.png";
 import blankProposedSapcrOrderPreview from "./assets/library/blank-proposed-sapcr-order-preview.png";
 import survivorHealingBundleMockup from "./assets/store/survivor-healing-bundle-mockup.png";
+import navigationGuideClipboard from "./assets/free-resources/navigation-guide-clipboard.png";
+import navigationGuideOverview from "./assets/free-resources/navigation-guide-overview.png";
+import navigationGuideTablet from "./assets/free-resources/navigation-guide-tablet.png";
 import { CommercePageTemplate, EditorialPageTemplate } from "./components/PageTemplates";
 import { AgencyReviewForm } from "./components/AgencyReviewForm";
 import { HousingStrategySystem } from "./components/HousingStrategySystem";
@@ -3513,8 +3516,38 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
           <p className="home-editorial-kicker">DOWNLOAD AND USE WHAT HELPS</p>
           <h2 id="home-free-resources-title">Free Resources</h2>
         </header>
-        <p>Download practical Survivor Systems trackers and tools without an account or purchase.</p>
-        <button type="button" onClick={() => onNavigate("free-resources", "/free-resources")}>Browse Free Resources</button>
+        <div className="home-free-resources-feature">
+          <div className="home-free-resources-preview" aria-label="Preview of the Survivor Systems Navigation Guide">
+            <img
+              className="home-free-resources-preview-lead"
+              src={navigationGuideTablet}
+              alt="Survivor Systems Navigation Guide shown on a tablet with printable planning pages"
+              loading="lazy"
+            />
+            <div className="home-free-resources-preview-supporting">
+              <img
+                src={navigationGuideClipboard}
+                alt="Navigation Guide cover and sample worksheets arranged on a clipboard"
+                loading="lazy"
+              />
+              <img
+                src={navigationGuideOverview}
+                alt="Overview of the systems and planning areas covered by the Navigation Guide"
+                loading="lazy"
+              />
+            </div>
+          </div>
+          <div className="home-free-resources-copy">
+            <p className="home-free-resources-label">FEATURED FREE DOWNLOAD</p>
+            <h3>Survivor Systems Navigation Guide</h3>
+            <p>
+              Organize housing, food, finances, health, transportation, childcare, legal information,
+              safety planning, education, and important documents in one practical guide.
+            </p>
+            <p>Download it without creating an account or making a purchase.</p>
+            <button type="button" onClick={() => onNavigate("free-resources", "/free-resources")}>Browse Free Resources</button>
+          </div>
+        </div>
       </article>
 
       <div className="home-editorial-secondary home-editorial-secondary-single" aria-label="Device safety">

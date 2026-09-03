@@ -11735,6 +11735,81 @@ body,
   font-family: "Times New Roman", Times, Georgia, serif !important;
 }
 
+.hud-frame.terminal-frame.module-home .home-free-resources-feature {
+  align-items: start;
+  display: grid;
+  gap: clamp(1rem, 3vw, 2rem);
+  grid-template-columns: minmax(0, 1.55fr) minmax(15rem, 0.75fr);
+  margin-top: 1rem;
+}
+
+.hud-frame.terminal-frame.module-home .home-free-resources-preview {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: minmax(0, 1.35fr) minmax(8rem, 0.65fr);
+}
+
+.hud-frame.terminal-frame.module-home .home-free-resources-preview img {
+  border: 1px solid var(--ss-ink);
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.hud-frame.terminal-frame.module-home .home-free-resources-preview-lead {
+  aspect-ratio: 1 / 1;
+}
+
+.hud-frame.terminal-frame.module-home .home-free-resources-preview-supporting {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-rows: 1fr 1fr;
+  min-width: 0;
+}
+
+.hud-frame.terminal-frame.module-home .home-free-resources-preview-supporting img {
+  aspect-ratio: 1 / 1;
+  min-height: 0;
+}
+
+.hud-frame.terminal-frame.module-home .home-free-resources-copy {
+  border-left: 5px solid var(--ss-red);
+  padding-left: clamp(1rem, 2vw, 1.5rem);
+}
+
+.hud-frame.terminal-frame.module-home .home-free-resources-copy h3 {
+  color: var(--ss-ink) !important;
+  font-family: Didot, "Bodoni MT", Bodoni, "Times New Roman", serif !important;
+  font-size: clamp(1.6rem, 3vw, 2.35rem) !important;
+  line-height: 1.02;
+  margin: 0.35rem 0 0.9rem;
+}
+
+.hud-frame.terminal-frame.module-home .home-free-resources-label {
+  color: var(--ss-red) !important;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+@media (max-width: 820px) {
+  .hud-frame.terminal-frame.module-home .home-free-resources-feature {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 540px) {
+  .hud-frame.terminal-frame.module-home .home-free-resources-preview {
+    grid-template-columns: 1fr;
+  }
+
+  .hud-frame.terminal-frame.module-home .home-free-resources-preview-supporting {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: none;
+  }
+}
+
 @media (max-width: 600px) {
   .hud-frame.terminal-frame.module-free-resources .free-resources-list article {
     align-items: stretch;
