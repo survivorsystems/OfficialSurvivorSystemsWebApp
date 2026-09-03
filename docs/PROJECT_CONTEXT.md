@@ -176,9 +176,15 @@ The latest original task ended while attempting to create or verify this owner r
 
 ## Current Visual Direction
 
+The current design source of truth is `docs/DESIGN_CONSTITUTION.md`, added September 3, 2026. It supersedes the Bauhaus direction and older visual experiments described below.
+
+Survivor Systems now operates visually as an independent editorial publication and practical field manual. The base is warm paper, ink, and charcoal, supported by muted olive, deep navy, rust, and ochre used primarily for meaning. Pages should not be built entirely from cards. Articles, guides, resource directories, and store pages share a family resemblance but use different structures appropriate to their jobs.
+
+The paragraphs below are retained as implementation history, not current direction.
+
 Several earlier concepts were explored and later rejected or superseded: Matrix, terminal/operating-system UI, Windows, folk, neon, faux-library, antique archive, and modern field manual.
 
-The newest implemented direction is Bauhaus-inspired and should be treated as current:
+The previously implemented direction was Bauhaus-inspired:
 
 - Warm parchment canvas with balanced blue, yellow, green, and red accents.
 - Flat geometric sections and asymmetric composition.
@@ -224,4 +230,3 @@ The original codebase used React/Vite and deployed through GitHub to Vercel. It 
 - Connect the Subscriber Library catalog to Supabase without exposing private storage.
 - Finish the Surviving educational content.
 - Continue developing the Strategy/Needs Assessment recommendation engine and map real resource metadata to it.
-

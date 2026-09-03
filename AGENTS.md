@@ -27,7 +27,10 @@ Read `docs/PROJECT_CONTEXT.md` before planning or implementing work in this repo
 - Use plain, warm, direct language, like the founder speaking clearly to a friend.
 - Use contractions. Avoid em dashes and institutional or clinical phrasing.
 - Do not write as a large organization. Survivor Systems currently has one founder.
-- The latest implemented visual direction is Bauhaus-inspired: balanced primary/accent colors, flat geometric surfaces, hard edges, Space Grotesk display type, and Inter body type.
+- Read `docs/DESIGN_CONSTITUTION.md` before any visual, layout, component, or page-template work. It is the current design source of truth.
+- The current direction is an editorial publication and practical field manual: warm paper, ink, charcoal, muted olive, deep navy, rust, and ochre, with restrained semantic use of color.
+- Do not over-cardify pages. Use cards only for genuine discrete objects or actions; prefer typography, rules, editorial grids, lists, indexes, whitespace, and full-width sections.
+- Different page families must serve their distinct jobs: articles read, guides operationalize, directories scan and filter, and products shop.
 - Do not revive earlier Matrix, terminal, Windows, faux-library, folk, neon, or heavily archival themes.
 - Preserve the Go-Bag game's intentionally distinct visual language.
 
@@ -39,4 +42,3 @@ When historical notes conflict, use this order:
 2. The current repository implementation.
 3. `docs/PROJECT_CONTEXT.md`.
 4. Older imported chat decisions.
-
