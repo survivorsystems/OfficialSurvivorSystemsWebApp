@@ -3494,10 +3494,8 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
         <div className="home-editorial-lead-copy">
           <p>
             <strong>Survivor Systems</strong> is a place for practical information and tools for when
-            your life has become an administrative nightmare.
-          </p>
-          <p>
-            Find state-specific resources, understand legal and public systems, document what is happening,
+            your life has become an administrative nightmare. Find state-specific resources, understand
+            legal and public systems, document what is happening,
             organize next steps, and use guides and templates built for real decisions. <strong>No
             inspirational-poster bullshit. No pretending a hotline fixes everything.</strong>
           </p>

@@ -13381,6 +13381,50 @@ body,
   }
 }
 
+/* Homepage hero and featured-download corrections. */
+#root .hud-frame.module-home .home-editorial-lead-copy {
+  column-count: 1 !important;
+  column-rule: 0 !important;
+  max-width: 82ch !important;
+}
+
+#root .hud-frame.module-home .home-editorial-lead-copy p {
+  font-size: clamp(1.08rem, 1.6vw, 1.24rem) !important;
+  line-height: 1.58 !important;
+}
+
+#root .hud-frame.module-home .home-free-resources-feature {
+  align-items: center !important;
+  grid-template-columns: minmax(220px, 0.62fr) minmax(0, 1.38fr) !important;
+}
+
+#root .hud-frame.module-home .home-free-resources-preview {
+  align-items: center !important;
+  display: flex !important;
+  justify-content: center !important;
+  min-width: 0 !important;
+}
+
+#root .hud-frame.module-home .home-free-resources-preview .home-free-resources-preview-lead {
+  aspect-ratio: auto !important;
+  height: auto !important;
+  max-height: 440px !important;
+  max-width: 420px !important;
+  object-fit: contain !important;
+  width: 100% !important;
+}
+
+@media (max-width: 760px) {
+  #root .hud-frame.module-home .home-free-resources-feature {
+    grid-template-columns: 1fr !important;
+  }
+
+  #root .hud-frame.module-home .home-free-resources-preview .home-free-resources-preview-lead {
+    max-height: none !important;
+    max-width: 340px !important;
+  }
+}
+
 /* Homepage constitution pass: final responsive and contrast locks. */
 #root .hud-frame.module-home .home-safety-story .home-article-header :is(.home-editorial-kicker, h2) {
   color: var(--ss-white) !important;
