@@ -3488,29 +3488,84 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
       </header>
 
       <article className="home-editorial-lead">
-        <p className="home-editorial-kicker">PRACTICAL INFORMATION FOR THE WHOLE PICTURE</p>
-        <h1 id="home-title">Welcome to Survivor Systems</h1>
+        <p className="home-editorial-kicker">PRACTICAL TOOLS FOR COMPLICATED SYSTEMS</p>
+        <h1 id="home-title">Understand the system. Decide what comes next.</h1>
         <div className="home-editorial-lead-copy">
           <p>
-            Welcome to <strong>Survivor Systems</strong>, a place for practical tools for when your life
-            has become an administrative nightmare.
+            <strong>Survivor Systems</strong> is a place for practical information and tools for when
+            your life has become an administrative nightmare.
           </p>
           <p>
-            Find state-specific housing, financial, legal, childcare, transportation, immigration, and
-            survivor resources. Use trackers to document what's happening. Build court records that make
-            sense. Organize money, housing applications, safety information, and next steps. Grab workbooks
-            and kits for rebuilding autonomy, income, routines, identity, and everything else abuse has a
-            way of hijacking.
-          </p>
-          <p><strong>No inspirational-poster bullshit. No pretending a hotline fixes everything.</strong></p>
-          <p>
-            Just information, tools, templates, and systems you can actually use to figure out what's
-            available, make informed decisions, keep your receipts, and move your life in the direction
-            <strong> you</strong> choose.
+            Find state-specific resources, understand legal and public systems, document what is happening,
+            organize next steps, and use guides and templates built for real decisions. <strong>No
+            inspirational-poster bullshit. No pretending a hotline fixes everything.</strong>
           </p>
         </div>
         <p className="home-editorial-deck">Welcome in. Use what helps. Leave what doesn't.</p>
       </article>
+
+      <div className="home-editorial-secondary home-editorial-secondary-single" aria-label="Device safety">
+        <article className="home-safety-story" aria-labelledby="home-privacy">
+          <header className="home-article-header">
+            <p className="home-editorial-kicker">DEVICE SAFETY</p>
+            <h2 id="home-privacy">Abusers often monitor devices and online activity.</h2>
+          </header>
+          <p>
+            Cyberstalking can include checking browser history, accessing accounts, tracking a phone's
+            location, reading messages, or installing surveillance software. Changing settings or
+            clearing history can sometimes alert the person monitoring you. Use a safer device when
+            possible and make changes only when they feel safe for you.
+          </p>
+          <button type="button" onClick={() => onNavigate("how-to", "/guides/browser-trace-cleanup")}>Read the Digital Safety Guide</button>
+        </article>
+      </div>
+
+      <aside className="home-editorial-disclaimer" aria-labelledby="home-education-disclaimer-title">
+        <strong id="home-education-disclaimer-title">Educational information, not individualized advice.</strong>
+        <p>Survivor Systems provides general educational information and practical planning tools. Nothing on this site is legal, medical, financial, mental-health, or other individualized professional advice unless a page explicitly states otherwise.</p>
+      </aside>
+
+      <section className="home-system-index" aria-labelledby="home-system-index-title">
+        <header>
+          <p className="home-editorial-kicker">START WITH THE PROBLEM IN FRONT OF YOU</p>
+          <h2 id="home-system-index-title">What do you need to navigate?</h2>
+          <p>You don't need to understand the whole site first. Choose the area closest to what you're handling today.</p>
+        </header>
+        <div className="home-system-index-list">
+          <button type="button" onClick={() => onNavigate("local-help", "/resources")}>
+            <strong>State and local resources</strong>
+            <span>Search practical programs by state, need, service area, and access method.</span>
+          </button>
+          <button type="button" onClick={() => onNavigate("local-help", "/resources")}>
+            <strong>Housing and homelessness</strong>
+            <span>Find housing, rental assistance, rapid rehousing, and homelessness prevention resources.</span>
+          </button>
+          <button type="button" onClick={() => onNavigate("guides", "/guides")}>
+            <strong>Family court and legal systems</strong>
+            <span>Understand court processes, protective orders, documentation, and self-represented filing.</span>
+          </button>
+          <button type="button" onClick={() => onNavigate("local-help", "/resources")}>
+            <strong>Benefits and daily needs</strong>
+            <span>Look for food, cash, childcare, transportation, disability, and other assistance.</span>
+          </button>
+          <button type="button" onClick={() => onNavigate("guides", "/guides")}>
+            <strong>Abuse, safety, and systems failures</strong>
+            <span>Read practical explanations of abuse patterns, institutional responses, and safer planning.</span>
+          </button>
+          <button type="button" onClick={() => onNavigate("local-help", "/resources")}>
+            <strong>Immigration and trafficking</strong>
+            <span>Find state-specific immigration services and trafficking survivor resources.</span>
+          </button>
+          <button type="button" onClick={() => onNavigate("guides", "/guides")}>
+            <strong>Rebuilding everyday life</strong>
+            <span>Use guides for routines, finances, autonomy, organization, and the work of starting again.</span>
+          </button>
+          <button type="button" onClick={() => onNavigate("free-resources", "/free-resources")}>
+            <strong>Free practical tools</strong>
+            <span>Download trackers, checklists, planners, and printable resources without an account.</span>
+          </button>
+        </div>
+      </section>
 
       <article className="home-free-resources" aria-labelledby="home-free-resources-title">
         <header className="home-article-header">
@@ -3550,27 +3605,6 @@ function HomeModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: stri
           </div>
         </div>
       </article>
-
-      <div className="home-editorial-secondary home-editorial-secondary-single" aria-label="Device safety">
-        <article className="home-safety-story" aria-labelledby="home-privacy">
-          <header className="home-article-header">
-            <p className="home-editorial-kicker">A NOTE ABOUT DEVICE SAFETY</p>
-            <h2 id="home-privacy">Abusers often monitor devices and online activity.</h2>
-          </header>
-          <p>
-            Cyberstalking can include checking browser history, accessing accounts, tracking a phone's
-            location, reading messages, or installing surveillance software. Changing settings or
-            clearing history can sometimes alert the person monitoring you. Use a safer device when
-            possible and make changes only when they feel safe for you.
-          </p>
-          <button type="button" onClick={() => onNavigate("how-to", "/guides/browser-trace-cleanup")}>Open Digital Safety Guide</button>
-        </article>
-      </div>
-
-      <aside className="home-editorial-disclaimer" aria-labelledby="home-education-disclaimer-title">
-        <strong id="home-education-disclaimer-title">Educational information, not individualized advice.</strong>
-        <p>Survivor Systems provides general educational information and practical planning tools. Nothing on this site is legal, medical, financial, mental-health, or other individualized professional advice unless a page explicitly states otherwise.</p>
-      </aside>
 
     </section>
   );

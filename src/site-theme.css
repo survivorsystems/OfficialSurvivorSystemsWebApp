@@ -11150,6 +11150,227 @@ body,
   }
 }
 
+/* Design Constitution: homepage as a practical field-manual front page. */
+#root .hud-frame.module-home {
+  --ss-paper: #f3ecde;
+  --ss-paper-deep: #e5dccb;
+  --ss-ink: #211f1b;
+  --ss-ink-soft: #4d4a43;
+  --ss-green: #697057;
+  --ss-blue: #293d50;
+  --ss-red: #a44332;
+  --ss-yellow: #b58a32;
+  --ss-white: #fffdf8;
+}
+
+#root .hud-frame.module-home .home-terminal.bauhaus-home {
+  gap: clamp(22px, 3vw, 38px) !important;
+}
+
+#root .hud-frame.module-home .home-editorial-lead {
+  background: transparent !important;
+  border: 0 !important;
+  border-bottom: 4px double var(--ss-ink) !important;
+  padding: clamp(22px, 3vw, 44px) 0 clamp(26px, 4vw, 48px) !important;
+}
+
+#root .hud-frame.module-home .home-editorial-lead > h1 {
+  border-bottom: 1px solid var(--ss-ink) !important;
+  font-size: clamp(2.35rem, 5vw, 4.8rem) !important;
+  line-height: 0.98 !important;
+  max-width: 18ch !important;
+  padding-bottom: clamp(18px, 3vw, 28px) !important;
+}
+
+#root .hud-frame.module-home .home-editorial-lead-copy {
+  column-count: 2 !important;
+  column-gap: clamp(28px, 5vw, 64px) !important;
+  column-rule: 1px solid #9f9688 !important;
+  max-width: 96ch;
+}
+
+#root .hud-frame.module-home .home-editorial-deck {
+  border-left: 4px solid var(--ss-yellow) !important;
+  font-size: clamp(1.1rem, 2vw, 1.45rem) !important;
+}
+
+#root .hud-frame.module-home .home-safety-story {
+  border: 1px solid var(--ss-ink) !important;
+}
+
+#root .hud-frame.module-home .home-safety-story .home-article-header {
+  background: var(--ss-red) !important;
+  border-bottom-width: 1px !important;
+}
+
+#root .hud-frame.module-home .home-safety-story > button,
+#root .hud-frame.module-home .home-free-resources button {
+  background: transparent !important;
+  border: 0 !important;
+  border-bottom: 2px solid currentColor !important;
+  color: var(--ss-red) !important;
+  padding: 3px 0 !important;
+  text-align: left !important;
+}
+
+#root .hud-frame.module-home .home-safety-story > button:is(:hover, :focus-visible),
+#root .hud-frame.module-home .home-free-resources button:is(:hover, :focus-visible) {
+  color: var(--ss-ink) !important;
+  outline: 2px solid var(--ss-yellow) !important;
+  outline-offset: 4px !important;
+}
+
+#root .hud-frame.module-home .home-editorial-disclaimer {
+  background: transparent !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--ss-ink) !important;
+  border-left: 5px solid var(--ss-red) !important;
+  color: var(--ss-ink) !important;
+  padding: 4px 0 18px 18px !important;
+}
+
+#root .hud-frame.module-home .home-editorial-disclaimer :is(strong, p) {
+  color: var(--ss-ink) !important;
+}
+
+#root .hud-frame.module-home .home-system-index {
+  background: var(--ss-white);
+  border-bottom: 4px double var(--ss-ink);
+  border-top: 4px double var(--ss-ink);
+  color: var(--ss-ink);
+  padding: clamp(24px, 4vw, 50px) 0;
+}
+
+#root .hud-frame.module-home .home-system-index > header {
+  display: grid;
+  gap: 10px clamp(28px, 5vw, 70px);
+  grid-template-columns: minmax(13rem, 0.75fr) minmax(18rem, 1.25fr);
+  padding: 0 clamp(22px, 4vw, 52px) clamp(20px, 3vw, 34px);
+}
+
+#root .hud-frame.module-home .home-system-index > header .home-editorial-kicker {
+  grid-column: 1 / -1;
+  margin-bottom: 0 !important;
+}
+
+#root .hud-frame.module-home .home-system-index > header h2 {
+  color: var(--ss-ink) !important;
+  font-family: Didot, "Bodoni MT", Bodoni, "Times New Roman", serif !important;
+  font-size: clamp(2rem, 4vw, 3.7rem) !important;
+  line-height: 0.98 !important;
+  margin: 0 !important;
+}
+
+#root .hud-frame.module-home .home-system-index > header > p:last-child {
+  align-self: end;
+  color: var(--ss-ink-soft) !important;
+  font-size: 1.08rem;
+  line-height: 1.5;
+  margin: 0;
+  max-width: 48ch;
+}
+
+#root .hud-frame.module-home .home-system-index-list {
+  border-top: 1px solid var(--ss-ink);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+#root .hud-frame.module-home .home-system-index-list button {
+  align-items: start !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-bottom: 1px solid #aaa092 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: var(--ss-ink) !important;
+  display: grid !important;
+  gap: 6px !important;
+  min-height: 118px;
+  padding: 20px clamp(22px, 4vw, 52px) !important;
+  text-align: left !important;
+  transform: none !important;
+}
+
+#root .hud-frame.module-home .home-system-index-list button:nth-child(even) {
+  border-left: 1px solid #aaa092 !important;
+}
+
+#root .hud-frame.module-home .home-system-index-list button strong {
+  color: var(--ss-ink) !important;
+  font-family: Didot, "Bodoni MT", Bodoni, "Times New Roman", serif !important;
+  font-size: clamp(1.25rem, 2vw, 1.65rem);
+  line-height: 1.05;
+  text-decoration: underline;
+  text-decoration-color: var(--ss-red);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 5px;
+}
+
+#root .hud-frame.module-home .home-system-index-list button span {
+  color: var(--ss-ink-soft) !important;
+  font-size: 0.97rem;
+  line-height: 1.4;
+}
+
+#root .hud-frame.module-home .home-system-index-list button:is(:hover, :focus-visible) {
+  background: var(--ss-paper-deep) !important;
+  outline: 2px solid var(--ss-ink) !important;
+  outline-offset: -2px !important;
+}
+
+#root .hud-frame.module-home .home-free-resources {
+  border: 0 !important;
+  border-bottom: 1px solid var(--ss-ink) !important;
+  border-top: 1px solid var(--ss-ink) !important;
+  padding: clamp(22px, 4vw, 42px) 0 !important;
+}
+
+#root .hud-frame.module-home .home-free-resources-feature {
+  grid-template-columns: minmax(0, 0.9fr) minmax(17rem, 1.1fr);
+}
+
+#root .hud-frame.module-home .home-free-resources-preview {
+  display: block;
+}
+
+#root .hud-frame.module-home .home-free-resources-preview-lead {
+  aspect-ratio: 4 / 3;
+}
+
+#root .hud-frame.module-home .home-free-resources-preview-supporting {
+  display: none;
+}
+
+#root .hud-frame.module-home .home-free-resources-copy {
+  border-left: 1px solid #9f9688;
+  padding-left: clamp(24px, 4vw, 52px);
+}
+
+@media (max-width: 760px) {
+  #root .hud-frame.module-home .home-editorial-lead-copy {
+    column-count: 1 !important;
+    column-rule: 0 !important;
+  }
+
+  #root .hud-frame.module-home .home-system-index > header,
+  #root .hud-frame.module-home .home-system-index-list,
+  #root .hud-frame.module-home .home-free-resources-feature {
+    grid-template-columns: 1fr !important;
+  }
+
+  #root .hud-frame.module-home .home-system-index-list button:nth-child(even) {
+    border-left: 0 !important;
+  }
+
+  #root .hud-frame.module-home .home-free-resources-copy {
+    border-left: 0;
+    border-top: 1px solid #9f9688;
+    padding-left: 0;
+    padding-top: 22px;
+  }
+}
+
 .hud-frame.terminal-frame.module-store .store-purchase-row :is(a, button),
 .hud-frame.terminal-frame.module-store .store-delivery-panel :is(button, a),
 .hud-frame.terminal-frame.module-store .store-download-list a,
@@ -13047,5 +13268,56 @@ body,
   #root .hud-frame.terminal-frame .site-footer-support {
     border-left: 0 !important;
     border-top: 1px solid var(--ss-ink) !important;
+  }
+}
+
+/* Homepage constitution pass: final responsive and contrast locks. */
+#root .hud-frame.module-home .home-safety-story .home-article-header :is(.home-editorial-kicker, h2) {
+  color: var(--ss-white) !important;
+}
+
+@media (max-width: 760px) {
+  #root .hud-frame.module-home,
+  #root .hud-frame.module-home .site-shell,
+  #root .hud-frame.module-home .folk-main-shell,
+  #root .hud-frame.module-home .terminal-screen,
+  #root .hud-frame.module-home .terminal-content,
+  #root .hud-frame.module-home .home-terminal,
+  #root .hud-frame.module-home .home-terminal > * {
+    box-sizing: border-box !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  #root .hud-frame.module-home .folk-main-shell,
+  #root .hud-frame.module-home .terminal-screen,
+  #root .hud-frame.module-home .terminal-content,
+  #root .hud-frame.module-home .home-terminal {
+    overflow-x: clip !important;
+    width: 100% !important;
+  }
+
+  #root .hud-frame.module-home .home-editorial-masthead {
+    overflow: hidden !important;
+    padding-inline: 12px !important;
+  }
+
+  #root .hud-frame.module-home .home-editorial-masthead strong {
+    font-size: clamp(1.55rem, 8vw, 2.15rem) !important;
+    white-space: nowrap !important;
+  }
+
+  #root .hud-frame.module-home .home-editorial-lead > h1 {
+    font-size: clamp(2rem, 10vw, 2.8rem) !important;
+    max-width: none !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  #root .hud-frame.module-home .home-editorial-lead-copy,
+  #root .hud-frame.module-home .home-system-index > header,
+  #root .hud-frame.module-home .home-system-index-list,
+  #root .hud-frame.module-home .home-free-resources-feature {
+    min-width: 0 !important;
+    width: 100% !important;
   }
 }
