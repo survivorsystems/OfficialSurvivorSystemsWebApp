@@ -23,6 +23,7 @@ import {
   stateResourcePrograms,
   type StateResourceLocation,
 } from "./data/stateResources";
+import { washingtonCategoryGuidance } from "./data/washingtonResources";
 import {
   createLibraryFileUrl,
   fetchSubscriberCatalog,
@@ -7482,9 +7483,16 @@ function StateResourcePage({ location, onBack }: { location: StateResourceLocati
           <div className="state-resource-category-list" aria-label={`${location.name} resource categories`}>
           {visibleCategories.map((category) => {
           const programs = getProgramsForStateCategory(location.slug, category);
+          const categoryGuidance = location.slug === "washington" ? washingtonCategoryGuidance[category] : null;
           return (
             <section key={category} id={category.toLowerCase().replace(/[^a-z0-9]+/g, "-")}>
               <h2>{category}</h2>
+              {categoryGuidance ? (
+                <div className="state-category-guidance">
+                  <p><strong>Next Step</strong>{categoryGuidance.nextStep}</p>
+                  <p><strong>Limitation</strong>{categoryGuidance.limitation}</p>
+                </div>
+              ) : null}
               {programs.length > 0 ? (
                 <div className="state-program-list">
                   {programs.map((program) => {
@@ -7494,17 +7502,22 @@ function StateResourcePage({ location, onBack }: { location: StateResourceLocati
                     <article key={program.name}>
                       <h3>{program.name}</h3>
                       <p>{program.summary}</p>
-                      <dl>
-                        {program.fit ? <div><dt>Who it may fit</dt><dd>{program.fit}</dd></div> : null}
-                        {program.access ? <div><dt>How to access it</dt><dd>{program.access}</dd></div> : null}
-                        {program.coverage ? <div><dt>Service area</dt><dd>{program.coverage}</dd></div> : null}
-                      </dl>
-                      {program.note ? <p className="state-program-note">{program.note}</p> : null}
-                      <CommunityRatingPanel rating={rating} />
-                      <div className="state-program-actions">
+                      <div className="state-program-actions state-program-actions-primary">
                         {program.phone ? <a href={`tel:${program.phone.replace(/[^0-9+]/g, "")}`}>Call {program.phone}</a> : null}
                         {program.secondaryPhone ? <a href={`tel:${program.secondaryPhone.replace(/[^0-9+]/g, "")}`}>Call {program.secondaryPhone}</a> : null}
                         {program.url ? <a href={program.url} target="_blank" rel="noreferrer">Official Website</a> : null}
+                      </div>
+                      <details className="state-program-details">
+                        <summary>Eligibility, Service Area &amp; Details</summary>
+                      <dl>
+                        {program.fit ? <div><dt>Eligibility</dt><dd>{program.fit}</dd></div> : null}
+                        {program.access ? <div><dt>How to access it</dt><dd>{program.access}</dd></div> : null}
+                        {program.coverage ? <div><dt>Service area</dt><dd>{program.coverage}</dd></div> : null}
+                      </dl>
+                      {program.note ? <p className="state-program-note"><strong>Limitation</strong>{program.note}</p> : null}
+                      </details>
+                      <CommunityRatingPanel rating={rating} />
+                      <div className="state-program-actions">
                         <a href={`/resources/review-agency?state=${encodeURIComponent(location.name)}&resource=${encodeURIComponent(program.name)}&key=${encodeURIComponent(reviewKey)}`}>Review This Resource</a>
                       </div>
                     </article>

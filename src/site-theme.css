@@ -13271,6 +13271,116 @@ body,
   }
 }
 
+/* Design Constitution: compact, action-first state resource directory. */
+#root .hud-frame.module-local-help .state-category-guidance {
+  background: var(--ss-white) !important;
+  border: 0 !important;
+  border-bottom: 1px solid #a89f92 !important;
+  box-shadow: none !important;
+  display: grid !important;
+  gap: 14px !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  margin: 0 !important;
+  padding: 18px 0 22px !important;
+}
+
+#root .hud-frame.module-local-help .state-category-guidance p {
+  color: var(--ss-ink) !important;
+  font-size: 0.98rem !important;
+  line-height: 1.45 !important;
+  margin: 0 !important;
+}
+
+#root .hud-frame.module-local-help .state-category-guidance p + p {
+  border-left: 1px solid #a89f92 !important;
+  padding-left: 20px !important;
+}
+
+#root .hud-frame.module-local-help .state-category-guidance strong,
+#root .hud-frame.module-local-help .state-program-note > strong {
+  color: var(--ss-red) !important;
+  display: block !important;
+  font-size: 0.76rem !important;
+  font-weight: 800 !important;
+  margin-bottom: 5px !important;
+  text-transform: uppercase !important;
+}
+
+#root .hud-frame.module-local-help .state-program-list article {
+  padding-block: clamp(20px, 3vw, 30px) !important;
+}
+
+#root .hud-frame.module-local-help .state-program-actions-primary {
+  border-bottom: 1px solid #a89f92 !important;
+  margin: 18px 0 0 !important;
+  padding-bottom: 18px !important;
+}
+
+#root .hud-frame.module-local-help .state-program-details {
+  border-bottom: 1px solid #a89f92 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+#root .hud-frame.module-local-help .state-program-details summary {
+  color: var(--ss-ink) !important;
+  cursor: pointer !important;
+  font-size: 0.95rem !important;
+  font-weight: 700 !important;
+  list-style-position: outside !important;
+  margin-left: 1.1rem !important;
+  padding: 14px 0 !important;
+  text-decoration: underline !important;
+  text-decoration-color: var(--ss-red) !important;
+  text-underline-offset: 4px !important;
+}
+
+#root .hud-frame.module-local-help .state-program-details[open] summary {
+  margin-bottom: 4px !important;
+}
+
+#root .hud-frame.module-local-help .state-program-details dl {
+  margin: 0 0 16px !important;
+}
+
+#root .hud-frame.module-local-help .state-program-note {
+  background: transparent !important;
+  border: 0 !important;
+  border-left: 4px solid var(--ss-red) !important;
+  color: var(--ss-ink) !important;
+  margin: 12px 0 18px !important;
+  padding: 4px 0 4px 14px !important;
+}
+
+#root .hud-frame.module-local-help .state-resource-community-rating {
+  margin-top: 18px !important;
+}
+
+#root .hud-frame.module-local-help .state-program-actions:last-child {
+  margin-top: 14px !important;
+}
+
+#root .hud-frame.module-local-help .state-program-actions:last-child a {
+  background: transparent !important;
+  border: 0 !important;
+  border-bottom: 1px solid currentColor !important;
+  color: var(--ss-red) !important;
+  padding: 2px 0 !important;
+}
+
+@media (max-width: 680px) {
+  #root .hud-frame.module-local-help .state-category-guidance {
+    grid-template-columns: 1fr !important;
+  }
+
+  #root .hud-frame.module-local-help .state-category-guidance p + p {
+    border-left: 0 !important;
+    border-top: 1px solid #a89f92 !important;
+    padding-left: 0 !important;
+    padding-top: 14px !important;
+  }
+}
+
 /* Homepage constitution pass: final responsive and contrast locks. */
 #root .hud-frame.module-home .home-safety-story .home-article-header :is(.home-editorial-kicker, h2) {
   color: var(--ss-white) !important;

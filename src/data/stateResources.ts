@@ -1,3 +1,5 @@
+import { washingtonProgramsByCategory } from "./washingtonResources";
+
 export type StateResourceLocation = {
   name: string;
   slug: string;
@@ -133,6 +135,7 @@ const stateResourceReviewDates: Partial<Record<string, string>> = {
   "rhode-island": "August 27, 2026",
   "south-carolina": "August 27, 2026",
   "south-dakota": "August 27, 2026",
+  washington: "August 28, 2026",
 };
 
 const stateResourceDownloadFiles: Partial<Record<string, string>> = {
@@ -175,6 +178,7 @@ const stateResourceDownloadFiles: Partial<Record<string, string>> = {
   "rhode-island": "Rhode_Island_DV_Survivor_Resource_Guide_2026.pdf",
   "south-carolina": "South_Carolina_DV_Survivor_Resource_Guide_2026.pdf",
   "south-dakota": "South_Dakota_DV_Survivor_Resource_Guide_2026.pdf",
+  washington: "Washington_State_Domestic_Violence_Survivor_Resource_Guide.pdf",
 };
 
 export const stateResourceLocations: StateResourceLocation[] = locationNames.map((name) => ({
@@ -11566,6 +11570,9 @@ const twelveCategoryProgramsByState: Partial<Record<string, TwelveCategoryProgra
   "rhode-island": rhodeIslandProgramsByCategory,
   "south-carolina": southCarolinaProgramsByCategory,
   "south-dakota": southDakotaProgramsByCategory,
+  washington: Object.fromEntries(
+    Object.entries(washingtonProgramsByCategory).map(([category, programs]) => [category, programs.map((program) => program.name)]),
+  ) as TwelveCategoryProgramMap,
 };
 
 export function getStateResourceCategories(slug: string): readonly string[] {
@@ -11576,6 +11583,7 @@ export function getStateResourceCategories(slug: string): readonly string[] {
 }
 
 export function getProgramsForStateCategory(slug: string, category: string): StateResourceProgram[] {
+  if (slug === "washington") return washingtonProgramsByCategory[category] ?? [];
   const groupedPrograms = stateResourcePrograms[slug] ?? {};
   const categoryMap = twelveCategoryProgramsByState[slug];
   if (!categoryMap) {
