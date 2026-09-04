@@ -28,6 +28,11 @@
   --ss-route-action-text: var(--ss-white);
   --ss-action-red: #b4232a;
   --ss-action-red-dark: #87191f;
+  --ss-charcoal: #34373d;
+  --ss-olive: #687153;
+  --ss-navy: #27384d;
+  --ss-rust: #9d3f2f;
+  --ss-ochre: #c79a32;
 }
 
 .module-assessments,
@@ -11523,6 +11528,198 @@ body,
 #root .hud-frame.terminal-frame.module-about .terminal-content .about-story button :is(span, strong) {
   background: var(--ss-ink) !important;
   color: var(--ss-white) !important;
+}
+
+/* About edition: an editorial profile, not a stack of cards. */
+#root .hud-frame.terminal-frame.module-about .terminal-content {
+  background: var(--ss-paper) !important;
+  padding-inline: clamp(1rem, 3vw, 3.5rem) !important;
+}
+
+#root .hud-frame.terminal-frame.module-about .about-story {
+  display: grid !important;
+  gap: 0 !important;
+  margin: 0 auto !important;
+  max-width: 1120px !important;
+}
+
+#root .hud-frame.terminal-frame.module-about .about-story > .page-flourish-header.page-flourish-header {
+  background: transparent !important;
+  border: 0 !important;
+  border-bottom: 4px double var(--ss-ink) !important;
+  padding: clamp(2rem, 5vw, 4.5rem) 0 clamp(1.25rem, 3vw, 2rem) !important;
+  text-align: left !important;
+}
+
+#root .hud-frame.terminal-frame.module-about .about-story > .page-flourish-header.page-flourish-header h1 {
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+  font-size: clamp(2.25rem, 5vw, 4.75rem) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0 !important;
+  line-height: 0.96 !important;
+  margin: 0.35rem 0 0.6rem !important;
+  max-width: none !important;
+}
+
+#root .hud-frame.terminal-frame.module-about .about-story > .page-flourish-header.page-flourish-header p {
+  font-size: clamp(1.05rem, 2vw, 1.35rem) !important;
+  font-style: italic !important;
+  margin: 0 !important;
+}
+
+#root .hud-frame.terminal-frame.module-about .about-story > .about-deck {
+  border-bottom: 1px solid var(--ss-ink);
+  color: var(--ss-charcoal) !important;
+  font-size: clamp(1.2rem, 2.2vw, 1.65rem) !important;
+  font-weight: 700;
+  line-height: 1.35;
+  margin: 0 !important;
+  max-width: none;
+  padding: clamp(1.5rem, 3.5vw, 2.75rem) 0;
+}
+
+#root .hud-frame.terminal-frame.module-about .terminal-content .about-story > :is(section, blockquote) {
+  background: transparent !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--ss-ink) !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+  padding: clamp(2rem, 4vw, 3.75rem) 0 !important;
+}
+
+#root .hud-frame.terminal-frame.module-about .about-story > section > div:first-child > span,
+#root .hud-frame.terminal-frame.module-about .about-story > section > header > span {
+  color: var(--ss-olive) !important;
+  display: block;
+  font-size: 0.78rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.08em !important;
+  margin-bottom: 0.55rem;
+}
+
+#root .hud-frame.terminal-frame.module-about .about-story h2 {
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+  font-size: clamp(1.65rem, 3vw, 2.55rem) !important;
+  letter-spacing: 0 !important;
+  line-height: 1.05 !important;
+  margin: 0 0 1.25rem !important;
+}
+
+#root .hud-frame.terminal-frame.module-about .about-story :is(p, li) {
+  font-family: "Times New Roman", Times, Georgia, serif !important;
+  font-size: clamp(1rem, 1.4vw, 1.12rem) !important;
+  line-height: 1.65 !important;
+}
+
+#root .hud-frame.terminal-frame.module-about .about-story > :is(.about-story-intro, .about-overlap-section) {
+  align-items: start;
+  display: grid !important;
+  gap: clamp(1.5rem, 5vw, 5rem) !important;
+  grid-template-columns: minmax(220px, 0.75fr) minmax(0, 1.5fr) !important;
+}
+
+#root .hud-frame.terminal-frame.module-about .about-story .about-strategy-callout {
+  background: transparent !important;
+  border-bottom: 1px solid var(--ss-ink) !important;
+  border-left: 8px solid var(--ss-rust, var(--ss-red)) !important;
+  padding-left: clamp(1.25rem, 4vw, 3rem) !important;
+}
+
+#root .hud-frame.terminal-frame.module-about .about-story .about-strategy-callout span {
+  color: var(--ss-rust, var(--ss-red)) !important;
+  font-size: 0.78rem !important;
+  font-weight: 800;
+  letter-spacing: 0.08em !important;
+}
+
+#root .hud-frame.terminal-frame.module-about .about-story .about-strategy-callout p {
+  color: var(--ss-ink) !important;
+  font-size: clamp(1.65rem, 3.5vw, 3rem) !important;
+  font-style: italic;
+  font-weight: 700;
+  line-height: 1.1 !important;
+  margin: 0.65rem 0 0 !important;
+  max-width: 22ch;
+}
+
+#root .hud-frame.terminal-frame.module-about .about-offerings-grid {
+  display: block !important;
+  margin-top: 1.75rem;
+}
+
+#root .hud-frame.terminal-frame.module-about .terminal-content .about-story .about-offerings-grid article:nth-child(n) {
+  background: transparent !important;
+  border: 0 !important;
+  border-top: 1px solid var(--ss-ink) !important;
+  box-shadow: none !important;
+  display: grid !important;
+  gap: 0.75rem clamp(1rem, 3vw, 2.5rem);
+  grid-template-columns: minmax(90px, 0.3fr) minmax(180px, 0.7fr) minmax(0, 1.5fr);
+  padding: 1.35rem 0 !important;
+}
+
+#root .hud-frame.terminal-frame.module-about .about-offerings-grid article > span {
+  color: var(--ss-rust, var(--ss-red)) !important;
+  font-size: 0.75rem !important;
+  font-weight: 800;
+  letter-spacing: 0.08em !important;
+}
+
+#root .hud-frame.terminal-frame.module-about .about-offerings-grid article :is(h3, p) {
+  margin: 0 !important;
+}
+
+#root .hud-frame.terminal-frame.module-about .about-principles ul {
+  border-left: 4px solid var(--ss-navy, var(--ss-ink));
+  list-style: none !important;
+  margin: 1.5rem 0 !important;
+  max-width: 760px;
+  padding: 0 0 0 1.5rem !important;
+}
+
+#root .hud-frame.terminal-frame.module-about .about-principles li + li {
+  margin-top: 0.4rem;
+}
+
+#root .hud-frame.terminal-frame.module-about .about-start {
+  border-bottom: 0 !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: clamp(1.5rem, 5vw, 4rem);
+}
+
+#root .hud-frame.terminal-frame.module-about .about-start > :not(.about-start-actions) {
+  grid-column: 1;
+}
+
+#root .hud-frame.terminal-frame.module-about .about-start-actions {
+  align-self: center;
+  grid-column: 2;
+  grid-row: 1 / span 7;
+}
+
+#root .hud-frame.terminal-frame.module-about .about-start-actions button {
+  background: var(--ss-ochre, var(--ss-red)) !important;
+  border: 1px solid var(--ss-ink) !important;
+  color: var(--ss-ink) !important;
+  font-weight: 800;
+  padding: 0.9rem 1.2rem !important;
+}
+
+@media (max-width: 760px) {
+  #root .hud-frame.terminal-frame.module-about .about-story > :is(.about-story-intro, .about-overlap-section),
+  #root .hud-frame.terminal-frame.module-about .terminal-content .about-story .about-offerings-grid article:nth-child(n),
+  #root .hud-frame.terminal-frame.module-about .about-start {
+    display: block !important;
+  }
+
+  #root .hud-frame.terminal-frame.module-about .about-offerings-grid article > :is(h3, p) {
+    margin-top: 0.5rem !important;
+  }
+
+  #root .hud-frame.terminal-frame.module-about .about-start-actions {
+    margin: 1.5rem 0;
+  }
 }
 
 .hud-frame.module-home :is(

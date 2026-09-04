@@ -4035,6 +4035,11 @@ function AboutModule({ onNavigate }: { onNavigate: (module: ModuleKey, path: str
         <p>Surviving abuse is only one part of getting free.</p>
       </PageFlourishHeader>
 
+      <p className="about-deck">
+        Practical information, strategy, and tools for rebuilding a life across systems that rarely
+        account for how much those systems overlap.
+      </p>
+
       <section className="about-story-intro" aria-labelledby="about-whole-picture-title">
         <div>
           <span>THE WHOLE PICTURE</span>
